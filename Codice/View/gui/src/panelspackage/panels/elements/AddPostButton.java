@@ -8,5 +8,6 @@ public class AddPostButton extends JButton{
 			this.setForeground(colore);
 			this.setLabel(name);
 			this.setVisible(true);
+			
 		}
 }

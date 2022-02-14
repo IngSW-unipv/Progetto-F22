@@ -18,12 +18,12 @@ public class Frame extends JFrame {
 	
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
 		
-		this.setTitle("SocialNetwork");
-		this.setSize(800,800);
+		this.setTitle("Social Network");
+		this.setSize(814,813);
 		this.setLayout(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
-		this.setResizable(true);
+		this.setResizable(false);
 		
 		Layers layers = new Layers();
 		layers.setBounds(0,0, 800, 775);

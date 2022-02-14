@@ -2,6 +2,7 @@ package test;
 import java.util.ArrayList;
 
 import packageframe.Frame;
+import panelspackage.panels.Chat;
 
 public class TestGui {
 	
@@ -19,5 +20,8 @@ public class TestGui {
 		
 		Frame gui = new Frame(bufferStories, bufferPosts);
 		gui.setVisible(true);
+		
+		Chat chat = new Chat();
+		chat.setVisible(true);
 	}	
 }
