@@ -24,6 +24,7 @@ public class Home extends JPanel {
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		int indiceBufferStories = 0;
 		int indiceBufferPosts = 0;
+		//FONT
 		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
 		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
 		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
