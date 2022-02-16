@@ -11,6 +11,10 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 public class LogIn extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 	ArrayList<String> dati = new ArrayList<String>();
 	Color ARANCIONE = new Color(255, 125, 0);

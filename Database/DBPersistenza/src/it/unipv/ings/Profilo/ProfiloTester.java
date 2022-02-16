@@ -19,8 +19,8 @@ public class ProfiloTester {
         
         
         
-        System.out.println("Inserimento avvenuto? " +pdao.inserisciProfilo(prof));
-        System.out.println("L'inserimento delle chiavi è avvenuto? " +pdao.inserisciChiavi(prof));
+       // System.out.println("Inserimento avvenuto? " +pdao.inserisciProfilo(prof));
+        //System.out.println("L'inserimento delle chiavi è avvenuto? " +pdao.inserisciChiavi(prof));
         //System.out.println("La rimozione è avvenuta? " + pdao.rimuoviProfilo(prof));
         
 	}

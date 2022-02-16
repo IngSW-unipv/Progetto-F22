@@ -1,8 +1,12 @@
 package panelspackage.panels;
-import panelspackage.panels.Profilo;
 
 public class ProfiloPersonale  extends Profilo {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	ProfiloPersonale(String NickName) {
 		super(NickName);
 	}

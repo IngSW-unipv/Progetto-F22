@@ -8,14 +8,17 @@ import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
 import panelspackage.panels.Profilo;
-import panelspackage.panels.Ricerca;
 
-import java.awt.*;
 public class Frame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 175, 0);
 	Color NERO = new Color(255,255,255);	
 	
+	@SuppressWarnings("deprecation")
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
 		
 		this.setTitle("Social Network");

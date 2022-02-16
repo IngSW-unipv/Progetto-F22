@@ -6,6 +6,10 @@ import javax.swing.JPanel;
 
 public class Chat extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Color NERO = new Color(0,0,0);
 	
 	public Chat() {

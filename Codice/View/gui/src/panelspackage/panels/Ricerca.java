@@ -1,7 +1,6 @@
 package panelspackage.panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,6 +8,10 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class Ricerca extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Color NERO = new Color(0,0,0);
 	Color ARANCIONE = new Color(255, 125, 0);
 

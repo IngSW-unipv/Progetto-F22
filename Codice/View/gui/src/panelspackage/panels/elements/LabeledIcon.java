@@ -1,9 +1,13 @@
 package panelspackage.panels.elements;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+
 public class LabeledIcon extends JLabel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public LabeledIcon(String path) {
 
 	ImageIcon icona = new ImageIcon(path);

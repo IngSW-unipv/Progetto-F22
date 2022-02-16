@@ -9,10 +9,13 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import panelspackage.Layers;
 	
 public class Home extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 125, 0);
 	Color NERO = new Color(0, 0, 0);
 	public int indiceBufferStories;
@@ -22,7 +25,7 @@ public class Home extends JPanel {
 	private Font fontButton;
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
-		int indiceBufferStories = 0;
+		//int indiceBufferStories = 0;
 		int indiceBufferPosts = 0;
 		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
 		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
