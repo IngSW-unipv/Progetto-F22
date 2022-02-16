@@ -21,6 +21,7 @@ public class Frame extends JFrame {
 	@SuppressWarnings("deprecation")
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
 		
+		//ciao 
 		this.setTitle("Social Network");
 		this.setSize(814,813);
 		this.setLayout(null);
