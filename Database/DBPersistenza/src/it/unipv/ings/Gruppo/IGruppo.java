@@ -2,6 +2,8 @@ package it.unipv.ings.Gruppo;
 
 import java.util.ArrayList;
 
+import chat.chatDiGruppo.gruppo.Gruppo;
+
 public interface IGruppo {
 public ArrayList<Gruppo> selectall();
 public boolean creaGruppo(Gruppo g);

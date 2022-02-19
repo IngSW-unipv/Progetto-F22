@@ -56,6 +56,14 @@ public class ChatPrivata implements IChatPrivata{
 		    }
 		 }, 0, 300 * 1000);
 		}
+
+	@Override
+	public boolean inserisciChiavi(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		boolean b;
+		b = mdao.inserisciChiavi(m);
+		return b;
+	}
 	}
 
 	

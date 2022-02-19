@@ -18,4 +18,6 @@ public interface IChatPrivata {
 	
 	//Legge tutti i messaggi ogni cinque minuti
 	public void selectAllRipetuto();
+	
+	public boolean inserisciChiavi(MessaggioPrivato m);
 }

@@ -10,4 +10,6 @@ public interface IMessaggioDiGruppoDao {
 	public boolean inserisciChiavi(MessaggioDiGruppo m);
 	public boolean rimuoviMessaggioDiGruppo(MessaggioDiGruppo m);
 	public ArrayList<MessaggioDiGruppo> cercaMessaggioDiGruppo(MessaggioDiGruppo m);
-}
+	public ArrayList<MessaggioDiGruppo> selectAllIdGruppo(MessaggioDiGruppo m);
+	}
+
