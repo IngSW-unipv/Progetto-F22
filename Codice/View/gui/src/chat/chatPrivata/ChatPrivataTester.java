@@ -10,12 +10,15 @@ public class ChatPrivataTester {
 		
 		ChatPrivata p = new ChatPrivata();
 		//MessaggioPrivato m = new MessaggioPrivato("004", null, null, null, null, null, null);
-		//ArrayList<MessaggioPrivato> res = p.selectAll();
-		//System.out.println(p.scriviMessaggio(m));
 		
+		
+		//ArrayList<MessaggioPrivato> res = p.selectAll();
 		//for(MessaggioPrivato msg : res) { 
 		//	System.out.println(msg.toString());
 		//}
+		
+		//System.out.println(p.scriviMessaggio(m));
+		
 		p.selectAllRipetuto();
 	}	
 }
