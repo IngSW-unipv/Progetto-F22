@@ -10,7 +10,7 @@ public class Multimedia extends Posts{
 	private String descrizione;
 	// private List<Posts> posti;
 	private int postInserito;
-	private ArrayList<String> post; // Devo cambiare dopo il tipo string per Post, prelevato dalla galleria
+	private ArrayList<String> post; // O mettiamo il tipo Posts?, Posti prelevati dalla galleria
 	
 	
 	
