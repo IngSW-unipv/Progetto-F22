@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import Messaggio.Messaggio;
 
-public abstract class Chat implements IChat{
+public abstract class Chat {
 
 	private Profilo profiloAttivo;
 	ArrayList <Messaggio> messaggi;

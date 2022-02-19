@@ -1,46 +1,63 @@
 package chat.chatPrivata;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import Messaggio.Messaggio;
-import Profilo.Profilo;
-import chat.Chat;
+import Messaggio.MessaggioPrivato;
+import it.unipv.ings.MessaggioPrivato.MessaggioPrivatoDao;
 
-public class ChatPrivata extends Chat{
+public class ChatPrivata implements IChatPrivata{
 
-	private Messaggio m;
-	private Profilo profiloInviante;
-	private Profilo profiloRicevente;
+	@Override
+	public boolean scriviMessaggio(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		boolean b;
+		b = mdao.scriviMessaggioPrivato(m);
+		return b;
+	}
+
+	@Override
+	public boolean eliminaMessaggio(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		boolean b;
+		b = mdao.rimuoviMessaggioPrivato(m);
+		return b;
+	}
+
+	@Override
+	public ArrayList<MessaggioPrivato> cercaMessaggio(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		return mdao.cercaMessaggioPrivato(m);
+	}
+
+	@Override
+	public ArrayList<MessaggioPrivato> selectAll() {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		return mdao.selectAll();
 	
-	public ChatPrivata(Profilo profiloAttivo, Messaggio m, Profilo profiloInviante, Profilo profiloRicevente) {
-		super(profiloAttivo);
-		this.m = m;
-		this.profiloInviante = profiloAttivo;
-		this.profiloRicevente = profiloRicevente;
 	}
+
+	@Override
+	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		return mdao.selectAllNomeProfilo(m);
+	}
+
+	@Override
+	public void selectAllRipetuto() {
+		Timer timer = new Timer();
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();   
+		timer.schedule( new TimerTask() {
+		    public void run() {
+               ArrayList<MessaggioPrivato> show = mdao.selectAll();
+               for(MessaggioPrivato msg : show)
+            	   System.out.println(msg.toString());
+		    }
+		 }, 0, 300 * 1000);
+		}
+	}
+
 	
-	@Override
-	public boolean scriviMessaggio(Messaggio m) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean eliminaMessaggio(Messaggio m) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public ArrayList<Messaggio> cercaMessaggio(Messaggio m) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Messaggio> selectAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-}

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Messaggio.MessaggioPrivato;
 import it.unipv.ings.connessione.DBConnection;
 
 public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
@@ -58,7 +59,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="insert into messaggioprivato (idMsgPvt,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m.getIdMessaggio());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
@@ -88,7 +89,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		{
 			String query="delete from messaggioPrivato where idMsgPvt=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m.getIdMessaggio());
 
 			st1.executeUpdate();
 
@@ -115,7 +116,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m.getIdMessaggio());
 
 			rs1=st1.executeQuery();
 
@@ -141,9 +142,9 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		{
 			String query="update messaggioPrivato set profiloInviante=?,profiloRicevente=? where idMsgPvt=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getProfiloInviante());
-			st1.setString(2, m.getProfiloRicevente());
-			st1.setString(3, m.getIdMsgPvt());
+			st1.setString(1, m.getIdProfiloInviante());
+			st1.setString(2, m.getIdProfiloInviante());
+			st1.setString(3, m.getIdMessaggio());
 
 			st1.executeUpdate();
 
@@ -155,6 +156,35 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 		DBConnection.closeConnection(conn);
 		return esito;
+	}
+
+
+	@Override
+	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m) {
+		ArrayList<MessaggioPrivato> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m.getIdProfiloRicevente());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				MessaggioPrivato msg=new MessaggioPrivato(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
+				result.add(msg);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
 	}
 
 }

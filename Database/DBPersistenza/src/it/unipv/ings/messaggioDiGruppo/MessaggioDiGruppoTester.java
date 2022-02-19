@@ -2,6 +2,8 @@ package it.unipv.ings.messaggioDiGruppo;
 
 import java.util.ArrayList;
 
+import Messaggio.MessaggioDiGruppo;
+
 public class MessaggioDiGruppoTester {
 
 	public static void main(String[] args) {
@@ -17,8 +19,8 @@ public class MessaggioDiGruppoTester {
 	     for(MessaggioDiGruppo msg : cercaMessaggio)
 				System.out.println(msg.toString());
 	          
-	  //  System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo(m));
-	   // System.out.println("L'inserimento delle chiavi è avvenuto? " +mdao.inserisciChiavi(m));
+	  // System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo(m));
+	   //System.out.println("L'inserimento delle chiavi è avvenuto? " +mdao.inserisciChiavi(m));
 	    // System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioDiGruppo(m));
 	      
 }

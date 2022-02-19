@@ -2,6 +2,8 @@ package it.unipv.ings.messaggioDiGruppo;
 
 import java.util.ArrayList;
 
+import Messaggio.MessaggioDiGruppo;
+
 public interface IMessaggioDiGruppoDao {
 	public ArrayList<MessaggioDiGruppo> selectAll();
 	public boolean scriviMessaggioDiGruppo(MessaggioDiGruppo m);

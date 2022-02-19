@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Messaggio.MessaggioDiGruppo;
 import it.unipv.ings.connessione.DBConnection;
 
 public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
@@ -56,7 +57,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
@@ -87,7 +88,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		{
 			String query="delete from messaggiodigruppo where idMsgGrp=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 
 			st1.executeUpdate();
 
@@ -112,7 +113,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 
 			rs1=st1.executeQuery();
 
@@ -138,7 +139,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		{
 			String query="update messaggioDiGruppo set gruppo=? where idMsgGrp=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 			
 
 			st1.executeUpdate();
