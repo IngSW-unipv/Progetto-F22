@@ -3,7 +3,7 @@ package chat.chatDiGruppo;
 import java.util.ArrayList;
 
 import Messaggio.MessaggioDiGruppo;
-import Messaggio.MessaggioPrivato;
+
 
 
 public interface IChatDiGruppo {
