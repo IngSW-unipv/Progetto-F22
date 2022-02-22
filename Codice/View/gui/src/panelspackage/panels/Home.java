@@ -215,4 +215,8 @@ public class Home extends JPanel {
 	public void setIndiceBufferPosts(int indiceBufferPosts) {
 		this.indiceBufferPosts = indiceBufferPosts;
 	}	
+	
+	//GETTER E SETTER PULSANTI
+	
+	
 }
