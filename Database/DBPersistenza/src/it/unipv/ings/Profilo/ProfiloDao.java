@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Profilo.Profilo;
 import it.unipv.ings.connessione.DBConnection;
 
 public class ProfiloDao implements IProfiloDao{

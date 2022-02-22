@@ -2,6 +2,10 @@ package it.unipv.ings.Profilo;
 
 import java.util.ArrayList;
 
+import Profilo.Profilo;
+
+
+
 public class ProfiloTester {
 
 	public static void main(String[] args) {
