@@ -12,5 +12,4 @@ public interface IUtilityChat {
 		//Metodo che converte LocalTime in sql Time
 	    public Time convertiInSqlTime(LocalTime t);
 	
-	    public void visualizzaMultimedia();
 }
