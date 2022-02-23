@@ -4,8 +4,7 @@ import java.util.ArrayList;
 
 public interface ITestoDao {
   
-	public ArrayList<Testo> selectAll();
-	public boolean pubblicaTesto(Testo t);
-	public boolean inserisciChiavi(Testo t);
-	public boolean rimuoviTesto(Testo t);
+	public ArrayList<TestoDB> selectAll();
+	public boolean pubblicaTesto(TestoDB t);
+	public boolean rimuoviTesto(TestoDB t);
 }

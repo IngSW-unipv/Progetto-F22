@@ -48,13 +48,14 @@ public class VideoDao implements IVideoDao{
 
 		try
 		{
-			String query="insert into video (idVideo,durata,percorso) values (?,?,?)";
+			String query="insert into video (idVideo,durata,percorso,post) values (?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, v.getIdVideo());
 			st1.setInt(2, v.getDurata());
 			st1.setString(3, v.getPercorso());
-		
+		    st1.setString(4, v.getPost());
+			
 			st1.executeUpdate();
 
 
@@ -66,29 +67,7 @@ public class VideoDao implements IVideoDao{
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
-	@Override
-	public boolean inserisciChiavi(Video v) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update testo set post=? where idVideo=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, v.getPost());
-			st1.setString(2, v.getIdVideo());
-			
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-	}
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
+	
 	@Override
 	public boolean rimuoviVideo(Video v) {
 		conn=DBConnection.startConnection(conn,schema);

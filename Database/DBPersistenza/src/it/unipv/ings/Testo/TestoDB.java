@@ -1,7 +1,7 @@
 package it.unipv.ings.Testo;
 
-public class Testo {
-public Testo(String idTesto, String descrizione, String titolo, String font, String post) {
+public class TestoDB {
+public TestoDB(String idTesto, String descrizione, String titolo, String font, String post) {
 		super();
 		this.idTesto = idTesto;
 		this.descrizione = descrizione;

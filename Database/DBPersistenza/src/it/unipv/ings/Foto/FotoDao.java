@@ -48,12 +48,13 @@ public class FotoDao implements IFotoDao{
 
 		try
 		{
-			String query="insert into foto (idFoto,percorso) values (?,?)";
+			String query="insert into foto (idFoto,percorso,post) values (?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, f.getIdFoto());
 			st1.setString(2, f.getPerscorso());
-
+            st1.setString(3, f.getPost());
+			
 			st1.executeUpdate();
 
 
@@ -66,29 +67,6 @@ public class FotoDao implements IFotoDao{
 		return esito;
 	}
 	
-	@Override
-	public boolean inserisciChiavi(Foto f) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update foto set post=? where idFoto=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, f.getPost());
-			st1.setString(2, f.getIdFoto());
-			
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-	}
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
 	@Override
 	public boolean rimuoviFoto(Foto f) {
 		conn=DBConnection.startConnection(conn,schema);

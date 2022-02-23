@@ -16,8 +16,8 @@ public class TestoDao implements ITestoDao{
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<Testo> selectAll() {
-		 ArrayList<Testo> result = new ArrayList<>();
+	public ArrayList<TestoDB> selectAll() {
+		 ArrayList<TestoDB> result = new ArrayList<>();
 
 			conn=DBConnection.startConnection(conn,schema);
 			Statement st1;
@@ -31,7 +31,7 @@ public class TestoDao implements ITestoDao{
 
 				while(rs1.next())
 				{
-					Testo t=new Testo(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5));                                     
+					TestoDB t=new TestoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5));                                     
 
 					result.add(t);
 				}
@@ -41,21 +41,21 @@ public class TestoDao implements ITestoDao{
 			return result;
 	}
 	@Override
-	public boolean pubblicaTesto(Testo t) {
+	public boolean pubblicaTesto(TestoDB t) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into testo (idTesto,descrizione,titolo,font) values (?,?,?,?)";
+			String query="insert into testo (idTesto,descrizione,titolo,font,post) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, t.getIdTesto());
 			st1.setString(2, t.getDescrizione());
 			st1.setString(3, t.getTitolo());
 			st1.setString(4, t.getFont());
-		
+		    st1.setString(5, t.getPost());
 		
 			st1.executeUpdate();
 
@@ -69,30 +69,7 @@ public class TestoDao implements ITestoDao{
 		return esito;
 	}
 	@Override
-	public boolean inserisciChiavi(Testo t) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update testo set post=? where idTesto=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, t.getPost());
-			st1.setString(2, t.getIdTesto());
-			
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-	}
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
-	@Override
-	public boolean rimuoviTesto(Testo t) {
+	public boolean rimuoviTesto(TestoDB t) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 

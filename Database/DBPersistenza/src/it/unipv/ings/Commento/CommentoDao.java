@@ -24,13 +24,14 @@ public class CommentoDao implements ICommentoDao{
 
 		try
 		{
-			String query="insert into commento (idCommento,oraCommento,dataCommento,testo) values (?,?,?,?)";
+			String query="insert into commento (idCommento,oraCommento,dataCommento,testo,post) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, c.getIdCommento());
 			st1.setTime(2, c.getOraCommento());
 			st1.setDate(3, c.getDataCommento());
 			st1.setString(4, c.getTesto());
+			st1.setString(5, c.getPost());
 		
 			st1.executeUpdate();
 
@@ -39,32 +40,6 @@ public class CommentoDao implements ICommentoDao{
 			e.printStackTrace();
 			esito=false;
 	}
-
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
-
-	
-	@Override
-	public boolean inserisciChiavi(Commento c) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update commento set post=? where idCommento=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, c.getPost());
-			st1.setString(2, c.getIdCommento());
-	
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
 
 		DBConnection.closeConnection(conn);
 		return esito;
