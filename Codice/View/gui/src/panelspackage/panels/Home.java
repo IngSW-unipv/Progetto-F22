@@ -23,6 +23,19 @@ public class Home extends JPanel {
 	private Font fontTitle;
 	private Font fontText;
 	private Font fontButton;
+	private JButton searchButton;	//Ricerca
+	private JButton buttonPrevPost;	//Post precedente
+	private JButton buttonNextPost;	//Post successivo
+	private JButton aggiungiLike;	//Aggiungi dislike
+	private JButton aggiungiDislike;	//Aggiungi like
+	private JButton aggiungiCommento;	//Aggiungi commento
+	private JButton buttonPrevStory;	//Storia successiva
+	private JButton buttonNextStory;	//Storia precedente
+	private AddPostButton pPost;
+	private AddPostButton pStory;
+	private AddPostButton pSondaggio;
+	private AddPostButton pIdea;
+	
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		//int indiceBufferStories = 0;
@@ -48,7 +61,7 @@ public class Home extends JPanel {
 		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
 		JLabel etichettaRicerca = new JLabel("Cerca un profilo: ");
 		JTextArea testoRicerca = new JTextArea();
-		JButton searchButton = new JButton("CERCA");
+		searchButton = new JButton("CERCA");
 		
 		testoRicerca.setForeground(ARANCIONE);
 		testoRicerca.setBackground(Color.LIGHT_GRAY);
@@ -126,13 +139,13 @@ public class Home extends JPanel {
 		numeroDislike.setForeground(Color.white);
 		JLabel numeroCommenti = new JLabel("N.Commenti");
 		numeroCommenti.setForeground(Color.white);
-		JButton buttonPrevPost = new JButton("Post precedente");
+		buttonPrevPost = new JButton("Post precedente");
 		buttonPrevPost.setFont(fontButton);
-		JButton buttonNextPost = new JButton("Post successivo");
+		buttonNextPost = new JButton("Post successivo");
 		buttonNextPost.setFont(fontButton);
-		JButton aggiungiLike = new JButton("+ Like");
-		JButton aggiungiDislike = new JButton("+ Dislike");
-		JButton aggiungiCommento = new JButton("+ Commento");
+		aggiungiLike = new JButton("+ Like");
+		aggiungiDislike = new JButton("+ Dislike");
+		aggiungiCommento = new JButton("+ Commento");
 		SpecificContainer containerBottoniPost = new SpecificContainer();
 		containerBottoniPost.setLayout(new GridLayout(1, 2));
 		containerBottoniPost.add(buttonPrevPost);
@@ -158,8 +171,8 @@ public class Home extends JPanel {
 		containerWest.add(containerStory, BorderLayout.CENTER);
 		containerStory.setLayout(new GridLayout(5,0));
 		containerCenter.add(containerWest, BorderLayout.WEST);
-		JButton buttonNextStory = new JButton("->");
-		JButton buttonPrevStory = new JButton("<-");
+		buttonNextStory = new JButton("->");
+		buttonPrevStory = new JButton("<-");
 		containerButtonStory.setLayout(new GridLayout(1, 2));
 		containerButtonStory.add(buttonPrevStory);
 		containerButtonStory.add(buttonNextStory);
@@ -185,16 +198,16 @@ public class Home extends JPanel {
 		SpecificContainer containerSud = new SpecificContainer();
 		this.add(containerSud, BorderLayout.SOUTH);
 		containerSud.setLayout(new GridLayout(1,4));
-		AddPostButton pPost =  new AddPostButton("Pubblica un post", ARANCIONE);
+		pPost =  new AddPostButton("Pubblica un post", ARANCIONE);
 		pPost.setFont(fontButton);
 		containerSud.add(pPost);
-		AddPostButton pStory =  new AddPostButton("Pubblica una story", ARANCIONE);
+		pStory =  new AddPostButton("Pubblica una story", ARANCIONE);
 		pStory.setFont(fontButton);
 		containerSud.add(pStory);
-		AddPostButton pSondaggio =  new AddPostButton("Pubblica sondaggio", ARANCIONE);
+		pSondaggio =  new AddPostButton("Pubblica sondaggio", ARANCIONE);
 		pSondaggio.setFont(fontButton);
 		containerSud.add(pSondaggio);
-		AddPostButton pIdea =  new AddPostButton("Pubblica un'idea", ARANCIONE);
+		pIdea =  new AddPostButton("Pubblica un'idea", ARANCIONE);
 		pIdea.setFont(fontButton);
 		containerSud.add(pIdea);
 		
@@ -214,9 +227,104 @@ public class Home extends JPanel {
 
 	public void setIndiceBufferPosts(int indiceBufferPosts) {
 		this.indiceBufferPosts = indiceBufferPosts;
-	}	
+	}
+
+	
 	
 	//GETTER E SETTER PULSANTI
-	
-	
+	public JButton getSearchButton() {
+		return searchButton;
+	}
+
+	public void setSearchButton(JButton searchButton) {
+		this.searchButton = searchButton;
+	}
+
+	public JButton getButtonPrevPost() {
+		return buttonPrevPost;
+	}
+
+	public void setButtonPrevPost(JButton buttonPrevPost) {
+		this.buttonPrevPost = buttonPrevPost;
+	}
+
+	public JButton getButtonNextPost() {
+		return buttonNextPost;
+	}
+
+	public void setButtonNextPost(JButton buttonNextPost) {
+		this.buttonNextPost = buttonNextPost;
+	}
+
+	public JButton getAggiungiLike() {
+		return aggiungiLike;
+	}
+
+	public void setAggiungiLike(JButton aggiungiLike) {
+		this.aggiungiLike = aggiungiLike;
+	}
+
+	public JButton getAggiungiDislike() {
+		return aggiungiDislike;
+	}
+
+	public void setAggiungiDislike(JButton aggiungiDislike) {
+		this.aggiungiDislike = aggiungiDislike;
+	}
+
+	public JButton getAggiungiCommento() {
+		return aggiungiCommento;
+	}
+
+	public void setAggiungiCommento(JButton aggiungiCommento) {
+		this.aggiungiCommento = aggiungiCommento;
+	}
+
+	public JButton getButtonPrevStory() {
+		return buttonPrevStory;
+	}
+
+	public void setButtonPrevStory(JButton buttonPrevStory) {
+		this.buttonPrevStory = buttonPrevStory;
+	}
+
+	public JButton getButtonNextStory() {
+		return buttonNextStory;
+	}
+
+	public void setButtonNextStory(JButton buttonNextStory) {
+		this.buttonNextStory = buttonNextStory;
+	}
+
+	public AddPostButton getpPost() {
+		return pPost;
+	}
+
+	public void setpPost(AddPostButton pPost) {
+		this.pPost = pPost;
+	}
+
+	public AddPostButton getpStory() {
+		return pStory;
+	}
+
+	public void setpStory(AddPostButton pStory) {
+		this.pStory = pStory;
+	}
+
+	public AddPostButton getpSondaggio() {
+		return pSondaggio;
+	}
+
+	public void setpSondaggio(AddPostButton pSondaggio) {
+		this.pSondaggio = pSondaggio;
+	}
+
+	public AddPostButton getpIdea() {
+		return pIdea;
+	}
+
+	public void setpIdea(AddPostButton pIdea) {
+		this.pIdea = pIdea;
+	}	
 }

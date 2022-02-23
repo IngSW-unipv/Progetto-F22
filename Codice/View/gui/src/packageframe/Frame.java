@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import panelspackage.Layers;
+import panelspackage.panels.Chat;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
@@ -51,8 +52,12 @@ public class Frame extends JFrame {
 		profilo.setBounds(0,0,800,775);
 		
 		Impostazioni impostazioni = new Impostazioni("Steve Rogers");
-		layers.add(impostazioni, new  Integer(3), 0);
+		layers.add(impostazioni, new  Integer(6), 0);
 		impostazioni.setBounds(0,0,800,775);
+		
+		Chat chat = new Chat();
+		layers.add(chat, new  Integer(7), 0);
+		chat.setBounds(0,0,800,775);
 		
 	}
 }

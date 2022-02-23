@@ -11,6 +11,7 @@ public class TestGui {
 		ArrayList<String> bufferPosts = new ArrayList<String>();
 		ArrayList<String> bufferStories = new ArrayList<String>();
 	
+		
 		bufferPosts.add("immagini/post.jpg");
 		bufferStories.add("immagini/Bruce.jpeg");
 		bufferStories.add("immagini/Natasha.jpeg");
