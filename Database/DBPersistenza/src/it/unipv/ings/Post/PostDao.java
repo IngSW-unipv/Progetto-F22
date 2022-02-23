@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import it.unipv.ings.connessione.DBConnection;
+import post.Post;
 
 public class PostDao implements IPostDao{
 private Connection conn;
@@ -95,7 +96,7 @@ public boolean inserisciChiavi(Post p) {
 	return esito;
 }
 @Override
-public boolean rimuoviProfilo(Post p) {
+public boolean rimuoviPost(Post p) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 

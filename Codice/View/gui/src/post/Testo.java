@@ -1,6 +1,6 @@
 package post;
 
-import java.awt.Font;
+/*import java.awt.Font;
 //import java.util.ArrayList;
 
 public class Testo extends Post{
@@ -68,5 +68,5 @@ public class Testo extends Post{
 	public void setTestoID(String testoID) {
 		this.testoID = testoID;
 	}
-
-}
+*/
+//}

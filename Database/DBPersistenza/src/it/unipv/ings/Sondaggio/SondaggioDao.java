@@ -15,8 +15,8 @@ public SondaggioDao() {
 	this.schema="socialnetwork";
 }
 @Override
-public ArrayList<Sondaggio> selectAll() {
-	 ArrayList<Sondaggio> result = new ArrayList<>();
+public ArrayList<SondaggioDB> selectAll() {
+	 ArrayList<SondaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -30,7 +30,7 @@ public ArrayList<Sondaggio> selectAll() {
 
 			while(rs1.next())
 			{
-				Sondaggio s=new Sondaggio(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));                                     
+				SondaggioDB s=new SondaggioDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));                                     
 
 				result.add(s);
 			}
@@ -40,14 +40,14 @@ public ArrayList<Sondaggio> selectAll() {
 		return result;
 }
 @Override
-public boolean pubblicaSondaggio(Sondaggio s) {
+public boolean pubblicaSondaggio(SondaggioDB s) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	boolean esito = true;
 
 	try
 	{
-		String query="insert into sondaggio (idSondaggio,primaScelta,secondaScelta,terzaScelta,quartaScelta) values (?,?,?,?,?)";
+		String query="insert into sondaggio (idSondaggio,primaScelta,secondaScelta,terzaScelta,quartaScelta,post) values (?,?,?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s.getIdSondaggio());
@@ -55,7 +55,7 @@ public boolean pubblicaSondaggio(Sondaggio s) {
 		st1.setString(3, s.getSecondaScelta());
 		st1.setString(4, s.getTerzaScelta());
 		st1.setString(5, s.getQuartaScelta());
-
+        st1.setString(6, s.getPost());
 	
 		st1.executeUpdate();
 
@@ -68,31 +68,9 @@ public boolean pubblicaSondaggio(Sondaggio s) {
 	DBConnection.closeConnection(conn);
 	return esito;
 }
+
 @Override
-public boolean inserisciChiavi(Sondaggio s) {
-	conn=DBConnection.startConnection(conn,schema);
-	PreparedStatement st1;
-	boolean esito = true;
-
-	try
-	{
-		String query="update sondaggio set post=? where idSondaggio=?";
-		st1 = conn.prepareStatement(query);
-		st1.setString(1, s.getPost());
-		st1.setString(2, s.getIdSondaggio());
-		
-		st1.executeUpdate();
-
-
-	}catch (Exception e){
-		e.printStackTrace();
-		esito=false;
-}
-	DBConnection.closeConnection(conn);
-	return esito;
-}
-@Override
-public boolean rimuoviSondaggio(Sondaggio s) {
+public boolean rimuoviSondaggio(SondaggioDB s) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 

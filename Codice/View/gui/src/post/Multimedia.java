@@ -1,10 +1,10 @@
 package post;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 
 
-	public class Multimedia extends Post{
+	/*public class Multimedia extends Post{
 		
 		// private int [] pixels;
 		private String postMultID;
@@ -55,7 +55,7 @@ import java.util.ArrayList;
 
 		public void setPixels(int[] pixels) {
 			this.pixels = pixels;
-		}*/
+		}
 
 		public int getDimensione() {
 			return dimensione;
@@ -103,5 +103,5 @@ import java.util.ArrayList;
 		public void setPost(ArrayList<String> post) {
 			this.post = post;
 		}
-	}
+	}*/
 

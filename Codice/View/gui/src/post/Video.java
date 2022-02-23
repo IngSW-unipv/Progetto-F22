@@ -1,7 +1,7 @@
 package post;
 
 
-   public class Video extends Multimedia{
+  /* public class Video extends Multimedia{
 		
 		private int durataMax;
 		private String videoID;
@@ -22,4 +22,4 @@ package post;
 			this.videoID = videoID;
 		}
 	}
-
+*/
