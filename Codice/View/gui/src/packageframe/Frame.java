@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import panelspackage.Layers;
 import panelspackage.panels.Chat;
+import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
@@ -58,6 +59,10 @@ public class Frame extends JFrame {
 		Chat chat = new Chat();
 		layers.add(chat, new  Integer(7), 0);
 		chat.setBounds(0,0,800,775);
+		
+		ChatMessaggi chatMessaggi = new ChatMessaggi("Nome_account_con_cui_sto_messaggiando");
+		layers.add(chatMessaggi, new  Integer(8), 0);
+		chatMessaggi.setBounds(0,0,800,775);
 		
 	}
 }
