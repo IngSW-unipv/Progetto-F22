@@ -1,10 +1,13 @@
 package controllerPackage;
 
-public class ControllerSocial {
+import panelspackage.panels.Home;
+
+public class ControllerSocial implements IcontrollerSistema{
 	
 	private Home homeView;
 	//Inserire modello con metodi per la home 
 	
+	private ActionListener gestoreRicerca;
 	private ActionListener gestoreAggiungiLike;
 	private ActionListener gestoreAggiungiDislike;
 	private ActionListener gestoreAggiungiCommento;
@@ -24,93 +27,136 @@ public class ControllerSocial {
 	
 	public void assegnaGestori() {
 		
+		gestoreRicerca = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Inserire metodi
+				System.out.println("Ricerca");
+				ricercaNelSocial();
+			}
+		};
+		homeView.getSearchButton().addActionListener(gestoreRicerca);
+		
+		
 		gestoreAggiungiLike = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("aggiungi like");
+				aggiungiLike();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getAggiungiLike().addActionListener(gestoreAggiungiLike);
+		
 		
 		gestoreAggiungiDislike = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("aggiungi dilike");
+				aggiungiDislike();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getAggiungiDislike().addActionListener(gestoreAggiungiDislike);
+		
 		
 		gestoreAggiungiCommento = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("aggiungi commento");
+				aggiungiCommento();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getAggiungiCommento().addActionListener(gestoreAggiungiCommento);
+		
 		
 		gestorePostSuccessivo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("post successivo");
+				postSuccessivo();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getButtonNextPost().addActionListener(gestorePostSuccessivo);
+		
 		
 		gestorePostPrecedente = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("post precedente");
+				postPrecedente();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getButtonPrevPost().addActionListener(gestorePostPrecedente);
+		
 		
 		gestoreStoriaSuccessiva = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("storia successiva");
+				storiaSuccessiva();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getButtonNextStory().addActionListener(gestoreStoriaSuccessiva);
+		
 		
 		gestoreStoriaPrecedente = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("storia precedente");
+				storiaPrecedente();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getButtonPrevStory().addActionListener(gestoreStoriaPrecedente);
+		
 		
 		gestorePubblicaPost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("pubblica post");
+				pubblicaPost();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getpPost().addActionListener(gestorePubblicaPost);
+		
 		
 		gestorePubblicaStoria = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("pubblica storia");
+				pubblicaStoria();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getpStory().addActionListener(gestorePubblicaStoria);
+		
 		
 		gestorePubblicaSondaggio = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("pubblica sondaggio");
+				pubblicaSondaggio();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getpSondaggio().addActionListener(gestorePubblicaSondaggio);
+		
 		
 		gestorePubblicaIdea = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Inserire metodi
+				System.out.println("pubblica idea");
+				pubblicaIdea();
 			}
 		};
-		//Assegnare al get del pulsante
+		homeView.getpIdea().addActionListener(gestorePubblicaIdea);
 	}
 }
 
