@@ -1,6 +1,6 @@
 package post;
 
-public class PostTest {
+/*public class PostTest {
 
 	public static void main(String[] args) {
 		Multimedia m = new  Multimedia();
@@ -20,3 +20,4 @@ public class PostTest {
 		
 	}
 }
+*/

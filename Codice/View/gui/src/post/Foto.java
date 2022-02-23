@@ -1,6 +1,6 @@
 package post;
 
-public class Foto extends Multimedia{
+/*public class Foto extends Multimedia{
 		
 		
 
@@ -21,3 +21,4 @@ public class Foto extends Multimedia{
 
 	}
 
+*/

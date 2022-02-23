@@ -1,9 +1,9 @@
 package it.unipv.ings.Sondaggio;
 
-public class Sondaggio {
+public class SondaggioDB {
 
 
-public Sondaggio(String idSondaggio, String primaScelta, String secondaScelta, String terzaScelta,
+public SondaggioDB(String idSondaggio, String primaScelta, String secondaScelta, String terzaScelta,
 			String quartaScelta, String post) {
 		super();
 		this.idSondaggio = idSondaggio;
