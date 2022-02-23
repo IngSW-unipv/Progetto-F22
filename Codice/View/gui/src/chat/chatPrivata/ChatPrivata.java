@@ -49,12 +49,18 @@ public class ChatPrivata implements IChatPrivata{
 		Timer timer = new Timer();
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();   
 		timer.schedule( new TimerTask() {
+			int i = 0;
 		    public void run() {
+		       
                ArrayList<MessaggioPrivato> show = mdao.selectAll();
                for(MessaggioPrivato msg : show)
             	   System.out.println(msg.toString());
+                   i++;
+                   if(i == 5)
+            	      timer.cancel();
+		   
 		    }
-		 }, 0, 300 * 1000);
+		 }, 0, 60 * 1000);
 		}
 
 	@Override

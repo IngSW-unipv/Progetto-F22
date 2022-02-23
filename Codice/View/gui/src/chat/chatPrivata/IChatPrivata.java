@@ -16,7 +16,7 @@ public interface IChatPrivata {
 	//Legge tutti i messaggi di un idProfilo specificato
 	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m);
 	
-	//Legge tutti i messaggi ogni cinque minuti
+	//Legge tutti i messaggi ricevuti ogni minuto. Dopo 5 minuti smette di farlo e si stoppa
 	public void selectAllRipetuto();
 	
 	public boolean inserisciChiavi(MessaggioPrivato m);

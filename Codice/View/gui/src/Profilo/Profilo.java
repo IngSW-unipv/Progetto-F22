@@ -1,86 +1,104 @@
 package Profilo;
-
-//import java.util.List;
-
-import Utente.Utente;
-
-//import java.util.HashMap;
-
-
-
 public class Profilo {
-	
-	private Utente u;
-	private String pwd;
-	private String nickname;
-	private String descrizione;
-	private int numeroFollower;
-	private int numeroSeguiti;
-	private int numeroPost;
-	private boolean connesso = true;
-	//private List <Post> ListaPost;
-	//private HashMap <Profilo, Chat> ListaChat;
-	private EnumProfilo tipoProfilo;
 
-	public Profilo(String nickname, String pwd) {
-		u = new Utente();
-		this.pwd = pwd;
-		numeroFollower = 0;
-		numeroSeguiti = 0;
-		numeroPost = 0;
-		//ListaPost ArrayList<Post>= new ArrayList<Post>();
-		//ListaChat = new HashMap<Profilo, Chat>;
-	}
-	
-	public void inserisciPwd(String pwd) {
-		u.getCredenziali().setPwd(pwd);
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
+public Profilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
+			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
+		super();
+		this.idProfilo = idProfilo;
 		this.nickname = nickname;
-	}
-
-	public String getDescrizione() {
-		return descrizione;
-	}
-
-	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+		this.numFollower = numFollower;
+		this.numSeguiti = numSeguiti;
+		this.numPost = numPost;
+		this.tipo = tipo;
+		this.messaggioDiGruppo = messaggioDiGruppo;
+		this.messaggioPrivato = messaggioPrivato;
+		this.utente = utente;
+		this.post = post;
 	}
+private String idProfilo;
+private String nickname;
+private String descrizione;
+private int numFollower;
+private int numSeguiti;
+private int numPost;
+private String tipo;
+private String messaggioDiGruppo;
+private String messaggioPrivato;
+private String utente;
+private String post;
+public String getIdProfilo() {
+	return idProfilo;
+}
+public void setIdProfilo(String idProfilo) {
+	this.idProfilo = idProfilo;
+}
+public String getNickname() {
+	return nickname;
+}
+public void setNickname(String nickname) {
+	this.nickname = nickname;
+}
+public String getDescrizione() {
+	return descrizione;
+}
+public void setDescrizione(String descrizione) {
+	this.descrizione = descrizione;
+}
+public int getNumFollower() {
+	return numFollower;
+}
+public void setNumFollower(int numFollower) {
+	this.numFollower = numFollower;
+}
+public int getNumSeguiti() {
+	return numSeguiti;
+}
+public void setNumSeguiti(int numSeguiti) {
+	this.numSeguiti = numSeguiti;
+}
+public int getNumPost() {
+	return numPost;
+}
+public void setNumPost(int numPost) {
+	this.numPost = numPost;
+}
+public String getTipo() {
+	return tipo;
+}
+public void setTipo(String tipo) {
+	this.tipo = tipo;
+}
+public String getMessaggioDiGruppo() {
+	return messaggioDiGruppo;
+}
+public void setMessaggioDiGruppo(String messaggioDiGruppo) {
+	this.messaggioDiGruppo = messaggioDiGruppo;
+}
+public String getMessaggioPrivato() {
+	return messaggioPrivato;
+}
+public void setMessaggioPrivato(String messaggioPrivato) {
+	this.messaggioPrivato = messaggioPrivato;
+}
+public String getUtente() {
+	return utente;
+}
+public void setUtente(String utente) {
+	this.utente = utente;
+}
+public String getPost() {
+	return post;
+}
+public void setPost(String post) {
+	this.post = post;
+}
+@Override
+public String toString() {
+	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
+			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
+			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
+			+ utente + ", post=" + post + "]";
+}
 
-	public int getNumeroFollower() {
-		return numeroFollower;
-	}
-
-	public void setNumeroFollower(int numeroFollower) {
-		this.numeroFollower = numeroFollower;
-	}
-
-	public int getNumeroSeguiti() {
-		return numeroSeguiti;
-	}
-
-	public void setNumeroSeguiti(int numeroSeguiti) {
-		this.numeroSeguiti = numeroSeguiti;
-	}
-
-	public int getNumeroPost() {
-		return numeroPost;
-	}
-
-	public void setNumeroPost(int numeroPost) {
-		this.numeroPost = numeroPost;
-	}
-
-	public EnumProfilo getTipoProfilo() {
-		return tipoProfilo;
-	}
-
-	public void setTipoProfilo(EnumProfilo tipoProfilo) {
-		this.tipoProfilo = tipoProfilo;
-	}
 }

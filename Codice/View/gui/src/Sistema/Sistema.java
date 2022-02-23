@@ -12,7 +12,14 @@ public class Sistema {
 	}
 	
 	public void creaProfilo(String nickname, String pwd) {
-		profiloAttivo = new Profilo(nickname, pwd);
+	     
+		//Per Francesco
+		//Bisogna usare la funzione di profiloDao
+		//simile a scrivi messaggio di chatPrivata
+		
+		
+		
+		//	profiloAttivo = new Profilo(nickname, pwd);
 	}
 	public boolean eliminaProfilo(Profilo p) {
 		return false;
@@ -34,10 +41,10 @@ public class Sistema {
 	
 	public void segui() {
 		//codice da recuperare da database
-		profiloAttivo.setNumeroFollower(altroProfilo.getNumeroFollower() + 1);
+		profiloAttivo.setNumFollower(altroProfilo.getNumFollower() + 1);
 	}
 	public void smettiDiSeguire() {
-		profiloAttivo.setNumeroFollower(altroProfilo.getNumeroFollower() - 1);
+		profiloAttivo.setNumFollower(altroProfilo.getNumFollower() - 1);
 	}
 	
 }

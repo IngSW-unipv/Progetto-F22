@@ -47,15 +47,22 @@ public class ChatDiGruppo implements IChatDiGruppo{
 	@Override
 	public void selectAllRipetuto() {
 		Timer timer = new Timer();
-		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();   
-		timer.schedule( new TimerTask() {
+		MessaggioDiGruppoDao gdao = new MessaggioDiGruppoDao();   
+		timer.schedule(new TimerTask() {
+			int i = 0;
 		    public void run() {
-               ArrayList<MessaggioDiGruppo> show = mdao.selectAll();
+		       
+               ArrayList<MessaggioDiGruppo> show = gdao.selectAll();
                for(MessaggioDiGruppo msg : show)
             	   System.out.println(msg.toString());
+                   i++;
+                   if(i == 5)
+            	      timer.cancel();
+		   
 		    }
-		 }, 0, 300 * 1000);
+		 }, 0, 60 * 1000);
 		}
+	
 
 	@Override
 	public boolean inserisciChiavi(MessaggioDiGruppo m) {
