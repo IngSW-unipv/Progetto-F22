@@ -31,6 +31,10 @@ public class Home extends JPanel {
 	private JButton aggiungiCommento;	//Aggiungi commento
 	private JButton buttonPrevStory;	//Storia successiva
 	private JButton buttonNextStory;	//Storia precedente
+	private JButton buttonImpostazioni;
+	private JButton buttonProfilo;
+	private JButton buttonChat;
+	private JButton buttonNotifiche;
 	private AddPostButton pPost;
 	private AddPostButton pStory;
 	private AddPostButton pSondaggio;
@@ -96,11 +100,13 @@ public class Home extends JPanel {
 		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
 		menuHomeSinistro.setLayout(new BorderLayout());
 			
-		LabeledIcon profileLabel = new LabeledIcon("immagini/profilo.png");
-		menuHomeSinistro.add(profileLabel, BorderLayout.EAST);
+		Icon profileLabel = new ImageIcon("immagini/profilo.png");
+		buttonProfilo = new JButton(profileLabel);
+		menuHomeSinistro.add(buttonProfilo, BorderLayout.EAST);
 			
-		LabeledIcon settingLabel = new LabeledIcon("immagini/impostazioni.png");
-		menuHomeSinistro.add(settingLabel, BorderLayout.WEST);
+		Icon settingLabel = new ImageIcon("immagini/impostazioni.png");
+		buttonImpostazioni = new JButton(settingLabel);
+		menuHomeSinistro.add(buttonImpostazioni, BorderLayout.WEST);
 				
 		Container menuHomeDestro = new Container();
 		menuHomeDestro.setLayout(new BorderLayout());
@@ -108,11 +114,13 @@ public class Home extends JPanel {
 		menuHomeDestro.setForeground(NERO);
 		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
 			
-		LabeledIcon notificationLabel = new LabeledIcon("immagini/notifiche.gif");
-		menuHomeDestro.add(notificationLabel, BorderLayout.EAST);
+		Icon notificationLabel = new ImageIcon("immagini/notifiche.gif");
+		buttonNotifiche = new JButton(notificationLabel);
+		menuHomeDestro.add(buttonNotifiche, BorderLayout.EAST);
 			
-		LabeledIcon textLabel = new LabeledIcon("immagini/testo.jpeg");
-		menuHomeDestro.add(textLabel, BorderLayout.WEST);
+		Icon chatLabel = new ImageIcon("immagini/testo.jpeg");
+		buttonChat = new JButton(chatLabel);
+		menuHomeDestro.add(buttonChat, BorderLayout.WEST);
 			
 			
 		SpecificContainer containerCenter = new SpecificContainer();
@@ -326,5 +334,38 @@ public class Home extends JPanel {
 
 	public void setpIdea(AddPostButton pIdea) {
 		this.pIdea = pIdea;
-	}	
+	}
+
+	public JButton getButtonImpostazioni() {
+		return buttonImpostazioni;
+	}
+
+	public void setButtonImpostazioni(JButton buttonImpostazioni) {
+		this.buttonImpostazioni = buttonImpostazioni;
+	}
+
+	public JButton getButtonProfilo() {
+		return buttonProfilo;
+	}
+
+	public void setButtonProfilo(JButton buttonProfilo) {
+		this.buttonProfilo = buttonProfilo;
+	}
+
+	public JButton getButtonChat() {
+		return buttonChat;
+	}
+
+	public void setButtonChat(JButton buttonChat) {
+		this.buttonChat = buttonChat;
+	}
+
+	public JButton getButtonNotifiche() {
+		return buttonNotifiche;
+	}
+
+	public void setButtonNotifiche(JButton buttonNotifiche) {
+		this.buttonNotifiche = buttonNotifiche;
+	}
+
 }
