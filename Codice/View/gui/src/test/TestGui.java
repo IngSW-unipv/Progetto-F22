@@ -1,8 +1,10 @@
 package test;
 import java.util.ArrayList;
 
+import controller.ControllerSocial;
 import packageframe.Frame;
 import panelspackage.panels.Chat;
+import panelspackage.panels.Home;
 
 public class TestGui {
 	
@@ -24,5 +26,8 @@ public class TestGui {
 		
 		Chat chat = new Chat();
 		chat.setVisible(true);
+		
+		ControllerSocial ctrl = new ControllerSocial(gui);
+		ctrl.assegnaGestori();
 	}	
 }

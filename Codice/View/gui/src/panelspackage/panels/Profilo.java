@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.LabeledIcon;
+import panelspackage.panels.elements.AddPostButton;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
@@ -24,7 +26,7 @@ public class  Profilo extends JPanel {
 	Color NERO = new Color(0, 0, 0);
 	int i;
 	
-	public Profilo(String NickName) {
+	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
 		
 		this.setOpaque(true);
 		this.setVisible(true);
@@ -33,26 +35,34 @@ public class  Profilo extends JPanel {
 		
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
-
-		Etichette etichetta = new Etichette(NickName, ARANCIONE);
-		containerNorth.add(etichetta, BorderLayout.CENTER);
+		LabeledIcon immagine = new LabeledIcon(immagineProfilo);
+		containerNorth.add(immagine, BorderLayout.WEST);
 		
-		SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
-		this.add(containerCenter, BorderLayout.CENTER);
+		Etichette etichetta = new Etichette(NickName, ARANCIONE);
+		containerNorth.add(etichetta, BorderLayout.NORTH);
+		
 		
 		this.dati.add("N.Post");
-		this.dati.add(" 5");
+		this.dati.add(Integer.toString(numeroPost));
 		this.dati.add("N.Follower");
-		this.dati.add(" 12");
+		this.dati.add(Integer.toString(numeroFollowers));
 		this.dati.add("N.Seguiti");
-		this.dati.add(" Nessuno");
+		this.dati.add(Integer.toString(numeroSeguiti));
 		for( i = 0; i < this.dati.size(); i++) {
-			AreaDiTesto area = new AreaDiTesto(ARANCIONE, this.dati.get(i), 1);
+			Etichette area = new Etichette(this.dati.get(i), ARANCIONE);
 			ListaEtichette.add(area);
 		}
 		
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
-		containerCenter.add(Dati, BorderLayout.NORTH);
+		containerNorth.add(Dati, BorderLayout.SOUTH);
+		
+		SpecificContainer containerCenter = new SpecificContainer(NERO, ARANCIONE);
+		this.add(containerCenter, BorderLayout.CENTER);
+		containerCenter.setLayout(new GridLayout(3,3));
+
+		for( i = 0; i < immaginiPost.length || i > 9 ; i++) {
+			containerCenter.add(new LabeledIcon(immaginiPost[i]));
+		}
 		
 		SpecificContainer containerSouth = new SpecificContainer(NERO);
 		this.add(containerSouth, BorderLayout.SOUTH);
