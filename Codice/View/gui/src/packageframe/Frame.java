@@ -61,14 +61,14 @@ public class Frame extends JFrame {
 		logIn = new LogIn();
 		layers.add(logIn, new  Integer(varLogin), 0);
 		logIn.setBounds(0,0,800,775);
-
-		/*for (i = 0; i<listaRisultatiRicerca.length; i++) {
+/* 		Ricerca di prova
+		for (i = 0; i<listaRisultatiRicerca.length; i++) {
 			risultatiRicerca.add(listaRisultatiRicerca[i]);
 		}
 		ricerca = new Ricerca("Tony", getRisultatiRicerca());
 		layers.add(ricerca, new  Integer(0), 0);
-		ricerca.setBounds(0,0,800,775);*/
-		
+		ricerca.setBounds(0,0,800,775);
+*/
 		profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
 		layers.add(profilo, new  Integer(0), 0);
 		profilo.setBounds(0,0,800,775);
@@ -182,6 +182,8 @@ public class Frame extends JFrame {
 		this.chat = chat;
 	}
 
-	
+	public ArrayList<String> getRisultatiRicerca() {
+		return risultatiRicerca;
+	}
 	
 }
