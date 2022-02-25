@@ -13,9 +13,10 @@ public class Chat extends JPanel {
 	private Container containerSuperiore;
 	private Container containerSceltaChat;
 	private Container containerInferiore;
-	private JButton pChatPrivata;
-	private JButton pChatGruppo;
-	private JButton pNuovaChat;
+	private JButton chatPrivata;
+	private JButton chatGruppo;
+	private JButton nuovaChat;
+	private JButton homeChat;
 	private static final long serialVersionUID = 1L;
 	private Color NERO = new Color(0,0,0);
 	private Font fontTitle = new Font("Arial", Font.BOLD | Font.ITALIC, 30);
@@ -32,28 +33,31 @@ public class Chat extends JPanel {
 		titoloChat.setFont(fontTitle);
 		titoloChat.setForeground(Color.WHITE);
 		
-		pChatPrivata = new JButton("Chat private");
-		pChatPrivata.setFont(fontButton);
+		chatPrivata = new JButton("Chat private");
+		chatPrivata.setFont(fontButton);
 		
-		pChatGruppo = new JButton("Chat di gruppo");
-		pChatGruppo.setFont(fontButton);
+		chatGruppo = new JButton("Chat di gruppo");
+		chatGruppo.setFont(fontButton);
 		
-		pNuovaChat = new JButton("Nuova chat");
-		pNuovaChat.setFont(fontButton);
+		nuovaChat = new JButton("Nuova chat");
+		nuovaChat.setFont(fontButton);
 		
+		homeChat = new JButton("Torna alla home");
+		nuovaChat.setFont(fontButton);
 		
 		containerSuperiore = new Container();
 		containerSuperiore.setLayout(new GridLayout(2, 1));
 		containerSceltaChat = new Container();
 		containerSceltaChat.setLayout(new GridLayout(1, 2));
 		containerInferiore = new Container();
-		containerInferiore.setLayout(new GridLayout(1, 2));
+		containerInferiore.setLayout(new GridLayout(2, 1));
 		
 		containerSuperiore.add(titoloChat);
-		containerSceltaChat.add(pChatPrivata);
-		containerSceltaChat.add(pChatGruppo);
+		containerSceltaChat.add(chatPrivata);
+		containerSceltaChat.add(chatGruppo);
 		containerSuperiore.add(containerSceltaChat);
-		containerInferiore.add(pNuovaChat);
+		containerInferiore.add(nuovaChat);
+		containerInferiore.add(homeChat);
 		this.add(containerSuperiore, BorderLayout.NORTH);
 		this.add(containerInferiore, BorderLayout.SOUTH);
 		for(i=0; i < numeroChat; i++) {
@@ -64,6 +68,38 @@ public class Chat extends JPanel {
 	public void aggiungiChatAllaLista(ArrayList listaChat) {
 		JLabel chat = new JLabel();
 		listaChat.add(chat);
+	}
+
+	public JButton getChatPrivata() {
+		return chatPrivata;
+	}
+
+	public void setChatPrivata(JButton chatPrivata) {
+		this.chatPrivata = chatPrivata;
+	}
+
+	public JButton getChatGruppo() {
+		return chatGruppo;
+	}
+
+	public void setChatGruppo(JButton chatGruppo) {
+		this.chatGruppo = chatGruppo;
+	}
+
+	public JButton getNuovaChat() {
+		return nuovaChat;
+	}
+
+	public void setNuovaChat(JButton nuovaChat) {
+		this.nuovaChat = nuovaChat;
+	}
+
+	public JButton getHomeChat() {
+		return homeChat;
+	}
+
+	public void setHomeChat(JButton homeChat) {
+		this.homeChat = homeChat;
 	}
 	
 	

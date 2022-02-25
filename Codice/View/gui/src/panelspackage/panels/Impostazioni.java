@@ -3,6 +3,8 @@ package panelspackage.panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -13,9 +15,16 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
 public class Impostazioni extends JPanel {
-	/**
-	 * 
-	 */
+
+	private JButton modificaProfilo;
+	private JButton cambiaProfilo;
+	private JButton visibilitaPost;
+	private JButton logout;
+	private JButton eliminaAccount;
+	private JButton homeImpostazioni;
+	
+	private SpecificContainer containerCenter;
+	
 	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 125, 0);
 	Color NERO = new Color(0, 0, 0);
@@ -40,20 +49,25 @@ public class Impostazioni extends JPanel {
 		
 		SpecificContainer containerWest = new SpecificContainer(ARANCIONE);
 		this.add(containerWest, BorderLayout.WEST);
-		
-
 		containerWest.setLayout(new GridLayout(8,1));
 		
-		containerWest.add(new AddPostButton("Modifica profilo", NERO));
-		containerWest.add(new AddPostButton("Cambia profilo", ARANCIONE));
+		modificaProfilo = new AddPostButton("Modifica profilo", NERO);
+		cambiaProfilo = new AddPostButton("Cambia profilo", ARANCIONE);
+		visibilitaPost = new AddPostButton("Visibilita' post", ARANCIONE);
+		logout = new AddPostButton("Logout", ARANCIONE);
+		eliminaAccount = new AddPostButton("Elimina account", ARANCIONE);
+		homeImpostazioni = new AddPostButton("Torna alla home", NERO);
+				
+		containerWest.add(modificaProfilo);
+		containerWest.add(cambiaProfilo);
 		containerWest.add(new Box(getVisibilita(), ARANCIONE));
-		containerWest.add(new AddPostButton("Visibilità post", ARANCIONE));
+		containerWest.add(visibilitaPost);
 		containerWest.add(new Box(getColori(), ARANCIONE));
-		containerWest.add(new AddPostButton("Logout", ARANCIONE));
-		containerWest.add(new AddPostButton("Elimina Account", ARANCIONE));
+		containerWest.add(logout);
+		containerWest.add(eliminaAccount);
 
 		
-		SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
+		containerCenter = new SpecificContainer(ARANCIONE);
 		this.add(containerCenter, BorderLayout.CENTER);
 		
 
@@ -66,9 +80,7 @@ public class Impostazioni extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		
-		Etichette etichettaSud = new Etichette("Sezione Inferiore", ARANCIONE);
-		containerSouth.add(etichettaSud, BorderLayout.CENTER);
+		containerSouth.add(homeImpostazioni, BorderLayout.CENTER);
 	}
 	public String[] getVisibilita() {
 		return visibilita;
@@ -81,6 +93,53 @@ public class Impostazioni extends JPanel {
 	public String[] getSesso() {
 		return sesso;
 	}
+
+	public SpecificContainer getContainerCenter() {
+		return containerCenter;
+	}
+	public void setContainerCenter(SpecificContainer containerCenter) {
+		this.containerCenter = containerCenter;
+	}
+	
+	
+	//GETTER E SETTER PULSANTI
+	public JButton getModificaProfilo() {
+		return modificaProfilo;
+	}
+	public void setModificaProfilo(JButton modificaProfilo) {
+		this.modificaProfilo = modificaProfilo;
+	}
+	public JButton getCambiaProfilo() {
+		return cambiaProfilo;
+	}
+	public void setCambiaProfilo(JButton cambiaProfilo) {
+		this.cambiaProfilo = cambiaProfilo;
+	}
+	public JButton getVisibilitaPost() {
+		return visibilitaPost;
+	}
+	public void setVisibilitaPost(JButton visibilitaPost) {
+		this.visibilitaPost = visibilitaPost;
+	}
+	public JButton getLogout() {
+		return logout;
+	}
+	public void setLogout(JButton logout) {
+		this.logout = logout;
+	}
+	public JButton getEliminaAccount() {
+		return eliminaAccount;
+	}
+	public void setEliminaAccount(JButton eliminaAccount) {
+		this.eliminaAccount = eliminaAccount;
+	}
+	public JButton getHomeImpostazioni() {
+		return homeImpostazioni;
+	}
+	public void setHomeImpostazioni(JButton homeImpostazioni) {
+		this.homeImpostazioni = homeImpostazioni;
+	}
+
 
 }
 	
