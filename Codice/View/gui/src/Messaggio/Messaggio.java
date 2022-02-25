@@ -13,6 +13,7 @@ public abstract class Messaggio {
 		this.testo = testo;
 		this.multimedia = multimedia;
 	}
+	
 	private String idMessaggio;
 	private Date dataInvio;
 	private Time oraInvio;

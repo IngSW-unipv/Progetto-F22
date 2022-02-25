@@ -20,4 +20,6 @@ public interface IChatPrivata {
 	public void selectAllRipetuto();
 	
 	public boolean inserisciChiavi(MessaggioPrivato m);
+	
+	public void ottieniTesto(MessaggioPrivato m);
 }

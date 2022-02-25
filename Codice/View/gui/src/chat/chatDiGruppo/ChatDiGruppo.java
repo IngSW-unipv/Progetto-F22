@@ -71,6 +71,12 @@ public class ChatDiGruppo implements IChatDiGruppo{
 		b = mdao.rimuoviMessaggioDiGruppo(m);
 		return b;
 	}
+
+	@Override
+	public void ottieniTesto(MessaggioDiGruppo m) {
+		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
+		mdao.ottieniTesto(m);
+	}
 		
 	}
 

@@ -11,4 +11,5 @@ public interface IMessaggioPrivatoDao {
 	public boolean rimuoviMessaggioPrivato(MessaggioPrivato m);
 	public ArrayList<MessaggioPrivato> cercaMessaggioPrivato(MessaggioPrivato m);
 	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m);
+	public void ottieniMessaggio(MessaggioPrivato m);
 }

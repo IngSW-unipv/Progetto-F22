@@ -22,4 +22,6 @@ public interface IChatDiGruppo {
 	public void selectAllRipetuto();
 	
 	public boolean inserisciChiavi(MessaggioDiGruppo m);
+	
+	public void ottieniTesto(MessaggioDiGruppo m);
 }

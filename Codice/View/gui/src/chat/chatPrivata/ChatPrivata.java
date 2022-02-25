@@ -70,6 +70,12 @@ public class ChatPrivata implements IChatPrivata{
 		b = mdao.inserisciChiavi(m);
 		return b;
 	}
+
+	@Override
+	public void ottieniTesto(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		mdao.ottieniMessaggio(m);
+	}
 	}
 
 	

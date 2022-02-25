@@ -187,4 +187,31 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		return result;
 	}
 
+
+	@Override
+	public void ottieniMessaggio(MessaggioPrivato m) {
+		
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT testo FROM messaggioprivato WHERE idMsgPvt=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m.getIdMessaggio());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				System.out.println(rs1.getString(1));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		
+	}
+
 }

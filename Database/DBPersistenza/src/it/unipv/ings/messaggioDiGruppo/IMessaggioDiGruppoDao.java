@@ -11,5 +11,6 @@ public interface IMessaggioDiGruppoDao {
 	public boolean rimuoviMessaggioDiGruppo(MessaggioDiGruppo m);
 	public ArrayList<MessaggioDiGruppo> cercaMessaggioDiGruppo(MessaggioDiGruppo m);
 	public ArrayList<MessaggioDiGruppo> selectAllIdGruppo(MessaggioDiGruppo m);
+	public void ottieniTesto(MessaggioDiGruppo m);
 	}
 
