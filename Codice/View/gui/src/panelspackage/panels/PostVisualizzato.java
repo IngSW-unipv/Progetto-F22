@@ -18,7 +18,18 @@ public class PostVisualizzato extends JPanel{
 		Color NERO = new Color(0, 0, 0);
 		int i;
 		
-		public PostVisualizzato(String postImmagine, String postCommenti[], String utentiCommenti[], int numeroMiPiace, int numeroNonMipiace) {
+		private JButton homePostVisualizzato;
+		public PostVisualizzato() {
+			//String postImmagine, String postCommenti[], String utentiCommenti[], int numeroMiPiace, int numeroNonMipiace
+			//da eliminare
+			String postImmagine = "lol";
+			String postcommenti[];
+			String utentiCommenti[];
+			int numeroMiPiace = 10;
+			int numeroNonMiPiace = 20;
+			
+			
+			
 			//commento
 			this.setOpaque(true);
 			this.setVisible(true);
@@ -30,9 +41,6 @@ public class PostVisualizzato extends JPanel{
 
 			Etichette etichetta = new Etichette("Post", ARANCIONE);
 			containerNorth.add(etichetta, BorderLayout.WEST);
-			
-			AddPostButton homeButton = new AddPostButton("Home", ARANCIONE);
-			containerNorth.add(homeButton, BorderLayout.CENTER);
 			
 			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
@@ -81,10 +89,10 @@ public class PostVisualizzato extends JPanel{
 			
 			//COMMENTI
 
-			for( i = 0; i <  postCommenti.length; i++) {
+			/*for( i = 0; i <  postCommenti.length; i++) {
 				Etichette area = new Etichette(utentiCommenti[i] +": " + postCommenti[i], ARANCIONE);
 				ListaAreaTesto.add(area);
-			}
+			}*/
 			
 			GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaAreaTesto,5,1, ListaAreaTesto.size());
 			containerCenter.add(Dati, BorderLayout.EAST);
@@ -92,8 +100,8 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerSouth = new SpecificContainer(NERO);
 			this.add(containerSouth, BorderLayout.SOUTH);
 			
-			Etichette etichettaSud = new Etichette("Sezione Inferiore", ARANCIONE);
-			containerSouth.add(etichettaSud, BorderLayout.CENTER);
+			homePostVisualizzato = new AddPostButton("Home", ARANCIONE);
+			containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
 		}
 
 		public ArrayList<JComponent> getListaAreaTesto() {
@@ -104,4 +112,16 @@ public class PostVisualizzato extends JPanel{
 			ListaAreaTesto = listaAreaTesto;
 		}
 
+		
+		
+		
+		//GETTER E SETTER PULSANTI
+		public JButton getHomePostVisualizzato() {
+			return homePostVisualizzato;
+		}
+
+		public void setHomePostVisualizzato(JButton homePostVisualizzato) {
+			this.homePostVisualizzato = homePostVisualizzato;
+		}
+		
 }
