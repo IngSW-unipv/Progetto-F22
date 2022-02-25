@@ -1,13 +1,11 @@
 package test;
 import java.util.ArrayList;
 
-import controller.ControllerSocial;
 import packageframe.Frame;
 import panelspackage.panels.Chat;
-import panelspackage.panels.Home;
 
 public class TestGui {
-	
+	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
 	public static void main(String[] args) {
 		
 		ArrayList<String> bufferPosts = new ArrayList<String>();
@@ -21,13 +19,17 @@ public class TestGui {
 		bufferStories.add("immagini/Clint.jpeg");
 		bufferStories.add("immagini/Steve.jpeg");
 		
-		Frame gui = new Frame(bufferStories, bufferPosts);
+		Frame gui = new Frame(bufferStories, bufferPosts, "Tony Stark", "tony.stark01@universitadipavia.it", 182, 93, 238,"immagini/Tony.jpeg", listaImmaginiPost);
 		gui.setVisible(true);
 		
 		Chat chat = new Chat();
 		chat.setVisible(true);
-		
-		ControllerSocial ctrl = new ControllerSocial(gui);
-		ctrl.assegnaGestori();
+	}
+	public String[] getListaImmaginiPost() {
+		return listaImmaginiPost;
+	}
+	public void setListaImmaginiPost(String[] listaImmaginiPost) {
+		this.listaImmaginiPost = listaImmaginiPost;
 	}	
 }
+
