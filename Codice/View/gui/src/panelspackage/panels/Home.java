@@ -12,10 +12,6 @@ import javax.swing.border.LineBorder;
 	
 public class Home extends JPanel {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 125, 0);
 	Color NERO = new Color(0, 0, 0);
 	public int indiceBufferStories;

@@ -4,6 +4,7 @@
 	import java.util.ArrayList;
 	import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.LabeledIcon;
+import panelspackage.panels.elements.AddPostButton;
 import panelspackage.panels.elements.AreaDiTesto;
 	import panelspackage.panels.elements.Etichette;
 	import panelspackage.panels.elements.SpecificContainer;
@@ -28,13 +29,57 @@ public class PostVisualizzato extends JPanel{
 			this.add(containerNorth, BorderLayout.NORTH);
 
 			Etichette etichetta = new Etichette("Post", ARANCIONE);
-			containerNorth.add(etichetta, BorderLayout.CENTER);
+			containerNorth.add(etichetta, BorderLayout.WEST);
+			
+			AddPostButton homeButton = new AddPostButton("Home", ARANCIONE);
+			containerNorth.add(homeButton, BorderLayout.CENTER);
 			
 			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
-			LabeledIcon immagine = new LabeledIcon(postImmagine);
-			containerCenter.add(immagine, BorderLayout.CENTER);
+
 			
+			//POST
+			
+			SpecificContainer containerPost = new SpecificContainer();
+			containerCenter.add(containerPost, BorderLayout.CENTER);
+			
+			LabeledIcon post = new LabeledIcon(postImmagine);
+			containerPost.add(post, BorderLayout.CENTER);
+			SpecificContainer containerCosePost = new SpecificContainer();
+			JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
+			areaDescrizione.setPreferredSize(new Dimension(400, 130));
+			areaDescrizione.setEditable(false);
+			areaDescrizione.setLineWrap(true);
+			JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JLabel numeroLike = new JLabel("N.like");
+			numeroLike.setForeground(Color.white);
+			JLabel numeroDislike = new JLabel("N.dislike");
+			numeroDislike.setForeground(Color.white);
+			JLabel numeroCommenti = new JLabel("N.Commenti");
+			numeroCommenti.setForeground(Color.white);
+			JButton aggiungiLike = new JButton("+ Like");
+			JButton aggiungiDislike = new JButton("- Like");
+
+			JButton  aggiungiCommento = new JButton("+ Commento");
+			
+			SpecificContainer containerBottoniPost = new SpecificContainer();
+			SpecificContainer containerLikeDislikeComm = new SpecificContainer();
+			
+			containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
+			containerLikeDislikeComm.add(numeroLike);
+			containerLikeDislikeComm.add(numeroDislike);
+			containerLikeDislikeComm.add(numeroCommenti);
+			containerLikeDislikeComm.add(aggiungiLike);
+			containerLikeDislikeComm.add(aggiungiDislike);
+			
+			containerLikeDislikeComm.add(aggiungiCommento);
+			containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
+			containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
+			containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
+			containerPost.add(containerCosePost, BorderLayout.SOUTH);		
+			
+			
+			//COMMENTI
 
 			for( i = 0; i <  postCommenti.length; i++) {
 				Etichette area = new Etichette(utentiCommenti[i] +": " + postCommenti[i], ARANCIONE);

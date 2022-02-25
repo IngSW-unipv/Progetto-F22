@@ -32,11 +32,11 @@ public class Impostazioni extends JPanel {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 		
-		JLabel nomeProfilo = new JLabel(profilo);
-		nomeProfilo.setVisible(true);
+		AddPostButton homeButton = new AddPostButton("Home", ARANCIONE);
+		containerNorth.add(homeButton, BorderLayout.CENTER);
 		
-		nomeProfilo.setForeground(ARANCIONE);
-		containerNorth.add(nomeProfilo, BorderLayout.CENTER);
+		Etichette nomeProfilo = new Etichette(profilo, ARANCIONE);
+		containerNorth.add(nomeProfilo, BorderLayout.WEST);
 		
 		SpecificContainer containerWest = new SpecificContainer(ARANCIONE);
 		this.add(containerWest, BorderLayout.WEST);

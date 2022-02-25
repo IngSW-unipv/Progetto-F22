@@ -28,14 +28,15 @@ public class Ricerca extends JPanel {
 		
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
-
-		JLabel etichetta = new JLabel("Hai cercato " + stringCercata);
-		etichetta.setForeground(ARANCIONE);
-		etichetta.setVisible(true);
-		containerNorth.add(etichetta, BorderLayout.CENTER);
+		AddPostButton homeButton = new AddPostButton("Home", ARANCIONE);
+		containerNorth.add(homeButton, BorderLayout.CENTER);
 		
 		SpecificContainer containerCenter = new SpecificContainer();
 		this.add(containerCenter, BorderLayout.CENTER);
+		
+		Etichette etichetta = new Etichette("Hai cercato " + stringCercata,ARANCIONE);
+		containerNorth.add(etichetta, BorderLayout.SOUTH);
+		
 		containerCenter.setLayout(new GridLayout(10,1));
 		
 		for (i = 0; i < risultatiRicerca.size() & i < 10; i++) {
@@ -49,13 +50,6 @@ public class Ricerca extends JPanel {
 			containerWest.add(new Etichette("risultato"+ (i+1), ARANCIONE));
 		}
 
-		/*containerCenter.add(new Etichette("primorisultato", ARANCIONE));
-		containerCenter.add(new Etichette("secondorisultato", ARANCIONE));
-		containerCenter.add(new Etichette("terzorisultato", ARANCIONE));
-		containerCenter.add(new Etichette("quartorisultato", ARANCIONE));
-		containerCenter.add(new Etichette("terzorisultato", ARANCIONE));
-		containerCenter.add(new Etichette("risultato", ARANCIONE));
-		*/
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
 	}

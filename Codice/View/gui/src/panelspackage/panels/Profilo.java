@@ -26,7 +26,7 @@ public class  Profilo extends JPanel {
 	Color NERO = new Color(0, 0, 0);
 	int i;
 	
-	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
+	public Profilo(String cickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
 		
 		this.setOpaque(true);
 		this.setVisible(true);
@@ -38,8 +38,17 @@ public class  Profilo extends JPanel {
 		LabeledIcon immagine = new LabeledIcon(immagineProfilo);
 		containerNorth.add(immagine, BorderLayout.WEST);
 		
-		Etichette etichetta = new Etichette(NickName, ARANCIONE);
-		containerNorth.add(etichetta, BorderLayout.NORTH);
+		SpecificContainer containerHome = new SpecificContainer();
+		containerNorth.add(containerHome, BorderLayout.NORTH);
+		
+		Etichette nickNameLabel = new Etichette(cickName, ARANCIONE);
+		containerHome.add(nickNameLabel, BorderLayout.WEST);
+		
+		Etichette altraLabel = new Etichette("altro", ARANCIONE);
+		containerHome.add(altraLabel, BorderLayout.EAST);
+		
+		AddPostButton homeButton = new AddPostButton("Home", ARANCIONE);
+		containerHome.add(homeButton, BorderLayout.CENTER);
 		
 		
 		this.dati.add("N.Post");
