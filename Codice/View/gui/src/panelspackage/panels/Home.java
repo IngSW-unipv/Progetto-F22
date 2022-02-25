@@ -2,13 +2,10 @@ package panelspackage.panels;
 import panelspackage.panels.elements.AddPostButton;
 import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.SpecificContainer;
-
 import java.awt.*;
 import java.util.ArrayList;
-
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 	
 public class Home extends JPanel {
 	
@@ -31,6 +28,10 @@ public class Home extends JPanel {
 	private JButton aggiungiCommento;	//Aggiungi commento
 	private JButton buttonPrevStory;	//Storia successiva
 	private JButton buttonNextStory;	//Storia precedente
+	private JButton buttonImpostazioni;
+	private JButton buttonProfilo;
+	private JButton buttonChat;
+	private JButton buttonNotifiche;
 	private AddPostButton pPost;
 	private AddPostButton pStory;
 	private AddPostButton pSondaggio;
@@ -54,7 +55,6 @@ public class Home extends JPanel {
 		containerNorth.setVisible(true);
 		this.add(containerNorth, BorderLayout.NORTH);
 		containerNorth.setLayout(new BorderLayout());
-
 		//AREA RICERCA ACCOUNT
 		Container areaRicerca = new Container();
 		areaRicerca.setVisible(true);
@@ -95,30 +95,35 @@ public class Home extends JPanel {
 		Container menuHomeSinistro = new Container();
 		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
 		menuHomeSinistro.setLayout(new BorderLayout());
-			
-		LabeledIcon profileLabel = new LabeledIcon("immagini/profilo.png");
-		menuHomeSinistro.add(profileLabel, BorderLayout.EAST);
-			
-		LabeledIcon settingLabel = new LabeledIcon("immagini/impostazioni.png");
-		menuHomeSinistro.add(settingLabel, BorderLayout.WEST);
-				
+
+		Icon profileLabel = new ImageIcon("immagini/profilo.png");
+		buttonProfilo = new JButton(profileLabel);
+		menuHomeSinistro.add(buttonProfilo, BorderLayout.EAST);
+
+		Icon settingLabel = new ImageIcon("immagini/impostazioni.png");
+		buttonImpostazioni = new JButton(settingLabel);
+		menuHomeSinistro.add(buttonImpostazioni, BorderLayout.WEST);
+
 		Container menuHomeDestro = new Container();
 		menuHomeDestro.setLayout(new BorderLayout());
 		menuHomeDestro.setBackground(ARANCIONE);
 		menuHomeDestro.setForeground(NERO);
 		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
-			
-		LabeledIcon notificationLabel = new LabeledIcon("immagini/notifiche.gif");
-		menuHomeDestro.add(notificationLabel, BorderLayout.EAST);
-			
+
+		Icon notificationLabel = new ImageIcon("immagini/notifiche.gif");
+		buttonNotifiche = new JButton(notificationLabel);
+		menuHomeDestro.add(buttonNotifiche, BorderLayout.EAST);
+
 		LabeledIcon textLabel = new LabeledIcon("immagini/testo.jpeg");
 		menuHomeDestro.add(textLabel, BorderLayout.WEST);
-			
-			
+		Icon chatLabel = new ImageIcon("immagini/testo.jpeg");
+		buttonChat = new JButton(chatLabel);
+		menuHomeDestro.add(buttonChat, BorderLayout.WEST);
+
+
 		SpecificContainer containerCenter = new SpecificContainer();
 		this.add(containerCenter, BorderLayout.CENTER);
 			
-
 		SpecificContainer containerCommenti = new SpecificContainer();
 		containerCenter.add(containerCommenti, BorderLayout.WEST);
 		
@@ -212,114 +217,87 @@ public class Home extends JPanel {
 		containerSud.add(pIdea);
 		
 	}
-
 	public int getIndiceBufferStories() {
 		return indiceBufferStories;
 	}
-
 	public void setIndiceBufferStories(int indiceBufferStories) {
 		this.indiceBufferStories = indiceBufferStories;
 	}
-
 	public int getIndiceBufferPosts() {
 		return indiceBufferPosts;
 	}
-
 	public void setIndiceBufferPosts(int indiceBufferPosts) {
 		this.indiceBufferPosts = indiceBufferPosts;
 	}
-
 	
 	
 	//GETTER E SETTER PULSANTI
 	public JButton getSearchButton() {
 		return searchButton;
 	}
-
 	public void setSearchButton(JButton searchButton) {
 		this.searchButton = searchButton;
 	}
-
 	public JButton getButtonPrevPost() {
 		return buttonPrevPost;
 	}
-
 	public void setButtonPrevPost(JButton buttonPrevPost) {
 		this.buttonPrevPost = buttonPrevPost;
 	}
-
 	public JButton getButtonNextPost() {
 		return buttonNextPost;
 	}
-
 	public void setButtonNextPost(JButton buttonNextPost) {
 		this.buttonNextPost = buttonNextPost;
 	}
-
 	public JButton getAggiungiLike() {
 		return aggiungiLike;
 	}
-
 	public void setAggiungiLike(JButton aggiungiLike) {
 		this.aggiungiLike = aggiungiLike;
 	}
-
 	public JButton getAggiungiDislike() {
 		return aggiungiDislike;
 	}
-
 	public void setAggiungiDislike(JButton aggiungiDislike) {
 		this.aggiungiDislike = aggiungiDislike;
 	}
-
 	public JButton getAggiungiCommento() {
 		return aggiungiCommento;
 	}
-
 	public void setAggiungiCommento(JButton aggiungiCommento) {
 		this.aggiungiCommento = aggiungiCommento;
 	}
-
 	public JButton getButtonPrevStory() {
 		return buttonPrevStory;
 	}
-
 	public void setButtonPrevStory(JButton buttonPrevStory) {
 		this.buttonPrevStory = buttonPrevStory;
 	}
-
 	public JButton getButtonNextStory() {
 		return buttonNextStory;
 	}
-
 	public void setButtonNextStory(JButton buttonNextStory) {
 		this.buttonNextStory = buttonNextStory;
 	}
-
 	public AddPostButton getpPost() {
 		return pPost;
 	}
-
 	public void setpPost(AddPostButton pPost) {
 		this.pPost = pPost;
 	}
-
 	public AddPostButton getpStory() {
 		return pStory;
 	}
-
 	public void setpStory(AddPostButton pStory) {
 		this.pStory = pStory;
 	}
-
 	public AddPostButton getpSondaggio() {
 		return pSondaggio;
 	}
-
 	public void setpSondaggio(AddPostButton pSondaggio) {
 		this.pSondaggio = pSondaggio;
 	}
-
 	public AddPostButton getpIdea() {
 		return pIdea;
 	}
@@ -327,4 +305,37 @@ public class Home extends JPanel {
 	public void setpIdea(AddPostButton pIdea) {
 		this.pIdea = pIdea;
 	}	
+
+	public JButton getButtonImpostazioni() {
+		return buttonImpostazioni;
+	}
+
+	public void setButtonImpostazioni(JButton buttonImpostazioni) {
+		this.buttonImpostazioni = buttonImpostazioni;
+	}
+
+	public JButton getButtonProfilo() {
+		return buttonProfilo;
+	}
+
+	public void setButtonProfilo(JButton buttonProfilo) {
+		this.buttonProfilo = buttonProfilo;
+	}
+
+	public JButton getButtonChat() {
+		return buttonChat;
+	}
+
+	public void setButtonChat(JButton buttonChat) {
+		this.buttonChat = buttonChat;
+	}
+
+	public JButton getButtonNotifiche() {
+		return buttonNotifiche;
+	}
+
+	public void setButtonNotifiche(JButton buttonNotifiche) {
+		this.buttonNotifiche = buttonNotifiche;
+	}
+
 }

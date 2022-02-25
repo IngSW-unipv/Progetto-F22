@@ -2,6 +2,7 @@ package test;
 import java.util.ArrayList;
 
 import packageframe.Frame;
+import controller.ControllerSocial;
 import panelspackage.panels.Chat;
 
 public class TestGui {
@@ -24,6 +25,9 @@ public class TestGui {
 		
 		Chat chat = new Chat();
 		chat.setVisible(true);
+		
+		ControllerSocial ctrl = new ControllerSocial(gui);
+		ctrl.assegnaGestori();
 	}
 	public String[] getListaImmaginiPost() {
 		return listaImmaginiPost;

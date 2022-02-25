@@ -1,6 +1,5 @@
 package controller;
 import java.awt.event.ActionListener;
-import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionEvent;
 
@@ -91,7 +90,7 @@ public class ControllerSocial{
 				frameSocial.setVarImpostazioni(0);
 				frameSocial.getImpostazioni().setVisible(false);
 				frameSocial.setVarChat(1);
-				frameSocial.getChat().setVisible(false);
+				frameSocial.getChat().setVisible(true);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
 			}
