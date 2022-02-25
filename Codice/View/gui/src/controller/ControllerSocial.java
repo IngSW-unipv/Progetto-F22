@@ -33,7 +33,7 @@ public class ControllerSocial{
 	public ControllerSocial(Frame frameSocial) {
 		this.frameSocial = frameSocial;
 		this.homeView = frameSocial.getHome();
-		//inserire modello con metodi per la home
+		//inserire modello con metodi per la home .
 	}
 	
 	public void assegnaGestori() {
