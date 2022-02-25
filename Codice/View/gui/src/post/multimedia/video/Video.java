@@ -51,18 +51,18 @@ public class Video extends Multimedia{
 	}
 	
 	//L'int passato da tastiera indica il numero di ore in cui vogliamo che la storia rimanga
-	@Override
+
 	public boolean settaDurataStoria(int time, Video v) {
 		UtilityVideo u = new UtilityVideo();
 		this.setStory(true);
 		this.setTempoCancellazione(time);
-		this.pubblicaVideo(u.convertiToTestoDB(v));
+		this.pubblicaVideo(u.convertiToVideoDB(v));
 		try {
 		    Thread.sleep(time * 60 * 60 * 1000);
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
 		}
-		this.rimuoviVideo(u.convertiToTestoDB(v));	
+		this.rimuoviVideo(u.convertiToVideoDB(v));	
 		return true;
 	}
 	

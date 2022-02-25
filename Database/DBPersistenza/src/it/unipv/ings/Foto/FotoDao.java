@@ -16,8 +16,8 @@ public class FotoDao implements IFotoDao{
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<Foto> selectAll() {
-		ArrayList<Foto> result = new ArrayList<>();
+	public ArrayList<FotoDB> selectAll() {
+		ArrayList<FotoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -31,7 +31,7 @@ public class FotoDao implements IFotoDao{
 
 			while(rs1.next())
 			{
-				Foto f=new Foto(rs1.getString(1),rs1.getString(2),rs1.getString(3));                                     
+				FotoDB f=new FotoDB(rs1.getString(1),rs1.getString(2),rs1.getString(3), rs1.getBoolean(4));                                     
 
 				result.add(f);
 			}
@@ -41,20 +41,21 @@ public class FotoDao implements IFotoDao{
 		return result;
 	}
 	@Override
-	public boolean pubblicaFoto(Foto f) {
+	public boolean pubblicaFoto(FotoDB f) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into foto (idFoto,percorso,post) values (?,?,?)";
+			String query="insert into foto (idFoto,percorso,post,isStory) values (?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, f.getIdFoto());
 			st1.setString(2, f.getPerscorso());
             st1.setString(3, f.getPost());
-			
+			st1.setBoolean(4, f.isStory());
+            
 			st1.executeUpdate();
 
 
@@ -68,7 +69,7 @@ public class FotoDao implements IFotoDao{
 	}
 	
 	@Override
-	public boolean rimuoviFoto(Foto f) {
+	public boolean rimuoviFoto(FotoDB f) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 

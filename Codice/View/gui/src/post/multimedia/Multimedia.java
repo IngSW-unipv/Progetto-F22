@@ -5,7 +5,7 @@ import java.sql.Time;
 
 import post.Post;
 
-public abstract class Multimedia extends Post implements IMultimedia{
+public abstract class Multimedia extends Post{
 
 	public Multimedia(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione, String percorso, boolean isStory) {
