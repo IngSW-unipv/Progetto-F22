@@ -1,17 +1,19 @@
 package it.unipv.ings.Video;
 
-public class Video {
-public Video(String idVideo, int durata, String percorso, String post) {
+public class VideoDB {
+public VideoDB(String idVideo, int durata, String percorso, String post, boolean isStory) {
 		super();
 		this.idVideo = idVideo;
 		this.durata = durata;
 		this.percorso = percorso;
 		this.post = post;
+		this.isStory = isStory;
 	}
 private String idVideo;
 private int durata;
 private String percorso;
 private String post;
+private boolean isStory;
 public String getIdVideo() {
 	return idVideo;
 }
@@ -36,8 +38,15 @@ public String getPost() {
 public void setPost(String post) {
 	this.post = post;
 }
+public boolean isStory() {
+	return isStory;
+}
+public void setStory(boolean isStory) {
+	this.isStory = isStory;
+}
 @Override
 public String toString() {
-	return "Video [idVideo=" + idVideo + ", durata=" + durata + ", percorso=" + percorso + ", post=" + post + "]";
+	return "VideoDB [idVideo=" + idVideo + ", durata=" + durata + ", percorso=" + percorso + ", post=" + post
+			+ ", isStory=" + isStory + "]";
 }
 }

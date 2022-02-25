@@ -3,7 +3,7 @@ package it.unipv.ings.Video;
 import java.util.ArrayList;
 
 public interface IVideoDao {
-	public ArrayList<Video> selectAll();
-	public boolean pubblicaVideo(Video v);
-	public boolean rimuoviVideo(Video v);
+	public ArrayList<VideoDB> selectAll();
+	public boolean pubblicaVideo(VideoDB v);
+	public boolean rimuoviVideo(VideoDB v);
 }

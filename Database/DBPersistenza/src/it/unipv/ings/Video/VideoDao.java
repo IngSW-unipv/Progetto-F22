@@ -16,8 +16,8 @@ public class VideoDao implements IVideoDao{
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<Video> selectAll() {
-		 ArrayList<Video> result = new ArrayList<>();
+	public ArrayList<VideoDB> selectAll() {
+		 ArrayList<VideoDB> result = new ArrayList<>();
 
 			conn=DBConnection.startConnection(conn,schema);
 			Statement st1;
@@ -31,7 +31,7 @@ public class VideoDao implements IVideoDao{
 
 				while(rs1.next())
 				{
-					Video v=new Video(rs1.getString(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4));                                     
+					VideoDB v=new VideoDB(rs1.getString(1), rs1.getInt(2),rs1.getString(3),rs1.getString(4),rs1.getBoolean(5));                                     
 
 					result.add(v);
 				}
@@ -41,21 +41,22 @@ public class VideoDao implements IVideoDao{
 			return result;
 	}
 	@Override
-	public boolean pubblicaVideo(Video v) {
+	public boolean pubblicaVideo(VideoDB v) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into video (idVideo,durata,percorso,post) values (?,?,?,?)";
+			String query="insert into video (idVideo,durata,percorso,post,isStory) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, v.getIdVideo());
 			st1.setInt(2, v.getDurata());
 			st1.setString(3, v.getPercorso());
 		    st1.setString(4, v.getPost());
-			
+			st1.setBoolean(5, v.isStory());
+		    
 			st1.executeUpdate();
 
 
@@ -69,7 +70,7 @@ public class VideoDao implements IVideoDao{
 	}
 	
 	@Override
-	public boolean rimuoviVideo(Video v) {
+	public boolean rimuoviVideo(VideoDB v) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 

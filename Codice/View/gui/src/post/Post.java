@@ -9,7 +9,7 @@ import it.unipv.ings.Post.PostDao;
 
 	public class Post implements IPost {
 		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-				int numDislike, boolean visibile, boolean isStory, boolean condivisibile, String profilo) {
+				int numDislike, boolean visibile, boolean condivisibile, String profilo) {
 			super();
 			this.idPost = idPost;
 			this.dataPubblicazione = dataPubblicazione;
@@ -18,7 +18,6 @@ import it.unipv.ings.Post.PostDao;
 			this.numLike = numLike;
 			this.numDislike = numDislike;
 			this.visibile = visibile;
-			this.isStory = isStory;
 			this.condivisibile = condivisibile;
 			this.profilo = profilo;
 		}
@@ -29,7 +28,6 @@ import it.unipv.ings.Post.PostDao;
 	private int numLike;
 	private int numDislike;
 	private boolean visibile;
-	private boolean isStory;
 	private boolean condivisibile;
 	private String profilo;
 	public String getIdPost() {
@@ -74,12 +72,6 @@ import it.unipv.ings.Post.PostDao;
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
 	}
-	public boolean isStory() {
-		return isStory;
-	}
-	public void setStory(boolean isStory) {
-		this.isStory = isStory;
-	}
 	public boolean isCondivisibile() {
 		return condivisibile;
 	}
@@ -96,7 +88,7 @@ import it.unipv.ings.Post.PostDao;
 	public String toString() {
 		return "Post [idPost=" + idPost + ", dataPubblicazione=" + dataPubblicazione + ", oraPubblicazione="
 				+ oraPubblicazione + ", descrizione=" + descrizione + ", numLike=" + numLike + ", numDislike=" + numDislike
-				+ ", visibile=" + visibile + ", isStory=" + isStory + ", condivisibile=" + condivisibile + ", profilo="
+				+ ", visibile=" + visibile + ", condivisibile=" + condivisibile + ", profilo="
 				+ profilo + "]";
 	}
 	@Override

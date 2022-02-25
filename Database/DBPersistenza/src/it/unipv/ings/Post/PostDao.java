@@ -31,7 +31,7 @@ public ArrayList<Post> selectAll() {
 
 			while(rs1.next())
 			{
-				Post p=new Post(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7),rs1.getBoolean(8),rs1.getBoolean(9),rs1.getString(10));                                     
+				Post p=new Post(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7),rs1.getBoolean(8),rs1.getString(9));                                     
 
 				result.add(p);
 			}
@@ -48,7 +48,7 @@ public boolean pubblicaPost(Post p) {
 
 	try
 	{
-		String query="insert into post (idPost,dataPubblicazione,oraPubblicazione,Descrizione,numLike,numDislike,visibile,isStory,condivisibile) values (?,?,?,?,?,?,?,?,?)";
+		String query="insert into post (idPost,dataPubblicazione,oraPubblicazione,Descrizione,numLike,numDislike,visibile,condivisibile) values (?,?,?,?,?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, p.getIdPost());
@@ -58,8 +58,7 @@ public boolean pubblicaPost(Post p) {
 		st1.setInt(5, p.getNumLike());
 		st1.setInt(6, p.getNumDislike());
 		st1.setBoolean(7, p.isVisibile());
-		st1.setBoolean(8, p.isStory());
-		st1.setBoolean(9, p.isCondivisibile());
+		st1.setBoolean(8, p.isCondivisibile());
 		
 		st1.executeUpdate();
 

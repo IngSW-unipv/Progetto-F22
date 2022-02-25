@@ -15,7 +15,7 @@ public class SondaggioTester {
         //int [] contDoppiaVot = {0, 0};
         int [] contMulti = {0, 0, 0, 0};
     	//Sondaggio sdv = new SondaggioDoppiaVotazione("P00", null, null, "Che bello il mare", 0, 0, false, false, false, "001", "Cane", "Gatto", "SD01", contDoppiaVot);
-	    SondaggioSceltaMultipla smul = new SondaggioSceltaMultipla("P00", null, null, "wow", 0, 0, false, false, false, "001", "Cane", "Gatto", "SD02", "Gallina", "Ippopotamo", contMulti);
+	    SondaggioSceltaMultipla smul = new SondaggioSceltaMultipla("P00", null, null, "wow", 0, 0, false, false, "001", "Cane", "Gatto", "SD02", "Gallina", "Ippopotamo", contMulti);
     	
 	   // smul.aggiungiVoto(6);
 	    //smul.mostraRisultati();

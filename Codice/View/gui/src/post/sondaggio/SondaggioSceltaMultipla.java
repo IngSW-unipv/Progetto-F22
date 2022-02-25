@@ -7,9 +7,9 @@ import java.util.Scanner;
 public class SondaggioSceltaMultipla extends Sondaggio{
 
 	public SondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-			int numLike, int numDislike, boolean visibile, boolean isStory, boolean condivisibile, String profilo,
+			int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
 			String primaScelta, String secondaScelta, String idSondaggio, String terzaScelta, String quartaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, isStory, condivisibile,	profilo, primaScelta, secondaScelta, idSondaggio);
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,	profilo, primaScelta, secondaScelta, idSondaggio);
 		this.terzaScelta = terzaScelta;
 		this.quartaScelta = quartaScelta;
 		this.azzeraConteggio(conteggio);

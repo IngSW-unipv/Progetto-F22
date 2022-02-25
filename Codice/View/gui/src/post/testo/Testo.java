@@ -9,9 +9,9 @@ import post.Post;
 
 public class Testo extends Post implements ITesto{
 	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean isStory, boolean condivisibile, String profilo, String idTesto,
+			int numDislike, boolean visibile, boolean condivisibile, String profilo, String idTesto,
 			String font, String titolo) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, isStory, condivisibile,
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,
 				profilo);
 		this.idTesto = idTesto;
 		this.font = font;
