@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+
 import it.unipv.ings.connessione.DBConnection;
+import post.commento.Commento;
 
 public class CommentoDao implements ICommentoDao{
 
@@ -70,7 +72,7 @@ public class CommentoDao implements ICommentoDao{
 	}
 
 	@Override
-	public ArrayList<Commento> cercaProfilo(Commento c) {
+	public ArrayList<Commento> mostraCommentiSottoPost(Commento c) {
 		ArrayList<Commento> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
