@@ -11,14 +11,15 @@ import panelspackage.panels.elements.AreaDiTesto;
 	
 public class PostVisualizzato extends JPanel{
 
-
+	
 		ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 		ArrayList<String> dati = new ArrayList<String>();
 		Color ARANCIONE = new Color(255, 125, 0);
 		Color NERO = new Color(0, 0, 0);
 		int i;
-		
+		private JTextArea areaDescrizione;
 		private JButton homePostVisualizzato;
+		private SpecificContainer containerNorth;
 		public PostVisualizzato() {
 			//String postImmagine, String postCommenti[], String utentiCommenti[], int numeroMiPiace, int numeroNonMipiace
 			//da eliminare
@@ -122,6 +123,18 @@ public class PostVisualizzato extends JPanel{
 
 		public void setHomePostVisualizzato(JButton homePostVisualizzato) {
 			this.homePostVisualizzato = homePostVisualizzato;
+		}
+
+		public JTextArea getAreaDescrizione() {
+			return areaDescrizione;
+		}
+
+		public void setAreaDescrizione(JTextArea areaDescrizione) {
+			this.areaDescrizione = areaDescrizione;
+		}
+
+		public SpecificContainer getContainerNorth() {
+			return containerNorth;
 		}
 		
 }

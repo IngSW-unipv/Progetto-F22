@@ -73,8 +73,14 @@ public class Impostazioni extends JPanel {
 
 		containerCenter.setLayout(new GridLayout(4,1));
 		
-		containerCenter.add(new AreaDiTesto(ARANCIONE, "inserisci la tua nuova descrizione profilo"));
-		containerCenter.add(new Box(getSesso(), ARANCIONE));
+		AreaDiTesto areaDescrizione = new AreaDiTesto(ARANCIONE, "inserisci la tua nuova descrizione profilo");
+		Box areaCambioSesso = new Box(getSesso(), ARANCIONE);
+		AreaDiTesto areaNuovaMail = new AreaDiTesto(ARANCIONE, "inserisci una nuova mail");
+
+		containerCenter.add(areaDescrizione);
+		containerCenter.add(areaCambioSesso);
+		containerCenter.add(areaNuovaMail);
+
 		containerCenter.setVisible(false);
 
 		SpecificContainer containerSouth = new SpecificContainer();

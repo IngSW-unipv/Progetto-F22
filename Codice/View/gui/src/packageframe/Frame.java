@@ -21,7 +21,7 @@ public class Frame extends JFrame {
 	private int varImpostazioni = 0;
 	private int varChat = 0;
 	private int varChatMessaggi = 0;
-	private int varPostVisualizzato = 0;
+	private int varPostVisualizzato = 3;
 	
 	private Home home;
 	private LogIn logIn;
