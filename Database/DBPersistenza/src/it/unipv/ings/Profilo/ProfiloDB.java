@@ -1,7 +1,8 @@
-package Profilo;
-public class Profilo {
+package it.unipv.ings.Profilo;
 
-public Profilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
+public class ProfiloDB {
+
+	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
 			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
 		super();
 		this.idProfilo = idProfilo;
@@ -27,6 +28,7 @@ private String messaggioDiGruppo;
 private String messaggioPrivato;
 private String utente;
 private String post;
+
 public String getIdProfilo() {
 	return idProfilo;
 }

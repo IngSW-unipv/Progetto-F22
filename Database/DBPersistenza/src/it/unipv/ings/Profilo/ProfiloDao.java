@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Profilo.Profilo;
 import it.unipv.ings.connessione.DBConnection;
 
 public class ProfiloDao implements IProfiloDao{
@@ -21,8 +20,8 @@ public class ProfiloDao implements IProfiloDao{
 	}
 
 
-	public ArrayList<Profilo> selectAll() {
-		ArrayList<Profilo> result = new ArrayList<>();
+	public ArrayList<ProfiloDB> selectAll() {
+		ArrayList<ProfiloDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -36,7 +35,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				Profilo p=new Profilo(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
+				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
 
 				result.add(p);
 			}
@@ -47,7 +46,7 @@ public class ProfiloDao implements IProfiloDao{
 	}
 
 
-	public boolean inserisciProfilo(Profilo p) {
+	public boolean inserisciProfilo(ProfiloDB p) {
 		
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -79,7 +78,7 @@ public class ProfiloDao implements IProfiloDao{
 
 	}
 
-	public boolean rimuoviProfilo(Profilo p) {
+	public boolean rimuoviProfilo(ProfiloDB p) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -105,8 +104,8 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	
-	public ArrayList<Profilo> cercaProfilo(Profilo p) {
-		ArrayList<Profilo> result = new ArrayList<>();
+	public ArrayList<ProfiloDB> cercaProfilo(ProfiloDB p) {
+		ArrayList<ProfiloDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -123,7 +122,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				Profilo prof =new Profilo(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));
 
 				result.add(prof);
 			}
@@ -135,7 +134,7 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	@Override
-	public boolean inserisciChiavi(Profilo p) {
+	public boolean inserisciChiavi(ProfiloDB p) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
