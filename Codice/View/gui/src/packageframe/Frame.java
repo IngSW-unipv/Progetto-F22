@@ -15,12 +15,29 @@ import panelspackage.panels.Ricerca;
 
 public class Frame extends JFrame {
 	
-	/**
-	 * 
-	 */
-	int i;
+	private int varHome = 1;
+	private int varLogin = 0;
+	private int varProfilo = 0;
+	private int varImpostazioni = 0;
+	private int varChat = 0;
+	private int varChatMessaggi = 0;
+	private int varPostVisualizzato = 0;
+	
+	private Home home;
+	private LogIn logIn;
+	private Profilo profilo;
+	private Impostazioni impostazioni;
+	private Chat chat;
+	private ChatMessaggi chatMessaggi;
+	private Ricerca ricerca;
+	private PostVisualizzato postVisualizzato;
+	
+	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 175, 0);
 	Color NERO = new Color(255,255,255);	
+	
+	
+	int i;	
 	//array di prova
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
@@ -28,8 +45,7 @@ public class Frame extends JFrame {
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10","tony11","tony12","tony13","tony14","tony15"};
 	@SuppressWarnings("deprecation")
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
-		
-		//ciao 
+		 
 		this.setTitle("Social Network");
 		this.setSize(814,813);
 		this.setLayout(null);
@@ -41,58 +57,156 @@ public class Frame extends JFrame {
 		layers.setBounds(0,0, 800, 775);
 		this.add(layers, BorderLayout.CENTER);
 		
-		Home home = new Home(bufferStories, bufferPosts);
-		layers.add(home, new  Integer(5), 0);
+		home = new Home(bufferStories, bufferPosts);
+		layers.add(home, new  Integer(varHome), 0);
 		home.setBounds(0,0,800,775);
 
-		
-		LogIn logIn = new LogIn();
-		layers.add(logIn, new  Integer(5), 0);
+		logIn = new LogIn();
+		layers.add(logIn, new  Integer(varLogin), 0);
 		logIn.setBounds(0,0,800,775);
-		
+/* 		Ricerca di prova
 		for (i = 0; i<listaRisultatiRicerca.length; i++) {
 			risultatiRicerca.add(listaRisultatiRicerca[i]);
 		}
-		Ricerca ricerca = new Ricerca("Tony", getRisultatiRicerca());
-		layers.add(ricerca, new  Integer(5), 0);
+		ricerca = new Ricerca("Tony", getRisultatiRicerca());
+		layers.add(ricerca, new  Integer(0), 0);
 		ricerca.setBounds(0,0,800,775);
-		
-		Profilo profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-		layers.add(profilo, new  Integer(6), 0);
+*/
+		profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
+		layers.add(profilo, new  Integer(0), 0);
 		profilo.setBounds(0,0,800,775);
 		
-		Impostazioni impostazioni = new Impostazioni(nomeUtente);
-		layers.add(impostazioni, new  Integer(7), 0);
+		impostazioni = new Impostazioni("Steve Rogers");
+		layers.add(impostazioni, new  Integer(varImpostazioni), 0);
 		impostazioni.setBounds(0,0,800,775);
 		
-		Chat chat = new Chat();
-		layers.add(chat, new  Integer(4), 0);
+		chat = new Chat();
+		layers.add(chat, new  Integer(varChat), 0);
 		chat.setBounds(0,0,800,775);
 		
-		ChatMessaggi chatMessaggi = new ChatMessaggi("Nome_account_con_cui_sto_messaggiando");
-		layers.add(chatMessaggi, new  Integer(0), 0);
+		chatMessaggi = new ChatMessaggi("Nome_account_con_cui_sto_messaggiando");
+		layers.add(chatMessaggi, new  Integer(varChatMessaggi), 0);
 		chatMessaggi.setBounds(0,0,800,775);
 		
-		PostVisualizzato postVisualizzato = new PostVisualizzato("immagini/Tony.jpeg",listaCommenti, listaUtenti, 25,69);
-		layers.add(postVisualizzato, new  Integer(5), 0);
+		postVisualizzato = new PostVisualizzato();
+		layers.add(postVisualizzato, new  Integer(varPostVisualizzato), 0);
 		postVisualizzato.setBounds(0,0,800,775);
 	}
 
-	public Color getARANCIONE() {
-		return ARANCIONE;
+	public int getVarHome() {
+		return varHome;
 	}
-	public Color getNERO() {
-		return NERO;
+
+	public void setVarHome(int varHome) {
+		this.varHome = varHome;
 	}
-	public static String[] getListaCommenti() {
-		return listaCommenti;
+
+	public int getVarLogin() {
+		return varLogin;
 	}
-	public static String[] getListaUtenti() {
-		return listaUtenti;
+
+	public void setVarLogin(int varLogin) {
+		this.varLogin = varLogin;
+	}
+
+	public int getVarProfilo() {
+		return varProfilo;
+	}
+
+	public void setVarProfilo(int varProfilo) {
+		this.varProfilo = varProfilo;
+	}
+
+	public int getVarImpostazioni() {
+		return varImpostazioni;
+	}
+
+	public void setVarImpostazioni(int varImpostazioni) {
+		this.varImpostazioni = varImpostazioni;
+	}
+
+	public int getVarChat() {
+		return varChat;
+	}
+
+	public void setVarChat(int varChat) {
+		this.varChat = varChat;
+	}
+
+	public int getVarChatMessaggi() {
+		return varChatMessaggi;
+	}
+
+	public void setVarChatMessaggi(int varChatMessaggi) {
+		this.varChatMessaggi = varChatMessaggi;
+	}
+	
+	public int getVarPostVisualizzato() {
+		return varPostVisualizzato;
+	}
+
+	public void setVarPostVisualizzato(int varPostVisualizzato) {
+		this.varPostVisualizzato = varPostVisualizzato;
+	}
+
+	public Home getHome() {
+		return home;
+	}
+
+	public void setHome(Home home) {
+		this.home = home;
+	}
+
+	public ChatMessaggi getChatMessaggi() {
+		return chatMessaggi;
+	}
+
+	public void setChatMessaggi(ChatMessaggi chatMessaggi) {
+		this.chatMessaggi = chatMessaggi;
+	}
+
+	public Impostazioni getImpostazioni() {
+		return impostazioni;
+	}
+
+	public void setImpostazioni(Impostazioni impostazioni) {
+		this.impostazioni = impostazioni;
+	}
+
+	public LogIn getLogIn() {
+		return logIn;
+	}
+
+	public void setLogIn(LogIn logIn) {
+		this.logIn = logIn;
+	}
+
+	public Profilo getProfilo() {
+		return profilo;
+	}
+
+	public void setProfilo(Profilo profilo) {
+		this.profilo = profilo;
+	}
+
+	public Chat getChat() {
+		return chat;
+	}
+
+	public void setChat(Chat chat) {
+		this.chat = chat;
 	}
 
 	public ArrayList<String> getRisultatiRicerca() {
 		return risultatiRicerca;
+	}
+
+	public PostVisualizzato getPostVisualizzato() {
+		return postVisualizzato;
+	}
+
+	public void setPostVisualizzato(PostVisualizzato postVisualizzato) {
+		this.postVisualizzato = postVisualizzato;
 	}
 
 }

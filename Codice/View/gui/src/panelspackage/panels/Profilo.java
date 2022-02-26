@@ -24,7 +24,8 @@ public class  Profilo extends JPanel {
 	ArrayList<String> dati = new ArrayList<String>();
 	Color ARANCIONE = new Color(255, 125, 0);
 	Color NERO = new Color(0, 0, 0);
-	int i;
+	private int i;
+	private JButton homeProfilo;
 	
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
 		
@@ -67,8 +68,8 @@ public class  Profilo extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer(NERO);
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		Etichette etichettaSud = new Etichette("Sezione Inferiore", ARANCIONE);
-		containerSouth.add(etichettaSud, BorderLayout.CENTER);
+		homeProfilo = new AddPostButton("Torna alla Home", NERO);
+		containerSouth.add(homeProfilo, BorderLayout.CENTER);
 	}
 
 	public ArrayList<JComponent> getListaAreaTesto() {
@@ -77,5 +78,15 @@ public class  Profilo extends JPanel {
 
 	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
 		ListaEtichette = listaAreaTesto;
+	}
+	
+	
+	//GETTER E SETTER PULSANTI
+	public JButton getHomeProfilo() {
+		return homeProfilo;
+	}
+
+	public void setHomeProfilo(JButton homeProfilo) {
+		this.homeProfilo = homeProfilo;
 	}
 }
