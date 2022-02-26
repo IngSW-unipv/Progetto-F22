@@ -89,4 +89,6 @@ public class  Profilo extends JPanel {
 	public void setHomeProfilo(JButton homeProfilo) {
 		this.homeProfilo = homeProfilo;
 	}
+	
+	
 }

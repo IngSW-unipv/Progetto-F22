@@ -9,6 +9,7 @@ import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
+import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 
@@ -20,6 +21,7 @@ public class Frame extends JFrame {
 	private int varImpostazioni = 0;
 	private int varChat = 0;
 	private int varChatMessaggi = 0;
+	private int varPostVisualizzato = 0;
 	
 	private Home home;
 	private LogIn logIn;
@@ -28,6 +30,7 @@ public class Frame extends JFrame {
 	private Chat chat;
 	private ChatMessaggi chatMessaggi;
 	private Ricerca ricerca;
+	private PostVisualizzato postVisualizzato;
 	
 	private static final long serialVersionUID = 1L;
 	Color ARANCIONE = new Color(255, 175, 0);
@@ -84,6 +87,10 @@ public class Frame extends JFrame {
 		chatMessaggi = new ChatMessaggi("Nome_account_con_cui_sto_messaggiando");
 		layers.add(chatMessaggi, new  Integer(varChatMessaggi), 0);
 		chatMessaggi.setBounds(0,0,800,775);
+		
+		postVisualizzato = new PostVisualizzato();
+		layers.add(postVisualizzato, new  Integer(varPostVisualizzato), 0);
+		postVisualizzato.setBounds(0,0,800,775);
 	}
 
 	public int getVarHome() {
@@ -132,6 +139,14 @@ public class Frame extends JFrame {
 
 	public void setVarChatMessaggi(int varChatMessaggi) {
 		this.varChatMessaggi = varChatMessaggi;
+	}
+	
+	public int getVarPostVisualizzato() {
+		return varPostVisualizzato;
+	}
+
+	public void setVarPostVisualizzato(int varPostVisualizzato) {
+		this.varPostVisualizzato = varPostVisualizzato;
 	}
 
 	public Home getHome() {
@@ -185,5 +200,14 @@ public class Frame extends JFrame {
 	public ArrayList<String> getRisultatiRicerca() {
 		return risultatiRicerca;
 	}
-	
+
+	public PostVisualizzato getPostVisualizzato() {
+		return postVisualizzato;
+	}
+
+	public void setPostVisualizzato(PostVisualizzato postVisualizzato) {
+		this.postVisualizzato = postVisualizzato;
+	}
+
+
 }

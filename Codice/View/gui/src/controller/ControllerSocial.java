@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import panelspackage.panels.Chat;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
+import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import packageframe.Frame;
 
@@ -16,6 +17,7 @@ public class ControllerSocial{
 	private Impostazioni impostazioniView;
 	private Chat chatView;
 	private Profilo profiloView;
+	private PostVisualizzato postVisualizzatoView;
 	//Inserire modello con metodi per la home 
 	
 	//ActionListener Home
@@ -40,6 +42,9 @@ public class ControllerSocial{
 	private ActionListener gestoreHomeImpostazioni;
 	private ActionListener gestoreModificaProfilo;
 	
+	//ActionListener PostVisualizzato
+	private ActionListener gestoreHomePostVisualizzato;
+	
 	private ActionListener gestoreHomeProfilo;
 	private ActionListener gestoreHomeChat;
 	private ActionListener gestoreListaChat;
@@ -50,6 +55,7 @@ public class ControllerSocial{
 		this.impostazioniView = frameSocial.getImpostazioni();
 		this.chatView = frameSocial.getChat();
 		this.profiloView = frameSocial.getProfilo();
+		this.postVisualizzatoView = frameSocial.getPostVisualizzato();
 	}
 	
 	public void assegnaGestori() {
@@ -70,6 +76,8 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(false);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		homeView.getButtonImpostazioni().addActionListener(gestoreImpostazioni);
@@ -90,6 +98,8 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(false);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		homeView.getButtonProfilo().addActionListener(gestoreProfilo);
@@ -110,6 +120,8 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(true);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		homeView.getButtonChat().addActionListener(gestoreChat);
@@ -259,6 +271,8 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(false);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		impostazioniView.getHomeImpostazioni().addActionListener(gestoreHomeImpostazioni);
@@ -288,6 +302,8 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(false);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		chatView.getHomeChat().addActionListener(gestoreHomeImpostazioni);
@@ -308,9 +324,34 @@ public class ControllerSocial{
 				frameSocial.getChat().setVisible(false);
 				frameSocial.setVarChatMessaggi(0);
 				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
 		profiloView.getHomeProfilo().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		//ACTIONLISTENER PULSANTI POST VISUALIZZATO
+		gestoreHomePostVisualizzato = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameSocial.setVarHome(1);
+				frameSocial.getHome().setVisible(true);
+				frameSocial.setVarLogin(0);
+				frameSocial.getLogIn().setVisible(false);
+				frameSocial.setVarProfilo(0);
+				frameSocial.getProfilo().setVisible(false);
+				frameSocial.setVarImpostazioni(0);
+				frameSocial.getImpostazioni().setVisible(false);
+				frameSocial.setVarChat(0);
+				frameSocial.getChat().setVisible(false);
+				frameSocial.setVarChatMessaggi(0);
+				frameSocial.getChatMessaggi().setVisible(false);
+				frameSocial.setVarPostVisualizzato(0);
+				frameSocial.getPostVisualizzato().setVisible(false);
+			}
+		};
+		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);
 	}
 }
 
