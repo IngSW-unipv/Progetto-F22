@@ -61,7 +61,7 @@ public class ChatPrivata implements IChatPrivata{
 		   
 		    }
 		 }, 0, 60 * 1000);
-		}
+	}
 
 	@Override
 	public boolean inserisciChiavi(MessaggioPrivato m) {
@@ -76,7 +76,7 @@ public class ChatPrivata implements IChatPrivata{
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		mdao.ottieniMessaggio(m);
 	}
-	}
+}
 
 	
 
