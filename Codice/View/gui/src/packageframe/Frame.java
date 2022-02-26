@@ -10,8 +10,10 @@ import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
 import panelspackage.panels.PostVisualizzato;
+import panelspackage.panels.PrimaPaginaAccesso;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
+import panelspackage.panels.SignUp;
 
 public class Frame extends JFrame {
 	
@@ -21,7 +23,7 @@ public class Frame extends JFrame {
 	private int varImpostazioni = 0;
 	private int varChat = 0;
 	private int varChatMessaggi = 0;
-	private int varPostVisualizzato = 3;
+	private int varPostVisualizzato = 0;
 	
 	private Home home;
 	private LogIn logIn;
@@ -62,7 +64,7 @@ public class Frame extends JFrame {
 		home.setBounds(0,0,800,775);
 
 		logIn = new LogIn();
-		layers.add(logIn, new  Integer(varLogin), 0);
+		layers.add(logIn, new  Integer(0), 0);
 		logIn.setBounds(0,0,800,775);
 /* 		Ricerca di prova
 		for (i = 0; i<listaRisultatiRicerca.length; i++) {
@@ -91,6 +93,15 @@ public class Frame extends JFrame {
 		postVisualizzato = new PostVisualizzato();
 		layers.add(postVisualizzato, new  Integer(varPostVisualizzato), 0);
 		postVisualizzato.setBounds(0,0,800,775);
+		
+		SignUp signUp = new SignUp();
+		layers.add(signUp, new  Integer(0), 0);
+		signUp.setBounds(0,0,800,775);
+	
+		PrimaPaginaAccesso primaPaginaAccesso = new PrimaPaginaAccesso();
+		layers.add(primaPaginaAccesso, new  Integer(3), 0);
+		primaPaginaAccesso.setBounds(0,0,800,775);
+		
 	}
 
 	public int getVarHome() {
