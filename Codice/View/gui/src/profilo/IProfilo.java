@@ -15,8 +15,7 @@ public interface IProfilo {
 	public void vediStory();  // con tipo Story(da modificare)
 	public void commentare(String testo);
 	public String bloccaUtente(Utente u); // O profilo.
-	public void mostraInformazioniProfiloPubblico(Profilo p);
-	public void mostraInformazioniProfiloPrivato(Profilo p);
+	public void mostraInformazioniProfilo(Profilo p);
 	public void mostraInformazioniPost(Post p);
 	
 	}
