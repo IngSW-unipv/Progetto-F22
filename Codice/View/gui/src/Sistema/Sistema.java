@@ -1,10 +1,10 @@
 package Sistema;
 
-import Profilo.Profilo;
 import it.unipv.ings.Post.*;
 import Utente.Utente;
 import it.unipv.ings.Profilo.*;
 import post.Post;
+import profilo.Profilo;
 
 public class Sistema {
 

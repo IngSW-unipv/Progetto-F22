@@ -2,23 +2,19 @@ package it.unipv.ings.Profilo;
 
 import java.util.ArrayList;
 
-import Profilo.Profilo;
-
-
-
 public class ProfiloTester {
 
 	public static void main(String[] args) {
 		ProfiloDao pdao = new ProfiloDao();
-		ArrayList<Profilo> selectAll = pdao.selectAll();
-       Profilo prof = new Profilo("002", null, null, 0, 2, 1, null, "003", "001", null, null);
+		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
+       ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, null);
 		
         
-        for(Profilo p : selectAll)
+        for(ProfiloDB p : selectAll)
 			System.out.println(p.toString());
         
-        ArrayList<Profilo> cercaProfilo = pdao.cercaProfilo(prof);
-        for(Profilo p : cercaProfilo)
+        ArrayList<ProfiloDB> cercaProfilo = pdao.cercaProfilo(prof);
+        for(ProfiloDB p : cercaProfilo)
 			System.out.println(p.toString());
         
         

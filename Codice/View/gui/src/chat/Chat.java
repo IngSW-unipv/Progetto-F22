@@ -1,6 +1,6 @@
 package chat;
 
-import Profilo.Profilo;
+import profilo.Profilo;
 
 public abstract class Chat {
 
