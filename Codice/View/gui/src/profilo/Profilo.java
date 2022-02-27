@@ -161,7 +161,15 @@ public String bloccaUtente(Utente u) {
 	return null;
 }
 @Override
-public void mostraInformazioniProfilo(Profilo p) {
+public void mostraInformazioniProfiloPubblico(Profilo p) {
+	// Prima verificazione nel database
+	System.out.println(p + ":\n" +EnumProfilo.PUBBLICO + "\n" +p.getNickname()+ "\n Followers:" +p.getNumFollower()+ "  Seguiti:" +p.getNumSeguiti()+
+			            "    numPosti: "+p.getNumPost() +" \nBio:" +p.getDescrizione()+ "\n" +p.getPost());
+	
+}
+
+@Override
+public void mostraInformazioniProfiloPrivato(Profilo p) {
 	// TODO Auto-generated method stub
 	
 }
