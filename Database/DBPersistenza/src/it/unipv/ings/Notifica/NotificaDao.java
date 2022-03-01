@@ -1,54 +1,82 @@
-package it.unipv.ings.Notifica;
+package Utente;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.Date;
 
-import it.unipv.ings.Sondaggio.SondaggioDB;
-import it.unipv.ings.connessione.DBConnection;
+public class Credenziali {
 
-import notifiche.Notifica;
-
-public class NotificaDao {
-
-	private Connection conn;
-	private String schema;
+	private String nome;
+	private String cognome;
+	private Date dataDiNascita;
+	private EnumSesso sesso;
+	private EnumPaesi paese;
+	private String eMail;
+	private String pwd;
 	
-	public NotificaDao() {
-		this.schema = "social network";
+	public Credenziali(String nome, String cognome, EnumSesso sesso, Date dataDiNascita, EnumPaesi paese, String eMail) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.sesso = sesso;
+		this.dataDiNascita = dataDiNascita;
+		this.paese = paese;
+		this.eMail = eMail;
 	}
-	
-	public ArrayList<Notifica> SelectAll() {
-	
-		ArrayList<Notifica> result = new ArrayList<>();
-		
-		conn = DBConnection.startConnection(conn, schema);
-		Statement st1;
-		ResultSet rs1;
-		
-		try
-		{
-			st1 = conn.createStatement();
-			String query="SELECT * from notifica"; //per davide: notifica va aggiunta al database
-			rs1=st1.executeQuery(query);
 
-			while(rs1.next())
-			{
-				Notifica n= new Notifica(rs1.getString(1), rs1.getDate(2),rs1.getTime(3));                                     
-
-				result.add(n);
-			}
-		}catch (Exception e){e.printStackTrace();}
-
-		DBConnection.closeConnection(conn);
-		
-		return result;
+	public String getPwd() {
+		return pwd;
 	}
-	
-	public boolean aggiornaNotifica() {
-		
-		
-		return true;
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
- }
+
+	public void setDataDiNascita(Date dataDiNascita) {
+		this.dataDiNascita = dataDiNascita;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public EnumSesso getSesso() {
+		return sesso;
+	}
+
+	public void setSesso(EnumSesso sesso) {
+		this.sesso = sesso;
+	}
+
+	public EnumPaesi getPaese() {
+		return paese;
+	}
+
+	public void setPaese(EnumPaesi paese) {
+		this.paese = paese;
+	}
+
+	public String getEMail() {
+		return eMail;
+	}
+
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
+	}
+
+	@Override
+	public String toString() {
+		return "Credenziali [nome=" + nome + ", cognome=" + cognome + ", sesso="
+				+ sesso + ", paese=" + paese + ", eMail=" + eMail + "]";
+	}
+
+}
