@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class ProfiloTester {
 	
-    public static void main(String [] args) {
+    public static void main(String [] args) throws Exception {
 	
 	Profilo p1 = new Profilo("P00", "MyAccount", null, 0, 0, 0, EnumProfilo.PRIVATO, null, null, null, null);
 	Profilo p2 = new Profilo("P01", null, null, 0, 0, 0, EnumProfilo.PUBBLICO, null, null, null, "myPost");
@@ -21,15 +21,13 @@ public class ProfiloTester {
 		//System.out.println(p1);
 		//System.out.println(p2);
 		//System.out.println(p3);
-		//System.out.println(p1.cercaProfilo(p3));
+		System.out.println(p1.cercaProfilo(p3));
 		
 		
 		
-		p2.mostraInformazioniProfilo(p1);
-		p3.mostraInformazioniProfilo(p2);
+		//p2.mostraInformazioniProfilo(p1);
+		//p3.mostraInformazioniProfilo(p2);
 		
-
-
  }
     
 }

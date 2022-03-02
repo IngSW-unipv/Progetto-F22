@@ -4,6 +4,8 @@ package profilo;
 //import java.util.Arrays;
 import java.util.HashMap;
 
+
+
 import Utente.Utente;
 import post.Post;
 
@@ -110,6 +112,7 @@ public void setListaSeguiti(HashMap<String, String> listaSeguiti) {
 	this.listaSeguiti = listaSeguiti;
 }
 
+
 @Override
 public HashMap<String,String> modificaFollow(Profilo p) {
     /* if (listaSeguiti.get(this.idProfilo) != p.idProfilo) {
@@ -135,26 +138,34 @@ public HashMap<String, String> getListaSeguiti() {
 }
 
 @Override
-public Profilo cercaProfilo(Profilo p) {
+public Profilo cercaProfilo(Profilo p) throws Exception {
 	// Verificazione dalla basi dati se il profilo esiste.
-		System.out.println(p.getNickname());
+	if(p.getIdProfilo() == null) {
+		return null;
+	} else {
 		return p;
+		} 
 	}
+
+
 @Override
 public boolean modificaDislike(Profilo profilo) {
 	// TODO Auto-generated method stub
 	return false;
 }
+
 @Override
 public void vediStory() {
 	// TODO Auto-generated method stub
 	
 }
+
 @Override
-public void commentare(String testo) {
-	// TODO Auto-generated method stub
+public String commentare(String testo) {
 	
+	return testo;
 }
+
 @Override
 public String bloccaUtente(Utente u) {
 	// TODO Auto-generated method stub
@@ -173,6 +184,7 @@ public void mostraInformazioniProfilo(Profilo p) {
 	                      +p.getNumSeguiti()+"    numPosti:"+p.getNumPost() +" \n Bio:" +p.getDescrizione()+ "\n" +p.getPost());
 	}
 }
+
 @Override
 public void mostraInformazioniPost(Post p) {
 	// TODO Auto-generated method stub
