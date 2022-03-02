@@ -1,218 +1,38 @@
 package panelspackage.panels;
-import panelspackage.panels.elements.AddPostButton;
+import panelspackage.panels.elements.Pulsanti;
+import panelspackage.panels.elements.AreaDiTesto;
+import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.SpecificContainer;
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+
+import packageframe.Frame;
 	
 public class Home extends JPanel {
 	
-	Color ARANCIONE = new Color(255, 125, 0);
-	Color NERO = new Color(0, 0, 0);
-	public int indiceBufferStories;
-	public int indiceBufferPosts;
-	private Font fontTitle;
-	private Font fontText;
-	private Font fontButton;
-	private JButton searchButton;	//Ricerca
-	private JButton buttonPrevPost;	//Post precedente
-	private JButton buttonNextPost;	//Post successivo
-	private JButton aggiungiLike;	//Aggiungi dislike
-	private JButton aggiungiDislike;	//Aggiungi like
-	private JButton aggiungiCommento;	//Aggiungi commento
-	private JButton buttonPrevStory;	//Storia successiva
-	private JButton buttonNextStory;	//Storia precedente
-	private JButton buttonImpostazioni;
-	private JButton buttonProfilo;
-	private JButton buttonChat;
-	private JButton buttonNotifiche;
-	private AddPostButton pPost;
-	private AddPostButton pStory;
-	private AddPostButton pSondaggio;
-	private AddPostButton pIdea;
-	
+	int i;
+
+	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter;
+	private int indiceBufferStories, indiceBufferPosts;
+	private Font fontTitle, fontText, fontButton;
+	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,buttonNotifiche,pPost,pStory,pSondaggio,pIdea, searchButton;
+	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
+	private AreaDiTesto testoRicerca;
+
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
-		//int indiceBufferStories = 0;
 		int indiceBufferPosts = 0;
-		//FONT
 		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
 		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
 		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
 		
-		this.setOpaque(true);
-		this.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.setBackground(NERO);	
-				
-		Container containerNorth = new Container();
-		containerNorth.setVisible(true);
-		this.add(containerNorth, BorderLayout.NORTH);
-		containerNorth.setLayout(new BorderLayout());
-		//AREA RICERCA ACCOUNT
-		Container areaRicerca = new Container();
-		areaRicerca.setVisible(true);
-		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
-		JLabel etichettaRicerca = new JLabel("Cerca un profilo: ");
-		JTextArea testoRicerca = new JTextArea();
-		searchButton = new JButton("CERCA");
-		
-		testoRicerca.setForeground(ARANCIONE);
-		testoRicerca.setBackground(Color.LIGHT_GRAY);
-		testoRicerca.setVisible(true);
-		testoRicerca.setFont(fontText);
-		
-		etichettaRicerca.setForeground(ARANCIONE);
-		etichettaRicerca.setBackground(Color.LIGHT_GRAY);
-		etichettaRicerca.setVisible(true);
-		etichettaRicerca.setFont(fontText);
-		
-		searchButton.setFont(fontButton);
-		
-		areaRicerca.setLayout(new BorderLayout());
-		areaRicerca.add(etichettaRicerca, BorderLayout.WEST);
-		areaRicerca.add(testoRicerca, BorderLayout.CENTER);
-		areaRicerca.add(searchButton, BorderLayout.EAST);
-		
-		
-			
-		Container menuHome = new Container();
-		containerNorth.add(menuHome, BorderLayout.NORTH);
-		menuHome.setLayout(new BorderLayout());
-		
-		//TITOLO
-		JLabel title = new JLabel("Socialnetwork", SwingConstants.CENTER);
-		title.setFont(fontTitle);
-		title.setForeground(ARANCIONE);
-		containerNorth.add(title, BorderLayout.CENTER);	
-			
-		Container menuHomeSinistro = new Container();
-		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
-		menuHomeSinistro.setLayout(new BorderLayout());
-
-		Icon profileLabel = new ImageIcon("immagini/profilo.png");
-		buttonProfilo = new JButton(profileLabel);
-		menuHomeSinistro.add(buttonProfilo, BorderLayout.EAST);
-
-		Icon settingLabel = new ImageIcon("immagini/impostazioni.png");
-		buttonImpostazioni = new JButton(settingLabel);
-		menuHomeSinistro.add(buttonImpostazioni, BorderLayout.WEST);
-
-		Container menuHomeDestro = new Container();
-		menuHomeDestro.setLayout(new BorderLayout());
-		menuHomeDestro.setBackground(ARANCIONE);
-		menuHomeDestro.setForeground(NERO);
-		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
-
-		Icon notificationLabel = new ImageIcon("immagini/notifiche.gif");
-		buttonNotifiche = new JButton(notificationLabel);
-		menuHomeDestro.add(buttonNotifiche, BorderLayout.EAST);
-
-		LabeledIcon textLabel = new LabeledIcon("immagini/testo.jpeg");
-		menuHomeDestro.add(textLabel, BorderLayout.WEST);
-		Icon chatLabel = new ImageIcon("immagini/testo.jpeg");
-		buttonChat = new JButton(chatLabel);
-		menuHomeDestro.add(buttonChat, BorderLayout.WEST);
-
-
-		SpecificContainer containerCenter = new SpecificContainer();
-		this.add(containerCenter, BorderLayout.CENTER);
-			
-		SpecificContainer containerCommenti = new SpecificContainer();
-		containerCenter.add(containerCommenti, BorderLayout.WEST);
-		
-		SpecificContainer containerPost = new SpecificContainer();
-		containerCenter.add(containerPost, BorderLayout.CENTER);
-		
-		LabeledIcon post = new LabeledIcon(bufferPosts.get(indiceBufferPosts));
-		containerPost.add(post, BorderLayout.CENTER);
-		SpecificContainer containerCosePost = new SpecificContainer();
-		JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
-		areaDescrizione.setPreferredSize(new Dimension(400, 130));
-		areaDescrizione.setEditable(false);
-		areaDescrizione.setLineWrap(true);
-		JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JLabel numeroLike = new JLabel("N.like");
-		numeroLike.setForeground(Color.white);
-		JLabel numeroDislike = new JLabel("N.dislike");
-		numeroDislike.setForeground(Color.white);
-		JLabel numeroCommenti = new JLabel("N.Commenti");
-		numeroCommenti.setForeground(Color.white);
-		buttonPrevPost = new JButton("Post precedente");
-		buttonPrevPost.setFont(fontButton);
-		buttonNextPost = new JButton("Post successivo");
-		buttonNextPost.setFont(fontButton);
-		aggiungiLike = new JButton("+ Like");
-		aggiungiDislike = new JButton("+ Dislike");
-		aggiungiCommento = new JButton("+ Commento");
-		SpecificContainer containerBottoniPost = new SpecificContainer();
-		containerBottoniPost.setLayout(new GridLayout(1, 2));
-		containerBottoniPost.add(buttonPrevPost);
-		containerBottoniPost.add(buttonNextPost);
-		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
-		containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
-		containerLikeDislikeComm.add(numeroLike);
-		containerLikeDislikeComm.add(numeroDislike);
-		containerLikeDislikeComm.add(numeroCommenti);
-		containerLikeDislikeComm.add(aggiungiLike);
-		containerLikeDislikeComm.add(aggiungiDislike);
-		containerLikeDislikeComm.add(aggiungiCommento);
-		containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
-		containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
-		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
-		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
-		
-		//SEZIONE STORIES
-		SpecificContainer containerStory = new SpecificContainer();
-		SpecificContainer containerWest = new SpecificContainer();
-		SpecificContainer containerButtonStory = new SpecificContainer();
-		
-		containerWest.add(containerStory, BorderLayout.CENTER);
-		containerStory.setLayout(new GridLayout(5,0));
-		containerCenter.add(containerWest, BorderLayout.WEST);
-		buttonNextStory = new JButton("->");
-		buttonPrevStory = new JButton("<-");
-		containerButtonStory.setLayout(new GridLayout(1, 2));
-		containerButtonStory.add(buttonPrevStory);
-		containerButtonStory.add(buttonNextStory);
-		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
-			
-		LabeledIcon primaStory = new LabeledIcon(bufferStories.get(this.getIndiceBufferStories()));
-		primaStory.setBorder(new LineBorder(NERO,4));
-		LabeledIcon secondaStory = new LabeledIcon(bufferStories.get(this.getIndiceBufferStories()+1));
-		secondaStory.setBorder(new LineBorder(NERO,4));
-		LabeledIcon terzaStory = new LabeledIcon(bufferStories.get(this.getIndiceBufferStories()+2));
-		terzaStory.setBorder(new LineBorder(NERO,4));
-		LabeledIcon quartaStory = new LabeledIcon(bufferStories.get(this.getIndiceBufferStories()+3));
-		quartaStory.setBorder(new LineBorder(NERO,4));
-		LabeledIcon quintaStory = new LabeledIcon(bufferStories.get(this.getIndiceBufferStories()+4));
-		quintaStory.setBorder(new LineBorder(NERO,4));
-		containerStory.add(primaStory);
-		containerStory.add(secondaStory);
-		containerStory.add(terzaStory);
-		containerStory.add(quartaStory);
-		containerStory.add(quintaStory);
-		
-		//Bottoni pubblicazione post
-		SpecificContainer containerSud = new SpecificContainer();
-		this.add(containerSud, BorderLayout.SOUTH);
-		containerSud.setLayout(new GridLayout(1,4));
-		pPost =  new AddPostButton("Pubblica un post", ARANCIONE);
-		pPost.setFont(fontButton);
-		containerSud.add(pPost);
-		pStory =  new AddPostButton("Pubblica una story", ARANCIONE);
-		pStory.setFont(fontButton);
-		containerSud.add(pStory);
-		pSondaggio =  new AddPostButton("Pubblica sondaggio", ARANCIONE);
-		pSondaggio.setFont(fontButton);
-		containerSud.add(pSondaggio);
-		pIdea =  new AddPostButton("Pubblica un'idea", ARANCIONE);
-		pIdea.setFont(fontButton);
-		containerSud.add(pIdea);
-		
+		avvio();		
+		iiItComponents(bufferPosts, bufferStories);
 	}
+	
 	public int getIndiceBufferStories() {
 		return indiceBufferStories;
 	}
@@ -231,74 +51,74 @@ public class Home extends JPanel {
 	public JButton getSearchButton() {
 		return searchButton;
 	}
-	public void setSearchButton(JButton searchButton) {
+	public void setSearchButton(Pulsanti searchButton) {
 		this.searchButton = searchButton;
 	}
 	public JButton getButtonPrevPost() {
 		return buttonPrevPost;
 	}
-	public void setButtonPrevPost(JButton buttonPrevPost) {
+	public void setButtonPrevPost(Pulsanti buttonPrevPost) {
 		this.buttonPrevPost = buttonPrevPost;
 	}
 	public JButton getButtonNextPost() {
 		return buttonNextPost;
 	}
-	public void setButtonNextPost(JButton buttonNextPost) {
+	public void setButtonNextPost(Pulsanti buttonNextPost) {
 		this.buttonNextPost = buttonNextPost;
 	}
 	public JButton getAggiungiLike() {
 		return aggiungiLike;
 	}
-	public void setAggiungiLike(JButton aggiungiLike) {
+	public void setAggiungiLike(Pulsanti aggiungiLike) {
 		this.aggiungiLike = aggiungiLike;
 	}
 	public JButton getAggiungiDislike() {
 		return aggiungiDislike;
 	}
-	public void setAggiungiDislike(JButton aggiungiDislike) {
+	public void setAggiungiDislike(Pulsanti aggiungiDislike) {
 		this.aggiungiDislike = aggiungiDislike;
 	}
 	public JButton getAggiungiCommento() {
 		return aggiungiCommento;
 	}
-	public void setAggiungiCommento(JButton aggiungiCommento) {
+	public void setAggiungiCommento(Pulsanti aggiungiCommento) {
 		this.aggiungiCommento = aggiungiCommento;
 	}
 	public JButton getButtonPrevStory() {
 		return buttonPrevStory;
 	}
-	public void setButtonPrevStory(JButton buttonPrevStory) {
+	public void setButtonPrevStory(Pulsanti buttonPrevStory) {
 		this.buttonPrevStory = buttonPrevStory;
 	}
 	public JButton getButtonNextStory() {
 		return buttonNextStory;
 	}
-	public void setButtonNextStory(JButton buttonNextStory) {
+	public void setButtonNextStory(Pulsanti buttonNextStory) {
 		this.buttonNextStory = buttonNextStory;
 	}
-	public AddPostButton getpPost() {
+	public Pulsanti getpPost() {
 		return pPost;
 	}
-	public void setpPost(AddPostButton pPost) {
+	public void setpPost(Pulsanti pPost) {
 		this.pPost = pPost;
 	}
-	public AddPostButton getpStory() {
+	public Pulsanti getpStory() {
 		return pStory;
 	}
-	public void setpStory(AddPostButton pStory) {
+	public void setpStory(Pulsanti pStory) {
 		this.pStory = pStory;
 	}
-	public AddPostButton getpSondaggio() {
+	public Pulsanti getpSondaggio() {
 		return pSondaggio;
 	}
-	public void setpSondaggio(AddPostButton pSondaggio) {
+	public void setpSondaggio(Pulsanti pSondaggio) {
 		this.pSondaggio = pSondaggio;
 	}
-	public AddPostButton getpIdea() {
+	public Pulsanti getpIdea() {
 		return pIdea;
 	}
 
-	public void setpIdea(AddPostButton pIdea) {
+	public void setpIdea(Pulsanti pIdea) {
 		this.pIdea = pIdea;
 	}	
 
@@ -306,7 +126,7 @@ public class Home extends JPanel {
 		return buttonImpostazioni;
 	}
 
-	public void setButtonImpostazioni(JButton buttonImpostazioni) {
+	public void setButtonImpostazioni(Pulsanti buttonImpostazioni) {
 		this.buttonImpostazioni = buttonImpostazioni;
 	}
 
@@ -314,7 +134,7 @@ public class Home extends JPanel {
 		return buttonProfilo;
 	}
 
-	public void setButtonProfilo(JButton buttonProfilo) {
+	public void setButtonProfilo(Pulsanti buttonProfilo) {
 		this.buttonProfilo = buttonProfilo;
 	}
 
@@ -322,7 +142,7 @@ public class Home extends JPanel {
 		return buttonChat;
 	}
 
-	public void setButtonChat(JButton buttonChat) {
+	public void setButtonChat(Pulsanti buttonChat) {
 		this.buttonChat = buttonChat;
 	}
 
@@ -330,8 +150,113 @@ public class Home extends JPanel {
 		return buttonNotifiche;
 	}
 
-	public void setButtonNotifiche(JButton buttonNotifiche) {
+	public void setButtonNotifiche(Pulsanti buttonNotifiche) {
 		this.buttonNotifiche = buttonNotifiche;
 	}
+	public void avvio() {
+		this.setOpaque(true);
+		this.setVisible(true);
+		this.setLayout(new BorderLayout());
+		this.setBackground(NERO);
+		this.add(containerNorth = new SpecificContainer(), BorderLayout.NORTH);
+		this.add(containerCenter = new SpecificContainer(), BorderLayout.CENTER);
+	}
 
+	public void menuHome() {
+		SpecificContainer areaRicerca = new SpecificContainer();
+		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
+
+		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
+		areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "____", fontText), BorderLayout.CENTER);
+		areaRicerca.add(searchButton = new Pulsanti("CERCA", fontButton), BorderLayout.EAST);
+		
+		SpecificContainer menuHome = new SpecificContainer();
+		containerNorth.add(menuHome, BorderLayout.NORTH);
+		
+		containerNorth.add(new Etichette("Socialnetwork", Frame.COLOREPRIMARIOTEMATICO, fontTitle), BorderLayout.CENTER);	
+			
+		SpecificContainer menuHomeSinistro = new SpecificContainer();
+		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
+		SpecificContainer menuHomeDestro = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO, Frame.COLORESECONDARIOTEMATICO);
+		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
+
+
+		menuHomeSinistro.add(buttonProfilo = new Pulsanti("immagini/profilo.png"), BorderLayout.EAST);
+		menuHomeSinistro.add(buttonImpostazioni = new Pulsanti("immagini/impostazioni.png"), BorderLayout.WEST);
+
+		menuHomeDestro.add(buttonNotifiche = new Pulsanti("immagini/notifiche.gif"), BorderLayout.EAST);
+		menuHomeDestro.add(buttonChat = new Pulsanti("immagini/testo.jpeg"), BorderLayout.WEST);
+
+	}
+	
+	public void areaPost(ArrayList<String>  bufferPosts) {
+		SpecificContainer containerPost = new SpecificContainer();
+		containerCenter.add(containerPost, BorderLayout.CENTER);
+		
+		containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
+		
+		SpecificContainer containerCosePost = new SpecificContainer();
+		
+		AreaDiTesto areaDescrizione = new AreaDiTesto("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",400, 130);
+		JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		SpecificContainer containerBottoniPost = new SpecificContainer();
+		containerBottoniPost.setLayout(new GridLayout(1, 2));
+		containerBottoniPost.add(buttonPrevPost = new Pulsanti("Post precedente", fontButton));
+		containerBottoniPost.add(buttonNextPost = new Pulsanti("Post successivo",fontButton));
+		
+		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
+		containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
+		containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
+		containerLikeDislikeComm.add(numeroDislike = new Etichette("N.dislike", Color.white));
+		containerLikeDislikeComm.add(numeroCommenti = new Etichette("N.Commenti", Color.white));
+		containerLikeDislikeComm.add(aggiungiLike = new Pulsanti("+ Like", Frame.COLORESECONDARIOTEMATICO));
+		containerLikeDislikeComm.add(aggiungiDislike = new Pulsanti("+ Dislike", Frame.COLORESECONDARIOTEMATICO));
+		containerLikeDislikeComm.add(aggiungiCommento = new Pulsanti("+ Commento", Frame.COLORESECONDARIOTEMATICO));
+		
+		containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
+		containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
+		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
+		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
+	}
+	
+	public void areaStories(ArrayList<String>  bufferStories) {
+		SpecificContainer containerWest = new SpecificContainer();
+		SpecificContainer containerStory = new SpecificContainer();
+		SpecificContainer containerButtonStory = new SpecificContainer();
+		
+		containerWest.add(containerStory = new SpecificContainer(), BorderLayout.CENTER);
+		containerStory.setLayout(new GridLayout(5,0));
+		containerCenter.add(containerWest, BorderLayout.WEST);
+	
+		containerButtonStory.setLayout(new GridLayout(1, 2));
+		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
+		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
+		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
+		
+		for (i = 0; i < 5; i++) {
+			containerStory.add(new Pulsanti(bufferStories.get(this.getIndiceBufferStories()+ i), Frame.COLORESECONDARIOTEMATICO, 4));
+		}	
+	}
+	
+		public void sezionePubblicaPost() {
+			
+			SpecificContainer containerSud = new SpecificContainer();
+			this.add(containerSud, BorderLayout.SOUTH);
+			
+			containerSud.setLayout(new GridLayout(1,4));
+
+			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pStory =  new Pulsanti("Pubblica una story", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+			containerSud.add(pSondaggio =  new Pulsanti("Pubblica sondaggio", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+			
+		}
+		
+	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
+		menuHome();
+		areaPost(bufferPosts);
+		areaStories(bufferStories);
+		sezionePubblicaPost();
+	}
 }

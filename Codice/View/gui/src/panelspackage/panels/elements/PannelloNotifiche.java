@@ -12,8 +12,8 @@ public class PannelloNotifiche extends JPanel {
 	Color ARANCIONE = new Color(255, 125, 0);
 	Color NERO = new Color(0, 0, 0);
 	int i;
-	//public AddPostButton[] listaPulsanti;
-	private ArrayList<AddPostButton> listaPulsanti  = new ArrayList<AddPostButton>();
+	//public Pulsanti[] listaPulsanti;
+	private ArrayList<Pulsanti> listaPulsanti  = new ArrayList<Pulsanti>();
 	
 	public PannelloNotifiche(ArrayList<String> contenuto, ArrayList<String> tipo ) {
 		
@@ -27,16 +27,16 @@ public class PannelloNotifiche extends JPanel {
 		containerCenter.setLayout(new GridLayout(contenuto.size(),1));
 		
 		for (i = 0; i < 5; i ++) {
-			listaPulsanti.add(new AddPostButton(contenuto.get(i), ARANCIONE));
+			listaPulsanti.add(new Pulsanti(contenuto.get(i), ARANCIONE));
 			containerCenter.add(listaPulsanti.get(i));
 		}
 	}
 
-	public ArrayList<AddPostButton> getListaPulsanti() {
+	public ArrayList<Pulsanti> getListaPulsanti() {
 		return listaPulsanti;
 	}
 
-	public void setListaPulsanti(ArrayList<AddPostButton> listaPulsanti) {
+	public void setListaPulsanti(ArrayList<Pulsanti> listaPulsanti) {
 		this.listaPulsanti = listaPulsanti;
 	}
 }

@@ -4,8 +4,6 @@ package profilo;
 //import java.util.Arrays;
 import java.util.HashMap;
 
-
-
 import Utente.Utente;
 import post.Post;
 
@@ -13,7 +11,7 @@ import post.Post;
 public class Profilo implements IProfilo{
 
 public Profilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
+			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -34,7 +32,7 @@ private String descrizione;
 private int numFollower;
 private int numSeguiti;
 private int numPost;
-private EnumProfilo tipo;
+private String tipo;
 private String messaggioDiGruppo;
 private String messaggioPrivato;
 private String utente;
@@ -77,10 +75,10 @@ public int getNumPost() {
 public void setNumPost(int numPost) {
 	this.numPost = numPost;
 }
-public EnumProfilo getTipo() {
+public String getTipo() {
 	return tipo;
 }
-public void setTipo(EnumProfilo tipo) {
+public void setTipo(String tipo) {
 	this.tipo = tipo;
 }
 public String getMessaggioDiGruppo() {
@@ -112,7 +110,6 @@ public void setListaSeguiti(HashMap<String, String> listaSeguiti) {
 	this.listaSeguiti = listaSeguiti;
 }
 
-
 @Override
 public HashMap<String,String> modificaFollow(Profilo p) {
     /* if (listaSeguiti.get(this.idProfilo) != p.idProfilo) {
@@ -138,53 +135,44 @@ public HashMap<String, String> getListaSeguiti() {
 }
 
 @Override
-public Profilo cercaProfilo(Profilo p) throws Exception {
+public Profilo cercaProfilo(Profilo p) {
 	// Verificazione dalla basi dati se il profilo esiste.
-	if(p.getIdProfilo() == null) {
-		return null;
-	} else {
+		System.out.println(p.getNickname());
 		return p;
-		} 
 	}
-
-
 @Override
 public boolean modificaDislike(Profilo profilo) {
 	// TODO Auto-generated method stub
 	return false;
 }
-
 @Override
 public void vediStory() {
 	// TODO Auto-generated method stub
 	
 }
-
 @Override
-public String commentare(String testo) {
+public void commentare(String testo) {
+	// TODO Auto-generated method stub
 	
-	return testo;
 }
-
 @Override
 public String bloccaUtente(Utente u) {
 	// TODO Auto-generated method stub
 	return null;
 }
-
-
 @Override
-public void mostraInformazioniProfilo(Profilo p) {
-	// TODO Auto-generated method stub
-	if(p.getTipo() == EnumProfilo.PRIVATO) {
-		System.out.println(p + " :\n" + p.getNickname() + "\n" +p.getTipo());
-	}
-	else {
-		System.out.println(p + ":\n" + p.getTipo()+ "\n" +p.getNickname()+ "\n Followers:" +p.getNumFollower()+ "  Seguiti:" 
-	                      +p.getNumSeguiti()+"    numPosti:"+p.getNumPost() +" \n Bio:" +p.getDescrizione()+ "\n" +p.getPost());
-	}
+public void mostraInformazioniProfiloPubblico(Profilo p) {
+	// Prima verificazione nel database
+	System.out.println(p + ":\n" +EnumProfilo.PUBBLICO + "\n" +p.getNickname()+ "\n Followers:" +p.getNumFollower()+ "  Seguiti:" +p.getNumSeguiti()+
+			            "    numPosti: "+p.getNumPost() +" \nBio:" +p.getDescrizione()+ "\n" +p.getPost());
+	
 }
 
+@Override
+public void mostraInformazioniProfiloPrivato(Profilo p) {
+	// TODO Auto-generated method stub
+	
+}
 @Override
 public void mostraInformazioniPost(Post p) {
 	// TODO Auto-generated method stub

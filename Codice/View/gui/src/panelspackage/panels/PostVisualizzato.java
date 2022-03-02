@@ -4,7 +4,7 @@ package panelspackage.panels;
 	import java.util.ArrayList;
 	import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.LabeledIcon;
-import panelspackage.panels.elements.AddPostButton;
+import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 	import panelspackage.panels.elements.Etichette;
 	import panelspackage.panels.elements.SpecificContainer;
@@ -91,7 +91,7 @@ public class PostVisualizzato extends JPanel{
 			//COMMENTI
 
 			/*for( i = 0; i <  postCommenti.length; i++) {
-				Etichette area = new Etichette(utentiCommenti[i] +": " + postCommenti[i], ARANCIONE);
+				Etichette area = new Etichette(utentiCommenti[i] +": " + postCommenti[i], COLOREPRIMARIOTEMATICO);
 				ListaAreaTesto.add(area);
 			}*/
 			
@@ -101,7 +101,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerSouth = new SpecificContainer(NERO);
 			this.add(containerSouth, BorderLayout.SOUTH);
 			
-			homePostVisualizzato = new AddPostButton("Home", ARANCIONE);
+			homePostVisualizzato = new Pulsanti("Home", ARANCIONE);
 			containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
 		}
 

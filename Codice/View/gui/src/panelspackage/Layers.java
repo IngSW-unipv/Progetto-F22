@@ -5,12 +5,11 @@ import javax.swing.*;
 
 public class Layers extends JLayeredPane{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	public Layers() {
+	public Layers(int base, int altezza) {
+		
+	this.setBounds(0,0, base, altezza);
 	this.setVisible(true);
+	
 	}
 }

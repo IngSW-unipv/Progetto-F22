@@ -1,4 +1,5 @@
 package panelspackage.panels;
+import packageframe.Frame;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
@@ -6,65 +7,49 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.Pulsanti;
+import panelspackage.panels.elements.ScrollText;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
+
 public class LogIn extends JPanel {
 
-	private JLabel titolo;
-	
-	private JLabel testoEmail;
-	private JLabel testoPassword;
-	
-	private JTextField email;
-	private JTextField password;
-	
-	private JButton accedi;
-	
-	private static final long serialVersionUID = 1L;
-	ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
-	ArrayList<String> dati = new ArrayList<String>();
-	Color ARANCIONE = new Color(255, 125, 0);
-	Color NERO = new Color(0, 0, 0);
 	int i;
+
+	private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
+	private ArrayList<String> dati = new ArrayList<String>();
 	
-	public LogIn() {
+	public LogIn(int base, int altezza) {
 		
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
-		this.setBackground(NERO);	
-		
+		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
+		this.setBounds(0,0,base,altezza);
+
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 
-		titolo = new JLabel("Login", SwingConstants.CENTER);
-		titolo.setForeground(ARANCIONE);
-		titolo.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 40));
-		containerNorth.add(titolo, BorderLayout.CENTER);
+		containerNorth.add(new Etichette("Login", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
 		
-		Container containerGenerale = new Container();
-		containerGenerale.setLayout(new GridLayout(2, 2));
-		
-		SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
+		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenter.setLayout(new GridLayout(3, 1));
 		this.add(containerCenter, BorderLayout.CENTER);
 		
-		Container containerVuoto = new Container();
-		Container containerVuoto1 = new Container();
-		
-		testoEmail = new JLabel("EMAIL: ", SwingConstants.CENTER);
-		testoEmail.setForeground(ARANCIONE);
+
+		/*testoEmail = new JLabel("EMAIL: ", SwingConstants.CENTER);
+		testoEmail.setForeground(Frame.COLOREPRIMARIOTEMATICO);
 		testoEmail.setFont(new Font("Arial", Font.BOLD, 25));
 		testoPassword = new JLabel("PASSWORD: ", SwingConstants.CENTER);
-		testoPassword.setForeground(ARANCIONE);
+		testoPassword.setForeground(Frame.COLOREPRIMARIOTEMATICO);
 		testoPassword.setFont(new Font("Arial", Font.BOLD, 25));
 		
 		email = new JTextField();
-		email.setBorder(new LineBorder(NERO,1));
+		email.setBorder(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1));
 		email.setFont(new Font("Arial", Font.PLAIN, 30));
 		password = new JTextField();
-		password.setBorder(new LineBorder(NERO,1));
+		password.setBorder(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1));
 		password.setFont(new Font("Arial", Font.PLAIN, 30));
 		
 		containerGenerale.add(testoEmail);
@@ -75,45 +60,53 @@ public class LogIn extends JPanel {
 		containerCenter.add(containerVuoto);
 		containerCenter.add(containerGenerale);
 		containerCenter.add(containerVuoto1);
-
+		*/
 		
+		listaComponenti.add(new Etichette("Inserisci email", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.add(new Etichette("Inserisci Password", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.add(new Pulsanti("Sign Up", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.add(new JScrollPane(new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		listaComponenti.add(new JScrollPane(new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		listaComponenti.add(new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
 		
-		
-		
-		
-		
-		/*this.dati.add("Email");
-		this.dati.add("Password");
-		for( i = 0; i < this.dati.size(); i++) {
-			AreaDiTesto area = new AreaDiTesto(ARANCIONE, this.dati.get(i));
-			ListaAreaTesto.add(area);
-		}
-		
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaAreaTesto,1,5, ListaAreaTesto.size());
-		containerCenter.add(Dati, BorderLayout.CENTER);*/
-		
-		SpecificContainer containerSouth = new SpecificContainer(NERO);
-		this.add(containerSouth, BorderLayout.SOUTH);
-		
-		accedi = new JButton("ACCEDI");
-		containerSouth.add(accedi, BorderLayout.CENTER);
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
+		containerNorth.add(Dati, BorderLayout.SOUTH);
 	}
 
 	public ArrayList<JComponent> getListaAreaTesto() {
-		return ListaAreaTesto;
+		return listaComponenti;
 	}
 
 	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
-		ListaAreaTesto = listaAreaTesto;
+		listaComponenti = listaAreaTesto;
 	}
 
 	//GETTER E SETTER PULSANTI
-	public JButton getAccedi() {
-		return accedi;
+
+
+	public ArrayList<String> getDati() {
+		return dati;
 	}
 
-	public void setAccedi(JButton accedi) {
-		this.accedi = accedi;
+	public void setDati(ArrayList<String> dati) {
+		this.dati = dati;
+	}
+
+
+	public ArrayList<JComponent> getListaComponenti() {
+		return listaComponenti;
+	}
+
+	public void setListaComponenti(ArrayList<JComponent> listaComponenti) {
+		this.listaComponenti = listaComponenti;
+	}
+	
+	public JButton getAccedi() {
+		return (JButton) this.listaComponenti.get(6);
+	}
+	
+	public JButton getSignUp() {
+		return (JButton) this.listaComponenti.get(3);
 	}
 
 }

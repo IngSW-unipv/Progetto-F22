@@ -2,91 +2,40 @@ package panelspackage.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import panelspackage.panels.elements.AddPostButton;
+import packageframe.Frame;
+import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Box;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
 public class Impostazioni extends JPanel {
-
-	private JButton modificaProfilo;
-	private JButton cambiaProfilo;
-	private JButton visibilitaPost;
-	private JButton logout;
-	private JButton eliminaAccount;
-	private JButton homeImpostazioni;
-	
+	HashMap<String,JComponent> mappaPulsanti = new  HashMap<String,JComponent>();
+	private Pulsanti homeImpostazioni;
+	private AreaDiTesto areaDescrizione, areaNuovaMail;
+	private Box areaCambioSesso;
 	private SpecificContainer containerCenter;
 	
-	private static final long serialVersionUID = 1L;
-	Color ARANCIONE = new Color(255, 125, 0);
-	Color NERO = new Color(0, 0, 0);
+	int i;
 	static String visibilita[]  = {"Pubblico", "Privato"};
 	static String colori[] = {"arancione", "verde"};
 	static String sesso[] = {"maschio", "femmina","altro"};
-	public Impostazioni(String profilo) {
 	
-		this.setOpaque(true);
-		this.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.setBackground(NERO);
-		
-		SpecificContainer containerNorth = new SpecificContainer();
-		this.add(containerNorth, BorderLayout.NORTH);
-		
-		JLabel nomeProfilo = new JLabel(profilo);
-		nomeProfilo.setVisible(true);
-		
-		nomeProfilo.setForeground(ARANCIONE);
-		containerNorth.add(nomeProfilo, BorderLayout.CENTER);
-		
-		SpecificContainer containerWest = new SpecificContainer(ARANCIONE);
-		this.add(containerWest, BorderLayout.WEST);
-		containerWest.setLayout(new GridLayout(8,1));
-		
-		modificaProfilo = new AddPostButton("Modifica profilo", NERO);
-		cambiaProfilo = new AddPostButton("Cambia profilo", ARANCIONE);
-		visibilitaPost = new AddPostButton("Visibilita' post", ARANCIONE);
-		logout = new AddPostButton("Logout", ARANCIONE);
-		eliminaAccount = new AddPostButton("Elimina account", ARANCIONE);
-		homeImpostazioni = new AddPostButton("Torna alla home", NERO);
-				
-		containerWest.add(modificaProfilo);
-		containerWest.add(cambiaProfilo);
-		containerWest.add(new Box(getVisibilita(), ARANCIONE));
-		containerWest.add(visibilitaPost);
-		containerWest.add(new Box(getColori(), ARANCIONE));
-		containerWest.add(logout);
-		containerWest.add(eliminaAccount);
-
-		
-		containerCenter = new SpecificContainer(ARANCIONE);
-		this.add(containerCenter, BorderLayout.CENTER);
+	public Impostazioni(String profilo) {
+		avvio();
+		inItComponents(profilo);
 		
 
-		containerCenter.setLayout(new GridLayout(4,1));
-		
-		AreaDiTesto areaDescrizione = new AreaDiTesto(ARANCIONE, "inserisci la tua nuova descrizione profilo");
-		Box areaCambioSesso = new Box(getSesso(), ARANCIONE);
-		AreaDiTesto areaNuovaMail = new AreaDiTesto(ARANCIONE, "inserisci una nuova mail");
-
-		containerCenter.add(areaDescrizione);
-		containerCenter.add(areaCambioSesso);
-		containerCenter.add(areaNuovaMail);
-
-		containerCenter.setVisible(false);
-
-		SpecificContainer containerSouth = new SpecificContainer();
-		this.add(containerSouth, BorderLayout.SOUTH);
-		
-		containerSouth.add(homeImpostazioni, BorderLayout.CENTER);
 	}
 	public String[] getVisibilita() {
 		return visibilita;
@@ -100,52 +49,82 @@ public class Impostazioni extends JPanel {
 		return sesso;
 	}
 
-	public SpecificContainer getContainerCenter() {
-		return containerCenter;
-	}
-	public void setContainerCenter(SpecificContainer containerCenter) {
-		this.containerCenter = containerCenter;
-	}
-	
-	
+
 	//GETTER E SETTER PULSANTI
-	public JButton getModificaProfilo() {
-		return modificaProfilo;
+	
+	public SpecificContainer getContainerCenter() {
+		return this.containerCenter;
 	}
-	public void setModificaProfilo(JButton modificaProfilo) {
-		this.modificaProfilo = modificaProfilo;
-	}
-	public JButton getCambiaProfilo() {
-		return cambiaProfilo;
-	}
-	public void setCambiaProfilo(JButton cambiaProfilo) {
-		this.cambiaProfilo = cambiaProfilo;
-	}
-	public JButton getVisibilitaPost() {
-		return visibilitaPost;
-	}
-	public void setVisibilitaPost(JButton visibilitaPost) {
-		this.visibilitaPost = visibilitaPost;
-	}
-	public JButton getLogout() {
-		return logout;
-	}
-	public void setLogout(JButton logout) {
-		this.logout = logout;
-	}
-	public JButton getEliminaAccount() {
-		return eliminaAccount;
-	}
-	public void setEliminaAccount(JButton eliminaAccount) {
-		this.eliminaAccount = eliminaAccount;
-	}
-	public JButton getHomeImpostazioni() {
-		return homeImpostazioni;
-	}
-	public void setHomeImpostazioni(JButton homeImpostazioni) {
-		this.homeImpostazioni = homeImpostazioni;
+	public Pulsanti getModificaProfilo() {
+		return (Pulsanti) mappaPulsanti.get("modificaprofilo");
 	}
 
+	public JButton getCambiaProfilo() {
+		return (Pulsanti) mappaPulsanti.get("cambiaprofilo");
+	}
+
+	public JButton getVisibilitaPost() {
+		return (Pulsanti) mappaPulsanti.get("visibilitapost");
+	}
+
+	public JButton getLogout() {
+		return (Pulsanti) mappaPulsanti.get("logout");
+	}
+
+	public Pulsanti getEliminaAccount() {
+		return (Pulsanti) mappaPulsanti.get("eliminaaccount");
+	}
+
+	public Pulsanti getHomeImpostazioni() {
+		return homeImpostazioni;
+	}
+
+	public void avvio() {
+		this.setOpaque(true);
+		this.setVisible(true);
+		this.setLayout(new BorderLayout());
+		this.setBackground(Frame.COLORESECONDARIOTEMATICO);
+	}
+	public void inItComponents(String profilo) {
+		SpecificContainer containerNorth = new SpecificContainer();
+		this.add(containerNorth, BorderLayout.NORTH);
+		
+		JLabel nomeProfilo = new JLabel(profilo);
+		nomeProfilo.setVisible(true);
+		
+		nomeProfilo.setForeground(Frame.COLOREPRIMARIOTEMATICO);
+		containerNorth.add(nomeProfilo, BorderLayout.CENTER);
+		
+		SpecificContainer containerWest = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		this.add(containerWest, BorderLayout.WEST);
+		containerWest.setLayout(new GridLayout(8,1));
+		
+		mappaPulsanti.put("modificaprofilo", new Pulsanti("Modifica profilo", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("cambiaprofilo",new Pulsanti("Cambia profilo", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("getvisibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("visibilitapost", new Pulsanti("Visibilita' post", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("getcolori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("logout",new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
+			
+		  mappaPulsanti.forEach(
+		            (key, value)
+		                -> containerWest.add(value));
+
+		containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		this.add(containerCenter, BorderLayout.CENTER);
+
+		containerCenter.setLayout(new GridLayout(4,1));
+
+		containerCenter.add(areaDescrizione = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "inserisci la tua nuova descrizione profilo"));
+		containerCenter.add(areaCambioSesso = new Box(getSesso(), Frame.COLOREPRIMARIOTEMATICO));
+		containerCenter.add(areaNuovaMail= new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "inserisci una nuova mail"));
+		containerCenter.setVisible(false);
+
+		SpecificContainer containerSouth = new SpecificContainer();
+		this.add(containerSouth, BorderLayout.SOUTH);
+		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
+	}
 
 }
 	

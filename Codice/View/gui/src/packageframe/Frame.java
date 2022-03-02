@@ -1,6 +1,7 @@
 package packageframe;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.*;
 import panelspackage.Layers;
@@ -17,91 +18,32 @@ import panelspackage.panels.SignUp;
 
 public class Frame extends JFrame {
 	
-	private int varHome = 1;
-	private int varLogin = 0;
-	private int varProfilo = 0;
-	private int varImpostazioni = 0;
-	private int varChat = 0;
-	private int varChatMessaggi = 0;
-	private int varPostVisualizzato = 0;
+	int i;
 	
-	private Home home;
-	private LogIn logIn;
-	private Profilo profilo;
-	private Impostazioni impostazioni;
-	private Chat chat;
-	private ChatMessaggi chatMessaggi;
-	private Ricerca ricerca;
-	private PostVisualizzato postVisualizzato;
+	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
+	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	
 	
-	private static final long serialVersionUID = 1L;
-	Color ARANCIONE = new Color(255, 175, 0);
-	Color NERO = new Color(255,255,255);	
+	private int varHome = 1, varLogin = 0,varProfilo = 0, varImpostazioni = 5,
+			varChat = 0,varChatMessaggi = 0, varPostVisualizzato = 0;
 	
+	private HashMap<String, JPanel> listaSchermateAttive = new HashMap<String, JPanel>();
+	private Layers layers;
+	private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	
-	int i;	
-	//array di prova
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
-	ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10","tony11","tony12","tony13","tony14","tony15"};
-	@SuppressWarnings("deprecation")
+
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		 
-		this.setTitle("Social Network");
-		this.setSize(814,813);
-		this.setLayout(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		this.setResizable(false);
+		//all'avvio della GUI verra creata solo la schermata di login
 		
-		Layers layers = new Layers();
-		layers.setBounds(0,0, 800, 775);
-		this.add(layers, BorderLayout.CENTER);
-		
-		home = new Home(bufferStories, bufferPosts);
-		layers.add(home, new  Integer(varHome), 0);
-		home.setBounds(0,0,800,775);
+		this.avvio();
+	//	this.avvioHome(bufferStories, bufferPosts);
+	//	this.avviaImpostazioni(nomeUtente);
+	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
+	//	this.avviaSchermataSignUp();
 
-		logIn = new LogIn();
-		layers.add(logIn, new  Integer(0), 0);
-		logIn.setBounds(0,0,800,775);
-/* 		Ricerca di prova
-		for (i = 0; i<listaRisultatiRicerca.length; i++) {
-			risultatiRicerca.add(listaRisultatiRicerca[i]);
-		}
-		ricerca = new Ricerca("Tony", getRisultatiRicerca());
-		layers.add(ricerca, new  Integer(0), 0);
-		ricerca.setBounds(0,0,800,775);
-*/
-		profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-		layers.add(profilo, new  Integer(0), 0);
-		profilo.setBounds(0,0,800,775);
-		
-		impostazioni = new Impostazioni("Steve Rogers");
-		layers.add(impostazioni, new  Integer(varImpostazioni), 0);
-		impostazioni.setBounds(0,0,800,775);
-		
-		chat = new Chat();
-		layers.add(chat, new  Integer(varChat), 0);
-		chat.setBounds(0,0,800,775);
-		
-		chatMessaggi = new ChatMessaggi("Nome_account_con_cui_sto_messaggiando");
-		layers.add(chatMessaggi, new  Integer(varChatMessaggi), 0);
-		chatMessaggi.setBounds(0,0,800,775);
-		
-		postVisualizzato = new PostVisualizzato();
-		layers.add(postVisualizzato, new  Integer(varPostVisualizzato), 0);
-		postVisualizzato.setBounds(0,0,800,775);
-		
-		SignUp signUp = new SignUp();
-		layers.add(signUp, new  Integer(0), 0);
-		signUp.setBounds(0,0,800,775);
-	
-		PrimaPaginaAccesso primaPaginaAccesso = new PrimaPaginaAccesso();
-		layers.add(primaPaginaAccesso, new  Integer(3), 0);
-		primaPaginaAccesso.setBounds(0,0,800,775);
-		
 	}
 
 	public int getVarHome() {
@@ -161,64 +103,108 @@ public class Frame extends JFrame {
 	}
 
 	public Home getHome() {
-		return home;
+		return (Home) listaSchermateAttive.get("Home");
 	}
-
-	public void setHome(Home home) {
-		this.home = home;
-	}
-
 	public ChatMessaggi getChatMessaggi() {
-		return chatMessaggi;
-	}
+		return (ChatMessaggi) listaSchermateAttive.get("ChatMessaggi");	}
 
-	public void setChatMessaggi(ChatMessaggi chatMessaggi) {
-		this.chatMessaggi = chatMessaggi;
-	}
 
 	public Impostazioni getImpostazioni() {
-		return impostazioni;
+		return (Impostazioni) listaSchermateAttive.get("Impostazioni");	
 	}
 
-	public void setImpostazioni(Impostazioni impostazioni) {
-		this.impostazioni = impostazioni;
-	}
 
 	public LogIn getLogIn() {
-		return logIn;
+		return (LogIn) listaSchermateAttive.get("LogIn");	
 	}
-
-	public void setLogIn(LogIn logIn) {
-		this.logIn = logIn;
-	}
-
 	public Profilo getProfilo() {
-		return profilo;
-	}
-
-	public void setProfilo(Profilo profilo) {
-		this.profilo = profilo;
+		return (Profilo) listaSchermateAttive.get("Profilo");	
 	}
 
 	public Chat getChat() {
-		return chat;
-	}
-
-	public void setChat(Chat chat) {
-		this.chat = chat;
+		return (Chat) listaSchermateAttive.get("Chat");	
 	}
 
 	public ArrayList<String> getRisultatiRicerca() {
 		return risultatiRicerca;
 	}
+	
+	public HashMap<String, JPanel> getListaSchermateAttive() {
+		return listaSchermateAttive;
+	}
+
+	public void setListaSchermateAttive(HashMap<String, JPanel> listaSchermateAttive) {
+		this.listaSchermateAttive = listaSchermateAttive;
+	}
+
+	public Layers getLayers() {
+		return layers;
+	}
+
+	public void setLayers(Layers layers) {
+		this.layers = layers;
+	}
+	
 
 	public PostVisualizzato getPostVisualizzato() {
-		return postVisualizzato;
+		return (PostVisualizzato) listaSchermateAttive.get("PostVisualizzato");	
 	}
-
-	public void setPostVisualizzato(PostVisualizzato postVisualizzato) {
-		this.postVisualizzato = postVisualizzato;
+	
+	public void avvio() {
+		this.setTitle("Social Network");
+		this.setSize(814,813);
+		this.setLayout(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setResizable(false);
+		
+		setLayers(layers = new Layers(800, 775));
+		this.add(getLayers(), BorderLayout.CENTER);
+		LogIn logIn = new LogIn(800, 775);
+		layers.add(logIn, new  Integer(0), 0);
+		this.listaSchermateAttive.put("logIn", logIn);
 	}
+	
+	public void avvioHome(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
+		Home home = new Home(bufferStories,  bufferPosts);
+		getLayers().add(home, new  Integer(varHome), 0);
+		home.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("Home", home);
+	}
+	
+	public void avviaImpostazioni(String profilo){
+		Impostazioni impostazioni = new Impostazioni(profilo);
+		layers.add(impostazioni, new  Integer(varImpostazioni), 0);
+		impostazioni.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("Impostazioni", impostazioni);
+	}
+	
+	public void avviaProfilo(String nomeUtente, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost) {
+	Profilo profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
+	layers.add(profilo, new  Integer(1), 0);
+	profilo.setBounds(0,0,800,775);
+	this.listaSchermateAttive.put("Profilo", profilo);
 
+	}
+	public void avviaSchermataRicerca(String profilo, ArrayList<String> risultatiRicerca) {
+		
+		for (i = 0; i<listaRisultatiRicerca.length; i++) {
+			risultatiRicerca.add(listaRisultatiRicerca[i]);
+		}
+		
+		Ricerca ricerca = new Ricerca(profilo, risultatiRicerca);
+		layers.add(ricerca, new  Integer(0), 0);
+		ricerca.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("Ricerca", ricerca);
+
+	}
+	
+	public void avviaSchermataSignUp() {
+		SignUp signUp = new SignUp();
+		layers.add(signUp, new  Integer(0), 0);
+		signUp.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("SignUp", signUp);
+
+	}
 
 }

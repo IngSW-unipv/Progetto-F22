@@ -7,11 +7,4 @@ public class ProfiloPersonale  extends Profilo {
 		super(NickName, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
 		// TODO Auto-generated constructor stub
 	}
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	
 }
