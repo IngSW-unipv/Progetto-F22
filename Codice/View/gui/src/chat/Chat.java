@@ -2,7 +2,7 @@ package chat;
 
 import profilo.Profilo;
 
-public abstract class Chat {
+public abstract class Chat implements IChat{
 
 	private Profilo profiloAttivo;
 	
@@ -17,5 +17,5 @@ public abstract class Chat {
 	public void setProfiloAttivo(Profilo profiloAttivo) {
 		this.profiloAttivo = profiloAttivo;
 	}	
-	public abstract String ritornaIlMioIdProfilo();
+
 }

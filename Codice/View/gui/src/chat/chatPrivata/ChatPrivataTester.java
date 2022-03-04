@@ -1,19 +1,32 @@
 package chat.chatPrivata;
 
+import java.util.ArrayList;
+
+import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
+//import chat.Chat;
 
 public class ChatPrivataTester {
 
 	public static void main(String[] args) {
 		
-		ChatPrivata p = new ChatPrivata();
-		MessaggioPrivato m = new MessaggioPrivato("002", null, null, "Buonasera", null, null, null);
+		MessaggioPrivato m = new MessaggioPrivato("001", null, null, "Buonasera", null, null, "002");
+		ChatPrivata c = new ChatPrivata(null);
 		
+		ArrayList<Messaggio> sall = c.selectAll();
+          for(Messaggio p : sall)
+			System.out.println(p.toString());
 		
-		p.ottieniTesto(m);
+
+		/*ArrayList<Messaggio> cmess = c.cercaMessaggio(m);
+        for(Messaggio msg : cmess)
+			System.out.println(msg.toString());*/
+        
+		//c.ottieniMessaggio(m);
 		
-		//System.out.println(p.scriviMessaggio(m));
+		//System.out.println(c.caricaMessaggio(m));
 		
-		//p.selectAllRipetuto();
+		//c.leggiTuttiMessaggi();
+		c.leggiMessaggiPrivati(m);
 	}	
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
 import it.unipv.ings.connessione.DBConnection;
 
@@ -20,10 +21,10 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		this.schema = "socialnetwork";
 	}
 
+    @Override
+	public ArrayList<Messaggio> selectAll() {
 
-	public ArrayList<MessaggioPrivato> selectAll() {
-
-		ArrayList<MessaggioPrivato> result = new ArrayList<>();
+		ArrayList<Messaggio> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -48,8 +49,8 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 	}
 
 
-	
-	public boolean scriviMessaggioPrivato(MessaggioPrivato m) {
+	@Override
+	public boolean scriviMessaggioPrivato(Messaggio m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -78,8 +79,8 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 	}
 
 
-	
-	public boolean rimuoviMessaggioPrivato(MessaggioPrivato m) {
+	@Override
+	public boolean rimuoviMessaggioPrivato(Messaggio m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -103,9 +104,9 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 	}
 
 
-
-	public ArrayList<MessaggioPrivato> cercaMessaggioPrivato(MessaggioPrivato m) {
-		ArrayList<MessaggioPrivato> result = new ArrayList<>();
+    @Override
+	public ArrayList<Messaggio> cercaMessaggioPrivato(Messaggio m) {
+		ArrayList<Messaggio> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -166,7 +167,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		ResultSet rs1;
-
+		
 		try
 		{
 			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=?";
@@ -189,7 +190,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public void ottieniMessaggio(MessaggioPrivato m) {
+	public void ottieniMessaggio(Messaggio m) {
 		
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;

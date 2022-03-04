@@ -1,41 +1,47 @@
 package panelspackage.panels;
+import packageframe.Frame;
 import javax.swing.*;
 
-import panelspackage.panels.elements.AddPostButton;
+import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 import java.awt.*;
 public class SchermataConferma extends JPanel {
+	
+	Pulsanti conferma, negazione;
 
-	Color ARANCIONE = new Color(255, 125, 0);
-	Color NERO = new Color(0, 0, 0);
 	//la stringa richiesta ricordera a quella richiesta va data conferma
 	
 	public SchermataConferma(String richiesta) {
 		
-			this.setOpaque(true);
-			this.setVisible(true);
-			this.setLayout(new BorderLayout());
-			this.setBackground(ARANCIONE);
+		avvio();
+		initComponents(richiesta);
+	}
+	
+	public void avvio() {
+		this.setOpaque(true);
+		this.setVisible(true);
+		this.setLayout(new BorderLayout());
+		this.setBackground(Frame.COLOREPRIMARIOTEMATICO);
+	}
+	
+	public void initComponents(String richiesta) {
+		
+		SpecificContainer containerNorth = new SpecificContainer();
+		this.add(containerNorth, BorderLayout.NORTH);
+		
+		Etichette motivoCreazionePannello = new Etichette(richiesta, Frame.COLOREPRIMARIOTEMATICO);
+	
+		motivoCreazionePannello.setForeground(Frame.COLOREPRIMARIOTEMATICO);
+		containerNorth.add(motivoCreazionePannello, BorderLayout.CENTER);
+		
+		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		this.add(containerCenter, BorderLayout.CENTER);
+		containerCenter.setLayout(new GridLayout(1,2));
 
-			SpecificContainer containerNorth = new SpecificContainer();
-			this.add(containerNorth, BorderLayout.NORTH);
-			
-			JLabel motivoCreazionePannello = new JLabel(richiesta);
-			motivoCreazionePannello.setVisible(true);
-			
-			motivoCreazionePannello.setForeground(ARANCIONE);
-			containerNorth.add(motivoCreazionePannello, BorderLayout.CENTER);
-			
-			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
-			this.add(containerCenter, BorderLayout.CENTER);
-			containerCenter.setLayout(new GridLayout(1,2));
-			
-			AddPostButton conferma = new AddPostButton("Si!", ARANCIONE);
-			AddPostButton negazione = new AddPostButton("No!", ARANCIONE);
-					
-			containerCenter.add(negazione);
-			containerCenter.add(negazione);
+		containerCenter.add(conferma = new Pulsanti("Si!", Frame.COLOREPRIMARIOTEMATICO));
+		containerCenter.add(negazione = new Pulsanti("No!", Frame.COLOREPRIMARIOTEMATICO));
 
 	}
 }

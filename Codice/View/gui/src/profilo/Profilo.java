@@ -1,7 +1,12 @@
 package profilo;
 
-import java.util.Arrays;
+
+//import java.util.Arrays;
 import java.util.HashMap;
+
+import Utente.Utente;
+import post.Post;
+
 
 public class Profilo implements IProfilo{
 
@@ -128,4 +133,64 @@ public boolean modificaLike(Profilo p) {
 public HashMap<String, String> getListaSeguiti() {
 	return listaSeguiti;
 }
+
+@Override
+public Profilo cercaProfilo(Profilo p) {
+	// Verificazione dalla basi dati se il profilo esiste.
+		System.out.println(p.getNickname());
+		return p;
+	}
+@Override
+public boolean modificaDislike(Profilo profilo) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public void vediStory() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void commentare(String testo) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public String bloccaUtente(Utente u) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public void mostraInformazioniProfiloPubblico(Profilo p) {
+	// Prima verificazione nel database
+	System.out.println(p + ":\n" +EnumProfilo.PUBBLICO + "\n" +p.getNickname()+ "\n Followers:" +p.getNumFollower()+ "  Seguiti:" +p.getNumSeguiti()+
+			            "    numPosti: "+p.getNumPost() +" \nBio:" +p.getDescrizione()+ "\n" +p.getPost());
+	
+}
+
+@Override
+public void mostraInformazioniProfiloPrivato(Profilo p) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void mostraInformazioniPost(Post p) {
+	// TODO Auto-generated method stub
+	
+}
+	
+	
+		
+	
+		  	
+
+  
+
+
+
+	
+	
+	
+	
+	
 }

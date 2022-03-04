@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import it.unipv.ings.connessione.DBConnection;
 
@@ -18,10 +19,11 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		super();
 		this.schema = "socialnetwork";
 	}
-
-	public ArrayList<MessaggioDiGruppo> selectAll() {
+	
+    @Override
+	public ArrayList<Messaggio> selectAll() {
 		
-		ArrayList<MessaggioDiGruppo> result = new ArrayList<>();
+		ArrayList<Messaggio> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -46,8 +48,8 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		
 	}
 
-
-	public boolean scriviMessaggioDiGruppo(MessaggioDiGruppo m) {
+    @Override
+	public boolean scriviMessaggioDiGruppo(Messaggio m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -77,8 +79,8 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 
-	
-	public boolean rimuoviMessaggioDiGruppo(MessaggioDiGruppo m) {
+    @Override
+	public boolean rimuoviMessaggioDiGruppo(Messaggio m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -101,8 +103,9 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		return esito;
 	}
 
-	public ArrayList<MessaggioDiGruppo> cercaMessaggioDiGruppo(MessaggioDiGruppo m) {
-		ArrayList<MessaggioDiGruppo> result = new ArrayList<>();
+    @Override
+	public ArrayList<Messaggio> cercaMessaggioDiGruppo(Messaggio m) {
+		ArrayList<Messaggio> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -184,7 +187,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 	@Override
-	public void ottieniTesto(MessaggioDiGruppo m) {
+	public void ottieniTesto(Messaggio m) {
 	
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;

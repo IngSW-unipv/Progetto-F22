@@ -78,7 +78,7 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 			+ ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + Amministratore + "]";
 	}
 	@Override
-	public boolean creaGruppo(Gruppo g) {
+	public boolean caricaGruppo(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
 		boolean b;
 		b = gdao.creaGruppo(g);

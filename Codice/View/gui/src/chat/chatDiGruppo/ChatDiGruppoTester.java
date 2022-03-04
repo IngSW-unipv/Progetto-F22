@@ -1,22 +1,24 @@
 package chat.chatDiGruppo;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
-//import Messaggio.MessaggioDiGruppo;
+import Messaggio.Messaggio;
+import Messaggio.MessaggioDiGruppo;
 
 public class ChatDiGruppoTester {
 
 	public static void main(String[] args) {
-		ChatDiGruppo c = new ChatDiGruppo();
-//		MessaggioDiGruppo m = new MessaggioDiGruppo("001", null, null, "Ciao Sara, come va?", null, null);
+		ChatDiGruppo c = new ChatDiGruppo(null);
+		MessaggioDiGruppo m = new MessaggioDiGruppo("001", null, null, "Ciao Sara, come va?", null, "G00");
 		
-		//ArrayList<MessaggioDiGruppo> res = c.selectAll();
-		//for(MessaggioDiGruppo msg : res) { 
-		//		System.out.println(msg.toString());
-		//	}
+		ArrayList<Messaggio> res = c.selectAll();
+		for(Messaggio msg : res) { 
+				System.out.println(msg.toString());
+			}
 		
-		//System.out.println(c.scriviMessaggio(m));
+		System.out.println(c.caricaMessaggio(m));
 		
-		c.selectAllRipetuto();
+		c.leggiMessaggiDiGruppo(m);
+		
 	}
 }

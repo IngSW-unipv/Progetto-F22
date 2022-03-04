@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IGruppo {
 
-	boolean creaGruppo(Gruppo g);
+	boolean caricaGruppo(Gruppo g);
 	boolean eliminaGruppo(Gruppo g);
 	
 	//Con questo metodo posso modificare i 6 partecipanti di un gruppo.
@@ -16,4 +16,5 @@ public interface IGruppo {
 	
 	public ArrayList<Gruppo> cercaGruppo(Gruppo g);
 	public ArrayList<Gruppo> selectAll();
+	
 }
