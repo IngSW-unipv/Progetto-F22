@@ -96,7 +96,6 @@ public class ControllerSocial{
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
 				frameSocial.setVarChat(1);
-				
 				frameSocial.avviaChat();
 
 			}
