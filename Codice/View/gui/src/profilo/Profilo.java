@@ -1,13 +1,17 @@
 package profilo;
 
 
+import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
 
 import Utente.Credenziali;
 import Utente.Utente;
 import chat.Chat;
+import db.profilo.ProfiloDB;
+import db.profilo.ProfiloDao;
 import post.Post;
+import post.commento.Commento;
 
 
 public class Profilo implements IProfilo{
@@ -128,23 +132,28 @@ public HashMap<String,String> modificaFollow(Profilo p) {
 	
      return listaSeguiti;
 }
+
 @Override
 public boolean modificaLike(Profilo p) {
 	// TODO Auto-generated method stub
 	return false;
 }
+
 public HashMap<String, String> getListaSeguiti() {
 	return listaSeguiti;
 }
 
 @Override
-public Profilo cercaProfilo(Profilo p) throws Exception {
+public ArrayList<ProfiloDB> cercaProfilo(ProfiloDB p) throws Exception {
 	// Verificazione dalla basi dati se il profilo esiste.
-	if(p.getIdProfilo() == null) {
+	ProfiloDao pdao = new ProfiloDao();
+	return pdao.cercaProfilo(p);
+	
+	/*if(p.getIdProfilo() == null) {
 		return null;
 	} else {
 		return p;
-		} 
+		} */
 	}
 
 
@@ -161,16 +170,13 @@ public void vediStory() {
 }
 
 @Override
-public String commentare(String testo) {
-	
-	return testo;
+public boolean commentare(Commento c) {
+	return c.scriviCommento(c);
 }
 
 @Override
-public String bloccaUtente(Utente u) {
+public void bloccaUtente(Utente u) {
 	// TODO Auto-generated method stub
-	
-	return null;
 }
 
 
@@ -178,7 +184,7 @@ public String bloccaUtente(Utente u) {
 public void mostraInformazioniProfilo(Profilo p) {
 	// TODO Auto-generated method stub
 	if(p.getTipo() == EnumProfilo.PRIVATO) {
-	
+	p.selectAll();
 	
 	}
 	else {
@@ -188,43 +194,57 @@ public void mostraInformazioniProfilo(Profilo p) {
 
 @Override
 public void mostraInformazioniPost(Post p) {
-	// TODO Auto-generated method stub
-	
+
 }
+
 @Override
 public Profilo creaProfilo(Profilo p) {
-	// TODO Auto-generated method stub
-	return null;
+	p = new Profilo(idProfilo, nickname, descrizione, numFollower, numSeguiti, numPost, tipo, messaggioDiGruppo, 
+			        messaggioPrivato, utente, post);
+	return p;
 }
+
 @Override
 public boolean modificaDatiPersonali(Credenziali c) {
 	// TODO Auto-generated method stub
 	return false;
 }
+
 @Override
 public boolean visualizzaProprioPost(Post p) {
 	// TODO Auto-generated method stub
 	return false;
 }
+
 @Override
-public Profilo eliminaProfilo(Profilo p) {
-	// TODO Auto-generated method stub
-	return null;
+public boolean eliminaProfilo(ProfiloDB p) {
+	ProfiloDao pDao = new ProfiloDao();
+	return pDao.rimuoviProfilo(p);
+	
 }
+
 @Override
 public Chat cercaChatAttiva(Chat chat) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
 @Override
 public Chat visualizzaChatAttiva(Chat chat) {
 	// TODO Auto-generated method stub
 	return null;
 }
+
 @Override
 public Post segnaLibro(Post p) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public ArrayList<ProfiloDB> selectAll() {
+	ProfiloDao pDao = new ProfiloDao();
+	return pDao.selectAll();
 }
 	
 	
