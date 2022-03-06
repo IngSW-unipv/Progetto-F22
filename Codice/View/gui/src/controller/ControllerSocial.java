@@ -61,6 +61,7 @@ public class ControllerSocial{
 		this.postVisualizzatoView = frameSocial.getPostVisualizzato();
 	}
 	
+	//Vari actionlistener
 	public void assegnaGestori() {
 		
 		//ACTIONLISTENER PULSANTI PANNELLO HOME
