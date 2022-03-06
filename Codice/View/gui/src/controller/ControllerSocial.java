@@ -8,6 +8,7 @@ import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
+import panelspackage.panels.elements.PannelloNotifiche;
 import packageframe.Frame;
 
 public class ControllerSocial{
@@ -18,6 +19,7 @@ public class ControllerSocial{
 	private Chat chatView;
 	private Profilo profiloView;
 	private PostVisualizzato postVisualizzatoView;
+	private PannelloNotifiche pannelloNotificheView;
 	//Inserire modello con metodi per la home 
 	
 	//ActionListener Home
@@ -48,6 +50,7 @@ public class ControllerSocial{
 	private ActionListener gestoreHomeProfilo;
 	private ActionListener gestoreHomeChat;
 	private ActionListener gestoreListaChat;
+	private String[] tmp = {"1", "2", "3"};
 	
 	public ControllerSocial(Frame frameSocial) {
 		this.frameSocial = frameSocial;
@@ -66,18 +69,9 @@ public class ControllerSocial{
 			public void actionPerformed(ActionEvent e) {
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				frameSocial.setVarLogin(0);
-				frameSocial.getLogIn().setVisible(false);
-				frameSocial.setVarProfilo(0);
-				frameSocial.getProfilo().setVisible(false);
 				frameSocial.setVarImpostazioni(1);
-				frameSocial.getImpostazioni().setVisible(true);
-				frameSocial.setVarChat(0);
-				frameSocial.getChat().setVisible(false);
-				frameSocial.setVarChatMessaggi(0);
-				frameSocial.getChatMessaggi().setVisible(false);
-				frameSocial.setVarPostVisualizzato(0);
-				frameSocial.getPostVisualizzato().setVisible(false);
+				
+				frameSocial.avviaImpostazioni("Marco");
 			}
 		};
 		homeView.getButtonImpostazioni().addActionListener(gestoreImpostazioni);
@@ -88,18 +82,9 @@ public class ControllerSocial{
 			public void actionPerformed(ActionEvent e) {
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				frameSocial.setVarLogin(0);
-				frameSocial.getLogIn().setVisible(false);
 				frameSocial.setVarProfilo(1);
-				frameSocial.getProfilo().setVisible(true);
-				frameSocial.setVarImpostazioni(0);
-				frameSocial.getImpostazioni().setVisible(false);
-				frameSocial.setVarChat(0);
-				frameSocial.getChat().setVisible(false);
-				frameSocial.setVarChatMessaggi(0);
-				frameSocial.getChatMessaggi().setVisible(false);
-				frameSocial.setVarPostVisualizzato(0);
-				frameSocial.getPostVisualizzato().setVisible(false);
+				
+				frameSocial.avviaProfilo("Marco", 10, 19, 20, "ImmagineProfilo", tmp);
 			}
 		};
 		homeView.getButtonProfilo().addActionListener(gestoreProfilo);
@@ -110,18 +95,10 @@ public class ControllerSocial{
 			public void actionPerformed(ActionEvent e) {
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				frameSocial.setVarLogin(0);
-				frameSocial.getLogIn().setVisible(false);
-				frameSocial.setVarProfilo(0);
-				frameSocial.getProfilo().setVisible(false);
-				frameSocial.setVarImpostazioni(0);
-				frameSocial.getImpostazioni().setVisible(false);
 				frameSocial.setVarChat(1);
-				frameSocial.getChat().setVisible(true);
-				frameSocial.setVarChatMessaggi(0);
-				frameSocial.getChatMessaggi().setVisible(false);
-				frameSocial.setVarPostVisualizzato(0);
-				frameSocial.getPostVisualizzato().setVisible(false);
+				
+				frameSocial.avviaChat();
+
 			}
 		};
 		homeView.getButtonChat().addActionListener(gestoreChat);
@@ -130,11 +107,14 @@ public class ControllerSocial{
 		gestoreNotifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Inserire metodi
+				frameSocial.setVarHome(0);
+				frameSocial.getHome().setVisible(false);
+				frameSocial.setVarNotifiche(1);
+				frameSocial.avviaNotifiche();
 			}
 		};
 		homeView.getButtonNotifiche().addActionListener(gestoreNotifiche);
-		
+		/*
 		gestoreRicerca = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -255,24 +235,16 @@ public class ControllerSocial{
 		homeView.getpIdea().addActionListener(gestorePubblicaIdea);
 		
 		
+		
 		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frameSocial.setVarHome(1);
-				frameSocial.getHome().setVisible(true);
-				frameSocial.setVarLogin(0);
-				frameSocial.getLogIn().setVisible(false);
-				frameSocial.setVarProfilo(0);
-				frameSocial.getProfilo().setVisible(false);
 				frameSocial.setVarImpostazioni(0);
 				frameSocial.getImpostazioni().setVisible(false);
-				frameSocial.setVarChat(0);
-				frameSocial.getChat().setVisible(false);
-				frameSocial.setVarChatMessaggi(0);
-				frameSocial.getChatMessaggi().setVisible(false);
-				frameSocial.setVarPostVisualizzato(0);
-				frameSocial.getPostVisualizzato().setVisible(false);
+				frameSocial.setVarHome(1);
+
+				frameSocial.avvioHome();
 			}
 		};
 		impostazioniView.getHomeImpostazioni().addActionListener(gestoreHomeImpostazioni);
@@ -351,7 +323,7 @@ public class ControllerSocial{
 				frameSocial.getPostVisualizzato().setVisible(false);
 			}
 		};
-		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);
+		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);*/
 	}
 }
 
