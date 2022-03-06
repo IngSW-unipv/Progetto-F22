@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-import it.unipv.ings.Commento.CommentoDao;
+import db.commento.CommentoDao;
 
 public class Commento implements ICommento{
 

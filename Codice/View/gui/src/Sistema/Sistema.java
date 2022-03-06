@@ -1,7 +1,8 @@
 package Sistema;
 
-import it.unipv.ings.Post.*;
+import Database.Post.*;
 import Utente.Utente;
+import db.profilo.ProfiloDao;
 import it.unipv.ings.Profilo.*;
 import post.Post;
 import profilo.Profilo;

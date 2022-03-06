@@ -36,6 +36,13 @@ public abstract class Multimedia extends Post{
 	public void setStory(boolean isStory) {
 		this.isStory = isStory;
 	}
+	@Override
+	public String toString() {
+		return super.toString() + ", tempoCancellazione = " + tempoCancellazione + ", percorso = " + percorso + ", isStory = "
+				+ isStory ;
+	}
+	
+	public abstract boolean settaDurataStoria(int tempo, Post p);
 	
 	
 }

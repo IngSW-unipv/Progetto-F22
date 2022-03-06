@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import chat.Chat;
-import it.unipv.ings.messaggioDiGruppo.MessaggioDiGruppoDao;
+import db.messaggioDiGruppo.MessaggioDiGruppoDao;
 import profilo.Profilo;
 
 

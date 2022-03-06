@@ -2,7 +2,7 @@ package chat.chatDiGruppo.gruppo;
 
 import java.util.ArrayList;
 
-import it.unipv.ings.Gruppo.GruppoDao;
+import db.gruppo.GruppoDao;
 
 public class Gruppo implements IGruppo{
 	

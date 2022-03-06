@@ -2,12 +2,8 @@ package post;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
-import it.unipv.ings.Post.PostDao;
-
-
-	public class Post implements IPost {
+	public abstract class Post implements IPost {
 		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 				int numDislike, boolean visibile, boolean condivisibile, String profilo) {
 			super();
@@ -86,36 +82,11 @@ import it.unipv.ings.Post.PostDao;
 	}
 	@Override
 	public String toString() {
-		return "Post [idPost=" + idPost + ", dataPubblicazione=" + dataPubblicazione + ", oraPubblicazione="
-				+ oraPubblicazione + ", descrizione=" + descrizione + ", numLike=" + numLike + ", numDislike=" + numDislike
-				+ ", visibile=" + visibile + ", condivisibile=" + condivisibile + ", profilo="
-				+ profilo + "]";
+		return "[idPost = " + idPost + ", dataPubblicazione = " + dataPubblicazione + ", oraPubblicazione = "
+				+ oraPubblicazione + ", descrizione = " + descrizione + ", numLike = " + numLike + ", numDislike = " + numDislike
+				+ ", visibile = " + visibile + ", condivisibile = " + condivisibile + ", profilo = "
+				+ profilo;
 	}
-	@Override
-	public ArrayList<Post> selectAll() {
-		PostDao pdao = new PostDao();
-		return pdao.selectAll();
-	}
-	@Override
-	public boolean pubblicaPost(Post p) {
-		PostDao pdao = new PostDao();
-		boolean b;
-		b = pdao.pubblicaPost(p);
-		return b;
-	}
-	@Override
-	public boolean inserisciChiavi(Post p) {
-		PostDao pdao = new PostDao();
-		boolean b;
-		b = pdao.inserisciChiavi(p);
-		return b;
-	}
-	@Override
-	public boolean rimuoviPost(Post p) {
-		PostDao pdao = new PostDao();
-		boolean b;
-		b = pdao.rimuoviPost(p);
-		return b;
-	}
+	
 	}
 

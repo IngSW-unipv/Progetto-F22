@@ -7,7 +7,7 @@ import java.util.TimerTask;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
 import chat.Chat;
-import it.unipv.ings.MessaggioPrivato.MessaggioPrivatoDao;
+import db.messaggioPrivato.MessaggioPrivatoDao;
 import profilo.Profilo;
 
 public class ChatPrivata extends Chat {
