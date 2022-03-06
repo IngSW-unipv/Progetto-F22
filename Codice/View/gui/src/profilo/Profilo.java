@@ -4,9 +4,9 @@ package profilo;
 //import java.util.Arrays;
 import java.util.HashMap;
 
-
-
+import Utente.Credenziali;
 import Utente.Utente;
+import chat.Chat;
 import post.Post;
 
 
@@ -178,11 +178,11 @@ public String bloccaUtente(Utente u) {
 public void mostraInformazioniProfilo(Profilo p) {
 	// TODO Auto-generated method stub
 	if(p.getTipo() == EnumProfilo.PRIVATO) {
-		System.out.println(p + " :\n" + p.getNickname() + "\n" +p.getTipo());
+	
+	
 	}
 	else {
-		System.out.println(p + ":\n" + p.getTipo()+ "\n" +p.getNickname()+ "\n Followers:" +p.getNumFollower()+ "  Seguiti:" 
-	                      +p.getNumSeguiti()+"    numPosti:"+p.getNumPost() +" \n Bio:" +p.getDescrizione()+ "\n" +p.getPost());
+		
 	}
 }
 
@@ -190,6 +190,41 @@ public void mostraInformazioniProfilo(Profilo p) {
 public void mostraInformazioniPost(Post p) {
 	// TODO Auto-generated method stub
 	
+}
+@Override
+public Profilo creaProfilo(Profilo p) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public boolean modificaDatiPersonali(Credenziali c) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public boolean visualizzaProprioPost(Post p) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public Profilo eliminaProfilo(Profilo p) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Chat cercaChatAttiva(Chat chat) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Chat visualizzaChatAttiva(Chat chat) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Post segnaLibro(Post p) {
+	// TODO Auto-generated method stub
+	return null;
 }
 	
 	
