@@ -30,24 +30,6 @@ public class  Profilo extends JPanel {
 		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
 		
 	}
-
-	public ArrayList<JComponent> getListaAreaTesto() {
-		return ListaEtichette;
-	}
-
-	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
-		ListaEtichette = listaAreaTesto;
-	}
-	
-	
-	//GETTER E SETTER PULSANTI
-	public Pulsanti getHomeProfilo() {
-		return homeProfilo;
-	}
-
-	public void setHomeProfilo(Pulsanti homeProfilo) {
-		this.homeProfilo = homeProfilo;
-	}
 	
 	public void avvio() {
 		this.setOpaque(true);
@@ -95,6 +77,25 @@ public class  Profilo extends JPanel {
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
 		containerSouth.add(homeProfilo= new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
+	}
+	
+
+	public ArrayList<JComponent> getListaAreaTesto() {
+		return ListaEtichette;
+	}
+
+	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
+		ListaEtichette = listaAreaTesto;
+	}
+	
+	
+	//GETTER E SETTER PULSANTI
+	public Pulsanti getHomeProfilo() {
+		return homeProfilo;
+	}
+
+	public void setHomeProfilo(Pulsanti homeProfilo) {
+		this.homeProfilo = homeProfilo;
 	}
 	
 }

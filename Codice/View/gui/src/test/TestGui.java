@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import packageframe.Frame;
 import controller.ControllerSocial;
 import panelspackage.panels.Chat;
+import panelspackage.panels.Home;
 
 public class TestGui {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
@@ -26,8 +27,10 @@ public class TestGui {
 		Chat chat = new Chat();
 		chat.setVisible(true);
 		
-		ControllerSocial ctrl = new ControllerSocial(gui);
+		ControllerSocial ctrl = new ControllerSocial(gui, bufferStories, bufferPosts);
 		ctrl.assegnaGestori();
+		
+
 	}
 	public String[] getListaImmaginiPost() {
 		return listaImmaginiPost;

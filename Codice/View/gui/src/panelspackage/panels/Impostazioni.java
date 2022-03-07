@@ -33,59 +33,16 @@ public class Impostazioni extends JPanel {
 	
 	public Impostazioni(String profilo) {
 		avvio();
-		inItComponents(profilo);
+		this.initComponents(profilo);
+	}
 		
-
-	}
-	public String[] getVisibilita() {
-		return visibilita;
-	}
-
-	public String[] getColori() {
-		return colori;
-	}
-
-	public String[] getSesso() {
-		return sesso;
-	}
-
-
-	//GETTER E SETTER PULSANTI
-	
-	public SpecificContainer getContainerCenter() {
-		return this.containerCenter;
-	}
-	public Pulsanti getModificaProfilo() {
-		return (Pulsanti) mappaPulsanti.get("modificaprofilo");
-	}
-
-	public JButton getCambiaProfilo() {
-		return (Pulsanti) mappaPulsanti.get("cambiaprofilo");
-	}
-
-	public JButton getVisibilitaPost() {
-		return (Pulsanti) mappaPulsanti.get("visibilitapost");
-	}
-
-	public JButton getLogout() {
-		return (Pulsanti) mappaPulsanti.get("logout");
-	}
-
-	public Pulsanti getEliminaAccount() {
-		return (Pulsanti) mappaPulsanti.get("eliminaaccount");
-	}
-
-	public Pulsanti getHomeImpostazioni() {
-		return homeImpostazioni;
-	}
-
 	public void avvio() {
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);
 	}
-	public void inItComponents(String profilo) {
+	public void initComponents(String profilo) {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 		
@@ -124,6 +81,48 @@ public class Impostazioni extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
 		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
+	}
+	
+	public String[] getVisibilita() {
+		return visibilita;
+	}
+	
+	public String[] getColori() {
+		return colori;
+	}
+	
+	public String[] getSesso() {
+		return sesso;
+	}
+	
+	
+	//GETTER E SETTER PULSANTI
+	
+	public SpecificContainer getContainerCenter() {
+		return this.containerCenter;
+	}
+	public Pulsanti getModificaProfilo() {
+		return (Pulsanti) mappaPulsanti.get("modificaprofilo");
+	}
+	
+	public JButton getCambiaProfilo() {
+		return (Pulsanti) mappaPulsanti.get("cambiaprofilo");
+	}
+	
+	public JButton getVisibilitaPost() {
+		return (Pulsanti) mappaPulsanti.get("visibilitapost");
+	}
+	
+	public JButton getLogout() {
+		return (Pulsanti) mappaPulsanti.get("logout");
+	}
+	
+	public Pulsanti getEliminaAccount() {
+		return (Pulsanti) mappaPulsanti.get("eliminaaccount");
+	}
+	
+	public Pulsanti getHomeImpostazioni() {
+		return homeImpostazioni;
 	}
 
 }

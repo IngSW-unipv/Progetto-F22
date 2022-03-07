@@ -15,10 +15,14 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class LogIn extends JPanel {
 
-	int i;
+	private int i;
 
 	private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
 	private ArrayList<String> dati = new ArrayList<String>();
+	
+	private AreaDiTesto inserimentoEmail;
+	private AreaDiTesto inserimentoPassword;
+	private Pulsanti accedi;
 	
 	public LogIn(int base, int altezza) {
 		
@@ -62,12 +66,15 @@ public class LogIn extends JPanel {
 		containerCenter.add(containerVuoto1);
 		*/
 		
+		inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
+		inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
+		
 		listaComponenti.add(new Etichette("Inserisci email", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.add(new Etichette("Inserisci Password", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.add(new Pulsanti("Sign Up", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.add(new JScrollPane(new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
-		listaComponenti.add(new JScrollPane(new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
-		listaComponenti.add(new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.add(new JScrollPane(inserimentoEmail, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		listaComponenti.add(new JScrollPane(inserimentoPassword, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		listaComponenti.add(accedi = new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
 		
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);
@@ -82,8 +89,6 @@ public class LogIn extends JPanel {
 	}
 
 	//GETTER E SETTER PULSANTI
-
-
 	public ArrayList<String> getDati() {
 		return dati;
 	}
@@ -108,5 +113,23 @@ public class LogIn extends JPanel {
 	public JButton getSignUp() {
 		return (JButton) this.listaComponenti.get(3);
 	}
+
+	public AreaDiTesto getInserimentoEmail() {
+		return inserimentoEmail;
+	}
+
+	public void setInserimentoEmail(AreaDiTesto inserimentoEmail) {
+		this.inserimentoEmail = inserimentoEmail;
+	}
+
+	public AreaDiTesto getInserimentoPassword() {
+		return inserimentoPassword;
+	}
+
+	public void setInserimentoPassword(AreaDiTesto inserimentoPassword) {
+		this.inserimentoPassword = inserimentoPassword;
+	}
+	
+
 
 }

@@ -21,6 +21,7 @@ public class Home extends JPanel {
 	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,buttonNotifiche,pPost,pStory,pSondaggio,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private AreaDiTesto testoRicerca;
+	public static final  Color NERO = new Color(0,0,0);	
 
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
@@ -30,7 +31,114 @@ public class Home extends JPanel {
 		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
 		
 		avvio();		
-		iiItComponents(bufferPosts, bufferStories);
+		this.initComponents(bufferPosts, bufferStories);
+	}
+	
+	public void avvio() {
+		this.setOpaque(true);
+		this.setVisible(true);
+		this.setLayout(new BorderLayout());
+		this.setBackground(NERO);
+		this.add(containerNorth = new SpecificContainer(), BorderLayout.NORTH);
+		this.add(containerCenter = new SpecificContainer(), BorderLayout.CENTER);
+	}
+
+	public void menuHome() {
+		SpecificContainer areaRicerca = new SpecificContainer();
+		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
+
+		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
+		areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "____", fontText), BorderLayout.CENTER);
+		areaRicerca.add(searchButton = new Pulsanti("CERCA", fontButton), BorderLayout.EAST);
+		
+		SpecificContainer menuHome = new SpecificContainer();
+		containerNorth.add(menuHome, BorderLayout.NORTH);
+		
+		containerNorth.add(new Etichette("Socialnetwork", Frame.COLOREPRIMARIOTEMATICO, fontTitle), BorderLayout.CENTER);	
+			
+		SpecificContainer menuHomeSinistro = new SpecificContainer();
+		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
+		SpecificContainer menuHomeDestro = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO, Frame.COLORESECONDARIOTEMATICO);
+		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
+
+
+		menuHomeSinistro.add(buttonProfilo = new Pulsanti("immagini/profilo.png"), BorderLayout.EAST);
+		menuHomeSinistro.add(buttonImpostazioni = new Pulsanti("immagini/impostazioni.png"), BorderLayout.WEST);
+
+		menuHomeDestro.add(buttonNotifiche = new Pulsanti("immagini/notifiche.gif"), BorderLayout.EAST);
+		menuHomeDestro.add(buttonChat = new Pulsanti("immagini/testo.jpeg"), BorderLayout.WEST);
+
+	}
+	
+	public void areaPost(ArrayList<String>  bufferPosts) {
+		SpecificContainer containerPost = new SpecificContainer();
+		containerCenter.add(containerPost, BorderLayout.CENTER);
+		
+		containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
+		
+		SpecificContainer containerCosePost = new SpecificContainer();
+		
+		AreaDiTesto areaDescrizione = new AreaDiTesto("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",400, 130);
+		JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		SpecificContainer containerBottoniPost = new SpecificContainer();
+		containerBottoniPost.setLayout(new GridLayout(1, 2));
+		containerBottoniPost.add(buttonPrevPost = new Pulsanti("Post precedente", fontButton));
+		containerBottoniPost.add(buttonNextPost = new Pulsanti("Post successivo",fontButton));
+		
+		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
+		containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
+		containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
+		containerLikeDislikeComm.add(numeroDislike = new Etichette("N.dislike", Color.white));
+		containerLikeDislikeComm.add(numeroCommenti = new Etichette("N.Commenti", Color.white));
+		containerLikeDislikeComm.add(aggiungiLike = new Pulsanti("+ Like", Frame.COLORESECONDARIOTEMATICO));
+		containerLikeDislikeComm.add(aggiungiDislike = new Pulsanti("+ Dislike", Frame.COLORESECONDARIOTEMATICO));
+		containerLikeDislikeComm.add(aggiungiCommento = new Pulsanti("+ Commento", Frame.COLORESECONDARIOTEMATICO));
+		
+		containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
+		containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
+		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
+		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
+	}
+	
+	public void areaStories(ArrayList<String>  bufferStories) {
+		SpecificContainer containerWest = new SpecificContainer();
+		SpecificContainer containerStory = new SpecificContainer();
+		SpecificContainer containerButtonStory = new SpecificContainer();
+		
+		containerWest.add(containerStory = new SpecificContainer(), BorderLayout.CENTER);
+		containerStory.setLayout(new GridLayout(5,0));
+		containerCenter.add(containerWest, BorderLayout.WEST);
+	
+		containerButtonStory.setLayout(new GridLayout(1, 2));
+		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
+		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
+		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
+		
+		for (i = 0; i < 5; i++) {
+			containerStory.add(new Pulsanti(bufferStories.get(this.getIndiceBufferStories()+ i), Frame.COLORESECONDARIOTEMATICO, 4));
+		}	
+	}
+	
+		public void sezionePubblicaPost() {
+			
+			SpecificContainer containerSud = new SpecificContainer();
+			this.add(containerSud, BorderLayout.SOUTH);
+			
+			containerSud.setLayout(new GridLayout(1,4));
+
+			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pStory =  new Pulsanti("Pubblica una story", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+			containerSud.add(pSondaggio =  new Pulsanti("Pubblica sondaggio", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+			
+		}
+		
+	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
+		menuHome();
+		areaPost(bufferPosts);
+		areaStories(bufferStories);
+		sezionePubblicaPost();
 	}
 	
 	public int getIndiceBufferStories() {
@@ -45,7 +153,6 @@ public class Home extends JPanel {
 	public void setIndiceBufferPosts(int indiceBufferPosts) {
 		this.indiceBufferPosts = indiceBufferPosts;
 	}
-	
 	
 	//GETTER E SETTER PULSANTI
 	public JButton getSearchButton() {
@@ -152,111 +259,5 @@ public class Home extends JPanel {
 
 	public void setButtonNotifiche(Pulsanti buttonNotifiche) {
 		this.buttonNotifiche = buttonNotifiche;
-	}
-	public void avvio() {
-		this.setOpaque(true);
-		this.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.setBackground(NERO);
-		this.add(containerNorth = new SpecificContainer(), BorderLayout.NORTH);
-		this.add(containerCenter = new SpecificContainer(), BorderLayout.CENTER);
-	}
-
-	public void menuHome() {
-		SpecificContainer areaRicerca = new SpecificContainer();
-		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
-
-		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
-		areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "____", fontText), BorderLayout.CENTER);
-		areaRicerca.add(searchButton = new Pulsanti("CERCA", fontButton), BorderLayout.EAST);
-		
-		SpecificContainer menuHome = new SpecificContainer();
-		containerNorth.add(menuHome, BorderLayout.NORTH);
-		
-		containerNorth.add(new Etichette("Socialnetwork", Frame.COLOREPRIMARIOTEMATICO, fontTitle), BorderLayout.CENTER);	
-			
-		SpecificContainer menuHomeSinistro = new SpecificContainer();
-		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);
-		SpecificContainer menuHomeDestro = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO, Frame.COLORESECONDARIOTEMATICO);
-		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
-
-
-		menuHomeSinistro.add(buttonProfilo = new Pulsanti("immagini/profilo.png"), BorderLayout.EAST);
-		menuHomeSinistro.add(buttonImpostazioni = new Pulsanti("immagini/impostazioni.png"), BorderLayout.WEST);
-
-		menuHomeDestro.add(buttonNotifiche = new Pulsanti("immagini/notifiche.gif"), BorderLayout.EAST);
-		menuHomeDestro.add(buttonChat = new Pulsanti("immagini/testo.jpeg"), BorderLayout.WEST);
-
-	}
-	
-	public void areaPost(ArrayList<String>  bufferPosts) {
-		SpecificContainer containerPost = new SpecificContainer();
-		containerCenter.add(containerPost, BorderLayout.CENTER);
-		
-		containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
-		
-		SpecificContainer containerCosePost = new SpecificContainer();
-		
-		AreaDiTesto areaDescrizione = new AreaDiTesto("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.",400, 130);
-		JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		SpecificContainer containerBottoniPost = new SpecificContainer();
-		containerBottoniPost.setLayout(new GridLayout(1, 2));
-		containerBottoniPost.add(buttonPrevPost = new Pulsanti("Post precedente", fontButton));
-		containerBottoniPost.add(buttonNextPost = new Pulsanti("Post successivo",fontButton));
-		
-		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
-		containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
-		containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
-		containerLikeDislikeComm.add(numeroDislike = new Etichette("N.dislike", Color.white));
-		containerLikeDislikeComm.add(numeroCommenti = new Etichette("N.Commenti", Color.white));
-		containerLikeDislikeComm.add(aggiungiLike = new Pulsanti("+ Like", Frame.COLORESECONDARIOTEMATICO));
-		containerLikeDislikeComm.add(aggiungiDislike = new Pulsanti("+ Dislike", Frame.COLORESECONDARIOTEMATICO));
-		containerLikeDislikeComm.add(aggiungiCommento = new Pulsanti("+ Commento", Frame.COLORESECONDARIOTEMATICO));
-		
-		containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
-		containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
-		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
-		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
-	}
-	
-	public void areaStories(ArrayList<String>  bufferStories) {
-		SpecificContainer containerWest = new SpecificContainer();
-		SpecificContainer containerStory = new SpecificContainer();
-		SpecificContainer containerButtonStory = new SpecificContainer();
-		
-		containerWest.add(containerStory = new SpecificContainer(), BorderLayout.CENTER);
-		containerStory.setLayout(new GridLayout(5,0));
-		containerCenter.add(containerWest, BorderLayout.WEST);
-	
-		containerButtonStory.setLayout(new GridLayout(1, 2));
-		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
-		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
-		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
-		
-		for (i = 0; i < 5; i++) {
-			containerStory.add(new Pulsanti(bufferStories.get(this.getIndiceBufferStories()+ i), Frame.COLORESECONDARIOTEMATICO, 4));
-		}	
-	}
-	
-		public void sezionePubblicaPost() {
-			
-			SpecificContainer containerSud = new SpecificContainer();
-			this.add(containerSud, BorderLayout.SOUTH);
-			
-			containerSud.setLayout(new GridLayout(1,4));
-
-			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
-			containerSud.add(pStory =  new Pulsanti("Pubblica una story", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggio =  new Pulsanti("Pubblica sondaggio", Frame.COLOREPRIMARIOTEMATICO, fontButton));
-			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			
-		}
-		
-	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
-		menuHome();
-		areaPost(bufferPosts);
-		areaStories(bufferStories);
-		sezionePubblicaPost();
 	}
 }
