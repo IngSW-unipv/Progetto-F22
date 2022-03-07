@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import Messaggio.Messaggio;
 public interface IChat {
 
-	public ArrayList<Messaggio> selectAll();
+	public ArrayList<Messaggio> ottieniListaTuttiMessaggi();
 	public ArrayList<Messaggio> cercaMessaggio(Messaggio m);
 	public void ottieniMessaggio(Messaggio m);
 	public boolean caricaMessaggio(Messaggio m);

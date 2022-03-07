@@ -133,7 +133,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 	@Override
-	public boolean inserisciChiavi(MessaggioDiGruppo m) {
+	public boolean inserisciChiavi(Messaggio m, String gruppo) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -142,7 +142,8 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		{
 			String query="update messaggioDiGruppo set gruppo=? where idMsgGrp=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, gruppo);
+			st1.setString(2, m.getIdMessaggio());
 			
 
 			st1.executeUpdate();

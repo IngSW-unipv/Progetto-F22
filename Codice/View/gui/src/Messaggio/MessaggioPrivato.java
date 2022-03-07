@@ -26,7 +26,7 @@ public class MessaggioPrivato extends Messaggio{
 	}
 	@Override
 	public String toString() {
-		return super.toString() + "MessaggioPrivato [idProfiloInviante=" + idProfiloInviante + ", idProfiloRicevente=" + idProfiloRicevente
+		return super.toString() + ", idProfiloInviante = " + idProfiloInviante + ", idProfiloRicevente = " + idProfiloRicevente
 				+ "]";
 	}
 	

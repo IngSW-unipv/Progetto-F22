@@ -12,24 +12,22 @@ import profilo.Profilo;
 
 public class ChatPrivata extends Chat {
 	
-	public ChatPrivata(Profilo profiloAttivo) {
+	public ChatPrivata(Profilo profiloAttivo, MessaggioPrivato msg) {
 		super(profiloAttivo);
+		this.msg = msg;
 	}
 
+	 private MessaggioPrivato msg;
+	 
+	 
+	 //Ottiene la lista dei messaggi privati scambiati con un profilo specificato
 		public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		return mdao.selectAllNomeProfilo(m);
 	}
 	
-	public boolean inserisciChiavi(MessaggioPrivato m) {
-		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		boolean b;
-		b = mdao.inserisciChiavi(m);
-		return b;
-	}
-
 	@Override
-	public ArrayList<Messaggio> selectAll() {
+	public ArrayList <Messaggio> ottieniListaTuttiMessaggi() {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		return mdao.selectAll();
 	
@@ -51,6 +49,7 @@ public class ChatPrivata extends Chat {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		boolean b;
 		b = mdao.scriviMessaggioPrivato(m);
+		mdao.inserisciChiavi(m, msg.getIdProfiloInviante(), msg.getIdProfiloRicevente());
 		return b;
 	}
 
@@ -102,6 +101,17 @@ public class ChatPrivata extends Chat {
 		    }
 		 }, 0, 60 * 1000);
 	}
+
+
+	public MessaggioPrivato getMsg() {
+		return msg;
+	}
+
+	public void setMsg(MessaggioPrivato msg) {
+		this.msg = msg;
+	}
+	
+
 	}
 
 

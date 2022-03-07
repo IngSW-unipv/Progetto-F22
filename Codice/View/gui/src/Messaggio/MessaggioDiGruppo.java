@@ -22,6 +22,6 @@ public class MessaggioDiGruppo extends Messaggio{
 
 	@Override
 	public String toString() {
-		return super.toString() + "MessaggioDiGruppo [idGruppo=" + idGruppo + "]";
+		return super.toString() + ", idGruppo = " + idGruppo + "]";
 	}
 }

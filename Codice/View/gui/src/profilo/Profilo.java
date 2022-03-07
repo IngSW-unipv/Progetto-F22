@@ -191,15 +191,13 @@ public void mostraInformazioniPost(Post p) {
 	// TODO Auto-generated method stub
 	
 }
-	
-	
-		
-	
-		  	
-
-  
-
-
+@Override
+public String toString() {
+	return " [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
+			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
+			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
+			+ utente + ", post=" + post + ", listaSeguiti=" + listaSeguiti + "]";
+}
 
 	
 	

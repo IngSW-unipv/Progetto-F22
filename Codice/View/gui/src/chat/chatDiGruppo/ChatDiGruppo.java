@@ -13,15 +13,13 @@ import profilo.Profilo;
 
 public class ChatDiGruppo extends Chat{
 
-	public ChatDiGruppo(Profilo profiloAttivo) {
+	public ChatDiGruppo(Profilo profiloAttivo, MessaggioDiGruppo msg) {
 		super(profiloAttivo);
+		this.msg = msg;
 	}
 
-	@Override
-	public ArrayList<Messaggio> selectAll() {
-		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		return mdao.selectAll();
-	}
+	private MessaggioDiGruppo msg;
+	
 
 	@Override
 	public ArrayList<Messaggio> cercaMessaggio(Messaggio m) {
@@ -41,6 +39,7 @@ public class ChatDiGruppo extends Chat{
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
 		boolean b;
 		b = mdao.scriviMessaggioDiGruppo(m);
+		mdao.inserisciChiavi(m, msg.getIdGruppo());
 		return b;
 	}
 
@@ -72,19 +71,14 @@ public class ChatDiGruppo extends Chat{
 			 }, 0, 60 * 1000);
 	}
 
-	public ArrayList<MessaggioDiGruppo> selectAllIdGruppo(MessaggioDiGruppo m) {
+	
+	//Restituisce un ArrayList con tutti i messaggi relativi al gruppo specificato 
+	public ArrayList<MessaggioDiGruppo> listaMessaggiDiUnGruppo(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
 		return mdao.selectAllIdGruppo(m);
 	}
 
 	
-	public boolean inserisciChiavi(MessaggioDiGruppo m) {
-		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		boolean b;
-		b = mdao.rimuoviMessaggioDiGruppo(m);
-		return b;
-	}
-
 	//Legge tutti i messaggi ricevuti ogni minuto da un profilo precisato.
 	//Dopo 5 minuti smette di farlo e si stoppa
 		
@@ -106,6 +100,21 @@ public class ChatDiGruppo extends Chat{
 		    }
 		 }, 0, 60 * 1000);
 }
+
+	@Override
+	public ArrayList<Messaggio> ottieniListaTuttiMessaggi() {
+		MessaggioDiGruppoDao gdao = new MessaggioDiGruppoDao();
+		return gdao.selectAll();
+	}
+	
+	
+	public MessaggioDiGruppo getMsg() {
+		return msg;
+	}
+
+	public void setMsg(MessaggioDiGruppo msg) {
+		this.msg = msg;
+	}
 	
 	}
 		

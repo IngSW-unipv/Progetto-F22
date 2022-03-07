@@ -134,7 +134,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public boolean inserisciChiavi(MessaggioPrivato m) {
+	public boolean inserisciChiavi(Messaggio m, String pInv, String pRic) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -143,8 +143,8 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		{
 			String query="update messaggioPrivato set profiloInviante=?,profiloRicevente=? where idMsgPvt=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdProfiloInviante());
-			st1.setString(2, m.getIdProfiloInviante());
+			st1.setString(1, pInv);
+			st1.setString(2, pRic);
 			st1.setString(3, m.getIdMessaggio());
 
 			st1.executeUpdate();
