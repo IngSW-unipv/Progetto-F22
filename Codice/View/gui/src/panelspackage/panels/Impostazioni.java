@@ -64,9 +64,7 @@ public class Impostazioni extends JPanel {
 		mappaPulsanti.put("logout",new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
 			
-		  mappaPulsanti.forEach(
-		            (key, value)
-		                -> containerWest.add(value));
+		mappaPulsanti.forEach((key, value) -> containerWest.add(value));
 
 		containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);

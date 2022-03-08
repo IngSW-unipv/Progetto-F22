@@ -1,17 +1,21 @@
 package controller;
 import java.awt.event.ActionListener;
-
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import panelspackage.panels.Chat;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
+import panelspackage.panels.LogIn;
 import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.elements.PannelloNotifiche;
 import packageframe.Frame;
 
 public class ControllerSocial{
+	
+	private ArrayList<String>bufferStories;
+	private ArrayList<String> bufferPosts;
 	
 	private Home homeView;
 	private Frame frameSocial;
@@ -20,7 +24,12 @@ public class ControllerSocial{
 	private Profilo profiloView;
 	private PostVisualizzato postVisualizzatoView;
 	private PannelloNotifiche pannelloNotificheView;
+	private LogIn loginView;
 	//Inserire modello con metodi per la home 
+	
+	//ActionListener login
+	private ActionListener gestoreLogin;
+	private ActionListener gestoreSignup;
 	
 	//ActionListener Home
 	private ActionListener gestoreImpostazioni;
@@ -46,33 +55,59 @@ public class ControllerSocial{
 	
 	//ActionListener PostVisualizzato
 	private ActionListener gestoreHomePostVisualizzato;
-	
 	private ActionListener gestoreHomeProfilo;
 	private ActionListener gestoreHomeChat;
 	private ActionListener gestoreListaChat;
 	private String[] tmp = {"1", "2", "3"};
 	
-	public ControllerSocial(Frame frameSocial) {
+	public ControllerSocial(Frame frameSocial, ArrayList<String>bufferStories, ArrayList<String>bufferPosts) {
+		this.bufferStories = bufferStories;
+		this.bufferPosts = bufferPosts;
+		
 		this.frameSocial = frameSocial;
 		this.homeView = frameSocial.getHome();
 		this.impostazioniView = frameSocial.getImpostazioni();
 		this.chatView = frameSocial.getChat();
 		this.profiloView = frameSocial.getProfilo();
 		this.postVisualizzatoView = frameSocial.getPostVisualizzato();
+		this.loginView = frameSocial.getLogIn();
 	}
 	
 	//Vari actionlistener
 	public void assegnaGestori() {
 		
+		//ACTIONLISTENER PULSANTI PANNELLO LOGIN
+		gestoreLogin = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(loginTest()) {
+					frameSocial.setVarLogin(0);
+					frameSocial.getLogIn().setVisible(false);
+					frameSocial.setVarHome(1);
+					frameSocial.avvioHome(bufferStories, bufferPosts);
+					
+				}
+			}
+		};
+		loginView.getAccedi().addActionListener(gestoreLogin);
+		
+		gestoreSignup = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Aggiungere metodi signup
+			}
+		};
+		loginView.getSignUp().addActionListener(gestoreSignup);
+		
+		
 		//ACTIONLISTENER PULSANTI PANNELLO HOME
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frameSocial.setVarHome(0);
+				//frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				frameSocial.setVarImpostazioni(1);
-				
-				frameSocial.avviaImpostazioni("Marco");
+				//frameSocial.setVarImpostazioni(1);
+				//frameSocial.avviaImpostazioni("Marco");
 			}
 		};
 		homeView.getButtonImpostazioni().addActionListener(gestoreImpostazioni);
@@ -324,6 +359,19 @@ public class ControllerSocial{
 			}
 		};
 		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);*/
+	}
+	
+	public boolean loginTest() {
+		String email = "email";
+		String password = "password";
+		if(loginView.getInserimentoEmail().getText().equals(email)) {
+			if(loginView.getInserimentoPassword().getText().equals(password)) {
+				return true;
+			}
+			return false;
+		} else {
+			return false;
+		}
 	}
 }
 
