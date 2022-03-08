@@ -77,19 +77,19 @@ public class ControllerSocial{
 	public void assegnaGestori() {
 		
 		//ACTIONLISTENER PULSANTI PANNELLO LOGIN
-		/*gestoreLogin = new ActionListener() {
+		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(loginTest()) {
 					frameSocial.setVarLogin(0);
 					frameSocial.getLogIn().setVisible(false);
-					
 					frameSocial.setVarHome(1);
 					frameSocial.avvioHome(bufferStories, bufferPosts);
+					
 				}
 			}
 		};
-		loginView.get
+		loginView.getAccedi().addActionListener(gestoreLogin);
 		
 		gestoreSignup = new ActionListener() {
 			@Override
@@ -97,18 +97,17 @@ public class ControllerSocial{
 				//Aggiungere metodi signup
 			}
 		};
-		loginView.getSignUp().addActionListener(gestoreSignup);*/
+		loginView.getSignUp().addActionListener(gestoreSignup);
 		
 		
 		//ACTIONLISTENER PULSANTI PANNELLO HOME
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frameSocial.setVarHome(0);
+				//frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				frameSocial.setVarImpostazioni(1);
-				
-				frameSocial.avviaImpostazioni("Marco");
+				//frameSocial.setVarImpostazioni(1);
+				//frameSocial.avviaImpostazioni("Marco");
 			}
 		};
 		homeView.getButtonImpostazioni().addActionListener(gestoreImpostazioni);
@@ -367,8 +366,6 @@ public class ControllerSocial{
 		String password = "password";
 		if(loginView.getInserimentoEmail().getText().equals(email)) {
 			if(loginView.getInserimentoPassword().getText().equals(password)) {
-				System.out.println(loginView.getInserimentoEmail().getText());
-				System.out.println(loginView.getInserimentoPassword().getText());
 				return true;
 			}
 			return false;
