@@ -71,6 +71,8 @@ public class ControllerSocial{
 		this.profiloView = frameSocial.getProfilo();
 		this.postVisualizzatoView = frameSocial.getPostVisualizzato();
 		this.loginView = frameSocial.getLogIn();
+		this.pannelloNotificheView = frameSocial.getPannelloNotifiche();
+		
 	}
 	
 	//Vari actionlistener
@@ -104,10 +106,10 @@ public class ControllerSocial{
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//frameSocial.setVarHome(0);
+				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
-				//frameSocial.setVarImpostazioni(1);
-				//frameSocial.avviaImpostazioni("Marco");
+				frameSocial.setVarImpostazioni(1);
+				frameSocial.avviaImpostazioni("Marco");
 			}
 		};
 		homeView.getButtonImpostazioni().addActionListener(gestoreImpostazioni);
@@ -149,7 +151,7 @@ public class ControllerSocial{
 			}
 		};
 		homeView.getButtonNotifiche().addActionListener(gestoreNotifiche);
-		/*
+		
 		gestoreRicerca = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -270,7 +272,7 @@ public class ControllerSocial{
 		homeView.getpIdea().addActionListener(gestorePubblicaIdea);
 		
 		
-		
+		/*
 		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
