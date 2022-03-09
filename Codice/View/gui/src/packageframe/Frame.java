@@ -40,7 +40,7 @@ public class Frame extends JFrame {
 	//all'avvio della GUI verra creata solo la schermata di login
 		
 		this.avvio();
-	//	this.avvioHome(bufferStories, bufferPosts);
+		this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
 	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
 	//	this.avviaSchermataSignUp();
