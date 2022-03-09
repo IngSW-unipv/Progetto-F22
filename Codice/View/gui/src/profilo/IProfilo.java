@@ -26,7 +26,6 @@ public interface IProfilo {
 	public void mostraInformazioniProfilo(Profilo p);
 	
 	public void mostraInformazioniPost(Post p);  // Chiama il metodo selectAll() del database.
-	public Profilo creaProfilo(Profilo p);
 	public boolean modificaDatiPersonali(Credenziali c);
 	public boolean visualizzaProprioPost(Post p);
 	
@@ -34,5 +33,9 @@ public interface IProfilo {
 	public Chat cercaChatAttiva(Chat chat);
 	public Chat visualizzaChatAttiva(Chat chat);
 	public Post segnaLibro(Post p);
+
+	Profilo creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti,
+			int numPost, EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String utente,
+			String post);
 	
 	}

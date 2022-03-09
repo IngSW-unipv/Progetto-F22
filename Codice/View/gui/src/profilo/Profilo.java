@@ -198,9 +198,11 @@ public void mostraInformazioniPost(Post p) {
 }
 
 @Override
-public Profilo creaProfilo(Profilo p) {
-	p = new Profilo(idProfilo, nickname, descrizione, numFollower, numSeguiti, numPost, tipo, messaggioDiGruppo, 
-			        messaggioPrivato, utente, post);
+public Profilo creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti,int numPost,
+		                    EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato,String utente, String post) {
+	
+	Profilo p = new Profilo(idProfilo, nickname, descrizione, numFollower, numSeguiti, numPost, tipo, messaggioDiGruppo, 
+			                 messaggioPrivato, utente, post);
 	return p;
 }
 
