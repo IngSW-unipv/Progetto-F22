@@ -1,5 +1,6 @@
 package Utente.exception;
 
+import profilo.Profilo;
 
 public class AccountDoesNotExist extends Exception{
 
@@ -7,9 +8,9 @@ public class AccountDoesNotExist extends Exception{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String msg = "Questo account non esiste";	
+	private static final String msg = "L'account di id %s non esiste";	
 	
-	public AccountDoesNotExist() {
-		super(String.format(msg, null));
+	public AccountDoesNotExist(Profilo p) {
+		super(String.format(msg, p.getIdProfilo()));
 	}
 }

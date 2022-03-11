@@ -1,6 +1,9 @@
-package Utente;
+package Utente.credenziali;
 
 import java.util.Calendar;
+
+import Utente.enumeration.EnumPaesi;
+import Utente.enumeration.EnumSesso;
 
 public class Credenziali {
 
@@ -12,22 +15,25 @@ public class Credenziali {
 	private String eMail;
 	private String pwd;
 	
-	public Credenziali(String nome, String cognome, EnumSesso sesso, EnumPaesi paese, String eMail) {
+	public Credenziali(String nome, String cognome, Calendar dataDiNascita, EnumSesso sesso, EnumPaesi paese, String eMail, String pwd) {
 		this.nome = nome;
 		this.cognome = cognome;
+		this.dataDiNascita = dataDiNascita;
 		this.sesso = sesso;
 		this.paese = paese;
 		this.eMail = eMail;
+		this.pwd = "Cambiami";
 	}
 	
 	
-	public Credenziali() {
+	/*public Credenziali() {
 		nome = "Francesco";
 		cognome = "Ardizzoni";
 		sesso = EnumSesso.MASCHIO;
 		paese = EnumPaesi.ITALY;
 		eMail = "francesco.ardizzoni@gmail.com";
 	}
+	*/
 	
 	public String getPwd() {
 		return pwd;

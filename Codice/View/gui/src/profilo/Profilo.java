@@ -5,8 +5,8 @@ import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
 
-import Utente.Credenziali;
 import Utente.Utente;
+import Utente.credenziali.Credenziali;
 import chat.Chat;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
@@ -17,14 +17,14 @@ import post.commento.Commento;
 public class Profilo implements IProfilo{
 
 public Profilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
+			EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, Utente utente, String post) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
 		this.descrizione = descrizione;
-		this.numFollower = numFollower;
-		this.numSeguiti = numSeguiti;
-		this.numPost = numPost;
+		this.numFollower = 0;
+		this.numSeguiti = 0;
+		this.numPost = 0;
 		this.tipo = tipo;
 		this.messaggioDiGruppo = messaggioDiGruppo;
 		this.messaggioPrivato = messaggioPrivato;
@@ -41,7 +41,7 @@ private int numPost;
 private EnumProfilo tipo;
 private String messaggioDiGruppo;
 private String messaggioPrivato;
-private String utente;
+private Utente utente;
 private String post;
 private HashMap <String,String> listaSeguiti;
 
@@ -99,10 +99,10 @@ public String getMessaggioPrivato() {
 public void setMessaggioPrivato(String messaggioPrivato) {
 	this.messaggioPrivato = messaggioPrivato;
 }
-public String getUtente() {
+public Utente getUtente() {
 	return utente;
 }
-public void setUtente(String utente) {
+public void setUtente(Utente utente) {
 	this.utente = utente;
 }
 public String getPost() {
@@ -222,7 +222,7 @@ public boolean eliminaProfilo(ProfiloDB p) {
 	return pDao.rimuoviProfilo(p);
 	
 }
-<<<<<<< HEAD
+//<<<<<<< HEAD
 @Override
 public String toString() {
 	return " [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
@@ -230,7 +230,7 @@ public String toString() {
 			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
 			+ utente + ", post=" + post + ", listaSeguiti=" + listaSeguiti + "]";
 }
-=======
+//=======
 
 @Override
 public Chat cercaChatAttiva(Chat chat) {
@@ -264,7 +264,7 @@ public ArrayList<ProfiloDB> selectAll() {
   
 
 
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+//>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
 	
 	

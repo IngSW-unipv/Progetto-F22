@@ -1,4 +1,4 @@
-package Utente;
+package Utente.enumeration;
 
 public enum EnumSesso {
 

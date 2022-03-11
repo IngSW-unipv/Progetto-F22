@@ -3,8 +3,9 @@ package profilo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import Utente.Credenziali;
+
 import Utente.Utente;
+import Utente.credenziali.Credenziali;
 import chat.Chat;
 import db.profilo.ProfiloDB;
 

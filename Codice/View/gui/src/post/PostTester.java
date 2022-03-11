@@ -28,5 +28,8 @@ public class PostTester {
 			p.selectAll();
 			System.out.println(p.toString());
 		}
+		
+		Post p = new SondaggioSceltaMultipla("abc", null, null, null, 0, 0, false, false, null, null, null, null, null, null);
+		p.caricaPost(p);
 	}
 }
