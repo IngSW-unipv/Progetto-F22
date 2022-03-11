@@ -33,13 +33,13 @@ public class Foto extends Multimedia{
 	public boolean settaDurataStoria(int time, Post f) {
 		this.setStory(true);
 		this.setTempoCancellazione(time);
-		this.caricaPost(f);
+		//this.caricaPost(f);
 		try {
 		    Thread.sleep(time * 60 * 60 * 1000);
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
 		}
-		this.rimuoviPost(f);	
+		//this.rimuoviPost(f);	
 		return true;
 	}
 
@@ -48,7 +48,7 @@ public class Foto extends Multimedia{
 		FotoDao fdao = new FotoDao();
 		return fdao.selectAll();
 	}
-
+/*
 	@Override
 	public boolean caricaPost(Post p) {
 		FotoDao fdao = new FotoDao();
@@ -62,7 +62,7 @@ public class Foto extends Multimedia{
 		FotoDao fdao = new FotoDao();
 		return fdao.rimuoviFoto(p);
 	}
-
+*/
 	@Override
 	public String toString() {
 		return super.toString() + ", isHd = " + isHd + "]";

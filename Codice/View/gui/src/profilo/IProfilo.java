@@ -33,6 +33,9 @@ public interface IProfilo {
 	public Chat cercaChatAttiva(Chat chat);
 	public Chat visualizzaChatAttiva(Chat chat);
 	public Post segnaLibro(Post p);
+	
+	public boolean caricaPost(Post p);
+	public boolean rimuoviPost(Post p);
 
 	Profilo creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti,
 			int numPost, EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String utente,

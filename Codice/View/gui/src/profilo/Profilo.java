@@ -248,9 +248,14 @@ public ArrayList<ProfiloDB> selectAll() {
 	ProfiloDao pDao = new ProfiloDao();
 	return pDao.selectAll();
 }
-	
-	
-		
+@Override
+public boolean caricaPost(Post p) {
+	return true;
+}
+@Override
+public boolean rimuoviPost(Post p) {
+	return true;
+}		
 	
 		  	
 
