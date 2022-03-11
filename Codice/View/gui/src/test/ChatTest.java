@@ -44,10 +44,10 @@ class ChatTest {
 		
 		Gruppo g = new Gruppo("g001", "descrizione del gruppo", "TMF-JAVA", null, "profiloB", "profiloC", "profiloD", "profiloE", "profiloF", "profiloB");
 		m2 = new MessaggioDiGruppo("ciaoo", null, null, "Tutto bene grazie", "G01", null);
-		c2 = new ChatDiGruppo(p, m2);
+		c2 = new ChatDiGruppo(p);
 		
 		m1 = new MessaggioPrivato("ciao", null, null, "Ciao Sara, come va?", "G00", "P001", "P003");
-		c1 = new ChatPrivata(p, m1);
+		c1 = new ChatPrivata(p);
 		
 		
 		
