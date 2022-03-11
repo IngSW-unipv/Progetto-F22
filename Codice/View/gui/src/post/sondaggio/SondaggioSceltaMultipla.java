@@ -91,7 +91,7 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 		return sdao.selectAll();
 	}
-/*
+
 	@Override
 	public boolean caricaPost(Post p) {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
@@ -105,7 +105,7 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 		return sdao.rimuoviSondaggio(p);
 	}
-*/
+
 	@Override
 	public String toString() {
 		return super.toString() + ", terzaScelta = " + terzaScelta + ", quartaScelta = " + quartaScelta + ", conteggio = "

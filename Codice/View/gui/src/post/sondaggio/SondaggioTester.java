@@ -15,17 +15,17 @@ import post.Post;
 public class SondaggioTester {
     public static void main(String[] args) {
        
-       // int [] contDoppiaVot = {0, 0};
+        int [] contDoppiaVot = {0, 0};
         int [] contMulti = {0, 0, 0, 0};
     	
         
-      /*  SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("P00", null, null, "Che bello il mare", 0, 0, false, false, "001", "Cane", "Gatto", contDoppiaVot);
+      SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("P00", null, null, "Che bello il mare", 0, 0, false, false, "001", "Cane", "Gatto", contDoppiaVot);
 	    
         System.out.println(sdv.caricaPost(sdv));
         
         ArrayList<Post> sall = sdv.selectAll();
         for(Post p : sall)
-			System.out.println(p.toString());*/
+			System.out.println(p.toString());
     	
     	SondaggioSceltaMultipla smul = new SondaggioSceltaMultipla("P00", null, null, "wow", 0, 0, false, false, "001", "Cane", "Gatto", "Pecora", "Gallina", contMulti);
     	

@@ -37,7 +37,7 @@ public class Testo extends Post {
 	public ArrayList<Post> selectAll() {
 		TestoDao tdao = new TestoDao();
 		return tdao.selectAll();
-	}/*
+	}
 	@Override
 	public boolean caricaPost(Post p) {
 		TestoDao tdao = new TestoDao();
@@ -49,7 +49,7 @@ public class Testo extends Post {
 	public boolean rimuoviPost(Post p) {
 		TestoDao tdao = new TestoDao();
 		return tdao.rimuoviTesto(p);
-	}*/
+	}
 	@Override
 	public String toString() {
 		return super.toString() + ", font=" + font + ", titolo=" + titolo + "]";
