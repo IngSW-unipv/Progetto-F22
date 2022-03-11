@@ -31,30 +31,30 @@ import Messaggio.MessaggioPrivato;
 class ChatTest {
 	
 	private Chat c1, c2;
-	private Profilo p;
-	private ArrayList<Messaggio> listaMessaggi = new ArrayList<Messaggio>();
+	private ArrayList<Messaggio> listaMessaggi;
 	private Messaggio m1, m2;
 	
-	/**
-	 * Crea due chat che poi comparerÃ².
-	 * Crea inoltre due liste di ruoli per istanziare correttamente i due compiti.
-	 * */
+	//verifico che posso istanziare correttamente le chat
 	@Before
 	public void initTestChat() {
 		
-		p = new Profilo("P001", "profiloA", "descrizione del profilo", 235, 384, 21, EnumProfilo.PRIVATO, "002", "001", "francesco.ardizzoni@gmail.com", "postX");
+		listaMessaggi = new ArrayList<Messaggio>();
 		
-		Gruppo g = new Gruppo("g001", "descrizione del gruppo", "TMF-JAVA", p.getNickname(), "profiloB", "profiloC", "profiloD", "profiloE", "profiloF", "profiloB");
-		m2 = new MessaggioDiGruppo(p.getMessaggioDiGruppo(), null, null, "Tutto bene grazie", "G01", g.getIdGruppo());
+		Profilo p = new Profilo("P001", "profiloA", "descrizione del profilo", 235, 384, 21, EnumProfilo.PRIVATO, "002", "001", "francesco.ardizzoni@gmail.com", "postX");
+		
+		Gruppo g = new Gruppo("g001", "descrizione del gruppo", "TMF-JAVA", null, "profiloB", "profiloC", "profiloD", "profiloE", "profiloF", "profiloB");
+		m2 = new MessaggioDiGruppo("ciaoo", null, null, "Tutto bene grazie", "G01", null);
 		c2 = new ChatDiGruppo(p, m2);
 		
-		m1 = new MessaggioPrivato(p.getMessaggioPrivato(), null, null, "Ciao Sara, come va?", "G00", "P001", "P003");
+		m1 = new MessaggioPrivato("ciao", null, null, "Ciao Sara, come va?", "G00", "P001", "P003");
 		c1 = new ChatPrivata(p, m1);
 		
+		
+		
 		listaMessaggi.add(m1);
-		listaMessaggi.add(m2);
+		listaMessaggi.add(m2);		
 	}
-	
+
 	@Test
 	public void testCaricaMessaggio() {
 		
