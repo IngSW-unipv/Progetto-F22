@@ -29,12 +29,19 @@ public class LogIn extends JPanel {
 	
 	public LogIn(int base, int altezza) {
 		
+		this.avvio(base, altezza);
+		initComponents();
+		}
+
+	public void avvio(int base, int altezza) {
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
 		this.setBounds(0,0,base,altezza);
-
+	}
+	
+	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 
@@ -56,10 +63,7 @@ public class LogIn extends JPanel {
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);
 	}
-
 	
-	
-
 	public void setListaComponenti(HashMap<String, JComponent> listaComponenti) {
 		this.listaComponenti = listaComponenti;
 	}
@@ -68,8 +72,6 @@ public class LogIn extends JPanel {
 		return this.listaComponenti;
 	}
 
-
-	//GETTER E SETTER PULSANTI
 	public ArrayList<String> getDati() {
 		return dati;
 	}
