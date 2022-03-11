@@ -60,9 +60,9 @@ public class Chat extends JPanel {
 		containerInferiore.add(homeChat);
 		this.add(containerSuperiore, BorderLayout.NORTH);
 		this.add(containerInferiore, BorderLayout.SOUTH);
-		for(i=0; i < numeroChat; i++) {
+		/*for(i=0; i < numeroChat; i++) {
 			this.add(listaChat.get(i));
-		}
+		}*/
 	}
 	
 	public void aggiungiChatAllaLista(ArrayList listaChat) {
@@ -101,6 +101,4 @@ public class Chat extends JPanel {
 	public void setHomeChat(JButton homeChat) {
 		this.homeChat = homeChat;
 	}
-	
-	
 }

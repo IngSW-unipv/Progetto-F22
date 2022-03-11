@@ -17,7 +17,7 @@ public class Sistema {
 	public Sistema() {
 		
 	}
-	
+	/*
 	public boolean creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
 			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
 	     
@@ -33,11 +33,11 @@ public class Sistema {
 		}
 		return b;
 		//	profiloAttivo = new Profilo(nickname, pwd);
-	}
+	}*/
 	public boolean eliminaProfilo(Profilo p) {
 		boolean b;
 		ProfiloDao pd = new ProfiloDao();
-		b = pd.rimuoviProfilo(p);
+		//b = pd.rimuoviProfilo(p);
 		return b;
 	}
 /*
@@ -94,12 +94,13 @@ public class Sistema {
 	}
 	
 	public boolean pubblicaPost(Post p) {
-		boolean b = post.pubblicaPost(p);
+		boolean b = profiloAttivo.caricaPost(p);
 		return b;
 	}
 	
 	public boolean rimuoviPost(Post p) {
-		boolean b = post.rimuoviPost(p);
+		boolean b = profiloAttivo.rimuoviPost(p);
 		return b;
 	}
 }
+

@@ -36,13 +36,13 @@ public class Video extends Multimedia{
 	public boolean settaDurataStoria(int time, Post p) {
 		this.setStory(true);
 		this.setTempoCancellazione(time);
-		this.caricaPost(p);
+		//this.caricaPost(p);
 		try {
 		    Thread.sleep(time * 60 * 60 * 1000);
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
 		}
-		this.rimuoviPost(p);
+		//this.rimuoviPost(p);
 		return true;
 	}
 
@@ -56,7 +56,7 @@ public class Video extends Multimedia{
 		VideoDao vdao = new VideoDao();
 		return vdao.selectAll();
 	}
-
+/*
 	@Override
 	public boolean caricaPost(Post p) {
 		VideoDao vdao = new VideoDao();
@@ -71,6 +71,6 @@ public class Video extends Multimedia{
 		return vdao.rimuoviVideo(p);
 	}
 
-
+*/
 	
 }

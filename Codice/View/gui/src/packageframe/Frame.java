@@ -7,6 +7,7 @@ import javax.swing.*;
 import panelspackage.Layers;
 import panelspackage.panels.Chat;
 import panelspackage.panels.ChatMessaggi;
+import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
@@ -39,8 +40,10 @@ public class Frame extends JFrame {
 		 
 	//all'avvio della GUI verra creata solo la schermata di login
 		
+		
 		this.avvio();
-		this.avvioHome(bufferStories, bufferPosts);
+		this.aviaCreazionePost(800,775);
+	//	this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
 	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
 	//	this.avviaSchermataSignUp();
@@ -60,6 +63,7 @@ public class Frame extends JFrame {
 		LogIn logIn = new LogIn(800, 775);
 		layers.add(logIn, new  Integer(0), 0);
 		this.listaSchermateAttive.put("logIn", logIn);
+		
 	}
 	
 	public void avvioHome(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
@@ -67,6 +71,13 @@ public class Frame extends JFrame {
 		getLayers().add(home, new  Integer(varHome), 0);
 		home.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("Home", home);
+	}
+	
+	public void aviaCreazionePost(int base, int altezza) {
+		CreazionePost creazionePost = new CreazionePost(base,  altezza);
+		getLayers().add(creazionePost, new  Integer(2), 0);
+		creazionePost.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("CreazionePost", creazionePost);
 	}
 	
 	public void avviaImpostazioni(String profilo){
@@ -198,7 +209,7 @@ public class Frame extends JFrame {
 	}
 	
 	public LogIn getLogIn() {
-		return (LogIn)listaSchermateAttive.get("LogIn");	
+		return (LogIn)listaSchermateAttive.get("logIn");	
 	}
 	public Profilo getProfilo() {
 		return (Profilo)listaSchermateAttive.get("Profilo");	

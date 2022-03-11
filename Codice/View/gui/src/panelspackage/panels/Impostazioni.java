@@ -64,9 +64,7 @@ public class Impostazioni extends JPanel {
 		mappaPulsanti.put("logout",new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
 			
-		  mappaPulsanti.forEach(
-		            (key, value)
-		                -> containerWest.add(value));
+		mappaPulsanti.forEach((key, value) -> containerWest.add(value));
 
 		containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);
@@ -96,8 +94,6 @@ public class Impostazioni extends JPanel {
 	}
 	
 	
-	//GETTER E SETTER PULSANTI
-	
 	public SpecificContainer getContainerCenter() {
 		return this.containerCenter;
 	}
@@ -108,7 +104,7 @@ public class Impostazioni extends JPanel {
 	public JButton getCambiaProfilo() {
 		return (Pulsanti) mappaPulsanti.get("cambiaprofilo");
 	}
-	
+
 	public JButton getVisibilitaPost() {
 		return (Pulsanti) mappaPulsanti.get("visibilitapost");
 	}

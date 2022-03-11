@@ -60,7 +60,7 @@ public ArrayList<Post> selectAll() {
 	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
 	return sdao.selectAll();
 }
-
+/*
 @Override
 public boolean caricaPost(Post p) {
 	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
@@ -75,7 +75,7 @@ public boolean rimuoviPost(Post p) {
 	return sdao.rimuoviSondaggio(p);
 }
 
-
+*/
 public int[] getConteggio() {
 	return conteggio;
 }
