@@ -6,11 +6,13 @@ import java.util.HashMap;
 
 import Utente.Utente;
 import Utente.credenziali.Credenziali;
+import Utente.exception.AccountDoesNotExist;
 import chat.Chat;
 import db.profilo.ProfiloDB;
 
 import post.Post;
 import post.commento.Commento;
+import profilo.exception.NotLoggedIn;
 
 public interface IProfilo {
 
@@ -18,7 +20,6 @@ public interface IProfilo {
 	
 	public HashMap<String, String> modificaFollow(Profilo p);
 	public boolean modificaLike(Profilo p);
-	public ArrayList<ProfiloDB> cercaProfilo(ProfiloDB p) throws Exception;
 	public boolean modificaDislike(Profilo profilo);
 	
 	public void vediStory();  // con tipo Story(da modificare)
@@ -38,8 +39,5 @@ public interface IProfilo {
 	public boolean caricaPost(Post p);
 	public boolean rimuoviPost(Post p);
 
-	Profilo creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti,
-			int numPost, EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String utente,
-			String post);
-	
+
 	}

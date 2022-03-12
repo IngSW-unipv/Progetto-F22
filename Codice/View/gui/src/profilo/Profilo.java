@@ -12,6 +12,8 @@ import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
+import profilo.exception.NotLoggedIn;
+import profilo.utility.ProfiloUtility;
 
 
 public class Profilo implements IProfilo{
@@ -117,6 +119,15 @@ public void setListaSeguiti(HashMap<String, String> listaSeguiti) {
 }
 
 
+public static ArrayList<ProfiloDB> cercaProfilo(Profilo p) throws NotLoggedIn{
+	if(p.getUtente().isLoggato() == false)
+		throw new NotLoggedIn(p);
+	ProfiloDao pdao = new ProfiloDao();
+	ProfiloUtility u = new ProfiloUtility();
+	return pdao.cercaProfilo(u.convertiAProfiloDB(p));
+	}
+
+
 @Override
 public HashMap<String,String> modificaFollow(Profilo p) {
     /* if (listaSeguiti.get(this.idProfilo) != p.idProfilo) {
@@ -142,20 +153,6 @@ public boolean modificaLike(Profilo p) {
 public HashMap<String, String> getListaSeguiti() {
 	return listaSeguiti;
 }
-
-@Override
-public ArrayList<ProfiloDB> cercaProfilo(ProfiloDB p) throws Exception {
-	// Verificazione dalla basi dati se il profilo esiste.
-	ProfiloDao pdao = new ProfiloDao();
-	return pdao.cercaProfilo(p);
-	
-	/*if(p.getIdProfilo() == null) {
-		return null;
-	} else {
-		return p;
-		} */
-	}
-
 
 @Override
 public boolean modificaDislike(Profilo profilo) {
@@ -195,15 +192,6 @@ public void mostraInformazioniProfilo(Profilo p) {
 @Override
 public void mostraInformazioniPost(Post p) {
 
-}
-
-@Override
-public Profilo creaProfilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti,int numPost,
-		                    EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato,String utente, String post) {
-	
-	Profilo p = new Profilo(idProfilo, nickname, descrizione, numFollower, numSeguiti, numPost, tipo, messaggioDiGruppo, 
-			                 messaggioPrivato, utente, post);
-	return p;
 }
 
 @Override

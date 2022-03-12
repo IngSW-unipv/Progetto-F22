@@ -3,7 +3,7 @@ package db.profilo;
 public class ProfiloDB {
 
 	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post) {
+			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -16,6 +16,10 @@ public class ProfiloDB {
 		this.messaggioPrivato = messaggioPrivato;
 		this.utente = utente;
 		this.post = post;
+		this.esiste = false;
+		this.pswCambiata = false;
+		this.isLoggato = false;
+		this.psw = "Cambiami"; 
 	}
 private String idProfilo;
 private String nickname;
@@ -28,6 +32,10 @@ private String messaggioDiGruppo;
 private String messaggioPrivato;
 private String utente;
 private String post;
+private boolean esiste;
+private boolean pswCambiata;
+private boolean isLoggato;
+private String psw;
 
 public String getIdProfilo() {
 	return idProfilo;
@@ -95,12 +103,37 @@ public String getPost() {
 public void setPost(String post) {
 	this.post = post;
 }
+public boolean isEsiste() {
+	return esiste;
+}
+public void setEsiste(boolean esiste) {
+	this.esiste = esiste;
+}
+public boolean isPswCambiata() {
+	return pswCambiata;
+}
+public void setPswCambiata(boolean pswCambiata) {
+	this.pswCambiata = pswCambiata;
+}
+public boolean isLoggato() {
+	return isLoggato;
+}
+public void setLoggato(boolean isLoggato) {
+	this.isLoggato = isLoggato;
+}
 @Override
 public String toString() {
-	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
+	return "ProfiloDB [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
 			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
-			+ utente + ", post=" + post + "]";
+			+ utente + ", post=" + post + ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato="
+			+ isLoggato + ", psw=" + psw + "]";
+}
+public String getPsw() {
+	return psw;
+}
+public void setPsw(String psw) {
+	this.psw = psw;
 }
 
 }

@@ -9,7 +9,7 @@ public class ProfiloUtility implements IProfiloUtility{
 
 	@Override
 	public ProfiloDB convertiAProfiloDB(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(),this.trasformaEnumInString(p.getTipo()), p.getMessaggioDiGruppo(),p.getMessaggioPrivato(),p.getUtente().getIdUtente(),p.getPost());
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(),this.trasformaEnumInString(p.getTipo()), p.getMessaggioDiGruppo(),p.getMessaggioPrivato(),p.getUtente().getIdUtente(),p.getPost(),p.getUtente().isAccountEsistente(), p.getUtente().isPswCambiata(),p.getUtente().isLoggato(), p.getUtente().getC().getPwd());
 		return pdb;
 	}
 
