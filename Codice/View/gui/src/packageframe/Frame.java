@@ -42,7 +42,7 @@ public class Frame extends JFrame {
 		
 		
 		this.avvio();
-		this.aviaCreazionePost(800,775);
+	//	this.aviaCreazionePost(800,775);
 	//	this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
 	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
