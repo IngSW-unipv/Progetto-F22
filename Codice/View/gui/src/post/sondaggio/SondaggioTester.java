@@ -2,7 +2,8 @@ package post.sondaggio;
 
 import java.util.ArrayList;
 
-import post.Post;
+import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
+import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
 
 //import it.unipv.ings.Sondaggio.SondaggioDB;
 
@@ -23,24 +24,24 @@ public class SondaggioTester {
 	    
         System.out.println(sdv.caricaPost(sdv));
         
-        ArrayList<Post> sall = sdv.selectAll();
-        for(Post p : sall)
+        ArrayList<SondaggioDoppiaVotazioneDB> sall = sdv.selectAllSDV();
+        for(SondaggioDoppiaVotazioneDB p : sall)
 			System.out.println(p.toString());
     	
     	SondaggioSceltaMultipla smul = new SondaggioSceltaMultipla("P00", null, null, "wow", 0, 0, false, false, "001", "Cane", "Gatto", "Pecora", "Gallina", contMulti);
     	
-    	//System.out.println(smul.caricaPost(smul));
+    	System.out.println(smul.caricaPost(smul));
     	
-       // ArrayList<Post> sall = smul.selectAll();
-      //  for(Post p : sall)
-		//	System.out.println(p.toString());
+        ArrayList<SondaggioSceltaMultiplaDB> salli = smul.selectAllSSM();
+       for(SondaggioSceltaMultiplaDB p : salli)
+			System.out.println(p.toString());
     	
 	    smul.aggiungiVoto(6);
 	    smul.mostraRisultati();
 	    
 	    
-    	//sdv.aggiungiVoto(5);
-        //sdv.mostraRisultati();
+    	sdv.aggiungiVoto(5);
+        sdv.mostraRisultati();
         
      
     }

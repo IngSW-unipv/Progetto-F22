@@ -4,7 +4,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import db.commento.CommentoDB;
 import db.commento.CommentoDao;
+import post.commento.utility.CommentoUtility;
 
 public class Commento implements ICommento{
 
@@ -59,20 +61,24 @@ public class Commento implements ICommento{
 	@Override
 	public boolean scriviCommento(Commento c) {
 		CommentoDao cdao = new CommentoDao();
-		boolean b;
-		b = cdao.scriviCommento(c);
-		return b;
+		CommentoUtility u = new CommentoUtility();
+	
+		return cdao.scriviCommento(u.converti(c));
+		
 	}
 	@Override
 	public boolean rimuoviCommento(Commento c) {
 		CommentoDao cdao = new CommentoDao();
+		CommentoUtility u = new CommentoUtility();
 		boolean b;
-		b = cdao.rimuoviCommento(c);
+		b = cdao.rimuoviCommento(u.converti(c));
 		return b;
 	}
-	@Override
-	public ArrayList<Commento> mostraCommentiSottoPost(Commento c) {
+
+	public ArrayList<CommentoDB> mostraCommentiSottoPostt(Commento c) {
 		CommentoDao cdao = new CommentoDao();
-		return cdao.mostraCommentiSottoPost(c);
+		CommentoUtility u = new CommentoUtility();
+		return cdao.mostraCommentiSottoPost(u.converti(c));
 	}
+	
 }

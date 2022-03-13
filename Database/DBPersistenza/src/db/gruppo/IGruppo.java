@@ -2,13 +2,12 @@ package db.gruppo;
 
 import java.util.ArrayList;
 
-import chat.chatDiGruppo.gruppo.Gruppo;
 
 public interface IGruppo {
-public ArrayList<Gruppo> selectall();
-public boolean creaGruppo(Gruppo g);
-public boolean inserisciChiavi(Gruppo g);
-public boolean cancellaGruppo(Gruppo g);
-public ArrayList<Gruppo> cercaGruppo(Gruppo g);
+public ArrayList<GruppoDB> selectall();
+public boolean creaGruppo(GruppoDB g);
+public boolean inserisciChiavi(GruppoDB g);
+public boolean cancellaGruppo(GruppoDB g);
+public ArrayList<GruppoDB> cercaGruppo(GruppoDB g);
 
 }

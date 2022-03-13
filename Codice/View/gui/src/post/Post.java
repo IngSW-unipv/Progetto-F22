@@ -3,6 +3,8 @@ package post;
 import java.sql.Date;
 import java.sql.Time;
 
+import profilo.Profilo;
+
 	public abstract class Post implements IPost {
 		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 				int numDislike, boolean visibile, boolean condivisibile, String profilo) {

@@ -2,6 +2,8 @@ package chat.chatDiGruppo.gruppo;
 
 import java.util.ArrayList;
 
+import chat.chatDiGruppo.gruppo.utility.GruppoUtility;
+import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
 
 public class Gruppo implements IGruppo{
@@ -77,34 +79,36 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 			+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4=" + profilo4
 			+ ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + Amministratore + "]";
 	}
-	@Override
+
 	public boolean caricaGruppo(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		boolean b;
-		b = gdao.creaGruppo(g);
-		return b;
+		GruppoUtility u = new GruppoUtility();
+		
+		return gdao.creaGruppo(u.converti(g));
+	
 	}
 	@Override
 	public boolean eliminaGruppo(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		boolean b;
-		b = gdao.cancellaGruppo(g);
-		return b;
+		GruppoUtility u = new GruppoUtility();
+		return gdao.cancellaGruppo(u.converti(g));
+		
 	}
 	@Override
 	public boolean gestisciPartecipanti(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		boolean b;
-		b = gdao.inserisciChiavi(g);
-		return b;
+		GruppoUtility u = new GruppoUtility();
+		return gdao.inserisciChiavi(u.converti(g));
+		
 	}
-	@Override
-	public ArrayList<Gruppo> cercaGruppo(Gruppo g) {
+
+	public ArrayList<GruppoDB> cercaGruppoo(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		return gdao.cercaGruppo(g);
+		GruppoUtility u = new GruppoUtility();
+		return gdao.cercaGruppo(u.converti(g));
 	}
-	@Override
-	public ArrayList<Gruppo> selectAll() {
+	
+	public ArrayList<GruppoDB> selectAlll() {
 		GruppoDao gdao = new GruppoDao();
 		return gdao.selectall();
 	}

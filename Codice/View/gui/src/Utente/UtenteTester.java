@@ -23,7 +23,7 @@ public class UtenteTester {
 		ProfiloDao pdao = new ProfiloDao();
 		ProfiloUtility ut = new ProfiloUtility();
 		
-		Profilo p = new Profilo("P01", "Davide99", "Mi piace programmare", 0, 0, 0, EnumProfilo.PUBBLICO, "001", "004", u, null);
+		Profilo p = new Profilo("001", "Davide99", "Mi piace programmare", 0, 0, 0, EnumProfilo.PUBBLICO, "001", "004", u, null);
 		
 		System.out.println(u.rimuoviAccount(p));
 		System.out.println(u.caricaProfilo(p));
@@ -115,7 +115,12 @@ public class UtenteTester {
 			e.printStackTrace();
 		}
 	
-	
-
+     	
+ try {
+	System.out.println(u.ritornaLoggato(p));
+} catch (AccountDoesNotExist e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
 	}
 }

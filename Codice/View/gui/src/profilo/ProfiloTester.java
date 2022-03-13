@@ -18,7 +18,6 @@ public class ProfiloTester {
 	Profilo p1 = new Profilo("P01", "MyAccount", "ds", 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
 	Profilo p2 = new Profilo("001", "MyAccount", null, 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
 	
-	ut.cambiaDefaultPassword("ciao");
 	Profilo p3 =new Profilo("P02", "Davide99", "Mi piace programmare", 0, 0, 0, EnumProfilo.PUBBLICO, "001", "004", ut, null);
 	ut.login(p3, "davide.mascheroni1234@gmail.com", "ciao");
 	

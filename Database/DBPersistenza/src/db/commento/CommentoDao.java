@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
-import post.commento.Commento;
 
 public class CommentoDao implements ICommentoDao{
 
@@ -18,7 +17,7 @@ public class CommentoDao implements ICommentoDao{
 	}
 
 	@Override
-	public boolean scriviCommento(Commento c) {
+	public boolean scriviCommento(CommentoDB c) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -47,7 +46,7 @@ public class CommentoDao implements ICommentoDao{
 	}
 
 	@Override
-	public boolean rimuoviCommento(Commento c) {
+	public boolean rimuoviCommento(CommentoDB c) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -71,8 +70,8 @@ public class CommentoDao implements ICommentoDao{
 	}
 
 	@Override
-	public ArrayList<Commento> mostraCommentiSottoPost(Commento c) {
-		ArrayList<Commento> result = new ArrayList<>();
+	public ArrayList<CommentoDB> mostraCommentiSottoPost(CommentoDB c) {
+		ArrayList<CommentoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -89,7 +88,7 @@ public class CommentoDao implements ICommentoDao{
 
 			while(rs1.next())
 			{
-				Commento com = new Commento(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5));
+				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5));
 				result.add(com);
 			}
 		}catch (Exception e){e.printStackTrace();}

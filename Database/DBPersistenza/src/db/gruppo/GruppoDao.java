@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import chat.chatDiGruppo.gruppo.Gruppo;
 import db.connessione.DBConnection;
 
 public class GruppoDao implements IGruppo{
@@ -18,8 +17,8 @@ public GruppoDao() {
 }
 
 @Override
-public ArrayList<Gruppo> selectall() {
-	ArrayList<Gruppo> result = new ArrayList<>();
+public ArrayList<GruppoDB> selectall() {
+	ArrayList<GruppoDB> result = new ArrayList<>();
 
 	conn=DBConnection.startConnection(conn,schema);
 	Statement st1;
@@ -33,7 +32,7 @@ public ArrayList<Gruppo> selectall() {
 
 		while(rs1.next())
 		{
-			Gruppo grp =new Gruppo(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
 
 			result.add(grp);
 		}
@@ -44,7 +43,7 @@ public ArrayList<Gruppo> selectall() {
 }
 
 @Override
-public boolean creaGruppo(Gruppo g) {
+public boolean creaGruppo(GruppoDB g) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	boolean esito = true;
@@ -70,7 +69,7 @@ public boolean creaGruppo(Gruppo g) {
 	return esito;
 }
 @Override
-public boolean inserisciChiavi(Gruppo g) {
+public boolean inserisciChiavi(GruppoDB g) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	boolean esito = true;
@@ -100,7 +99,7 @@ public boolean inserisciChiavi(Gruppo g) {
 	return esito;
 }
 @Override
-public boolean cancellaGruppo(Gruppo g) {
+public boolean cancellaGruppo(GruppoDB g) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 
@@ -123,8 +122,8 @@ public boolean cancellaGruppo(Gruppo g) {
 	return esito;
 }
 @Override
-public ArrayList<Gruppo> cercaGruppo(Gruppo g) {
-	ArrayList<Gruppo> result = new ArrayList<>();
+public ArrayList<GruppoDB> cercaGruppo(GruppoDB g) {
+	ArrayList<GruppoDB> result = new ArrayList<>();
 
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -141,7 +140,7 @@ public ArrayList<Gruppo> cercaGruppo(Gruppo g) {
 
 		while(rs1.next())
 		{
-			Gruppo grp =new Gruppo(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
 
 			result.add(grp);
 		}

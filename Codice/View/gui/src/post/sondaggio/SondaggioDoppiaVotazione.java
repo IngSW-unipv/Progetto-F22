@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDao;
-import post.Post;
+import post.sondaggio.utility.SondaggioUtility;
 
 
 public class SondaggioDoppiaVotazione extends Sondaggio{
@@ -55,24 +56,25 @@ public String toString() {
 	return super.toString() + ", conteggio = " + Arrays.toString(conteggio) + "]";
 }
 
-@Override
-public ArrayList<Post> selectAll() {
+
+public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
 	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
 	return sdao.selectAll();
 }
 
-@Override
-public boolean caricaPost(Post p) {
+
+public boolean caricaPost(SondaggioDoppiaVotazione p) {
 	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	boolean b = sdao.pubblicaSondaggio(p);
-	sdao.aggiungiScelte(p, this.getPrimaScelta(), this.getSecondaScelta());
+	SondaggioUtility u = new SondaggioUtility();
+	boolean b = sdao.pubblicaSondaggio(u.convertiSDV(p));
 	return b;
 }
 
-@Override
-public boolean rimuoviPost(Post p) {
+
+public boolean rimuoviPost(SondaggioDoppiaVotazione p) {
 	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	return sdao.rimuoviSondaggio(p);
+	SondaggioUtility u = new SondaggioUtility();
+	return sdao.rimuoviSondaggio(u.convertiSDV(p));
 }
 
 public int[] getConteggio() {

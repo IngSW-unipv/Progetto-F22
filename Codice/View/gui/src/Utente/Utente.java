@@ -221,4 +221,11 @@ public class Utente {
 	    throw new AccountDoesNotExist(p.getIdProfilo());
 	}
 	
+	
+	
+	public boolean ritornaLoggato(Profilo p) throws AccountDoesNotExist {
+		ProfiloDao pdao = new ProfiloDao();
+		return pdao.vediSeIsLoggato(p.getIdProfilo());
+	}
+	
 }

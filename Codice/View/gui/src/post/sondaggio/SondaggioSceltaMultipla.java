@@ -6,8 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDao;
-import post.Post;
+import post.sondaggio.utility.SondaggioUtility;
 
 public class SondaggioSceltaMultipla extends Sondaggio{
 
@@ -86,24 +87,24 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 				+ "L'opzione " + this.getQuartaScelta() + " ha totalizzato " + this.conteggio[3] + " voti\n");
 	}
 
-	@Override
-	public ArrayList<Post> selectAll() {
+
+	public ArrayList<SondaggioSceltaMultiplaDB> selectAllSSM() {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 		return sdao.selectAll();
 	}
 
-	@Override
-	public boolean caricaPost(Post p) {
+	
+	public boolean caricaPost(SondaggioSceltaMultipla p) {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		boolean b = sdao.pubblicaSondaggio(p);
-		sdao.aggiungiScelte(p, this.getPrimaScelta(), this.getSecondaScelta(), this.getTerzaScelta(), this.getQuartaScelta());
+		SondaggioUtility u = new SondaggioUtility();
+		boolean b = sdao.pubblicaSondaggio(u.convertiSSM(p));
 		return b;
 	}
 
-	@Override
-	public boolean rimuoviPost(Post p) {
+	public boolean rimuoviPost(SondaggioSceltaMultipla p) {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		return sdao.rimuoviSondaggio(p);
+		SondaggioUtility u = new SondaggioUtility();
+		return sdao.rimuoviSondaggio(u.convertiSSM(p));
 	}
 
 	@Override

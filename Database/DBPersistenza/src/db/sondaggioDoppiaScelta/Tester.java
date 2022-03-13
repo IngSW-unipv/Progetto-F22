@@ -2,22 +2,23 @@ package db.sondaggioDoppiaScelta;
 
 import java.util.ArrayList;
 
-import post.Post;
 import post.sondaggio.SondaggioDoppiaVotazione;
+import post.sondaggio.utility.SondaggioUtility;
 
 public class Tester {
 
 	public static void main(String[] args) {
 		SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
 		SondaggioDoppiaVotazione p = new SondaggioDoppiaVotazione("P00", null, null, null, 0, 0, false, false, null, null, null, null);
+		SondaggioUtility u = new SondaggioUtility();
 		
-		ArrayList<Post> res = sdao.selectAll();
+		ArrayList<SondaggioDoppiaVotazioneDB> res = sdao.selectAll();
 		
-		for(Post pst : res)
+		for(SondaggioDoppiaVotazioneDB pst : res)
 			System.out.println(pst.toString());
 		
-		//System.out.println(sdao.pubblicaSondaggio(p));
-		//System.out.println(sdao.aggiungiScelte(p, "Cane", "Gatto"));
-		System.out.println(sdao.rimuoviSondaggio(p));
+		System.out.println(sdao.pubblicaSondaggio(u.convertiSDV(p)));
+	
+		System.out.println(sdao.rimuoviSondaggio(u.convertiSDV(p)));
 	}
 }

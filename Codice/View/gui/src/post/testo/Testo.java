@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import db.testo.TestoDB;
 import db.testo.TestoDao;
 import post.Post;
+import post.testo.utility.TestoUtility;
 
 public class Testo extends Post {
 	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
@@ -33,22 +35,22 @@ public class Testo extends Post {
 	public void setTitolo(String titolo) {
 		this.titolo = titolo;
 	}
-	@Override
-	public ArrayList<Post> selectAll() {
+	
+	public ArrayList<TestoDB> selectAllTesto() {
 		TestoDao tdao = new TestoDao();
 		return tdao.selectAll();
 	}
-	@Override
-	public boolean caricaPost(Post p) {
+	
+	public boolean caricaPost(Testo p) {
 		TestoDao tdao = new TestoDao();
-		boolean b = tdao.pubblicaTesto(p);
-		tdao.aggiungiCaratteristiche(p, this.getFont(), this.getTitolo());
+		TestoUtility u = new TestoUtility();
+		boolean b = tdao.pubblicaTesto(u.converti(p));
 	    return b;
 	}
-	@Override
-	public boolean rimuoviPost(Post p) {
+	public boolean rimuoviPost(Testo p) {
 		TestoDao tdao = new TestoDao();
-		return tdao.rimuoviTesto(p);
+		TestoUtility u = new TestoUtility();
+		return tdao.rimuoviTesto(u.converti(p));
 	}
 	@Override
 	public String toString() {

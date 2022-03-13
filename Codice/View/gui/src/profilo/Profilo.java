@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import Utente.Utente;
 import Utente.credenziali.Credenziali;
+import Utente.exception.AccountDoesNotExist;
 import chat.Chat;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
@@ -119,12 +120,15 @@ public void setListaSeguiti(HashMap<String, String> listaSeguiti) {
 }
 
 
-public static ArrayList<ProfiloDB> cercaProfilo(Profilo p) throws NotLoggedIn{
-	if(p.getUtente().isLoggato() == false)
+public static ArrayList<ProfiloDB> cercaProfilo(Profilo p) throws NotLoggedIn, AccountDoesNotExist{
+	
+	if(p.getUtente().ritornaLoggato(p) == false)
 		throw new NotLoggedIn(p);
+	else {
 	ProfiloDao pdao = new ProfiloDao();
 	ProfiloUtility u = new ProfiloUtility();
 	return pdao.cercaProfilo(u.convertiAProfiloDB(p));
+	}
 	}
 
 

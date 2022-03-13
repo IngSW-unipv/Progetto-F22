@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import db.video.VideoDB;
 import db.video.VideoDao;
 import post.Post;
 import post.multimedia.Multimedia;
+import post.multimedia.video.utility.VideoUtility;
 
 public class Video extends Multimedia{
 
@@ -33,7 +35,7 @@ public class Video extends Multimedia{
 	
 	//L'int passato da tastiera indica il numero di ore in cui vogliamo che la storia rimanga
 
-	public boolean settaDurataStoria(int time, Post p) {
+	public boolean settaDurataStoria(int time, Video p) {
 		this.setStory(true);
 		this.setTempoCancellazione(time);
 		this.caricaPost(p);
@@ -51,24 +53,25 @@ public class Video extends Multimedia{
 		return super.toString() + ", durataInSecondi = " + durataInSecondi + "]";
 	}
 
-	@Override
-	public ArrayList<Post> selectAll() {
+	
+	public ArrayList<VideoDB> selectAllVideo() {
 		VideoDao vdao = new VideoDao();
 		return vdao.selectAll();
 	}
 
-	@Override
-	public boolean caricaPost(Post p) {
+
+	public boolean caricaPost(Video p) {
 		VideoDao vdao = new VideoDao();
-		boolean b = vdao.pubblicaVideo(p);
-		vdao.inserisciCaratteristiche(p, this.getTempoCancellazione(), this.getPercorso(), this.isStory(), this.getDurataInSecondi());
+		VideoUtility u = new VideoUtility();
+		boolean b = vdao.pubblicaVideo(u.coverti(p));
 		return b;
 	}
 
-	@Override
-	public boolean rimuoviPost(Post p) {
+
+	public boolean rimuoviPost(Video p) {
 		VideoDao vdao = new VideoDao();
-		return vdao.rimuoviVideo(p);
+		VideoUtility u = new VideoUtility();
+		return vdao.rimuoviVideo(u.coverti(p));
 	}
 
 

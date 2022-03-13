@@ -4,9 +4,11 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import db.foto.FotoDB;
 import db.foto.FotoDao;
 import post.Post;
 import post.multimedia.Multimedia;
+import post.multimedia.foto.utility.FotoUtility;
 
 public class Foto extends Multimedia{
 
@@ -19,7 +21,7 @@ public class Foto extends Multimedia{
 	}
 
 
-	public boolean isHd;
+	private boolean isHd;
 	
 	public boolean isHd() {
 		return isHd;
@@ -30,7 +32,8 @@ public class Foto extends Multimedia{
 	}
 	
 	
-	public boolean settaDurataStoria(int time, Post f) {
+	public boolean settaDurataStoria(int time, Foto f) {
+		
 		this.setStory(true);
 		this.setTempoCancellazione(time);
 		this.caricaPost(f);
@@ -43,24 +46,25 @@ public class Foto extends Multimedia{
 		return true;
 	}
 
-	@Override
-	public ArrayList<Post> selectAll() {
+	
+	public ArrayList<FotoDB> selectAllFoto() {
 		FotoDao fdao = new FotoDao();
 		return fdao.selectAll();
 	}
 
-	@Override
-	public boolean caricaPost(Post p) {
+
+	public boolean caricaPost(Foto p) {
 		FotoDao fdao = new FotoDao();
-		boolean b = fdao.pubblicaFoto(p);
-		fdao.inserisciCaratteristiche(p, this.getTempoCancellazione(), this.getPercorso(), this.isStory(), this.isHd);
+		FotoUtility u = new FotoUtility();
+		boolean b = fdao.pubblicaFoto(u.converti(p));
 		return b;
 	}
 
-	@Override
-	public boolean rimuoviPost(Post p) {
+	
+	public boolean rimuoviPost(Foto p) {
 		FotoDao fdao = new FotoDao();
-		return fdao.rimuoviFoto(p);
+		FotoUtility u = new FotoUtility();
+		return fdao.rimuoviFoto(u.converti(p));
 	}
 	@Override
 	public String toString() {

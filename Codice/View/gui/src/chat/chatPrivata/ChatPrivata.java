@@ -6,7 +6,9 @@ import java.util.TimerTask;
 
 import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
+import Messaggio.utility.MessaggioUtility;
 import chat.Chat;
+import db.messaggioPrivato.MessaggioPrivatoDB;
 import db.messaggioPrivato.MessaggioPrivatoDao;
 import profilo.Profilo;
 
@@ -21,44 +23,48 @@ public class ChatPrivata extends Chat {
 	 
 	 
 	 //Ottiene la lista dei messaggi privati scambiati con un profilo specificato
-		public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m) {
+		public ArrayList<MessaggioPrivatoDB> selectAllNomeProfilo(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		return mdao.selectAllNomeProfilo(m);
+		MessaggioUtility u = new MessaggioUtility();
+		return mdao.selectAllNomeProfilo(u.convertiMPDB(m));
 	}
 	
-	@Override
-	public ArrayList <Messaggio> ottieniListaTuttiMessaggi() {
+	
+	public ArrayList <MessaggioPrivatoDB> ottieniListaTuttiMessaggii() {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		return mdao.selectAll();
 	
 	}
 	
-	@Override
-	public ArrayList<Messaggio> cercaMessaggio(Messaggio m) {
+	
+	public ArrayList<MessaggioPrivatoDB> cercaMessaggio(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		return mdao.cercaMessaggioPrivato(m);
-	}
-	@Override
-	public void ottieniMessaggio(Messaggio m) {
-		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		mdao.ottieniMessaggio(m);
+		MessaggioUtility u = new MessaggioUtility();
+		return mdao.cercaMessaggioPrivato(u.convertiMPDB(m));
 	}
 
-	@Override
-	public boolean caricaMessaggio(Messaggio m) {
+	public void ottieniMessaggio(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		boolean b;
-		b = mdao.scriviMessaggioPrivato(m);
-		mdao.inserisciChiavi(m, msg.getIdProfiloInviante(), msg.getIdProfiloRicevente());
-		return b;
+		MessaggioUtility u = new MessaggioUtility();
+		mdao.ottieniMessaggio(u.convertiMPDB(m));
 	}
 
-	@Override
-	public boolean eliminaMessaggio(Messaggio m) {
+
+	public boolean caricaMessaggio(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		boolean b;
-		b = mdao.rimuoviMessaggioPrivato(m);
-		return b;
+		MessaggioUtility u = new MessaggioUtility();
+		
+		return mdao.scriviMessaggioPrivato(u.convertiMPDB(m));
+
+	}
+
+	
+	public boolean eliminaMessaggio(MessaggioPrivato m) {
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
+		MessaggioUtility u = new MessaggioUtility();
+
+		return mdao.rimuoviMessaggioPrivato(u.convertiMPDB(m));
+
 	}
 	
 
@@ -70,8 +76,8 @@ public class ChatPrivata extends Chat {
 			int i = 0;
 		    public void run() {
 		       
-               ArrayList<Messaggio> show = mdao.selectAll();
-               for(Messaggio msg : show)
+               ArrayList<MessaggioPrivatoDB> show = mdao.selectAll();
+               for(MessaggioPrivatoDB msg : show)
             	   System.out.println(msg.toString());
                    i++;
                    if(i == 5)
@@ -86,13 +92,14 @@ public class ChatPrivata extends Chat {
 	
 	public void leggiMessaggiPrivati(MessaggioPrivato m) {
 		Timer timer = new Timer();
-		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();   
+		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();  
+		MessaggioUtility u = new MessaggioUtility();
 		timer.schedule( new TimerTask() {
 			int i = 0;
 		    public void run() {
 		       
-               ArrayList<MessaggioPrivato> show = mdao.selectAllNomeProfilo(m);
-               for(Messaggio msg : show)
+               ArrayList<MessaggioPrivatoDB> show = mdao.selectAllNomeProfilo(u.convertiMPDB(m));
+               for(MessaggioPrivatoDB msg : show)
             	   System.out.println(msg.toString());
                    i++;
                    if(i == 5)
