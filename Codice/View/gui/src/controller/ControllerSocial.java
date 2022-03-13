@@ -87,13 +87,11 @@ public class ControllerSocial{
 					frameSocial.setVarHome(1);
 					frameSocial.avvioHome(bufferStories, bufferPosts);
 					frameSocial.avviaChat();
-					//frameSocial.avviaProfilo("marco", 0, 0, 0, null, tmp);
 					
 					homeView = frameSocial.getHome();
 					chatView = frameSocial.getChat();
 					profiloView = frameSocial.getProfilo();
 					
-					System.out.println(frameSocial.getVarHome() + "   " + frameSocial.getVarLogin());
 					assegnaGestoriHome();
 				}
 			}
