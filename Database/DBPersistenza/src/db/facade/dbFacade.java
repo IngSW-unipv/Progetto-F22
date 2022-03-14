@@ -2,8 +2,6 @@ package db.facade;
 
 import java.util.ArrayList;
 
-import Messaggio.MessaggioDiGruppo;
-//import Messaggio.utility.MessaggioUtility;
 import profilo.exception.AccountDoesNotExist;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;

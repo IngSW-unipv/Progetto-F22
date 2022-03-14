@@ -8,10 +8,10 @@ import convertitore.sondaggioUtility.*;
 public class Tester {
 
 	public static void main(String [] args) {
-		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, null, null, 0, 0, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
+		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, null, null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		SondaggioUtility u = new SondaggioUtility();
-		System.out.println(sdao.rimuoviSondaggio(u.convertiSSM(s)));
+
+		System.out.println(sdao.rimuoviSondaggio(SondaggioUtility.convertiASondMulDB(s)));
 		
 ArrayList<SondaggioSceltaMultiplaDB> res = sdao.selectAll();
 	   
