@@ -11,8 +11,6 @@ import org.junit.Before;
 
 import java.sql.Date;
 import java.sql.Time;
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull; 
