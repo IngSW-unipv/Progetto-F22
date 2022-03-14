@@ -2,8 +2,8 @@ package controller;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-
 import panelspackage.panels.Chat;
+import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
@@ -16,6 +16,7 @@ public class ControllerSocial{
 	
 	private ArrayList<String>bufferStories;
 	private ArrayList<String> bufferPosts;
+	private String percorsoFile;
 	
 	private Home homeView;
 	private Frame frameSocial;
@@ -25,6 +26,7 @@ public class ControllerSocial{
 	private PostVisualizzato postVisualizzatoView;
 	private PannelloNotifiche pannelloNotificheView;
 	private LogIn loginView;
+	private CreazionePost creazionePostView;
 	//Inserire modello con metodi per la home 
 	
 	//ActionListener login
@@ -52,6 +54,13 @@ public class ControllerSocial{
 	//ActionListener Impostazioni
 	private ActionListener gestoreHomeImpostazioni;
 	private ActionListener gestoreModificaProfilo;
+	private ActionListener gestoreSalvaModifiche;
+	private ActionListener gestoreLogout;
+	private ActionListener gestoreVisibilitaPost;
+	private ActionListener gestoreEliminaAccount;
+	private ActionListener gestoreCambiaProfilo;
+	private ActionListener gestoreVisibilitaProfilo;
+	private ActionListener gestoreCambiaColore;
 	
 	//ActionListener PostVisualizzato
 	private ActionListener gestoreHomePostVisualizzato;
@@ -59,6 +68,11 @@ public class ControllerSocial{
 	private ActionListener gestoreHomeChat;
 	private ActionListener gestoreListaChat;
 	private String[] tmp = {"1", "2", "3"};
+	
+	//ActionListener pubblicazione post
+	private ActionListener gestoreCaricamentoPost;
+	private ActionListener gestoreHomeCreazionePost;
+	private ActionListener gestorePubblicazionePost;
 	
 	public ControllerSocial(Frame frameSocial, ArrayList<String>bufferStories, ArrayList<String>bufferPosts) {
 		this.bufferStories = bufferStories;
@@ -91,7 +105,7 @@ public class ControllerSocial{
 					homeView = frameSocial.getHome();
 					chatView = frameSocial.getChat();
 					profiloView = frameSocial.getProfilo();
-					
+					creazionePostView = frameSocial.getCreazionePost();
 					assegnaGestoriHome();
 				}
 			}
@@ -110,7 +124,6 @@ public class ControllerSocial{
 	
 	//Vari actionlistener
 	public void assegnaGestoriHome() {
-		
 		//ACTIONLISTENER PULSANTI PANNELLO HOME
 		gestoreImpostazioni = new ActionListener() {
 			@Override
@@ -253,8 +266,12 @@ public class ControllerSocial{
 		gestorePubblicaPost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Inserire metodi
-				System.out.println("pubblica post");
+				frameSocial.setVarHome(0);
+				frameSocial.getHome().setVisible(false);
+				frameSocial.setVarCreazionePost(1);
+				frameSocial.avviaCreazionePost();
+				creazionePostView = frameSocial.getCreazionePost();
+				assegnaGestoriPubblicazionePost();
 			}
 		};
 		homeView.getpPost().addActionListener(gestorePubblicaPost);
@@ -289,6 +306,41 @@ public class ControllerSocial{
 		};
 		homeView.getpIdea().addActionListener(gestorePubblicaIdea);
 	}
+
+	public void assegnaGestoriPubblicazionePost() {
+		//ACTIONLISTENER PULSANTI CREAZIONE POST
+		
+		gestoreCaricamentoPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				percorsoFile = creazionePostView.getFileChooser().getSelectedFile().getAbsolutePath();
+				System.out.println(percorsoFile);
+			}
+		};
+		creazionePostView.getFileChooser().addActionListener(gestoreCaricamentoPost);
+		
+		
+		gestorePubblicazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi pubblicazione post
+			}
+		};
+		creazionePostView.getPubblicaPost().addActionListener(gestorePubblicazionePost);
+		
+		gestoreHomeCreazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameSocial.setVarCreazionePost(0);
+				frameSocial.getCreazionePost().setVisible(false);
+				frameSocial.setVarHome(1);
+				frameSocial.getHome().setVisible(true);
+				assegnaGestoriHome();
+			}
+		};
+		creazionePostView.getHomeCreazionePost().addActionListener(gestoreHomeCreazionePost);
+		
+	}
 	
 	public void assegnaGestoriProfilo() {
 		gestoreHomeProfilo = new ActionListener() {
@@ -305,7 +357,86 @@ public class ControllerSocial{
 	}
 		
 	public void assegnaGestoriImpostazioni() {
-		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI
+		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI		
+		gestoreModificaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impostazioniView.getContainerCenter().setVisible(true);
+				//validate() e repaint() servono per aggiornare il JPanel per mostrare gli elementi
+				impostazioniView.validate();
+				impostazioniView.repaint();
+				//Metodi modifica profilo modello
+			}
+		};
+		impostazioniView.getModificaProfilo().addActionListener(gestoreModificaProfilo);
+	
+		gestoreLogout = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//Metodi logout modello
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getLogout().addActionListener(gestoreLogout);
+		
+		gestoreVisibilitaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello visibilita post
+				//impostazioniView.getContainerCenter().setVisible(false);
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getVisibilitaPost().addActionListener(gestoreVisibilitaPost);
+		
+		gestoreEliminaAccount = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello elimina account
+				//impostazioniView.getContainerCenter().setVisible(false);
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getEliminaAccount().addActionListener(gestoreEliminaAccount);
+		
+		
+		gestoreCambiaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello cambia profilo
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getCambiaProfilo().addActionListener(gestoreCambiaProfilo);
+		
+		gestoreVisibilitaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi visibilita profilo
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getVisibilitaProfilo().addActionListener(gestoreVisibilitaProfilo);
+		
+		gestoreCambiaColore = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi cambia colore
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getCambiaColore().addActionListener(gestoreCambiaColore);
+		
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -318,14 +449,14 @@ public class ControllerSocial{
 		};
 		impostazioniView.getHomeImpostazioni().addActionListener(gestoreHomeImpostazioni);
 		
-		gestoreModificaProfilo = new ActionListener() {
-			
+		gestoreSalvaModifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				impostazioniView.getContainerCenter().setVisible(true);
+				//Metodi per il salvataggio delle modifiche nel modello
 			}
 		};
-		impostazioniView.getModificaProfilo().addActionListener(gestoreModificaProfilo);
+		impostazioniView.getSalvaModifiche().addActionListener(gestoreSalvaModifiche);
+	
 	}
 	
 	public void assegnaGestoriChat() {
@@ -382,6 +513,12 @@ public class ControllerSocial{
 		};
 		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);*/
 
+	public void nascodiPannelloModificaProfilo() {
+		impostazioniView.getContainerCenter().setVisible(false);
+		impostazioniView.validate();
+		impostazioniView.repaint();
+	}
+	
 	
 	public boolean loginTest() {
 		String email = "email";
@@ -395,6 +532,17 @@ public class ControllerSocial{
 			return false;
 		}
 	}
+
+	
+	//GETTER E SETTER DELLA STRINGA CONTENENTE IL PERCORSO DEL POST DA PUBBLICARE
+	public String getPercorsoFile() {
+		return percorsoFile;
+	}
+
+	public void setPercorsoFile(String percorsoFile) {
+		this.percorsoFile = percorsoFile;
+	}
+	
 }
 
 
