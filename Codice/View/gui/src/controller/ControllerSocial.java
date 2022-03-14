@@ -16,6 +16,7 @@ public class ControllerSocial{
 	
 	private ArrayList<String>bufferStories;
 	private ArrayList<String> bufferPosts;
+	private String percorsoFile;
 	
 	private Home homeView;
 	private Frame frameSocial;
@@ -308,14 +309,16 @@ public class ControllerSocial{
 
 	public void assegnaGestoriPubblicazionePost() {
 		//ACTIONLISTENER PULSANTI CREAZIONE POST
+		
 		gestoreCaricamentoPost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Metodi caricamento
-				
+				percorsoFile = creazionePostView.getFileChooser().getSelectedFile().getAbsolutePath();
+				System.out.println(percorsoFile);
 			}
 		};
-		creazionePostView.getCaricaPost().addActionListener(gestoreCaricamentoPost);
+		creazionePostView.getFileChooser().addActionListener(gestoreCaricamentoPost);
+		
 		
 		gestorePubblicazionePost = new ActionListener() {
 			@Override

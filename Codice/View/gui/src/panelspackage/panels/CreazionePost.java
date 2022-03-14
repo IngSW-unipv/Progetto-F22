@@ -17,15 +17,12 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class CreazionePost extends JPanel {
 
-	private int i;
-
-	//private HashMap<String, JComponent> listaComponenti = new HashMap<String, JComponent>();
 	private AreaDiTesto inserimentoCommentoPost;
 	private Pulsanti homeCreazionePost;
 	private Pulsanti pubblicaPost;
-	private Pulsanti caricaPost;
+	private Pulsanti caricaFile;
 	private Etichette testoInserisciCommento;
-	//static String visibilita[]  = {"Pubblico", "Privato"};
+	private JFileChooser fileChooser;
 	
 	public CreazionePost() {
 		this.avvio();
@@ -45,30 +42,19 @@ public class CreazionePost extends JPanel {
 		this.add(containerNorth, BorderLayout.NORTH);
 
 		containerNorth.add(new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
-		
-		pubblicaPost = new Pulsanti("Carica un file", Frame.COLOREPRIMARIOTEMATICO);
+
+		fileChooser = new JFileChooser();
 		
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		//containerCenter.setLayout(new GridLayout(3, 1));
 		this.add(containerCenter, BorderLayout.CENTER);
-		containerCenter.add(pubblicaPost, BorderLayout.NORTH);
+		containerCenter.add(fileChooser, BorderLayout.NORTH);
+		
 		SpecificContainer containerCommento = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenter.add(containerCommento);
 		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20);
 		testoInserisciCommento = new Etichette("Inserire il commento al post:", SwingConstants.LEFT, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN, 20));
 		containerCommento.add(testoInserisciCommento, BorderLayout.NORTH);
 		containerCommento.add(inserimentoCommentoPost, BorderLayout.CENTER);
-		
-		//inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
-		//inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
-		//listaComponenti.put("InserisciCommento", new JScrollPane(inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, ": )", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		//listaComponenti.put("CaricaImmagine", new Pulsanti("Carica un file", Frame.COLOREPRIMARIOTEMATICO));
-		//listaComponenti.put("EtichettaInserisciCommento", new Etichette("inserisci il commento", Frame.COLOREPRIMARIOTEMATICO));
-		//listaComponenti.put("Pubblica", new Pulsanti("Pubblica", Frame.COLOREPRIMARIOTEMATICO));
-		//listaComponenti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
-
-		//GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,1,4, listaComponenti.size());
-		//containerCenter.add(Dati, BorderLayout.CENTER);
 		
 		pubblicaPost = new Pulsanti("Pubblica post", Frame.COLORESECONDARIOTEMATICO);
 		
@@ -78,8 +64,7 @@ public class CreazionePost extends JPanel {
 		containerSouth.add(pubblicaPost);
 		containerSouth.add(homeCreazionePost = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 	}
-
-
+	
 	public Pulsanti getHomeCreazionePost() {
 		return homeCreazionePost;
 	}
@@ -92,15 +77,24 @@ public class CreazionePost extends JPanel {
 		this.pubblicaPost = pubblicaPost;
 	}
 
-	public Pulsanti getCaricaPost() {
-		return caricaPost;
+	public Pulsanti getCaricaFile() {
+		return caricaFile;
 	}
 
-	public void setCaricaPost(Pulsanti caricaPost) {
-		this.caricaPost = caricaPost;
+	public void setCaricaFile(Pulsanti caricaFile) {
+		this.caricaFile = caricaFile;
 	}
 
 	public void setHomeCreazionePost(Pulsanti homeCreazionePost) {
 		this.homeCreazionePost = homeCreazionePost;
 	}
+
+	public JFileChooser getFileChooser() {
+		return fileChooser;
+	}
+
+	public void setFileChooser(JFileChooser fileChooser) {
+		this.fileChooser = fileChooser;
+	}
+	
 }
