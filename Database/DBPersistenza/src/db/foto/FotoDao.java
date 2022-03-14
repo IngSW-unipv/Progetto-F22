@@ -26,7 +26,7 @@ public class FotoDao implements IFotoDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from foto";
+			String query="SELECT * from foto order by idFoto";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())

@@ -31,7 +31,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from messaggioprivato";
+			String query="SELECT * from messaggioprivato order by idMsgPvt";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())
@@ -114,7 +114,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=?";
+			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdMsgPvt());
@@ -142,7 +142,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		
 		try
 		{
-			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=?";
+			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdMsgPvt());

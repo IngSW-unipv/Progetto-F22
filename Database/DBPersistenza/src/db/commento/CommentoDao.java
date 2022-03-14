@@ -79,7 +79,7 @@ public class CommentoDao implements ICommentoDao{
 
 		try
 		{
-			String query="SELECT * FROM commento WHERE post=?";
+			String query="SELECT * FROM commento WHERE post=? order by IdCommento";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, c.getPost());

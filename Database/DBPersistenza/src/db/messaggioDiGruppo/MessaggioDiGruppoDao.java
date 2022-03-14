@@ -30,7 +30,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from messaggiodigruppo";
+			String query="SELECT * from messaggiodigruppo order by idMsgGrp";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())
@@ -111,7 +111,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=?";
+			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=? order by idMsgGrp";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdMsgGrp());
@@ -140,7 +140,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=?";
+			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by idMsgGrp";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdGruppo());

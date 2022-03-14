@@ -27,7 +27,7 @@ public ArrayList<GruppoDB> selectall() {
 	try
 	{
 		st1 = conn.createStatement();
-		String query="SELECT * from gruppo";
+		String query="SELECT * from gruppo order by idGruppo";
 		rs1=st1.executeQuery(query);
 
 		while(rs1.next())
@@ -131,7 +131,7 @@ public ArrayList<GruppoDB> cercaGruppo(GruppoDB g) {
 
 	try
 	{
-		String query="SELECT * FROM Gruppo WHERE idGruppo=?";
+		String query="SELECT * FROM Gruppo WHERE idGruppo=? order by idGruppo";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, g.getIdGruppo());
