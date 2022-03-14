@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 import Messaggio.MessaggioDiGruppo;
-import Messaggio.utility.MessaggioUtility;
+import convertitore.messaggioUtility.*;
 
 public class MessaggioDiGruppoTester {
 
@@ -24,7 +24,7 @@ public class MessaggioDiGruppoTester {
 				System.out.println(msg.toString());
 	          
 	   System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo(u.convertiMDG(m)));
-	     System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioDiGruppo(u.convertiMDG(m)));
+	     System.out.println("La rimozione ï¿½ avvenuta? " + mdao.rimuoviMessaggioDiGruppo(u.convertiMDG(m)));
 	      
 }
 }

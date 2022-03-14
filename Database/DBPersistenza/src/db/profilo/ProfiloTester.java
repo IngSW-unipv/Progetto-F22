@@ -2,7 +2,7 @@ package db.profilo;
 
 import java.util.ArrayList;
 
-import Utente.exception.AccountDoesNotExist;
+import profilo.exception.AccountDoesNotExist;
 
 public class ProfiloTester {
 
@@ -94,8 +94,8 @@ public class ProfiloTester {
    
       
         System.out.println("Inserimento avvenuto? " +pdao.inserisciProfilo(prof));
-        System.out.println("L'inserimento delle chiavi è avvenuto? " +pdao.inserisciChiavi(prof));
-        System.out.println("La rimozione è avvenuta? " + pdao.rimuoviProfilo(prof));
+        System.out.println("L'inserimento delle chiavi ï¿½ avvenuto? " +pdao.inserisciChiavi(prof));
+        System.out.println("La rimozione ï¿½ avvenuta? " + pdao.rimuoviProfilo(prof));
        */
        
      /*  try {

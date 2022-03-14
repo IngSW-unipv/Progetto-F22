@@ -22,16 +22,14 @@ import panelspackage.panels.elements.SpecificContainer;
 public class Impostazioni extends JPanel {
 	HashMap<String,JComponent> mappaPulsanti = new  HashMap<String,JComponent>();
 	private Pulsanti homeImpostazioni;
-	private Pulsanti salvaModifiche;
 	private AreaDiTesto areaDescrizione, areaNuovaMail;
 	private Box areaCambioSesso;
 	private SpecificContainer containerCenter;
 	
 	int i;
-	private static String visibilita[]  = {"Pubblico", "Privato"};
-	private static String colori[] = {"arancione", "verde"};
-	private static String sesso[] = {"maschio", "femmina","altro"};
-	private static String profili[] = {"Profilo1", "Profilo2", "Profilo3", "Profilo4"};
+	static String visibilita[]  = {"Pubblico", "Privato"};
+	static String colori[] = {"arancione", "verde"};
+	static String sesso[] = {"maschio", "femmina","altro"};
 	
 	public Impostazioni(String profilo) {
 		avvio();
@@ -59,11 +57,10 @@ public class Impostazioni extends JPanel {
 		containerWest.setLayout(new GridLayout(8,1));
 		
 		mappaPulsanti.put("modificaprofilo", new Pulsanti("Modifica profilo", Frame.COLOREPRIMARIOTEMATICO));
-		//mappaPulsanti.put("cambiaprofilo",new Pulsanti("Cambia profilo", Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("cambiaProfilo", new Box(getProfili(), Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("cambiaprofilo",new Pulsanti("Cambia profilo", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("getvisibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("visibilitapost", new Pulsanti("Visibilita' post", Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("cambiaColori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("getcolori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("logout",new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
 			
@@ -81,8 +78,6 @@ public class Impostazioni extends JPanel {
 
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
-		containerSouth.setLayout(new GridLayout(2, 1));
-		containerSouth.add(salvaModifiche = new Pulsanti("Salva le modifiche", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 	}
 	
@@ -98,10 +93,6 @@ public class Impostazioni extends JPanel {
 		return sesso;
 	}
 	
-	public String[] getProfili() {
-		return profili;
-	}
-	
 	
 	public SpecificContainer getContainerCenter() {
 		return this.containerCenter;
@@ -110,16 +101,8 @@ public class Impostazioni extends JPanel {
 		return (Pulsanti) mappaPulsanti.get("modificaprofilo");
 	}
 	
-	public Box getCambiaProfilo() {
-		return (Box) mappaPulsanti.get("cambiaProfilo");
-	}
-	
-	public Box getVisibilitaProfilo() {
-		return (Box) mappaPulsanti.get("visibilita");
-	}
-	
-	public Box getCambiaColore() {
-		return (Box) mappaPulsanti.get("cambiaColori");
+	public JButton getCambiaProfilo() {
+		return (Pulsanti) mappaPulsanti.get("cambiaprofilo");
 	}
 
 	public JButton getVisibilitaPost() {
@@ -136,10 +119,6 @@ public class Impostazioni extends JPanel {
 	
 	public Pulsanti getHomeImpostazioni() {
 		return homeImpostazioni;
-	}
-	
-	public Pulsanti getSalvaModifiche() {
-		return salvaModifiche;
 	}
 
 }

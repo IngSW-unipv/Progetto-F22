@@ -2,7 +2,7 @@ package db.profilo;
 
 import java.util.ArrayList;
 
-import Utente.exception.AccountDoesNotExist;
+import profilo.exception.AccountDoesNotExist;
 
 public interface IProfiloDao {
 	public ArrayList<ProfiloDB> selectAll();

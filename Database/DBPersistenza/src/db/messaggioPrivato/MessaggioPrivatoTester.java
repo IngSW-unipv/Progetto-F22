@@ -3,7 +3,7 @@ package db.messaggioPrivato;
 import java.util.ArrayList;
 
 import Messaggio.MessaggioPrivato;
-import Messaggio.utility.MessaggioUtility;
+import convertitore.messaggioUtility.*;
 
 public class MessaggioPrivatoTester {
 public static void main(String[] args) {
@@ -17,7 +17,7 @@ public static void main(String[] args) {
 	mdao.ottieniMessaggio(u.convertiMPDB(m));
           
    System.out.println("Inserimento avvenuto? " +mdao.scriviMessaggioPrivato(u.convertiMPDB(m1)));
-   System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioPrivato(u.convertiMPDB(m)));
+   System.out.println("La rimozione ï¿½ avvenuta? " + mdao.rimuoviMessaggioPrivato(u.convertiMPDB(m)));
       
      
 }

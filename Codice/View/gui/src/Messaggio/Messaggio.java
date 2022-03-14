@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 
-public abstract class Messaggio implements Comparable<Messaggio> {
+public abstract class Messaggio {
 	public Messaggio(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia) {
 		super();
 		this.idMessaggio = idMessaggio;
@@ -53,23 +53,5 @@ public abstract class Messaggio implements Comparable<Messaggio> {
 	public String toString() {
 		return "idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
 				+ ", testo = " + testo + ", multimedia = " + multimedia ;
-	}
-	@Override
-	public int compareTo(Messaggio m) {
-		if(this.getDataInvio().compareTo(m.getDataInvio()) > 0) {
-			return 1;
-		}
-		else if(this.getDataInvio().compareTo(m.getDataInvio()) < 0) {
-			return -1;
-		}
-		else {
-			if(this.getOraInvio().compareTo(m.getOraInvio()) > 0) {
-				return 1;
-			}
-			else if(this.getOraInvio().compareTo(m.getOraInvio()) > 0) {
-				return -1;
-			}
-		}
-		return 0;
-	}
+	}	
 }

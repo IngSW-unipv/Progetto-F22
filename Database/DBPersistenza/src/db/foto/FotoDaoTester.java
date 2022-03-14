@@ -1,7 +1,7 @@
 package db.foto;
 
 import post.multimedia.foto.Foto;
-import post.multimedia.foto.utility.FotoUtility;
+import convertitore.fotoUtility.*;
 
 public class FotoDaoTester {
 
