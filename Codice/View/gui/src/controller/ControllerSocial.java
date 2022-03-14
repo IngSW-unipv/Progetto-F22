@@ -52,6 +52,13 @@ public class ControllerSocial{
 	//ActionListener Impostazioni
 	private ActionListener gestoreHomeImpostazioni;
 	private ActionListener gestoreModificaProfilo;
+	private ActionListener gestoreSalvaModifiche;
+	private ActionListener gestoreLogout;
+	private ActionListener gestoreVisibilitaPost;
+	private ActionListener gestoreEliminaAccount;
+	private ActionListener gestoreCambiaProfilo;
+	private ActionListener gestoreVisibilitaProfilo;
+	private ActionListener gestoreCambiaColore;
 	
 	//ActionListener PostVisualizzato
 	private ActionListener gestoreHomePostVisualizzato;
@@ -305,7 +312,86 @@ public class ControllerSocial{
 	}
 		
 	public void assegnaGestoriImpostazioni() {
-		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI
+		//ACTIONLISTENER PULSANTI PANNELLO IMPOSTAZIONI		
+		gestoreModificaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				impostazioniView.getContainerCenter().setVisible(true);
+				//validate() e repaint() servono per aggiornare il JPanel per mostrare gli elementi
+				impostazioniView.validate();
+				impostazioniView.repaint();
+				//Metodi modifica profilo modello
+			}
+		};
+		impostazioniView.getModificaProfilo().addActionListener(gestoreModificaProfilo);
+	
+		gestoreLogout = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//Metodi logout modello
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getLogout().addActionListener(gestoreLogout);
+		
+		gestoreVisibilitaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello visibilita post
+				//impostazioniView.getContainerCenter().setVisible(false);
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getVisibilitaPost().addActionListener(gestoreVisibilitaPost);
+		
+		gestoreEliminaAccount = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello elimina account
+				//impostazioniView.getContainerCenter().setVisible(false);
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getEliminaAccount().addActionListener(gestoreEliminaAccount);
+		
+		
+		gestoreCambiaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi modello cambia profilo
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getCambiaProfilo().addActionListener(gestoreCambiaProfilo);
+		
+		gestoreVisibilitaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi visibilita profilo
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getVisibilitaProfilo().addActionListener(gestoreVisibilitaProfilo);
+		
+		gestoreCambiaColore = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi cambia colore
+				//impostazioniView.getContainerCenter().setVisible(false);
+				//impostazioniView.validate();
+				//impostazioniView.repaint();
+				nascodiPannelloModificaProfilo();
+			}
+		};
+		impostazioniView.getCambiaColore().addActionListener(gestoreCambiaColore);
+		
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -318,14 +404,14 @@ public class ControllerSocial{
 		};
 		impostazioniView.getHomeImpostazioni().addActionListener(gestoreHomeImpostazioni);
 		
-		gestoreModificaProfilo = new ActionListener() {
-			
+		gestoreSalvaModifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				impostazioniView.getContainerCenter().setVisible(true);
+				//Metodi per il salvataggio delle modifiche nel modello
 			}
 		};
-		impostazioniView.getModificaProfilo().addActionListener(gestoreModificaProfilo);
+		impostazioniView.getSalvaModifiche().addActionListener(gestoreSalvaModifiche);
+	
 	}
 	
 	public void assegnaGestoriChat() {
@@ -382,6 +468,12 @@ public class ControllerSocial{
 		};
 		postVisualizzatoView.getHomePostVisualizzato().addActionListener(gestoreHomeImpostazioni);*/
 
+	public void nascodiPannelloModificaProfilo() {
+		impostazioniView.getContainerCenter().setVisible(false);
+		impostazioniView.validate();
+		impostazioniView.repaint();
+	}
+	
 	
 	public boolean loginTest() {
 		String email = "email";

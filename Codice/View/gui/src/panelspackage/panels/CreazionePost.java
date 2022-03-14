@@ -22,6 +22,7 @@ public class CreazionePost extends JPanel {
 	private HashMap<String, JComponent> listaComponenti = new HashMap<String, JComponent>();
 	private AreaDiTesto inserimentoCommentoPost;
 	private Pulsanti homeImpostazioni;
+	private Pulsanti pubblicaPost;
 	static String visibilita[]  = {"Pubblico", "Privato"};
 	
 	public CreazionePost(int base, int altezza) {
@@ -52,14 +53,18 @@ public class CreazionePost extends JPanel {
 		listaComponenti.put("InserisciCommento", new JScrollPane(inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, ": )", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		listaComponenti.put("CaricaImmagine", new Pulsanti("Carica un file", Frame.COLOREPRIMARIOTEMATICO));
 		//listaComponenti.put("EtichettaInserisciCommento", new Etichette("inserisci il commento", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.put("Pubblica", new Pulsanti("Pubblica", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
+		//listaComponenti.put("Pubblica", new Pulsanti("Pubblica", Frame.COLOREPRIMARIOTEMATICO));
+		//listaComponenti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
 
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,1,4, listaComponenti.size());
 		containerCenter.add(Dati, BorderLayout.CENTER);
 		
+		pubblicaPost = new Pulsanti("Pubblica post", Frame.COLORESECONDARIOTEMATICO);
+		
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
+		containerSouth.setLayout(new GridLayout(2, 1));
+		containerSouth.add(pubblicaPost);
 		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 	}
 
