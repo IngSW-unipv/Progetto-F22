@@ -268,8 +268,8 @@ public class ControllerSocial{
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
 				frameSocial.setVarCreazionePost(1);
-				creazionePostView = frameSocial.getCreazionePost();
 				frameSocial.avviaCreazionePost();
+				creazionePostView = frameSocial.getCreazionePost();
 				assegnaGestoriPubblicazionePost();
 			}
 		};
@@ -312,6 +312,7 @@ public class ControllerSocial{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Metodi caricamento
+				
 			}
 		};
 		creazionePostView.getCaricaPost().addActionListener(gestoreCaricamentoPost);
