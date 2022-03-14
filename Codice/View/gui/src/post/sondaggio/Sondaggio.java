@@ -6,10 +6,9 @@ import post.Post;
 
 public abstract class Sondaggio extends Post{
 
-	public Sondaggio(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean condivisibile, String profilo, String primaScelta, 
+	public Sondaggio(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta, 
 			String secondaScelta) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,profilo);
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,profilo);
 		
 		this.primaScelta = primaScelta;
 		this.secondaScelta = secondaScelta;

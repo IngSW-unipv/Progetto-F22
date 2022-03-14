@@ -6,19 +6,14 @@ import profilo.EnumProfilo;
 import profilo.Profilo;
 
 public class ProfiloUtility {
-
-	/*public static  ProfiloDB convertiAProfiloDB(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(),ProfiloUtility.trasformaEnumInString(p.getTipo()), p.getMessaggioDiGruppo(),p.getMessaggioPrivato(), null, p.getPost(),p.isAccountesistente(), p.isPswCambiata(),p.isLoggato(), p.getPassword());
-		return pdb;
-	}*/
 	
 	public static ProfiloDB convertiAProfiloDB(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(),ProfiloUtility.trasformaEnumInString(p.getTipo()), p.getMessaggioDiGruppo(),p.getMessaggioPrivato(), null ,p.getPost(),p.isAccountesistente(), p.isPswCambiata(),p.isLoggato(), p.getPwd());
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), ProfiloUtility.trasformaEnumInString(p.getTipo()), p.getMessaggioDiGruppo(), p.getMessaggioPrivato(), p.getPost(), p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), p.getPassword());
 		return pdb;
 	}
 	
-	public static  Profilo convertiAProfilo(ProfiloDB pdb) {
-		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname(), pdb.getDescrizione(), pdb.getNumFollower(), pdb.getNumSeguiti(), pdb.getNumPost(),ProfiloUtility.trasformaStringinEnum(pdb.getTipo()), pdb.getMessaggioDiGruppo(),pdb.getMessaggioPrivato(),pdb.getIdProfilo(),pdb.isEsiste(), pdb.isPswCambiata(),pdb.isLoggato(), pdb.getPsw());
+	public static Profilo convertiAProfilo(ProfiloDB pdb) {
+		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname(), pdb.getDescrizione(), ProfiloUtility.trasformaStringinEnum(pdb.getTipo()), pdb.getMessaggioDiGruppo(),pdb.getMessaggioPrivato(),pdb.getPost());
 		return p;
 	}
 	
@@ -40,14 +35,14 @@ public class ProfiloUtility {
 	}
 
 	static public EnumProfilo trasformaStringinEnum(String s) {
-		EnumProfilo enumP = null;
-		if(s.compareTo("PRIVATO") == 0) {
-			enumP = EnumProfilo.PRIVATO;
+		if(s.equals("PRIVATO")) {
+			return EnumProfilo.PRIVATO;
 		}
-		if(s.compareTo("PUBBLICO") == 0) {
-			enumP = EnumProfilo.PUBBLICO;
+		else if(s.equals("PUBBLICO")) {
+			return EnumProfilo.PUBBLICO;
 		}
-		return enumP;
+		System.out.println("La stringa inserita non corrisponde ad un tipo di profilo esistente");
+		return null;
 	}
 
 }

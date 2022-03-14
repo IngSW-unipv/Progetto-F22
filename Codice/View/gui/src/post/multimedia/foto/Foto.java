@@ -7,11 +7,9 @@ import post.multimedia.Multimedia;
 
 public class Foto extends Multimedia{
 
-	public Foto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,
-			String percorso, boolean isStory, boolean isHd) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile, profilo,
-				tempoCancellazione, percorso, isStory);
+	public Foto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo,
+			String percorso, boolean isHd) {
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione,visibile, condivisibile, profilo, percorso);
 		this.isHd = isHd;
 	}
 

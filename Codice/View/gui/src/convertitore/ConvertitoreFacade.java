@@ -1,6 +1,5 @@
 package convertitore;
 
-import convertitore.*;
 import convertitore.profiloUtility.ProfiloUtility;
 import db.profilo.ProfiloDB;
 import profilo.Profilo;

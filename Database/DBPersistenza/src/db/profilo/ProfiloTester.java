@@ -2,22 +2,22 @@ package db.profilo;
 
 import java.util.ArrayList;
 
-import profilo.exception.AccountDoesNotExist;
+//import profilo.exception.AccountDoesNotExist;
 
 public class ProfiloTester {
 
 	public static void main(String[] args) {
 		ProfiloDao pdao = new ProfiloDao();
 		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
-       ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, null, false, false,false, null);
-       ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, "003", "001", null, null, false, false,false, null);
+    //   ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
+     //  ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
         
-       ArrayList<ProfiloDB> c;
+      /* ArrayList<ProfiloDB> c;
 	
-		/*c = pdao.cercaProfilo(prof);
+		c = pdao.cercaProfilo(prof);
 		for(ProfiloDB pr : c)
 	    	   System.out.println(pr.toString());
-	
+	*/
        
    
        
@@ -25,7 +25,7 @@ public class ProfiloTester {
        for(ProfiloDB p : selectAll)
 			System.out.println(p.toString());
         
-        ArrayList<ProfiloDB> cercaProfilo = pdao.cercaProfilo(prof);
+       /* ArrayList<ProfiloDB> cercaProfilo = pdao.cercaProfilo(prof);
         for(ProfiloDB p : cercaProfilo)
 			System.out.println(p.toString());
         
@@ -96,21 +96,21 @@ public class ProfiloTester {
         System.out.println("Inserimento avvenuto? " +pdao.inserisciProfilo(prof));
         System.out.println("L'inserimento delle chiavi � avvenuto? " +pdao.inserisciChiavi(prof));
         System.out.println("La rimozione � avvenuta? " + pdao.rimuoviProfilo(prof));
-       */
+       
        
      /*  try {
 		System.out.println(pdao.modificaPsw(prof1.getIdProfilo(), "uva"));
 	} catch (AccountDoesNotExist e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();*/
-       
+    /*   
        try {
 		String s = pdao.ottieniPsw(prof1.getIdProfilo());
 		System.out.println(s);
 	} catch (AccountDoesNotExist e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}*/
 	}
 	}
 

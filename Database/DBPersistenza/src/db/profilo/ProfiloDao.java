@@ -36,7 +36,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11),rs1.getBoolean(12),rs1.getBoolean(13),rs1.getBoolean(14),rs1.getString(15));                                     
+				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11),rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14));                                     
 
 				result.add(p);
 			}
@@ -55,7 +55,7 @@ public class ProfiloDao implements IProfiloDao{
 
 		try
 		{
-			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,tipo,esiste) values (?,?,?,?,?,?,?,?)";
+			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,tipo,esiste,pswCambiata,isloggato) values (?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p.getIdProfilo());
@@ -66,6 +66,8 @@ public class ProfiloDao implements IProfiloDao{
 			st1.setInt(6, p.getNumPost());
 			st1.setString(7, p.getTipo());
 			st1.setBoolean(8, false);
+			st1.setBoolean(9, false);
+			st1.setBoolean(10, false);
 			
 			st1.executeUpdate();
 
@@ -124,7 +126,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11),rs1.getBoolean(12), rs1.getBoolean(13),rs1.getBoolean(14),rs1.getString(15));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14));
 
 				result.add(prof);
 			}
@@ -143,13 +145,12 @@ public class ProfiloDao implements IProfiloDao{
 
 		try
 		{
-			String query="update profilo set messaggioDiGruppo=?,messaggioPrivato=?,utente=?,post=? where idProfilo=?";
+			String query="update profilo set messaggioDiGruppo=?,messaggioPrivato=?,post=? where idProfilo=?";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p.getMessaggioDiGruppo());
 			st1.setString(2, p.getMessaggioPrivato());
-			st1.setString(3, p.getUtente());
-			st1.setString(4, p.getPost());
-			st1.setString(5, p.getIdProfilo());
+			st1.setString(3, p.getPost());
+			st1.setString(4, p.getIdProfilo());
 			
 			st1.executeUpdate();
 

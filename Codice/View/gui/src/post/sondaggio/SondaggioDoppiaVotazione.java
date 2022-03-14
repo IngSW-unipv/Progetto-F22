@@ -10,11 +10,10 @@ public class SondaggioDoppiaVotazione extends Sondaggio{
 
  
 	private int[] conteggio = new int[2];
-	public SondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-			int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
-			String primaScelta, String secondaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile, profilo, primaScelta, secondaScelta);
-		
+	public SondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
+			boolean visibile, boolean condivisibile, String profilo, String primaScelta, String secondaScelta, int [] conteggio) {
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta);
+		this.conteggio = conteggio;
 	}
 
 	public void azzeraConteggio(int [] c) {

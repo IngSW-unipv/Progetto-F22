@@ -7,11 +7,10 @@ import post.multimedia.Multimedia;
 
 public class Video extends Multimedia{
 
-	public Video(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,
-			String percorso,boolean isStory, int durataInSecondi) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,
-				profilo, tempoCancellazione, percorso, isStory);
+	public Video(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo,
+			String percorso, int durataInSecondi) {
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
+				profilo, percorso);
 		this.durataInSecondi = durataInSecondi;
 	}
 

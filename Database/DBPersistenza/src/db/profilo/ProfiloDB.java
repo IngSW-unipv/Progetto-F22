@@ -3,7 +3,7 @@ package db.profilo;
 public class ProfiloDB {
 
 	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			String tipo, String messaggioDiGruppo, String messaggioPrivato, String utente, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw) {
+			String tipo, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -14,7 +14,6 @@ public class ProfiloDB {
 		this.tipo = tipo;
 		this.messaggioDiGruppo = messaggioDiGruppo;
 		this.messaggioPrivato = messaggioPrivato;
-		this.utente = utente;
 		this.post = post;
 		this.esiste = false;
 		this.pswCambiata = false;
@@ -30,7 +29,6 @@ private int numPost;
 private String tipo;
 private String messaggioDiGruppo;
 private String messaggioPrivato;
-private String utente;
 private String post;
 private boolean esiste;
 private boolean pswCambiata;
@@ -91,12 +89,6 @@ public String getMessaggioPrivato() {
 public void setMessaggioPrivato(String messaggioPrivato) {
 	this.messaggioPrivato = messaggioPrivato;
 }
-public String getUtente() {
-	return utente;
-}
-public void setUtente(String utente) {
-	this.utente = utente;
-}
 public String getPost() {
 	return post;
 }
@@ -125,8 +117,7 @@ public void setLoggato(boolean isLoggato) {
 public String toString() {
 	return "ProfiloDB [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
-			+ utente + ", post=" + post + ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato="
+			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", post=" + post + ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato="
 			+ isLoggato + ", psw=" + psw + "]";
 }
 public String getPsw() {

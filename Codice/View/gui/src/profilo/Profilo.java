@@ -48,20 +48,21 @@ public class Profilo implements IProfilo {
 	}
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione, int numeroFollowers, int numeroSeguiti, int numeroPost, EnumProfilo visibilita, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswCambiata,boolean isLoggato, String pwd) {
+	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita, String messaggioDiGruppo, String messaggioPrivato, String post) {
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
 		this.descrizione = descrizione;
-		this.numFollower = numeroFollowers;
-		this.numSeguiti = numeroSeguiti;
-		this.numPost = numeroPost;
+		this.numFollower = 0;
+		this.numSeguiti = 0;
+		this.numPost = 0;
 		this.tipo = visibilita;
 		this.messaggioDiGruppo = messaggioDiGruppo;
 		this.messaggioPrivato = messaggioPrivato;
 		this.post = post;
-		this.loggato = loggato;
-		this.accountesistente = esiste;
-		this.isPswCambiata = pswCambiata;
+		this.loggato = false;
+		this.accountesistente = false;
+		this.isPswCambiata = false;
+		this.password = "Cambiami";
 	}
 
 

@@ -5,10 +5,9 @@ import java.sql.Time;
 import post.Post;
 
 public class Testo extends Post {
-	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean condivisibile, String profilo,
-			String font, String titolo) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,
+	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+			boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
 				profilo);
 		this.font = font;
 		this.titolo = titolo;
