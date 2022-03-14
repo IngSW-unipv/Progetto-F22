@@ -27,7 +27,7 @@ public class VideoDao implements IVideoDao{
 			try
 			{
 				st1 = conn.createStatement();
-				String query="SELECT * from video";
+				String query="SELECT * from video order by idVideo";
 				rs1=st1.executeQuery(query);
 
 				while(rs1.next())

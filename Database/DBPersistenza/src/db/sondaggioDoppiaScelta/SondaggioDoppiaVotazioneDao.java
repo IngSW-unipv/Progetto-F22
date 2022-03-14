@@ -26,7 +26,7 @@ public ArrayList<SondaggioDoppiaVotazioneDB> selectAll() {
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from sondaggiodoppiavotazione";
+			String query="SELECT * from sondaggiodoppiavotazione order by idSondaggio";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())

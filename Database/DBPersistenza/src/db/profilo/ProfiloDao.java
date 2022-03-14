@@ -31,7 +31,7 @@ public class ProfiloDao implements IProfiloDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from profilo";
+			String query="SELECT * from profilo order by idProfilo";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())
@@ -115,7 +115,7 @@ public class ProfiloDao implements IProfiloDao{
 
 		try
 		{
-			String query="SELECT * FROM profilo WHERE idProfilo=?";
+			String query="SELECT * FROM profilo WHERE idProfilo=? order by idProfilo";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p.getIdProfilo());

@@ -1,6 +1,5 @@
 package chat.chatDiGruppo.gruppo;
 
-import java.util.ArrayList;
 
 public class Gruppo {
 	

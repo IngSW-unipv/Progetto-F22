@@ -2,7 +2,6 @@ package post.multimedia.video;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import post.Post;
 import post.multimedia.Multimedia;
 

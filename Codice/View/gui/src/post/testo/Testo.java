@@ -2,7 +2,6 @@ package post.testo;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import post.Post;
 
 public class Testo extends Post {

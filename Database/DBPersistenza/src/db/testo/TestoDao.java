@@ -26,7 +26,7 @@ public class TestoDao implements ITestoDao{
 			try
 			{
 				st1 = conn.createStatement();
-				String query="SELECT * from testo";
+				String query="SELECT * from testo order by idTesto";
 				rs1=st1.executeQuery(query);
 
 				while(rs1.next())
