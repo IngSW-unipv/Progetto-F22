@@ -1,17 +1,18 @@
 package profilo;
 
 
-import java.util.ArrayList;
-//import java.util.Arrays;
-import java.util.HashMap;
+//import java.util.ArrayList;
 
-import chat.Chat;
-import convertitore.profiloUtility.ProfiloUtility;
-import db.profilo.ProfiloDB;
-import post.Post;
-import post.commento.Commento;
-import profilo.credenziali.Credenziali;
-import profilo.exception.NotLoggedIn;
+//import java.util.Arrays;
+//import java.util.HashMap;
+
+//import chat.Chat;
+//import convertitore.profiloUtility.ProfiloUtility;
+//import db.profilo.ProfiloDB;
+//import post.Post;
+//import post.commento.Commento;
+//import profilo.credenziali.Credenziali;
+//import profilo.exception.NotLoggedIn;
 
 public class Profilo implements IProfilo {
 
@@ -41,10 +42,10 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
-		this.tipo = tipo.PUBBLICO;
-		this.messaggioDiGruppo = messaggioDiGruppo;
-		this.messaggioPrivato = messaggioPrivato;
-		this.post = post;
+		//this.tipo = tipo.PUBBLICO;
+		//this.messaggioDiGruppo = messaggioDiGruppo;
+		//this.messaggioPrivato = messaggioPrivato;
+		//this.post = post;
 	}
 
 	//costruttore per la conversione profiloDB

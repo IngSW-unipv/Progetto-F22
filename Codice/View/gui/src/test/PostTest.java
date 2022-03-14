@@ -1,7 +1,6 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull; 
 import static org.junit.Assert.assertNull;
@@ -36,10 +35,10 @@ class PostTest {
 		int[] sceltaMultipla1 = {0, 0};
 		int[] sceltaMultipla2 = {0, 0, 0, 0};
 		
-		p1 = new Foto("Post1", null, null, "xxx", 0, 0, true, true, "profilo", 6000, "perc1", true, true);
-		p2 = new Video("Post2", null, null, "xxx", 0, 0, true, true, "profilo", 6000, "perc2", true, 1000);
-		p3 = new SondaggioDoppiaVotazione("Post3", null, null, "xxx", 0, 0, true, true, "profilo", "primascelta", "secondascelta", sceltaMultipla1);
-		p4 = new SondaggioSceltaMultipla("Post4", null, null, "xxx", 0, 0, true, true, "profilo", "primascelta", "secondascelta", "terzascelta", "quartascelta", sceltaMultipla2);
+		p1 = new Foto("Post1", null, null, "xxx", true, true, "profilo", "perc1", true);
+		p2 = new Video("Post2", null, null, "xxx", true, true, "profilo", "perc2", 1000);
+		p3 = new SondaggioDoppiaVotazione("Post3", null, null, "xxx", true, true, "profilo", "primascelta", "secondascelta", sceltaMultipla1);
+		p4 = new SondaggioSceltaMultipla("Post4", null, null, "xxx", true, true, "profilo", "primascelta", "secondascelta", "terzascelta", "quartascelta", sceltaMultipla2);
 		
 		ListaPost.add(p1);
 		ListaPost.add(p2);

@@ -58,7 +58,7 @@ class ChatTest {
 
 		listaMessaggi = new ArrayList<Messaggio>();
 		
-		Profilo p = new Profilo("P001", "profiloA", "descrizione del profilo", 235, 384, 21, EnumProfilo.PRIVATO, "002", "001", "francesco.ardizzoni@gmail.com", "postX");
+		Profilo p = new Profilo("P001", "profiloA", "descrizione del profilo", EnumProfilo.PRIVATO, "002", "001", "francesco.ardizzoni@gmail.com");
 		
 		Gruppo g = new Gruppo("g001", "descrizione del gruppo", "TMF-JAVA", null, "profiloB", "profiloC", "profiloD", "profiloE", "profiloF", "profiloB");
 		m2 = new MessaggioDiGruppo("ciaoo", null, null, "Tutto bene grazie", "G01", null);
