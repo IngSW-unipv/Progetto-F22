@@ -2,13 +2,8 @@ package post.multimedia.foto;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
-
-import db.foto.FotoDB;
-import db.foto.FotoDao;
 import post.Post;
 import post.multimedia.Multimedia;
-import post.multimedia.foto.utility.FotoUtility;
 
 public class Foto extends Multimedia{
 
@@ -36,39 +31,23 @@ public class Foto extends Multimedia{
 		
 		this.setStory(true);
 		this.setTempoCancellazione(time);
-		this.caricaPost(f);
 		try {
 		    Thread.sleep(time * 60 * 60 * 1000);
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
 		}
-		this.rimuoviPost(f);	
 		return true;
 	}
 
-	
-	public ArrayList<FotoDB> selectAllFoto() {
-		FotoDao fdao = new FotoDao();
-		return fdao.selectAll();
-	}
 
-
-	public boolean caricaPost(Foto p) {
-		FotoDao fdao = new FotoDao();
-		FotoUtility u = new FotoUtility();
-		boolean b = fdao.pubblicaFoto(u.converti(p));
-		return b;
-	}
-
-	
-	public boolean rimuoviPost(Foto p) {
-		FotoDao fdao = new FotoDao();
-		FotoUtility u = new FotoUtility();
-		return fdao.rimuoviFoto(u.converti(p));
-	}
 	@Override
 	public String toString() {
 		return super.toString() + ", isHd = " + isHd + "]";
 	}
 
+	@Override
+	public boolean settaDurataStoria(int tempo, Post p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

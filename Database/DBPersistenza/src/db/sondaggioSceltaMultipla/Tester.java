@@ -3,7 +3,7 @@ package db.sondaggioSceltaMultipla;
 import java.util.ArrayList;
 
 import post.sondaggio.SondaggioSceltaMultipla;
-import post.sondaggio.utility.SondaggioUtility;
+import convertitore.sondaggioUtility.*;
 
 public class Tester {
 

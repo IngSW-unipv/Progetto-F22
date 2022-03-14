@@ -3,11 +3,7 @@ package post.testo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-
-import db.testo.TestoDB;
-import db.testo.TestoDao;
 import post.Post;
-import post.testo.utility.TestoUtility;
 
 public class Testo extends Post {
 	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
@@ -36,27 +32,10 @@ public class Testo extends Post {
 		this.titolo = titolo;
 	}
 	
-	public ArrayList<TestoDB> selectAllTesto() {
-		TestoDao tdao = new TestoDao();
-		return tdao.selectAll();
-	}
-	
-	public boolean caricaPost(Testo p) {
-		TestoDao tdao = new TestoDao();
-		TestoUtility u = new TestoUtility();
-		boolean b = tdao.pubblicaTesto(u.converti(p));
-	    return b;
-	}
-	public boolean rimuoviPost(Testo p) {
-		TestoDao tdao = new TestoDao();
-		TestoUtility u = new TestoUtility();
-		return tdao.rimuoviTesto(u.converti(p));
-	}
 	@Override
 	public String toString() {
 		return super.toString() + ", font=" + font + ", titolo=" + titolo + "]";
 	}
-	
-	}
+}
 	
 	

@@ -17,84 +17,84 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class CreazionePost extends JPanel {
 
+	private int i;
+
+	private HashMap<String, JComponent> listaComponenti = new HashMap<String, JComponent>();
 	private AreaDiTesto inserimentoCommentoPost;
-	private Pulsanti homeCreazionePost;
-	private Pulsanti pubblicaPost;
-	private Pulsanti caricaFile;
-	private Etichette testoInserisciCommento;
-	private JFileChooser fileChooser;
+	private Pulsanti homeImpostazioni;
+	static String visibilita[]  = {"Pubblico", "Privato"};
 	
-	public CreazionePost() {
-		this.avvio();
+	public CreazionePost(int base, int altezza) {
+		
+		this.avvio(base, altezza);
 		this.initComponents();
 	}
 		
-	public void avvio() {
+	public void avvio(int base, int altezza) {
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
-		//this.setBounds(0,0,base,altezza);
+		this.setBounds(0,0,base,altezza);
 	}
-	
 	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 
 		containerNorth.add(new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
-
-		fileChooser = new JFileChooser();
 		
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		containerCenter.setLayout(new GridLayout(3, 1));
 		this.add(containerCenter, BorderLayout.CENTER);
-		containerCenter.add(fileChooser, BorderLayout.NORTH);
 		
-		SpecificContainer containerCommento = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		containerCenter.add(containerCommento);
-		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20);
-		testoInserisciCommento = new Etichette("Inserire il commento al post:", SwingConstants.LEFT, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN, 20));
-		containerCommento.add(testoInserisciCommento, BorderLayout.NORTH);
-		containerCommento.add(inserimentoCommentoPost, BorderLayout.CENTER);
-		
-		pubblicaPost = new Pulsanti("Pubblica post", Frame.COLORESECONDARIOTEMATICO);
+		//inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
+		//inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
+		listaComponenti.put("InserisciCommento", new JScrollPane(inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, ": )", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		listaComponenti.put("CaricaImmagine", new Pulsanti("Carica un file", Frame.COLOREPRIMARIOTEMATICO));
+		//listaComponenti.put("EtichettaInserisciCommento", new Etichette("inserisci il commento", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.put("Pubblica", new Pulsanti("Pubblica", Frame.COLOREPRIMARIOTEMATICO));
+		listaComponenti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
+
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,1,4, listaComponenti.size());
+		containerCenter.add(Dati, BorderLayout.CENTER);
 		
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
-		containerSouth.setLayout(new GridLayout(2, 1));
-		containerSouth.add(pubblicaPost);
-		containerSouth.add(homeCreazionePost = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
+		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
+	}
+
+	
+	
+
+	public void setListaComponenti(HashMap<String, JComponent> listaComponenti) {
+		this.listaComponenti = listaComponenti;
 	}
 	
-	public Pulsanti getHomeCreazionePost() {
-		return homeCreazionePost;
-	}
-
-	public Pulsanti getPubblicaPost() {
-		return pubblicaPost;
-	}
-
-	public void setPubblicaPost(Pulsanti pubblicaPost) {
-		this.pubblicaPost = pubblicaPost;
-	}
-
-	public Pulsanti getCaricaFile() {
-		return caricaFile;
-	}
-
-	public void setCaricaFile(Pulsanti caricaFile) {
-		this.caricaFile = caricaFile;
-	}
-
-	public void setHomeCreazionePost(Pulsanti homeCreazionePost) {
-		this.homeCreazionePost = homeCreazionePost;
-	}
-
-	public JFileChooser getFileChooser() {
-		return fileChooser;
-	}
-
-	public void setFileChooser(JFileChooser fileChooser) {
-		this.fileChooser = fileChooser;
+	public HashMap getListaComponenti() {
+		return this.listaComponenti;
 	}
 	
+	public String[] getVisibilita() {
+		return visibilita;
+	}
+	
+	public AreaDiTesto getCommento() {
+		return (AreaDiTesto) this.listaComponenti.get("InserisciCommento");
+	}
+	
+	public Pulsanti getPubblica() {
+		return (Pulsanti) this.listaComponenti.get("Pubblica");
+	}
+	
+	public Pulsanti getCaricaImmagine() {
+		return (Pulsanti) this.listaComponenti.get("CaricaImmagine");
+	}
+	
+	public Box getBoxVisibilita() {
+		return (Box) this.listaComponenti.get("visibilita");
+	}
+
+	public Pulsanti getHomeImpostazioni() {
+		return homeImpostazioni;
+	}
 }

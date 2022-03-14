@@ -3,8 +3,8 @@ package db.facade;
 import java.util.ArrayList;
 
 import Messaggio.MessaggioDiGruppo;
-import Messaggio.utility.MessaggioUtility;
-import Utente.exception.AccountDoesNotExist;
+//import Messaggio.utility.MessaggioUtility;
+import profilo.exception.AccountDoesNotExist;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
 import db.foto.FotoDB;
@@ -92,11 +92,10 @@ public class dbFacade {
 		return gdao.selectall();
 	}
 	
-	public ArrayList<MessaggioDiGruppoDB> cercaMessaggio(MessaggioDiGruppo m) {
+	/*public ArrayList<MessaggioDiGruppoDB> cercaMessaggio(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		MessaggioUtility u = new MessaggioUtility();
 		return mdao.cercaMessaggioDiGruppo(u.convertiMDG(m));
-	}
+	} */
 
 	
 	public void ottieniMessaggio(MessaggioDiGruppoDB m) {

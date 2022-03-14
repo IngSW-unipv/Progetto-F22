@@ -5,48 +5,65 @@ import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
 
-import Utente.Utente;
-import Utente.credenziali.Credenziali;
-import Utente.exception.AccountDoesNotExist;
 import chat.Chat;
+import convertitore.profiloUtility.ProfiloUtility;
 import db.profilo.ProfiloDB;
-import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
+import profilo.credenziali.Credenziali;
 import profilo.exception.NotLoggedIn;
-import profilo.utility.ProfiloUtility;
 
+public class Profilo implements IProfilo {
 
-public class Profilo implements IProfilo{
-
-public Profilo(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, Utente utente, String post) {
+	private String idProfilo;
+	private String nickname;
+	private String descrizione;
+	private int numFollower;
+	private int numSeguiti;
+	private int numPost;
+	private EnumProfilo tipo;
+	private String messaggioDiGruppo;
+	private String messaggioPrivato;
+	private String post;
+	//private Credenziali c;
+	private String password;
+	private boolean loggato;
+	private boolean accountesistente;
+	private boolean isPswCambiata;
+	
+	//funzione richiamata dal signUP
+	public Profilo(String idProfilo, String nickname,  String eMail, String passWord) {
 		super();
+		// funzione per prelevare l'id piu alto dal database this.idProfilo = ;
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
-		this.descrizione = descrizione;
+		this.descrizione = null;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
-		this.tipo = tipo;
+		this.tipo = tipo.PUBBLICO;
 		this.messaggioDiGruppo = messaggioDiGruppo;
 		this.messaggioPrivato = messaggioPrivato;
-		this.utente = utente;
 		this.post = post;
-		listaSeguiti = new HashMap<>();
 	}
-private String idProfilo;
-private String nickname;
-private String descrizione;
-private int numFollower;
-private int numSeguiti;
-private int numPost;
-private EnumProfilo tipo;
-private String messaggioDiGruppo;
-private String messaggioPrivato;
-private Utente utente;
-private String post;
-private HashMap <String,String> listaSeguiti;
+
+	//costruttore per la conversione profiloDB
+	public 	Profilo(String idProfilo, String nickname, String descrizione, int numeroFollowers, int numeroSeguiti, int numeroPost, EnumProfilo visibilita, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswCambiata,boolean isLoggato, String pwd) {
+		this.idProfilo = idProfilo;
+		this.nickname = nickname;
+		this.descrizione = descrizione;
+		this.numFollower = numeroFollowers;
+		this.numSeguiti = numeroSeguiti;
+		this.numPost = numeroPost;
+		this.tipo = visibilita;
+		this.messaggioDiGruppo = messaggioDiGruppo;
+		this.messaggioPrivato = messaggioPrivato;
+		this.post = post;
+		this.loggato = loggato;
+		this.accountesistente = esiste;
+		this.isPswCambiata = pswCambiata;
+	}
+
 
 public String getIdProfilo() {
 	return idProfilo;
@@ -102,12 +119,7 @@ public String getMessaggioPrivato() {
 public void setMessaggioPrivato(String messaggioPrivato) {
 	this.messaggioPrivato = messaggioPrivato;
 }
-public Utente getUtente() {
-	return utente;
-}
-public void setUtente(Utente utente) {
-	this.utente = utente;
-}
+
 public String getPost() {
 	return post;
 }
@@ -115,10 +127,32 @@ public void setPost(String post) {
 	this.post = post;
 }
 
-public void setListaSeguiti(HashMap<String, String> listaSeguiti) {
-	this.listaSeguiti = listaSeguiti;
+
+public boolean isLoggato() {
+	return loggato;
 }
 
+public void setLoggato(boolean loggato) {
+	this.loggato = loggato;
+}
+
+public boolean isAccountesistente() {
+	return accountesistente;
+}
+
+public void setAccountesistente(boolean accountesistente) {
+	this.accountesistente = accountesistente;
+}
+
+public boolean isPswCambiata() {
+	return isPswCambiata;
+}
+
+public void setPswCambiata(boolean isPswCambiata) {
+	this.isPswCambiata = isPswCambiata;
+}
+		  
+/*
 
 public static ArrayList<ProfiloDB> cercaProfilo(Profilo p) throws NotLoggedIn, AccountDoesNotExist{
 	
@@ -134,14 +168,14 @@ public static ArrayList<ProfiloDB> cercaProfilo(Profilo p) throws NotLoggedIn, A
 
 @Override
 public HashMap<String,String> modificaFollow(Profilo p) {
-    /* if (listaSeguiti.get(this.idProfilo) != p.idProfilo) {
+     if (listaSeguiti.get(this.idProfilo) != p.idProfilo) {
     	    listaSeguiti.put(this.idProfilo, p.idProfilo);
     	    this.setNumSeguiti(this.getNumSeguiti() + 1);
     	    p.setNumFollower(p.getNumFollower() + 1);
      }
      else 
     	 listaSeguiti.remove(p.idProfilo);
-     */
+     
 	 this.listaSeguiti.put(this.idProfilo, "cavallo");
 	 this.listaSeguiti.put(this.idProfilo, "mucca");
 	
@@ -257,17 +291,107 @@ public boolean caricaPost(Post p) {
 public boolean rimuoviPost(Post p) {
 	return true;
 }		
-	
-		  	
+*/
+@Override
+public int personalizzaSfondo() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int visualizzaChat() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int modificaDatiChat() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int cancellaMessaggio() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int scriviMessaggio() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int entraInGruppo() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int accettaRichiestaDinvito() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int apriChatPrivata() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int invitaUtenteAdIscriversi() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int posta() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int eliminaUnPost() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int modificaPost() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int commentaPost() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int visualizzaPost() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int aggiungiSegnaLibro() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int mettiDislike() {
+	// TODO Auto-generated method stub
+	return 0;
+}
 
-  
+@Override
+public int signUp() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+public String getPwd() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
 
 
 //>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-
-	
-	
-	
-	
-	
 }

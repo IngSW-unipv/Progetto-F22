@@ -10,9 +10,9 @@ import profilo.utility.ProfiloUtility;
 
 public class ProfiloTester {
 	
-    public static void main(String [] args) throws Exception {
+    public static void main(String [] args)ß {
 	
-    ProfiloUtility u = new ProfiloUtility();
+    /*ProfiloUtility u = new ProfiloUtility();
     Credenziali c = new Credenziali("Davide", "Mascheroni", null, null, null, "davide.mascheroni1234@gmail.com", null);
     Utente ut = new Utente(c, false, false, false, "AB10");
 	Profilo p1 = new Profilo("P01", "MyAccount", "ds", 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
@@ -24,7 +24,6 @@ public class ProfiloTester {
 	ArrayList<ProfiloDB> res = Profilo.cercaProfilo(p2);
 	
 	for(ProfiloDB pd: res)
-		System.out.println(pd.toString());
- }
-    
+		System.out.println(pd.toString());*/
+    }   
 }

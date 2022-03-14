@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Utente.exception.AccountDoesNotExist;
+import profilo.exception.AccountDoesNotExist;
 import db.connessione.DBConnection;
 
 public class ProfiloDao implements IProfiloDao{

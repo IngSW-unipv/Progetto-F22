@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
-import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDao;
-import post.sondaggio.utility.SondaggioUtility;
-
 
 public class SondaggioDoppiaVotazione extends Sondaggio{
 
@@ -56,26 +52,6 @@ public String toString() {
 	return super.toString() + ", conteggio = " + Arrays.toString(conteggio) + "]";
 }
 
-
-public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	return sdao.selectAll();
-}
-
-
-public boolean caricaPost(SondaggioDoppiaVotazione p) {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	SondaggioUtility u = new SondaggioUtility();
-	boolean b = sdao.pubblicaSondaggio(u.convertiSDV(p));
-	return b;
-}
-
-
-public boolean rimuoviPost(SondaggioDoppiaVotazione p) {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	SondaggioUtility u = new SondaggioUtility();
-	return sdao.rimuoviSondaggio(u.convertiSDV(p));
-}
 
 public int[] getConteggio() {
 	return conteggio;
