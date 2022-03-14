@@ -532,6 +532,17 @@ public class ControllerSocial{
 			return false;
 		}
 	}
+
+	
+	//GETTER E SETTER DELLA STRINGA CONTENENTE IL PERCORSO DEL POST DA PUBBLICARE
+	public String getPercorsoFile() {
+		return percorsoFile;
+	}
+
+	public void setPercorsoFile(String percorsoFile) {
+		this.percorsoFile = percorsoFile;
+	}
+	
 }
 
 
