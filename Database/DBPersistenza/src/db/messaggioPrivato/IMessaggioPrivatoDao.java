@@ -2,15 +2,13 @@ package db.messaggioPrivato;
 
 import java.util.ArrayList;
 
-import Messaggio.Messaggio;
-import Messaggio.MessaggioPrivato;
+
 
 public interface IMessaggioPrivatoDao {
-	public ArrayList<Messaggio> selectAll();//
-	public boolean scriviMessaggioPrivato(Messaggio m);//
-	public boolean inserisciChiavi(MessaggioPrivato m);
-	public boolean rimuoviMessaggioPrivato(Messaggio m);//
-	public ArrayList<Messaggio> cercaMessaggioPrivato(Messaggio m);//
-	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m);
-	public void ottieniMessaggio(Messaggio m);//
+	public ArrayList<MessaggioPrivatoDB> selectAll();
+	public boolean scriviMessaggioPrivato(MessaggioPrivatoDB m);
+	public boolean rimuoviMessaggioPrivato(MessaggioPrivatoDB m);
+	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(MessaggioPrivatoDB m);
+	public ArrayList<MessaggioPrivatoDB> selectAllNomeProfilo(MessaggioPrivatoDB m);
+	public void ottieniMessaggio(MessaggioPrivatoDB m);
 }

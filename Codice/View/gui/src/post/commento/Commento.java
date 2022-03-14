@@ -2,11 +2,9 @@ package post.commento;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
-import db.commento.CommentoDao;
 
-public class Commento implements ICommento{
+public class Commento {
 
 	public Commento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) {
 		super();
@@ -21,6 +19,7 @@ public class Commento implements ICommento{
 	private Date dataCommento;
 	private String testo;
 	private String post;
+	
 	public String getIdCommento() {
 		return idCommento;
 	}
@@ -55,24 +54,5 @@ public class Commento implements ICommento{
 	public String toString() {
 		return "Commento [idCommento=" + idCommento + ", oraCommento=" + oraCommento + ", dataCommento=" + dataCommento
 				+ ", testo=" + testo + ", post=" + post + "]";
-	}
-	@Override
-	public boolean scriviCommento(Commento c) {
-		CommentoDao cdao = new CommentoDao();
-		boolean b;
-		b = cdao.scriviCommento(c);
-		return b;
-	}
-	@Override
-	public boolean rimuoviCommento(Commento c) {
-		CommentoDao cdao = new CommentoDao();
-		boolean b;
-		b = cdao.rimuoviCommento(c);
-		return b;
-	}
-	@Override
-	public ArrayList<Commento> mostraCommentiSottoPost(Commento c) {
-		CommentoDao cdao = new CommentoDao();
-		return cdao.mostraCommentiSottoPost(c);
-	}
+	}	
 }

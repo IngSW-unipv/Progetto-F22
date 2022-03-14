@@ -1,33 +1,26 @@
 package profilo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import db.profilo.ProfiloDB;
+
 
 public class ProfiloTester {
 	
-    public static void main(String [] args) throws Exception {
+    public static void main(String [] args) {
 	
-	Profilo p1 = new Profilo("P00", "MyAccount", null, 0, 0, 0, EnumProfilo.PRIVATO, null, null, null, null);
-	Profilo p2 = new Profilo("P01", null, null, 0, 0, 0, EnumProfilo.PUBBLICO, null, null, null, "myPost");
-	Profilo p3 = new Profilo("P02", "nocera", null, 0, 0, 0, null, null, null, null, null);
-	HashMap <String, String> res = p1.modificaFollow(p2);
-	//HashMap <String, String> res = p1.modificaFollow(p2);
-	//res = p1.modificaFollow(p3);
-	for (String name: res.keySet()) {
-	    String key = name.toString();
-	    String value = res.get(name).toString();
-	    System.out.println(key + " " + value);
-	}
-
-		//System.out.println(p1);
-		//System.out.println(p2);
-		//System.out.println(p3);
-		
-		
-		
-		
-		//p2.mostraInformazioniProfilo(p1);
-		//p3.mostraInformazioniProfilo(p2);
-		
- }
-    
+    /*ProfiloUtility u = new ProfiloUtility();
+    Credenziali c = new Credenziali("Davide", "Mascheroni", null, null, null, "davide.mascheroni1234@gmail.com", null);
+    Utente ut = new Utente(c, false, false, false, "AB10");
+	Profilo p1 = new Profilo("P01", "MyAccount", "ds", 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
+	Profilo p2 = new Profilo("001", "MyAccount", null, 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
+	
+	Profilo p3 =new Profilo("P02", "Davide99", "Mi piace programmare", 0, 0, 0, EnumProfilo.PUBBLICO, "001", "004", ut, null);
+	ut.login(p3, "davide.mascheroni1234@gmail.com", "ciao");
+	
+	ArrayList<ProfiloDB> res = Profilo.cercaProfilo(p2);
+	
+	for(ProfiloDB pd: res)
+		System.out.println(pd.toString());*/
+    }   
 }

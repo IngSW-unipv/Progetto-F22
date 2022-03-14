@@ -28,7 +28,8 @@ public class TestGui {
 		chat.setVisible(true);
 		
 		ControllerSocial ctrl = new ControllerSocial(gui, bufferStories, bufferPosts);
-		ctrl.assegnaGestori();
+		ctrl.assegnaGestoriLogin();
+
 		
 
 	}

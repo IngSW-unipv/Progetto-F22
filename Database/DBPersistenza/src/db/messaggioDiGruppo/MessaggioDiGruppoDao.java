@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Messaggio.Messaggio;
-import Messaggio.MessaggioDiGruppo;
 import db.connessione.DBConnection;
 
 public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
@@ -21,9 +19,9 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 	
     @Override
-	public ArrayList<Messaggio> selectAll() {
+	public ArrayList<MessaggioDiGruppoDB> selectAll() {
 		
-		ArrayList<Messaggio> result = new ArrayList<>();
+		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -32,12 +30,12 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from messaggiodigruppo";
+			String query="SELECT * from messaggiodigruppo order by idMsgGrp";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppo msg=new MessaggioDiGruppo(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
 
 				result.add(msg);
 			}
@@ -49,22 +47,22 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
     @Override
-	public boolean scriviMessaggioDiGruppo(Messaggio m) {
+	public boolean scriviMessaggioDiGruppo(MessaggioDiGruppoDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
+			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia,gruppo) values (?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgGrp());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
 			st1.setString(5, m.getMultimedia());
-			
+			st1.setString(6, m.getIdGruppo());
 			
 			st1.executeUpdate();
 
@@ -80,7 +78,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 
     @Override
-	public boolean rimuoviMessaggioDiGruppo(Messaggio m) {
+	public boolean rimuoviMessaggioDiGruppo(MessaggioDiGruppoDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -90,7 +88,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		{
 			String query="delete from messaggiodigruppo where idMsgGrp=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgGrp());
 
 			st1.executeUpdate();
 
@@ -104,8 +102,8 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
     @Override
-	public ArrayList<Messaggio> cercaMessaggioDiGruppo(Messaggio m) {
-		ArrayList<Messaggio> result = new ArrayList<>();
+	public ArrayList<MessaggioDiGruppoDB> cercaMessaggioDiGruppo(MessaggioDiGruppoDB m) {
+		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -113,16 +111,16 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=?";
+			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=? order by idMsgGrp";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgGrp());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppo msg=new MessaggioDiGruppo(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
 
 				result.add(msg);
 			}
@@ -133,33 +131,8 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 	@Override
-	public boolean inserisciChiavi(MessaggioDiGruppo m) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update messaggioDiGruppo set gruppo=? where idMsgGrp=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
-			
-
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
-
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
-
-	@Override
-	public ArrayList<MessaggioDiGruppo> selectAllIdGruppo(MessaggioDiGruppo m) {
-		ArrayList<MessaggioDiGruppo> result = new ArrayList<>();
+	public ArrayList<MessaggioDiGruppoDB> selectAllIdGruppo(MessaggioDiGruppoDB m) {
+		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -167,7 +140,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=?";
+			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by idMsgGrp";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdGruppo());
@@ -176,7 +149,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppo msg=new MessaggioDiGruppo(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
 
 				result.add(msg);
 			}
@@ -187,7 +160,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 	@Override
-	public void ottieniTesto(Messaggio m) {
+	public void ottieniTesto(MessaggioDiGruppoDB m) {
 	
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -198,7 +171,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 			String query="SELECT testo FROM messaggiodigruppo WHERE idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgGrp());
 
 			rs1=st1.executeQuery();
 

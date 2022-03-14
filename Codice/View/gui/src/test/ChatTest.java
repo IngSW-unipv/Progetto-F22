@@ -2,6 +2,15 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.junit.Before;
+
+import java.sql.Date;
+import java.sql.Time;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull; 
 import static org.junit.Assert.assertNull;
@@ -31,13 +40,22 @@ import Messaggio.MessaggioPrivato;
 class ChatTest {
 	
 	private Chat c1, c2;
+
+	private Profilo p;
+	private ArrayList<Messaggio> listaMessaggi = new ArrayList<Messaggio>();
+
 	private ArrayList<Messaggio> listaMessaggi;
 	private Messaggio m1, m2;
-	
+
+	/**
+	 * Crea due chat che poi comparerò.
+	 * Crea inoltre due liste di ruoli per istanziare correttamente i due compiti.
+	 * */
+
 	//verifico che posso istanziare correttamente le chat
 	@Before
 	public void initTestChat() {
-		
+
 		listaMessaggi = new ArrayList<Messaggio>();
 		
 		Profilo p = new Profilo("P001", "profiloA", "descrizione del profilo", 235, 384, 21, EnumProfilo.PRIVATO, "002", "001", "francesco.ardizzoni@gmail.com", "postX");
@@ -48,8 +66,6 @@ class ChatTest {
 		
 		m1 = new MessaggioPrivato("ciao", null, null, "Ciao Sara, come va?", "G00", "P001", "P003");
 		c1 = new ChatPrivata(p);
-		
-		
 		
 		listaMessaggi.add(m1);
 		listaMessaggi.add(m2);		

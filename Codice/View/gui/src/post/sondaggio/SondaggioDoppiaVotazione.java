@@ -2,23 +2,18 @@ package post.sondaggio;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDao;
-import post.Post;
 
 
 public class SondaggioDoppiaVotazione extends Sondaggio{
 
  
 	private int[] conteggio = new int[2];
-	public SondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-			int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
-			String primaScelta, String secondaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile, profilo, primaScelta, secondaScelta);
-		
+	public SondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
+			boolean visibile, boolean condivisibile, String profilo, String primaScelta, String secondaScelta, int [] conteggio) {
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta);
+		this.conteggio = conteggio;
 	}
 
 	public void azzeraConteggio(int [] c) {
@@ -53,26 +48,6 @@ public class SondaggioDoppiaVotazione extends Sondaggio{
 @Override
 public String toString() {
 	return super.toString() + ", conteggio = " + Arrays.toString(conteggio) + "]";
-}
-
-@Override
-public ArrayList<Post> selectAll() {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	return sdao.selectAll();
-}
-
-@Override
-public boolean caricaPost(Post p) {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	boolean b = sdao.pubblicaSondaggio(p);
-	sdao.aggiungiScelte(p, this.getPrimaScelta(), this.getSecondaScelta());
-	return b;
-}
-
-@Override
-public boolean rimuoviPost(Post p) {
-	SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-	return sdao.rimuoviSondaggio(p);
 }
 
 

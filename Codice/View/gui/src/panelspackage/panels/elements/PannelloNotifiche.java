@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,9 +20,10 @@ public class PannelloNotifiche extends JPanel {
 	private Font fontTitolo;
 	int i;
 	//public Pulsanti[] listaPulsanti;
-	private ArrayList<Pulsanti> listaPulsanti  = new ArrayList<Pulsanti>();
+	private HashMap<String, JButton> mappaPulsanti  = new HashMap<String, JButton>();
 	private JLabel titoloNotifiche;
 	private JButton eliminaNotifiche;
+	private JButton homeNotifiche;
 	
 	public PannelloNotifiche(/*ArrayList<String> contenuto, ArrayList<String> tipo*/ ) {
 		
@@ -33,30 +35,41 @@ public class PannelloNotifiche extends JPanel {
 		fontTitolo = new Font("Arial", Font.BOLD | Font.ITALIC, 30);
 		eliminaNotifiche = new JButton("Elimina notifiche");
 		
+		homeNotifiche = new JButton("Torna alla home");
+		
 		titoloNotifiche = new JLabel("NOTIFICHE", SwingConstants.CENTER);
 		titoloNotifiche.setFont(fontTitolo);
 		titoloNotifiche.setForeground(Color.WHITE);
 		
 		SpecificContainer containerNorth = new SpecificContainer();
 		SpecificContainer containerSouth = new SpecificContainer();
+		SpecificContainer containerPulsanti = new SpecificContainer();
+		
 		this.add(containerNorth, BorderLayout.NORTH);
 		containerNorth.add(titoloNotifiche);
 		this.add(containerSouth, BorderLayout.SOUTH);
-		containerSouth.add(eliminaNotifiche);
+		containerSouth.add(containerPulsanti);
+		containerPulsanti.setLayout(new GridLayout(2, 1));
+		containerPulsanti.add(eliminaNotifiche);
+		containerPulsanti.add(homeNotifiche);
+		
+		mappaPulsanti.put("eliminaNotifiche", eliminaNotifiche);
+		mappaPulsanti.put("homeNotifiche", homeNotifiche);
 		/*containerCenter.setLayout(new GridLayout(contenuto.size(),1));
 		
 		for (i = 0; i < 5; i ++) {
 			listaPulsanti.add(new Pulsanti(contenuto.get(i), ARANCIONE));
 			containerCenter.add(listaPulsanti.get(i));
 		}*/
+		
 	}
 
-	public ArrayList<Pulsanti> getListaPulsanti() {
-		return listaPulsanti;
+	public JButton getEliminaNotifiche() {
+		return (JButton) mappaPulsanti.get("eliminaProfilo");
 	}
-
-	public void setListaPulsanti(ArrayList<Pulsanti> listaPulsanti) {
-		this.listaPulsanti = listaPulsanti;
+	
+	public JButton getHomeNotifiche() {
+		return (JButton) mappaPulsanti.get("homeNotifiche");
 	}
 
 }

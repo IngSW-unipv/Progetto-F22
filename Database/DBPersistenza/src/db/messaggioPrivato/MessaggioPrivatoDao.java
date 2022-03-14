@@ -6,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Messaggio.Messaggio;
-import Messaggio.MessaggioPrivato;
 import db.connessione.DBConnection;
 
 public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
@@ -22,9 +20,9 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 	}
 
     @Override
-	public ArrayList<Messaggio> selectAll() {
+	public ArrayList<MessaggioPrivatoDB> selectAll() {
 
-		ArrayList<Messaggio> result = new ArrayList<>();
+		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -33,12 +31,12 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		try
 		{
 			st1 = conn.createStatement();
-			String query="SELECT * from messaggioprivato";
+			String query="SELECT * from messaggioprivato order by idMsgPvt";
 			rs1=st1.executeQuery(query);
 
 			while(rs1.next())
 			{
-				MessaggioPrivato msg=new MessaggioPrivato(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
+				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
 
 				result.add(msg);
 			}
@@ -50,21 +48,23 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public boolean scriviMessaggioPrivato(Messaggio m) {
+	public boolean scriviMessaggioPrivato(MessaggioPrivatoDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into messaggioprivato (idMsgPvt,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
+			String query="insert into messaggioprivato (idMsgPvt,dataInvio,oraInvio,testo,multimedia,profiloInviante,profiloRicevente) values (?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgPvt());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
 			st1.setString(5, m.getMultimedia());
+			st1.setString(6, m.getProfiloInviante());
+			st1.setString(7, m.getProfiloRicevente());
 			
 			st1.executeUpdate();
 
@@ -80,7 +80,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public boolean rimuoviMessaggioPrivato(Messaggio m) {
+	public boolean rimuoviMessaggioPrivato(MessaggioPrivatoDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -90,7 +90,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		{
 			String query="delete from messaggioPrivato where idMsgPvt=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgPvt());
 
 			st1.executeUpdate();
 
@@ -105,8 +105,8 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
     @Override
-	public ArrayList<Messaggio> cercaMessaggioPrivato(Messaggio m) {
-		ArrayList<Messaggio> result = new ArrayList<>();
+	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(MessaggioPrivatoDB m) {
+		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -114,16 +114,16 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=?";
+			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgPvt());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				MessaggioPrivato msg=new MessaggioPrivato(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
+				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -132,37 +132,9 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		return result;
 	}
 
-
 	@Override
-	public boolean inserisciChiavi(MessaggioPrivato m) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update messaggioPrivato set profiloInviante=?,profiloRicevente=? where idMsgPvt=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdProfiloInviante());
-			st1.setString(2, m.getIdProfiloInviante());
-			st1.setString(3, m.getIdMessaggio());
-
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
-
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
-
-
-	@Override
-	public ArrayList<MessaggioPrivato> selectAllNomeProfilo(MessaggioPrivato m) {
-		ArrayList<MessaggioPrivato> result = new ArrayList<>();
+	public ArrayList<MessaggioPrivatoDB> selectAllNomeProfilo(MessaggioPrivatoDB m) {
+		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -170,16 +142,16 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		
 		try
 		{
-			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=?";
+			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdProfiloRicevente());
+			st1.setString(1, m.getIdMsgPvt());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				MessaggioPrivato msg=new MessaggioPrivato(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
+				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -190,7 +162,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public void ottieniMessaggio(Messaggio m) {
+	public void ottieniMessaggio(MessaggioPrivatoDB m) {
 		
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -201,7 +173,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="SELECT testo FROM messaggioprivato WHERE idMsgPvt=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
+			st1.setString(1, m.getIdMsgPvt());
 
 			rs1=st1.executeQuery();
 

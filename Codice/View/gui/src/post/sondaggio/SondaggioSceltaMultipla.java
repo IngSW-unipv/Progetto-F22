@@ -2,21 +2,18 @@ package post.sondaggio;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDao;
-import post.Post;
 
 public class SondaggioSceltaMultipla extends Sondaggio{
 
 	public SondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-			int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
+			boolean visibile, boolean condivisibile, String profilo,
 			String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, numLike, numDislike, visibile, condivisibile,	profilo, primaScelta, secondaScelta);
+		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,	profilo, primaScelta, secondaScelta);
 		this.terzaScelta = terzaScelta;
 		this.quartaScelta = quartaScelta;
+		this.conteggio = conteggio;
 	}
 
 	private String terzaScelta;
@@ -86,25 +83,6 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 				+ "L'opzione " + this.getQuartaScelta() + " ha totalizzato " + this.conteggio[3] + " voti\n");
 	}
 
-	@Override
-	public ArrayList<Post> selectAll() {
-		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		return sdao.selectAll();
-	}
-
-	@Override
-	public boolean caricaPost(Post p) {
-		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		boolean b = sdao.pubblicaSondaggio(p);
-		sdao.aggiungiScelte(p, this.getPrimaScelta(), this.getSecondaScelta(), this.getTerzaScelta(), this.getQuartaScelta());
-		return b;
-	}
-
-	@Override
-	public boolean rimuoviPost(Post p) {
-		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		return sdao.rimuoviSondaggio(p);
-	}
 
 	@Override
 	public String toString() {

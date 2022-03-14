@@ -51,7 +51,7 @@ public abstract class Messaggio {
 	}
 	@Override
 	public String toString() {
-		return "Messaggio [idMessaggio=" + idMessaggio + ", dataInvio=" + dataInvio + ", oraInvio=" + oraInvio
-				+ ", testo=" + testo + ", multimedia=" + multimedia + "]";
+		return "idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
+				+ ", testo = " + testo + ", multimedia = " + multimedia ;
 	}	
 }
