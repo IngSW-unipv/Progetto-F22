@@ -26,7 +26,7 @@ public class Frame extends JFrame {
 	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	
 	
 	private int varHome = 1, varLogin = 0,varProfilo = 0, varImpostazioni = 0,
-				varChat = 0,varChatMessaggi = 0, varPostVisualizzato = 0, varNotifiche = 0;
+				varChat = 0,varChatMessaggi = 0, varPostVisualizzato = 0, varNotifiche = 0, varCreazionePost = 0;
 	
 	private HashMap<String, JPanel> listaSchermateAttive = new HashMap<String, JPanel>();
 	private Layers layers;
@@ -42,7 +42,7 @@ public class Frame extends JFrame {
 		
 		
 		this.avvio();
-		this.aviaCreazionePost(800,775);
+	//	this.avviaCreazionePost();
 	//	this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
 	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
@@ -73,9 +73,9 @@ public class Frame extends JFrame {
 		this.listaSchermateAttive.put("Home", home);
 	}
 	
-	public void aviaCreazionePost(int base, int altezza) {
-		CreazionePost creazionePost = new CreazionePost(base,  altezza);
-		getLayers().add(creazionePost, new  Integer(2), 0);
+	public void avviaCreazionePost() {
+		CreazionePost creazionePost = new CreazionePost();
+		getLayers().add(creazionePost, new  Integer(varCreazionePost), 0);
 		creazionePost.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("CreazionePost", creazionePost);
 	}
@@ -126,7 +126,6 @@ public class Frame extends JFrame {
 		layers.add(signUp, new  Integer(0), 0);
 		signUp.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("SignUp", signUp);
-
 	}
 	
 	public int getVarHome() {
@@ -169,6 +168,14 @@ public class Frame extends JFrame {
 		this.varNotifiche = varNotifiche;
 	}
 	
+	public int getVarCreazionePost() {
+		return varCreazionePost;
+	}
+
+	public void setVarCreazionePost(int varCreazionePost) {
+		this.varCreazionePost = varCreazionePost;
+	}
+
 	public int getVarNotifiche() {
 		return varNotifiche;
 	}
@@ -217,6 +224,10 @@ public class Frame extends JFrame {
 
 	public Chat getChat() {
 		return (Chat)listaSchermateAttive.get("Chat");	
+	}
+	
+	public CreazionePost getCreazionePost() {
+		return (CreazionePost)listaSchermateAttive.get("CreazionePost");
 	}
 
 	public ArrayList<String> getRisultatiRicerca() {

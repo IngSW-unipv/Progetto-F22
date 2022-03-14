@@ -2,8 +2,8 @@ package controller;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-
 import panelspackage.panels.Chat;
+import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
@@ -25,6 +25,7 @@ public class ControllerSocial{
 	private PostVisualizzato postVisualizzatoView;
 	private PannelloNotifiche pannelloNotificheView;
 	private LogIn loginView;
+	private CreazionePost creazionePostView;
 	//Inserire modello con metodi per la home 
 	
 	//ActionListener login
@@ -67,6 +68,11 @@ public class ControllerSocial{
 	private ActionListener gestoreListaChat;
 	private String[] tmp = {"1", "2", "3"};
 	
+	//ActionListener pubblicazione post
+	private ActionListener gestoreCaricamentoPost;
+	private ActionListener gestoreHomeCreazionePost;
+	private ActionListener gestorePubblicazionePost;
+	
 	public ControllerSocial(Frame frameSocial, ArrayList<String>bufferStories, ArrayList<String>bufferPosts) {
 		this.bufferStories = bufferStories;
 		this.bufferPosts = bufferPosts;
@@ -98,7 +104,7 @@ public class ControllerSocial{
 					homeView = frameSocial.getHome();
 					chatView = frameSocial.getChat();
 					profiloView = frameSocial.getProfilo();
-					
+					creazionePostView = frameSocial.getCreazionePost();
 					assegnaGestoriHome();
 				}
 			}
@@ -117,7 +123,6 @@ public class ControllerSocial{
 	
 	//Vari actionlistener
 	public void assegnaGestoriHome() {
-		
 		//ACTIONLISTENER PULSANTI PANNELLO HOME
 		gestoreImpostazioni = new ActionListener() {
 			@Override
@@ -260,8 +265,12 @@ public class ControllerSocial{
 		gestorePubblicaPost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Inserire metodi
-				System.out.println("pubblica post");
+				frameSocial.setVarHome(0);
+				frameSocial.getHome().setVisible(false);
+				frameSocial.setVarCreazionePost(1);
+				creazionePostView = frameSocial.getCreazionePost();
+				frameSocial.avviaCreazionePost();
+				assegnaGestoriPubblicazionePost();
 			}
 		};
 		homeView.getpPost().addActionListener(gestorePubblicaPost);
@@ -295,6 +304,38 @@ public class ControllerSocial{
 			}
 		};
 		homeView.getpIdea().addActionListener(gestorePubblicaIdea);
+	}
+
+	public void assegnaGestoriPubblicazionePost() {
+		//ACTIONLISTENER PULSANTI CREAZIONE POST
+		gestoreCaricamentoPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi caricamento
+			}
+		};
+		creazionePostView.getCaricaPost().addActionListener(gestoreCaricamentoPost);
+		
+		gestorePubblicazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//Metodi pubblicazione post
+			}
+		};
+		creazionePostView.getPubblicaPost().addActionListener(gestorePubblicazionePost);
+		
+		gestoreHomeCreazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameSocial.setVarCreazionePost(0);
+				frameSocial.getCreazionePost().setVisible(false);
+				frameSocial.setVarHome(1);
+				frameSocial.getHome().setVisible(true);
+				assegnaGestoriHome();
+			}
+		};
+		creazionePostView.getHomeCreazionePost().addActionListener(gestoreHomeCreazionePost);
+		
 	}
 	
 	public void assegnaGestoriProfilo() {
