@@ -64,7 +64,12 @@ public class ControllerSocial{
 	
 	//ActionListener PostVisualizzato
 	private ActionListener gestoreHomePostVisualizzato;
+	
+	//ActionListener Profilo
 	private ActionListener gestoreHomeProfilo;
+	private ActionListener gestoreVisualizzaImmagineProfilo;
+	
+	//ActionListener Chat
 	private ActionListener gestoreHomeChat;
 	private ActionListener gestoreListaChat;
 	private String[] tmp = {"1", "2", "3"};
@@ -145,7 +150,7 @@ public class ControllerSocial{
 				frameSocial.setVarHome(0);
 				frameSocial.getHome().setVisible(false);
 				frameSocial.setVarProfilo(1);
-				frameSocial.avviaProfilo("Marco", 10, 19, 20, "ImmagineProfilo", tmp);
+				frameSocial.avviaProfilo("Marco", 10, 19, 20, "immagini/Tony.jpeg", bufferStories);
 				
 				profiloView = frameSocial.getProfilo();
 				assegnaGestoriProfilo();
@@ -343,6 +348,7 @@ public class ControllerSocial{
 	}
 	
 	public void assegnaGestoriProfilo() {
+		//ACTION LISTENER PROFILO
 		gestoreHomeProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -354,6 +360,15 @@ public class ControllerSocial{
 			}
 		};
 		profiloView.getHomeProfilo().addActionListener(gestoreHomeProfilo);
+		
+		gestoreVisualizzaImmagineProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frameSocial.setVarProfilo(0);
+				frameSocial.getProfilo().setVisible(false);
+			}
+		};
+		profiloView.getImmagineProf().addActionListener(gestoreVisualizzaImmagineProfilo);
 	}
 		
 	public void assegnaGestoriImpostazioni() {
@@ -532,6 +547,10 @@ public class ControllerSocial{
 			return false;
 		}
 	}
+	
+	public void assegnaGestoriSchermataHome() {
+		
+	}
 
 	
 	//GETTER E SETTER DELLA STRINGA CONTENENTE IL PERCORSO DEL POST DA PUBBLICARE
@@ -542,6 +561,8 @@ public class ControllerSocial{
 	public void setPercorsoFile(String percorsoFile) {
 		this.percorsoFile = percorsoFile;
 	}
+	
+	
 	
 }
 

@@ -45,6 +45,13 @@ public class CreazionePost extends JPanel {
 		containerNorth.add(new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
 		
 		fileChooser = new JFileChooser();
+		fileChooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Only text post (.txt)", "txt");
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter("Image post (.png)", "png");
+        FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Image post (.jpg)", "jpg");
+        fileChooser.addChoosableFileFilter(filter);
+        fileChooser.addChoosableFileFilter(filter1);
+        fileChooser.addChoosableFileFilter(filter2);
 		
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);

@@ -24,7 +24,7 @@ public class MessaggioUtility{
 		return mdb;
 	}
 	
-	public MessaggioDiGruppo convertiAMessGrp(MessaggioDiGruppoDB m) {
+	public  static MessaggioDiGruppo convertiAMessGrp(MessaggioDiGruppoDB m) {
 		MessaggioDiGruppo mdb = new MessaggioDiGruppo(m.getIdMsgGrp(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getIdGruppo());
 		return mdb;
 	}
