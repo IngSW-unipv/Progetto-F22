@@ -33,6 +33,7 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import convertitore.ConvertitoreFacade;
+import convertitore.messaggioUtility.MessaggioUtility;
 
 
 public class dbFacade {
