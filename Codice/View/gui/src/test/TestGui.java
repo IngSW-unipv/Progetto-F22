@@ -1,10 +1,10 @@
 package test;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 import packageframe.Frame;
 import controller.ControllerSocial;
 import panelspackage.panels.Chat;
-import panelspackage.panels.Home;
+//import panelspackage.panels.Home;
 
 public class TestGui {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
@@ -36,6 +36,7 @@ public class TestGui {
 	public String[] getListaImmaginiPost() {
 		return listaImmaginiPost;
 	}
+	@SuppressWarnings("static-access")
 	public void setListaImmaginiPost(String[] listaImmaginiPost) {
 		this.listaImmaginiPost = listaImmaginiPost;
 	}	
