@@ -24,7 +24,7 @@ public class  Profilo extends JPanel {
 	private Etichette etichettaNome;
 
 	
-	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
+	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		
 		this.avvio();
 		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
@@ -38,7 +38,7 @@ public class  Profilo extends JPanel {
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
 	}
 	
-	public void initComponents(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] immaginiPost) {
+	public void initComponents(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
@@ -63,13 +63,13 @@ public class  Profilo extends JPanel {
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);
 		
-		SpecificContainer containerCenter = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO, Frame.COLORESECONDARIOTEMATICO);
+		SpecificContainer containerCenter = new SpecificContainer();
 		this.add(containerCenter, BorderLayout.CENTER);
 		containerCenter.setLayout(new GridLayout(3,3));
 
 		ListaPost.clear();
-		for( i = 0; i < immaginiPost.length || i > 9 ; i++) {
-			ListaPost.add(new LabeledIcon(immaginiPost[i]));
+		for( i = 0; i < immaginiPost.size() && i < 9 ; i++) {
+			ListaPost.add(new LabeledIcon(immaginiPost.get(i)));
 			containerCenter.add(ListaPost.get(i));
 		}
 		
@@ -96,6 +96,14 @@ public class  Profilo extends JPanel {
 
 	public void setHomeProfilo(Pulsanti homeProfilo) {
 		this.homeProfilo = homeProfilo;
+	}
+
+	public Pulsanti getImmagineProf() {
+		return immagineProf;
+	}
+
+	public void setImmagineProf(Pulsanti immagineProf) {
+		this.immagineProf = immagineProf;
 	}
 	
 }

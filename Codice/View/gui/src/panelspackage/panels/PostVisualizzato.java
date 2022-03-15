@@ -20,10 +20,11 @@ public class PostVisualizzato extends JPanel{
 		private JTextArea areaDescrizione;
 		private JButton homePostVisualizzato;
 		private SpecificContainer containerNorth;
-		public PostVisualizzato() {
+		private String percorsoPost;
+		public PostVisualizzato(String percorsoPost) {
 			//String postImmagine, String postCommenti[], String utentiCommenti[], int numeroMiPiace, int numeroNonMipiace
 			//da eliminare
-			String postImmagine = "lol";
+			this.percorsoPost = percorsoPost;
 			String postcommenti[];
 			String utentiCommenti[];
 			int numeroMiPiace = 10;
@@ -52,7 +53,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerPost = new SpecificContainer();
 			containerCenter.add(containerPost, BorderLayout.CENTER);
 			
-			LabeledIcon post = new LabeledIcon(postImmagine);
+			LabeledIcon post = new LabeledIcon(percorsoPost);
 			containerPost.add(post, BorderLayout.CENTER);
 			SpecificContainer containerCosePost = new SpecificContainer();
 			JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");

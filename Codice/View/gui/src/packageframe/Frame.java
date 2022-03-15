@@ -42,6 +42,7 @@ public class Frame extends JFrame {
 		
 		
 		this.avvio();
+		this.avvioPostVisualizzato();
 	//	this.avviaCreazionePost();
 	//	this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
@@ -87,7 +88,7 @@ public class Frame extends JFrame {
 		this.listaSchermateAttive.put("Impostazioni", impostazioni);
 	}
 	
-	public void avviaProfilo(String nomeUtente, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost) {
+	public void avviaProfilo(String nomeUtente, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> listaImmaginiPost) {
 	Profilo profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
 	layers.add(profilo, new  Integer(1), 0);
 	profilo.setBounds(0,0,800,775);
@@ -106,6 +107,13 @@ public class Frame extends JFrame {
 		layers.add(pannelloNotifiche, new Integer(varNotifiche), 0);
 		pannelloNotifiche.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("PannelloNotifiche", pannelloNotifiche);
+	}
+	
+	public void avvioPostVisualizzato() {
+		PostVisualizzato postVisualizzato = new PostVisualizzato("immagini/Tony.jpeg");
+		layers.add(postVisualizzato, new Integer(varPostVisualizzato), 0);
+		postVisualizzato.setBounds(0,0,800,775);
+		this.listaSchermateAttive.put("PannelloNotifiche", postVisualizzato);
 	}
 	
 	public void avviaSchermataRicerca(String profilo, ArrayList<String> risultatiRicerca) {
