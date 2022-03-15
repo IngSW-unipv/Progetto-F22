@@ -4,6 +4,5 @@
 	<classpathentry kind="src" path="Codice/View/gui/src"/>
 	<classpathentry kind="src" path="Database/DBPersistenza/src"/>
 	<classpathentry kind="lib" path="Database/DBPersistenza/Connettore/mysql-connector-java-8.0.27.jar" sourcepath="Database/DBPersistenza/Connettore/mysql-connector-java-8.0.27.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="Codice/View/gui/bin"/>
 </classpath>
