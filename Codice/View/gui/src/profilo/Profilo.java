@@ -29,7 +29,7 @@ public class Profilo implements IProfilo {
 	private boolean isPswCambiata;
 	
 	//funzione richiamata dal signUP
-	public Profilo(String idProfilo, String nickname,  String eMail, String passWord) {
+	public Profilo(String idProfilo, String nickname) {
 		super();
 		// funzione per prelevare l'id piu alto dal database this.idProfilo = ;
 		this.idProfilo = idProfilo;

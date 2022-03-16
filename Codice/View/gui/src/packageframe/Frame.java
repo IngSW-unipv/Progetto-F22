@@ -42,7 +42,7 @@ public class Frame extends JFrame {
 		
 		
 		this.avvio();
-		this.avvioPostVisualizzato();
+	//	this.avvioPostVisualizzato();
 	//	this.avviaCreazionePost();
 	//	this.avvioHome(bufferStories, bufferPosts);
 	//	this.avviaImpostazioni(nomeUtente);
