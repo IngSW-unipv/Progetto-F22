@@ -6,4 +6,5 @@ public interface IFotoDao {
 	public ArrayList<FotoDB> selectAll();
 	public boolean pubblicaFoto(FotoDB f);
 	public boolean rimuoviFoto(FotoDB f);
+	public ArrayList<FotoDB> cercaFoto(String f);
 }

@@ -122,7 +122,7 @@ public boolean cancellaGruppo(GruppoDB g) {
 	return esito;
 }
 @Override
-public ArrayList<GruppoDB> cercaGruppo(GruppoDB g) {
+public ArrayList<GruppoDB> cercaGruppo(String g) {
 	ArrayList<GruppoDB> result = new ArrayList<>();
 
 	conn=DBConnection.startConnection(conn,schema);
@@ -131,10 +131,10 @@ public ArrayList<GruppoDB> cercaGruppo(GruppoDB g) {
 
 	try
 	{
-		String query="SELECT * FROM Gruppo WHERE idGruppo=? order by idGruppo";
+		String query="SELECT * FROM Gruppo WHERE idGruppo=?";
 
 		st1 = conn.prepareStatement(query);
-		st1.setString(1, g.getIdGruppo());
+		st1.setString(1, g);
 
 		rs1=st1.executeQuery();
 

@@ -98,6 +98,34 @@ public boolean rimuoviSondaggio(SondaggioDoppiaVotazioneDB p) {
 	DBConnection.closeConnection(conn);
 	return esito;
 }
+@Override
+public ArrayList<SondaggioDoppiaVotazioneDB> cercaSondaggio(String s) {
+	ArrayList<SondaggioDoppiaVotazioneDB> result = new ArrayList<>();
+
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	ResultSet rs1;
+
+	try
+	{
+		String query="SELECT * FROM sondaggiodoppiavotazione WHERE idSondaggio=?";
+
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, s);
+
+		rs1=st1.executeQuery();
+
+		while(rs1.next())
+		{
+			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
+
+			result.add(sdb);
+		}
+	}catch (Exception e){e.printStackTrace();}
+
+	DBConnection.closeConnection(conn);
+	return result;
+}
 
 
 }

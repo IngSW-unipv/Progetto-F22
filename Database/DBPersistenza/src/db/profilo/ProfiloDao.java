@@ -108,7 +108,7 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	
-	public ArrayList<ProfiloDB> cercaProfilo(ProfiloDB p) {
+	public ArrayList<ProfiloDB> cercaProfilo(String p) {
 		ArrayList<ProfiloDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -120,7 +120,7 @@ public class ProfiloDao implements IProfiloDao{
 			String query="SELECT * FROM profilo WHERE idProfilo=? order by idProfilo";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, p.getIdProfilo());
+			st1.setString(1, p);
 
 			rs1=st1.executeQuery();
 

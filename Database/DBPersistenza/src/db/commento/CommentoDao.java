@@ -96,4 +96,33 @@ public class CommentoDao implements ICommentoDao{
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+
+	@Override
+	public ArrayList<CommentoDB> cercaCommento(String c) {
+		ArrayList<CommentoDB> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT * FROM commento WHERE idCommento=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, c);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5));
+
+				result.add(com);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
 }

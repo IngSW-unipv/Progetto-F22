@@ -105,7 +105,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
     @Override
-	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(MessaggioPrivatoDB m) {
+	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(String m) {
 		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -117,7 +117,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="SELECT * FROM messaggioprivato WHERE idMsgPvt=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m);
 
 			rs1=st1.executeQuery();
 

@@ -102,7 +102,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
     @Override
-	public ArrayList<MessaggioDiGruppoDB> cercaMessaggioDiGruppo(MessaggioDiGruppoDB m) {
+	public ArrayList<MessaggioDiGruppoDB> cercaMessaggioDiGruppo(String m) {
 		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -111,10 +111,10 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=? order by idMsgGrp";
+			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m);
 
 			rs1=st1.executeQuery();
 

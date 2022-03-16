@@ -18,7 +18,7 @@ public class MessaggioDiGruppoTester {
 		
 		mdao.ottieniTesto(MessaggioUtility.convertiAMessGrupDB(m));
 		
-		 ArrayList<MessaggioDiGruppoDB> cercaMessaggio = mdao.cercaMessaggioDiGruppo(MessaggioUtility.convertiAMessGrupDB(m));
+		 ArrayList<MessaggioDiGruppoDB> cercaMessaggio = mdao.cercaMessaggioDiGruppo(m.getIdMessaggio());
 	     for(MessaggioDiGruppoDB msg : cercaMessaggio)
 				System.out.println(msg.toString());
 	          
