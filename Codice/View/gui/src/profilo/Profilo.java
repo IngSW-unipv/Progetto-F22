@@ -347,9 +347,9 @@ public int modificaLike(Post p) {
 }
 
 @Override
-public int signUp() {
+public boolean signUp() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 
 public String getPwd() {
