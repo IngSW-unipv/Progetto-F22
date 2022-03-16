@@ -64,61 +64,61 @@ public class ConvertitoreFacade {
 	public ProfiloDB converti(Profilo p) {
 		return pUtility.convertiAProfiloDB(p);
 	}
-	public Profilo convertiinverso(ProfiloDB pdb) {
+	public Profilo convertiInverso(ProfiloDB pdb) {
 		return pUtility.convertiAProfilo(pdb);
 	}
 	public FotoDB converti(Foto f) {
 		return fUtility.convertiAFotoDB(f);
 	}
-	public Foto convertiinverso(FotoDB fdb) {
+	public Foto convertiInverso(FotoDB fdb) {
 		return fUtility.convertiAFoto(fdb);
 	}
 	public CommentoDB converti(Commento c) {
 		return cUtility.convertiACommentoDB(c);
 	}
-	public Commento convertiinverso(CommentoDB cdb) {
+	public Commento convertiInverso(CommentoDB cdb) {
 		return cUtility.convertiACommento(cdb);
 	}
 	public GruppoDB converti(Gruppo g) {
 		return gUtility.convertiAGruppoDB(g);
 	}
-	public Gruppo convertiinverso(GruppoDB gdb) {
+	public Gruppo convertiInverso(GruppoDB gdb) {
 		return gUtility.convertiAGruppo(gdb);
 	}
 	public MessaggioPrivatoDB converti(MessaggioPrivato m) {
 		return mUtility.convertiAMessPrivDB(m);
 	}
-	public MessaggioPrivato convertiinverso(MessaggioPrivatoDB mdb) {
+	public MessaggioPrivato convertiInverso(MessaggioPrivatoDB mdb) {
 		return mUtility.convertiAMessPriv(mdb);
 	}
 	public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
 		return mUtility.convertiAMessGrupDB(m);
 	}
-	public MessaggioDiGruppo convertiinverso(MessaggioDiGruppoDB mdb) {
+	public MessaggioDiGruppo convertiInverso(MessaggioDiGruppoDB mdb) {
 		return mUtility.convertiAMessGrp(mdb);
 	}
 	public SondaggioDoppiaVotazioneDB converti(SondaggioDoppiaVotazione s) {
 		return sUtility.convertiASondDopDB(s);
 	}
-	public SondaggioDoppiaVotazione convertiinverso(SondaggioDoppiaVotazioneDB sdb) {
+	public SondaggioDoppiaVotazione convertiInverso(SondaggioDoppiaVotazioneDB sdb) {
 		return sUtility.convertiASondDop(sdb);
 	}
 	public SondaggioSceltaMultiplaDB converti(SondaggioSceltaMultipla s) {
 		return sUtility.convertiASondMulDB(s);
 	}
-	public SondaggioSceltaMultipla convertiinverso(SondaggioSceltaMultiplaDB sdb) {
+	public SondaggioSceltaMultipla convertiInverso(SondaggioSceltaMultiplaDB sdb) {
 		return sUtility.convertiASondMul(sdb);
 	}
 	public TestoDB converti(Testo t) {
 		return tUtility.convertiATestoDB(t);
 	}
-	public Testo convertiinverso(TestoDB tdb) {
+	public Testo convertiInverso(TestoDB tdb) {
 		return tUtility.convertiATesto(tdb);
 	}
 	public VideoDB converti(Video v) {
 		return vUtility.covertiAVideoDB(v);
 	}
-	public Video convertiinverso(VideoDB vdb) {
+	public Video convertiInverso(VideoDB vdb) {
 		return vUtility.convertiAVideo(vdb);
 	}
 }
