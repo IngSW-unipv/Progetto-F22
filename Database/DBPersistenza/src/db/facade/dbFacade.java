@@ -79,9 +79,9 @@ public class dbFacade {
 		
 	}
 
-	public ArrayList<GruppoDB> cercaGruppo(Gruppo g) {
+	public ArrayList<GruppoDB> cercaGruppo(String g) {
 		GruppoDao gdao = new GruppoDao();
-		return gdao.cercaGruppo(ConvertitoreFacade.converti(g));
+		return gdao.cercaGruppo(g);
 	}
 	
 	public ArrayList<GruppoDB> selectAlll() {
@@ -89,9 +89,9 @@ public class dbFacade {
 		return gdao.selectall();
 	}
 	
-	public ArrayList<MessaggioDiGruppoDB> cercaMessaggio(MessaggioDiGruppo m) {
+	public ArrayList<MessaggioDiGruppoDB> cercaMessaggio(String m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		return mdao.cercaMessaggioDiGruppo(ConvertitoreFacade.converti(m));
+		return mdao.cercaMessaggioDiGruppo(m);
 	} 
 
 	
@@ -138,9 +138,9 @@ public class dbFacade {
 	}
 	
 	
-	public ArrayList<MessaggioPrivatoDB> cercaMessaggio(MessaggioPrivato m) {
+	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(String m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		return mdao.cercaMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m));
+		return mdao.cercaMessaggioPrivato(m);
 	}
 
 	public void ottieniMessaggio(MessaggioPrivato m) {
@@ -241,9 +241,9 @@ public class dbFacade {
 		return pdao.inserisciProfilo(ConvertitoreFacade.converti(p));
 	}
 	
-	public boolean inserisciChiaviProfilo(Profilo p) {
+	public boolean inserisciChiaviProfilo(Profilo p, String s1, String s2, String s3) {
 		ProfiloDao pdao = new ProfiloDao();
-		return pdao.inserisciChiavi(ConvertitoreFacade.converti(p));
+		return pdao.inserisciChiavi(ConvertitoreFacade.converti(p),s1,s2,s3);
 	}
 	
 	public boolean rimuovi(Profilo p) {
@@ -251,9 +251,9 @@ public class dbFacade {
 		return pdao.rimuoviProfilo(ConvertitoreFacade.converti(p));
 	}
 	
-	public ArrayList<ProfiloDB> cercaProfilo(Profilo p) {
+	public ArrayList<ProfiloDB> cercaProfilo(String p) {
 		ProfiloDao pdao = new ProfiloDao();
-		return pdao.cercaProfilo(ConvertitoreFacade.converti(p));
+		return pdao.cercaProfilo(p);
 	}
 	
 	public boolean vediEsiste(String idProfilo) throws AccountDoesNotExist {

@@ -19,26 +19,24 @@ public class Sistema {
 	private Profilo profiloAttivo;
 	private Profilo altroProfilo;
 	private Post post;
-	private dbFacade  dbfacade;
+	private dbFacade dbfacade;
 	private ConvertitoreFacade convertitoreFacade;
 	
 	public Sistema() {
 		dbfacade = new dbFacade();
 		convertitoreFacade = new ConvertitoreFacade();
-		this.signUp("dilo", "nudo", "gram");
 	}
 	
 	//Crea il profilo e lo carica nel database
 		public Profilo creaProfilo(String idProfilo, String nickname, String descrizione,
 				EnumProfilo tipo, String messaggioDiGruppo, String messaggioPrivato, String post) throws AccountGiaEsistente{	
-			    ProfiloDao pdao = new ProfiloDao();
-			    Profilo p = new Profilo(idProfilo, nickname, descrizione, tipo, messaggioDiGruppo, messaggioPrivato, post);
+			    Profilo p = new Profilo(idProfilo, nickname, descrizione, tipo);
 
-			    ArrayList<ProfiloDB> r = pdao.cercaProfilo(ProfiloUtility.convertiAProfiloDB(p));
+			    ArrayList<ProfiloDB> r = dbfacade.cercaProfilo(idProfilo);
 			    if(r.isEmpty() == true) {
 			        dbfacade.carica(p);
-			        p.getUtente().setAccountEsistente(true);
-			        pdao.modificaEsiste(idProfilo, true);
+			        p.setAccountesistente(true);
+			        dbfacade.modificaEsiste(idProfilo, true);
 	                System.out.println("Profilo creato con successo");
 	                return p;
 	            }
@@ -47,15 +45,14 @@ public class Sistema {
 
 		public boolean cambiaDefaultPassword (Profilo p, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
 	 		ProfiloDao pdao = new ProfiloDao();
-	 		ProfiloUtility u = new ProfiloUtility();
 
-	 		ArrayList<ProfiloDB> res = pdao.cercaProfilo(u.convertiAProfiloDB(p));
-	 		String s = pdao.ottieniPsw(p.getIdProfilo());
-
+	 		ArrayList<ProfiloDB> res =dbfacade.cercaProfilo(p.getIdProfilo());
+	 		String s = dbfacade.vediPsw(p.getIdProfilo());
+        
 	 		//Se provo a cambiare psw ad un account che non esiste viene lanciata una eccezione
-	 		if(res.isEmpty() == false && pdao.vediSeEsiste(p.getIdProfilo()) == true) {
+	 		if(res.isEmpty() == false && dbfacade.vediEsiste(p.getIdProfilo()) == true) {
 
-	 		     if(this.isPswCambiata() == false && s.equals("Cambiami") && nuovaPsw != "Cambiami") {
+	 		     if(p.isPswCambiata() == false && s.equals("Cambiami") && nuovaPsw != "Cambiami") {
 	 			     this.c.setPwd(nuovaPsw);
 	 			     this.setPswCambiata(true);
 	 			     pdao.modificaPsw(p.getIdProfilo(), nuovaPsw);

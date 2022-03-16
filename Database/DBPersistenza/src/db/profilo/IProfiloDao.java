@@ -7,7 +7,7 @@ import profilo.exception.AccountDoesNotExist;
 public interface IProfiloDao {
 	public ArrayList<ProfiloDB> selectAll();
 	public boolean inserisciProfilo(ProfiloDB p);
-	public boolean inserisciChiavi(ProfiloDB p);
+	public boolean inserisciChiavi(ProfiloDB p, String messaggioPrivato, String messaggioDiGruppo, String post);
 	public boolean rimuoviProfilo(ProfiloDB p);
 	public ArrayList<ProfiloDB> cercaProfilo(String p);
 	

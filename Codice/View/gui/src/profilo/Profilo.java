@@ -22,9 +22,6 @@ public class Profilo implements IProfilo {
 	private int numSeguiti;
 	private int numPost;
 	private EnumProfilo tipo;
-	private String messaggioDiGruppo;
-	private String messaggioPrivato;
-	private String post;
 	//private Credenziali c;
 	private String password;
 	private boolean loggato;
@@ -42,13 +39,10 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.tipo = tipo.PUBBLICO;
-		this.messaggioDiGruppo = messaggioDiGruppo;
-		this.messaggioPrivato = messaggioPrivato;
-		this.post = post;
 	}
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita, String messaggioDiGruppo, String messaggioPrivato, String post) {
+	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita) {
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
 		this.descrizione = descrizione;
@@ -56,9 +50,6 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.tipo = visibilita;
-		this.messaggioDiGruppo = messaggioDiGruppo;
-		this.messaggioPrivato = messaggioPrivato;
-		this.post = post;
 		this.loggato = false;
 		this.accountesistente = false;
 		this.isPswCambiata = false;
@@ -107,25 +98,6 @@ public EnumProfilo getTipo() {
 }
 public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
-}
-public String getMessaggioDiGruppo() {
-	return messaggioDiGruppo;
-}
-public void setMessaggioDiGruppo(String messaggioDiGruppo) {
-	this.messaggioDiGruppo = messaggioDiGruppo;
-}
-public String getMessaggioPrivato() {
-	return messaggioPrivato;
-}
-public void setMessaggioPrivato(String messaggioPrivato) {
-	this.messaggioPrivato = messaggioPrivato;
-}
-
-public String getPost() {
-	return post;
-}
-public void setPost(String post) {
-	this.post = post;
 }
 
 

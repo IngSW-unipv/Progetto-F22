@@ -138,7 +138,7 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	@Override
-	public boolean inserisciChiavi(ProfiloDB p) {
+	public boolean inserisciChiavi(ProfiloDB p, String messaggioDiGruppo, String messaggioPrivato, String post) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
@@ -147,9 +147,9 @@ public class ProfiloDao implements IProfiloDao{
 		{
 			String query="update profilo set messaggioDiGruppo=?,messaggioPrivato=?,post=? where idProfilo=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, p.getMessaggioDiGruppo());
-			st1.setString(2, p.getMessaggioPrivato());
-			st1.setString(3, p.getPost());
+			st1.setString(1, messaggioDiGruppo);
+			st1.setString(2, messaggioPrivato);
+			st1.setString(3, post);
 			st1.setString(4, p.getIdProfilo());
 			
 			st1.executeUpdate();

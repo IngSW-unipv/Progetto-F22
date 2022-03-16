@@ -16,7 +16,7 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 		this.profilo4 = profilo4;
 		this.profilo5 = profilo5;
 		this.profilo6 = profilo6;
-		Amministratore = amministratore;
+		this.amministratore = amministratore;
 	}
 
 	private String idGruppo;
@@ -28,7 +28,7 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	private String profilo4;
 	private String profilo5;
 	private String profilo6;
-	private String Amministratore;
+	private String amministratore;
 	public String getIdGruppo() {
 	return idGruppo;
 	}
@@ -66,12 +66,12 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	}
 	
 	public String getAmministratore() {
-		return Amministratore;
+		return amministratore;
 	}
 	@Override
 	public String toString() {
 		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", nomeGruppo=" + nomeGruppo
 			+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4=" + profilo4
-			+ ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + Amministratore + "]";
+			+ ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + amministratore + "]";
 	}
 }
