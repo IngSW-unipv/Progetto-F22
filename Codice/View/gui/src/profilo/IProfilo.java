@@ -1,36 +1,40 @@
 package profilo;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import chat.Chat;
+import chat.chatDiGruppo.gruppo.Gruppo;
+import chat.chatPrivata.ChatPrivata;
 import post.Post;
 import post.commento.Commento;
+import profilo.credenziali.Credenziali;
 import profilo.exception.NotLoggedIn;
 
 
 public interface IProfilo {
 
-	public int personalizzaSfondo();
-	public int visualizzaChat();
-	public int modificaDatiChat();
-	public int cancellaMessaggio();
-	public int scriviMessaggio();
-	public int entraInGruppo();
-	public int accettaRichiestaDinvito();
-	public int apriChatPrivata();
-	public int invitaUtenteAdIscriversi();
+	public boolean personalizzaSfondo();
+	public void visualizzaChat(Chat c);
+	public boolean modificaDatiChat(Chat c);
+	public boolean cancellaMessaggio();
+	public boolean scriviMessaggio();
+	public boolean entraInGruppo(Gruppo g);
+	public boolean accettaRichiestaDinvito();
+	public void apriChatPrivata(ChatPrivata c);
+	public boolean invitaUtenteAdIscriversi(Profilo p);
 	
-	public int posta();
-	public int eliminaUnPost();
-	public int modificaPost();
-	public int commentaPost();
-	public int visualizzaPost();
-	public int aggiungiSegnaLibro();
-	public int mettiDislike();
+	public boolean posta(Post p);
+	public boolean eliminaUnPost(Post p);
+	public boolean modificaPost(Post p);
+	public boolean commentaPost(Post p);
+	public void visualizzaPost(Post p);
+	public boolean aggiungiSegnaLibro();
+	public int modificaLike(Post p);
 	
-	public int signUp();
+	public void mostraInformazioniProfilo();
+	public boolean signUp();
+	public void bloccaProfilo(Profilo p);
+	public boolean modificaDatiPersonali(Credenziali c);
 	/*public ArrayList<ProfiloDB> selectAll();
 	public HashMap<String, String> modificaFollow(Profilo p);
 	
@@ -51,8 +55,7 @@ public interface IProfilo {
 	public Chat visualizzaChatAttiva(Chat chat);
 	public Post segnaLibro(Post p);
 	
-	public boolean caricaPost(Post p);
-	public boolean rimuoviPost(Post p);
+	
 	*/
 
 	}

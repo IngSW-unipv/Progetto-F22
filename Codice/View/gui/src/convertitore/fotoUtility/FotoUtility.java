@@ -6,12 +6,12 @@ import post.multimedia.foto.Foto;
 public class FotoUtility{
 
 	
-	public static FotoDB convertiAFotoDB(Foto f) {
+	public FotoDB convertiAFotoDB(Foto f) {
 		FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getTempoCancellazione(), f.getPercorso(), f.isStory(), f.isHd());
 		return fdb;
 	}
 
-	public static Foto convertiAFoto(FotoDB f) {
+	public Foto convertiAFoto(FotoDB f) {
 		Foto fdb = new Foto(f.getIdFoto(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
 		return fdb;
 	}

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import chat.Chat;
+import chat.chatDiGruppo.gruppo.Gruppo;
+import chat.chatPrivata.ChatPrivata;
 import convertitore.profiloUtility.ProfiloUtility;
 import db.profilo.ProfiloDB;
 import post.Post;
@@ -13,7 +15,7 @@ import post.commento.Commento;
 import profilo.credenziali.Credenziali;
 import profilo.exception.NotLoggedIn;
 
-public class Profilo implements IProfilo {
+public class Profilo implements IProfilo { 
 
 	private String idProfilo;
 	private String nickname;
@@ -55,7 +57,6 @@ public class Profilo implements IProfilo {
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
 	}
-
 
 public String getIdProfilo() {
 	return idProfilo;
@@ -99,7 +100,6 @@ public EnumProfilo getTipo() {
 public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
 }
-
 
 public boolean isLoggato() {
 	return loggato;
@@ -266,95 +266,108 @@ public boolean rimuoviPost(Post p) {
 }		
 */
 @Override
-public int personalizzaSfondo() {
+public boolean personalizzaSfondo() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int visualizzaChat() {
+public void visualizzaChat(Chat c) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int modificaDatiChat() {
+public boolean modificaDatiChat(Chat c) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int cancellaMessaggio() {
+public boolean cancellaMessaggio() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int scriviMessaggio() {
+public boolean scriviMessaggio() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int entraInGruppo() {
+public boolean entraInGruppo(Gruppo g) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int accettaRichiestaDinvito() {
+public boolean accettaRichiestaDinvito() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int apriChatPrivata() {
+public void apriChatPrivata(ChatPrivata c) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int invitaUtenteAdIscriversi() {
+public boolean invitaUtenteAdIscriversi(Profilo p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int posta() {
+public boolean posta(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int eliminaUnPost() {
+public boolean eliminaUnPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int modificaPost() {
+public boolean modificaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int commentaPost() {
+public boolean commentaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int visualizzaPost() {
+public void visualizzaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int aggiungiSegnaLibro() {
+public boolean aggiungiSegnaLibro() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int mettiDislike() {
+public int modificaLike(Post p) {
 	// TODO Auto-generated method stub
 	return 0;
 }
 
 @Override
-public int signUp() {
+public boolean signUp() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 
 public String getPwd() {
 	// TODO Auto-generated method stub
 	return null;
+}
+@Override
+public void mostraInformazioniProfilo() {
+	// TODO Auto-generated method stub
+}
+@Override
+public boolean modificaDatiPersonali(Credenziali c) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public void bloccaProfilo(Profilo p) {
+	// TODO Auto-generated method stub
 }
 
 public String getPassword() {
