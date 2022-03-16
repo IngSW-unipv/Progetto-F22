@@ -33,7 +33,7 @@ public interface IProfilo {
 	public int modificaLike(Post p);
 	
 	public void mostraInformazioniProfilo();
-	public int signUp();
+	public boolean signUp();
 	public void bloccaProfilo(Profilo p);
 	public boolean modificaDatiPersonali(Credenziali c);
 	/*public ArrayList<ProfiloDB> selectAll();
