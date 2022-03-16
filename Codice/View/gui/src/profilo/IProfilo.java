@@ -8,6 +8,7 @@ import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import post.Post;
 import post.commento.Commento;
+import profilo.credenziali.Credenziali;
 import profilo.exception.NotLoggedIn;
 
 
@@ -31,7 +32,10 @@ public interface IProfilo {
 	public boolean aggiungiSegnaLibro();
 	public int modificaLike(Post p);
 	
+	public void mostraInformazioniProfilo();
 	public int signUp();
+	public void bloccaProfilo(Profilo p);
+	public boolean modificaDatiPersonali(Credenziali c);
 	/*public ArrayList<ProfiloDB> selectAll();
 	public HashMap<String, String> modificaFollow(Profilo p);
 	
@@ -52,8 +56,7 @@ public interface IProfilo {
 	public Chat visualizzaChatAttiva(Chat chat);
 	public Post segnaLibro(Post p);
 	
-	public boolean caricaPost(Post p);
-	public boolean rimuoviPost(Post p);
+	
 	*/
 
 	}
