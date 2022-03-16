@@ -32,64 +32,93 @@ import profilo.Profilo;
 
 public class ConvertitoreFacade {
 	
-	static public ProfiloDB converti(Profilo p) {
-		return ProfiloUtility.convertiAProfiloDB(p);
+	static private ConvertitoreFacade istance;
+	
+	private CommentoUtility cUtility;
+	private FotoUtility fUtility;
+	private GruppoUtility gUtility;
+	private MessaggioUtility mUtility;
+	private ProfiloUtility pUtility;
+	private SondaggioUtility sUtility;
+	private TestoUtility tUtility;
+	private VideoUtility vUtility;
+	
+	private ConvertitoreFacade() {
+		cUtility = new CommentoUtility();
+		fUtility = new FotoUtility();
+		gUtility = new GruppoUtility();
+		mUtility = new MessaggioUtility();
+		pUtility = new ProfiloUtility();
+		sUtility = new SondaggioUtility();
+		tUtility = new TestoUtility();
+		vUtility = new VideoUtility();
 	}
-	static public Profilo convertiinverso(ProfiloDB pdb) {
-		return ProfiloUtility.convertiAProfilo(pdb);
+	
+	public static ConvertitoreFacade getIstance() {
+		if(istance == null) {
+			istance = new ConvertitoreFacade();
+		}
+		return istance;
 	}
-	static public FotoDB converti(Foto f) {
-		return FotoUtility.convertiAFotoDB(f);
+	
+	public ProfiloDB converti(Profilo p) {
+		return pUtility.convertiAProfiloDB(p);
 	}
-	static public Post convertiinverso(FotoDB fdb) {
-		return FotoUtility.convertiAFoto(fdb);
+	public Profilo convertiinverso(ProfiloDB pdb) {
+		return pUtility.convertiAProfilo(pdb);
 	}
-	static public CommentoDB converti(Commento c) {
-		return CommentoUtility.convertiACommentoDB(c);
+	public FotoDB converti(Foto f) {
+		return fUtility.convertiAFotoDB(f);
 	}
-	static public Commento convertiinverso(CommentoDB cdb) {
-		return CommentoUtility.convertiACommento(cdb);
+	public Foto convertiinverso(FotoDB fdb) {
+		return fUtility.convertiAFoto(fdb);
 	}
-	static public GruppoDB converti(Gruppo g) {
-		return GruppoUtility.convertiAGruppoDB(g);
+	public CommentoDB converti(Commento c) {
+		return cUtility.convertiACommentoDB(c);
 	}
-	static public Gruppo convertiinverso(GruppoDB gdb) {
-		return GruppoUtility.convertiAGruppo(gdb);
+	public Commento convertiinverso(CommentoDB cdb) {
+		return cUtility.convertiACommento(cdb);
 	}
-	static public MessaggioPrivatoDB converti(MessaggioPrivato m) {
-		return MessaggioUtility.convertiAMessPrivDB(m);
+	public GruppoDB converti(Gruppo g) {
+		return gUtility.convertiAGruppoDB(g);
 	}
-	static public MessaggioPrivato convertiinverso(MessaggioPrivatoDB mdb) {
-		return MessaggioUtility.convertiAMessPriv(mdb);
+	public Gruppo convertiinverso(GruppoDB gdb) {
+		return gUtility.convertiAGruppo(gdb);
 	}
-	static public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
-		return MessaggioUtility.convertiAMessGrupDB(m);
+	public MessaggioPrivatoDB converti(MessaggioPrivato m) {
+		return mUtility.convertiAMessPrivDB(m);
 	}
-	static public MessaggioDiGruppo convertiinverso(MessaggioDiGruppoDB mdb) {
-		return MessaggioUtility.convertiAMessGrp(mdb);
+	public MessaggioPrivato convertiinverso(MessaggioPrivatoDB mdb) {
+		return mUtility.convertiAMessPriv(mdb);
 	}
-	static public SondaggioDoppiaVotazioneDB converti(SondaggioDoppiaVotazione s) {
-		return SondaggioUtility.convertiASondDopDB(s);
+	public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
+		return mUtility.convertiAMessGrupDB(m);
 	}
-	static public SondaggioDoppiaVotazione convertiinverso(SondaggioDoppiaVotazioneDB sdb) {
-		return SondaggioUtility.convertiASondDop(sdb);
+	public MessaggioDiGruppo convertiinverso(MessaggioDiGruppoDB mdb) {
+		return mUtility.convertiAMessGrp(mdb);
 	}
-	static public SondaggioSceltaMultiplaDB converti(SondaggioSceltaMultipla s) {
-		return SondaggioUtility.convertiASondMulDB(s);
+	public SondaggioDoppiaVotazioneDB converti(SondaggioDoppiaVotazione s) {
+		return sUtility.convertiASondDopDB(s);
 	}
-	static public SondaggioSceltaMultipla convertiinverso(SondaggioSceltaMultiplaDB sdb) {
-		return SondaggioUtility.convertiASondMul(sdb);
+	public SondaggioDoppiaVotazione convertiinverso(SondaggioDoppiaVotazioneDB sdb) {
+		return sUtility.convertiASondDop(sdb);
 	}
-	static public TestoDB converti(Testo t) {
-		return TestoUtility.convertiATestoDB(t);
+	public SondaggioSceltaMultiplaDB converti(SondaggioSceltaMultipla s) {
+		return sUtility.convertiASondMulDB(s);
 	}
-	static public Testo convertiinverso(TestoDB tdb) {
-		return TestoUtility.convertiATesto(tdb);
+	public SondaggioSceltaMultipla convertiinverso(SondaggioSceltaMultiplaDB sdb) {
+		return sUtility.convertiASondMul(sdb);
 	}
-	static public VideoDB converti(Video v) {
-		return VideoUtility.covertiAVideoDB(v);
+	public TestoDB converti(Testo t) {
+		return tUtility.convertiATestoDB(t);
 	}
-	static public Video convertiinverso(VideoDB vdb) {
-		return VideoUtility.convertiAVideo(vdb);
+	public Testo convertiinverso(TestoDB tdb) {
+		return tUtility.convertiATesto(tdb);
+	}
+	public VideoDB converti(Video v) {
+		return vUtility.covertiAVideoDB(v);
+	}
+	public Video convertiinverso(VideoDB vdb) {
+		return vUtility.convertiAVideo(vdb);
 	}
 }
