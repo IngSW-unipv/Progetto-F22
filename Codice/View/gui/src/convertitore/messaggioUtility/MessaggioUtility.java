@@ -8,23 +8,23 @@ import db.messaggioPrivato.MessaggioPrivatoDB;
 public class MessaggioUtility{
 
 	
-	public static MessaggioPrivatoDB convertiAMessPrivDB(MessaggioPrivato m) {
+	public MessaggioPrivatoDB convertiAMessPrivDB(MessaggioPrivato m) {
 		MessaggioPrivatoDB mdb = new MessaggioPrivatoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getIdProfiloInviante(), m.getIdProfiloRicevente());
 		return mdb;
 	}
 
 	
-	public static MessaggioDiGruppoDB convertiAMessGrupDB(MessaggioDiGruppo m) {
+	public MessaggioDiGruppoDB convertiAMessGrupDB(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDB mdb = new MessaggioDiGruppoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getIdGruppo());
 		return mdb;
 	}
 
-	public static MessaggioPrivato convertiAMessPriv(MessaggioPrivatoDB m) {
+	public MessaggioPrivato convertiAMessPriv(MessaggioPrivatoDB m) {
 		MessaggioPrivato mdb = new MessaggioPrivato(m.getIdMsgPvt(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getProfiloInviante(), m.getProfiloRicevente());
 		return mdb;
 	}
 	
-	public  static MessaggioDiGruppo convertiAMessGrp(MessaggioDiGruppoDB m) {
+	public MessaggioDiGruppo convertiAMessGrp(MessaggioDiGruppoDB m) {
 		MessaggioDiGruppo mdb = new MessaggioDiGruppo(m.getIdMsgGrp(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getIdGruppo());
 		return mdb;
 	}
