@@ -2,10 +2,16 @@ package profilo;
 
 
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Scanner;
 
+import java.util.Set;
+
+import Messaggio.Messaggio;
 import chat.Chat;
+import chat.chatPrivata.ChatPrivata;
 import convertitore.profiloUtility.ProfiloUtility;
 import db.profilo.ProfiloDB;
 import post.Post;
@@ -54,6 +60,8 @@ public class Profilo implements IProfilo {
 		this.accountesistente = false;
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
+		
+		invitaUtenteAdIscriversi();
 	}
 
 
@@ -265,92 +273,7 @@ public boolean rimuoviPost(Post p) {
 	return true;
 }		
 */
-@Override
-public int personalizzaSfondo() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int visualizzaChat() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int modificaDatiChat() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int cancellaMessaggio() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int scriviMessaggio() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int entraInGruppo() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int apriChatPrivata() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int invitaUtenteAdIscriversi() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int posta() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int eliminaUnPost() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int modificaPost() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int commentaPost() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int visualizzaPost() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int aggiungiSegnaLibro() {
-	// TODO Auto-generated method stub
-	return 0;
-}
-@Override
-public int mettiDislike() {
-	// TODO Auto-generated method stub
-	return 0;
-}
 
-@Override
-public int signUp() {
-	// TODO Auto-generated method stub
-	return 0;
-}
 
 public String getPwd() {
 	// TODO Auto-generated method stub
@@ -363,6 +286,159 @@ public String getPassword() {
 
 public void setPassword(String password) {
 	this.password = password;
+}
+
+
+@Override
+public void visualizzaChat(Chat chat) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+@Override
+public boolean modificaDatiChat(Chat chat) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public boolean cancellaMessaggio(Messaggio m) {
+	
+	return false;
+}
+
+
+@Override
+public boolean scriviMessaggio(Messaggio m) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+
+@Override
+public void entraInGruppo() {
+	// TODO Auto-generated method stub
+	
+}
+
+
+@Override
+public boolean accettaRichiestaDinvito() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public void apriChatPrivata(ChatPrivata chat) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public void invitaUtenteAdIscriversi() {
+	
+	Profilo p = new Profilo(this.getIdProfilo(), this.getNickname());
+	@SuppressWarnings("resource")
+	Scanner scan = new Scanner(System.in);
+	ArrayList<String> utenti = new ArrayList<>();
+	System.out.println("Digita il nome dell'utente da invitare sul social");
+	String nomeUtente = scan.nextLine();
+	if(nomeUtente.equals(p.getNickname())) {
+		//utenti.add(p.getNickname());
+		System.out.println("Utente gia scritto");
+	} else 
+		utenti.add(nomeUtente);
+		for (String string : utenti) {
+			System.out.println(string);
+			
+		} 
+		  // Deve inviare un messaggio al nomeUtente 
+	     
+	//@SuppressWarnings("rawtypes")
+	//Iterator iterator = utenti.iterator();
+	//while(utenti.get(0).equals(nomeUtente)) {
+		//ArrayList<String> entry = (ArrayList<String>) iterator.next();
+		//if(utenti.contains(nomeUtente)) {
+			
+			//p++;
+			
+			
+	}
+	 /*if(p == 0) {
+		while(utenti..hasNext()) {
+			//Entry<String, ArrayList<String>> ent = iterator.next();
+			ArrayList<String> utenteSeguiti = new ArrayList<>();
+			utenti.add(nomeUtente);
+			utenti.addAll(utenteSeguiti);
+			System.out.println("");
+			
+		}
+	}*/
+	
+	
+	
+
+
+
+@Override
+public Post posta(Post p) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+@Override
+public boolean eliminaUnPost() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public boolean modificaPost() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public String commentaPost() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+@Override
+public void visualizzaPost(Post p) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+@Override
+public boolean aggiungiSegnaLibro() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public boolean mettiDislike() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public boolean signUp() {
+	// TODO Auto-generated method stub
+	return false;
 }
 
 

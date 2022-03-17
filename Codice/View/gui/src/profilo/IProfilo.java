@@ -2,9 +2,12 @@ package profilo;
 
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
+import Messaggio.Messaggio;
 import chat.Chat;
+import chat.chatPrivata.ChatPrivata;
 import post.Post;
 import post.commento.Commento;
 import profilo.exception.NotLoggedIn;
@@ -12,25 +15,28 @@ import profilo.exception.NotLoggedIn;
 
 public interface IProfilo {
 
-	public int personalizzaSfondo();
-	public int visualizzaChat();
-	public int modificaDatiChat();
-	public int cancellaMessaggio();
-	public int scriviMessaggio();
-	public int entraInGruppo();
-	public int accettaRichiestaDinvito();
-	public int apriChatPrivata();
-	public int invitaUtenteAdIscriversi();
+	// public void personalizzaSfondo();
+	public void visualizzaChat(Chat chat);
+	public boolean modificaDatiChat(Chat chat);
+	public boolean cancellaMessaggio(Messaggio m);
+	public boolean scriviMessaggio(Messaggio m);
 	
-	public int posta();
-	public int eliminaUnPost();
-	public int modificaPost();
-	public int commentaPost();
-	public int visualizzaPost();
-	public int aggiungiSegnaLibro();
-	public int mettiDislike();
+	public  void entraInGruppo();
+	public boolean accettaRichiestaDinvito();
+	public void apriChatPrivata(ChatPrivata chat);
+	public void invitaUtenteAdIscriversi();
 	
-	public int signUp();
+	public Post posta(Post p);
+	public boolean eliminaUnPost();
+	public boolean modificaPost();
+	public String commentaPost();
+	
+	public void visualizzaPost(Post p);
+	public boolean aggiungiSegnaLibro();
+	public boolean mettiDislike();
+	public boolean signUp();
+	
+	
 	/*public ArrayList<ProfiloDB> selectAll();
 	public HashMap<String, String> modificaFollow(Profilo p);
 	

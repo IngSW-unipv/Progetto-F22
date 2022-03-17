@@ -8,6 +8,9 @@ import db.profilo.ProfiloDB;
 public class ProfiloTester {
 	
     public static void main(String [] args) {
+    	
+    	Profilo p = new Profilo("001", "mami", null, EnumProfilo.PUBBLICO);
+    	p.invitaUtenteAdIscriversi();
 	
     /*ProfiloUtility u = new ProfiloUtility();
     Credenziali c = new Credenziali("Davide", "Mascheroni", null, null, null, "davide.mascheroni1234@gmail.com", null);
