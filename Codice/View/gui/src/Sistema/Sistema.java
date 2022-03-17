@@ -1,6 +1,6 @@
 package Sistema;
 
-import db.facade.dbFacade;
+import db.facade.DbFacade;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
 
@@ -19,12 +19,12 @@ public class Sistema {
 	private Profilo profiloAttivo;
 	private Profilo altroProfilo;
 	private Post post;
-	private dbFacade dbfacade;
-	private ConvertitoreFacade convertitoreFacade;
+	private DbFacade dbfacade;
+	//private ConvertitoreFacade convertitoreFacade;
 	
 	public Sistema()   {
-		dbfacade = new dbFacade();
-		convertitoreFacade = ConvertitoreFacade.getIstance();
+		dbfacade = DbFacade.getIstance();
+		//convertitoreFacade = ConvertitoreFacade.getIstance();
 		//this.signIn("tommaso.masaracchio01@unipv.it", "tommaso", "nuovaPWD");
 	}
 	//idProfilo e Mail sono la stessa ( va sistemato il database )
