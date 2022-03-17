@@ -1,4 +1,4 @@
-	package db.facade;
+package db.facade;
 
 import java.util.ArrayList;
 
@@ -35,24 +35,36 @@ import post.testo.Testo;
 import convertitore.ConvertitoreFacade;
 import convertitore.messaggioUtility.MessaggioUtility;
 
-
-public class dbFacade {
-
+public class DbFacade {
+	
+	private static DbFacade istance;
+	
+	private DbFacade() {
+		
+	}
+	
+	public static DbFacade getIstance() {
+		if(istance == null) {
+			istance = new DbFacade();
+		}
+		return istance;
+	}
+	
 	public boolean carica(Commento c) {
 		CommentoDao cdao = new CommentoDao();
-	    return cdao.scriviCommento(ConvertitoreFacade.converti(c));
+	    return cdao.scriviCommento(ConvertitoreFacade.getIstance().converti(c));
 		
 	}
 	
 	public boolean rimuovi(Commento c) {
 		CommentoDao cdao = new CommentoDao();
-		return cdao.rimuoviCommento(ConvertitoreFacade.converti(c));
+		return cdao.rimuoviCommento(ConvertitoreFacade.getIstance().converti(c));
 	
 	}
 
 	public ArrayList<CommentoDB> mostraCommentiSottoPost(Commento c) {
 		CommentoDao cdao = new CommentoDao();
-		return cdao.mostraCommentiSottoPost(ConvertitoreFacade.converti(c));
+		return cdao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(c));
 	}
 	
 	public ArrayList<FotoDB> selectAllFoto() {
@@ -62,20 +74,20 @@ public class dbFacade {
 
 	public boolean carica(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		return gdao.creaGruppo(ConvertitoreFacade.converti(g));
+		return gdao.creaGruppo(ConvertitoreFacade.getIstance().converti(g));
 	
 	}
 	
 	public boolean rimuovi(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
 
-		return gdao.cancellaGruppo(ConvertitoreFacade.converti(g));
+		return gdao.cancellaGruppo(ConvertitoreFacade.getIstance().converti(g));
 		
 	}
 	
 	public boolean gestisciPartecipanti(Gruppo g) {
 		GruppoDao gdao = new GruppoDao();
-		return gdao.inserisciChiavi(ConvertitoreFacade.converti(g));
+		return gdao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(g));
 		
 	}
 
@@ -97,26 +109,25 @@ public class dbFacade {
 	
 	public void ottieniMessaggio(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		mdao.ottieniTesto(ConvertitoreFacade.converti(m));
-		
+		mdao.ottieniTesto(ConvertitoreFacade.getIstance().converti(m));
 	}
 
 
 	public boolean carica(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		return  mdao.scriviMessaggioDiGruppo(ConvertitoreFacade.converti(m));
+		return  mdao.scriviMessaggioDiGruppo(ConvertitoreFacade.getIstance().converti(m));
 		
 	}
 
 	public boolean rimuovi(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		return mdao.rimuoviMessaggioDiGruppo(ConvertitoreFacade.converti(m));
+		return mdao.rimuoviMessaggioDiGruppo(ConvertitoreFacade.getIstance().converti(m));
 		
 	}
 
 	public ArrayList<MessaggioDiGruppoDB> listaMessaggiDiUnGruppo(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		return mdao.selectAllIdGruppo(ConvertitoreFacade.converti(m));
+		return mdao.selectAllIdGruppo(ConvertitoreFacade.getIstance().converti(m));
 	}
 
 	public ArrayList<MessaggioDiGruppoDB> ottieniListaTuttiMessaggiDiGruppo() {
@@ -124,10 +135,9 @@ public class dbFacade {
 		return gdao.selectAll();
 	}
 	
-	
 	public ArrayList<MessaggioPrivatoDB> selectAllNomeProfilo(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		return mdao.selectAllNomeProfilo(ConvertitoreFacade.converti(m));
+		return mdao.selectAllNomeProfilo(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
 	
@@ -137,7 +147,6 @@ public class dbFacade {
 	
 	}
 	
-	
 	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(String m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		return mdao.cercaMessaggioPrivato(m);
@@ -145,23 +154,19 @@ public class dbFacade {
 
 	public void ottieniMessaggio(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-		mdao.ottieniMessaggio(MessaggioUtility.convertiAMessPrivDB(m));
+		mdao.ottieniMessaggio(ConvertitoreFacade.getIstance().converti(m));
 	}
-
 
 	public boolean carica(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 		
-		return mdao.scriviMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m));
-
+		return mdao.scriviMessaggioPrivato(ConvertitoreFacade.getIstance().converti(m));
 	}
 
-	
 	public boolean rimuovi(MessaggioPrivato m) {
 		MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 
-		return mdao.rimuoviMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m));
-
+		return mdao.rimuoviMessaggioPrivato(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
 	public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
@@ -172,14 +177,14 @@ public class dbFacade {
 
 	public boolean carica(SondaggioDoppiaVotazione p) {
 		SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-		 return sdao.pubblicaSondaggio(ConvertitoreFacade.converti(p));
+		 return sdao.pubblicaSondaggio(ConvertitoreFacade.getIstance().converti(p));
 		
 	}
 
 
 	public boolean rimuovi(SondaggioDoppiaVotazione p) {
 		SondaggioDoppiaVotazioneDao sdao = new SondaggioDoppiaVotazioneDao();
-		return sdao.rimuoviSondaggio(ConvertitoreFacade.converti(p));
+		return sdao.rimuoviSondaggio(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public ArrayList<SondaggioSceltaMultiplaDB> selectAllSSM() {
@@ -190,12 +195,12 @@ public class dbFacade {
 	
 	public boolean carica(SondaggioSceltaMultipla p) {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-	    return sdao.pubblicaSondaggio(ConvertitoreFacade.converti(p));
+	    return sdao.pubblicaSondaggio(ConvertitoreFacade.getIstance().converti(p));
 	}
 
 	public boolean rimuovi(SondaggioSceltaMultipla p) {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
-		return sdao.rimuoviSondaggio(ConvertitoreFacade.converti(p));
+		return sdao.rimuoviSondaggio(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public ArrayList<TestoDB> selectAllTesto() {
@@ -205,12 +210,12 @@ public class dbFacade {
 	
 	public boolean carica(Testo p) {
 		TestoDao tdao = new TestoDao();
-		return tdao.pubblicaTesto(ConvertitoreFacade.converti(p));
+		return tdao.pubblicaTesto(ConvertitoreFacade.getIstance().converti(p));
 	    
 	}
 	public boolean rimuovi(Testo p) {
 		TestoDao tdao = new TestoDao();
-		return tdao.rimuoviTesto(ConvertitoreFacade.converti(p));
+		return tdao.rimuoviTesto(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public ArrayList<VideoDB> selectAllVideo() {
@@ -221,14 +226,14 @@ public class dbFacade {
 
 	public boolean carica(Video p) {
 		VideoDao vdao = new VideoDao();
-		return vdao.pubblicaVideo(ConvertitoreFacade.converti(p));
+		return vdao.pubblicaVideo(ConvertitoreFacade.getIstance().converti(p));
 	
 	}
 
 
 	public boolean rimuovi(Video p) {
 		VideoDao vdao = new VideoDao();
-		return vdao.rimuoviVideo(ConvertitoreFacade.converti(p));
+		return vdao.rimuoviVideo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public ArrayList<ProfiloDB> selectAllProfilo() {
@@ -238,17 +243,17 @@ public class dbFacade {
 	
 	public boolean carica(Profilo p) {
 		ProfiloDao pdao = new ProfiloDao();
-		return pdao.inserisciProfilo(ConvertitoreFacade.converti(p));
+		return pdao.inserisciProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public boolean inserisciChiaviProfilo(Profilo p, String s1, String s2, String s3) {
 		ProfiloDao pdao = new ProfiloDao();
-		return pdao.inserisciChiavi(ConvertitoreFacade.converti(p),s1,s2,s3);
+		return pdao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s1, s2, s3);
 	}
 	
 	public boolean rimuovi(Profilo p) {
 		ProfiloDao pdao = new ProfiloDao();
-		return pdao.rimuoviProfilo(ConvertitoreFacade.converti(p));
+		return pdao.rimuoviProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
 	public ArrayList<ProfiloDB> cercaProfilo(String p) {
