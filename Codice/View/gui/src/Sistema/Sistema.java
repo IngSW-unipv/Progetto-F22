@@ -24,7 +24,7 @@ public class Sistema {
 	
 	public Sistema()   {
 		dbfacade = new dbFacade();
-		convertitoreFacade = new ConvertitoreFacade();
+		convertitoreFacade = ConvertitoreFacade.getIstance();
 		//this.signIn("tommaso.masaracchio01@unipv.it", "tommaso", "nuovaPWD");
 	}
 	//idProfilo e Mail sono la stessa ( va sistemato il database )
