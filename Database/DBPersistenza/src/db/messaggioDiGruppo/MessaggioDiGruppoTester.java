@@ -16,14 +16,14 @@ public class MessaggioDiGruppoTester {
 		
 		System.out.println(selectAll.toString());
 		
-		mdao.ottieniTesto(MessaggioUtility.convertiAMessGrupDB(m));
+		//mdao.ottieniTesto(MessaggioUtility.convertiAMessGrupDB(m));
 		
 		 ArrayList<MessaggioDiGruppoDB> cercaMessaggio = mdao.cercaMessaggioDiGruppo(m.getIdMessaggio());
 	     for(MessaggioDiGruppoDB msg : cercaMessaggio)
 				System.out.println(msg.toString());
 	          
-	   System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo(MessaggioUtility.convertiAMessGrupDB(m)));
-	     System.out.println("La rimozione ï¿½ avvenuta? " + mdao.rimuoviMessaggioDiGruppo(MessaggioUtility.convertiAMessGrupDB(m)));
-	      
+	  /* System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo(MessaggioUtility.convertiAMessGrupDB(m)));
+	     System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioDiGruppo(MessaggioUtility.convertiAMessGrupDB(m)));
+	   */   
 }
 }

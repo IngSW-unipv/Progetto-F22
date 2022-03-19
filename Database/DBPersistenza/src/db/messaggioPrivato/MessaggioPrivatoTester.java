@@ -13,11 +13,11 @@ public static void main(String[] args) {
 	//MessaggioPrivato m1 = new MessaggioPrivato("001", null, null, null, null, null, null);
 	System.out.println(selectAll.toString());
 	
-	mdao.ottieniMessaggio(MessaggioUtility.convertiAMessPrivDB(m));
+	/*mdao.ottieniMessaggio(MessaggioUtility.convertiAMessPrivDB(m));
           
    System.out.println("Inserimento avvenuto? " +mdao.scriviMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m)));
-   System.out.println("La rimozione ï¿½ avvenuta? " + mdao.rimuoviMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m)));
+   System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioPrivato(MessaggioUtility.convertiAMessPrivDB(m)));
       
-     
+     */
 }
 }

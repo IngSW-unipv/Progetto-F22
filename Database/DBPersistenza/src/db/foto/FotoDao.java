@@ -128,4 +128,5 @@ public class FotoDao implements IFotoDao{
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+
 }

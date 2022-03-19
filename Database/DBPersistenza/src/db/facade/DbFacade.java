@@ -9,6 +9,8 @@ import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
+import db.follow.FollowDB;
+import db.follow.FollowDao;
 import db.foto.FotoDB;
 import db.foto.FotoDao;
 import db.gruppo.GruppoDB;
@@ -20,6 +22,7 @@ import db.messaggioPrivato.MessaggioPrivatoDao;
 import db.notifica.NotificaDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
+import db.profilo.follow.Follow;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDao;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
@@ -34,7 +37,6 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import convertitore.ConvertitoreFacade;
-import convertitore.messaggioUtility.MessaggioUtility;
 
 public class DbFacade {
 	
@@ -51,6 +53,7 @@ public class DbFacade {
 	private SondaggioSceltaMultiplaDao ssmDao;
 	private TestoDao tDao;
 	private VideoDao vDao;
+	private FollowDao flDao;
 	
 	private DbFacade() {
 		cDao = new CommentoDao();
@@ -64,6 +67,7 @@ public class DbFacade {
 		ssmDao = new SondaggioSceltaMultiplaDao();
 		tDao = new TestoDao();
 		vDao = new VideoDao();
+		flDao = new FollowDao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -269,4 +273,23 @@ public class DbFacade {
 	public boolean modificaPsw(String p, String b) throws AccountDoesNotExist {
 		return pDao.modificaPsw(p, b);
 	}
+	
+	public boolean carica(Follow f) {
+		return flDao.carica(ConvertitoreFacade.getIstance().converti(f));
+	}
+	public boolean rimuovi(String profiloPersonale, String profiloSeguito) {
+		return flDao.rimuovi(profiloPersonale, profiloSeguito);
+	}
+	
+	public ArrayList<FollowDB> selectAllFollow(){
+		return flDao.selectAll();
+	}
+	public ArrayList<String> cercaProfSeguito(String profiloPersonale){
+		return flDao.cercaProfSeguito(profiloPersonale);
+	}
+	public ArrayList<FollowDB> cercaFollow(String profiloPersonale, String profiloSeguito){
+		return flDao.cerca(profiloPersonale, profiloSeguito);
+	}
+	
+	
 }

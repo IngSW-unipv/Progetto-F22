@@ -7,11 +7,13 @@ import java.util.HashMap;
 import chat.Chat;
 import post.Post;
 import post.commento.Commento;
+import profilo.exception.AccountDoesNotExist;
 import profilo.exception.NotLoggedIn;
 
 
 public interface IProfilo {
 
+	public boolean segui(String email)throws AccountDoesNotExist, NotLoggedIn;
 	public int personalizzaSfondo();
 	public int visualizzaChat();
 	public int modificaDatiChat();
@@ -21,7 +23,6 @@ public interface IProfilo {
 	public int accettaRichiestaDinvito();
 	public int apriChatPrivata();
 	public int invitaUtenteAdIscriversi();
-	
 	public int posta();
 	public int eliminaUnPost();
 	public int modificaPost();

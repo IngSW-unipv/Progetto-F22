@@ -4,6 +4,7 @@ import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.commentoChatUtility.CommentoUtility;
+import convertitore.followUtility.FollowUtility;
 import convertitore.fotoUtility.FotoUtility;
 import convertitore.profiloUtility.ProfiloUtility;
 import convertitore.sondaggioUtility.SondaggioUtility;
@@ -12,11 +13,13 @@ import convertitore.videoUtility.VideoUtility;
 import convertitore.gruppoUtility.GruppoUtility;
 import convertitore.messaggioUtility.MessaggioUtility;
 import db.commento.CommentoDB;
+import db.follow.FollowDB;
 import db.foto.FotoDB;
 import db.gruppo.GruppoDB;
 import db.messaggioDiGruppo.MessaggioDiGruppoDB;
 import db.messaggioPrivato.MessaggioPrivatoDB;
 import db.profilo.ProfiloDB;
+import db.profilo.follow.Follow;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
 import db.testo.TestoDB;
@@ -42,6 +45,7 @@ public class ConvertitoreFacade {
 	private SondaggioUtility sUtility;
 	private TestoUtility tUtility;
 	private VideoUtility vUtility;
+	private FollowUtility flUtility;
 	
 	private ConvertitoreFacade() {
 		cUtility = new CommentoUtility();
@@ -52,6 +56,7 @@ public class ConvertitoreFacade {
 		sUtility = new SondaggioUtility();
 		tUtility = new TestoUtility();
 		vUtility = new VideoUtility();
+		flUtility = new FollowUtility();
 	}
 	
 	public static ConvertitoreFacade getIstance() {
@@ -120,5 +125,11 @@ public class ConvertitoreFacade {
 	}
 	public Video convertiinverso(VideoDB vdb) {
 		return vUtility.convertiAVideo(vdb);
+	}
+	public FollowDB converti(Follow f) {
+		return flUtility.convertiAFollowDB(f);
+	}
+	public Follow convertiinverso(FollowDB f) {
+		return flUtility.convertiAFollow(f);
 	}
 }

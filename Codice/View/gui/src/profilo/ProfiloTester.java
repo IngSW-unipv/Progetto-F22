@@ -1,26 +1,29 @@
 package profilo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import db.profilo.ProfiloDB;
-
+import profilo.exception.AccountDoesNotExist;
+import profilo.exception.NotLoggedIn;
 
 public class ProfiloTester {
 	
     public static void main(String [] args) {
 	
-    /*ProfiloUtility u = new ProfiloUtility();
-    Credenziali c = new Credenziali("Davide", "Mascheroni", null, null, null, "davide.mascheroni1234@gmail.com", null);
-    Utente ut = new Utente(c, false, false, false, "AB10");
-	Profilo p1 = new Profilo("P01", "MyAccount", "ds", 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
-	Profilo p2 = new Profilo("001", "MyAccount", null, 0, 0, 0, EnumProfilo.PRIVATO, null, null, ut, null);
-	
-	Profilo p3 =new Profilo("P02", "Davide99", "Mi piace programmare", 0, 0, 0, EnumProfilo.PUBBLICO, "001", "004", ut, null);
-	ut.login(p3, "davide.mascheroni1234@gmail.com", "ciao");
-	
-	ArrayList<ProfiloDB> res = Profilo.cercaProfilo(p2);
-	
-	for(ProfiloDB pd: res)
-		System.out.println(pd.toString());*/
-    }   
-}
+    	Profilo p = new Profilo("001", null);
+    	
+    	
+    
+				try {
+					System.out.println(p.smettiDiSeguire("002"));
+				} catch (AccountDoesNotExist e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (NotLoggedIn e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+    	
+    	}
+    }
+
+    	   
+
