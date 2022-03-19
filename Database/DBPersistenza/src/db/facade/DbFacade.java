@@ -114,7 +114,7 @@ public class DbFacade {
 		return gDao.cercaGruppo(g);
 	}
 	
-	public ArrayList<GruppoDB> selectAlll() {
+	public ArrayList<GruppoDB> selectAllGruppo() {
 		return gDao.selectall();
 	}
 	

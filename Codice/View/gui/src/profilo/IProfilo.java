@@ -1,11 +1,14 @@
 package profilo;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
+import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
 import profilo.exception.AccountDoesNotExist;
@@ -16,7 +19,15 @@ import profilo.exception.NotLoggedIn;
 public interface IProfilo {
 
 
+	public boolean profiloNonSeguito(String emailProfilo);
+	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
+	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn;
 	public boolean segui(String email)throws AccountDoesNotExist, NotLoggedIn;
+	public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExist, NotLoggedIn;
+	
+	public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist, NotLoggedIn; 
+	
+	public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn;
 	public boolean personalizzaSfondo();
 	public void visualizzaChat(Chat c);
 	public boolean modificaDatiChat(Chat c);
@@ -35,9 +46,6 @@ public interface IProfilo {
 	public boolean aggiungiSegnaLibro();
 	public int modificaLike(Post p);
 	
-	public void mostraInformazioniProfilo();
-	public boolean signIn() throws Exception;
-	public void bloccaProfilo(Profilo p);
 	public Credenziali modificaDatiPersonali(Credenziali c);
 	/*public ArrayList<ProfiloDB> selectAll();
 	public HashMap<String, String> modificaFollow(Profilo p);

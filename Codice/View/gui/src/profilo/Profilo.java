@@ -1,16 +1,15 @@
 package profilo;
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
-//import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import Sistema.Sistema;
 import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
-import convertitore.profiloUtility.ProfiloUtility;
 import db.facade.DbFacade;
 import db.follow.FollowDB;
 import db.profilo.ProfiloDB;
@@ -18,14 +17,7 @@ import db.profilo.follow.Follow;
 import post.Post;
 import post.commento.Commento;
 import profilo.credenziali.Credenziali;
-<<<<<<< HEAD
 import profilo.exception.AccountDoesNotExist;
-import profilo.exception.AccountGiaSeguito;
-=======
-import profilo.enumeration.EnumPaesi;
-import profilo.enumeration.EnumSesso;
-import profilo.exception.AccountGiaEsistente;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 import profilo.exception.NotLoggedIn;
 
 public class Profilo implements IProfilo { 
@@ -115,10 +107,7 @@ public EnumProfilo getTipo() {
 public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 public boolean isLoggato() {
 	return loggato;
 }
@@ -143,6 +132,7 @@ public void setPswCambiata(boolean isPswCambiata) {
 	this.isPswCambiata = isPswCambiata;
 }
 
+@Override
 //Ritorna true se l'account inserito è "seguibile"
 public boolean profiloNonSeguito(String emailProfilo) {
 	ArrayList<FollowDB> search = dbfacade.cercaFollow(this.getIdProfilo(), emailProfilo);
@@ -152,6 +142,7 @@ public boolean profiloNonSeguito(String emailProfilo) {
 	return false;
 }
 
+@Override
 //Ritorna true se l'account è esistente
 public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist {
 	ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(emailProfilo);
@@ -161,6 +152,7 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 	return true;
 }
 
+@Override
 //Ritorna true se l'account è loggato
 public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.accountEsistente(emailProfilo) == true) {
@@ -183,7 +175,7 @@ public boolean segui(String profiloSeguito) throws AccountDoesNotExist, NotLogge
 	}
 	return false;
 }
-
+@Override
 public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true && this.accountEsistente(profiloSeguito) == true && this.profiloNonSeguito(profiloSeguito) == false) {
 		dbfacade.rimuovi(this.getIdProfilo(), profiloSeguito);
@@ -193,6 +185,22 @@ public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist
 	return false;
 }
 
+@Override
+public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.selectAllProfilo();
+	}
+	return null;
+}
+
+@Override
+public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist, NotLoggedIn {
+	Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(c);
+	}
+	return false;
+}
 
 /*
 @Override
@@ -391,27 +399,7 @@ public int modificaLike(Post p) {
 	return 0;
 }
 
-@Override
-public boolean signIn() throws Exception {
-	Sistema s = new Sistema();
 
-	return s.signIn(getNickname(), getPassword());
-}
-
-public String getPwd() {
-	// TODO Auto-generated method stub
-	return null;
-}
-@Override
-public void mostraInformazioniProfilo() {
-	if(tipo == EnumProfilo.PRIVATO) {
-		System.out.println(getNickname());
-		
-	} else {
-		// Chiama la selectAll del database
-		
-	}
-}
 @Override
 public Credenziali modificaDatiPersonali(Credenziali c) {
 
