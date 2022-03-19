@@ -23,11 +23,8 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.credenziali.Credenziali;
 import profilo.exception.AccountDoesNotExist;
-<<<<<<< HEAD
 //import profilo.exception.AccountGiaSeguito;
 import profilo.exception.AccountGiaEsistente;
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 import profilo.exception.NotLoggedIn;
 
 public class Profilo implements IProfilo { 
@@ -118,10 +115,7 @@ public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 public boolean isLoggato() {
 	return loggato;
 }
@@ -412,9 +406,9 @@ public int modificaLike(Post p) {
 }
 
 
-<<<<<<< HEAD
-	return s.signIn(getNickname(), getPassword());
-}
+
+	
+
 
 public String getPwd() {
 	// TODO Auto-generated method stub
@@ -422,30 +416,14 @@ public String getPwd() {
 }
 
 
-@Override
-public void mostraInformazioniProfilo() {
-      if(tipo == EnumProfilo.PUBBLICO) {
 
-		} else {
-		
-		
-	}
-      
-      
-      
-}
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 @Override
 public Credenziali modificaDatiPersonali(Credenziali c) {
 
 	return c.modificaDatiPersonali();
 	}
 
-@Override
-public void bloccaProfilo(Profilo p) {
-	// TODO Auto-generated method stub
-}
+
 
 @Override
 public ArrayList<ProfiloDB> ottieniListaProfilo() throws AccountDoesNotExist, NotLoggedIn {

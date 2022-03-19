@@ -2,18 +2,15 @@ package profilo;
 
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.NotLoggedIn;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import db.profilo.ProfiloDB;
 import profilo.credenziali.Credenziali;
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+
+
+
 
 public class ProfiloTester {
 	

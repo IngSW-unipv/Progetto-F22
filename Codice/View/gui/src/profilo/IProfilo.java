@@ -18,15 +18,14 @@ import profilo.exception.NotLoggedIn;
 
 public interface IProfilo {
 
-<<<<<<< HEAD
-=======
+
 
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
 	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+
 	public boolean segui(String email)throws AccountDoesNotExist, NotLoggedIn;
-<<<<<<< HEAD
+
 	/*
 	public int personalizzaSfondo();
 	public int visualizzaChat();
@@ -45,13 +44,12 @@ public interface IProfilo {
 	public int aggiungiSegnaLibro();
 	public int mettiDislike();*/
 
-=======
 	public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExist, NotLoggedIn;
 	
 	public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist, NotLoggedIn; 
 	
 	public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+
 	public boolean personalizzaSfondo();
 	public void visualizzaChat(Chat c);
 	public boolean modificaDatiChat(Chat c);
@@ -72,10 +70,7 @@ public interface IProfilo {
 	public void visualizzaPost(Post p);
 	public boolean aggiungiSegnaLibro();
 	public int modificaLike(Post p);
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	
 	public Credenziali modificaDatiPersonali(Credenziali c);
 	
