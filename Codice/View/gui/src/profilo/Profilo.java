@@ -4,8 +4,12 @@ package profilo;
 import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 
+import Sistema.Sistema;
 import chat.Chat;
+import chat.chatDiGruppo.gruppo.Gruppo;
+import chat.chatPrivata.ChatPrivata;
 import convertitore.profiloUtility.ProfiloUtility;
 import db.facade.DbFacade;
 import db.follow.FollowDB;
@@ -14,11 +18,17 @@ import db.profilo.follow.Follow;
 import post.Post;
 import post.commento.Commento;
 import profilo.credenziali.Credenziali;
+<<<<<<< HEAD
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AccountGiaSeguito;
+=======
+import profilo.enumeration.EnumPaesi;
+import profilo.enumeration.EnumSesso;
+import profilo.exception.AccountGiaEsistente;
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 import profilo.exception.NotLoggedIn;
 
-public class Profilo implements IProfilo {
+public class Profilo implements IProfilo { 
 
 	private DbFacade dbfacade;
 	
@@ -63,7 +73,6 @@ public class Profilo implements IProfilo {
 		this.password = "Cambiami";
 	}
 
-
 public String getIdProfilo() {
 	return idProfilo;
 }
@@ -106,6 +115,10 @@ public EnumProfilo getTipo() {
 public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 public boolean isLoggato() {
 	return loggato;
 }
@@ -293,95 +306,121 @@ public boolean rimuoviPost(Post p) {
 }		
 */
 @Override
-public int personalizzaSfondo() {
+public boolean personalizzaSfondo() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int visualizzaChat() {
+public void visualizzaChat(Chat c) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int modificaDatiChat() {
+public boolean modificaDatiChat(Chat c) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int cancellaMessaggio() {
+public boolean cancellaMessaggio() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int scriviMessaggio() {
+public boolean scriviMessaggio() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int entraInGruppo() {
+public boolean entraInGruppo(Gruppo g) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int accettaRichiestaDinvito() {
+public boolean accettaRichiestaDinvito() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int apriChatPrivata() {
+public void apriChatPrivata(ChatPrivata c) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int invitaUtenteAdIscriversi() {
-	// TODO Auto-generated method stub
-	return 0;
+public boolean invitaUtenteAdIscriversi(Profilo p) {
+
+	Scanner scan = new Scanner(System.in);
+	System.out.println("Digita il nome dell'utente da invitare");
+	
+	String nomeUtente = scan.nextLine();
+	// non ho finito
+	return false;
 }
 @Override
-public int posta() {
+public boolean posta(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int eliminaUnPost() {
+public boolean eliminaUnPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int modificaPost() {
+public boolean modificaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int commentaPost() {
+public boolean commentaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int visualizzaPost() {
+public void visualizzaPost(Post p) {
 	// TODO Auto-generated method stub
-	return 0;
+	
 }
 @Override
-public int aggiungiSegnaLibro() {
+public boolean aggiungiSegnaLibro() {
 	// TODO Auto-generated method stub
-	return 0;
+	return false;
 }
 @Override
-public int mettiDislike() {
+public int modificaLike(Post p) {
 	// TODO Auto-generated method stub
 	return 0;
 }
 
 @Override
-public int signUp() {
-	// TODO Auto-generated method stub
-	return 0;
+public boolean signIn() throws Exception {
+	Sistema s = new Sistema();
+
+	return s.signIn(getNickname(), getPassword());
 }
 
 public String getPwd() {
 	// TODO Auto-generated method stub
 	return null;
+}
+@Override
+public void mostraInformazioniProfilo() {
+	if(tipo == EnumProfilo.PRIVATO) {
+		System.out.println(getNickname());
+		
+	} else {
+		// Chiama la selectAll del database
+		
+	}
+}
+@Override
+public Credenziali modificaDatiPersonali(Credenziali c) {
+
+	return c.modificaDatiPersonali();
+	}
+
+@Override
+public void bloccaProfilo(Profilo p) {
+	// TODO Auto-generated method stub
 }
 
 public String getPassword() {

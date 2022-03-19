@@ -24,6 +24,10 @@ public class Credenziali {
 		this.pwd = "Cambiami";
 	}
 	
+	public  Credenziali modificaDatiPersonali() {
+		Credenziali c = new Credenziali(getNome(), getCognome(), getDataDiNascita(), getSesso(), getPaese(), getEMail(), getPwd());
+		return c;
+	}
 	
 	/*public Credenziali() {
 		nome = "Francesco";
