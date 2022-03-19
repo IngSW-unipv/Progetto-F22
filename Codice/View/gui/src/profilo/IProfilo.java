@@ -33,9 +33,9 @@ public interface IProfilo {
 	public int modificaLike(Post p);
 	
 	public void mostraInformazioniProfilo();
-	public boolean signUp();
+	public boolean signIn() throws Exception;
 	public void bloccaProfilo(Profilo p);
-	public boolean modificaDatiPersonali(Credenziali c);
+	public Credenziali modificaDatiPersonali(Credenziali c);
 	/*public ArrayList<ProfiloDB> selectAll();
 	public HashMap<String, String> modificaFollow(Profilo p);
 	

@@ -46,7 +46,7 @@ public class CommentoDao implements ICommentoDao{
 	}
 
 	@Override
-	public boolean rimuoviCommento(CommentoDB c) {
+	public boolean rimuoviCommento(String c) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -56,7 +56,7 @@ public class CommentoDao implements ICommentoDao{
 		{
 			String query="delete from commento where idCommento=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, c.getIdCommento());
+			st1.setString(1, c);
 
 			st1.executeUpdate();
 

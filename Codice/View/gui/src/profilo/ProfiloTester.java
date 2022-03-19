@@ -3,11 +3,16 @@ package profilo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import db.profilo.ProfiloDB;
+import profilo.credenziali.Credenziali;
 
 
 public class ProfiloTester {
 	
     public static void main(String [] args) {
+    	
+    
+    	
+    	
 	
     /*ProfiloUtility u = new ProfiloUtility();
     Credenziali c = new Credenziali("Davide", "Mascheroni", null, null, null, "davide.mascheroni1234@gmail.com", null);

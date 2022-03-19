@@ -4,7 +4,9 @@ package profilo;
 import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Scanner;
 
+import Sistema.Sistema;
 import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
@@ -13,6 +15,9 @@ import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
 import profilo.credenziali.Credenziali;
+import profilo.enumeration.EnumPaesi;
+import profilo.enumeration.EnumSesso;
+import profilo.exception.AccountGiaEsistente;
 import profilo.exception.NotLoggedIn;
 
 public class Profilo implements IProfilo { 
@@ -31,7 +36,7 @@ public class Profilo implements IProfilo {
 	private boolean isPswCambiata;
 	
 	//funzione richiamata dal signUP
-	public Profilo(String idProfilo, String nickname,  String eMail, String passWord) {
+	public Profilo(String idProfilo, String nickname) {
 		super();
 		// funzione per prelevare l'id piu alto dal database this.idProfilo = ;
 		this.idProfilo = idProfilo;
@@ -307,7 +312,12 @@ public void apriChatPrivata(ChatPrivata c) {
 }
 @Override
 public boolean invitaUtenteAdIscriversi(Profilo p) {
-	// TODO Auto-generated method stub
+
+	Scanner scan = new Scanner(System.in);
+	System.out.println("Digita il nome dell'utente da invitare");
+	
+	String nomeUtente = scan.nextLine();
+	// non ho finito
 	return false;
 }
 @Override
@@ -347,9 +357,10 @@ public int modificaLike(Post p) {
 }
 
 @Override
-public boolean signUp() {
-	// TODO Auto-generated method stub
-	return false;
+public boolean signIn() throws Exception {
+	Sistema s = new Sistema();
+
+	return s.signIn(getNickname(), getPassword());
 }
 
 public String getPwd() {
@@ -358,13 +369,20 @@ public String getPwd() {
 }
 @Override
 public void mostraInformazioniProfilo() {
-	// TODO Auto-generated method stub
+	if(tipo == EnumProfilo.PRIVATO) {
+		System.out.println(getNickname());
+		
+	} else {
+		// Chiama la selectAll del database
+		
+	}
 }
 @Override
-public boolean modificaDatiPersonali(Credenziali c) {
-	// TODO Auto-generated method stub
-	return false;
-}
+public Credenziali modificaDatiPersonali(Credenziali c) {
+
+	return c.modificaDatiPersonali();
+	}
+
 @Override
 public void bloccaProfilo(Profilo p) {
 	// TODO Auto-generated method stub

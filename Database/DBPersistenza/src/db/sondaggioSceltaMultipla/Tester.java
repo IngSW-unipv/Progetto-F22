@@ -1,8 +1,10 @@
 package db.sondaggioSceltaMultipla;
 
-import java.util.ArrayList;
 
 import post.sondaggio.SondaggioSceltaMultipla;
+
+import java.util.ArrayList;
+
 import convertitore.sondaggioUtility.*;
 
 public class Tester {
@@ -11,7 +13,7 @@ public class Tester {
 		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, null, null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 
-		System.out.println(sdao.rimuoviSondaggio(SondaggioUtility.convertiASondMulDB(s)));
+		//System.out.println(sdao.pubblicaSondaggio(SondaggioUtility.convertiASondMulDB(s)));
 		
 ArrayList<SondaggioSceltaMultiplaDB> res = sdao.selectAll();
 	   
