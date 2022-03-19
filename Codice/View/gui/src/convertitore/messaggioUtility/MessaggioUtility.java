@@ -13,10 +13,6 @@ public class MessaggioUtility{
 		return mdb;
 	}
 
-<<<<<<< HEAD
-=======
-	
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	public MessaggioDiGruppoDB convertiAMessGrupDB(MessaggioDiGruppo m) {
 		MessaggioDiGruppoDB mdb = new MessaggioDiGruppoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), m.getIdGruppo());
 		return mdb;

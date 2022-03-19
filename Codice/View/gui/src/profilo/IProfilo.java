@@ -8,35 +8,15 @@ import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import post.Post;
 import post.commento.Commento;
-<<<<<<< HEAD
 import profilo.exception.AccountDoesNotExist;
-=======
 import profilo.credenziali.Credenziali;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 import profilo.exception.NotLoggedIn;
 
 
 public interface IProfilo {
 
-<<<<<<< HEAD
+
 	public boolean segui(String email)throws AccountDoesNotExist, NotLoggedIn;
-	public int personalizzaSfondo();
-	public int visualizzaChat();
-	public int modificaDatiChat();
-	public int cancellaMessaggio();
-	public int scriviMessaggio();
-	public int entraInGruppo();
-	public int accettaRichiestaDinvito();
-	public int apriChatPrivata();
-	public int invitaUtenteAdIscriversi();
-	public int posta();
-	public int eliminaUnPost();
-	public int modificaPost();
-	public int commentaPost();
-	public int visualizzaPost();
-	public int aggiungiSegnaLibro();
-	public int mettiDislike();
-=======
 	public boolean personalizzaSfondo();
 	public void visualizzaChat(Chat c);
 	public boolean modificaDatiChat(Chat c);
@@ -54,7 +34,6 @@ public interface IProfilo {
 	public void visualizzaPost(Post p);
 	public boolean aggiungiSegnaLibro();
 	public int modificaLike(Post p);
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	
 	public void mostraInformazioniProfilo();
 	public boolean signIn() throws Exception;
