@@ -32,6 +32,7 @@ import db.testo.TestoDao;
 import db.video.VideoDB;
 import db.video.VideoDao;
 import post.commento.Commento;
+import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
@@ -212,6 +213,14 @@ public class DbFacade {
 	
 	public ArrayList<VideoDB> selectAllVideo() {
 		return vDao.selectAll();
+	}
+	
+	public boolean carica(Foto f) {
+		return fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(f));
+	}
+	
+	public boolean rimuovi(Foto f) {
+		return fDao.rimuoviFoto(ConvertitoreFacade.getIstance().converti(f));
 	}
 
 	public boolean carica(Video p) {

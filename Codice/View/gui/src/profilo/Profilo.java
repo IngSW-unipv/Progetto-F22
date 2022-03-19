@@ -1,6 +1,8 @@
 package profilo;
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 //import java.util.Arrays;
 import java.util.HashMap;
@@ -17,15 +19,15 @@ import db.profilo.ProfiloDB;
 import db.profilo.follow.Follow;
 import post.Post;
 import post.commento.Commento;
+import post.multimedia.foto.Foto;
+import post.multimedia.video.Video;
+import post.sondaggio.SondaggioDoppiaVotazione;
+import post.sondaggio.SondaggioSceltaMultipla;
+import post.testo.Testo;
 import profilo.credenziali.Credenziali;
-<<<<<<< HEAD
 import profilo.exception.AccountDoesNotExist;
-import profilo.exception.AccountGiaSeguito;
-=======
-import profilo.enumeration.EnumPaesi;
-import profilo.enumeration.EnumSesso;
+//import profilo.exception.AccountGiaSeguito;
 import profilo.exception.AccountGiaEsistente;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 import profilo.exception.NotLoggedIn;
 
 public class Profilo implements IProfilo { 
@@ -115,10 +117,8 @@ public EnumProfilo getTipo() {
 public void setTipo(EnumProfilo tipo) {
 	this.tipo = tipo;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+
 public boolean isLoggato() {
 	return loggato;
 }
@@ -182,6 +182,7 @@ public boolean segui(String profiloSeguito) throws AccountDoesNotExist, NotLogge
 	return true;	
 	}
 	return false;
+
 }
 
 public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
@@ -370,11 +371,8 @@ public boolean modificaPost(Post p) {
 	// TODO Auto-generated method stub
 	return false;
 }
-@Override
-public boolean commentaPost(Post p) {
-	// TODO Auto-generated method stub
-	return false;
-}
+
+
 @Override
 public void visualizzaPost(Post p) {
 	// TODO Auto-generated method stub
@@ -402,15 +400,19 @@ public String getPwd() {
 	// TODO Auto-generated method stub
 	return null;
 }
+
+
 @Override
 public void mostraInformazioniProfilo() {
-	if(tipo == EnumProfilo.PRIVATO) {
-		System.out.println(getNickname());
+      if(tipo == EnumProfilo.PUBBLICO) {
+
+		} else {
 		
-	} else {
-		// Chiama la selectAll del database
 		
 	}
+      
+      
+      
 }
 @Override
 public Credenziali modificaDatiPersonali(Credenziali c) {
@@ -423,6 +425,15 @@ public void bloccaProfilo(Profilo p) {
 	// TODO Auto-generated method stub
 }
 
+@Override
+public ArrayList<ProfiloDB> ottieniListaProfilo() throws AccountDoesNotExist, NotLoggedIn {
+	if (this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.selectAllProfilo();
+	} else {
+	return null;
+	}
+}
+
 public String getPassword() {
 	return password;
 }
@@ -430,6 +441,158 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
+
+
+@Override
+public boolean pubblicaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+		boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd)
+		throws AccountDoesNotExist, NotLoggedIn {
+	      
+	       Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	       if(this.seiLoggato(this.getIdProfilo() ) == true){
+	    	 return dbfacade.carica(f); 
+	      } else {
+	              return false;
+	             }
+}
+
+@Override
+public boolean pubblicaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+		boolean visibile, boolean condivisibile, String profilo, String percorso, int durataInSecondi)
+		throws AccountDoesNotExist, NotLoggedIn {
+	
+	    Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo,
+	    		             percorso, durataInSecondi);
+	    if(this.seiLoggato(this.getIdProfilo()) == true) {
+	    	return dbfacade.carica(v);
+	    } else {
+	            return false;
+	           }
+}
+
+@Override
+public boolean pubblicaSondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione,
+		                                       String descrizione, boolean visibile, boolean condivisibile, 
+		                                       String profilo, String primaScelta,String secondaScelta, int[] conteggio) 
+		                                       throws AccountDoesNotExist, NotLoggedIn {
+	
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
+			                                                profilo, primaScelta, secondaScelta, secondaScelta, primaScelta, conteggio);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(s);
+	} else {
+	       return false;
+	       }
+}
+
+@Override
+public boolean pubblicaSondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, 
+		                                        boolean visibile, boolean condivisibile, String profilo, String primaScelta,
+		                                        String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio)
+		                                        throws AccountDoesNotExist, NotLoggedIn {
+	
+	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
+			                                                    profilo, primaScelta, secondaScelta, conteggio);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(sdp);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
+		                     boolean condivisibile, String profilo, String font, String titolo)
+		                     throws AccountDoesNotExist, NotLoggedIn {
+	
+	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(t);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)
+		                       throws AccountDoesNotExist, NotLoggedIn {
+	
+	Commento c = new Commento(idCommento, oraCommento, dataCommento, testo, post);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(c);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
+		                    boolean condivisibile, String profilo, String percorso, boolean isHd) throws AccountDoesNotExist, NotLoggedIn {
+	
+	Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(f);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
+		                    boolean condivisibile, String profilo, String percorso, int durataInSecondi) throws AccountDoesNotExist, 
+                            NotLoggedIn {
+	
+	Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(v);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviSondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
+		                                       boolean visibile, boolean condivisibile, String profilo, String primaScelta,
+		                                       String secondaScelta, int[] conteggio) throws AccountDoesNotExist, NotLoggedIn {
+	
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
+			                                                 profilo, primaScelta, secondaScelta, secondaScelta, primaScelta, conteggio);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(s);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviSondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
+		                                       boolean visibile, boolean condivisibile, String profilo, String primaScelta,
+		                                       String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio)
+		                                       throws AccountDoesNotExist, NotLoggedIn {
+	
+	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
+			                                                    profilo, primaScelta, secondaScelta, conteggio);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(sdp);
+	} else {
+	        return false;
+	       }
+}
+
+
+@Override
+public boolean rimuoviTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
+		                    boolean condivisibile, String profilo, String font, String titolo) throws AccountDoesNotExist, NotLoggedIn {
+	
+	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(t);
+	} else {
+	        return false;
+	       }
+}
+
+
 
 
 
