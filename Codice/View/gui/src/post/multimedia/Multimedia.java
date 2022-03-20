@@ -41,7 +41,4 @@ public abstract class Multimedia extends Post{
 				+ isStory ;
 	}
 	
-	public abstract boolean settaDurataStoria(int tempo, Post p);
-	
-	
 }

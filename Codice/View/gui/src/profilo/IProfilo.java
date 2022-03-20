@@ -5,10 +5,11 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import chat.Chat;
-import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import db.profilo.ProfiloDB;
 import post.Post;
+import post.multimedia.foto.Foto;
+import post.multimedia.video.Video;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.NotLoggedIn;
 
@@ -28,12 +29,12 @@ public interface IProfilo {
 	public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist, NotLoggedIn;// 
 	
 	public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn;//
-
+	
+	//L'int time rappresenta la durata in ore nel quale la storia rimarrà pubblicata. A fine di time ore, la storia sarà rimossa automaticamente
+    public boolean trasformaFotoInStoria(int time, Foto f);//
+	public boolean trasformaVideoInStoria(int time, Video v);//
+	
 	public void visualizzaChat(Chat c);
-	public boolean modificaDatiChat(Chat c);
-	public boolean cancellaMessaggio();
-	public boolean scriviMessaggio();
-	public boolean entraInGruppo(Gruppo g);
 	public boolean accettaRichiestaDinvito();
 	public void apriChatPrivata(ChatPrivata c);
 	public boolean invitaUtenteAdIscriversi(Profilo p);
@@ -44,7 +45,20 @@ public interface IProfilo {
 	public boolean aggiungiSegnaLibro();
 	public int modificaLike(Post p);
 
-	//Pubblicazioni
+ 
+	public boolean aggiungiLike(Post p);
+	public boolean aggiungiDislike(Post p);
+	public boolean rimuoviLike(Post p);
+	public boolean rimuoviDislike(Post p);
+	
+    public boolean scriviMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String idProfiloInviante, String idProfiloRicevente)throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean scriviMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String idGruppo)throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean rimuoviMessaggioPrivato(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean rimuoviMessaggioDiGruppo(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore)throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist, NotLoggedIn;//
+    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist, NotLoggedIn;//
+    
 	public boolean pubblicaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile,
 			                     boolean condivisibile, String profilo, String percorso, boolean isHd) throws AccountDoesNotExist, 
 	                             NotLoggedIn; //

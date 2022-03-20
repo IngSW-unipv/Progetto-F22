@@ -4,8 +4,11 @@ package profilo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import Messaggio.MessaggioDiGruppo;
+import Messaggio.MessaggioPrivato;
 import Sistema.Sistema;
 import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
@@ -38,6 +41,8 @@ public class Profilo implements IProfilo {
 	private boolean loggato;
 	private boolean accountesistente;
 	private boolean isPswCambiata;
+	private HashMap<String,String> likeMap;
+	private HashMap<String,String> dislikeMap;
 	
 	//funzione richiamata dal signUP
 	public Profilo(String idProfilo, String nickname) {
@@ -50,6 +55,8 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.tipo = tipo.PUBBLICO;
+		likeMap = new HashMap<>();
+		dislikeMap = new HashMap<>();
 	}
 
 	//costruttore per la conversione profiloDB
@@ -66,6 +73,8 @@ public class Profilo implements IProfilo {
 		this.accountesistente = false;
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
+		likeMap = new HashMap<>(); 
+		dislikeMap = new HashMap<>();
 	}
 
 public String getIdProfilo() {
@@ -144,6 +153,30 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
+public HashMap<String, String> getLikeMap() {
+	return likeMap;
+}
+
+public void setLikeMap(HashMap<String, String> likeMap) {
+	this.likeMap = likeMap;
+}
+
+public HashMap<String, String> getDislikeMap() {
+	return dislikeMap;
+}
+
+public void setDislikeMap(HashMap<String, String> dislikeMap) {
+	this.dislikeMap = dislikeMap;
+}
+
+
+@Override
+public String toString() {
+	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
+			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
+			+ ", password=" + password + ", loggato=" + loggato + ", accountesistente=" + accountesistente
+			+ ", isPswCambiata=" + isPswCambiata + ", likeMap=" + likeMap + ", dislikeMap=" + dislikeMap + "]";
+}
 
 
 @Override
@@ -198,6 +231,163 @@ public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist
 	return false;
 }
 
+
+
+@Override
+public boolean trasformaFotoInStoria(int time, Foto f) {
+		f.setStory(true);
+		f.setTempoCancellazione(time);
+		dbfacade.carica(f);
+		try {
+		    Thread.sleep(time * 60 * 60 * 1000);
+		} catch (InterruptedException ie) {
+		    Thread.currentThread().interrupt();
+		}	
+		dbfacade.rimuovi(f);	
+		return true;
+}
+
+@Override
+public boolean trasformaVideoInStoria(int time, Video v) {
+	v.setStory(true);
+	v.setTempoCancellazione(time);
+	dbfacade.carica(v);
+	try {
+	    Thread.sleep(time * 60 * 60 * 1000);
+	} catch (InterruptedException ie) {
+	    Thread.currentThread().interrupt();
+	}	
+	dbfacade.rimuovi(v);	
+	return true;
+}
+
+@Override
+public boolean scriviMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+		String idProfiloInviante, String idProfiloRicevente) throws AccountDoesNotExist, NotLoggedIn {
+	    MessaggioPrivato m = new MessaggioPrivato(id,dataInvio,oraInvio,testo,multimedia,idProfiloInviante,idProfiloRicevente);
+	    if(this.seiLoggato(this.getIdProfilo()) == true) {
+	    	return dbfacade.carica(m);
+	    }
+	return false;
+}
+
+@Override
+public boolean scriviMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+		String idGruppo) throws AccountDoesNotExist, NotLoggedIn{
+	MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, idGruppo);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(m);
+	}
+	return false;
+}
+
+
+@Override
+public boolean rimuoviMessaggioPrivato(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn {
+	MessaggioPrivato m = new MessaggioPrivato(idMessaggio, null, null, null, null, null, null);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(m);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean rimuoviMessaggioDiGruppo(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn {
+	MessaggioDiGruppo m = new MessaggioDiGruppo(idMessaggio, null, null, null, null, null);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(m);
+	} else {
+	        return false;
+	       }
+}
+
+
+@Override
+public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
+		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore)
+		throws AccountDoesNotExist, NotLoggedIn {
+	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.carica(g);
+	}
+	return false;
+	
+	
+}
+
+@Override
+public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist, NotLoggedIn {
+	Gruppo g = new Gruppo(idGruppo,null,null,null,null,null,null,null,null,null);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.rimuovi(g);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist, NotLoggedIn {
+	Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.gestisciPartecipanti(g);
+	} else {
+	        return false;
+	       }
+}
+
+@Override
+public boolean aggiungiLike(Post p) {
+	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true)
+		return false;
+	else {
+				
+	    int i = p.getNumLike();
+        i++;
+        p.setNumLike(i);
+        likeMap.put(this.getIdProfilo(), p.getIdPost());
+	    return true;
+	}
+}
+
+@Override
+public boolean aggiungiDislike(Post p) {
+	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true)
+		return false;
+	else {
+				
+	    int i = p.getNumLike();
+        i++;
+        p.setNumLike(i);
+        dislikeMap.put(this.getIdProfilo(), p.getIdPost());
+	    return true;
+	}
+}
+
+
+@Override
+public boolean rimuoviLike(Post p) {
+	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true) {
+		int i = p.getNumLike();
+		i--;
+		p.setNumLike(i);
+		likeMap.remove(this.getIdProfilo(), p.getIdPost());
+		return true;
+	}
+	return false;
+}
+
+@Override
+public boolean rimuoviDislike(Post p) {
+	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true) {
+		int i = p.getNumDislike();
+		i--;
+		p.setNumDislike(i);
+		dislikeMap.remove(this.getIdProfilo(), p.getIdPost());
+		return true;
+	}
+	return false;
+}
 
 
 @Override
@@ -321,8 +511,7 @@ public boolean rimuoviFoto(String idPost) throws AccountDoesNotExist, NotLoggedI
 }
 
 @Override
-public boolean rimuoviVideo(String idPost) throws AccountDoesNotExist, 
-                            NotLoggedIn {
+public boolean rimuoviVideo(String idPost) throws AccountDoesNotExist,NotLoggedIn {
 	
 	Video v = new Video(idPost, null, null, null, false, false, null, null, 0);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
@@ -372,31 +561,7 @@ public void visualizzaChat(Chat c) {
 	// TODO Auto-generated method stub
 	
 }
-@Override
-public boolean modificaDatiChat(Chat c) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean cancellaMessaggio() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean scriviMessaggio() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean entraInGruppo(Gruppo g) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
-	return false;
-}
+
 @Override
 public void apriChatPrivata(ChatPrivata c) {
 	// TODO Auto-generated method stub
@@ -431,9 +596,24 @@ public int modificaLike(Post p) {
 	return 0;
 }
 
+@Override
+public boolean accettaRichiestaDinvito() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+public static DbFacade getDbfacade() {
+	return dbfacade;
+}
+
+public static void setDbfacade(DbFacade dbfacade) {
+	Profilo.dbfacade = dbfacade;
+}
+}
+
 
 	
 
 
 
-}
+

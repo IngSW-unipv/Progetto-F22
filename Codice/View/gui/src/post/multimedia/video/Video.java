@@ -2,7 +2,6 @@ package post.multimedia.video;
 
 import java.sql.Date;
 import java.sql.Time;
-import post.Post;
 import post.multimedia.Multimedia;
 
 public class Video extends Multimedia{
@@ -25,31 +24,8 @@ public class Video extends Multimedia{
 		this.durataInSecondi = durataInSecondi;
 	}
 
-	
-	//L'int passato da tastiera indica il numero di ore in cui vogliamo che la storia rimanga
-
-	public boolean settaDurataStoria(int time, Video p) {
-		this.setStory(true);
-		this.setTempoCancellazione(time);
-		try {
-		    Thread.sleep(time * 60 * 60 * 1000);
-		} catch (InterruptedException ie) {
-		    Thread.currentThread().interrupt();
-		}
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return super.toString() + ", durataInSecondi = " + durataInSecondi + "]";
-	}
-
-	@Override
-	public boolean settaDurataStoria(int tempo, Post p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	
+	}	
 }
