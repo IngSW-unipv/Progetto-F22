@@ -19,7 +19,6 @@ import db.gruppo.GruppoDB;
 import db.messaggioDiGruppo.MessaggioDiGruppoDB;
 import db.messaggioPrivato.MessaggioPrivatoDB;
 import db.profilo.ProfiloDB;
-import db.profilo.follow.Follow;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
 import db.testo.TestoDB;
@@ -31,6 +30,7 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.Profilo;
+import profilo.follow.Follow;
 
 public class ConvertitoreFacade {
 	

@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 
-	public abstract class Post implements IPost {
+	public abstract class Post {
 		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
 		            boolean visibile, boolean condivisibile, String profilo) {
 			super();

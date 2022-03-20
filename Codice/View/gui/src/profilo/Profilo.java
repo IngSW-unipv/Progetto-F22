@@ -11,9 +11,7 @@ import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import db.facade.DbFacade;
-import db.follow.FollowDB;
 import db.profilo.ProfiloDB;
-import db.profilo.follow.Follow;
 import post.Post;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
@@ -21,15 +19,13 @@ import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
-import profilo.credenziali.Credenziali;
 import profilo.exception.AccountDoesNotExist;
-//import profilo.exception.AccountGiaSeguito;
-import profilo.exception.AccountGiaEsistente;
 import profilo.exception.NotLoggedIn;
+import profilo.follow.Follow;
 
 public class Profilo implements IProfilo { 
 
-	private DbFacade dbfacade;
+	private static DbFacade dbfacade;
 	
 	private String idProfilo;
 	private String nickname;
@@ -140,11 +136,21 @@ public void setPswCambiata(boolean isPswCambiata) {
 	this.isPswCambiata = isPswCambiata;
 }
 
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
+
+
 @Override
 //Ritorna true se l'account inserito è "seguibile"
 public boolean profiloNonSeguito(String emailProfilo) {
-	ArrayList<FollowDB> search = dbfacade.cercaFollow(this.getIdProfilo(), emailProfilo);
-	if (search.isEmpty() == true) {
+	Follow f = new Follow(this.getIdProfilo(),emailProfilo);
+	if (dbfacade.profiloNonSeguito(f) == true) {
 		return true;
 	}
 	return false;
@@ -153,8 +159,8 @@ public boolean profiloNonSeguito(String emailProfilo) {
 @Override
 //Ritorna true se l'account è esistente
 public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist {
-	ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(emailProfilo);
-	if(res.isEmpty() == true) {
+	Profilo p = new Profilo(emailProfilo,null);
+	if(dbfacade.accountEsistente(p) == false) {
 		throw new AccountDoesNotExist(emailProfilo);
 	}
 	return true;
@@ -163,13 +169,10 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 @Override
 //Ritorna true se l'account è loggato
 public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.accountEsistente(emailProfilo) == true) {
-		if(dbfacade.vediSeLoggato(emailProfilo) == true) {
+	if(dbfacade.seiLoggato(emailProfilo) == true) {
 			return true;
 		}
 		throw new NotLoggedIn(emailProfilo);
-	}
-	return false;
 }
 
 @Override
@@ -187,12 +190,15 @@ public boolean segui(String profiloSeguito) throws AccountDoesNotExist, NotLogge
 @Override
 public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true && this.accountEsistente(profiloSeguito) == true && this.profiloNonSeguito(profiloSeguito) == false) {
-		dbfacade.rimuovi(this.getIdProfilo(), profiloSeguito);
+		Follow f = new Follow(this.getIdProfilo(),profiloSeguito);
+		dbfacade.rimuovi(f);
 		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
 	}
 	return false;
 }
+
+
 
 @Override
 public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExist, NotLoggedIn {
@@ -201,6 +207,8 @@ public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExi
 	}
 	return null;
 }
+
+
 
 @Override
 public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist, NotLoggedIn {
@@ -211,220 +219,6 @@ public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCo
 	return false;
 }
 
-/*
-@Override
-public boolean modificaLike(Profilo p) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-public HashMap<String, String> getListaSeguiti() {
-	return listaSeguiti;
-}
-
-@Override
-public boolean modificaDislike(Profilo profilo) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public void vediStory() {
-	// TODO Auto-generated method stub
-	
-}
-
-@Override
-public boolean commentare(Commento c) {
-	return c.scriviCommento(c);
-}
-
-@Override
-public void bloccaUtente(Utente u) {
-	// TODO Auto-generated method stub
-}
-
-
-@Override
-public void mostraInformazioniProfilo(Profilo p) {
-	// TODO Auto-generated method stub
-	if(p.getTipo() == EnumProfilo.PRIVATO) {
-	p.selectAll();
-	
-	}
-	else {
-		
-	}
-}
-
-@Override
-public void mostraInformazioniPost(Post p) {
-
-}
-
-@Override
-public boolean modificaDatiPersonali(Credenziali c) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public boolean visualizzaProprioPost(Post p) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public boolean eliminaProfilo(ProfiloDB p) {
-	ProfiloDao pDao = new ProfiloDao();
-	return pDao.rimuoviProfilo(p);
-	
-}
-//<<<<<<< HEAD
-@Override
-public String toString() {
-	return " [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
-			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", utente="
-			+ utente + ", post=" + post + ", listaSeguiti=" + listaSeguiti + "]";
-}
-//=======
-
-@Override
-public Chat cercaChatAttiva(Chat chat) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public Chat visualizzaChatAttiva(Chat chat) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public Post segnaLibro(Post p) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public ArrayList<ProfiloDB> selectAll() {
-	ProfiloDao pDao = new ProfiloDao();
-	return pDao.selectAll();
-}
-@Override
-public boolean caricaPost(Post p) {
-	return true;
-}
-@Override
-public boolean rimuoviPost(Post p) {
-	return true;
-}		
-*/
-@Override
-public boolean personalizzaSfondo() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public void visualizzaChat(Chat c) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean modificaDatiChat(Chat c) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean cancellaMessaggio() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean scriviMessaggio() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean entraInGruppo(Gruppo g) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public void apriChatPrivata(ChatPrivata c) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean invitaUtenteAdIscriversi(Profilo p) {
-
-	Scanner scan = new Scanner(System.in);
-	System.out.println("Digita il nome dell'utente da invitare");
-	
-	String nomeUtente = scan.nextLine();
-	// non ho finito
-	return false;
-}
-@Override
-public boolean posta(Post p) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean eliminaUnPost(Post p) {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public boolean modificaPost(Post p) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-
-@Override
-public void visualizzaPost(Post p) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
-public boolean aggiungiSegnaLibro() {
-	// TODO Auto-generated method stub
-	return false;
-}
-@Override
-public int modificaLike(Post p) {
-	// TODO Auto-generated method stub
-	return 0;
-}
-
-
-
-	
-
-
-public String getPwd() {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
-
-@Override
-public Credenziali modificaDatiPersonali(Credenziali c) {
-
-	return c.modificaDatiPersonali();
-	}
-
-
-
 @Override
 public ArrayList<ProfiloDB> ottieniListaProfilo() throws AccountDoesNotExist, NotLoggedIn {
 	if (this.seiLoggato(this.getIdProfilo()) == true) {
@@ -433,15 +227,6 @@ public ArrayList<ProfiloDB> ottieniListaProfilo() throws AccountDoesNotExist, No
 	return null;
 	}
 }
-
-public String getPassword() {
-	return password;
-}
-
-public void setPassword(String password) {
-	this.password = password;
-}
-
 
 @Override
 public boolean pubblicaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
@@ -514,10 +299,9 @@ public boolean pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubb
 }
 
 @Override
-public boolean rimuoviCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)
-		                       throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist, NotLoggedIn {
 	
-	Commento c = new Commento(idCommento, oraCommento, dataCommento, testo, post);
+	Commento c = new Commento(idCommento, null, null, null, null);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(c);
 	} else {
@@ -526,10 +310,9 @@ public boolean rimuoviCommento(String idCommento, Time oraCommento, Date dataCom
 }
 
 @Override
-public boolean rimuoviFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
-		                    boolean condivisibile, String profilo, String percorso, boolean isHd) throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviFoto(String idPost) throws AccountDoesNotExist, NotLoggedIn {
 	
-	Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	Foto f = new Foto(idPost, null, null, null, false, false, null, null, false);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(f);
 	} else {
@@ -538,11 +321,10 @@ public boolean rimuoviFoto(String idPost, Date dataPubblicazione, Time oraPubbli
 }
 
 @Override
-public boolean rimuoviVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
-		                    boolean condivisibile, String profilo, String percorso, int durataInSecondi) throws AccountDoesNotExist, 
+public boolean rimuoviVideo(String idPost) throws AccountDoesNotExist, 
                             NotLoggedIn {
 	
-	Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
+	Video v = new Video(idPost, null, null, null, false, false, null, null, 0);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(v);
 	} else {
@@ -551,12 +333,10 @@ public boolean rimuoviVideo(String idPost, Date dataPubblicazione, Time oraPubbl
 }
 
 @Override
-public boolean rimuoviSondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
-		                                       boolean visibile, boolean condivisibile, String profilo, String primaScelta,
-		                                       String secondaScelta, int[] conteggio) throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviSondaggioSceltaMultipla(String idPost) throws AccountDoesNotExist, NotLoggedIn {
 	
-	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
-			                                                 profilo, primaScelta, secondaScelta, secondaScelta, primaScelta, conteggio);
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, null, null, null, false, false, 
+			                                                 null, null, null, null, null, null);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(s);
 	} else {
@@ -565,13 +345,10 @@ public boolean rimuoviSondaggioSceltaMultipla(String idPost, Date dataPubblicazi
 }
 
 @Override
-public boolean rimuoviSondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
-		                                       boolean visibile, boolean condivisibile, String profilo, String primaScelta,
-		                                       String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio)
-		                                       throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviSondaggioDoppiaVotazione(String idPost) throws AccountDoesNotExist, NotLoggedIn {
 	
-	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
-			                                                    profilo, primaScelta, secondaScelta, conteggio);
+	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, null, null, null, false, false, 
+			                                                    null, null, null, null);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(sdp);
 	} else {
@@ -581,20 +358,82 @@ public boolean rimuoviSondaggioDoppiaVotazione(String idPost, Date dataPubblicaz
 
 
 @Override
-public boolean rimuoviTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
-		                    boolean condivisibile, String profilo, String font, String titolo) throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviTesto(String idPost) throws AccountDoesNotExist, NotLoggedIn {
 	
-	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo);
+	Testo t = new Testo(idPost, null, null, null, false, false, null, null, null);
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.rimuovi(t);
 	} else {
 	        return false;
 	       }
 }
+@Override
+public void visualizzaChat(Chat c) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public boolean modificaDatiChat(Chat c) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public boolean cancellaMessaggio() {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public boolean scriviMessaggio() {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public boolean entraInGruppo(Gruppo g) {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public boolean accettaRichiestaDinvito() {
+	// TODO Auto-generated method stub
+	return false;
+}
+@Override
+public void apriChatPrivata(ChatPrivata c) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public boolean invitaUtenteAdIscriversi(Profilo p) {
+
+	Scanner scan = new Scanner(System.in);
+	System.out.println("Digita il nome dell'utente da invitare");
+	
+	String nomeUtente = scan.nextLine();
+	// non ho finito
+	return false;
+}
+
+
+@Override
+public void visualizzaPost(Post p) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public boolean aggiungiSegnaLibro() {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public int modificaLike(Post p) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+	
 
 
 
-
-
-//>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 }

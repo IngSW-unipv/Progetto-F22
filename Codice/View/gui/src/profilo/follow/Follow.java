@@ -1,4 +1,4 @@
-package db.profilo.follow;
+package profilo.follow;
 
 public class Follow {
 

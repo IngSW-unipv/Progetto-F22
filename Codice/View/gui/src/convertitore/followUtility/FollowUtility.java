@@ -1,7 +1,7 @@
 package convertitore.followUtility;
 
 import db.follow.FollowDB;
-import db.profilo.follow.Follow;
+import profilo.follow.Follow;
 
 public class FollowUtility {
 

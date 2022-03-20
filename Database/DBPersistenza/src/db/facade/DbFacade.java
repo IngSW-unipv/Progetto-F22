@@ -7,6 +7,8 @@ import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.NotLoggedIn;
+import profilo.follow.Follow;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
 import db.follow.FollowDB;
@@ -22,7 +24,6 @@ import db.messaggioPrivato.MessaggioPrivatoDao;
 import db.notifica.NotificaDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
-import db.profilo.follow.Follow;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDao;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
@@ -286,8 +287,8 @@ public class DbFacade {
 	public boolean carica(Follow f) {
 		return flDao.carica(ConvertitoreFacade.getIstance().converti(f));
 	}
-	public boolean rimuovi(String profiloPersonale, String profiloSeguito) {
-		return flDao.rimuovi(profiloPersonale, profiloSeguito);
+	public boolean rimuovi(Follow f) {
+		return flDao.rimuovi(ConvertitoreFacade.getIstance().converti(f));
 	}
 	
 	public ArrayList<FollowDB> selectAllFollow(){
@@ -300,5 +301,41 @@ public class DbFacade {
 		return flDao.cerca(profiloPersonale, profiloSeguito);
 	}
 	
+	
+	
+	
+	
+	//Alcuni metodi utility
+	
+	
+	//Ritorna true se l'account inserito è "seguibile"
+	public boolean profiloNonSeguito(Follow f) {
+		ArrayList<FollowDB> search = this.cercaFollow(f.getMailProfiloPersonale(), f.getMailProfiloSeguito());
+		if (search.isEmpty() == true) {
+			return true;
+		}
+		return false;
+	}
+
+	//Ritorna true se l'account è esistente
+	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist {
+		ArrayList<ProfiloDB> res = this.cercaProfilo(p.getIdProfilo());
+		if(res.isEmpty() == true) {
+			throw new AccountDoesNotExist(p.getIdProfilo());
+		}
+		return true;
+	}
+
+	//Ritorna true se l'account è loggato
+	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
+		Profilo p = new Profilo(emailProfilo, null);
+		if(this.accountEsistente(p) == true) {
+			if(this.vediSeLoggato(emailProfilo) == true) {
+				return true;
+			}
+			throw new NotLoggedIn(emailProfilo);
+		}
+		return false;
+	}
 	
 }

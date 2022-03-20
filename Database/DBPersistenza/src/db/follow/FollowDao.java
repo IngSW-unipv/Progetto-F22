@@ -38,7 +38,7 @@ public class FollowDao implements IFollowDao{
 		
 	}
 	@Override
-	public boolean rimuovi(String s1, String s2) {
+	public boolean rimuovi(FollowDB f) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -48,8 +48,8 @@ public class FollowDao implements IFollowDao{
 		{
 			String query="delete from follow where profiloPersonale=? and profiloSeguito=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s1);
-			st1.setString(2, s2);
+			st1.setString(1, f.getProfiloPersonale());
+			st1.setString(2, f.getProfiloSeguito());
 
 			st1.executeUpdate();
 
