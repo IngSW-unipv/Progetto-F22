@@ -10,13 +10,29 @@ public class ProfiloTester {
     	Profilo p = new Profilo("001", "Girella");
     	Profilo p1 = new Profilo("P01", "Luca26");
     	Foto f = new Foto("F11", null, null, null, false, false, null, null, false);
-           
-			System.out.println(p.aggiungiLike(f));
 
-            System.out.println(p.rimuoviLike(f));
-            System.out.println(p1.rimuoviLike(f));
-    	
+        
+			try {
+				System.out.println(p.aggiungiLike(f));
+			} catch (AccountDoesNotExist | NotLoggedIn e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
             try {
+				System.out.println(p.rimuoviLike(f));
+			} catch (AccountDoesNotExist | NotLoggedIn e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+            try {
+				System.out.println(p1.rimuoviLike(f));
+			} catch (AccountDoesNotExist | NotLoggedIn e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+    	
+           try {
 				p.seiLoggato(p.getIdProfilo());
 			} catch (AccountDoesNotExist e) {
 				// TODO Auto-generated catch block
@@ -25,6 +41,8 @@ public class ProfiloTester {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+            
+           
     	}
     }
 

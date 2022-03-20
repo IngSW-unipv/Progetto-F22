@@ -9,4 +9,5 @@ public interface IFollowDao {
 	public ArrayList<FollowDB> selectAll();
 	public ArrayList<String> cercaProfSeguito(String profiloPersonale);
 	public ArrayList<FollowDB> cerca(String profiloPersonale, String profiloSeguito);
+	//public ArrayList<String> vediFollower(String)
 }

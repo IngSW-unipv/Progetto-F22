@@ -382,6 +382,34 @@ public class ProfiloDao implements IProfiloDao{
 	}
 
 
+	@Override
+	public String ottieniTipo(String idProfilo) throws AccountDoesNotExist {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT tipo FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, idProfilo);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String s = rs1.getString("psw");
+				DBConnection.closeConnection(conn);
+				return s;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    throw new AccountDoesNotExist(idProfilo);
+	}
+
+
 	}
 
 	

@@ -17,5 +17,4 @@ public class UtilityChat{
 	    	Time time = Time.valueOf(t);
 	    	return time;
 	    }	    
-	    
 }

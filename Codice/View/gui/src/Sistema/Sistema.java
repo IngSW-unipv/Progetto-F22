@@ -111,5 +111,9 @@ public class Sistema {
 	 	else
 	 	    throw new AccountDoesNotExist(email);
 	 	}
+	 	
+	 	public void stampaTuttiIprofilo() {
+	 		dbfacade.stampaSelectAllProfilo();
+	 	}
 }
 

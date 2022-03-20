@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import db.connessione.DBConnection;
 
+
 public class CommentoDao implements ICommentoDao{
 
 	private Connection conn;
@@ -125,4 +126,6 @@ public class CommentoDao implements ICommentoDao{
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+
+
 }

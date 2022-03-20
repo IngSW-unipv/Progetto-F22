@@ -6,14 +6,16 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.Timer;
 
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
-import Sistema.Sistema;
 import chat.Chat;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import db.facade.DbFacade;
+import db.messaggioDiGruppo.MessaggioDiGruppoDB;
+import db.messaggioPrivato.MessaggioPrivatoDB;
 import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
@@ -25,6 +27,7 @@ import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.NotLoggedIn;
 import profilo.follow.Follow;
+import java.util.TimerTask;
 
 public class Profilo implements IProfilo { 
 
@@ -234,8 +237,9 @@ public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist
 
 
 @Override
-public boolean trasformaFotoInStoria(int time, Foto f) {
-		f.setStory(true);
+public boolean trasformaFotoInStoria(int time, Foto f) throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	    f.setStory(true);
 		f.setTempoCancellazione(time);
 		dbfacade.carica(f);
 		try {
@@ -245,10 +249,13 @@ public boolean trasformaFotoInStoria(int time, Foto f) {
 		}	
 		dbfacade.rimuovi(f);	
 		return true;
+	}
+	return false;
 }
 
 @Override
-public boolean trasformaVideoInStoria(int time, Video v) {
+public boolean trasformaVideoInStoria(int time, Video v) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
 	v.setStory(true);
 	v.setTempoCancellazione(time);
 	dbfacade.carica(v);
@@ -259,6 +266,8 @@ public boolean trasformaVideoInStoria(int time, Video v) {
 	}	
 	dbfacade.rimuovi(v);	
 	return true;
+	}
+	return false;
 }
 
 @Override
@@ -302,6 +311,45 @@ public boolean rimuoviMessaggioDiGruppo(String idMessaggio) throws AccountDoesNo
 	       }
 }
 
+@Override
+public boolean leggiMessaggiDiGruppo(MessaggioDiGruppo m) throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	Timer timer = new Timer();
+	timer.schedule(new TimerTask() {
+		int i = 0;
+	    public void run() {
+	      
+	    	dbfacade.stampaListaMessaggi(m);
+	    	i++;
+               if(i == 5) 
+        	      timer.cancel();
+        
+	    }
+	 }, 0, 60 * 1000);
+	return true;
+	}
+	return false;
+}
+
+@Override
+public boolean leggiMessaggiPrivati(MessaggioPrivato m) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	Timer timer = new Timer();
+	timer.schedule(new TimerTask() {
+		int i = 0;
+	    public void run() {
+	      
+	    	dbfacade.stampaListaMessaggi(m);
+	    	i++;
+               if(i == 5) 
+        	      timer.cancel();
+        
+	    }
+	 }, 0, 60 * 1000);	
+	return true;
+	}
+	return false;
+}
 
 @Override
 public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
@@ -337,7 +385,8 @@ public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,Strin
 }
 
 @Override
-public boolean aggiungiLike(Post p) {
+public boolean aggiungiLike(Post p) throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
 	else {
@@ -348,10 +397,13 @@ public boolean aggiungiLike(Post p) {
         likeMap.put(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
+	}
+	return false;
 }
 
 @Override
-public boolean aggiungiDislike(Post p) {
+public boolean aggiungiDislike(Post p) throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo())== true) {
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
 	else {
@@ -362,11 +414,14 @@ public boolean aggiungiDislike(Post p) {
         dislikeMap.put(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
+	}
+	return false;
 }
 
 
 @Override
-public boolean rimuoviLike(Post p) {
+public boolean rimuoviLike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumLike();
 		i--;
@@ -375,16 +430,21 @@ public boolean rimuoviLike(Post p) {
 		return true;
 	}
 	return false;
+	}
+	return false;
 }
 
 @Override
-public boolean rimuoviDislike(Post p) {
+public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumDislike();
 		i--;
 		p.setNumDislike(i);
 		dislikeMap.remove(this.getIdProfilo(), p.getIdPost());
 		return true;
+	}
+	return false;
 	}
 	return false;
 }
@@ -407,15 +467,6 @@ public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCo
 		return dbfacade.carica(c);
 	}
 	return false;
-}
-
-@Override
-public ArrayList<ProfiloDB> ottieniListaProfilo() throws AccountDoesNotExist, NotLoggedIn {
-	if (this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.selectAllProfilo();
-	} else {
-	return null;
-	}
 }
 
 @Override
@@ -556,17 +607,169 @@ public boolean rimuoviTesto(String idPost) throws AccountDoesNotExist, NotLogged
 	        return false;
 	       }
 }
+
 @Override
-public void visualizzaChat(Chat c) {
-	// TODO Auto-generated method stub
-	
+public boolean cercaProfilo(String id) throws AccountDoesNotExist, NotLoggedIn{
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	dbfacade.stampaProfiloCercato(id);
+	}
+	return false;
 }
 
 @Override
-public void apriChatPrivata(ChatPrivata c) {
-	// TODO Auto-generated method stub
-	
+public boolean cercaCommento(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaCommentoCercato(id);
+		}
+		return false;
 }
+
+@Override
+public boolean cercaFoto(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaFotoCercate(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaGruppoCercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaMessaggioDiGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaMessaggiDiGruppoCercati(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaMessaggioPrivato(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaMessaggioPrivatoCercati(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaSondaggioDoppiaVotazione(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSDVcercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaSondaggioSceltaMultipla(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSSMcercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaTesto(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaTestoCercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean cercaVideo(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaVideoCercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaCommentiSottoPost(c);
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllFoto() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllFoto();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllGruppo();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllMessaggiDiGruppo() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllMessaggiDiGruppo();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllMessaggiPrivati() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllMessaggioPrivato();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllSondaggioDoppiaVotazione() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllSDV();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllSondaggioSceltaMultipla() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllSSM();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllTesto() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllTesto();
+		}
+		return false;
+}
+
+@Override
+public boolean selectAllVideo() throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaSelectAllVideo();
+		}
+		return false;
+}
+
+@Override
+public boolean stampaInfoProfilo() throws AccountDoesNotExist, NotLoggedIn {
+
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaProfiloCercato(this.getIdProfilo());
+		}
+		return false;
+}
+
+
 @Override
 public boolean invitaUtenteAdIscriversi(Profilo p) {
 
@@ -580,21 +783,12 @@ public boolean invitaUtenteAdIscriversi(Profilo p) {
 
 
 @Override
-public void visualizzaPost(Post p) {
-	// TODO Auto-generated method stub
-	
-}
-@Override
 public boolean aggiungiSegnaLibro() {
 	// TODO Auto-generated method stub
 	return false;
 }
 
-@Override
-public int modificaLike(Post p) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+
 
 @Override
 public boolean accettaRichiestaDinvito() {
@@ -602,13 +796,8 @@ public boolean accettaRichiestaDinvito() {
 	return false;
 }
 
-public static DbFacade getDbfacade() {
-	return dbfacade;
-}
 
-public static void setDbfacade(DbFacade dbfacade) {
-	Profilo.dbfacade = dbfacade;
-}
+
 }
 
 

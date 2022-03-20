@@ -34,4 +34,5 @@ public interface IProfiloDao {
   	 
   	 public String ottieniPsw(String idProfilo)throws AccountDoesNotExist;
   	 
+  	 public String ottieniTipo(String idProfilo)throws AccountDoesNotExist;
 }
