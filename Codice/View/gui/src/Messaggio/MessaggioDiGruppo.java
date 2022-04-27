@@ -3,6 +3,8 @@ package Messaggio;
 import java.sql.Date;
 import java.sql.Time;
 
+import Messaggio.enumeration.TipoMessaggio;
+
 public class MessaggioDiGruppo extends Messaggio{
 
 	public MessaggioDiGruppo(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia, String idGruppo) {
@@ -24,4 +26,18 @@ public class MessaggioDiGruppo extends Messaggio{
 	public String toString() {
 		return super.toString() + ", idGruppo = " + idGruppo + "]";
 	}
+	
+
+	@Override
+	public TipoMessaggio getTipo() {
+		return TipoMessaggio.DIGRUPPO;
+	}
+
+	@Override
+	public Messaggio inserisciCaratteristiche(Messaggio m) {
+		m = new MessaggioDiGruppo(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),this.getIdGruppo());
+		return m;
+		
+	}
+
 }

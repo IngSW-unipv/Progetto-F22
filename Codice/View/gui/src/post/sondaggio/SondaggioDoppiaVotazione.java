@@ -5,6 +5,8 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import post.enumeration.TipoPost;
+
 
 public class SondaggioDoppiaVotazione extends Sondaggio{
 
@@ -65,6 +67,11 @@ public void mostraRisultati() {
 	System.out.println("L'opzione " + this.getPrimaScelta() + " ha totalizzato " + this.conteggio[0] + " voti\n"
 			+ "L'opzione " + this.getSecondaScelta() + " ha totalizzato " + this.conteggio[1] + " voti\n");
 	
+}
+
+@Override
+public TipoPost getTipo() {
+	return TipoPost.SONDAGGIODOPPIAVOTAZIONE;
 }
 
 }

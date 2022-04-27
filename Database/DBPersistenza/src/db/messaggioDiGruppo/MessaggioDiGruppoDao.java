@@ -3,7 +3,6 @@ package db.messaggioDiGruppo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
@@ -18,33 +17,6 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 		this.schema = "socialnetwork";
 	}
 	
-    @Override
-	public ArrayList<MessaggioDiGruppoDB> selectAll() {
-		
-		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
-
-		conn=DBConnection.startConnection(conn,schema);
-		Statement st1;
-		ResultSet rs1;
-
-		try
-		{
-			st1 = conn.createStatement();
-			String query="SELECT * from messaggiodigruppo order by idMsgGrp";
-			rs1=st1.executeQuery(query);
-
-			while(rs1.next())
-			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
-
-				result.add(msg);
-			}
-		}catch (Exception e){e.printStackTrace();}
-
-		DBConnection.closeConnection(conn);
-		return result;
-		
-	}
 
     @Override
 	public boolean scriviMessaggioDiGruppo(MessaggioDiGruppoDB m) {
@@ -160,7 +132,7 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	}
 
 	@Override
-	public void ottieniTesto(MessaggioDiGruppoDB m) {
+	public String ottieniTesto(String m) {
 	
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -171,18 +143,20 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 			String query="SELECT testo FROM messaggiodigruppo WHERE idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m);
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				System.out.println(rs1.getString(1));
+				String s = rs1.getString("testo");
+				DBConnection.closeConnection(conn);
+				return s;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		
+		return null;
 	}
 
 	

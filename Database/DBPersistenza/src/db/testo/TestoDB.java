@@ -3,7 +3,10 @@ package db.testo;
 import java.sql.Date;
 import java.sql.Time;
 
-public class TestoDB {
+import db.Interfacce.IPost;
+
+
+public class TestoDB implements IPost{
 
 	public TestoDB(String idTesto, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 			int numDislike, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {

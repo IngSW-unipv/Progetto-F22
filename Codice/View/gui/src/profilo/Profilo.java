@@ -8,9 +8,12 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Timer;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
+import Messaggio.enumeration.TipoMessaggio;
 import chat.Chat;
+import chat.chatDiGruppo.ChatDiGruppo;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import chat.chatPrivata.ChatPrivata;
 import db.facade.DbFacade;
@@ -270,86 +273,129 @@ public boolean trasformaVideoInStoria(int time, Video v) throws AccountDoesNotEx
 	return false;
 }
 
+
+//Messaggi
+
 @Override
-public boolean scriviMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
-		String idProfiloInviante, String idProfiloRicevente) throws AccountDoesNotExist, NotLoggedIn {
-	    MessaggioPrivato m = new MessaggioPrivato(id,dataInvio,oraInvio,testo,multimedia,idProfiloInviante,idProfiloRicevente);
-	    if(this.seiLoggato(this.getIdProfilo()) == true) {
-	    	return dbfacade.carica(m);
+public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+		String idGruppo) {
+	   MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, idGruppo);
+	   return m;
+}
+@Override
+public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+		String idProfiloInviante, String idProfiloRicevente) {
+	 MessaggioPrivato m = new MessaggioPrivato(id,dataInvio,oraInvio,testo,multimedia,idProfiloInviante,idProfiloRicevente);
+	 return m;
+}
+@Override
+public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
+	 if(this.seiLoggato(this.getIdProfilo()) == true) {
+	    	return dbfacade.carica(m);	
 	    }
 	return false;
 }
 
 @Override
-public boolean scriviMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
-		String idGruppo) throws AccountDoesNotExist, NotLoggedIn{
-	MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, idGruppo);
+public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.carica(m);
+    	return dbfacade.rimuovi(m);
+    }
+return false;
+}
+
+@Override
+public boolean cercaMessaggio(String id, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaMessaggioCercato(id, t);
+		}
+		return false;
+}
+
+
+@Override
+public boolean leggiMessaggi(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) { 
+		
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+				int i = 0;
+			    public void run() {
+			      
+			    	dbfacade.stampaListaMessaggi(m);
+			    	i++;
+		               if(i == 5) 
+		        	      timer.cancel();
+			    }
+			 }, 0,  1000);	
+			return true;
 	}
 	return false;
-}
 
-
-@Override
-public boolean rimuoviMessaggioPrivato(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn {
-	MessaggioPrivato m = new MessaggioPrivato(idMessaggio, null, null, null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(m);
-	} else {
-	        return false;
-	       }
 }
 
 @Override
-public boolean rimuoviMessaggioDiGruppo(String idMessaggio) throws AccountDoesNotExist, NotLoggedIn {
-	MessaggioDiGruppo m = new MessaggioDiGruppo(idMessaggio, null, null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(m);
-	} else {
-	        return false;
-	       }
+public boolean leggiSoloTesto(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
+	/*if(this.seiLoggato(this.getIdProfilo()) == true) { 
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			int i = 0;
+		    public void run() {
+		      
+		    	dbfacade.
+		    	i++;
+	               if(i == 5) 
+	        	      timer.cancel();
+		    }
+		 }, 0,  1000);	
+		return true;
+}*/
+return false;
+}
+
+
+
+//------------------------------------------------------------------------------------------------------------------------------------
+
+
+//Post
+
+
+@Override
+public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	return f;
 }
 
 @Override
-public boolean leggiMessaggiDiGruppo(MessaggioDiGruppo m) throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-	Timer timer = new Timer();
-	timer.schedule(new TimerTask() {
-		int i = 0;
-	    public void run() {
-	      
-	    	dbfacade.stampaListaMessaggi(m);
-	    	i++;
-               if(i == 5) 
-        	      timer.cancel();
-        
-	    }
-	 }, 0, 60 * 1000);
-	return true;
-	}
-	return false;
+public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, int durataInSecondi) {
+	Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
+	return v;
+}
+
+
+
+@Override
+public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 @Override
-public boolean leggiMessaggiPrivati(MessaggioPrivato m) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-	Timer timer = new Timer();
-	timer.schedule(new TimerTask() {
-		int i = 0;
-	    public void run() {
-	      
-	    	dbfacade.stampaListaMessaggi(m);
-	    	i++;
-               if(i == 5) 
-        	      timer.cancel();
-        
-	    }
-	 }, 0, 60 * 1000);	
-	return true;
-	}
-	return false;
+public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, int[] conteggio) {
+	SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, conteggio);
+	return s;
 }
+
+@Override
+public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio) {
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	return s;
+}
+
+
+
 
 @Override
 public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
@@ -448,17 +494,6 @@ public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
 	}
 	return false;
 }
-
-
-@Override
-public ArrayList<ProfiloDB> mostraInformazioniProfilo() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.selectAllProfilo();
-	}
-	return null;
-}
-
-
 
 @Override
 public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist, NotLoggedIn {
@@ -640,21 +675,6 @@ public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
 		return false;
 }
 
-@Override
-public boolean cercaMessaggioDiGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaMessaggiDiGruppoCercati(id);
-		}
-		return false;
-}
-
-@Override
-public boolean cercaMessaggioPrivato(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaMessaggioPrivatoCercati(id);
-		}
-		return false;
-}
 
 @Override
 public boolean cercaSondaggioDoppiaVotazione(String id) throws AccountDoesNotExist, NotLoggedIn {
@@ -713,22 +733,6 @@ public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
 }
 
 @Override
-public boolean selectAllMessaggiDiGruppo() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllMessaggiDiGruppo();
-		}
-		return false;
-}
-
-@Override
-public boolean selectAllMessaggiPrivati() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllMessaggioPrivato();
-		}
-		return false;
-}
-
-@Override
 public boolean selectAllSondaggioDoppiaVotazione() throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		dbfacade.stampaSelectAllSDV();
@@ -769,6 +773,21 @@ public boolean stampaInfoProfilo() throws AccountDoesNotExist, NotLoggedIn {
 		return false;
 }
 
+@Override
+public boolean vediMieiFollower(String id) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaProfiloCercato(id);
+		}
+		return false;
+}
+
+@Override
+public boolean vediProfiloCercato(String profiloPersonale, String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		dbfacade.stampaFollowCercati(profiloPersonale, profiloSeguito);
+		}
+		return false;
+}
 
 @Override
 public boolean invitaUtenteAdIscriversi(Profilo p) {
@@ -796,6 +815,11 @@ public boolean accettaRichiestaDinvito() {
 	return false;
 }
 
+@Override
+public boolean pubblicaPost(Post p) {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 
 }

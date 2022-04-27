@@ -3,7 +3,9 @@ package db.video;
 import java.sql.Date;
 import java.sql.Time;
 
-public class VideoDB {
+import db.Interfacce.IPost;
+
+public class VideoDB implements IPost{
 
 	public VideoDB(String idVideo, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,

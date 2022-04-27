@@ -2,6 +2,8 @@ package post.multimedia.foto;
 
 import java.sql.Date;
 import java.sql.Time;
+
+import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 
 public class Foto extends Multimedia{
@@ -27,6 +29,11 @@ public class Foto extends Multimedia{
 	@Override
 	public String toString() {
 		return super.toString() + ", isHd = " + isHd + "]";
+	}
+
+	@Override
+	public TipoPost getTipo() {
+		return TipoPost.FOTO;
 	}
 
 }

@@ -1,33 +1,33 @@
 package chat.chatPrivata;
 
+
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
 import chat.Chat;
+import chat.enumeration.TipoChat;
 
 
 public class ChatPrivata extends Chat {
 	
-	public ChatPrivata( MessaggioPrivato msg) {
-		super();
-		this.msg = msg;
+	public ChatPrivata(String nomeChat) {
+		super(nomeChat);
+	}
+	
+	public void aggiungiAllaLista(MessaggioPrivato m) {
+		ArrayList<Messaggio> res = super.getListaMessaggi();
+		res.add(m);
+		super.setListaMessaggi(res);
 	}
 
-	 private MessaggioPrivato msg;
-	 
-	 
-	 //Ottiene la lista dei messaggi privati scambiati con un profilo specificato
-
-	public MessaggioPrivato getMsg() {
-		return msg;
+	@Override
+	public TipoChat getTipo() {
+		return TipoChat.PRIVATA;
 	}
 
-	public void setMsg(MessaggioPrivato msg) {
-		this.msg = msg;
-	}
+	
+
 }
 
 

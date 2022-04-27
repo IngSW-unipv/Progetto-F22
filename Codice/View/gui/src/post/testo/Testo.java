@@ -3,6 +3,7 @@ package post.testo;
 import java.sql.Date;
 import java.sql.Time;
 import post.Post;
+import post.enumeration.TipoPost;
 
 public class Testo extends Post {
 	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
@@ -32,6 +33,10 @@ public class Testo extends Post {
 	@Override
 	public String toString() {
 		return super.toString() + ", font=" + font + ", titolo=" + titolo + "]";
+	}
+	@Override
+	public TipoPost getTipo() {
+		return TipoPost.TESTO;
 	}
 }
 	

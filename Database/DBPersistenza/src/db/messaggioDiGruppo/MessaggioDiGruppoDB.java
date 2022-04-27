@@ -3,7 +3,9 @@ package db.messaggioDiGruppo;
 import java.sql.Date;
 import java.sql.Time;
 
-public class MessaggioDiGruppoDB {
+import db.Interfacce.IMessaggio;
+
+public class MessaggioDiGruppoDB implements IMessaggio {
 
 	public MessaggioDiGruppoDB(String idMsgGrp, Date dataInvio, Time oraInvio, String testo, String multimedia,
 			String idGruppo) {

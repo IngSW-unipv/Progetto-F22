@@ -8,17 +8,18 @@ import convertitore.ConvertitoreFacade;
 public class MessaggioPrivatoTester {
 public static void main(String[] args) {
 	MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
-	ArrayList<MessaggioPrivatoDB> selectAll = mdao.selectAll();
-	MessaggioPrivato m = new MessaggioPrivato("002", null, null, "Buongiorno", null, "001", "002");
+	MessaggioPrivato m = new MessaggioPrivato("M05", null, null, "Buongiorno", null, "001", "002");
 	ConvertitoreFacade f = ConvertitoreFacade.getIstance();
 	
-	System.out.println(selectAll.toString());
 	
-	mdao.ottieniMessaggio(f.converti(m));
+	System.out.println(mdao.ottieniMessaggio(m.getIdMessaggio()));
           
-   System.out.println("Inserimento avvenuto? " +mdao.scriviMessaggioPrivato(f.converti(m)));
-   System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioPrivato(f.converti(m)));
-      
+   System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioPrivato((MessaggioPrivatoDB) f.conversione(m)));
+   System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioPrivato((MessaggioPrivatoDB) f.conversione(m)));
+	
+	ArrayList<MessaggioPrivatoDB> res = mdao.selectAllNomeProfilo((MessaggioPrivatoDB) f.conversione(m));
+	for(MessaggioPrivatoDB mdb : res)
+		System.out.println(mdb.toString());
      
 }
 }

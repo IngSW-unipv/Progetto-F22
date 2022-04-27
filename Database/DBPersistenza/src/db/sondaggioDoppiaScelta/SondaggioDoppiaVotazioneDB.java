@@ -3,7 +3,9 @@ package db.sondaggioDoppiaScelta;
 import java.sql.Date;
 import java.sql.Time;
 
-public class SondaggioDoppiaVotazioneDB {
+import db.Interfacce.IPost;
+
+public class SondaggioDoppiaVotazioneDB implements IPost{
 
 	public SondaggioDoppiaVotazioneDB(String idSondaggio, Date dataPubblicazione, Time oraPubblicazione,
 			String descrizione, int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,

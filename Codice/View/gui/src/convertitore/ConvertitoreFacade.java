@@ -1,5 +1,6 @@
 package convertitore;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.gruppo.Gruppo;
@@ -12,6 +13,7 @@ import convertitore.testoUtility.TestoUtility;
 import convertitore.videoUtility.VideoUtility;
 import convertitore.gruppoUtility.GruppoUtility;
 import convertitore.messaggioUtility.MessaggioUtility;
+import db.Interfacce.IMessaggio;
 import db.commento.CommentoDB;
 import db.follow.FollowDB;
 import db.foto.FotoDB;
@@ -66,6 +68,10 @@ public class ConvertitoreFacade {
 		return istance;
 	}
 
+	public IMessaggio conversione(Messaggio m) {
+		return mUtility.converti(m);
+	}
+	
 	public ProfiloDB converti(Profilo p) {
 		return pUtility.convertiAProfiloDB(p);
 	}
@@ -95,16 +101,16 @@ public class ConvertitoreFacade {
 	public Gruppo convertiInverso(GruppoDB gdb) {
 		return gUtility.convertiAGruppo(gdb);
 	}
-	public MessaggioPrivatoDB converti(MessaggioPrivato m) {
+	/*public MessaggioPrivatoDB converti(MessaggioPrivato m) {
 		return mUtility.convertiAMessPrivDB(m);
 	}
-
+*/
 	public MessaggioPrivato convertiInverso(MessaggioPrivatoDB mdb) {
 		return mUtility.convertiAMessPriv(mdb);
 	}
-	public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
+	/*public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
 		return mUtility.convertiAMessGrupDB(m);
-	}
+	}*/
 
 	public MessaggioDiGruppo convertiInverso(MessaggioDiGruppoDB mdb) {
 		return mUtility.convertiAMessGrp(mdb);

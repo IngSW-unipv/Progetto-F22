@@ -3,7 +3,6 @@ package db.messaggioPrivato;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
@@ -18,34 +17,6 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 		super();
 		this.schema = "socialnetwork";
 	}
-
-    @Override
-	public ArrayList<MessaggioPrivatoDB> selectAll() {
-
-		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
-
-		conn=DBConnection.startConnection(conn,schema);
-		Statement st1;
-		ResultSet rs1;
-
-		try
-		{
-			st1 = conn.createStatement();
-			String query="SELECT * from messaggioprivato order by idMsgPvt";
-			rs1=st1.executeQuery(query);
-
-			while(rs1.next())
-			{
-				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
-
-				result.add(msg);
-			}
-		}catch (Exception e){e.printStackTrace();}
-
-		DBConnection.closeConnection(conn);
-		return result;
-	}
-
 
 	@Override
 	public boolean scriviMessaggioPrivato(MessaggioPrivatoDB m) {
@@ -145,7 +116,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m.getProfiloRicevente());
 
 			rs1=st1.executeQuery();
 
@@ -162,7 +133,7 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 
 
 	@Override
-	public void ottieniMessaggio(MessaggioPrivatoDB m) {
+	public String ottieniMessaggio(String m) {
 		
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -173,17 +144,20 @@ public class MessaggioPrivatoDao implements IMessaggioPrivatoDao{
 			String query="SELECT testo FROM messaggioprivato WHERE idMsgPvt=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m);
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				System.out.println(rs1.getString(1));
+				String s = rs1.getString("testo");
+				DBConnection.closeConnection(conn);
+				return s;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
+		return null;
 		
 	}
 

@@ -3,7 +3,9 @@ package db.messaggioPrivato;
 import java.sql.Date;
 import java.sql.Time;
 
-public class MessaggioPrivatoDB {
+import db.Interfacce.IMessaggio;
+
+public class MessaggioPrivatoDB implements IMessaggio {
 
 	public MessaggioPrivatoDB(String idMsgPvt, Date dataInvio, Time oraInvio, String testo, String multimedia,
 			String profiloInviante, String profiloRicevente) {

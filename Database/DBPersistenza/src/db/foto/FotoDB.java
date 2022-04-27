@@ -3,7 +3,9 @@ package db.foto;
 import java.sql.Date;
 import java.sql.Time;
 
-public class FotoDB {
+import db.Interfacce.IPost;
+
+public class FotoDB implements IPost{
 
 	public FotoDB(String idFoto, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
 			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,

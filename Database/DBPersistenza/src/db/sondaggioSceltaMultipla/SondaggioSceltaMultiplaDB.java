@@ -3,7 +3,9 @@ package db.sondaggioSceltaMultipla;
 import java.sql.Date;
 import java.sql.Time;
 
-public class SondaggioSceltaMultiplaDB {
+import db.Interfacce.IPost;
+
+public class SondaggioSceltaMultiplaDB implements IPost{
 
 	public SondaggioSceltaMultiplaDB(String idSondaggio, Date dataPubblicazione, Time oraPubblicazione,
 			String descrizione, int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,

@@ -3,6 +3,8 @@ package Messaggio;
 import java.sql.Date;
 import java.sql.Time;
 
+import Messaggio.enumeration.TipoMessaggio;
+
 
 public abstract class Messaggio {
 	public Messaggio(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia) {
@@ -54,4 +56,7 @@ public abstract class Messaggio {
 		return "idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
 				+ ", testo = " + testo + ", multimedia = " + multimedia ;
 	}	
+	
+	public abstract TipoMessaggio getTipo();
+	public abstract Messaggio inserisciCaratteristiche(Messaggio m);
 }

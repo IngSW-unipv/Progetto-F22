@@ -114,6 +114,12 @@ public class ProfiloTester {
 		e.printStackTrace();
 	}
        }
+       try {
+		System.out.println(pdao.ottieniTipo(prof1.getIdProfilo()));
+	} catch (AccountDoesNotExist e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
      }
 	}
 	

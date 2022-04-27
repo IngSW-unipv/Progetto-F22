@@ -1,0 +1,6 @@
+package post.enumeration;
+
+public enum TipoPost {
+
+	FOTO, VIDEO, SONDAGGIODOPPIAVOTAZIONE, SONDAGGIOSCELTAMULTIPLA, TESTO
+}

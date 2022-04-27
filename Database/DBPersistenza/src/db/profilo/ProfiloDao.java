@@ -399,7 +399,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				String s = rs1.getString("psw");
+				String s = rs1.getString("tipo");
 				DBConnection.closeConnection(conn);
 				return s;
 			}
@@ -410,6 +410,7 @@ public class ProfiloDao implements IProfiloDao{
 	}
 
 
+	
 	}
 
 	

@@ -2,6 +2,8 @@ package post.multimedia.video;
 
 import java.sql.Date;
 import java.sql.Time;
+
+import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 
 public class Video extends Multimedia{
@@ -27,5 +29,10 @@ public class Video extends Multimedia{
 	@Override
 	public String toString() {
 		return super.toString() + ", durataInSecondi = " + durataInSecondi + "]";
+	}
+
+	@Override
+	public TipoPost getTipo() {
+		return TipoPost.VIDEO;
 	}	
 }

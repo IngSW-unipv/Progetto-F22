@@ -3,6 +3,8 @@ package Messaggio;
 import java.sql.Date;
 import java.sql.Time;
 
+import Messaggio.enumeration.TipoMessaggio;
+
 public class MessaggioPrivato extends Messaggio{
 
 	public MessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String idProfiloInviante, String idProfiloRicevente) {
@@ -12,12 +14,14 @@ public class MessaggioPrivato extends Messaggio{
 	}
 	private String idProfiloInviante;
 	private String idProfiloRicevente;
+	
 	public String getIdProfiloInviante() {
 		return idProfiloInviante;
 	}
 	public void setIdProfiloInviante(String idProfiloInviante) {
 		this.idProfiloInviante = idProfiloInviante;
 	}
+	
 	public String getIdProfiloRicevente() {
 		return idProfiloRicevente;
 	}
@@ -28,6 +32,15 @@ public class MessaggioPrivato extends Messaggio{
 	public String toString() {
 		return super.toString() + ", idProfiloInviante = " + idProfiloInviante + ", idProfiloRicevente = " + idProfiloRicevente
 				+ "]";
+	}
+	@Override
+	public TipoMessaggio getTipo() {
+		return TipoMessaggio.PRIVATO;
+	}
+	@Override
+	public Messaggio inserisciCaratteristiche(Messaggio m) {
+		m = new MessaggioPrivato(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),this.getIdProfiloInviante(),this.getIdProfiloRicevente());
+		return m;
 	}
 	
 	

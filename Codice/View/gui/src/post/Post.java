@@ -3,6 +3,8 @@ package post;
 import java.sql.Date;
 import java.sql.Time;
 
+import post.enumeration.TipoPost;
+
 
 	public abstract class Post {
 		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
@@ -88,6 +90,8 @@ import java.sql.Time;
 				+ ", visibile = " + visibile + ", condivisibile = " + condivisibile + ", profilo = "
 				+ profilo;
 	}
+	
+	public abstract TipoPost getTipo();
 	
 	}
 
