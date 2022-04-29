@@ -1,9 +1,9 @@
-package messaggio.messaggioDiGruppo;
+package db.messaggio.messaggioDiGruppo;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import messaggio.MessaggioDB;
+import db.messaggio.MessaggioDB;
 
 
 public class MessaggioDiGruppoDB extends MessaggioDB{

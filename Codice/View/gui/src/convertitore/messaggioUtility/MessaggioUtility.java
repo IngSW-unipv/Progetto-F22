@@ -4,9 +4,9 @@ import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import messaggio.IMessaggio;
-import messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
-import messaggio.messaggioPrivato.MessaggioPrivatoDB;
 import Messaggio.enumeration.*;
+import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
+import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
 
 public class MessaggioUtility{
 

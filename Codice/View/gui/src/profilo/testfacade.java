@@ -1,7 +1,7 @@
 package profilo;
 
-import messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
-import messaggio.messaggioPrivato.MessaggioPrivatoDB;
+import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
+import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
 
 public class testfacade {
 

@@ -1,4 +1,4 @@
-package messaggio.messaggioDiGruppo;
+package db.messaggio.messaggioDiGruppo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
-import messaggio.MessaggioDB;
-import messaggio.MessaggioDao;
+import db.messaggio.MessaggioDB;
+import db.messaggio.MessaggioDao;
 
 public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGruppoDao{
 	private String schema;

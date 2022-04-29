@@ -1,4 +1,4 @@
-package messaggio;
+package db.messaggio;
 
 public class MessaggioDao {
 

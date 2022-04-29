@@ -17,7 +17,7 @@ public class ProfiloTester {
 
     	Messaggio m = new MessaggioDiGruppo("M17", null, null, null, null, "G00");
     	MessaggioPrivato m1 = new MessaggioPrivato("001", null, null, null, null, "001", "002");
-        
+        System.out.println("Funziona");
 			/*try {
 				System.out.println(p.aggiungiLike(f));
 			} catch (AccountDoesNotExist | NotLoggedIn e1) {

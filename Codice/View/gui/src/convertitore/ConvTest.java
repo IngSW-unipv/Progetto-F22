@@ -2,7 +2,7 @@ package convertitore;
 
 import Messaggio.MessaggioPrivato;
 import convertitore.messaggioUtility.MessaggioUtility;
-import messaggio.messaggioPrivato.MessaggioPrivatoDB;
+import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
 
 public class ConvTest {
 

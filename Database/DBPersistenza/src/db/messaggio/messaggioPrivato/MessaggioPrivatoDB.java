@@ -1,9 +1,9 @@
-package messaggio.messaggioPrivato;
+package db.messaggio.messaggioPrivato;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import messaggio.MessaggioDB;
+import db.messaggio.MessaggioDB;
 
 
 public class MessaggioPrivatoDB extends MessaggioDB{

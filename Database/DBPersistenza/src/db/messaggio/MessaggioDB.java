@@ -1,4 +1,4 @@
-package messaggio;
+package db.messaggio;
 
 import java.sql.Date;
 import java.sql.Time;
