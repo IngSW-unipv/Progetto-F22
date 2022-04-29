@@ -3,9 +3,9 @@ package convertitore.messaggioUtility;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
-import db.Interfacce.IMessaggio;
-import db.messaggioDiGruppo.MessaggioDiGruppoDB;
-import db.messaggioPrivato.MessaggioPrivatoDB;
+import messaggio.IMessaggio;
+import messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
+import messaggio.messaggioPrivato.MessaggioPrivatoDB;
 import Messaggio.enumeration.*;
 
 public class MessaggioUtility{

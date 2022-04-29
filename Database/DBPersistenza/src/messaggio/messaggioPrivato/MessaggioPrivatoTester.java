@@ -1,4 +1,4 @@
-package db.messaggioPrivato;
+package messaggio.messaggioPrivato;
 
 import java.util.ArrayList;
 

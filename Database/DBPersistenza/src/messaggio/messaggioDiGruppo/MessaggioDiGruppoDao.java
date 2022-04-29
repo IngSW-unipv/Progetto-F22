@@ -1,4 +1,4 @@
-package db.messaggioDiGruppo;
+package messaggio.messaggioDiGruppo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import messaggio.MessaggioDB;
+import messaggio.MessaggioDao;
 
-public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
+public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGruppoDao{
 	private String schema;
 	private Connection conn;
 
@@ -19,22 +21,21 @@ public class MessaggioDiGruppoDao implements IMessaggioDiGruppoDao{
 	
 
     @Override
-	public boolean scriviMessaggioDiGruppo(MessaggioDiGruppoDB m) {
+	public boolean scriviMessaggio(MessaggioDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia,gruppo) values (?,?,?,?,?,?)";
+			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
 			st1.setString(5, m.getMultimedia());
-			st1.setString(6, m.getIdGruppo());
 			
 			st1.executeUpdate();
 

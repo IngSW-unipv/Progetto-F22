@@ -1,4 +1,4 @@
-package db.messaggioDiGruppo;
+package messaggio.messaggioDiGruppo;
 
 import java.util.ArrayList;
 

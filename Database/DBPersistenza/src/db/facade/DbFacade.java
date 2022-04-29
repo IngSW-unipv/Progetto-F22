@@ -11,7 +11,6 @@ import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.NotLoggedIn;
 import profilo.follow.Follow;
-import db.Interfacce.IMessaggio;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
 import db.follow.FollowDB;
@@ -20,10 +19,6 @@ import db.foto.FotoDB;
 import db.foto.FotoDao;
 import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
-import db.messaggioDiGruppo.MessaggioDiGruppoDB;
-import db.messaggioDiGruppo.MessaggioDiGruppoDao;
-import db.messaggioPrivato.MessaggioPrivatoDB;
-import db.messaggioPrivato.MessaggioPrivatoDao;
 import db.notifica.NotificaDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
@@ -35,6 +30,13 @@ import db.testo.TestoDB;
 import db.testo.TestoDao;
 import db.video.VideoDB;
 import db.video.VideoDao;
+import messaggio.IMessaggio;
+import messaggio.MessaggioDB;
+import messaggio.MessaggioDao;
+import messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
+import messaggio.messaggioDiGruppo.MessaggioDiGruppoDao;
+import messaggio.messaggioPrivato.MessaggioPrivatoDB;
+import messaggio.messaggioPrivato.MessaggioPrivatoDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
@@ -52,6 +54,9 @@ public class DbFacade {
 	private CommentoDao cDao;
 	private FotoDao fDao;
 	private GruppoDao gDao;
+	
+	private MessaggioDao mdao;
+	
 	private MessaggioDiGruppoDao mdgDao;
 	private MessaggioPrivatoDao mpDao;
 	private NotificaDao nDao;
@@ -75,6 +80,7 @@ public class DbFacade {
 		tDao = new TestoDao();
 		vDao = new VideoDao();
 		flDao = new FollowDao();
+		mdao = new MessaggioDao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -152,16 +158,8 @@ public class DbFacade {
 	
 	//Messaggi
 	
-	public boolean carica(Messaggio m) {
-		if(m.getTipo() == TipoMessaggio.PRIVATO) {
-		 mpDao.scriviMessaggioPrivato((MessaggioPrivatoDB) ConvertitoreFacade.getIstance().conversione(m));
-		return true;
-		}
-		else if(m.getTipo() == TipoMessaggio.DIGRUPPO) {
-			mdgDao.scriviMessaggioDiGruppo((MessaggioDiGruppoDB) ConvertitoreFacade.getIstance().conversione(m));
-		return true;
-		}
-		return false;
+	public boolean carica(MessaggioDB md) {
+		return mdao.scriviMessaggio(md);
 	}
 	
 	public boolean rimuovi(Messaggio m) {

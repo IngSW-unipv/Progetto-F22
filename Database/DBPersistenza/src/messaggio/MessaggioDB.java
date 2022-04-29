@@ -1,33 +1,28 @@
-package db.messaggioDiGruppo;
+package messaggio;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import db.Interfacce.IMessaggio;
+public abstract class MessaggioDB {
 
-public class MessaggioDiGruppoDB implements IMessaggio {
-
-	public MessaggioDiGruppoDB(String idMsgGrp, Date dataInvio, Time oraInvio, String testo, String multimedia,
-			String idGruppo) {
+	public MessaggioDB(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia) {
 		super();
-		this.idMsgGrp = idMsgGrp;
+		this.idMessaggio = idMessaggio;
 		this.dataInvio = dataInvio;
 		this.oraInvio = oraInvio;
 		this.testo = testo;
 		this.multimedia = multimedia;
-		this.idGruppo = idGruppo;
 	}
-	private String idMsgGrp;
+	private String idMessaggio;
 	private Date dataInvio;
 	private Time oraInvio;
 	private String testo;
 	private String multimedia;
-	private String idGruppo;
-	public String getIdMsgGrp() {
-		return idMsgGrp;
+	public String getIdMessaggio() {
+		return idMessaggio;
 	}
-	public void setIdMsgGrp(String idMsgGrp) {
-		this.idMsgGrp = idMsgGrp;
+	public void setIdMessaggio(String idMessaggio) {
+		this.idMessaggio = idMessaggio;
 	}
 	public Date getDataInvio() {
 		return dataInvio;
@@ -53,15 +48,10 @@ public class MessaggioDiGruppoDB implements IMessaggio {
 	public void setMultimedia(String multimedia) {
 		this.multimedia = multimedia;
 	}
-	public String getIdGruppo() {
-		return idGruppo;
-	}
-	public void setIdGruppo(String idGruppo) {
-		this.idGruppo = idGruppo;
-	}
 	@Override
 	public String toString() {
-		return "MessaggioDiGruppoDB [idMsgGrp=" + idMsgGrp + ", dataInvio=" + dataInvio + ", oraInvio=" + oraInvio
-				+ ", testo=" + testo + ", multimedia=" + multimedia + ", idGruppo=" + idGruppo + "]";
-	}
+		return "[idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
+				+ ", testo = " + testo + ", multimedia = " + multimedia + "]";
+	} 
+	
 }

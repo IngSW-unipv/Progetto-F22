@@ -44,7 +44,7 @@ class ChatTest {
 	private Profilo p;
 	private ArrayList<Messaggio> listaMessaggi = new ArrayList<Messaggio>();
 
-	private ArrayList<Messaggio> listaMessaggi;
+	private ArrayList<MessaggioDB> listaMessaggi;
 	private Messaggio m1, m2;
 
 	/**
