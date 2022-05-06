@@ -38,6 +38,7 @@ public interface IProfilo {
 	
 	public boolean cercaMessaggio(String id, TipoMessaggio t)throws AccountDoesNotExist, NotLoggedIn;
 	
+	
     //Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	public boolean leggiMessaggi(Messaggio m) throws AccountDoesNotExist, NotLoggedIn;
     

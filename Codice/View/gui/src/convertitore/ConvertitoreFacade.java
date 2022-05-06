@@ -1,8 +1,7 @@
 package convertitore;
 
 import Messaggio.Messaggio;
-import Messaggio.MessaggioDiGruppo;
-import Messaggio.MessaggioPrivato;
+
 import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.commentoChatUtility.CommentoUtility;
 import convertitore.followUtility.FollowUtility;
@@ -17,14 +16,12 @@ import db.commento.CommentoDB;
 import db.follow.FollowDB;
 import db.foto.FotoDB;
 import db.gruppo.GruppoDB;
-import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
-import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
+import db.messaggio.MessaggioDB;
 import db.profilo.ProfiloDB;
 import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
 import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
 import db.testo.TestoDB;
 import db.video.VideoDB;
-import messaggio.IMessaggio;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
@@ -68,9 +65,19 @@ public class ConvertitoreFacade {
 		return istance;
 	}
 
-	public IMessaggio conversione(Messaggio m) {
+	
+	
+
+	public MessaggioDB converti(Messaggio m) {
 		return mUtility.converti(m);
 	}
+	
+	public String [] ritorna(Messaggio m) {
+		return mUtility.ritornaCaratteristiche(m);
+	}
+	
+	
+	
 	
 	public ProfiloDB converti(Profilo p) {
 		return pUtility.convertiAProfiloDB(p);
@@ -101,20 +108,7 @@ public class ConvertitoreFacade {
 	public Gruppo convertiInverso(GruppoDB gdb) {
 		return gUtility.convertiAGruppo(gdb);
 	}
-	/*public MessaggioPrivatoDB converti(MessaggioPrivato m) {
-		return mUtility.convertiAMessPrivDB(m);
-	}
-*/
-	public MessaggioPrivato convertiInverso(MessaggioPrivatoDB mdb) {
-		return mUtility.convertiAMessPriv(mdb);
-	}
-	/*public MessaggioDiGruppoDB converti(MessaggioDiGruppo m) {
-		return mUtility.convertiAMessGrupDB(m);
-	}*/
-
-	public MessaggioDiGruppo convertiInverso(MessaggioDiGruppoDB mdb) {
-		return mUtility.convertiAMessGrp(mdb);
-	}
+	
 	public SondaggioDoppiaVotazioneDB converti(SondaggioDoppiaVotazione s) {
 		return sUtility.convertiASondDopDB(s);
 	}

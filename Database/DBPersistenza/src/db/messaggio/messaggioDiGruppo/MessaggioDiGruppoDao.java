@@ -49,9 +49,43 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 		return esito;
 	}
 
+ 
+    
 
     @Override
-	public boolean rimuoviMessaggioDiGruppo(MessaggioDiGruppoDB m) {
+	public boolean inserisciChiavi(MessaggioDB m, String s1, String s2) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update messaggiodigruppo set gruppo=? where idMsgGrp=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s1);
+			st1.setString(2, m.getIdMessaggio());
+			
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+		
+		
+	}
+  
+   
+    
+
+    
+    @Override
+	public boolean rimuoviMessaggio(MessaggioDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -61,7 +95,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 		{
 			String query="delete from messaggiodigruppo where idMsgGrp=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgGrp());
+			st1.setString(1, m.getIdMessaggio());
 
 			st1.executeUpdate();
 
@@ -74,9 +108,11 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 		return esito;
 	}
 
+    
+    
     @Override
-	public ArrayList<MessaggioDiGruppoDB> cercaMessaggioDiGruppo(String m) {
-		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
+	public ArrayList<MessaggioDB> cercaMessaggio(String m) {
+		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -103,6 +139,8 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 		return result;
 	}
 
+    
+    
 	@Override
 	public ArrayList<MessaggioDiGruppoDB> selectAllIdGruppo(MessaggioDiGruppoDB m) {
 		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();

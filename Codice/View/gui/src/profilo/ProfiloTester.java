@@ -16,8 +16,15 @@ public class ProfiloTester {
     	Foto f = new Foto("F11", null, null, null, false, false, null, null, false);
 
     	Messaggio m = new MessaggioDiGruppo("M17", null, null, null, null, "G00");
-    	MessaggioPrivato m1 = new MessaggioPrivato("001", null, null, null, null, "001", "002");
-        System.out.println("Funziona");
+    	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001", "002");
+    
+    	try {
+			System.out.println(p.rimuoviMessaggio(m1));
+		} catch (AccountDoesNotExist | NotLoggedIn e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
 			/*try {
 				System.out.println(p.aggiungiLike(f));
 			} catch (AccountDoesNotExist | NotLoggedIn e1) {

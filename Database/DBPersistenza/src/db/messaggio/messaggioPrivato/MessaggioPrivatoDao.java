@@ -21,7 +21,64 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 	}
 
 	@Override
-	public boolean rimuoviMessaggioPrivato(MessaggioPrivatoDB m) {
+	public boolean scriviMessaggio(MessaggioDB m) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="insert into messaggioprivato (idMsgPvt,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m.getIdMessaggio());
+			st1.setDate(2, m.getDataInvio());
+			st1.setTime(3, m.getOraInvio());
+			st1.setString(4, m.getTesto());
+			st1.setString(5, m.getMultimedia());	
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+	
+	@Override
+	public boolean inserisciChiavi(MessaggioDB m, String s1, String s2) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update messaggioprivato set profiloInviante=?,profiloRicevente=? where idMsgPvt=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s1);
+			st1.setString(2, s2);
+			st1.setString(3, m.getIdMessaggio());
+			
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+		
+		
+	}
+	
+	@Override
+	public boolean rimuoviMessaggio(MessaggioDB m) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -31,7 +88,7 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 		{
 			String query="delete from messaggioPrivato where idMsgPvt=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMsgPvt());
+			st1.setString(1, m.getIdMessaggio());
 
 			st1.executeUpdate();
 
@@ -46,8 +103,8 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 
 
     @Override
-	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(String m) {
-		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
+	public ArrayList<MessaggioDB> cercaMessaggio(String m) {
+		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -129,34 +186,6 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 		DBConnection.closeConnection(conn);
 		return null;
 		
-	}
-
-	@Override
-	public boolean scriviMessaggio(MessaggioDB m) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="insert into messaggioprivato (idMsgPvt,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
-
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdMessaggio());
-			st1.setDate(2, m.getDataInvio());
-			st1.setTime(3, m.getOraInvio());
-			st1.setString(4, m.getTesto());
-			st1.setString(5, m.getMultimedia());	
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
-
-		DBConnection.closeConnection(conn);
-		return esito;
 	}
 
 }

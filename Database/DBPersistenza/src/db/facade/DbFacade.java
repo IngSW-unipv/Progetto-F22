@@ -36,7 +36,6 @@ import db.testo.TestoDB;
 import db.testo.TestoDao;
 import db.video.VideoDB;
 import db.video.VideoDao;
-import messaggio.IMessaggio;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
@@ -51,14 +50,17 @@ public class DbFacade {
 	
 	private static DbFacade istance;
 	
+	private MessaggioDao mDao;
+	
 	private CommentoDao cDao;
 	private FotoDao fDao;
 	private GruppoDao gDao;
 	
-	private MessaggioDao mdao;
 	
 	private MessaggioDiGruppoDao mdgDao;
 	private MessaggioPrivatoDao mpDao;
+	
+	
 	private NotificaDao nDao;
 	private ProfiloDao pDao;
 	private SondaggioDoppiaVotazioneDao sdvDao;
@@ -80,7 +82,6 @@ public class DbFacade {
 		tDao = new TestoDao();
 		vDao = new VideoDao();
 		flDao = new FollowDao();
-		mdao = new MessaggioDao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -158,30 +159,27 @@ public class DbFacade {
 	
 	//Messaggi
 	
-	public boolean carica(MessaggioDB md) {
-		return mdao.scriviMessaggio(md);
+	public boolean carica(Messaggio md) {
+		mDao = Utility.convertiTipoMessaggio(md.getTipo());
+		boolean b = mDao.scriviMessaggio(ConvertitoreFacade.getIstance().converti(md));
+		String s[] = ConvertitoreFacade.getIstance().ritorna(md);
+		mDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(md), s[0], s[1]);
+	    return b;
+		
 	}
+	
 	
 	public boolean rimuovi(Messaggio m) {
-		if(m.getTipo() == TipoMessaggio.PRIVATO) {
-			 mpDao.rimuoviMessaggioPrivato((MessaggioPrivatoDB) ConvertitoreFacade.getIstance().conversione(m));
-			return true;
-			}
-			else if(m.getTipo() == TipoMessaggio.DIGRUPPO) {
-				mdgDao.rimuoviMessaggioDiGruppo((MessaggioDiGruppoDB) ConvertitoreFacade.getIstance().conversione(m));
-			return true;
-			}
-			return false;
+		mDao = Utility.convertiTipoMessaggio(m.getTipo());
+		return mDao.rimuoviMessaggio(ConvertitoreFacade.getIstance().converti(m));
+	}
+	
+	public ArrayList<MessaggioDB> cercaMessaggio(String m, TipoMessaggio t){
+		mDao = Utility.convertiTipoMessaggio(t);
+		return mDao.cercaMessaggio(m);
 	}
 	
 	
-	public ArrayList<MessaggioDiGruppoDB> cercaMessaggioDiGruppo(String m) {
-		return mdgDao.cercaMessaggioDiGruppo(m);
-	} 
-	
-	public ArrayList<MessaggioPrivatoDB> cercaMessaggioPrivato(String m) {
-		return mpDao.cercaMessaggioPrivato(m);
-	}
 
     public void stampaMessaggioCercato(String s, TipoMessaggio t) {
     	if(t == TipoMessaggio.PRIVATO) {
@@ -224,7 +222,7 @@ public class DbFacade {
 	
     public boolean carica(Post p) {
     	if(p.getTipo() == TipoPost.FOTO) {
-    		fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(p))
+    		fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(p));
     	}
     		
     }

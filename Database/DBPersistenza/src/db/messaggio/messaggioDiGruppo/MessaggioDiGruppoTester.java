@@ -2,26 +2,17 @@ package db.messaggio.messaggioDiGruppo;
 
 import java.util.ArrayList;
 
-
-import Messaggio.MessaggioDiGruppo;
-import convertitore.ConvertitoreFacade;
+import db.messaggio.MessaggioDB;
 
 public class MessaggioDiGruppoTester {
 
 	public static void main(String[] args) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		MessaggioDiGruppo m = new MessaggioDiGruppo("M17", null, null, null, null, null);
-	    ConvertitoreFacade f = ConvertitoreFacade.getIstance();
+		MessaggioDiGruppoDB m = new MessaggioDiGruppoDB("001", null, null, null, null, null);
 	  
-			
-		 ArrayList<MessaggioDiGruppoDB> cercaMessaggio = mdao.cercaMessaggioDiGruppo(m.getIdMessaggio());
-	     for(MessaggioDiGruppoDB msg : cercaMessaggio)
-				System.out.println(msg.toString());
-	          
-	  System.out.println("Inserimento avvenuto? " + mdao.scriviMessaggioDiGruppo((MessaggioDiGruppoDB) f.conversione(m)));
-	     System.out.println("La rimozione è avvenuta? " + mdao.rimuoviMessaggioDiGruppo((MessaggioDiGruppoDB) f.conversione(m)));
-	  
-	    System.out.println(mdao.ottieniTesto(m.getIdMessaggio()));
-	    System.out.println(mdao.scriviMessaggioDiGruppo((MessaggioDiGruppoDB) f.conversione(m)));
+		ArrayList<MessaggioDB> res = mdao.cercaMessaggio(m.getIdMessaggio());
+		for(MessaggioDB ms: res)
+			System.out.println(ms.toString());
+		
 }
 }
