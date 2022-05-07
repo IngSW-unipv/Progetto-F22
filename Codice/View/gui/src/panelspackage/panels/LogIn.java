@@ -22,23 +22,21 @@ public class LogIn extends JPanel {
 	
 	private ArrayList<String> dati = new ArrayList<String>();
 	
-	private AreaDiTesto inserimentoEmail;
-	private AreaDiTesto inserimentoPassword;
+	private AreaDiTesto inserimentoEmail, inserimentoPassword;
 	private Pulsanti accedi;
 	
 	
-	public LogIn(int base, int altezza) {
+	public LogIn() {
 		
-		this.avvio(base, altezza);
+		this.avvio();
 		initComponents();
-		}
+	}
 
-	public void avvio(int base, int altezza) {
+	public void avvio() {
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
-		this.setBounds(0,0,base,altezza);
 	}
 	
 	public void initComponents() {

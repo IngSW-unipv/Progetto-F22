@@ -17,6 +17,7 @@ import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
 import panelspackage.panels.elements.PannelloNotifiche;
+import panelspackage.panels.elements.SpecificContainer;
 
 public class Frame extends JFrame {
 	
@@ -24,94 +25,88 @@ public class Frame extends JFrame {
 	
 	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
 	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	
-	
-	private int varHome = 1, varLogin = 0,varProfilo = 0, varImpostazioni = 0,
-				varChat = 0,varChatMessaggi = 0, varPostVisualizzato = 0, varNotifiche = 0, varCreazionePost = 0;
-	
+
 	private HashMap<String, JPanel> listaSchermateAttive = new HashMap<String, JPanel>();
-	private Layers layers;
 	private ArrayList<String> risultatiRicerca = new ArrayList<String>();
+	private SpecificContainer FrameMainContainer;
 	
+	// liste di prova
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10","tony11","tony12","tony13","tony14","tony15"};
 
+	
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		 
 	//all'avvio della GUI verra creata solo la schermata di login
-		
-		
 		this.avvio();
-	//	this.avvioPostVisualizzato();
-	//	this.avviaCreazionePost();
-	//	this.avvioHome(bufferStories, bufferPosts);
-	//	this.avviaImpostazioni(nomeUtente);
-	//	this.avviaProfilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-	//	this.avviaSchermataSignUp();
-
 	}
 	
 	public void avvio() {
+		this.settingParametriFrame();
+		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
+		this.avvioLogin();
+	}
+	
+	public void settingParametriFrame() {
 		this.setTitle("Social Network");
 		this.setSize(814,813);
-		this.setLayout(null);
+		this.setLayout(new BorderLayout());
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.setResizable(false);
-		
-		setLayers(layers = new Layers(800, 775));
-		this.add(getLayers(), BorderLayout.CENTER);
-		LogIn logIn = new LogIn(800, 775);
-		layers.add(logIn, new  Integer(0), 0);
+	}
+	
+	public void avvioLogin() {
+		LogIn logIn = new LogIn();
+		FrameMainContainer.add(logIn, BorderLayout.CENTER);
 		this.listaSchermateAttive.put("logIn", logIn);
 		
 	}
 	
 	public void avvioHome(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
 		Home home = new Home(bufferStories,  bufferPosts);
-		getLayers().add(home, new  Integer(varHome), 0);
-		home.setBounds(0,0,800,775);
+		FrameMainContainer.add(home);
 		this.listaSchermateAttive.put("Home", home);
 	}
 	
 	public void avviaCreazionePost() {
 		CreazionePost creazionePost = new CreazionePost();
-		getLayers().add(creazionePost, new  Integer(varCreazionePost), 0);
-		creazionePost.setBounds(0,0,800,775);
+		FrameMainContainer.add(creazionePost);
 		this.listaSchermateAttive.put("CreazionePost", creazionePost);
 	}
 	
 	public void avviaImpostazioni(String profilo){
 		Impostazioni impostazioni = new Impostazioni(profilo);
-		layers.add(impostazioni, new  Integer(varImpostazioni), 0);
+		FrameMainContainer.add(impostazioni);
 		impostazioni.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("Impostazioni", impostazioni);
 	}
 	
 	public void avviaProfilo(String nomeUtente, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> listaImmaginiPost) {
 	Profilo profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-	layers.add(profilo, new  Integer(1), 0);
+	FrameMainContainer.add(profilo);
 	profilo.setBounds(0,0,800,775);
 	this.listaSchermateAttive.put("Profilo", profilo);
 	}
 	
 	public void avviaChat() {
 		Chat chat = new Chat();
-		layers.add(chat, new Integer(varChat), 0);
-		chat.setBounds(0,0,800,775);
+		FrameMainContainer.add(chat);
+
 		this.listaSchermateAttive.put("Chat", chat);
 	}
 	
 	public void avviaNotifiche() {
 		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
-		layers.add(pannelloNotifiche, new Integer(varNotifiche), 0);
+		FrameMainContainer.add(pannelloNotifiche);
 		pannelloNotifiche.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("PannelloNotifiche", pannelloNotifiche);
 	}
 	
 	public void avvioPostVisualizzato() {
 		PostVisualizzato postVisualizzato = new PostVisualizzato("immagini/Tony.jpeg");
-		layers.add(postVisualizzato, new Integer(varPostVisualizzato), 0);
+		FrameMainContainer.add(postVisualizzato);
 		postVisualizzato.setBounds(0,0,800,775);
 		this.listaSchermateAttive.put("PannelloNotifiche", postVisualizzato);
 	}
@@ -131,83 +126,11 @@ public class Frame extends JFrame {
 	
 	public void avviaSchermataSignUp() {
 		SignUp signUp = new SignUp();
-		layers.add(signUp, new  Integer(0), 0);
-		signUp.setBounds(0,0,800,775);
+		FrameMainContainer.add(signUp);
 		this.listaSchermateAttive.put("SignUp", signUp);
 	}
 	
-	public int getVarHome() {
-		return varHome;
-	}
-
-	public void setVarHome(int varHome) {
-		this.varHome = varHome;
-	}
-
-	public int getVarLogin() {
-		return varLogin;
-	}
-
-	public void setVarLogin(int varLogin) {
-		this.varLogin = varLogin;
-	}
-
-	public int getVarProfilo() {
-		return varProfilo;
-	}
-
-	public void setVarProfilo(int varProfilo) {
-		this.varProfilo = varProfilo;
-	}
-
-	public int getVarImpostazioni() {
-		return varImpostazioni;
-	}
-
-	public void setVarImpostazioni(int varImpostazioni) {
-		this.varImpostazioni = varImpostazioni;
-	}
-
-	public int getVarChat() {
-		return varChat;
-	}
-
-	public void setVarNotifiche(int varNotifiche) {
-		this.varNotifiche = varNotifiche;
-	}
 	
-	public int getVarCreazionePost() {
-		return varCreazionePost;
-	}
-
-	public void setVarCreazionePost(int varCreazionePost) {
-		this.varCreazionePost = varCreazionePost;
-	}
-
-	public int getVarNotifiche() {
-		return varNotifiche;
-	}
-
-	public void setVarChat(int varChat) {
-		this.varChat = varChat;
-	}
-
-	public int getVarChatMessaggi() {
-		return varChatMessaggi;
-	}
-
-	public void setVarChatMessaggi(int varChatMessaggi) {
-		this.varChatMessaggi = varChatMessaggi;
-	}
-	
-	public int getVarPostVisualizzato() {
-		return varPostVisualizzato;
-	}
-
-	public void setVarPostVisualizzato(int varPostVisualizzato) {
-		this.varPostVisualizzato = varPostVisualizzato;
-	}
-
 	public Home getHome() {
 		return (Home)listaSchermateAttive.get("Home");
 	}
@@ -250,17 +173,27 @@ public class Frame extends JFrame {
 		this.listaSchermateAttive = listaSchermateAttive;
 	}
 
-	public Layers getLayers() {
-		return layers;
-	}
-
-	public void setLayers(Layers layers) {
-		this.layers = layers;
-	}
-	
-
 	public PostVisualizzato getPostVisualizzato() {
 		return (PostVisualizzato) listaSchermateAttive.get("PostVisualizzato");	
+	}
+	
+	public JButton getLoginButton() {
+		return this.getLogIn().getAccedi();
+	}
+	
+	public JButton getSignUpButton() {
+		return this.getLogIn().getSignUp();
+	}
+	
+	public HashMap avvioSchermate() {
+		HashMap<String, JComponent> mappaSchermate = new HashMap<String, JComponent>();
+		//LogIn schermataLogin = new LogIn();
+		ArrayList bufferStories = new ArrayList();
+		bufferStories.add("immagini/Bruce.jpeg"); bufferStories.add("immagini/Natasha.jpeg"); bufferStories.add("immagini/Tony.jpeg"); bufferStories.add("immagini/Clint.jpeg"); bufferStories.add("immagini/Steve.jpeg");
+		Home schermataHome = new Home(bufferStories, bufferStories);
+		//mappaSchermate.put("Login", schermataLogin);
+		mappaSchermate.put("Home", schermataHome);
+		return mappaSchermate;
 	}
 
 	public static Color getColoreprimariotematico() {
