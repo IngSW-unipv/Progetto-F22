@@ -14,4 +14,21 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Codice/View/gui/src/panelspackage/panels/elements/immagini/Appelico.png</name>
+			<type>1</type>
+			<location>C:/Users/aissa/OneDrive/Immagini/Appelico.png</location>
+		</link>
+		<link>
+			<name>Codice/View/gui/src/panelspackage/panels/elements/immagini/profiler.png</name>
+			<type>1</type>
+			<location>C:/Users/aissa/OneDrive/Immagini/profiler.png</location>
+		</link>
+		<link>
+			<name>Codice/View/gui/src/panelspackage/panels/elements/immagini/torna.png</name>
+			<type>1</type>
+			<location>C:/Users/aissa/OneDrive/Immagini/torna.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

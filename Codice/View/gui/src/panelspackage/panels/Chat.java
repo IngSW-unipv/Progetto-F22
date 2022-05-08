@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-public class Chat extends JPanel {
+public class Chat extends JFrame {
 	private ArrayList<JLabel> listaChat = new ArrayList<JLabel>();
 	private int numeroChat; 	//Numero delle chat di un account
 	private JLabel titoloChat;
@@ -24,7 +24,7 @@ public class Chat extends JPanel {
 	
 	public Chat() {
 		int i;
-		this.setOpaque(true);
+		//this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(NERO);	
@@ -68,6 +68,15 @@ public class Chat extends JPanel {
 	public void aggiungiChatAllaLista(ArrayList listaChat) {
 		JLabel chat = new JLabel();
 		listaChat.add(chat);
+	}
+	
+	public static void main(String[] args) {
+		Chat chat = new Chat();
+		chat.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		chat.setVisible(true);
+		chat.setSize(500, 500);
+		chat.pack();
+		chat.setLayout(new FlowLayout(FlowLayout.LEADING));
 	}
 
 	public JButton getChatPrivata() {
