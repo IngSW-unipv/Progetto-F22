@@ -53,5 +53,9 @@ public abstract class MessaggioDB {
 		return "[idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
 				+ ", testo = " + testo + ", multimedia = " + multimedia + "]";
 	} 
-	
+	public  MessaggioDB inserisciCaratteristiche(MessaggioDB m) {
+		return null;
+	}
 }
+
+

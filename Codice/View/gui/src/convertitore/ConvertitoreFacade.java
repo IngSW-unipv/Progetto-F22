@@ -1,7 +1,9 @@
 package convertitore;
 
-import Messaggio.Messaggio;
+import java.util.ArrayList;
 
+import Messaggio.Messaggio;
+import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.commentoChatUtility.CommentoUtility;
 import convertitore.followUtility.FollowUtility;
@@ -76,6 +78,9 @@ public class ConvertitoreFacade {
 		return mUtility.ritornaCaratteristiche(m);
 	}
 	
+	public ArrayList<Messaggio> convertiLista(TipoMessaggio t, ArrayList<MessaggioDB> m){
+		return mUtility.convertiLista(t, m);
+	}
 	
 	
 	
@@ -144,3 +149,4 @@ public class ConvertitoreFacade {
 		return flUtility.convertiAFollow(f);
 	}
 }
+

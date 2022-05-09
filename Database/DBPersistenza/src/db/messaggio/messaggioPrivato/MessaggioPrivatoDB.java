@@ -1,3 +1,4 @@
+
 package db.messaggio.messaggioPrivato;
 
 import java.sql.Date;
@@ -30,6 +31,11 @@ public class MessaggioPrivatoDB extends MessaggioDB{
 	public void setProfiloRicevente(String profiloRicevente) {
 		this.profiloRicevente = profiloRicevente;
 	}
+	public  MessaggioDB inserisciCaratteristiche(MessaggioDB m) {
+		m = new MessaggioPrivatoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), this.getProfiloInviante(), this.getProfiloRicevente());
+		return m;
+	}
+	
 	@Override
 	public String toString() {
 		return super.toString() + ", profiloInviante = " + profiloInviante + ", profiloRicevente = " + profiloRicevente
@@ -37,3 +43,7 @@ public class MessaggioPrivatoDB extends MessaggioDB{
 	}
 	
 }
+
+
+
+

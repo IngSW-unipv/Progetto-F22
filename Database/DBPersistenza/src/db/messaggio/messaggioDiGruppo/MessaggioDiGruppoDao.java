@@ -9,7 +9,7 @@ import db.connessione.DBConnection;
 import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
 
-public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGruppoDao{
+public class MessaggioDiGruppoDao extends MessaggioDao {
 	private String schema;
 	private Connection conn;
 
@@ -142,8 +142,8 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
     
     
 	@Override
-	public ArrayList<MessaggioDiGruppoDB> selectAllIdGruppo(MessaggioDiGruppoDB m) {
-		ArrayList<MessaggioDiGruppoDB> result = new ArrayList<>();
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s) {
+		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -154,7 +154,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by idMsgGrp";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getIdGruppo());
+			st1.setString(1, s);
 
 			rs1=st1.executeQuery();
 
@@ -171,7 +171,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 	}
 
 	@Override
-	public String ottieniTesto(String m) {
+	public String ottieniTestoMessaggio(String m) {
 	
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -196,6 +196,36 @@ public class MessaggioDiGruppoDao extends MessaggioDao implements IMessaggioDiGr
 
 		DBConnection.closeConnection(conn);
 		return null;
+	}
+
+
+	@Override
+	public ArrayList<String> ottieniTestoListaMessaggi(String m) {
+
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT testo FROM messaggiodigruppo WHERE gruppo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+                	result.add(rs1.getString("testo"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+		
 	}
 
 	

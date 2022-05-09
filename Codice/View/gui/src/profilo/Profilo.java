@@ -305,16 +305,26 @@ return false;
 }
 
 @Override
-public boolean cercaMessaggio(String id, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
+public ArrayList<Messaggio> cercaMessaggio(String id, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaMessaggioCercato(id, t);
+		return dbfacade.cerca(id, t);
 		}
-		return false;
+		return null;
 }
 
 
 @Override
-public boolean leggiMessaggi(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
+public String ottieniTestoMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) {
+		return dbfacade.ottieniTestoMessaggio(m.getIdMessaggio(), m.getTipo());
+		}
+		return null;
+}
+
+
+
+@Override
+public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true) { 
 		
 			Timer timer = new Timer();
@@ -322,35 +332,42 @@ public boolean leggiMessaggi(Messaggio m) throws AccountDoesNotExist, NotLoggedI
 				int i = 0;
 			    public void run() {
 			      
-			    	dbfacade.stampaListaMessaggi(m);
+			    	ArrayList<Messaggio> mess = dbfacade.selezionaMessaggi(s, t);
+			    	for(Messaggio lis : mess)
+			    		System.out.println(lis.toString());
+			    	
 			    	i++;
 		               if(i == 5) 
 		        	      timer.cancel();
 			    }
-			 }, 0,  1000);	
+			 }, 0,  1000 * 60 * 5);	
 			return true;
 	}
 	return false;
 
 }
 
+
 @Override
-public boolean leggiSoloTesto(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
-	/*if(this.seiLoggato(this.getIdProfilo()) == true) { 
+public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
+	if(this.seiLoggato(this.getIdProfilo()) == true) { 
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			int i = 0;
 		    public void run() {
 		      
-		    	dbfacade.
+		       ArrayList<String> res = dbfacade.ottieniTestoListaMessaggi(s, t);
+		    	for(String msg : res)
+		    		System.out.println(msg.toString());
+		       
 		    	i++;
 	               if(i == 5) 
 	        	      timer.cancel();
 		    }
-		 }, 0,  1000);	
+		 }, 0,  1000 * 60 * 5);	
 		return true;
-}*/
+}
 return false;
 }
 
@@ -820,6 +837,7 @@ public boolean pubblicaPost(Post p) {
 	// TODO Auto-generated method stub
 	return false;
 }
+
 
 
 }

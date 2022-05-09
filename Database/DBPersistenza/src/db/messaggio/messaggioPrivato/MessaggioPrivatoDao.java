@@ -9,7 +9,7 @@ import db.connessione.DBConnection;
 import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
 
-public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPrivatoDao{
+public class MessaggioPrivatoDao extends MessaggioDao {
 
 	private String schema;
 	private Connection conn;
@@ -131,8 +131,8 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 	}
 
 	@Override
-	public ArrayList<MessaggioPrivatoDB> selectAllNomeProfilo(MessaggioPrivatoDB m) {
-		ArrayList<MessaggioPrivatoDB> result = new ArrayList<>();
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s) {
+		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -143,7 +143,7 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=? order by idMsgPvt";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m.getProfiloRicevente());
+			st1.setString(1, s);
 
 			rs1=st1.executeQuery();
 
@@ -159,8 +159,9 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 	}
 
 
+	
 	@Override
-	public String ottieniMessaggio(String m) {
+	public String ottieniTestoMessaggio(String m) {
 		
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -187,5 +188,36 @@ public class MessaggioPrivatoDao extends MessaggioDao implements IMessaggioPriva
 		return null;
 		
 	}
+
+	@Override
+	public ArrayList<String> ottieniTestoListaMessaggi(String s) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try
+		{
+			String query="SELECT testo FROM messaggioprivato WHERE profiloRicevente=? order by idMsgPvt";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				result.add(rs1.getString("testo"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+
+
+
+
 
 }

@@ -26,6 +26,26 @@ public class MessaggioUtility{
 		return null;
 	}
 
+	
+	public Messaggio convertiInverso(MessaggioDB mess, TipoMessaggio tipo) {
+
+		if(tipo == TipoMessaggio.PRIVATO) {
+			MessaggioPrivatoDB mdb = (MessaggioPrivatoDB) mess.inserisciCaratteristiche(mess);
+			MessaggioPrivato m = new MessaggioPrivato(mdb.getIdMessaggio(), mdb.getDataInvio(), mdb.getOraInvio(), mdb.getTesto(), mdb.getMultimedia(), mdb.getProfiloInviante(), mdb.getProfiloRicevente());
+			return m;
+		}
+		
+		else if(tipo == TipoMessaggio.DIGRUPPO){
+			MessaggioDiGruppoDB mdb = (MessaggioDiGruppoDB) mess.inserisciCaratteristiche(mess);
+			MessaggioDiGruppo m = new MessaggioDiGruppo(mdb.getIdMessaggio(), mdb.getDataInvio(), mdb.getOraInvio(), mdb.getTesto(), mdb.getMultimedia(), mdb.getIdGruppo());
+			return m;
+		}
+		
+		return null;
+	}
+	
+	
+	
 	public String [] ritornaCaratteristiche(Messaggio m) {
 		String [] s = new String [2];
 		if(m.getTipo() == TipoMessaggio.PRIVATO){
@@ -47,20 +67,14 @@ public class MessaggioUtility{
 	}
 
 
-public ArrayList<MessaggioDB> convertiLista(TipoMessaggio t, ArrayList<Messaggio> m){
-	ArrayList<MessaggioDB> res;
-	if(t == TipoMessaggio.PRIVATO) {
-	   for(int i = 0;i<7; i++)
-		   m[i] = new MessaggioPrivato(null, null, null, null, null, null, null);
-		
-	}
-	return null;
-}
+public ArrayList<Messaggio> convertiLista(TipoMessaggio t, ArrayList<MessaggioDB> m){
+	ArrayList<Messaggio> ms = new ArrayList<>();;
+	   for(MessaggioDB msg : m)
+		   ms.add(this.convertiInverso(msg, t));
+	   return ms;
 }
 
-
-
-
+}
 
 
 

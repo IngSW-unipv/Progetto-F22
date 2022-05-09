@@ -1,5 +1,7 @@
 package profilo;
 
+import java.util.ArrayList;
+
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
@@ -15,17 +17,38 @@ public class ProfiloTester {
     	Profilo p1 = new Profilo("P01", "Luca26");
     	Foto f = new Foto("F11", null, null, null, false, false, null, null, false);
 
-    	Messaggio m = new MessaggioDiGruppo("M17", null, null, null, null, "G00");
+    	MessaggioDiGruppo m = new MessaggioDiGruppo("006", null, null, null, null, "G00");
     	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001", "002");
     
+    	
+    	
     	try {
-			System.out.println(p.rimuoviMessaggio(m1));
+			p.leggiSoloTesto(m.getIdGruppo(), m.getTipo());
 		} catch (AccountDoesNotExist | NotLoggedIn e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-			/*try {
+    	/*try {
+			System.out.println(p.leggiMessaggi(m.getIdGruppo(), m.getTipo()));
+		} catch (AccountDoesNotExist | NotLoggedIn e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+    	try {
+			ArrayList<Messaggio> lis = p.cercaMessaggio("M03", m.getTipo());
+			for(Messaggio mess : lis){
+				System.out.println(mess.toString());
+			}
+		} catch (AccountDoesNotExist | NotLoggedIn e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	
+			try {
 				System.out.println(p.aggiungiLike(f));
 			} catch (AccountDoesNotExist | NotLoggedIn e1) {
 				// TODO Auto-generated catch block

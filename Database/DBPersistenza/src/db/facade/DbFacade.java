@@ -3,8 +3,6 @@ package db.facade;
 import java.util.ArrayList;
 
 import Messaggio.Messaggio;
-import Messaggio.MessaggioDiGruppo;
-import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
@@ -19,12 +17,7 @@ import db.foto.FotoDB;
 import db.foto.FotoDao;
 import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
-import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
-import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
-import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDao;
-import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
-import db.messaggio.messaggioPrivato.MessaggioPrivatoDao;
 import db.notifica.NotificaDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
@@ -36,9 +29,7 @@ import db.testo.TestoDB;
 import db.testo.TestoDao;
 import db.video.VideoDB;
 import db.video.VideoDao;
-import post.Post;
 import post.commento.Commento;
-import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -50,17 +41,11 @@ public class DbFacade {
 	
 	private static DbFacade istance;
 	
-	private MessaggioDao mDao;
 	
+	private MessaggioDao mDao;
 	private CommentoDao cDao;
 	private FotoDao fDao;
 	private GruppoDao gDao;
-	
-	
-	private MessaggioDiGruppoDao mdgDao;
-	private MessaggioPrivatoDao mpDao;
-	
-	
 	private NotificaDao nDao;
 	private ProfiloDao pDao;
 	private SondaggioDoppiaVotazioneDao sdvDao;
@@ -69,12 +54,11 @@ public class DbFacade {
 	private VideoDao vDao;
 	private FollowDao flDao;
 	
+	
 	private DbFacade() {
 		cDao = new CommentoDao();
 		fDao = new FotoDao();
 		gDao = new GruppoDao();
-		mdgDao = new MessaggioDiGruppoDao();
-		mpDao = new MessaggioPrivatoDao();
 		nDao = new NotificaDao();
 		pDao = new ProfiloDao();
 		sdvDao = new SondaggioDoppiaVotazioneDao();
@@ -159,6 +143,7 @@ public class DbFacade {
 	
 	//Messaggi
 	
+	
 	public boolean carica(Messaggio md) {
 		mDao = Utility.convertiTipoMessaggio(md.getTipo());
 		boolean b = mDao.scriviMessaggio(ConvertitoreFacade.getIstance().converti(md));
@@ -174,58 +159,40 @@ public class DbFacade {
 		return mDao.rimuoviMessaggio(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
-	public ArrayList<MessaggioDB> cercaMessaggio(String m, TipoMessaggio t){
+	public ArrayList<Messaggio> cerca(String m, TipoMessaggio t){
 		mDao = Utility.convertiTipoMessaggio(t);
-		return mDao.cercaMessaggio(m);
+		 return ConvertitoreFacade.getIstance().convertiLista(t, mDao.cercaMessaggio(m));
+	}
+	
+	public String ottieniTestoMessaggio(String m, TipoMessaggio t) {
+		 mDao = Utility.convertiTipoMessaggio(t);
+		return mDao.ottieniTestoMessaggio(m);
 	}
 	
 	
-
-    public void stampaMessaggioCercato(String s, TipoMessaggio t) {
-    	if(t == TipoMessaggio.PRIVATO) {
-    		ArrayList<MessaggioPrivatoDB> res = mpDao.cercaMessaggioPrivato(s);
-    		for(MessaggioPrivatoDB pdb : res)
-    			System.out.println(pdb.toString());
-    	}
-    	else if(t == TipoMessaggio.DIGRUPPO) {
-    		ArrayList<MessaggioDiGruppoDB> res = mdgDao.cercaMessaggioDiGruppo(s);
-    		for(MessaggioDiGruppoDB mdb : res)
-    			System.out.println(mdb.toString());
-    	}
-    }
+	public ArrayList<Messaggio> selezionaMessaggi(String s, TipoMessaggio t){
+		mDao = Utility.convertiTipoMessaggio(t);
+		return ConvertitoreFacade.getIstance().convertiLista(t, mDao.selezionaMessaggi(s));
+	}
+ 	
 	
-    public void stampaListaMessaggi(Messaggio m) {
-    	if(m.getTipo() == TipoMessaggio.PRIVATO) {
-    		ArrayList<MessaggioPrivatoDB> res = mpDao.selectAllNomeProfilo((MessaggioPrivatoDB) ConvertitoreFacade.getIstance().conversione(m));
-    		for(MessaggioPrivatoDB pdb : res)
-    			System.out.println(pdb.toString());
-    	}
-    	else if(m.getTipo() == TipoMessaggio.DIGRUPPO) {
-    		ArrayList<MessaggioDiGruppoDB> res = mdgDao.selectAllIdGruppo((MessaggioDiGruppoDB) ConvertitoreFacade.getIstance().conversione(m));
-    		for(MessaggioDiGruppoDB mdb : res)
-    			System.out.println(mdb.toString());
-    	}
-    }
-   
-    public String ottieniMessaggio(Messaggio m) {
-    	if(m.getTipo() == TipoMessaggio.PRIVATO)
-    		return mpDao.ottieniMessaggio(m.getIdMessaggio());
-    	if(m.getTipo() == TipoMessaggio.DIGRUPPO)
-    		return mdgDao.ottieniTesto(m.getIdMessaggio());
-    	else 
-    		return null;
-    }
-    
+	public ArrayList<String> ottieniTestoListaMessaggi(String m, TipoMessaggio t){
+		mDao = Utility.convertiTipoMessaggio(t);
+		return  mDao.ottieniTestoListaMessaggi(m);
+	}
+	
+	
+	
 
 	
 	//Post
 	
-    public boolean carica(Post p) {
+  /*  public boolean carica(Post p) {
     	if(p.getTipo() == TipoPost.FOTO) {
     		fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(p));
     	}
     		
-    }
+    }*/
     
 	public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
 		return sdvDao.selectAll();
@@ -507,3 +474,5 @@ public class DbFacade {
 	}
 	
 }
+
+

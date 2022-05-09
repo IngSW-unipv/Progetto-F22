@@ -2,6 +2,8 @@ package profilo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
+
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
@@ -36,15 +38,16 @@ public interface IProfilo {
 	public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn;
 	public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn;
 	
-	public boolean cercaMessaggio(String id, TipoMessaggio t)throws AccountDoesNotExist, NotLoggedIn;
+	public ArrayList<Messaggio> cercaMessaggio(String id, TipoMessaggio t)throws AccountDoesNotExist, NotLoggedIn;
 	
+	public String ottieniTestoMessaggio(Messaggio m)throws AccountDoesNotExist, NotLoggedIn;
 	
     //Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
-	public boolean leggiMessaggi(Messaggio m) throws AccountDoesNotExist, NotLoggedIn;
+	public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn;
     
 	//Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	//A differenza del metodo leggiMessaggi, verranno restituite solo le informazioni riguardanti il testo del messaggio
-	public boolean leggiSoloTesto(Messaggio m)throws AccountDoesNotExist, NotLoggedIn;
+	public boolean leggiSoloTesto(String s, TipoMessaggio t)throws AccountDoesNotExist, NotLoggedIn;
 	
 	
 	

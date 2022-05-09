@@ -2,21 +2,20 @@ package db.messaggio;
 
 import java.util.ArrayList;
 
-public class MessaggioDao implements IMessaggioDao{
+public abstract class MessaggioDao implements IMessaggioDao{
 
-	public boolean scriviMessaggio(MessaggioDB m) {
-		return false;
-	} 
+	public abstract boolean scriviMessaggio(MessaggioDB m);
 
-	public boolean inserisciChiavi(MessaggioDB m,String s1, String s2) {
-		return false;
-	}
+	public abstract boolean inserisciChiavi(MessaggioDB m,String s1, String s2);
 	
-	public boolean rimuoviMessaggio(MessaggioDB m) {
-		return false;
-	}
+	public abstract boolean rimuoviMessaggio(MessaggioDB m);
 	
-	public ArrayList<MessaggioDB> cercaMessaggio(String s){
-		return null;
-	}
+	public abstract ArrayList<MessaggioDB> cercaMessaggio(String s);
+	
+	public abstract String ottieniTestoMessaggio(String m);
+
+	public abstract ArrayList<MessaggioDB> selezionaMessaggi(String s);
+	
+	public abstract ArrayList<String> ottieniTestoListaMessaggi(String s);
+	
 }

@@ -11,4 +11,13 @@ public interface IMessaggioDao {
 	public boolean rimuoviMessaggio(MessaggioDB m);
 	
 	public ArrayList<MessaggioDB> cercaMessaggio(String s);
+	
+	public String ottieniTestoMessaggio(String m);
+	
+	
+	//Seleziona tutti i messaggi inviati da un gruppo o una persona specificata
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s);
+	
+	public ArrayList<String> ottieniTestoListaMessaggi(String s);
+	
 }
