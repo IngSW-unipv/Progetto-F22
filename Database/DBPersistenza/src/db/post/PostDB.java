@@ -1,17 +1,14 @@
-package db.sondaggioDoppiaScelta;
+package db.post;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import db.Interfacce.IPost;
+public abstract class PostDB {
 
-public class SondaggioDoppiaVotazioneDB implements IPost{
-
-	public SondaggioDoppiaVotazioneDB(String idSondaggio, Date dataPubblicazione, Time oraPubblicazione,
-			String descrizione, int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
-			String primaScelta, String secondaScelta) {
+	public PostDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
+			int numDislike, boolean visibile, boolean condivisibile, String profilo) {
 		super();
-		this.idSondaggio = idSondaggio;
+		this.idPost = idPost;
 		this.dataPubblicazione = dataPubblicazione;
 		this.oraPubblicazione = oraPubblicazione;
 		this.descrizione = descrizione;
@@ -20,10 +17,8 @@ public class SondaggioDoppiaVotazioneDB implements IPost{
 		this.visibile = visibile;
 		this.condivisibile = condivisibile;
 		this.profilo = profilo;
-		this.primaScelta = primaScelta;
-		this.secondaScelta = secondaScelta;
 	}
-	private String idSondaggio;
+	private String idPost;
 	private Date dataPubblicazione;
 	private Time oraPubblicazione;
 	private String descrizione;
@@ -32,13 +27,12 @@ public class SondaggioDoppiaVotazioneDB implements IPost{
 	private boolean visibile;
 	private boolean condivisibile;
 	private String profilo;
-	private String primaScelta;
-	private String secondaScelta;
-	public String getIdSondaggio() {
-		return idSondaggio;
+	
+	public String getIdPost() {
+		return idPost;
 	}
-	public void setIdSondaggio(String idSondaggio) {
-		this.idSondaggio = idSondaggio;
+	public void setIdPost(String idPost) {
+		this.idPost = idPost;
 	}
 	public Date getDataPubblicazione() {
 		return dataPubblicazione;
@@ -88,23 +82,11 @@ public class SondaggioDoppiaVotazioneDB implements IPost{
 	public void setProfilo(String profilo) {
 		this.profilo = profilo;
 	}
-	public String getPrimaScelta() {
-		return primaScelta;
-	}
-	public void setPrimaScelta(String primaScelta) {
-		this.primaScelta = primaScelta;
-	}
-	public String getSecondaScelta() {
-		return secondaScelta;
-	}
-	public void setSecondaScelta(String secondaScelta) {
-		this.secondaScelta = secondaScelta;
-	}
 	@Override
 	public String toString() {
-		return "SondaggioDoppiaVotazioneDB [idSondaggio=" + idSondaggio + ", dataPubblicazione=" + dataPubblicazione
-				+ ", oraPubblicazione=" + oraPubblicazione + ", descrizione=" + descrizione + ", numLike=" + numLike
-				+ ", numDislike=" + numDislike + ", visibile=" + visibile + ", condivisibile=" + condivisibile
-				+ ", profilo=" + profilo + ", primaScelta=" + primaScelta + ", secondaScelta=" + secondaScelta + "]";
+		return "[idPost=" + idPost + ", dataPubblicazione=" + dataPubblicazione + ", oraPubblicazione="
+				+ oraPubblicazione + ", descrizione=" + descrizione + ", numLike=" + numLike + ", numDislike="
+				+ numDislike + ", visibile=" + visibile + ", condivisibile=" + condivisibile + ", profilo=" + profilo;
 	}
+	
 }

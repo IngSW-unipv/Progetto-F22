@@ -1,4 +1,4 @@
-package db.foto;
+package db.post.multimedia.foto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +51,7 @@ public class FotoDao implements IFotoDao{
 			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory,isHd) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, f.getIdFoto());
+			st1.setString(1, f.getIdPost());
 			st1.setDate(2, f.getDataPubblicazione());
 			st1.setTime(3, f.getOraPubblicazione());
 		    st1.setString(4, f.getDescrizione());
@@ -88,7 +88,7 @@ public class FotoDao implements IFotoDao{
 		{
 			String query="delete from foto where idFoto=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, f.getIdFoto());
+			st1.setString(1, f.getIdPost());
            
 			st1.executeUpdate();
 

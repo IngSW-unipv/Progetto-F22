@@ -1,4 +1,4 @@
-package db.testo;
+package db.post.testo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +51,7 @@ public class TestoDao implements ITestoDao{
 			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,font,titolo) values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, t.getIdTesto());
+			st1.setString(1, t.getIdPost());
 			st1.setDate(2, t.getDataPubblicazione());
 			st1.setTime(3, t.getOraPubblicazione());
 			st1.setString(4, t.getDescrizione());
@@ -85,7 +85,7 @@ public class TestoDao implements ITestoDao{
 		{
 			String query="delete from testo where idTesto=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1,t.getIdTesto());
+			st1.setString(1,t.getIdPost());
 
 			st1.executeUpdate();
 

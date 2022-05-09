@@ -1,4 +1,4 @@
-package db.testo;
+package db.post.testo;
 
 import java.util.ArrayList;
 

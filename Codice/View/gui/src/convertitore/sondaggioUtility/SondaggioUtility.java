@@ -1,8 +1,8 @@
 package convertitore.sondaggioUtility;
 
 
-import db.sondaggioDoppiaScelta.SondaggioDoppiaVotazioneDB;
-import db.sondaggioSceltaMultipla.SondaggioSceltaMultiplaDB;
+import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDB;
+import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDB;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 

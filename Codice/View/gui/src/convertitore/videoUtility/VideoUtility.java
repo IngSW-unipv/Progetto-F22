@@ -1,6 +1,6 @@
 package convertitore.videoUtility;
 
-import db.video.VideoDB;
+import db.post.multimedia.video.VideoDB;
 import post.multimedia.video.Video;
 
 public class VideoUtility{

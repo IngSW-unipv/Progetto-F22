@@ -1,4 +1,4 @@
-package db.sondaggioSceltaMultipla;
+package db.post.sondaggio.sondaggiosceltamultipla;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -51,7 +51,7 @@ public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
 			String query="insert into sondaggiosceltamultipla (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,primaScelta,secondaScelta,terzaScelta,quartaScelta) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s.getIdSondaggio());
+			st1.setString(1, s.getIdPost());
 			st1.setDate(2, s.getDataPubblicazione());
 			st1.setTime(3, s.getOraPubblicazione());
 			st1.setString(4, s.getDescrizione());
@@ -88,7 +88,7 @@ public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
 		{
 			String query="delete from sondaggiosceltamultipla where idSondaggio=? ";
 			st1 = conn.prepareStatement(query);
-	        st1.setString(1, p.getIdSondaggio());
+	        st1.setString(1, p.getIdPost());
 			
 			st1.executeUpdate();
 

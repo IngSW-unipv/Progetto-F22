@@ -1,4 +1,4 @@
-package db.foto;
+package db.post.multimedia.foto;
 
 import java.util.ArrayList;
 

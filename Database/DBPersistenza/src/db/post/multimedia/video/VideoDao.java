@@ -1,4 +1,4 @@
-package db.video;
+package db.post.multimedia.video;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +52,7 @@ public class VideoDao implements IVideoDao{
 			String query="insert into video (idVideo,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory,durataInSecondi) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, v.getIdVideo());
+			st1.setString(1, v.getIdPost());
 			st1.setDate(2, v.getDataPubblicazione());
 			st1.setTime(3, v.getOraPubblicazione());
 		    st1.setString(4, v.getDescrizione());
@@ -89,7 +89,7 @@ public class VideoDao implements IVideoDao{
 		{
 			String query="delete from video where idVideo=?";
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, v.getIdVideo());
+			st1.setString(1, v.getIdPost());
 			
 			st1.executeUpdate();
 

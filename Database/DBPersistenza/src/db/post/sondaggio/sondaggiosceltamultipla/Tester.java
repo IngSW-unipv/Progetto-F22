@@ -1,4 +1,4 @@
-package db.sondaggioSceltaMultipla;
+package db.post.sondaggio.sondaggiosceltamultipla;
 
 
 import post.sondaggio.SondaggioSceltaMultipla;

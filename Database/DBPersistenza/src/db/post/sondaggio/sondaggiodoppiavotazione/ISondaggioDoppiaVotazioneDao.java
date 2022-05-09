@@ -1,4 +1,4 @@
-package db.sondaggioDoppiaScelta;
+package db.post.sondaggio.sondaggiodoppiavotazione;
 
 import java.util.ArrayList;
 

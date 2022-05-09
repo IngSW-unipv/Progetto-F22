@@ -1,4 +1,4 @@
-package db.video;
+package db.post.multimedia.video;
 
 import java.util.ArrayList;
 
