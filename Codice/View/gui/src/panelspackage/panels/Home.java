@@ -34,6 +34,7 @@ public class Home extends JPanel {
 		this.initComponents(bufferPosts, bufferStories);
 	}
 	
+			
 	public void avvio() {
 		this.setOpaque(true);
 		this.setVisible(true);
