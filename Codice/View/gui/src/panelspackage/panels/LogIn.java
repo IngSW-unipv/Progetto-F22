@@ -48,17 +48,15 @@ public class LogIn extends JPanel {
 		containerCenter.setLayout(new GridLayout(3, 1));
 		this.add(containerCenter, BorderLayout.CENTER);
 		
-		//inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
-		//inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/);
-		
 		listaComponenti.put("password", new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		listaComponenti.put("signup", new Pulsanti("Sign Up", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.put("email", new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));		
 		listaComponenti.put("labelEmail", new Etichette("Inserisci email", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.put("labelPwd", new Etichette("Inserisci Password", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.put("accedi", new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
-		containerNorth.add(Dati, BorderLayout.SOUTH);
+		GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
+		
+		containerNorth.add(dati, BorderLayout.SOUTH);
 	}
 	
 	public void setListaComponenti(HashMap<String, JComponent> listaComponenti) {
@@ -101,6 +99,4 @@ public class LogIn extends JPanel {
 		this.inserimentoPassword = inserimentoPassword;
 	}
 	
-
-
 }

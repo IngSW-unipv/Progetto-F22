@@ -13,7 +13,7 @@ import panelspackage.panels.LogIn;
 
 public class Controller {
 	
-	//private HashMap<String, JPanel> listaSchermate = new HashMap<String, JPanel>();
+	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp;
 	
 	Frame view;
@@ -22,11 +22,7 @@ public class Controller {
 	public Controller(Sistema s, Frame f) {
 		
 		this.view = f;
-		this.model = s;
-		//listaSchermate = view.getMappaSchermate();
-		//listaSchermate.put("Login",view.getLogIn());
-		//listaSchermate.put("Home", view.getHome());
-		//initComponents();		
+		this.model = s;	
 	}
 	
 	public void initComponents() {
@@ -36,33 +32,22 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Login");
 				mostraSchermata("Home");
-				
+				view.mostraHome();
 			}
 		};
-		
-s
-		
-		gestoreSignUp = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Login");
-				
-				
-			}
-		};
-		view.getSignUpButton().addActionListener(gestoreSignUp);
+		view.getLoginButton().addActionListener(gestoreLogin);
 	}
 	
 
 	public void nascondiSchermata(String schermata) {
-		view.getMappaSchermate().get(schermata).setVisible(false);
+		view.mappaSchermate.get(schermata).setVisible(false);
 	}
 	
 	public void mostraSchermata(String schermata) {
-		view.getMappaSchermate().get(schermata).setVisible(true);
+		view.mappaSchermate.get(schermata).setVisible(true);
 	}
 	
 	public void avvioSocial() {
-		wview.getMappaSchermate().get("Login").setVisible(true);
+		view.getMappaSchermate().get("Login").setVisible(true);
 	}
 }

@@ -35,15 +35,23 @@ public class Frame extends JFrame {
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10","tony11","tony12","tony13","tony14","tony15"};
-	private HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
+	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
 	
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		 
 	//all'avvio della GUI verra creata solo la schermata di login
 		this.avvio();
 		LogIn login = new LogIn();
-		this.getMappaSchermate().put("Login",   login);
+		mappaSchermate.put("Login",   login);
 		this.FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
+		
+		Home home = new Home(bufferStories, bufferPosts);
+		mappaSchermate.put("Home", home);
+
+	}
+	
+	public void mostraHome() {
+		this.FrameMainContainer.add(this.getMappaSchermate().get("Home"), BorderLayout.CENTER);
 	}
 	
 	public void avvio() {
@@ -164,7 +172,7 @@ public class Frame extends JFrame {
 	
 	
 	public Home getHome() {
-		return (Home)this.getMappaSchermate().get("Home");
+		return (Home)mappaSchermate.get("Home");
 	}
 	public ChatMessaggi getChatMessaggi() {
 		return (ChatMessaggi)this.getMappaSchermate().get("ChatMessaggi");	}
@@ -179,7 +187,7 @@ public class Frame extends JFrame {
 	}
 	
 	public LogIn getLogIn() {
-		return (LogIn)this.getMappaSchermate().get("logIn");	
+		return (LogIn)mappaSchermate.get("Login");	
 	}
 	public Profilo getProfilo() {
 		return (Profilo)this.getMappaSchermate().get("Profilo");	
@@ -202,14 +210,22 @@ public class Frame extends JFrame {
 	}
 	
 	public JButton getLoginButton() {
-		return this.getLogIn().getAccedi();
+		return getLogIn().getAccedi();
 	}
 	
-	public JButton getSignUpButton() {
-		return this.getLogIn().getSignUp();
-	}
 
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
-	}	
+	}
+
+	public SpecificContainer getFrameMainContainer() {
+		return FrameMainContainer;
+	}
+
+	public void setFrameMainContainer(SpecificContainer frameMainContainer) {
+		FrameMainContainer = frameMainContainer;
+	}
+	
+	
+	
 }
