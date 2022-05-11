@@ -40,7 +40,7 @@ public class Controller {
 			}
 		};
 		
-		view.getLoginButton().addActionListener(gestoreLogin);
+s
 		
 		gestoreSignUp = new ActionListener() {
 			@Override
