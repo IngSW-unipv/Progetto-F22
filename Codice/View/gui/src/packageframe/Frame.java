@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
-import panelspackage.Layers;
 import panelspackage.panels.Chat;
 import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.CreazionePost;
@@ -12,7 +11,6 @@ import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
 import panelspackage.panels.LogIn;
 import panelspackage.panels.PostVisualizzato;
-import panelspackage.panels.PrimaPaginaAccesso;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
@@ -26,7 +24,7 @@ public class Frame extends JFrame {
 	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
 	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	
 
-	private HashMap<String, JPanel> listaSchermateAttive = new HashMap<String, JPanel>();
+	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>(); ;
 	private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	private SpecificContainer FrameMainContainer;
 	
@@ -45,7 +43,7 @@ public class Frame extends JFrame {
 	public void avvio() {
 		this.settingParametriFrame();
 		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
-		this.avvioLogin();
+		//this.avvioLogin();
 	}
 	
 	public void settingParametriFrame() {
@@ -56,7 +54,8 @@ public class Frame extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 	}
-	
+
+	/*
 	public void avvioLogin() {
 		LogIn logIn = new LogIn();
 		FrameMainContainer.add(logIn, BorderLayout.CENTER);
@@ -118,8 +117,7 @@ public class Frame extends JFrame {
 		}
 		
 		Ricerca ricerca = new Ricerca(profilo, risultatiRicerca);
-		layers.add(ricerca, new  Integer(0), 0);
-		ricerca.setBounds(0,0,800,775);
+		FrameMainContainer.add(ricerca);
 		this.listaSchermateAttive.put("Ricerca", ricerca);
 
 	}
@@ -128,72 +126,21 @@ public class Frame extends JFrame {
 		SignUp signUp = new SignUp();
 		FrameMainContainer.add(signUp);
 		this.listaSchermateAttive.put("SignUp", signUp);
-	}
-	
-	
-	public Home getHome() {
-		return (Home)listaSchermateAttive.get("Home");
-	}
-	public ChatMessaggi getChatMessaggi() {
-		return (ChatMessaggi)listaSchermateAttive.get("ChatMessaggi");	}
+	}*/
 
-
-	public Impostazioni getImpostazioni() {
-		return (Impostazioni)listaSchermateAttive.get("Impostazioni");	
-	}
 	
-	public PannelloNotifiche getPannelloNotifiche() {
-		return (PannelloNotifiche)listaSchermateAttive.get("PannelloNotifiche");
-	}
-	
-	public LogIn getLogIn() {
-		return (LogIn)listaSchermateAttive.get("logIn");	
-	}
-	public Profilo getProfilo() {
-		return (Profilo)listaSchermateAttive.get("Profilo");	
-	}
-
-	public Chat getChat() {
-		return (Chat)listaSchermateAttive.get("Chat");	
-	}
-	
-	public CreazionePost getCreazionePost() {
-		return (CreazionePost)listaSchermateAttive.get("CreazionePost");
-	}
-
-	public ArrayList<String> getRisultatiRicerca() {
-		return risultatiRicerca;
-	}
-	
-	public HashMap<String, JPanel> getListaSchermateAttive() {
-		return listaSchermateAttive;
-	}
-
-	public void setListaSchermateAttive(HashMap<String, JPanel> listaSchermateAttive) {
-		this.listaSchermateAttive = listaSchermateAttive;
-	}
-
-	public PostVisualizzato getPostVisualizzato() {
-		return (PostVisualizzato) listaSchermateAttive.get("PostVisualizzato");	
-	}
-	
-	public JButton getLoginButton() {
-		return this.getLogIn().getAccedi();
-	}
-	
-	public JButton getSignUpButton() {
-		return this.getLogIn().getSignUp();
-	}
-	
-	public HashMap avvioSchermate() {
-		HashMap<String, JComponent> mappaSchermate = new HashMap<String, JComponent>();
-		//LogIn schermataLogin = new LogIn();
-		ArrayList bufferStories = new ArrayList();
-		bufferStories.add("immagini/Bruce.jpeg"); bufferStories.add("immagini/Natasha.jpeg"); bufferStories.add("immagini/Tony.jpeg"); bufferStories.add("immagini/Clint.jpeg"); bufferStories.add("immagini/Steve.jpeg");
-		Home schermataHome = new Home(bufferStories, bufferStories);
-		//mappaSchermate.put("Login", schermataLogin);
-		mappaSchermate.put("Home", schermataHome);
-		return mappaSchermate;
+	public void avvioSchermate() {
+		
+		//ArrayList bufferStories = new ArrayList();
+		
+		//bufferStories.add("immagini/Bruce.jpeg"); bufferStories.add("immagini/Natasha.jpeg"); bufferStories.add("immagini/Tony.jpeg"); bufferStories.add("immagini/Clint.jpeg"); bufferStories.add("immagini/Steve.jpeg");
+		//Home schermataHome = new Home(bufferStories, bufferStories);
+		//mappaSchermate.put("Home", (JPanel)schermataHome);
+		//System.out.println("home" + mappaSchermate.get(schermataHome));
+		
+		LogIn schermataLogin = new LogIn();
+		mappaSchermate.put("Login", (JPanel)schermataLogin);
+		System.out.println("login" + mappaSchermate.get(schermataLogin));
 	}
 
 	public static Color getColoreprimariotematico() {
@@ -203,4 +150,61 @@ public class Frame extends JFrame {
 	public static Color getColoresecondariotematico() {
 		return COLORESECONDARIOTEMATICO;
 	}
+	
+	
+	
+	public Home getHome() {
+		return (Home)mappaSchermate.get("Home");
+	}
+	public ChatMessaggi getChatMessaggi() {
+		return (ChatMessaggi)mappaSchermate.get("ChatMessaggi");	}
+
+
+	public Impostazioni getImpostazioni() {
+		return (Impostazioni)mappaSchermate.get("Impostazioni");	
+	}
+	
+	public PannelloNotifiche getPannelloNotifiche() {
+		return (PannelloNotifiche)mappaSchermate.get("PannelloNotifiche");
+	}
+	
+	public LogIn getLogIn() {
+		return (LogIn)mappaSchermate.get("logIn");	
+	}
+	public Profilo getProfilo() {
+		return (Profilo)mappaSchermate.get("Profilo");	
+	}
+
+	public Chat getChat() {
+		return (Chat)mappaSchermate.get("Chat");	
+	}
+	
+	public CreazionePost getCreazionePost() {
+		return (CreazionePost)mappaSchermate.get("CreazionePost");
+	}
+
+	public ArrayList<String> getRisultatiRicerca() {
+		return risultatiRicerca;
+	}
+
+	public PostVisualizzato getPostVisualizzato() {
+		return (PostVisualizzato)mappaSchermate.get("PostVisualizzato");	
+	}
+	
+	public JButton getLoginButton() {
+		return this.getLogIn().getAccedi();
+	}
+	
+	public JButton getSignUpButton() {
+		return this.getLogIn().getSignUp();
+	}
+
+	public HashMap<String, JPanel> getMappaSchermate() {
+		return mappaSchermate;
+	}
+
+	public void setMappaSchermate(HashMap<String, JPanel> mappaSchermate) {
+		this.mappaSchermate = mappaSchermate;
+	}
+	
 }

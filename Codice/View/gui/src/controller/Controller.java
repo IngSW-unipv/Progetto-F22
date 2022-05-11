@@ -5,13 +5,14 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import Sistema.Sistema;
 import packageframe.Frame;
 
 public class Controller {
 	
-	private HashMap<String, JComponent> listaSchermate = new HashMap<String, JComponent>();
+	//private HashMap<String, JPanel> listaSchermate = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp;
 	
 	Frame view;
@@ -21,9 +22,15 @@ public class Controller {
 		
 		view = f;
 		model = s;
-		listaSchermate = view.avvioSchermate();
-		listaSchermate.put("Login",view.getLogIn());
-		initComponents();
+		view.avvioSchermate();
+		//listaSchermate = view.getMappaSchermate();
+		//listaSchermate.put("Login",view.getLogIn());
+		//listaSchermate.put("Home", view.getHome());
+		//initComponents();
+		
+		view.mappaSchermate.put("Home", view.getHome());
+		view.mappaSchermate.put("Login", view.getLogIn());
+
 		
 	}
 	
@@ -32,7 +39,8 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondi("Login");
+				nascondiSchermata("Login");
+				mostraSchermata("Home");
 				
 			}
 		};
@@ -42,7 +50,7 @@ public class Controller {
 		gestoreSignUp = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				nascondiSchermata("Login");
 				
 				
 			}
@@ -50,10 +58,16 @@ public class Controller {
 		view.getSignUpButton().addActionListener(gestoreSignUp);
 	}
 	
-	public void actionPerformed(ActionEvent ae) {
 
-			}
-	public void nascondi(String schermata) {
-		listaSchermate.get(schermata).setVisible(false);
+	public void nascondiSchermata(String schermata) {
+		view.mappaSchermate.get(schermata).setVisible(false);
+	}
+	
+	public void mostraSchermata(String schermata) {
+		view.mappaSchermate.get(schermata).setVisible(true);
+	}
+	
+	public void avvioSocial() {
+		view.mappaSchermate.get("Login").setVisible(true);
 	}
 }

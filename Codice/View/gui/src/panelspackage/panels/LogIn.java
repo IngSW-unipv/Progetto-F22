@@ -27,9 +27,9 @@ public class LogIn extends JPanel {
 	
 	
 	public LogIn() {
-		
 		this.avvio();
 		initComponents();
+		System.out.println("kebab "+ this.getWidth());
 	}
 
 	public void avvio() {
