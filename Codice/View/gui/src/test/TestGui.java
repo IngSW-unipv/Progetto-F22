@@ -1,17 +1,27 @@
 package test;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.swing.JPanel;
 
 import Sistema.Sistema;
 import controller.Controller;
 import packageframe.Frame;
 import panelspackage.panels.Chat;
 import panelspackage.panels.Home;
+import panelspackage.panels.LogIn;
 
 public class TestGui {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
 	public static void main(String[] args) {
-		
-		ArrayList<String> bufferPosts = new ArrayList<String>();
+			
+	/*	HashMap<String, JPanel> mappa = new HashMap<String, JPanel>();
+		LogIn login = new LogIn();
+		login.setName("cucchiarella");
+		mappa.put("Login",   login);
+		System.out.println("dilo nudo " + mappa.get("Login").getName()+ "kebab a palate");
+		*/
+		/*ArrayList<String> bufferPosts = new ArrayList<String>();
 		ArrayList<String> bufferStories = new ArrayList<String>();
 		
 		Sistema sistema = new Sistema();
@@ -29,7 +39,7 @@ public class TestGui {
 		
 		ctrl.avvioSocial();
 		ctrl.initComponents();
-
+	*/
 	}
 	public String[] getListaImmaginiPost() {
 		return listaImmaginiPost;

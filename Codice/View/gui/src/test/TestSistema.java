@@ -1,6 +1,8 @@
 package test;
 
+import org.junit.*;
 import Sistema.Sistema;
+import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AccountGiaEsistente;
 import profilo.exception.ChangeDefaultPassword;
@@ -9,10 +11,16 @@ import profilo.exception.PswOmailErrati;
 
 public class TestSistema {
 	
+	Sistema sistema; 
+	boolean c;
+	
 	public static void main(String[] args)   {
 		Sistema sistema = new Sistema();
-	/*	try {
-			boolean c = sistema.signIn("ciccioGamer@unipv.it", "ciccio");
+		sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
+
+		try {
+			boolean c;
+			c = sistema.signIn("ciccioGamer@unipv.it", "ciccio");
 			System.out.println(c);
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
@@ -28,7 +36,7 @@ public class TestSistema {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 		
 		try {
 			try {
@@ -45,7 +53,7 @@ public class TestSistema {
 			e.printStackTrace();
 		}
 		
-		/*try {
+		try {
 			sistema.login("ciccioGamer@unipv.it", "Mucca");
 		} catch (ChangeDefaultPassword e) {
 			// TODO Auto-generated catch block
@@ -56,9 +64,6 @@ public class TestSistema {
 		} catch (PswOmailErrati e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
-
-	
-
 }

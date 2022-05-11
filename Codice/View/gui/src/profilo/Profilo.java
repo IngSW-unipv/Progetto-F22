@@ -64,6 +64,8 @@ public class Profilo implements IProfilo {
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
+	
+
 
 	//costruttore per la conversione profiloDB
 	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita) {
@@ -82,6 +84,7 @@ public class Profilo implements IProfilo {
 		likeMap = new HashMap<>(); 
 		dislikeMap = new HashMap<>();
 	}
+
 
 public String getIdProfilo() {
 	return idProfilo;
@@ -186,7 +189,7 @@ public String toString() {
 
 
 @Override
-//Ritorna true se l'account inserito è "seguibile"
+//Ritorna true se l'account inserito ï¿½ "seguibile"
 public boolean profiloNonSeguito(String emailProfilo) {
 	Follow f = new Follow(this.getIdProfilo(),emailProfilo);
 	if (dbfacade.profiloNonSeguito(f) == true) {
@@ -196,7 +199,7 @@ public boolean profiloNonSeguito(String emailProfilo) {
 }
 
 @Override
-//Ritorna true se l'account è esistente
+//Ritorna true se l'account ï¿½ esistente
 public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist {
 	Profilo p = new Profilo(emailProfilo,null);
 	if(dbfacade.accountEsistente(p) == false) {
@@ -206,7 +209,7 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 }
 
 @Override
-//Ritorna true se l'account è loggato
+//Ritorna true se l'account ï¿½ loggato
 public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
 	if(dbfacade.seiLoggato(emailProfilo) == true) {
 			return true;

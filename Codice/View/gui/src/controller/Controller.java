@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 
 import Sistema.Sistema;
 import packageframe.Frame;
+import panelspackage.panels.LogIn;
 
 public class Controller {
 	
@@ -20,18 +21,12 @@ public class Controller {
 	
 	public Controller(Sistema s, Frame f) {
 		
-		view = f;
-		model = s;
-		view.avvioSchermate();
+		this.view = f;
+		this.model = s;
 		//listaSchermate = view.getMappaSchermate();
 		//listaSchermate.put("Login",view.getLogIn());
 		//listaSchermate.put("Home", view.getHome());
-		//initComponents();
-		
-		view.mappaSchermate.put("Home", view.getHome());
-		view.mappaSchermate.put("Login", view.getLogIn());
-
-		
+		//initComponents();		
 	}
 	
 	public void initComponents() {
@@ -60,14 +55,14 @@ public class Controller {
 	
 
 	public void nascondiSchermata(String schermata) {
-		view.mappaSchermate.get(schermata).setVisible(false);
+		view.getMappaSchermate().get(schermata).setVisible(false);
 	}
 	
 	public void mostraSchermata(String schermata) {
-		view.mappaSchermate.get(schermata).setVisible(true);
+		view.getMappaSchermate().get(schermata).setVisible(true);
 	}
 	
 	public void avvioSocial() {
-		view.mappaSchermate.get("Login").setVisible(true);
+		wview.getMappaSchermate().get("Login").setVisible(true);
 	}
 }

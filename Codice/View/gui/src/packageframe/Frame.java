@@ -2,8 +2,12 @@ package packageframe;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
+
+import Sistema.Sistema;
+import controller.Controller;
 import panelspackage.panels.Chat;
 import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.CreazionePost;
@@ -24,7 +28,6 @@ public class Frame extends JFrame {
 	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
 	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	
 
-	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>(); ;
 	private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	private SpecificContainer FrameMainContainer;
 	
@@ -32,18 +35,22 @@ public class Frame extends JFrame {
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10","tony11","tony12","tony13","tony14","tony15"};
-
+	private HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
 	
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		 
 	//all'avvio della GUI verra creata solo la schermata di login
 		this.avvio();
+		LogIn login = new LogIn();
+		this.getMappaSchermate().put("Login",   login);
+		this.FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
 	}
 	
 	public void avvio() {
 		this.settingParametriFrame();
 		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
-		//this.avvioLogin();
+		this.avvioSchermate();
+		
 	}
 	
 	public void settingParametriFrame() {
@@ -138,9 +145,12 @@ public class Frame extends JFrame {
 		//mappaSchermate.put("Home", (JPanel)schermataHome);
 		//System.out.println("home" + mappaSchermate.get(schermataHome));
 		
+		/*
+		mappaSchermate = new HashMap<String, JPanel>(); ;
 		LogIn schermataLogin = new LogIn();
-		mappaSchermate.put("Login", (JPanel)schermataLogin);
+		mappaSchermate.put("Login", schermataLogin);
 		System.out.println("login" + mappaSchermate.get(schermataLogin));
+		*/
 	}
 
 	public static Color getColoreprimariotematico() {
@@ -154,33 +164,33 @@ public class Frame extends JFrame {
 	
 	
 	public Home getHome() {
-		return (Home)mappaSchermate.get("Home");
+		return (Home)this.getMappaSchermate().get("Home");
 	}
 	public ChatMessaggi getChatMessaggi() {
-		return (ChatMessaggi)mappaSchermate.get("ChatMessaggi");	}
+		return (ChatMessaggi)this.getMappaSchermate().get("ChatMessaggi");	}
 
 
 	public Impostazioni getImpostazioni() {
-		return (Impostazioni)mappaSchermate.get("Impostazioni");	
+		return (Impostazioni)this.getMappaSchermate().get("Impostazioni");	
 	}
 	
 	public PannelloNotifiche getPannelloNotifiche() {
-		return (PannelloNotifiche)mappaSchermate.get("PannelloNotifiche");
+		return (PannelloNotifiche)this.getMappaSchermate().get("PannelloNotifiche");
 	}
 	
 	public LogIn getLogIn() {
-		return (LogIn)mappaSchermate.get("logIn");	
+		return (LogIn)this.getMappaSchermate().get("logIn");	
 	}
 	public Profilo getProfilo() {
-		return (Profilo)mappaSchermate.get("Profilo");	
+		return (Profilo)this.getMappaSchermate().get("Profilo");	
 	}
 
 	public Chat getChat() {
-		return (Chat)mappaSchermate.get("Chat");	
+		return (Chat)this.getMappaSchermate().get("Chat");	
 	}
 	
 	public CreazionePost getCreazionePost() {
-		return (CreazionePost)mappaSchermate.get("CreazionePost");
+		return (CreazionePost)this.getMappaSchermate().get("CreazionePost");
 	}
 
 	public ArrayList<String> getRisultatiRicerca() {
@@ -188,7 +198,7 @@ public class Frame extends JFrame {
 	}
 
 	public PostVisualizzato getPostVisualizzato() {
-		return (PostVisualizzato)mappaSchermate.get("PostVisualizzato");	
+		return (PostVisualizzato)this.getMappaSchermate().get("PostVisualizzato");	
 	}
 	
 	public JButton getLoginButton() {
@@ -200,11 +210,6 @@ public class Frame extends JFrame {
 	}
 
 	public HashMap<String, JPanel> getMappaSchermate() {
-		return mappaSchermate;
-	}
-
-	public void setMappaSchermate(HashMap<String, JPanel> mappaSchermate) {
-		this.mappaSchermate = mappaSchermate;
-	}
-	
+		return this.mappaSchermate;
+	}	
 }

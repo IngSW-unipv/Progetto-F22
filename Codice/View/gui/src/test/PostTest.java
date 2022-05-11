@@ -25,6 +25,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 
 class PostTest {
 	
+	int i;
 	ArrayList<Post> ListaPost;
 	Post p1, p2, p3, p4;
 	
@@ -36,10 +37,10 @@ class PostTest {
 		int[] sceltaMultipla1 = {0, 0};
 		int[] sceltaMultipla2 = {0, 0, 0, 0};
 		
-		p1 = new Foto("Post1", null, null, "xxx", 0, 0, true, true, "profilo", 6000, "perc1", true, true);
-		p2 = new Video("Post2", null, null, "xxx", 0, 0, true, true, "profilo", 6000, "perc2", true, 1000);
-		p3 = new SondaggioDoppiaVotazione("Post3", null, null, "xxx", 0, 0, true, true, "profilo", "primascelta", "secondascelta", sceltaMultipla1);
-		p4 = new SondaggioSceltaMultipla("Post4", null, null, "xxx", 0, 0, true, true, "profilo", "primascelta", "secondascelta", "terzascelta", "quartascelta", sceltaMultipla2);
+		p1 = new Foto("Post1", null, null, "xxx", true, true, "profilo", "perc1", true);
+		p2 = new Video("Post2", null, null, "xxx", true, true, "profilo", "perc2", 1000);
+		p3 = new SondaggioDoppiaVotazione("Post3", null, null, "xxx", true, true, "profilo", "primascelta", "secondascelta", sceltaMultipla1);
+		p4 = new SondaggioSceltaMultipla("Post4", null, null, "xxx", true, true, "profilo", "primascelta", "secondascelta", "terzascelta", "quartascelta", sceltaMultipla2);
 		
 		ListaPost.add(p1);
 		ListaPost.add(p2);
@@ -49,11 +50,10 @@ class PostTest {
           
 	@Test
 	void testCaricaPost() { 
-		//Profilo p = new Profilo()		
-		//AssertTrue(p.CaricaPost(ListaPost.get(0)));
-		//AssertTrue(p.CaricaPost(ListaPost.get(1)));
-		//AssertTrue(p.CaricaPost(ListaPost.get(2)));
-		//AssertTrue(p.CaricaPost(ListaPost.get(3)));
+		Profilo p = new Profilo(null, null);
+				for(i = 0; i<4; i++)
+		System.out.println(AssertTrue(p.car(ListaPost.get(i))));
+
 	}
 	
 	@Test
