@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import post.Post;
 import post.enumeration.TipoPost;
 
 public class SondaggioSceltaMultipla extends Sondaggio{
@@ -95,5 +96,14 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 	@Override
 	public TipoPost getTipo() {
 		return TipoPost.SONDAGGIOSCELTAMULTIPLA;
+	}
+
+	@Override
+	public Post inserisciCaratteristiche(Post p) {
+		
+		p = new SondaggioSceltaMultipla(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getTerzaScelta(), this.getQuartaScelta(), this.getConteggio());
+
+
+		return p;
 	}
 }

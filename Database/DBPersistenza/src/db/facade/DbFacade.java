@@ -92,6 +92,7 @@ public class DbFacade {
 		for(CommentoDB cdb : res)
 			System.out.println(cdb.toString());
 	}
+	
 	public void stampaCommentoCercato(String c) {
 		ArrayList<CommentoDB> res = cDao.cercaCommento(c);
 		for(CommentoDB cdb : res)

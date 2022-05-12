@@ -2,6 +2,7 @@ package db.facade;
 
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
+
 import java.util.*;
 
 public class testfacade {
@@ -18,6 +19,5 @@ public class testfacade {
         ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(), mdg.getTipo());
         for(String ms : res)
         	System.out.println(ms.toString());
-
 }
 }

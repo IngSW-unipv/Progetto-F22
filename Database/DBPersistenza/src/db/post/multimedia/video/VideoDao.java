@@ -7,9 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import db.post.PostDB;
+import db.post.PostDao;
 
 
-public class VideoDao implements IVideoDao{
+public class VideoDao  extends PostDao {
 
 	private Connection conn;
 	private String schema;
@@ -41,15 +43,16 @@ public class VideoDao implements IVideoDao{
 			DBConnection.closeConnection(conn);
 			return result;
 	}
+	
 	@Override
-	public boolean pubblicaVideo(VideoDB v) {
+	public boolean caricaPost(PostDB v) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into video (idVideo,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory,durataInSecondi) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into video (idVideo,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, v.getIdPost());
@@ -61,10 +64,6 @@ public class VideoDao implements IVideoDao{
 			st1.setBoolean(7, v.isVisibile());
 			st1.setBoolean(8, v.isCondivisibile());
 		    st1.setString(9, v.getProfilo());
-			st1.setInt(10, v.getTempoCancellazione());
-		    st1.setString(11, v.getPercorso());
-		    st1.setBoolean(12, v.isStory());
-		    st1.setInt(13, v.getDurataInSecondi());
 		    
 			st1.executeUpdate();
 
@@ -79,7 +78,7 @@ public class VideoDao implements IVideoDao{
 	}
 	
 	@Override
-	public boolean rimuoviVideo(VideoDB v) {
+	public boolean eliminaPost(PostDB v) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 

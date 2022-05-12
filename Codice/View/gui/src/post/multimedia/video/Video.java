@@ -3,6 +3,7 @@ package post.multimedia.video;
 import java.sql.Date;
 import java.sql.Time;
 
+import post.Post;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 
@@ -34,5 +35,11 @@ public class Video extends Multimedia{
 	@Override
 	public TipoPost getTipo() {
 		return TipoPost.VIDEO;
+	}
+
+	@Override
+	public Post inserisciCaratteristiche(Post p) {
+		p = new Video(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPercorso(), this.getDurataInSecondi());
+		return p;
 	}	
 }

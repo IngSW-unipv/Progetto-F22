@@ -7,8 +7,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import db.post.PostDB;
+import db.post.PostDao;
 
-public class TestoDao implements ITestoDao{
+public class TestoDao extends PostDao {
 
 	private Connection conn;
 	private String schema;
@@ -41,14 +43,14 @@ public class TestoDao implements ITestoDao{
 			return result;
 	}
 	@Override
-	public boolean pubblicaTesto(TestoDB t) {
+	public boolean caricaPost(PostDB t) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,font,titolo) values (?,?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, t.getIdPost());
@@ -60,8 +62,6 @@ public class TestoDao implements ITestoDao{
 		    st1.setBoolean(7, t.isVisibile());
 		    st1.setBoolean(8, t.isCondivisibile());
 		    st1.setString(9, t.getProfilo());
-		    st1.setString(10, t.getFont());
-		    st1.setString(11, t.getTitolo());
 		    
 			st1.executeUpdate();
 
@@ -75,7 +75,7 @@ public class TestoDao implements ITestoDao{
 		return esito;
 	}
 	@Override
-	public boolean rimuoviTesto(TestoDB t) {
+	public boolean eliminaPost(PostDB t) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 

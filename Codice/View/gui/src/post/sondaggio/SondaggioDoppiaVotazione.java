@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import post.Post;
 import post.enumeration.TipoPost;
 
 
@@ -72,6 +73,12 @@ public void mostraRisultati() {
 @Override
 public TipoPost getTipo() {
 	return TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+}
+
+@Override
+public Post inserisciCaratteristiche(Post p) {
+	p = new SondaggioDoppiaVotazione(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getConteggio());
+	return p;
 }
 
 }

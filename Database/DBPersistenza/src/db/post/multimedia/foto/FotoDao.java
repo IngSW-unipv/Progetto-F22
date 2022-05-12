@@ -7,8 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import db.post.PostDB;
+import db.post.PostDao;
+import post.Post;
 
-public class FotoDao implements IFotoDao{
+public class FotoDao extends PostDao{
 
 	private Connection conn;
 	private String schema;
@@ -40,15 +43,16 @@ public class FotoDao implements IFotoDao{
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+	
 	@Override
-	public boolean pubblicaFoto(FotoDB f) {
+	public boolean caricaPost(PostDB f) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory,isHd) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, f.getIdPost());
@@ -60,10 +64,7 @@ public class FotoDao implements IFotoDao{
 			st1.setBoolean(7, f.isVisibile());
 			st1.setBoolean(8, f.isCondivisibile());
 		    st1.setString(9, f.getProfilo());
-		    st1.setInt(10, f.getTempoCancellazione());
-		    st1.setString(11, f.getPercorso());
-		    st1.setBoolean(12, f.isStory());
-		    st1.setBoolean(13, f.isHd);
+		 
 		    
 			st1.executeUpdate();
 
@@ -77,8 +78,17 @@ public class FotoDao implements IFotoDao{
 		return esito;
 	}
 	
+	
 	@Override
-	public boolean rimuoviFoto(FotoDB f) {
+	public boolean inserisciChiavi(PostDB p, String s1, String s2, String s3, String s4, int i1, int i2, boolean b1,
+			boolean b2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	@Override
+	public boolean eliminaPost(PostDB f) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 
@@ -100,6 +110,7 @@ public class FotoDao implements IFotoDao{
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+	
 	@Override
 	public ArrayList<FotoDB> cercaFoto(String f) {
 		ArrayList<FotoDB> result = new ArrayList<>();

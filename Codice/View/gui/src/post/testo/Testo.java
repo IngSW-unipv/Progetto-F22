@@ -38,6 +38,11 @@ public class Testo extends Post {
 	public TipoPost getTipo() {
 		return TipoPost.TESTO;
 	}
+	@Override
+	public Post inserisciCaratteristiche(Post p) {
+		p = new Testo(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
+		return p;
+	}
 }
 	
 	

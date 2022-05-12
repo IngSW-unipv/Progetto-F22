@@ -7,7 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
-public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
+import db.post.PostDB;
+import db.post.PostDao;
+public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSceltaMultiplaDao{
 
 	private Connection conn;
 	private String schema; 
@@ -41,14 +43,14 @@ public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
 	}
 
 	@Override
-	public boolean pubblicaSondaggio(SondaggioSceltaMultiplaDB s) {
+	public boolean caricaPost(PostDB s) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="insert into sondaggiosceltamultipla (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,primaScelta,secondaScelta,terzaScelta,quartaScelta) values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into sondaggiosceltamultipla (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s.getIdPost());
@@ -60,10 +62,6 @@ public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
 	        st1.setBoolean(7, s.isVisibile());
 	        st1.setBoolean(8, s.isCondivisibile());
 	        st1.setString(9, s.getProfilo());
-	        st1.setString(10, s.getPrimaScelta());
-	        st1.setString(11, s.getSecondaScelta());
-	        st1.setString(12, s.getTerzaScelta());
-	        st1.setString(13, s.getQuartaScelta());
 	        
 			st1.executeUpdate();
 
@@ -78,7 +76,7 @@ public class SondaggioSceltaMultiplaDao implements ISondaggioSceltaMultiplaDao{
 	}
 
 	@Override
-	public boolean rimuoviSondaggio(SondaggioSceltaMultiplaDB p) {
+	public boolean eliminaPost(PostDB p) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		

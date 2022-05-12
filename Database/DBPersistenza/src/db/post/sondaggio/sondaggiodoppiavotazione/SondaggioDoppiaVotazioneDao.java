@@ -7,9 +7,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import db.post.PostDB;
+import db.post.PostDao;
 
 
-public class SondaggioDoppiaVotazioneDao implements ISondaggioDoppiaVotazioneDao{
+public class SondaggioDoppiaVotazioneDao extends PostDao {
 private Connection conn;
 private String schema; 
 public SondaggioDoppiaVotazioneDao() {
@@ -41,14 +43,14 @@ public ArrayList<SondaggioDoppiaVotazioneDB> selectAll() {
 }
 
 @Override
-public boolean pubblicaSondaggio(SondaggioDoppiaVotazioneDB s) {
+public boolean caricaPost(PostDB s) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	boolean esito = true;
 
 	try
 	{
-		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,primaScelta,secondaScelta) values (?,?,?,?,?,?,?,?,?,?,?)";
+		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s.getIdPost());
@@ -60,8 +62,6 @@ public boolean pubblicaSondaggio(SondaggioDoppiaVotazioneDB s) {
         st1.setBoolean(7, s.isVisibile());
         st1.setBoolean(8, s.isCondivisibile());
         st1.setString(9, s.getProfilo());
-        st1.setString(10, s.getPrimaScelta());
-        st1.setString(11, s.getSecondaScelta());
         
 		st1.executeUpdate();
 
@@ -76,7 +76,7 @@ public boolean pubblicaSondaggio(SondaggioDoppiaVotazioneDB s) {
 }
 
 @Override
-public boolean rimuoviSondaggio(SondaggioDoppiaVotazioneDB p) {
+public boolean eliminaPost(PostDB p) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	

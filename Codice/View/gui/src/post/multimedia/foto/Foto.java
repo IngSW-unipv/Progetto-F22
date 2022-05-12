@@ -3,6 +3,7 @@ package post.multimedia.foto;
 import java.sql.Date;
 import java.sql.Time;
 
+import post.Post;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 
@@ -34,6 +35,12 @@ public class Foto extends Multimedia{
 	@Override
 	public TipoPost getTipo() {
 		return TipoPost.FOTO;
+	}
+
+	@Override
+	public Post inserisciCaratteristiche(Post p) {
+        p = new Foto(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPercorso(), this.isHd());
+		return p;
 	}
 
 }
