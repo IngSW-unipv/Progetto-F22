@@ -2,20 +2,16 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import Sistema.Sistema;
 import packageframe.Frame;
-import panelspackage.panels.LogIn;
+
 
 public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
-						   gestoreChat, gestorePannelloNotifiche;
+						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
+						   gestoreHomeChat, gestoreHomePannelloNotifiche;
 	
 	Frame view;
 	Sistema model;
@@ -27,6 +23,8 @@ public class Controller {
 	}
 	
 	public void initComponents() {
+		
+		//ActionListeners schermata login
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -49,6 +47,8 @@ public class Controller {
 		view.getSignUpButton().addActionListener(gestoreSignUp);
 		
 		
+		
+		//ActionListeners schermata SignUp
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -60,6 +60,8 @@ public class Controller {
 		view.getRegistratiButton().addActionListener(gestoreRegistrati);
 		
 		
+		
+		//ActionListeners schermata Home
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -102,6 +104,54 @@ public class Controller {
 			}
 		};
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
+	
+		
+		//ActionListeners schermata Impostazioni
+		gestoreHomeImpostazioni = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Impostazioni");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		//ActionListeners schermata Profilo
+		gestoreHomeProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Profilo");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
+		
+		
+		//ActionListeners schermata Chat
+		gestoreHomeChat = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Chat");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeChatButton().addActionListener(gestoreHomeChat);
+		
+		
+		//ActionListeners schermata Notifiche
+		gestoreHomePannelloNotifiche = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("PannelloNotifiche");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
 	}
 	
 

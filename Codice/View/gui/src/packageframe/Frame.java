@@ -204,6 +204,26 @@ public class Frame extends JFrame {
 	public JButton getNotificheButton() {
 		return getHome().getButtonNotifiche();
 	}
+	
+	//Get pannello impostazioni
+	public JButton getHomeImpostazioniButton() {
+		return getImpostazioni().getHomeImpostazioni();
+	}
+	
+	//Get pannello profilo
+	public JButton getHomeProfiloButton() {
+		return getProfilo().getHomeProfilo();
+	}
+	
+	//Get pannello Chat
+	public JButton getHomeChatButton() {
+		return getChat().getHomeChat();
+	}
+	
+	//Get pannello Notifiche
+	public JButton getHomePannelloNotificheButton() {
+		return getPannelloNotifiche().getHomeNotifiche();
+	}
 
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
