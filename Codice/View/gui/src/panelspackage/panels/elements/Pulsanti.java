@@ -42,5 +42,9 @@ public class Pulsanti extends JButton{
 			this.setVisible(true);
 		}
 		
+		public Pulsanti() {
+		
+		}
+		
 		
 }

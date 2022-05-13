@@ -1,17 +1,14 @@
 package test;
-import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.swing.JPanel;
+import static org.junit.jupiter.api.Assertions.*;
 
-import Sistema.Sistema;
-import controller.Controller;
-import packageframe.Frame;
-import panelspackage.panels.Chat;
-import panelspackage.panels.Home;
-import panelspackage.panels.LogIn;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TestGui {
+class TestGui {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
 	public static void main(String[] args) {
 			
@@ -46,5 +43,27 @@ public class TestGui {
 	}
 	public void setListaImmaginiPost(String[] listaImmaginiPost) {
 		this.listaImmaginiPost = listaImmaginiPost;
-	}	
+	}
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
 }
