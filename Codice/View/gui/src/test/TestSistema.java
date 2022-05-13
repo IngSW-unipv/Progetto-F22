@@ -1,15 +1,18 @@
 package test;
 
-import org.junit.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import Sistema.Sistema;
 import profilo.Profilo;
-import profilo.exception.AccountDoesNotExist;
-import profilo.exception.AccountGiaEsistente;
-import profilo.exception.ChangeDefaultPassword;
-import profilo.exception.ChangePassword;
-import profilo.exception.PswOmailErrati;
+import profilo.exception.*;
 
-public class TestSistema {
+class TestSistema {
 	
 	Sistema sistema; 
 	boolean c;
@@ -66,4 +69,26 @@ public class TestSistema {
 			e.printStackTrace();
 		}
 	}
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+	}
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
 }
