@@ -43,6 +43,8 @@ class TestGui {
 	}
 	public void setListaImmaginiPost(String[] listaImmaginiPost) {
 		this.listaImmaginiPost = listaImmaginiPost;
+	}
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 	}
