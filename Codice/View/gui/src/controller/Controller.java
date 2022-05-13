@@ -14,7 +14,7 @@ import panelspackage.panels.LogIn;
 public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
-	private ActionListener gestoreLogin, gestoreSignUp;
+	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati;
 	
 	Frame view;
 	Sistema model;
@@ -26,7 +26,6 @@ public class Controller {
 	}
 	
 	public void initComponents() {
-		////ACTIONLISTENER PULSANTI PANNELLO LOGIN
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -36,6 +35,37 @@ public class Controller {
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
+		
+		gestoreSignUp = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Login");
+				mostraSchermata("Signup");
+				view.mostraSignUp();
+			}
+		};
+		view.getSignUpButton().addActionListener(gestoreSignUp);
+		
+		gestoreRegistrati = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Signup");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getRegistratiButton().addActionListener(gestoreRegistrati);
+		
+		gestoreImpostazioni = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Home");
+				mostraSchermata("Impostazini");
+				view.mostraImpostazioni();
+			}
+		};
+		view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
+		
 	}
 	
 

@@ -45,13 +45,28 @@ public class Frame extends JFrame {
 		mappaSchermate.put("Login",   login);
 		this.FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
 		
+		SignUp signup = new SignUp();
+		mappaSchermate.put("Signup", signup);
+		
 		Home home = new Home(bufferStories, bufferPosts);
 		mappaSchermate.put("Home", home);
+		
+		Impostazioni impostazioni = new Impostazioni("Stringa profilo prova");
+		mappaSchermate.put("Impostazioni", impostazioni);
+		
 
 	}
 	
 	public void mostraHome() {
-		this.FrameMainContainer.add(this.getMappaSchermate().get("Home"), BorderLayout.CENTER);
+		this.FrameMainContainer.add(mappaSchermate.get("Home"), BorderLayout.CENTER);
+	}
+	
+	public void mostraSignUp() {
+		this.FrameMainContainer.add(mappaSchermate.get("Signup"), BorderLayout.CENTER);
+	}
+	
+	public void mostraImpostazioni() {
+		this.FrameMainContainer.add(mappaSchermate.get("Impostazioni"), BorderLayout.CENTER);
 	}
 	
 	public void avvio() {
@@ -69,80 +84,6 @@ public class Frame extends JFrame {
 		this.setVisible(true);
 		this.setResizable(false);
 	}
-
-	/*
-	public void avvioLogin() {
-		LogIn logIn = new LogIn();
-		FrameMainContainer.add(logIn, BorderLayout.CENTER);
-		this.listaSchermateAttive.put("logIn", logIn);
-		
-	}
-	
-	public void avvioHome(ArrayList<String> bufferStories, ArrayList<String> bufferPosts) {
-		Home home = new Home(bufferStories,  bufferPosts);
-		FrameMainContainer.add(home);
-		this.listaSchermateAttive.put("Home", home);
-	}
-	
-	public void avviaCreazionePost() {
-		CreazionePost creazionePost = new CreazionePost();
-		FrameMainContainer.add(creazionePost);
-		this.listaSchermateAttive.put("CreazionePost", creazionePost);
-	}
-	
-	public void avviaImpostazioni(String profilo){
-		Impostazioni impostazioni = new Impostazioni(profilo);
-		FrameMainContainer.add(impostazioni);
-		impostazioni.setBounds(0,0,800,775);
-		this.listaSchermateAttive.put("Impostazioni", impostazioni);
-	}
-	
-	public void avviaProfilo(String nomeUtente, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> listaImmaginiPost) {
-	Profilo profilo = new Profilo(nomeUtente, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-	FrameMainContainer.add(profilo);
-	profilo.setBounds(0,0,800,775);
-	this.listaSchermateAttive.put("Profilo", profilo);
-	}
-	
-	public void avviaChat() {
-		Chat chat = new Chat();
-		FrameMainContainer.add(chat);
-
-		this.listaSchermateAttive.put("Chat", chat);
-	}
-	
-	public void avviaNotifiche() {
-		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
-		FrameMainContainer.add(pannelloNotifiche);
-		pannelloNotifiche.setBounds(0,0,800,775);
-		this.listaSchermateAttive.put("PannelloNotifiche", pannelloNotifiche);
-	}
-	
-	public void avvioPostVisualizzato() {
-		PostVisualizzato postVisualizzato = new PostVisualizzato("immagini/Tony.jpeg");
-		FrameMainContainer.add(postVisualizzato);
-		postVisualizzato.setBounds(0,0,800,775);
-		this.listaSchermateAttive.put("PannelloNotifiche", postVisualizzato);
-	}
-	
-	public void avviaSchermataRicerca(String profilo, ArrayList<String> risultatiRicerca) {
-		
-		for (i = 0; i<listaRisultatiRicerca.length; i++) {
-			risultatiRicerca.add(listaRisultatiRicerca[i]);
-		}
-		
-		Ricerca ricerca = new Ricerca(profilo, risultatiRicerca);
-		FrameMainContainer.add(ricerca);
-		this.listaSchermateAttive.put("Ricerca", ricerca);
-
-	}
-	
-	public void avviaSchermataSignUp() {
-		SignUp signUp = new SignUp();
-		FrameMainContainer.add(signUp);
-		this.listaSchermateAttive.put("SignUp", signUp);
-	}*/
-
 	
 	public void avvioSchermate() {
 		
@@ -179,7 +120,7 @@ public class Frame extends JFrame {
 
 
 	public Impostazioni getImpostazioni() {
-		return (Impostazioni)this.getMappaSchermate().get("Impostazioni");	
+		return (Impostazioni)mappaSchermate.get("Impostazioni");	
 	}
 	
 	public PannelloNotifiche getPannelloNotifiche() {
@@ -189,6 +130,11 @@ public class Frame extends JFrame {
 	public LogIn getLogIn() {
 		return (LogIn)mappaSchermate.get("Login");	
 	}
+	
+	public SignUp getSignUp() {
+		return (SignUp)mappaSchermate.get("Signup");
+	}
+	
 	public Profilo getProfilo() {
 		return (Profilo)this.getMappaSchermate().get("Profilo");	
 	}
@@ -211,6 +157,18 @@ public class Frame extends JFrame {
 	
 	public JButton getLoginButton() {
 		return getLogIn().getAccedi();
+	}
+	
+	public JButton getSignUpButton() {
+		return getLogIn().getSignUp();
+	}
+	
+	public JButton getImpostazioniButton() {
+		return getHome().getButtonImpostazioni();
+	}
+	
+	public JButton getRegistratiButton() {
+		return getSignUp().getRegistrati();
 	}
 	
 
