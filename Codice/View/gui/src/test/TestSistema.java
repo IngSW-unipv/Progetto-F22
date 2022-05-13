@@ -35,6 +35,7 @@ class TestSistema {
 		} catch (ChangeDefaultPassword e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
+	}
 	 catch (AccountDoesNotExist e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
