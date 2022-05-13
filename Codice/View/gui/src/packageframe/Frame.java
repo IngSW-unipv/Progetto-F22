@@ -177,13 +177,6 @@ public class Frame extends JFrame {
 		return (PostVisualizzato)this.getMappaSchermate().get("PostVisualizzato");	
 	}
 	
-	public JButton getLoginButton() {
-		return getLogIn().getAccedi();
-	}
-	
-	public JButton getSignUpButton() {
-		return getLogIn().getSignUp();
-	}
 	
 	public JButton getImpostazioniButton() {
 		return getHome().getButtonImpostazioni();
@@ -203,6 +196,23 @@ public class Frame extends JFrame {
 	
 	public JButton getNotificheButton() {
 		return getHome().getButtonNotifiche();
+	}
+	
+	//Get pannello Login
+	public JButton getLoginButton() {
+		return getLogIn().getAccedi();
+	}
+	
+	public JButton getSignUpButton() {
+		return getLogIn().getSignUp();
+	}
+	
+	public String emailInserita() {
+		return getLogIn().getInserimentoEmail().getText();
+	}
+	
+	public String passwordInserita() {
+		return getLogIn().getInserimentoEmail().getText();
 	}
 	
 	//Get pannello impostazioni
@@ -236,6 +246,8 @@ public class Frame extends JFrame {
 	public void setFrameMainContainer(SpecificContainer frameMainContainer) {
 		FrameMainContainer = frameMainContainer;
 	}
+	
+	
 	
 	
 	

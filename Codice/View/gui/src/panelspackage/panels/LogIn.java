@@ -99,4 +99,6 @@ public class LogIn extends JPanel {
 		this.inserimentoPassword = inserimentoPassword;
 	}
 	
+	
+	
 }

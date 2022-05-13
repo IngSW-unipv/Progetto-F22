@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Sistema.Sistema;
 import packageframe.Frame;
+import profilo.exception.AccountDoesNotExist;
+import profilo.exception.ChangeDefaultPassword;
+import profilo.exception.PswOmailErrati;
 
 
 public class Controller {
@@ -17,7 +20,6 @@ public class Controller {
 	Sistema model;
 	
 	public Controller(Sistema s, Frame f) {
-		
 		this.view = f;
 		this.model = s;	
 	}
@@ -31,6 +33,17 @@ public class Controller {
 				nascondiSchermata("Login");
 				mostraSchermata("Home");
 				view.mostraHome();
+				
+				
+				try {
+					model.login(view.emailInserita(), view.passwordInserita());
+				} catch (ChangeDefaultPassword errore1) {
+					errore1.printStackTrace();
+				} catch (AccountDoesNotExist errore2) {
+					errore2.printStackTrace();
+				} catch (PswOmailErrati errore3) {
+					errore3.printStackTrace();
+				}
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
