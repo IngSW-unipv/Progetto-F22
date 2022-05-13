@@ -3,6 +3,7 @@ package db.post.multimedia.foto;
 import java.sql.Date;
 import java.sql.Time;
 
+import db.post.PostDB;
 import db.post.multimedia.MultimediaDB;
 
 public class FotoDB extends MultimediaDB{
@@ -25,6 +26,11 @@ public class FotoDB extends MultimediaDB{
 	@Override
 	public String toString() {
 		return super.toString() + ", isHd=" + isHd + "]";
+	}
+	@Override
+	public PostDB inserisciCaratteristiche(PostDB p) {
+		FotoDB fdb = new FotoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.getNumLike(), p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getTempoCancellazione(), this.getPercorso(), this.isStory(), this.isHd);
+		return fdb;
 	}
     
 }

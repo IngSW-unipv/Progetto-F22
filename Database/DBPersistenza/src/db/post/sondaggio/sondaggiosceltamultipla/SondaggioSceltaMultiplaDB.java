@@ -3,6 +3,7 @@ package db.post.sondaggio.sondaggiosceltamultipla;
 import java.sql.Date;
 import java.sql.Time;
 
+import db.post.PostDB;
 import db.post.sondaggio.SondaggioDB;
 
 
@@ -36,5 +37,10 @@ public class SondaggioSceltaMultiplaDB extends SondaggioDB{
 	@Override
 	public String toString() {
 		return super.toString() + ", quartaScelta=" + quartaScelta + "]";
+	}
+	@Override
+	public PostDB inserisciCaratteristiche(PostDB p) {
+		SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.getNumLike(), p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getPrimaScelta(), this.getTerzaScelta(), this.getQuartaScelta());
+		return sdb;
 	}
 }
