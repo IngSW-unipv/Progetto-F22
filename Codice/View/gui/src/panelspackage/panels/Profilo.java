@@ -25,7 +25,6 @@ public class  Profilo extends JPanel {
 
 	
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
-		
 		this.avvio();
 		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
 		
