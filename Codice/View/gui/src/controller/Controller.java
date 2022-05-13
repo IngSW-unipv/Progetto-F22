@@ -14,7 +14,8 @@ import panelspackage.panels.LogIn;
 public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
-	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati;
+	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
+						   gestoreChat;
 	
 	Frame view;
 	Sistema model;
@@ -65,6 +66,27 @@ public class Controller {
 			}
 		};
 		view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
+		
+		gestoreProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Home");
+				mostraSchermata("Profilo");
+				view.mostraProfilo();
+			}
+		};
+		view.getProfiloButton().addActionListener(gestoreProfilo);
+		
+		gestoreChat = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Home");
+				mostraSchermata("Chat");
+				view.mostraChat();
+			}
+		};
+		view.getChatButton().addActionListener(gestoreChat);
+		
 		
 	}
 	
