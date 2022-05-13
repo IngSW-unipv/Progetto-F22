@@ -60,6 +60,9 @@ public class Frame extends JFrame {
 		
 		Chat chat = new Chat();
 		mappaSchermate.put("Chat", chat);
+		
+		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
+		mappaSchermate.put("PannelloNotifiche", pannelloNotifiche);
 
 	}
 	
@@ -81,6 +84,10 @@ public class Frame extends JFrame {
 	
 	public void mostraChat() {
 		this.FrameMainContainer.add(mappaSchermate.get("Chat"), BorderLayout.CENTER);
+	}
+	
+	public void mostraPannelloNotifiche() {
+		this.FrameMainContainer.add(mappaSchermate.get("PannelloNotifiche"), BorderLayout.CENTER);
 	}
 	
 	public void avvio() {
@@ -194,6 +201,9 @@ public class Frame extends JFrame {
 		return getHome().getButtonChat();
 	}
 	
+	public JButton getNotificheButton() {
+		return getHome().getButtonNotifiche();
+	}
 
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;

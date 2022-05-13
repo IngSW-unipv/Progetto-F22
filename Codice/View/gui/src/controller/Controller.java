@@ -15,7 +15,7 @@ public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
-						   gestoreChat;
+						   gestoreChat, gestorePannelloNotifiche;
 	
 	Frame view;
 	Sistema model;
@@ -37,6 +37,7 @@ public class Controller {
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
 		
+		
 		gestoreSignUp = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,6 +47,7 @@ public class Controller {
 			}
 		};
 		view.getSignUpButton().addActionListener(gestoreSignUp);
+		
 		
 		gestoreRegistrati = new ActionListener() {
 			@Override
@@ -57,15 +59,17 @@ public class Controller {
 		};
 		view.getRegistratiButton().addActionListener(gestoreRegistrati);
 		
+		
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
-				mostraSchermata("Impostazini");
+				mostraSchermata("Impostazioni");
 				view.mostraImpostazioni();
 			}
 		};
 		view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
+		
 		
 		gestoreProfilo = new ActionListener() {
 			@Override
@@ -76,6 +80,7 @@ public class Controller {
 			}
 		};
 		view.getProfiloButton().addActionListener(gestoreProfilo);
+		
 		
 		gestoreChat = new ActionListener() {
 			@Override
@@ -88,6 +93,15 @@ public class Controller {
 		view.getChatButton().addActionListener(gestoreChat);
 		
 		
+		gestorePannelloNotifiche = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Home");
+				mostraSchermata("PannelloNotifiche");
+				view.mostraPannelloNotifiche();
+			}
+		};
+		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
 	}
 	
 
