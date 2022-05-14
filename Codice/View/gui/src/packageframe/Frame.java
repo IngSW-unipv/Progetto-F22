@@ -39,11 +39,9 @@ public class Frame extends JFrame {
 	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
 	
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
+		 
+	//all'avvio della GUI viene mostrata nel frame la schermata di Login
 		this.avvio();
-		this.initComponent(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, listaImmaginiPost);
-		}
-	
-	private void initComponent(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost) {
 		LogIn login = new LogIn();
 		mappaSchermate.put("Login",   login);
 		this.FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
@@ -65,12 +63,9 @@ public class Frame extends JFrame {
 		
 		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
 		mappaSchermate.put("PannelloNotifiche", pannelloNotifiche);
+
 	}
-	public void mostraSchermata(String schermata) {
-		this.FrameMainContainer.add(mappaSchermate.get(schermata), BorderLayout.CENTER);
-		mappaSchermate.get(schermata).setVisible(true);
-	}
-	/* 
+	
 	public void mostraHome() {
 		this.FrameMainContainer.add(mappaSchermate.get("Home"), BorderLayout.CENTER);
 	}
@@ -93,11 +88,13 @@ public class Frame extends JFrame {
 	
 	public void mostraPannelloNotifiche() {
 		this.FrameMainContainer.add(mappaSchermate.get("PannelloNotifiche"), BorderLayout.CENTER);
-	}*/
+	}
 	
 	public void avvio() {
 		this.settingParametriFrame();
 		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
+		this.avvioSchermate();
+		
 	}
 	
 	public void settingParametriFrame() {
@@ -109,6 +106,23 @@ public class Frame extends JFrame {
 		this.setResizable(false);
 	}
 
+	
+	public void avvioSchermate() {
+		
+		//ArrayList bufferStories = new ArrayList();
+		
+		//bufferStories.add("immagini/Bruce.jpeg"); bufferStories.add("immagini/Natasha.jpeg"); bufferStories.add("immagini/Tony.jpeg"); bufferStories.add("immagini/Clint.jpeg"); bufferStories.add("immagini/Steve.jpeg");
+		//Home schermataHome = new Home(bufferStories, bufferStories);
+		//mappaSchermate.put("Home", (JPanel)schermataHome);
+		//System.out.println("home" + mappaSchermate.get(schermataHome));
+		
+		/*
+		mappaSchermate = new HashMap<String, JPanel>(); ;
+		LogIn schermataLogin = new LogIn();
+		mappaSchermate.put("Login", schermataLogin);
+		System.out.println("login" + mappaSchermate.get(schermataLogin));
+		*/
+	}
 
 	public static Color getColoreprimariotematico() {
 		return COLOREPRIMARIOTEMATICO;
@@ -117,6 +131,7 @@ public class Frame extends JFrame {
 	public static Color getColoresecondariotematico() {
 		return COLORESECONDARIOTEMATICO;
 	}
+	
 	
 	
 	public Home getHome() {
@@ -162,13 +177,6 @@ public class Frame extends JFrame {
 		return (PostVisualizzato)this.getMappaSchermate().get("PostVisualizzato");	
 	}
 	
-	public JButton getLoginButton() {
-		return getLogIn().getAccedi();
-	}
-	
-	public JButton getSignUpButton() {
-		return getLogIn().getSignUp();
-	}
 	
 	public JButton getImpostazioniButton() {
 		return getHome().getButtonImpostazioni();
@@ -188,6 +196,23 @@ public class Frame extends JFrame {
 	
 	public JButton getNotificheButton() {
 		return getHome().getButtonNotifiche();
+	}
+	
+	//Get pannello Login
+	public JButton getLoginButton() {
+		return getLogIn().getAccedi();
+	}
+	
+	public JButton getSignUpButton() {
+		return getLogIn().getSignUp();
+	}
+	
+	public String emailInserita() {
+		return getLogIn().getInserimentoEmail().getText();
+	}
+	
+	public String passwordInserita() {
+		return getLogIn().getInserimentoEmail().getText();
 	}
 	
 	//Get pannello impostazioni
@@ -221,4 +246,5 @@ public class Frame extends JFrame {
 	public void setFrameMainContainer(SpecificContainer frameMainContainer) {
 		FrameMainContainer = frameMainContainer;
 	}
+	
 }

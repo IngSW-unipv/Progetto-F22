@@ -2,20 +2,19 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import Sistema.Sistema;
 import packageframe.Frame;
-import panelspackage.panels.LogIn;
+import profilo.exception.AccountDoesNotExist;
+import profilo.exception.ChangeDefaultPassword;
+import profilo.exception.PswOmailErrati;
+
 
 public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
-						   gestoreChat, gestorePannelloNotifiche;
+						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
+						   gestoreHomeChat, gestoreHomePannelloNotifiche;
 	
 	Frame view;
 	Sistema model;
@@ -26,84 +25,157 @@ public class Controller {
 	}
 	
 	public void initComponents() {
+		
+		//ActionListeners schermata login
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Login");
-				//mostraSchermata("Home");
-				view.mostraSchermata("Login");
+				mostraSchermata("Home");
+				view.mostraHome();
+				
+				
+				try {
+					model.login(view.emailInserita(), view.passwordInserita());
+				} catch (ChangeDefaultPassword errore1) {
+					errore1.printStackTrace();
+				} catch (AccountDoesNotExist errore2) {
+					errore2.printStackTrace();
+				} catch (PswOmailErrati errore3) {
+					errore3.printStackTrace();
+				}
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
+		
 		
 		gestoreSignUp = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Login");
-				//mostraSchermata("Signup");
-				view.mostraSchermata("Signup");
+				mostraSchermata("Signup");
+				view.mostraSignUp();
 			}
 		};
 		view.getSignUpButton().addActionListener(gestoreSignUp);
 		
+		
+		
+		//ActionListeners schermata SignUp
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Signup");
-				//mostraSchermata("Home");
-				view.mostraSchermata("Home");
+				mostraSchermata("Home");
+				view.mostraHome();
 			}
 		};
 		view.getRegistratiButton().addActionListener(gestoreRegistrati);
 		
+		
+		
+		//ActionListeners schermata Home
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
-				//mostraSchermata("Impostazioni");
-				view.mostraSchermata("Impostazioni");
+				mostraSchermata("Impostazioni");
+				view.mostraImpostazioni();
 			}
 		};
 		view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
+		
 		
 		gestoreProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
-				//mostraSchermata("Profilo");
-				view.mostraSchermata("Profilo");
+				mostraSchermata("Profilo");
+				view.mostraProfilo();
 			}
 		};
 		view.getProfiloButton().addActionListener(gestoreProfilo);
+		
 		
 		gestoreChat = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
-				//mostraSchermata("Chat");
-				view.mostraSchermata("Chat");
+				mostraSchermata("Chat");
+				view.mostraChat();
 			}
 		};
 		view.getChatButton().addActionListener(gestoreChat);
+		
 		
 		gestorePannelloNotifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
-				//mostraSchermata("PannelloNotifiche");
-				view.mostraSchermata("PannelloNotifiche");
+				mostraSchermata("PannelloNotifiche");
+				view.mostraPannelloNotifiche();
 			}
-		}; 
+		};
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
+	
+		
+		//ActionListeners schermata Impostazioni
+		gestoreHomeImpostazioni = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Impostazioni");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		//ActionListeners schermata Profilo
+		gestoreHomeProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Profilo");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
+		
+		
+		//ActionListeners schermata Chat
+		gestoreHomeChat = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Chat");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomeChatButton().addActionListener(gestoreHomeChat);
+		
+		
+		//ActionListeners schermata Notifiche
+		gestoreHomePannelloNotifiche = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("PannelloNotifiche");
+				mostraSchermata("Home");
+				view.mostraHome();
+			}
+		};
+		view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
 	}
+	
 
 	public void nascondiSchermata(String schermata) {
 		view.mappaSchermate.get(schermata).setVisible(false);
 	}
-	/*
+	
 	public void mostraSchermata(String schermata) {
 		view.mappaSchermate.get(schermata).setVisible(true);
-	}*/
+	}
+	
 	public void avvioSocial() {
 		view.getMappaSchermate().get("Login").setVisible(true);
 	}
