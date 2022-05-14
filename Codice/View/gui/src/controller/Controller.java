@@ -13,7 +13,7 @@ public class Controller {
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
-						   gestoreHomeChat, gestoreHomePannelloNotifiche;
+						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost;
 	
 	Frame view;
 	Sistema model;
@@ -152,6 +152,26 @@ public class Controller {
 			}
 		};
 		view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
+	
+	
+		//ActionListeners schermata CreazionePost
+		gestoreCreazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("Home");
+				mostraSchermata("CreazionePost");
+			}
+		};
+		view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
+		
+		gestoreHomeCreazionePost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nascondiSchermata("CreazionePost");
+				mostraSchermata("Home");
+			}
+		};
+		view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
 	}
 
 	public void nascondiSchermata(String schermata) {

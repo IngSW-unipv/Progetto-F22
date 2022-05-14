@@ -63,6 +63,9 @@ public class Frame extends JFrame {
 		
 		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
 		mappaSchermate.put("PannelloNotifiche", pannelloNotifiche);
+		
+		CreazionePost creazionePost = new CreazionePost();
+		mappaSchermate.put("CreazionePost", creazionePost);
 
 	}
 	
@@ -185,6 +188,14 @@ public class Frame extends JFrame {
 	
 	public JButton getImpostazioniButton() {
 		return getHome().getButtonImpostazioni();
+	}
+	
+	public JButton getCreazionePostButton() {
+		return getHome().getpPost();
+	}
+	
+	public JButton getHomeCreazionePostButton() {
+		return getCreazionePost().getHomeCreazionePost();
 	}
 	
 	public JButton getProfiloButton() {
