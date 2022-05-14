@@ -32,8 +32,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Login");
 				mostraSchermata("Home");
-				view.mostraHome();
-				
 				
 				try {
 					model.login(view.emailInserita(), view.passwordInserita());
@@ -54,7 +52,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Login");
 				mostraSchermata("Signup");
-				view.mostraSignUp();
 			}
 		};
 		view.getSignUpButton().addActionListener(gestoreSignUp);
@@ -67,7 +64,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Signup");
 				mostraSchermata("Home");
-				view.mostraHome();
 			}
 		};
 		view.getRegistratiButton().addActionListener(gestoreRegistrati);
@@ -80,7 +76,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
 				mostraSchermata("Impostazioni");
-				view.mostraImpostazioni();
 			}
 		};
 		view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
@@ -91,7 +86,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
 				mostraSchermata("Profilo");
-				view.mostraProfilo();
 			}
 		};
 		view.getProfiloButton().addActionListener(gestoreProfilo);
@@ -102,7 +96,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
 				mostraSchermata("Chat");
-				view.mostraChat();
 			}
 		};
 		view.getChatButton().addActionListener(gestoreChat);
@@ -113,7 +106,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Home");
 				mostraSchermata("PannelloNotifiche");
-				view.mostraPannelloNotifiche();
 			}
 		};
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
@@ -125,7 +117,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Impostazioni");
 				mostraSchermata("Home");
-				view.mostraHome();
 			}
 		};
 		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
@@ -137,7 +128,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Profilo");
 				mostraSchermata("Home");
-				view.mostraHome();
 			}
 		};
 		view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
@@ -149,7 +139,6 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("Chat");
 				mostraSchermata("Home");
-				view.mostraHome();
 			}
 		};
 		view.getHomeChatButton().addActionListener(gestoreHomeChat);
@@ -161,19 +150,17 @@ public class Controller {
 			public void actionPerformed(ActionEvent e) {
 				nascondiSchermata("PannelloNotifiche");
 				mostraSchermata("Home");
-				view.mostraHome();
 			}
 		};
 		view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
 	}
-	
 
 	public void nascondiSchermata(String schermata) {
 		view.mappaSchermate.get(schermata).setVisible(false);
 	}
 	
 	public void mostraSchermata(String schermata) {
-		view.mappaSchermate.get(schermata).setVisible(true);
+		view.mostraSchermata(schermata);
 	}
 	
 	public void avvioSocial() {

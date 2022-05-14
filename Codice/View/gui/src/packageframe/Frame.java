@@ -66,6 +66,11 @@ public class Frame extends JFrame {
 
 	}
 	
+	public void mostraSchermata(String Schermata) {
+		this.FrameMainContainer.add(mappaSchermate.get(Schermata), BorderLayout.CENTER);
+		mappaSchermate.get(Schermata).setVisible(true);
+	}
+	/*
 	public void mostraHome() {
 		this.FrameMainContainer.add(mappaSchermate.get("Home"), BorderLayout.CENTER);
 	}
@@ -89,7 +94,7 @@ public class Frame extends JFrame {
 	public void mostraPannelloNotifiche() {
 		this.FrameMainContainer.add(mappaSchermate.get("PannelloNotifiche"), BorderLayout.CENTER);
 	}
-	
+	*/
 	public void avvio() {
 		this.settingParametriFrame();
 		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
