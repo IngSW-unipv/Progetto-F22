@@ -8,7 +8,6 @@ import profilo.exception.AccountDoesNotExist;
 import profilo.exception.ChangeDefaultPassword;
 import profilo.exception.PswOmailErrati;
 
-
 public class Controller {
 	
 	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
@@ -107,7 +106,7 @@ public class Controller {
 				nascondiSchermata("Home");
 				mostraSchermata("PannelloNotifiche");
 			}
-		};
+		}; 
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
 	
 		
