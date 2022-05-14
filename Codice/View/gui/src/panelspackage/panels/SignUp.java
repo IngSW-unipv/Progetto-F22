@@ -83,7 +83,7 @@ public class SignUp extends JPanel {
 		this.registrati = registrati;
 	}
 	public String getEmailPerReigstrarsi() {
-		return this.testoEmail.getText();
+		return this.email.getText();
 	}
 	public String getPasswordPerRegistrarsi() {
 		return this.password.getText();
