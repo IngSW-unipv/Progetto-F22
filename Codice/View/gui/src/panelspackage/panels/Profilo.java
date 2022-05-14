@@ -40,18 +40,18 @@ public class  Profilo extends JPanel {
 	public void initComponents(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		
 		SpecificContainer containerNorth = new SpecificContainer();
-		this.add(containerNorth, BorderLayout.NORTH);
+		add(containerNorth, BorderLayout.NORTH);
 		
 		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.WEST);
 		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		System.out.print(true);
 		
-		this.dati.add("N.Post");
-		this.dati.add(Integer.toString(numeroPost));
-		this.dati.add("N.Follower");
-		this.dati.add(Integer.toString(numeroFollowers));
-		this.dati.add("N.Seguiti");
-		this.dati.add(Integer.toString(numeroSeguiti));
+		dati.add("N.Post");
+		dati.add(Integer.toString(numeroPost));
+		dati.add("N.Follower");
+		dati.add(Integer.toString(numeroFollowers));
+		dati.add("N.Seguiti");
+		dati.add(Integer.toString(numeroSeguiti));
 		
 		ListaEtichette.clear();
 		for( i = 0; i < this.dati.size(); i++) {
@@ -63,7 +63,7 @@ public class  Profilo extends JPanel {
 		containerNorth.add(Dati, BorderLayout.SOUTH);
 		
 		SpecificContainer containerCenter = new SpecificContainer();
-		this.add(containerCenter, BorderLayout.CENTER);
+		add(containerCenter, BorderLayout.CENTER);
 		containerCenter.setLayout(new GridLayout(3,3));
 
 		ListaPost.clear();
@@ -77,7 +77,6 @@ public class  Profilo extends JPanel {
 		
 		containerSouth.add(homeProfilo= new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
 	}
-	
 
 	public ArrayList<JComponent> getListaAreaTesto() {
 		return ListaEtichette;
@@ -87,8 +86,6 @@ public class  Profilo extends JPanel {
 		ListaEtichette = listaAreaTesto;
 	}
 	
-	
-	//GETTER E SETTER PULSANTI
 	public Pulsanti getHomeProfilo() {
 		return homeProfilo;
 	}

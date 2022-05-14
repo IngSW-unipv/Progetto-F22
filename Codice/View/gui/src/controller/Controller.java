@@ -183,8 +183,5 @@ public class Controller {
 	public void mostraSchermata(String schermata) {
 		view.mostraSchermata(schermata);
 	}
-	
-	public void avvioSocial() {
-		view.getMappaSchermate().get("Login").setVisible(true);
-	}
+
 }

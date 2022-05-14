@@ -27,15 +27,15 @@ public class LogIn extends JPanel {
 	
 	
 	public LogIn() {
-		this.avvio();
+		avvio();
 		initComponents();
 		}
 
 	public void avvio() {
-		this.setOpaque(true);
-		this.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
+		setOpaque(true);
+		setVisible(true);
+		setLayout(new BorderLayout());
+		setBackground(Frame.COLORESECONDARIOTEMATICO);	
 	}
 	
 	public void initComponents() {
@@ -55,7 +55,6 @@ public class LogIn extends JPanel {
 		listaComponenti.put("labelPwd", new Etichette("Inserisci Password", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.put("accedi", new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
 		GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
-		
 		containerNorth.add(dati, BorderLayout.SOUTH);
 	}
 	
@@ -98,7 +97,5 @@ public class LogIn extends JPanel {
 	public void setInserimentoPassword(AreaDiTesto inserimentoPassword) {
 		this.inserimentoPassword = inserimentoPassword;
 	}
-	
-	
 	
 }

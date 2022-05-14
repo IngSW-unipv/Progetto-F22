@@ -23,20 +23,20 @@ public class SignUp extends JPanel {
 	int i;
 	
 	public SignUp() {
-		this.avvio();
-		this.initComponents();
+		avvio();
+		initComponents();
 	}
 	
 	public void avvio() {
-		this.setOpaque(true);
-		this.setVisible(true);
-		this.setLayout(new BorderLayout());
-		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
+		setOpaque(true);
+		setVisible(true);
+		setLayout(new BorderLayout());
+		setBackground(Frame.COLORESECONDARIOTEMATICO);	
 	}
 	
 	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
-		this.add(containerNorth, BorderLayout.NORTH);
+		add(containerNorth, BorderLayout.NORTH);
 		containerNorth.add(titolo = new Etichette("Sign Up", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD | Font.ITALIC, 40)), BorderLayout.CENTER);		
 		Container containerGenerale = new Container();
 		containerGenerale.setLayout(new GridLayout(3, 1));
@@ -44,7 +44,7 @@ public class SignUp extends JPanel {
 		Container containerVuoto1 = new Container();
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenter.setLayout(new GridLayout(4, 2));
-		this.add(containerGenerale, BorderLayout.CENTER);
+		add(containerGenerale, BorderLayout.CENTER);
 		
 		containerCenter.add(testoEmail = new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
 		containerCenter.add(email = new AreaDiTesto(new LineBorder(Frame.COLOREPRIMARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
@@ -60,7 +60,7 @@ public class SignUp extends JPanel {
 		containerGenerale.add(containerVuoto1);
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		this.add(containerSouth, BorderLayout.SOUTH);
+		add(containerSouth, BorderLayout.SOUTH);
 		
 		registrati = new JButton();
 		registrati.setText("REGISTRATI");
