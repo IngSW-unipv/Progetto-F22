@@ -41,7 +41,26 @@ public class Frame extends JFrame {
 	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		 
 	//all'avvio della GUI viene mostrata nel frame la schermata di Login
-		this.avvio();
+		this.avvio(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost,immagineProfilo, listaImmaginiPost);
+	}
+	
+
+	public void avvio(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
+		this.settingParametriFrame();
+		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
+		this.avvioSchermate(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost,immagineProfilo, listaImmaginiPost);
+	}
+	
+	public void settingParametriFrame() {
+		this.setTitle("Social Network");
+		this.setSize(814,813);
+		this.setLayout(new BorderLayout());
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+		this.setResizable(false);
+	}
+	
+	public void avvioSchermate(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
 		LogIn login = new LogIn();
 		mappaSchermate.put("Login",   login);
 		this.FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
@@ -73,65 +92,8 @@ public class Frame extends JFrame {
 		this.FrameMainContainer.add(mappaSchermate.get(Schermata), BorderLayout.CENTER);
 		mappaSchermate.get(Schermata).setVisible(true);
 	}
-	/*
-	public void mostraHome() {
-		this.FrameMainContainer.add(mappaSchermate.get("Home"), BorderLayout.CENTER);
-	}
-	
-	public void mostraSignUp() {
-		this.FrameMainContainer.add(mappaSchermate.get("Signup"), BorderLayout.CENTER);
-	}
-	
-	public void mostraImpostazioni() {
-		this.FrameMainContainer.add(mappaSchermate.get("Impostazioni"), BorderLayout.CENTER);
-	}
-	
-	public void mostraProfilo() {
-		this.FrameMainContainer.add(mappaSchermate.get("Profilo"), BorderLayout.CENTER);
-	}
-	
-	public void mostraChat() {
-		this.FrameMainContainer.add(mappaSchermate.get("Chat"), BorderLayout.CENTER);
-	}
-	
-	public void mostraPannelloNotifiche() {
-		this.FrameMainContainer.add(mappaSchermate.get("PannelloNotifiche"), BorderLayout.CENTER);
-	}
-	*/
-	public void avvio() {
-		this.settingParametriFrame();
-		this.add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
-		this.avvioSchermate();
-		
-	}
-	
-	public void settingParametriFrame() {
-		this.setTitle("Social Network");
-		this.setSize(814,813);
-		this.setLayout(new BorderLayout());
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-		this.setResizable(false);
-	}
 
 	
-	public void avvioSchermate() {
-		
-		//ArrayList bufferStories = new ArrayList();
-		
-		//bufferStories.add("immagini/Bruce.jpeg"); bufferStories.add("immagini/Natasha.jpeg"); bufferStories.add("immagini/Tony.jpeg"); bufferStories.add("immagini/Clint.jpeg"); bufferStories.add("immagini/Steve.jpeg");
-		//Home schermataHome = new Home(bufferStories, bufferStories);
-		//mappaSchermate.put("Home", (JPanel)schermataHome);
-		//System.out.println("home" + mappaSchermate.get(schermataHome));
-		
-		/*
-		mappaSchermate = new HashMap<String, JPanel>(); ;
-		LogIn schermataLogin = new LogIn();
-		mappaSchermate.put("Login", schermataLogin);
-		System.out.println("login" + mappaSchermate.get(schermataLogin));
-		*/
-	}
-
 	public static Color getColoreprimariotematico() {
 		return COLOREPRIMARIOTEMATICO;
 	}
@@ -139,8 +101,6 @@ public class Frame extends JFrame {
 	public static Color getColoresecondariotematico() {
 		return COLORESECONDARIOTEMATICO;
 	}
-	
-	
 	
 	public Home getHome() {
 		return (Home)mappaSchermate.get("Home");
@@ -263,4 +223,13 @@ public class Frame extends JFrame {
 		FrameMainContainer = frameMainContainer;
 	}
 	
+	public String getEmailPerReigstrarsi() {
+		SignUp signUp = (SignUp)this.getSignUp();
+		return signUp.getEmailPerReigstrarsi();
+	}
+	
+	public String getPasswordPerReigstrarsi() {
+		SignUp signUp = (SignUp)this.getSignUp();
+		return signUp.getPasswordPerRegistrarsi();
+	}
 }

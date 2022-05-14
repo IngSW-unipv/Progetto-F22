@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Sistema.Sistema;
 import packageframe.Frame;
-import profilo.exception.AccountDoesNotExist;
-import profilo.exception.ChangeDefaultPassword;
-import profilo.exception.PswOmailErrati;
+import profilo.exception.*;
 
 public class Controller {
 	
@@ -44,8 +42,7 @@ public class Controller {
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
-		
-		
+			
 		gestoreSignUp = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -53,21 +50,26 @@ public class Controller {
 				mostraSchermata("Signup");
 			}
 		};
-		view.getSignUpButton().addActionListener(gestoreSignUp);
-		
-		
+		view.getSignUpButton().addActionListener(gestoreSignUp);	
 		
 		//ActionListeners schermata SignUp
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
+				String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
+				
+				try {
+					System.out.println("credenziali inserite " + passEmailPerRegistrarsi + " " +  passWordPerRegistrarsi);
+					model.signIn(passEmailPerRegistrarsi, passWordPerRegistrarsi);
+				} catch (AccountGiaEsistente e1) {
+					e1.printStackTrace();
+				}
 				nascondiSchermata("Signup");
 				mostraSchermata("Home");
 			}
 		};
-		view.getRegistratiButton().addActionListener(gestoreRegistrati);
-		
-		
+		view.getRegistratiButton().addActionListener(gestoreRegistrati);	
 		
 		//ActionListeners schermata Home
 		gestoreImpostazioni = new ActionListener() {

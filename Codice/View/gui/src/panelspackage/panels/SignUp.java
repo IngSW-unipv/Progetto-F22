@@ -75,13 +75,17 @@ public class SignUp extends JPanel {
 		ListaAreaTesto = listaAreaTesto;
 	}
 
-	
-	//GETTER E SETTER PULSANTI
 	public JButton getRegistrati() {
 		return registrati;
 	}
 
 	public void setRegistrati(JButton registrati) {
 		this.registrati = registrati;
+	}
+	public String getEmailPerReigstrarsi() {
+		return this.testoEmail.getText();
+	}
+	public String getPasswordPerRegistrarsi() {
+		return this.password.getText();
 	}
 }

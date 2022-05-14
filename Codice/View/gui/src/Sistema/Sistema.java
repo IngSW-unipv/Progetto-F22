@@ -23,7 +23,7 @@ public class Sistema {
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
-            System.out.println("Profilo creato con successo");
+            System.out.println("il Profilo di " + mail + " è stato creato con successo");
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
