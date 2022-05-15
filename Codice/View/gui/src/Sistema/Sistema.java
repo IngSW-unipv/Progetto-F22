@@ -30,7 +30,7 @@ public class Sistema {
 	}
 	
 	public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
-	 	ArrayList<ProfiloDB> res =dbfacade.cercaProfilo(email);
+	 	ArrayList<ProfiloDB> res =dbfacade.cerca(new Profilo(email));
 	 	String s = dbfacade.vediPsw(email);
         
 	 		//Se provo a cambiare psw ad un account che non esiste viene lanciata una eccezione
@@ -47,8 +47,8 @@ public class Sistema {
 	 		    throw new AccountDoesNotExist(email);
 	 	}
 
-    public boolean cambiaPassword(String email, String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, ChangePassword, AccountDoesNotExist {
-    	ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(email);
+    public boolean cambiaPassword(String email, String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, AccountDoesNotExist {
+    	ArrayList<ProfiloDB> res = dbfacade.cerca(new Profilo(email));
 	 	String s = dbfacade.vediPsw(email);
 
 	 	if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
@@ -60,10 +60,10 @@ public class Sistema {
 	 		    	System.out.println("Password cambiata con successo");
 	 		    		return true;
 	 		}
-	 		throw new ChangePassword(vecchiaPassword);
 	 	}
 	 		else
 	 		    throw new AccountDoesNotExist(email);
+		return false;
 	 	}
 
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
@@ -84,7 +84,7 @@ public class Sistema {
 	 }
 
 	 public boolean logout(String email) throws AccountDoesNotExist {
-	 	ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(email);
+	 	ArrayList<ProfiloDB> res = dbfacade.cerca(new Profilo(email));
 	 	boolean b = dbfacade.vediSeLoggato(email);
 
 	 	if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
