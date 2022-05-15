@@ -19,7 +19,7 @@ public class Sistema {
 	//idProfilo e Mail sono la stessa ( va sistemato il database )
 	public boolean signIn(String mail, String nickName) throws AccountGiaEsistente {
 		Profilo p =  new Profilo(mail, nickName);
-	    ArrayList<ProfiloDB> r = dbfacade.cercaProfilo(mail);
+	    ArrayList<ProfiloDB> r = dbfacade.cerca(new Profilo(mail));
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);

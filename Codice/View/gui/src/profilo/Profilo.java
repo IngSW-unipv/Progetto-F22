@@ -65,7 +65,20 @@ public class Profilo implements IProfilo {
 		dislikeMap = new HashMap<>();
 	}
 	
-
+	public Profilo(String idProfilo) {
+		super();
+		this.dbfacade = dbfacade.getIstance();
+		this.idProfilo = idProfilo;
+		this.nickname = null;
+		this.descrizione = null;
+		this.numFollower = 0;
+		this.numSeguiti = 0;
+		this.numPost = 0;
+		this.tipo = tipo.PUBBLICO;
+		likeMap = new HashMap<>();
+		dislikeMap = new HashMap<>();
+	}
+	
 
 	//costruttore per la conversione profiloDB
 	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita) {

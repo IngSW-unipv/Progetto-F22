@@ -8,7 +8,6 @@ import profilo.exception.*;
 
 public class Controller {
 	
-	//private HashMap<String, JPanel> mappaSchermateController = new HashMap<String, JPanel>();
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost;
@@ -27,17 +26,28 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Login");
-				mostraSchermata("Home");
+				boolean success = true;
 				
 				try {
 					model.login(view.emailInserita(), view.passwordInserita());
 				} catch (ChangeDefaultPassword errore1) {
 					errore1.printStackTrace();
+					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore1.toString());
+					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 				} catch (AccountDoesNotExist errore2) {
 					errore2.printStackTrace();
+					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore2.toString());
+					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+					success = false;
 				} catch (PswOmailErrati errore3) {
+					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore3.toString());
+					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 					errore3.printStackTrace();
+					success = false;
+				}
+				if (success == true) {
+				nascondiSchermata("Login");
+				mostraSchermata("Home");
 				}
 			}
 		};

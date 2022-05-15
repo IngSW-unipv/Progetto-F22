@@ -313,7 +313,7 @@ public class DbFacade {
 		for(ProfiloDB pdb : res)
 			System.out.println(pdb.toString());
 	}
-	
+
 	public boolean carica(Profilo p) {
 		return pDao.inserisciProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
@@ -326,8 +326,8 @@ public class DbFacade {
 		return pDao.rimuoviProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
-	public ArrayList<ProfiloDB> cercaProfilo(String p) {
-		return pDao.cercaProfilo(p);
+	public ArrayList<ProfiloDB> cerca(Profilo profilo) {
+		return  pDao.cerca(profilo.getIdProfilo());
 	}
 	public void stampaProfiloCercato(String p) {
 		ArrayList<ProfiloDB> res = pDao.cercaProfilo(p);
@@ -413,7 +413,7 @@ public class DbFacade {
 	//Alcuni metodi utility
 	
 	
-	//Ritorna true se l'account inserito è "seguibile"
+	//Ritorna true se l'account inserito ï¿½ "seguibile"
 	public boolean profiloNonSeguito(Follow f) {
 		ArrayList<FollowDB> search = this.cercaFollow(f.getMailProfiloPersonale(), f.getMailProfiloSeguito());
 		if (search.isEmpty() == true) {
@@ -422,7 +422,7 @@ public class DbFacade {
 		return false;
 	}
 
-	//Ritorna true se l'account è esistente
+	//Ritorna true se l'account ï¿½ esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist {
 		ArrayList<ProfiloDB> res = this.cercaProfilo(p.getIdProfilo());
 		if(res.isEmpty() == true) {
@@ -431,7 +431,7 @@ public class DbFacade {
 		return true;
 	}
 
-	//Ritorna true se l'account è loggato
+	//Ritorna true se l'account ï¿½ loggato
 	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
 		Profilo p = new Profilo(emailProfilo, null);
 		if(this.accountEsistente(p) == true) {

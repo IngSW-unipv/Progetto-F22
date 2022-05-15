@@ -108,7 +108,7 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	
-	public ArrayList<ProfiloDB> cercaProfilo(String p) {
+	public ArrayList<ProfiloDB> cerca(String p) {
 		ArrayList<ProfiloDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -407,6 +407,13 @@ public class ProfiloDao implements IProfiloDao{
 
 		DBConnection.closeConnection(conn);
 	    throw new AccountDoesNotExist(idProfilo);
+	}
+
+
+	@Override
+	public ArrayList<ProfiloDB> cercaProfilo(String p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

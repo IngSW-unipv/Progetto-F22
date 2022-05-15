@@ -24,6 +24,7 @@ public class LogIn extends JPanel {
 	
 	private AreaDiTesto inserimentoEmail, inserimentoPassword;
 	private Pulsanti accedi;
+	private Etichette etichettaDiSegnalazioneLoginFallito;
 	
 	
 	public LogIn() {
@@ -40,14 +41,9 @@ public class LogIn extends JPanel {
 	
 	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
-		this.add(containerNorth, BorderLayout.NORTH);
+		add(containerNorth, BorderLayout.NORTH);
 
 		containerNorth.add(new Etichette("Login", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
-		
-		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		containerCenter.setLayout(new GridLayout(3, 1));
-		this.add(containerCenter, BorderLayout.CENTER);
-		
 		listaComponenti.put("password", new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		listaComponenti.put("signup", new Pulsanti("Sign Up", Frame.COLOREPRIMARIOTEMATICO));
 		listaComponenti.put("email", new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));		
@@ -56,6 +52,11 @@ public class LogIn extends JPanel {
 		listaComponenti.put("accedi", new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
 		GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
 		containerNorth.add(dati, BorderLayout.SOUTH);
+		
+		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		add(containerCenter, BorderLayout.CENTER);
+		containerCenter.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		etichettaDiSegnalazioneLoginFallito.setVisible(false);
 	}
 	
 	public void setListaComponenti(HashMap<String, JComponent> listaComponenti) {
@@ -96,6 +97,9 @@ public class LogIn extends JPanel {
 
 	public void setInserimentoPassword(AreaDiTesto inserimentoPassword) {
 		this.inserimentoPassword = inserimentoPassword;
+	}
+	public Etichette getEtichettaErroreLogin() {
+		return etichettaDiSegnalazioneLoginFallito;
 	}
 	
 }

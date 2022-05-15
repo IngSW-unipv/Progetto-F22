@@ -18,6 +18,7 @@ import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
+import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.SpecificContainer;
 
@@ -159,6 +160,10 @@ public class Frame extends JFrame {
 	
 	public String passwordInserita() {
 		return ((LogIn)mappaSchermate.get("Login")).getInserimentoEmail().getText();
+	}
+	
+	public Etichette getEtichettaDiSegnalazioneLoginFallito() {
+		return ((LogIn)mappaSchermate.get("Login")).getEtichettaErroreLogin();
 	}
 	
 	public JButton getHomeImpostazioniButton() {
