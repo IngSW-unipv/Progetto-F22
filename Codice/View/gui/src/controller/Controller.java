@@ -178,18 +178,12 @@ public class Controller {
 		try {
 			model.login(view.emailInserita(), view.passwordInserita());
 		} catch (ChangeDefaultPassword errore1) {
-			errore1.printStackTrace();
-			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore1.toString());
-			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+			mostraFallimentoLogin(errore1.toString());
 		} catch (AccountDoesNotExist errore2) {
-			errore2.printStackTrace();
-			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore2.toString());
-			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+			mostraFallimentoLogin(errore2.toString());
 			return false;
 		} catch (PswOmailErrati errore3) {
-			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore3.toString());
-			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
-			errore3.printStackTrace();
+			mostraFallimentoLogin(errore3.toString());
 			return false;
 		}	
 		return true;
@@ -211,6 +205,11 @@ public class Controller {
 
 	public void setSchermataAttuale(String schermataAttuale) {
 		this.schermataAttuale = schermataAttuale;
+	}
+	
+	public void mostraFallimentoLogin(String codiceFallimento) {
+	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
+	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 	}
 
 }
