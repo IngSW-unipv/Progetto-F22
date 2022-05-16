@@ -2,10 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import Sistema.Sistema;
@@ -15,78 +13,86 @@ import profilo.exception.*;
 class TestSistema {
 
 	static Sistema sistema; 
-	static boolean esitoTestSignIn, esitoRimozione;
 
-	public static void main(String[] args) throws AccountDoesNotExist, AccountGiaEsistente, ChangeDefaultPassword   {
-		Sistema sistema = new Sistema();
+	public static void main(String[] args) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist   {
+		sistema = new Sistema();
 
-		esitoRimozione = sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
+		setUpBeforeClass();
+		
+		testSignIn("ciccioGamer@unipv.it", "ciccioGamer", "Mucca");
+		testLogIn("ciccioGamer@unipv.it", "Mucca");
+		testCambioPassword("ciccioGamer@unipv.it", "Mucca", "Lucertola");
+		testLogInConVecchiaPassWord("ciccioGamer@unipv.it", "Mucca");
+		
+		tearDownAfterClass();
+	}
 
+	@Before
+	static void setUpBeforeClass() { 
+		
+	}
+
+	@After
+	static void tearDownAfterClass() {
+		sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
+	}
+
+	@Test
+	static	void testSignIn(String email, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
+		boolean esito = false;
 		try {
-			esitoTestSignIn = sistema.signIn("ciccioGamer@unipv.it", "ciccio","javahero");
+			esito = sistema.signIn(email, nickName, password);
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
-		}
-
-
-	 try {
-			 sistema.cambiaPassword("ciccioGamer@unipv.it","Mucca", "Lucertola");
-	 } catch (ChangeDefaultPassword e) {
-		 e.printStackTrace();
-	 } catch (AccountDoesNotExist e) {
-		 e.printStackTrace();
-	 }
-
-	 try {
-		 sistema.login("ciccioGamer@unipv.it", "Mucca");
-	 } catch (ChangeDefaultPassword e) {
-		 e.printStackTrace();
-	 } catch (AccountDoesNotExist e) {
-		 e.printStackTrace();
-	 } catch (PswOmailErrati e) {
-		 System.out.println("test login con password vecchia fallito come si ci aspettava");
-	 }
-	 try {
-		 sistema.login("paoloruffini@gmail.it	", "paoloruffini");
-	 } catch (ChangeDefaultPassword e) {
-		 e.printStackTrace();
-	 } catch (AccountDoesNotExist e) {
-		 e.printStackTrace();
-	 } catch (PswOmailErrati e) {
-		 e.printStackTrace();
-	 } System.out.println("paolo ruffini ha loggato");
-
-	 testSignIn();
-		}
-
-		@BeforeAll
-		static void setUpBeforeClass() { 
-			Sistema sistema = new Sistema();
-			esitoRimozione = sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
-		}
-
-		@AfterAll
-		static void tearDownAfterClass() throws Exception {
-		}
-
-		@BeforeEach
-		void setUp() throws AccountGiaEsistente {
-
-		}
-
-		@AfterEach
-		void tearDown() throws Exception {
-		}
-
-		@Test
-		static	void testSignIn() throws AccountGiaEsistente {
-	    /*	try {
-				esitoTestSignIn = sistema.signIn("ciccioGamer@unipv.it", "ciccio");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		assertTrue(esitoTestSignIn);
-		*/
+		}	
+		System.out.println(esito);
+		assertTrue(esito);
+	}
+	
+	@Test
+	static void testLogIn(String email, String passWord) {
+		boolean esito = false;
+		try {
+		 	esito = sistema.login(email, passWord);
+	 	} catch (ChangeDefaultPassword e) {
+		 	e.printStackTrace();
+	 	} catch (AccountDoesNotExist e) {
+		 	e.printStackTrace();
+	 	} catch (PswOmailErrati e) {
+	 		e.printStackTrace();
+	 		
+	 	} 
+		System.out.println(esito);
+		assertTrue(esito);
+	}
+	
+	@Test
+	static void testCambioPassword(String email, String vecchiaPassword, String nuovaPassword) {
+		boolean esito = false;
+		try {
+			esito = sistema.cambiaPassword(email,vecchiaPassword, nuovaPassword);
+	 	} catch (ChangeDefaultPassword e) {
+		 	e.printStackTrace();
+	 	} catch (AccountDoesNotExist e) {
+		 	e.printStackTrace();
+	 	}
+		System.out.println(esito);
+		assertTrue(esito);
+	}
+	@Test
+	static void testLogInConVecchiaPassWord(String email, String passWord) {
+		boolean esito = true;
+		try {
+		 	sistema.login(email, passWord);
+	 	} catch (ChangeDefaultPassword e) {
+		 	e.printStackTrace();
+	 	} catch (AccountDoesNotExist e) {
+		 	e.printStackTrace();
+	 	} catch (PswOmailErrati e) {
+	 		esito = false;
+	 	} 			
+			System.out.println(esito);
+	 		assertFalse(esito);
 	}
 }
 

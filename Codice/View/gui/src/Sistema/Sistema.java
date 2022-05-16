@@ -23,7 +23,6 @@ public class Sistema {
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
-            System.out.println("il Profilo di " + mail + " è stato creato con successo");
             this.cambiaDefaultPassword(mail, password);
             return true;
         }
@@ -39,7 +38,6 @@ public class Sistema {
 	 		if(s.equals("Cambiami") && nuovaPsw != "Cambiami") {
 	 			dbfacade.modificaPsw(email, nuovaPsw);
 	 			dbfacade.modificaPswCambiata(email, true);
-	 			System.out.println("Password di default cambiata successo");
 	 				return true;
 	 		      }
 	 		    throw new ChangeDefaultPassword("Cambiami");
@@ -58,7 +56,6 @@ public class Sistema {
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		    else if(s.equals(vecchiaPassword)) {
 	 		    	dbfacade.modificaPsw(email, nuovaPassword);
-	 		    	System.out.println("Password cambiata con successo");
 	 		    		return true;
 	 		}
 	 	}
@@ -74,10 +71,8 @@ public class Sistema {
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
-	 			System.out.println("Hai effettuato con successo il login");
 	 			return true;
 	 		}
-	 		System.out.println("i valori inseriti sono: "+ dbfacade.vediPsw(email) + psw);
 	 		throw new PswOmailErrati(email,psw);
 	 	}
 
@@ -92,11 +87,9 @@ public class Sistema {
 	 	if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
 	 		if(b == true) {
 	 			dbfacade.modificaLoggato(email, false);
-	 			System.out.println("Hai effettuato il logout con successo");
 	 				return true;
 	 			}
 	 			else 
-	 			System.out.println("Logout non riuscito");
 	 				return false;
 	 		}
 	 	else

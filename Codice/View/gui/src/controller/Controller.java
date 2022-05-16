@@ -62,7 +62,6 @@ public class Controller {
 		gestoreImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Home");
 				mostraSchermata("Impostazioni");
 			}
 		};
@@ -202,8 +201,8 @@ public class Controller {
 	}
 	
 	public void mostraSchermata(String schermata) {
-		view.mostraSchermata(schermata);
 		nascondiSchermata(getSchermataAttuale());
+		view.mostraSchermata(schermata);
 		setSchermataAttuale(schermata);
 	}
 
