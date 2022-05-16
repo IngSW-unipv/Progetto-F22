@@ -17,8 +17,9 @@ public class Controller {
 	private String schermataAttuale = "Login";
 	
 	public Controller(Sistema s, Frame f) {
-		this.view = f;
-		this.model = s;	
+		view = f;
+		model = s;	
+		initComponents();
 	}
 	
 	public void initComponents() {
@@ -159,7 +160,6 @@ public class Controller {
 		String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
 		
 		try {
-			System.out.println("credenziali inserite " + passEmailPerRegistrarsi + " " +  passWordPerRegistrarsi);
 			model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
 		} catch (AccountGiaEsistente e1) {
 			e1.printStackTrace();
@@ -176,7 +176,6 @@ public class Controller {
 	
 	public boolean login() {		
 		try {
-			System.out.println( "Hai inserito la pass: " + view.passwordInserita());
 			model.login(view.emailInserita(), view.passwordInserita());
 		} catch (ChangeDefaultPassword errore1) {
 			errore1.printStackTrace();

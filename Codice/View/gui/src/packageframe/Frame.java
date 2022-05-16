@@ -48,6 +48,7 @@ public class Frame extends JFrame {
 		settingParametriFrame();
 		add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
 		avvioSchermate(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost,immagineProfilo, listaImmaginiPost);
+		setVisible(true);
 	}
 	
 	public void settingParametriFrame() {
@@ -63,25 +64,25 @@ public class Frame extends JFrame {
 		LogIn login = new LogIn();
 		mappaSchermate.put("Login",   login);
 		FrameMainContainer.add(this.getMappaSchermate().get("Login"), BorderLayout.CENTER);
-		
+
 		SignUp signup = new SignUp();
 		mappaSchermate.put("Signup", signup);
-		
+
 		Home home = new Home(bufferStories, bufferPosts);
 		mappaSchermate.put("Home", home);
-		
+
 		Impostazioni impostazioni = new Impostazioni("Stringa profilo prova");
 		mappaSchermate.put("Impostazioni", impostazioni);
-		
+
 		Profilo profilo = new Profilo("Tony Stark", 10, 20, 30, bufferStories.get(2), listaPost);
 		mappaSchermate.put("Profilo", profilo);
-		
+
 		Chat chat = new Chat();
 		mappaSchermate.put("Chat", chat);
-		
+
 		PannelloNotifiche pannelloNotifiche = new PannelloNotifiche();
 		mappaSchermate.put("PannelloNotifiche", pannelloNotifiche);
-		
+
 		CreazionePost creazionePost = new CreazionePost();
 		mappaSchermate.put("CreazionePost", creazionePost);
 

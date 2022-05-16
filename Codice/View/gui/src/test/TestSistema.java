@@ -79,6 +79,7 @@ class TestSistema {
 		System.out.println(esito);
 		assertTrue(esito);
 	}
+	
 	@Test
 	static void testLogInConVecchiaPassWord(String email, String passWord) {
 		boolean esito = true;

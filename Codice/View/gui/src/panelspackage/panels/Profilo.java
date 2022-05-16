@@ -44,7 +44,6 @@ public class  Profilo extends JPanel {
 		
 		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.WEST);
 		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		System.out.print(true);
 		
 		dati.add("N.Post");
 		dati.add(Integer.toString(numeroPost));
