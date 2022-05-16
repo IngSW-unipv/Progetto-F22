@@ -88,4 +88,8 @@ public class SignUp extends JPanel {
 	public String getPasswordPerRegistrarsi() {
 		return this.password.getText();
 	}
+
+	public String getNickNamePerReigstrarsi() {
+		return this.username.getText();
+	}
 }

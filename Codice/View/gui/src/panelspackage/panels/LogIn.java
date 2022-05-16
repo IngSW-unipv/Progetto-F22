@@ -101,5 +101,9 @@ public class LogIn extends JPanel {
 	public Etichette getEtichettaErroreLogin() {
 		return etichettaDiSegnalazioneLoginFallito;
 	}
+
+	public AreaDiTesto getInserimentoPwd() {
+		return inserimentoPassword;
+	}
 	
 }

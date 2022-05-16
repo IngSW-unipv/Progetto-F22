@@ -14,6 +14,7 @@ public class Controller {
 	
 	Frame view;
 	Sistema model;
+	private String schermataAttuale = "Login";
 	
 	public Controller(Sistema s, Frame f) {
 		this.view = f;
@@ -26,28 +27,10 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean success = true;
-				
-				try {
-					model.login(view.emailInserita(), view.passwordInserita());
-				} catch (ChangeDefaultPassword errore1) {
-					errore1.printStackTrace();
-					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore1.toString());
-					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
-				} catch (AccountDoesNotExist errore2) {
-					errore2.printStackTrace();
-					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore2.toString());
-					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
-					success = false;
-				} catch (PswOmailErrati errore3) {
-					view.getEtichettaDiSegnalazioneLoginFallito().setText(errore3.toString());
-					view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
-					errore3.printStackTrace();
-					success = false;
-				}
+				boolean success;
+				success = login();
 				if (success == true) {
-				nascondiSchermata("Login");
-				mostraSchermata("Home");
+					mostraSchermata("Home");
 				}
 			}
 		};
@@ -56,7 +39,6 @@ public class Controller {
 		gestoreSignUp = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Login");
 				mostraSchermata("Signup");
 			}
 		};
@@ -66,17 +48,12 @@ public class Controller {
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
-				String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
-				
-				try {
-					System.out.println("credenziali inserite " + passEmailPerRegistrarsi + " " +  passWordPerRegistrarsi);
-					model.signIn(passEmailPerRegistrarsi, passWordPerRegistrarsi);
-				} catch (AccountGiaEsistente e1) {
-					e1.printStackTrace();
+				boolean success = false;
+	
+					success = signUp();
+				if (success == true) {
+					mostraSchermata("Home");
 				}
-				nascondiSchermata("Signup");
-				mostraSchermata("Home");
 			}
 		};
 		view.getRegistratiButton().addActionListener(gestoreRegistrati);	
@@ -95,7 +72,6 @@ public class Controller {
 		gestoreProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Home");
 				mostraSchermata("Profilo");
 			}
 		};
@@ -105,7 +81,6 @@ public class Controller {
 		gestoreChat = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Home");
 				mostraSchermata("Chat");
 			}
 		};
@@ -115,7 +90,6 @@ public class Controller {
 		gestorePannelloNotifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Home");
 				mostraSchermata("PannelloNotifiche");
 			}
 		}; 
@@ -126,7 +100,6 @@ public class Controller {
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Impostazioni");
 				mostraSchermata("Home");
 			}
 		};
@@ -137,7 +110,6 @@ public class Controller {
 		gestoreHomeProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Profilo");
 				mostraSchermata("Home");
 			}
 		};
@@ -148,7 +120,6 @@ public class Controller {
 		gestoreHomeChat = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Chat");
 				mostraSchermata("Home");
 			}
 		};
@@ -159,7 +130,6 @@ public class Controller {
 		gestoreHomePannelloNotifiche = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("PannelloNotifiche");
 				mostraSchermata("Home");
 			}
 		};
@@ -170,7 +140,6 @@ public class Controller {
 		gestoreCreazionePost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("Home");
 				mostraSchermata("CreazionePost");
 			}
 		};
@@ -179,19 +148,71 @@ public class Controller {
 		gestoreHomeCreazionePost = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				nascondiSchermata("CreazionePost");
 				mostraSchermata("Home");
 			}
 		};
 		view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
 	}
-
+	
+	public boolean signUp() {
+		String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
+		String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
+		String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
+		
+		try {
+			System.out.println("credenziali inserite " + passEmailPerRegistrarsi + " " +  passWordPerRegistrarsi);
+			model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
+		} catch (AccountGiaEsistente e1) {
+			e1.printStackTrace();
+			return false;
+		} catch (ChangeDefaultPassword e2) {
+			e2.printStackTrace();
+			return false;
+		} catch (AccountDoesNotExist e3) {
+			e3.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean login() {		
+		try {
+			System.out.println( "Hai inserito la pass: " + view.passwordInserita());
+			model.login(view.emailInserita(), view.passwordInserita());
+		} catch (ChangeDefaultPassword errore1) {
+			errore1.printStackTrace();
+			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore1.toString());
+			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+		} catch (AccountDoesNotExist errore2) {
+			errore2.printStackTrace();
+			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore2.toString());
+			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+			return false;
+		} catch (PswOmailErrati errore3) {
+			view.getEtichettaDiSegnalazioneLoginFallito().setText(errore3.toString());
+			view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+			errore3.printStackTrace();
+			return false;
+		}	
+		return true;
+	}
+	
 	public void nascondiSchermata(String schermata) {
 		view.mappaSchermate.get(schermata).setVisible(false);
 	}
 	
 	public void mostraSchermata(String schermata) {
 		view.mostraSchermata(schermata);
+		nascondiSchermata(getSchermataAttuale());
+		setSchermataAttuale(schermata);
+	}
+
+	public String getSchermataAttuale() {
+		return schermataAttuale;
+	}
+
+	public void setSchermataAttuale(String schermataAttuale) {
+		this.schermataAttuale = schermataAttuale;
 	}
 
 }

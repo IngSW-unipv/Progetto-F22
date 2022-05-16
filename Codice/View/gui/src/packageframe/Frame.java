@@ -96,6 +96,10 @@ public class Frame extends JFrame {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
 	}
 	
+
+	public String getNickNamePerReigstrarsi() {
+		return ((SignUp)mappaSchermate.get("Signup")).getNickNamePerReigstrarsi();
+	}
 	public String getPasswordPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getPasswordPerRegistrarsi();
 	}
@@ -159,7 +163,7 @@ public class Frame extends JFrame {
 	}
 	
 	public String passwordInserita() {
-		return ((LogIn)mappaSchermate.get("Login")).getInserimentoEmail().getText();
+		return ((LogIn)mappaSchermate.get("Login")).getInserimentoPwd().getText();
 	}
 	
 	public Etichette getEtichettaDiSegnalazioneLoginFallito() {

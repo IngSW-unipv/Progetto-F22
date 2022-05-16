@@ -17,13 +17,14 @@ public class Sistema {
 	}
 	
 	//idProfilo e Mail sono la stessa ( va sistemato il database )
-	public boolean signIn(String mail, String nickName) throws AccountGiaEsistente {
+	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
 	    ArrayList<ProfiloDB> r = dbfacade.cerca(new Profilo(mail));
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
             System.out.println("il Profilo di " + mail + " è stato creato con successo");
+            this.cambiaDefaultPassword(mail, password);
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
@@ -76,6 +77,7 @@ public class Sistema {
 	 			System.out.println("Hai effettuato con successo il login");
 	 			return true;
 	 		}
+	 		System.out.println("i valori inseriti sono: "+ dbfacade.vediPsw(email) + psw);
 	 		throw new PswOmailErrati(email,psw);
 	 	}
 
