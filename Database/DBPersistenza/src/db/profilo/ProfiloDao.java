@@ -229,7 +229,7 @@ public class ProfiloDao implements IProfiloDao{
 		try
 		{
 			String query="SELECT pswCambiata FROM profilo WHERE idProfilo=?";
-
+			System.out.println("account di " + p);
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p);
 

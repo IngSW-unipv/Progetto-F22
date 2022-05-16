@@ -17,25 +17,16 @@ class TestSistema {
 	static Sistema sistema; 
 	static boolean esitoTestSignIn, esitoRimozione;
 
-	public static void main(String[] args) throws AccountDoesNotExist, AccountGiaEsistente   {
+	public static void main(String[] args) throws AccountDoesNotExist, AccountGiaEsistente, ChangeDefaultPassword   {
 		Sistema sistema = new Sistema();
 
 		esitoRimozione = sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
 
 		try {
-			esitoTestSignIn = sistema.signIn("ciccioGamer@unipv.it", "ciccio");
+			esitoTestSignIn = sistema.signIn("ciccioGamer@unipv.it", "ciccio","javahero");
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
 		}
-
-		try {
-			sistema.cambiaDefaultPassword("ciccioGamer@unipv.it", "Gelato");
-		} catch (ChangeDefaultPassword e) {
-	e.printStackTrace();
-	}
-	 catch (AccountDoesNotExist e) {
-	e.printStackTrace();
-	 }
 
 
 	 try {
@@ -55,6 +46,15 @@ class TestSistema {
 	 } catch (PswOmailErrati e) {
 		 System.out.println("test login con password vecchia fallito come si ci aspettava");
 	 }
+	 try {
+		 sistema.login("paoloruffini@gmail.it	", "paoloruffini");
+	 } catch (ChangeDefaultPassword e) {
+		 e.printStackTrace();
+	 } catch (AccountDoesNotExist e) {
+		 e.printStackTrace();
+	 } catch (PswOmailErrati e) {
+		 e.printStackTrace();
+	 } System.out.println("paolo ruffini ha loggato");
 
 	 testSignIn();
 		}
