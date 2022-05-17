@@ -61,4 +61,5 @@ public abstract class Chat {
 	}
 	
 	public abstract TipoChat getTipo();
+	
 }

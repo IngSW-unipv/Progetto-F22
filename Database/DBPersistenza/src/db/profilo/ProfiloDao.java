@@ -108,7 +108,12 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	
+<<<<<<< HEAD
 	public ProfiloDB cercaProfilo(ProfiloDB p) {
+=======
+	public ArrayList<ProfiloDB> cerca(String p) {
+		ArrayList<ProfiloDB> result = new ArrayList<>();
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -229,7 +234,7 @@ public class ProfiloDao implements IProfiloDao{
 		try
 		{
 			String query="SELECT pswCambiata FROM profilo WHERE idProfilo=?";
-
+			System.out.println("account di " + p);
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p);
 
@@ -407,6 +412,13 @@ public class ProfiloDao implements IProfiloDao{
 
 		DBConnection.closeConnection(conn);
 	    throw new AccountDoesNotExist(idProfilo);
+	}
+
+
+	@Override
+	public ArrayList<ProfiloDB> cercaProfilo(String p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
