@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
-public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSceltaMultiplaDao{
+public class SondaggioSceltaMultiplaDao extends PostDao{
 
 	private Connection conn;
 	private String schema; 
@@ -18,8 +18,8 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 	}
 	
 	@Override
-	public ArrayList<SondaggioSceltaMultiplaDB> selectAll() {
-		ArrayList<SondaggioSceltaMultiplaDB> result = new ArrayList<>();
+	public ArrayList<PostDB> selectAll() {
+		ArrayList<PostDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -33,8 +33,8 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 
 			while(rs1.next())
 			{
-			SondaggioSceltaMultiplaDB s = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12), rs1.getString(13));
-				result.add(s);
+				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
+				result.add(sdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -50,18 +50,16 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 
 		try
 		{
-			String query="insert into sondaggiosceltamultipla (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
+			String query="insert into sondaggiosceltamultipla (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s.getIdPost());
 			st1.setDate(2, s.getDataPubblicazione());
 			st1.setTime(3, s.getOraPubblicazione());
 			st1.setString(4, s.getDescrizione());
-			st1.setInt(5, s.getNumLike());
-	        st1.setInt(6, s.getNumDislike());
-	        st1.setBoolean(7, s.isVisibile());
-	        st1.setBoolean(8, s.isCondivisibile());
-	        st1.setString(9, s.getProfilo());
+	        st1.setBoolean(5, s.isVisibile());
+	        st1.setBoolean(6, s.isCondivisibile());
+	        st1.setString(7, s.getProfilo());
 	        
 			st1.executeUpdate();
 
@@ -76,14 +74,14 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 	}
 
 	@Override
-	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+	public boolean inserisciChiavi(PostDB p, String[] s, int i, boolean b) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=? where idMsgGrp=?";
+			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=? where idSondaggio=?";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s[0]);
@@ -130,8 +128,8 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 	}
 
 	@Override
-	public ArrayList<SondaggioSceltaMultiplaDB> cerca(String s) {
-		ArrayList<SondaggioSceltaMultiplaDB> result = new ArrayList<>();
+	public PostDB cercaPost(PostDB s) {
+		
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -142,40 +140,22 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 			String query="SELECT * FROM sondaggiosceltamultipla WHERE idSondaggio=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s);
+			st1.setString(1, s.getIdPost());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12), rs1.getString(13));
+				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
 
-				result.add(sdb);
+				DBConnection.closeConnection(conn);
+
+				return sdb;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
-
-	@Override
-	public boolean inserisciChiavi(PostDB p, String s1, String s2, String s3, String s4, int i1, int i2, boolean b1,
-			boolean b2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean pubblicaSondaggio(SondaggioSceltaMultiplaDB s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean rimuoviSondaggio(SondaggioSceltaMultiplaDB p) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 }

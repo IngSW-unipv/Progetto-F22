@@ -108,8 +108,7 @@ public class ProfiloDao implements IProfiloDao{
 
 
 	
-	public ArrayList<ProfiloDB> cercaProfilo(String p) {
-		ArrayList<ProfiloDB> result = new ArrayList<>();
+	public ProfiloDB cercaProfilo(ProfiloDB p) {
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -120,7 +119,7 @@ public class ProfiloDao implements IProfiloDao{
 			String query="SELECT * FROM profilo WHERE idProfilo=? order by idProfilo";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, p);
+			st1.setString(1, p.getIdProfilo());
 
 			rs1=st1.executeQuery();
 
@@ -128,12 +127,13 @@ public class ProfiloDao implements IProfiloDao{
 			{
 				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14));
 
-				result.add(prof);
+				DBConnection.closeConnection(conn);
+				return prof;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
 
 

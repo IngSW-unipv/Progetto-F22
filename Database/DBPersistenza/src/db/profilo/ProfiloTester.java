@@ -13,26 +13,16 @@ public class ProfiloTester {
 		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
        ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
        ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
-        
-       ArrayList<ProfiloDB> c;
+  
 	
        System.out.println(pdao.inserisciChiavi(prof, "001", "002", "P00"));
-		c = pdao.cercaProfilo(prof.getIdProfilo());
-		for(ProfiloDB pr : c)
-	    	   System.out.println(pr.toString());
 	
        
-   
-       
-       
+  
        for(ProfiloDB p : selectAll)
 			System.out.println(p.toString());
         
-        ArrayList<ProfiloDB> cercaProfilo = pdao.cercaProfilo(prof.getIdProfilo());
-        for(ProfiloDB p : cercaProfilo)
-			System.out.println(p.toString());
-        
-    
+     
        
     System.out.println(pdao.modificaIsLoggato(prof1.getIdProfilo(), true));
        

@@ -10,7 +10,7 @@ public interface IMessaggioDao {
 	
 	public boolean rimuoviMessaggio(MessaggioDB m);
 	
-	public ArrayList<MessaggioDB> cercaMessaggio(String s);
+	public MessaggioDB cercaMessaggio(MessaggioDB m);
 	
 	public String ottieniTestoMessaggio(String m);
 	

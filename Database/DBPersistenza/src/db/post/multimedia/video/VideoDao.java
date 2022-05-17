@@ -19,8 +19,8 @@ public class VideoDao  extends PostDao {
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<VideoDB> selectAll() {
-		 ArrayList<VideoDB> result = new ArrayList<>();
+	public ArrayList<PostDB> selectAll() {
+		 ArrayList<PostDB> result = new ArrayList<>();
 
 			conn=DBConnection.startConnection(conn,schema);
 			Statement st1;
@@ -34,9 +34,9 @@ public class VideoDao  extends PostDao {
 
 				while(rs1.next())
 				{
-					VideoDB v=new VideoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getInt(13));                                     
+					VideoDB vdb =new VideoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getInt(9));                                     
 
-					result.add(v);
+					result.add(vdb);
 				}
 			}catch (Exception e){e.printStackTrace();}
 
@@ -78,20 +78,20 @@ public class VideoDao  extends PostDao {
 	}
 	
 	@Override
-	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+	public boolean inserisciChiavi(PostDB p, String[] s, int i, boolean b) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="update video set tempoCancellazione=?, percorso=?, isStory=?, durataInSecondi=? where idMsgGrp=?";
+			String query="update video set tempoCancellazione=?, percorso=?, isStory=?, durataInSecondi=? where idVideo=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setInt(1, i[0]);
+			st1.setInt(1, 0);
 			st1.setString(2, s[0]);
-			st1.setBoolean(3, b[0]);
-			st1.setInt(4, i[1]);
+			st1.setBoolean(3, false);
+			st1.setInt(4, i);
 			st1.setString(5, p.getIdPost());
 			
 			st1.executeUpdate();
@@ -131,8 +131,7 @@ public class VideoDao  extends PostDao {
 		return esito;
 	}
 	@Override
-	public ArrayList<VideoDB> cercaVideo(String v) {
-		ArrayList<VideoDB> result = new ArrayList<>();
+	public PostDB cercaPost(PostDB v) {
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -143,20 +142,21 @@ public class VideoDao  extends PostDao {
 			String query="SELECT * FROM video WHERE idVideo=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, v);
+			st1.setString(1, v.getIdPost());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				VideoDB vdb =new VideoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getInt(13));                                     
+				VideoDB vdb =new VideoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getInt(9));                                     
+				DBConnection.closeConnection(conn);
 
-				result.add(vdb);
+				return vdb;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
 
 }

@@ -1,5 +1,6 @@
 package db.facade;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 
@@ -19,5 +20,8 @@ public class testfacade {
         ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(), mdg.getTipo());
         for(String ms : res)
         	System.out.println(ms.toString());
+        
+        Messaggio m = dbf.cercaMessaggio(mdg);
+        System.out.println(m.toString());
 }
 }

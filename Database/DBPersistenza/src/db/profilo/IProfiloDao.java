@@ -9,7 +9,7 @@ public interface IProfiloDao {
 	public boolean inserisciProfilo(ProfiloDB p);
 	public boolean inserisciChiavi(ProfiloDB p, String messaggioPrivato, String messaggioDiGruppo, String post);
 	public boolean rimuoviProfilo(ProfiloDB p);
-	public ArrayList<ProfiloDB> cercaProfilo(String p);
+	public ProfiloDB cercaProfilo(ProfiloDB p);
 	
 	//prende il valore del campo "esiste" di un profilo specificato
 	public boolean vediSeEsiste(String idProfilo) throws AccountDoesNotExist ;

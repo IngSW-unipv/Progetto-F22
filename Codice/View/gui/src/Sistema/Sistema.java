@@ -1,8 +1,6 @@
 package Sistema;
 
 import db.facade.DbFacade;
-import db.profilo.ProfiloDB;
-
 import java.util.ArrayList;
 
 import profilo.exception.*;
@@ -19,7 +17,8 @@ public class Sistema {
 	//idProfilo e Mail sono la stessa ( va sistemato il database )
 	public boolean signIn(String mail, String nickName) throws AccountGiaEsistente {
 		Profilo p =  new Profilo(mail, nickName);
-	    ArrayList<ProfiloDB> r = dbfacade.cercaProfilo(mail);
+	    ArrayList<Profilo> r = new ArrayList<>();
+	    r.add(dbfacade.cercaProfilo(p));
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
@@ -31,7 +30,8 @@ public class Sistema {
 	
 		public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
 			
-	 		ArrayList<ProfiloDB> res =dbfacade.cercaProfilo(email);
+	 		ArrayList<Profilo> res = new ArrayList<>();
+	 		res.add(dbfacade.cercaProfilo(new Profilo(email, null)));
 	 		String s = dbfacade.vediPsw(email);
         
 	 		//Se provo a cambiare psw ad un account che non esiste viene lanciata una eccezione
@@ -54,7 +54,8 @@ public class Sistema {
     	public boolean cambiaPassword(String email, String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, ChangePassword, AccountDoesNotExist {
 
 
-	 		ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(email);
+	 		ArrayList<Profilo> res = new ArrayList<>();
+	 	    res.add(dbfacade.cercaProfilo(new Profilo(email, null)));
 	 		String s = dbfacade.vediPsw(email);
 
 	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
@@ -95,7 +96,8 @@ public class Sistema {
 
 	 	public boolean logout(String email) throws AccountDoesNotExist {
 
-	 		ArrayList<ProfiloDB> res = dbfacade.cercaProfilo(email);
+	 		ArrayList<Profilo> res = new ArrayList<>();
+	 			res.add	(dbfacade.cercaProfilo(new Profilo(email,null)));
 	 		boolean b = dbfacade.vediSeLoggato(email);
 
 	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
@@ -113,7 +115,13 @@ public class Sistema {
 	 	}
 	 	
 	 	public void stampaTuttiIprofilo() {
-	 		dbfacade.stampaSelectAllProfilo();
+	 		ArrayList<Profilo> res = dbfacade.selectAllProfilo();
+	 		for(Profilo prof : res)
+	 			System.out.println(prof.toString());
+	 	}
+	 	
+	 	public boolean rimuoviProfilo(Profilo p) {
+	 		return dbfacade.rimuovi(p);
 	 	}
 }
 
