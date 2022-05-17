@@ -9,9 +9,9 @@ import profilo.exception.*;
 import profilo.*;
 
 public class Sistema {
-
-	private DbFacade dbfacade;
 	
+	private DbFacade dbfacade;
+	private Profilo profiloAttivo = null;
 	public Sistema()   {
 		dbfacade = DbFacade.getIstance();
 	}
@@ -71,6 +71,7 @@ public class Sistema {
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
+	 			setProfiloAttivo(dbfacade.cerca(new Profilo(email)));
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
@@ -87,6 +88,7 @@ public class Sistema {
 	 	if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
 	 		if(b == true) {
 	 			dbfacade.modificaLoggato(email, false);
+	 			setProfiloAttivo(null);
 	 				return true;
 	 			}
 	 			else 
@@ -99,6 +101,14 @@ public class Sistema {
 	 public void stampaTuttiIprofilo() {
 	 	dbfacade.stampaSelectAllProfilo();
 	 }
+
+	public Profilo getProfiloAttivo() {
+		return profiloAttivo;
+	}
+
+	public void setProfiloAttivo(Profilo profiloAttivo) {
+		this.profiloAttivo = profiloAttivo;
+	}
 	 
 }
 

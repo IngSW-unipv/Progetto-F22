@@ -10,8 +10,8 @@ public class Controller {
 	
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
-						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost;
-	
+						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
+						   gestoreLogOut;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -97,6 +97,15 @@ public class Controller {
 	
 		
 		//ActionListeners schermata Impostazioni
+		gestoreLogOut = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//model.logout(model.getProfiloAttivo());
+				mostraSchermata("Login");
+			}
+		};
+		view.getLogOutButton().addActionListener(gestoreLogOut);
+		
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -104,6 +113,7 @@ public class Controller {
 			}
 		};
 		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
 		
 		
 		//ActionListeners schermata Profilo
@@ -162,13 +172,13 @@ public class Controller {
 		try {
 			model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
 		} catch (AccountGiaEsistente e1) {
-			e1.printStackTrace();
+			e1.toString();
 			return false;
 		} catch (ChangeDefaultPassword e2) {
-			e2.printStackTrace();
+			e2.toString();
 			return false;
 		} catch (AccountDoesNotExist e3) {
-			e3.printStackTrace();
+			e3.toString();
 			return false;
 		}
 		return true;
@@ -178,7 +188,7 @@ public class Controller {
 		try {
 			model.login(view.emailInserita(), view.passwordInserita());
 		} catch (ChangeDefaultPassword errore1) {
-			mostraFallimentoLogin(errore1.toString());
+			//mostraFallimentoLogin(errore1.toString());
 		} catch (AccountDoesNotExist errore2) {
 			mostraFallimentoLogin(errore2.toString());
 			return false;

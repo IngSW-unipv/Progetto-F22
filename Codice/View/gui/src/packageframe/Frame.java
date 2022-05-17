@@ -175,6 +175,10 @@ public class Frame extends JFrame {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getHomeImpostazioni();
 	}
 	
+	public JButton getLogOutButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getLogout();
+	}
+	
 	public JButton getHomeProfiloButton() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getHomeProfilo();
 	}
