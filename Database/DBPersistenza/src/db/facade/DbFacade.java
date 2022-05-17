@@ -230,19 +230,10 @@ public class DbFacade {
 		return pDao.rimuoviProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
-<<<<<<< HEAD
+
 	public Profilo cercaProfilo(Profilo p) {
 		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
 		return ConvertitoreFacade.getIstance().convertiInverso(pdb);
-=======
-	public ArrayList<ProfiloDB> cerca(Profilo profilo) {
-		return  pDao.cerca(profilo.getIdProfilo());
-	}
-	public void stampaProfiloCercato(String p) {
-		ArrayList<ProfiloDB> res = pDao.cercaProfilo(p);
-		for(ProfiloDB pdb : res)
-			System.out.println(pdb.toString());
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	}
 	
 	public boolean vediEsiste(String idProfilo) throws AccountDoesNotExist {
