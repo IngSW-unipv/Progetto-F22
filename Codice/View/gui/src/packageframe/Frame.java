@@ -135,6 +135,19 @@ public class Frame extends JFrame {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getHomeCreazionePost();
 	}
 	
+	public String ottieniPercorsoFile(){
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniPercorsoFile();
+	}
+	
+	public String ottieniCommento() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniCommento();
+	}
+	
+	public JButton getPubblicaPostButton() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getPubblicaPost();
+
+	}
+	
 	public JButton getProfiloButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonProfilo();
 	}
@@ -177,6 +190,22 @@ public class Frame extends JFrame {
 	
 	public JButton getLogOutButton() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getLogout();
+	}
+	
+	public JButton getModificaProfiloButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getModificaProfilo();
+	}
+	
+	public JButton getVisibilitaPostButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getVisibilitaPost();
+	}
+	
+	public JButton getEliminaAccountButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getEliminaAccount();
+	}
+	
+	public SpecificContainer getContainerCenterFrame() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getContainerCenter();
 	}
 	
 	public JButton getHomeProfiloButton() {

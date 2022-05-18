@@ -19,6 +19,7 @@ import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
+import post.sondaggio.Sondaggio;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
@@ -338,6 +339,20 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotEx
 
 
 //Post
+	public void creaPost(Foto f) {
+		System.out.println(3);
+
+		dbfacade.carica(f);
+	}
+	
+	public void creaPost(Sondaggio s) {
+		dbfacade.carica(s);
+	}
+	
+	public void creaPost(Testo t) {
+		dbfacade.carica(t);
+	}
+	
 
 
 @Override
@@ -563,6 +578,97 @@ public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist{
 	
 }
 
+<<<<<<< HEAD
+=======
+@Override
+public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist {
+	Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
+	
+		return dbfacade.carica(c);
+
+}
+
+
+
+@Override
+public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist {
+	
+	Commento c = new Commento(idCommento, null, null, null, null);
+		 dbfacade.rimuovi(c);
+		 return true;
+		
+}
+
+
+
+@Override
+public boolean cercaCommento(String id) throws AccountDoesNotExist {
+		dbfacade.stampaCommentoCercato(id);
+		return true;
+}
+
+
+
+@Override
+public boolean cercaGruppo(String id) throws AccountDoesNotExist {
+
+		dbfacade.stampaGruppoCercato(id);
+		return true;
+}
+
+
+@Override
+public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist {
+
+		dbfacade.stampaCommentiSottoPost(c);
+		return true;
+}
+
+
+@Override
+public boolean selectAllGruppo() throws AccountDoesNotExist  {
+		dbfacade.stampaSelectAllGruppo();
+		return true;
+}
+
+
+
+
+@Override
+public boolean vediMieiFollower(String id) throws AccountDoesNotExist {
+
+		//dbfacade.stampaProfiloCercato(id);
+		return true;
+}
+
+@Override
+public boolean vediProfiloCercato(String profiloPersonale, String profiloSeguito) throws AccountDoesNotExist {
+		dbfacade.stampaFollowCercati(profiloPersonale, profiloSeguito);
+		return false;
+}
+
+@Override
+public boolean invitaUtenteAdIscriversi(Profilo p) {
+
+	Scanner scan = new Scanner(System.in);
+	System.out.println("Digita il nome dell'utente da invitare");
+	
+	String nomeUtente = scan.nextLine();
+	// non ho finito
+	return false;
+}
+
+
+
+
+
+@Override
+public boolean accettaRichiestaDinvito() {
+	return false;
+}
+
+
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
 }
 

@@ -23,6 +23,7 @@ class TestSistema {
 		testLogIn("ciccioGamer@unipv.it", "Mucca");
 		testCambioPassword("ciccioGamer@unipv.it", "Mucca", "Lucertola");
 		testLogInConVecchiaPassWord("ciccioGamer@unipv.it", "Mucca");
+		testCreaPost();
 		
 		tearDownAfterClass();
 	}
@@ -94,6 +95,11 @@ class TestSistema {
 	 	} 			
 			System.out.println(esito);
 	 		assertFalse(esito);
+	}
+	@Test
+	static void testCreaPost() {
+		boolean esito = false;
+		sistema.pubblicaPost("viva i ceci", null, null, "ceci", false, false, "altriceci", "directory", false);
 	}
 }
 

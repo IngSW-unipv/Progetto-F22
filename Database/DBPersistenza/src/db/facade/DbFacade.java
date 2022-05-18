@@ -156,6 +156,7 @@ public class DbFacade {
     	int  i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
     	boolean a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
     	pstDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s, i, a);
+
     	return b;
     		
     }
@@ -202,6 +203,7 @@ public class DbFacade {
 
 	public Profilo cerca(Profilo p) {
 		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
+		System.out.println("profilo yees: "+ ConvertitoreFacade.getIstance().convertiInverso(pdb).getNickname());
 		return ConvertitoreFacade.getIstance().convertiInverso(pdb);
 	}
 	

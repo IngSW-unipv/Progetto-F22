@@ -11,7 +11,7 @@ public class Controller {
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
-						   gestoreLogOut;
+						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -33,6 +33,7 @@ public class Controller {
 				if (success == true) {
 					mostraSchermata("Home");
 				}
+				//mostraSchermata("Home");
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
@@ -101,6 +102,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//model.logout(model.getProfiloAttivo());
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Login");
 			}
 		};
@@ -109,10 +111,37 @@ public class Controller {
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Home");
 			}
 		};
 		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		gestoreModificaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(true);
+				refresh();
+			}
+		};
+		view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
+		
+		gestoreVisibilitaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
+		
+		gestoreEliminaAccount = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
 		
 		
 		
@@ -162,8 +191,27 @@ public class Controller {
 			}
 		};
 		view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
+		
+		gestorePubblicaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pubblicaPost();
+			}
+				/*boolean success = false
+						if(success = true) {
+				mostraSchermata("Home");
+			}*/
+		};
+		view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
+		
 	}
 	
+	public void refresh() {
+		view.invalidate();
+		view.validate();
+		view.repaint();
+	}
+		
 	public boolean signUp() {
 		String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
 		String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
@@ -221,5 +269,10 @@ public class Controller {
 	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
 	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 	}
-
+	public void pubblicaPost() {
+		String percorsoFilePost = view.ottieniPercorsoFile();
+		String commentoPost = view.ottieniCommento();
+		System.out.println(percorsoFilePost);
+		model.pubblicaPost(commentoPost, null, null, commentoPost, false, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+	}
 }
