@@ -11,7 +11,7 @@ public class Controller {
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
-						   gestoreLogOut,gestorePubblicaPost;
+						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -33,6 +33,7 @@ public class Controller {
 				if (success == true) {
 					mostraSchermata("Home");
 				}
+				//mostraSchermata("Home");
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
@@ -101,6 +102,7 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//model.logout(model.getProfiloAttivo());
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Login");
 			}
 		};
@@ -109,10 +111,37 @@ public class Controller {
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Home");
 			}
 		};
 		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		gestoreModificaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(true);
+				refresh();
+			}
+		};
+		view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
+		
+		gestoreVisibilitaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
+		
+		gestoreEliminaAccount = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
 		
 		
 		
@@ -177,6 +206,11 @@ public class Controller {
 		
 	}
 	
+	public void refresh() {
+		view.invalidate();
+		view.validate();
+		view.repaint();
+	}
 		
 	public boolean signUp() {
 		String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
