@@ -1,6 +1,11 @@
 package Sistema;
 
 import db.facade.DbFacade;
+import post.multimedia.foto.Foto;
+import post.testo.Testo;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import profilo.exception.*;
@@ -73,13 +78,14 @@ public class Sistema {
 
     
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
-	 		if(dbfacade.vediPswCambiata(email) == false)
+			setProfiloAttivo(dbfacade.cercaProfilo(new Profilo(email,null)));
+			System.out.println("profiloattivo di: " + this.getProfiloAttivo().getIdProfilo());
+			if(dbfacade.vediPswCambiata(email) == false)
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		else if (dbfacade.vediEsiste(email) == false)
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
-	 			setProfiloAttivo(dbfacade.cercaProfilo(new Profilo(email,null)));
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
@@ -121,6 +127,14 @@ public class Sistema {
 	 			System.out.println(prof.toString());
 	 	}
 	 	
+	 	public void pubblicaPost(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+
+	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
+	 	}
+	 	
+	 	public void pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
+	 		profiloAttivo.creaPost(new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo));
+	 	}
 	 
 
 	public Profilo getProfiloAttivo() {

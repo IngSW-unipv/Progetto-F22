@@ -26,6 +26,7 @@ import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
+import post.sondaggio.Sondaggio;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
@@ -336,6 +337,20 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotEx
 
 
 //Post
+	public void creaPost(Foto f) {
+		System.out.println(3);
+
+		dbfacade.carica(f);
+	}
+	
+	public void creaPost(Sondaggio s) {
+		dbfacade.carica(s);
+	}
+	
+	public void creaPost(Testo t) {
+		dbfacade.carica(t);
+	}
+	
 
 
 @Override
@@ -530,70 +545,59 @@ public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCo
 
 
 @Override
-public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist {
 	
 	Commento c = new Commento(idCommento, null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(c);
-	} else {
-	        return false;
-	       }
+		 dbfacade.rimuovi(c);
+		 return true;
+		
 }
 
 
 
 @Override
 public boolean cercaCommento(String id) throws AccountDoesNotExist {
-
 		dbfacade.stampaCommentoCercato(id);
-		}
-		return false;
+		return true;
 }
 
 
 
 @Override
-public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean cercaGruppo(String id) throws AccountDoesNotExist {
+
 		dbfacade.stampaGruppoCercato(id);
-		}
-		return false;
+		return true;
 }
 
 
 @Override
-public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist {
+
 		dbfacade.stampaCommentiSottoPost(c);
-		}
-		return false;
+		return true;
 }
 
 
 @Override
-public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean selectAllGruppo() throws AccountDoesNotExist  {
 		dbfacade.stampaSelectAllGruppo();
-		}
-		return false;
+		return true;
 }
 
 
 
 
 @Override
-public boolean vediMieiFollower(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaProfiloCercato(id);
-		}
-		return false;
+public boolean vediMieiFollower(String id) throws AccountDoesNotExist {
+
+		//dbfacade.stampaProfiloCercato(id);
+		return true;
 }
 
 @Override
-public boolean vediProfiloCercato(String profiloPersonale, String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean vediProfiloCercato(String profiloPersonale, String profiloSeguito) throws AccountDoesNotExist {
 		dbfacade.stampaFollowCercati(profiloPersonale, profiloSeguito);
-		}
 		return false;
 }
 
@@ -614,7 +618,6 @@ public boolean invitaUtenteAdIscriversi(Profilo p) {
 
 @Override
 public boolean accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
 	return false;
 }
 

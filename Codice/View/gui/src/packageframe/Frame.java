@@ -135,6 +135,19 @@ public class Frame extends JFrame {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getHomeCreazionePost();
 	}
 	
+	public String ottieniPercorsoFile(){
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniPercorsoFile();
+	}
+	
+	public String ottieniCommento() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniCommento();
+	}
+	
+	public JButton getPubblicaPostButton() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getPubblicaPost();
+
+	}
+	
 	public JButton getProfiloButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonProfilo();
 	}

@@ -11,7 +11,7 @@ public class Controller {
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
-						   gestoreLogOut;
+						   gestoreLogOut,gestorePubblicaPost;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -162,8 +162,22 @@ public class Controller {
 			}
 		};
 		view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
+		
+		gestorePubblicaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pubblicaPost();
+			}
+				/*boolean success = false
+						if(success = true) {
+				mostraSchermata("Home");
+			}*/
+		};
+		view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
+		
 	}
 	
+		
 	public boolean signUp() {
 		String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
 		String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
@@ -221,5 +235,10 @@ public class Controller {
 	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
 	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 	}
-
+	public void pubblicaPost() {
+		String percorsoFilePost = view.ottieniPercorsoFile();
+		String commentoPost = view.ottieniCommento();
+		System.out.println(percorsoFilePost);
+		model.pubblicaPost(commentoPost, null, null, commentoPost, false, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+	}
 }
