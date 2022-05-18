@@ -15,7 +15,7 @@ public class SignUp extends JPanel {
 	
 	private JLabel titolo,testoEmail,testoPassword,testoRipetiPassword, testoUsername;
 	private AreaDiTesto email,password,ripetiPassword,username;
-	private Pulsanti registrati;
+	private JButton registrati;
 	
 	ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 	ArrayList<String> dati = new ArrayList<String>();
@@ -62,28 +62,10 @@ public class SignUp extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		registrati = new Pulsanti("REGISTRATI");
+		registrati = new JButton();
+		registrati.setText("REGISTRATI");
 		containerSouth.add(registrati, BorderLayout.CENTER);
-		
-		/*
-		this.dati.add("Email");
-		this.dati.add("Password");
-		this.dati.add("RipetiPassword");
-		this.dati.add("NickName");
-		for( i = 0; i < this.dati.size(); i++) {
-			AreaDiTesto area = new AreaDiTesto(COLOREPRIMARIOTEMATICO, this.dati.get(i), 1);
-			ListaAreaTesto.add(area);
-		}
-		
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaAreaTesto,5,1, ListaAreaTesto.size());
-		containerCenter.add(Dati, BorderLayout.NORTH);
-		
-		SpecificContainer containerSouth = new SpecificContainer(COLORESECONDARIOTEMATICO);
-		this.add(containerSouth, BorderLayout.SOUTH);
-		
-		Etichette etichettaSud = new Etichette("Sezione Inferiore", COLOREPRIMARIOTEMATICO);
-		containerSouth.add(etichettaSud, BorderLayout.CENTER);
-		*/
+
 	}
 	public ArrayList<JComponent> getListaAreaTesto() {
 		return ListaAreaTesto;
@@ -93,13 +75,17 @@ public class SignUp extends JPanel {
 		ListaAreaTesto = listaAreaTesto;
 	}
 
-	
-	//GETTER E SETTER PULSANTI
-	public Pulsanti getRegistrati() {
+	public JButton getRegistrati() {
 		return registrati;
 	}
 
-	public void setRegistrati(Pulsanti registrati) {
+	public void setRegistrati(JButton registrati) {
 		this.registrati = registrati;
+	}
+	public String getEmailPerReigstrarsi() {
+		return this.email.getText();
+	}
+	public String getPasswordPerRegistrarsi() {
+		return this.password.getText();
 	}
 }

@@ -7,27 +7,18 @@ import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.commentoChatUtility.CommentoUtility;
 import convertitore.followUtility.FollowUtility;
-import convertitore.fotoUtility.FotoUtility;
 import convertitore.profiloUtility.ProfiloUtility;
-import convertitore.sondaggioUtility.SondaggioUtility;
-import convertitore.testoUtility.TestoUtility;
-import convertitore.videoUtility.VideoUtility;
 import convertitore.gruppoUtility.GruppoUtility;
 import convertitore.messaggioUtility.MessaggioUtility;
+import convertitore.postUtility.PostUtility;
 import db.commento.CommentoDB;
 import db.follow.FollowDB;
 import db.gruppo.GruppoDB;
 import db.messaggio.MessaggioDB;
-import db.post.multimedia.video.VideoDB;
-import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDB;
-import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDB;
+import db.post.PostDB;
 import db.profilo.ProfiloDB;
+import post.Post;
 import post.commento.Commento;
-import post.multimedia.foto.Foto;
-import post.multimedia.video.Video;
-import post.sondaggio.SondaggioDoppiaVotazione;
-import post.sondaggio.SondaggioSceltaMultipla;
-import post.testo.Testo;
 import profilo.Profilo;
 import profilo.follow.Follow;
 
@@ -36,25 +27,18 @@ public class ConvertitoreFacade {
 
 	static private ConvertitoreFacade istance;
 	
+	private PostUtility pstUtility;
 	private CommentoUtility cUtility;
-	private FotoUtility fUtility;
 	private GruppoUtility gUtility;
 	private MessaggioUtility mUtility;
 	private ProfiloUtility pUtility;
-	private SondaggioUtility sUtility;
-	private TestoUtility tUtility;
-	private VideoUtility vUtility;
 	private FollowUtility flUtility;
 	
 	private ConvertitoreFacade() {
 		cUtility = new CommentoUtility();
-		fUtility = new FotoUtility();
 		gUtility = new GruppoUtility();
 		mUtility = new MessaggioUtility();
 		pUtility = new ProfiloUtility();
-		sUtility = new SondaggioUtility();
-		tUtility = new TestoUtility();
-		vUtility = new VideoUtility();
 		flUtility = new FollowUtility();
 	}
 	
@@ -66,7 +50,7 @@ public class ConvertitoreFacade {
 	}
 
 	
-	
+	//Messaggi
 
 	public MessaggioDB converti(Messaggio m) {
 		return mUtility.converti(m);
@@ -80,7 +64,28 @@ public class ConvertitoreFacade {
 		return mUtility.convertiLista(t, m);
 	}
 	
+	//Post
 	
+	public PostDB converti(Post p) {
+		return pstUtility.converti(p);
+	}
+	
+	public String[] ritornaChiaviString(Post p) {
+		return pstUtility.ritornaChiaviString(p);
+	}
+	
+	public int[] ritornaChiaviInt(Post p) {
+		return pstUtility.ritornaChiaviInt(p);
+	}
+	
+	public boolean [] ritornaChiaviBoolean(Post p) {
+		return pstUtility.ritornaChiaviBoolean(p);
+	}
+	
+	
+	
+	
+	//Profilo
 	
 	public ProfiloDB converti(Profilo p) {
 		return pUtility.convertiAProfiloDB(p);
@@ -89,13 +94,7 @@ public class ConvertitoreFacade {
 	public Profilo convertiInverso(ProfiloDB pdb) {
 		return pUtility.convertiAProfilo(pdb);
 	}
-	public FotoDB converti(Foto f) {
-		return fUtility.convertiAFotoDB(f);
-	}
-	
-	public Foto convertiInverso(FotoDB fdb) {
-		return fUtility.convertiAFoto(fdb);
-	}
+
 	
 	public CommentoDB converti(Commento c) {
 		return cUtility.convertiACommentoDB(c);
@@ -112,34 +111,6 @@ public class ConvertitoreFacade {
 		return gUtility.convertiAGruppo(gdb);
 	}
 	
-	public SondaggioDoppiaVotazioneDB converti(SondaggioDoppiaVotazione s) {
-		return sUtility.convertiASondDopDB(s);
-	}
-
-	public SondaggioDoppiaVotazione convertiInverso(SondaggioDoppiaVotazioneDB sdb) {
-		return sUtility.convertiASondDop(sdb);
-	}
-	public SondaggioSceltaMultiplaDB converti(SondaggioSceltaMultipla s) {
-		return sUtility.convertiASondMulDB(s);
-	}
-
-	public SondaggioSceltaMultipla convertiInverso(SondaggioSceltaMultiplaDB sdb) {
-		return sUtility.convertiASondMul(sdb);
-	}
-	public TestoDB converti(Testo t) {
-		return tUtility.convertiATestoDB(t);
-	}
-
-	public Testo convertiInverso(TestoDB tdb) {
-		return tUtility.convertiATesto(tdb);
-	}
-	
-	public VideoDB converti(Video v) {
-		return vUtility.covertiAVideoDB(v);
-	}
-	public Video convertiInverso(VideoDB vdb) {
-		return vUtility.convertiAVideo(vdb);
-	}
 	public FollowDB converti(Follow f) {
 		return flUtility.convertiAFollowDB(f);
 	}

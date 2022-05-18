@@ -76,6 +76,36 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 	}
 
 	@Override
+	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=? where idMsgGrp=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s[0]);
+			st1.setString(2, s[1]);
+			st1.setString(3, s[2]);
+			st1.setString(4, s[3]);
+			st1.setString(5, p.getIdPost());
+			
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+		
+	}
+	
+	@Override
 	public boolean eliminaPost(PostDB p) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -127,5 +157,25 @@ public class SondaggioSceltaMultiplaDao extends PostDao implements ISondaggioSce
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+
+	@Override
+	public boolean inserisciChiavi(PostDB p, String s1, String s2, String s3, String s4, int i1, int i2, boolean b1,
+			boolean b2) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean pubblicaSondaggio(SondaggioSceltaMultiplaDB s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean rimuoviSondaggio(SondaggioSceltaMultiplaDB p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

@@ -74,6 +74,34 @@ public class TestoDao extends PostDao {
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+	
+	@Override
+	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update testo set font=?, titolo=? where idMsgGrp=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s[0]);
+			st1.setString(2, s[1]);
+			st1.setString(3, p.getIdPost());
+			
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+	
 	@Override
 	public boolean eliminaPost(PostDB t) {
 		conn=DBConnection.startConnection(conn,schema);
@@ -124,6 +152,12 @@ public class TestoDao extends PostDao {
 
 		DBConnection.closeConnection(conn);
 		return result;
+	}
+	@Override
+	public boolean inserisciChiavi(PostDB p, String s1, String s2, String s3, String s4, int i1, int i2, boolean b1,
+			boolean b2) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }

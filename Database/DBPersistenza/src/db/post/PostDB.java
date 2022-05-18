@@ -89,4 +89,6 @@ public abstract class PostDB {
 				+ numDislike + ", visibile=" + visibile + ", condivisibile=" + condivisibile + ", profilo=" + profilo;
 	}
 	
+	public abstract PostDB inserisciCaratteristiche(PostDB p);
+	
 }

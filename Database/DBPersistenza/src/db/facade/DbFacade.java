@@ -13,11 +13,11 @@ import db.commento.CommentoDB;
 import db.commento.CommentoDao;
 import db.follow.FollowDB;
 import db.follow.FollowDao;
-import db.foto.FotoDB;
 import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
 import db.messaggio.MessaggioDao;
 import db.notifica.NotificaDao;
+import db.post.PostDao;
 import db.post.multimedia.foto.FotoDao;
 import db.post.multimedia.video.VideoDB;
 import db.post.multimedia.video.VideoDao;
@@ -28,7 +28,7 @@ import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDao;
 import db.post.testo.TestoDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
-import db.testo.TestoDB;
+import post.Post;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
@@ -43,28 +43,21 @@ public class DbFacade {
 	
 	
 	private MessaggioDao mDao;
+	private PostDao pstDao;
+	
 	private CommentoDao cDao;
-	private FotoDao fDao;
+	
 	private GruppoDao gDao;
 	private NotificaDao nDao;
 	private ProfiloDao pDao;
-	private SondaggioDoppiaVotazioneDao sdvDao;
-	private SondaggioSceltaMultiplaDao ssmDao;
-	private TestoDao tDao;
-	private VideoDao vDao;
 	private FollowDao flDao;
 	
 	
 	private DbFacade() {
 		cDao = new CommentoDao();
-		fDao = new FotoDao();
 		gDao = new GruppoDao();
 		nDao = new NotificaDao();
 		pDao = new ProfiloDao();
-		sdvDao = new SondaggioDoppiaVotazioneDao();
-		ssmDao = new SondaggioSceltaMultiplaDao();
-		tDao = new TestoDao();
-		vDao = new VideoDao();
 		flDao = new FollowDao();
 	}
 	
@@ -188,13 +181,25 @@ public class DbFacade {
 	
 	//Post
 	
-  /*  public boolean carica(Post p) {
-    	if(p.getTipo() == TipoPost.FOTO) {
-    		fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(p));
-    	}
+     public boolean carica(Post p) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+    	boolean b = pstDao.caricaPost(ConvertitoreFacade.getIstance().converti(p));
+    	String [] s = ConvertitoreFacade.getIstance().ritornaChiaviString(p);
+    	int [] i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
+    	boolean [] a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
+    	pstDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s, i, a);
+    	return b;
     		
-    }*/
+    }
     
+     public boolean rimuovi(Post p) {
+    	 pstDao = Utility.convertiTipoPost(p.getTipo());
+    	 return pstDao.eliminaPost(ConvertitoreFacade.getIstance().converti(p));
+     }
+     
+     
+      //______________________________________________________________________________________________
+     
 	public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
 		return sdvDao.selectAll();
 	}
@@ -203,11 +208,6 @@ public class DbFacade {
 		ArrayList<SondaggioDoppiaVotazioneDB> res = sdvDao.selectAll();
 		for(SondaggioDoppiaVotazioneDB sdb : res)
 			System.out.println(sdb.toString());
-	}
-
-	public boolean carica(SondaggioDoppiaVotazione p) {
-		 return sdvDao.pubblicaSondaggio(ConvertitoreFacade.getIstance().converti(p));
-		
 	}
 
 	public ArrayList<SondaggioDoppiaVotazioneDB> cercaSDV(String s){
@@ -220,10 +220,6 @@ public class DbFacade {
 			System.out.println(sdb.toString());
 	}
 
-	public boolean rimuovi(SondaggioDoppiaVotazione p) {
-		return sdvDao.rimuoviSondaggio(ConvertitoreFacade.getIstance().converti(p));
-	}
-	
 	
 	
 	public ArrayList<SondaggioSceltaMultiplaDB> selectAllSSM() {
@@ -235,14 +231,7 @@ public class DbFacade {
 		for(SondaggioSceltaMultiplaDB sdb : res)
 			System.out.println(sdb.toString());
 	}
-	
-	public boolean carica(SondaggioSceltaMultipla p) {
-	    return ssmDao.pubblicaSondaggio(ConvertitoreFacade.getIstance().converti(p));
-	}
 
-	public boolean rimuovi(SondaggioSceltaMultipla p) {
-		return ssmDao.rimuoviSondaggio(ConvertitoreFacade.getIstance().converti(p));
-	}
 	
 	public ArrayList<SondaggioSceltaMultiplaDB> cercaSSM(String s){
 		return ssmDao.cerca(s);
@@ -274,13 +263,6 @@ public class DbFacade {
 			System.out.println(tdb.toString());
 	}
 	
-	public boolean carica(Testo p) {
-		return tDao.pubblicaTesto(ConvertitoreFacade.getIstance().converti(p));
-	    
-	}
-	public boolean rimuovi(Testo p) {
-		return tDao.rimuoviTesto(ConvertitoreFacade.getIstance().converti(p));
-	}
 	
 	public ArrayList<VideoDB> selectAllVideo() {
 		return vDao.selectAll();
@@ -302,13 +284,6 @@ public class DbFacade {
 			System.out.println(vdb.toString());
 	}
 	
-	public boolean carica(Foto f) {
-		return fDao.pubblicaFoto(ConvertitoreFacade.getIstance().converti(f));
-	}
-	
-	public boolean rimuovi(Foto f) {
-		return fDao.rimuoviFoto(ConvertitoreFacade.getIstance().converti(f));
-	}
 
 	public ArrayList<FotoDB> selectAllFoto() {
 		return fDao.selectAll();
@@ -327,13 +302,7 @@ public class DbFacade {
 			System.out.println(fdb.toString());
 	}
 	
-	public boolean carica(Video p) {
-		return vDao.pubblicaVideo(ConvertitoreFacade.getIstance().converti(p));
-	}
-
-	public boolean rimuovi(Video p) {
-		return vDao.rimuoviVideo(ConvertitoreFacade.getIstance().converti(p));
-	}
+	//Profilo
 	
 	public ArrayList<ProfiloDB> selectAllProfilo() {
 		return pDao.selectAll();

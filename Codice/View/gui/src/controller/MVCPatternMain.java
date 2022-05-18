@@ -19,7 +19,5 @@ public class MVCPatternMain {
 		Controller ctrl = new Controller(model, view);
 		view.setVisible(true);
 		ctrl.initComponents();
-		
-
 	}
 }

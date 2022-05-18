@@ -34,5 +34,10 @@ public class TestoDB extends PostDB{
 		public String toString() {
 			return super.toString() + ", font=" + font + ", titolo=" + titolo + "]";
 		}
+		@Override
+		public PostDB inserisciCaratteristiche(PostDB p) {
+			TestoDB pdb = new TestoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.getNumLike(), p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
+			return pdb;
+		}
 		
 	}

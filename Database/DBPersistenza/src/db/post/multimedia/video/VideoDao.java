@@ -78,6 +78,36 @@ public class VideoDao  extends PostDao {
 	}
 	
 	@Override
+	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update video set tempoCancellazione=?, percorso=?, isStory=?, durataInSecondi=? where idMsgGrp=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, i[0]);
+			st1.setString(2, s[0]);
+			st1.setBoolean(3, b[0]);
+			st1.setInt(4, i[1]);
+			st1.setString(5, p.getIdPost());
+			
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+		
+	}
+	
+	@Override
 	public boolean eliminaPost(PostDB v) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -128,4 +158,5 @@ public class VideoDao  extends PostDao {
 		DBConnection.closeConnection(conn);
 		return result;
 	}
+
 }
