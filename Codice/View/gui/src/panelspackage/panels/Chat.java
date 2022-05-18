@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
-public class Chat extends JPanel {
+public class Chat extends JFrame {
 	private ArrayList<JLabel> listaChat = new ArrayList<JLabel>();
 	private int numeroChat; 	//Numero delle chat di un account
 	private JLabel titoloChat;
@@ -23,8 +23,8 @@ public class Chat extends JPanel {
 	private Font fontButton = new Font("Arial", Font.BOLD, 15);
 	
 	public Chat() {
-		int i;
-		this.setOpaque(true);
+		//int i;
+		//this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(NERO);	
@@ -100,5 +100,14 @@ public class Chat extends JPanel {
 
 	public void setHomeChat(JButton homeChat) {
 		this.homeChat = homeChat;
+	}
+	
+	public static void main(String[] args) {
+		
+		Chat c = new Chat();
+		c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		c.setSize(400, 400);
+		c.setVisible(true);
+		c.setLayout(new FlowLayout(FlowLayout.LEADING));
 	}
 }
