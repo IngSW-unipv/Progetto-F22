@@ -5,51 +5,55 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import packageframe.Frame;
+import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.Pulsanti;
+import panelspackage.panels.elements.SpecificContainer;
 
-public class Chat extends JFrame {
+
+public class Chat extends JPanel {
 	private ArrayList<JLabel> listaChat = new ArrayList<JLabel>();
 	private int numeroChat; 	//Numero delle chat di un account
 	private JLabel titoloChat;
-	private Container containerSuperiore;
-	private Container containerSceltaChat;
-	private Container containerInferiore;
-	private JButton chatPrivata;
-	private JButton chatGruppo;
-	private JButton nuovaChat;
-	private JButton homeChat;
+	private SpecificContainer containerSuperiore,containerSceltaChat,containerInferiore;
+	private Pulsanti chatPrivata,chatGruppo,nuovaChat,homeChat;
 	private static final long serialVersionUID = 1L;
-	private Color NERO = new Color(0,0,0);
 	private Font fontTitle = new Font("Arial", Font.BOLD | Font.ITALIC, 30);
 	private Font fontButton = new Font("Arial", Font.BOLD, 15);
 	
 	public Chat() {
-		//int i;
-		//this.setOpaque(true);
+		avvio();
+		initComponents();
+	}
+	
+	public void avvio() {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
-		this.setBackground(NERO);	
-		
+		this.setBackground(Frame.COLOREPRIMARIOTEMATICO);	
+	}
+	
+	public void initComponents() {
 		titoloChat = new JLabel("CHAT", SwingConstants.LEFT);
 		titoloChat.setFont(fontTitle);
 		titoloChat.setForeground(Color.WHITE);
 		
-		chatPrivata = new JButton("Chat private");
+		chatPrivata = new Pulsanti("Chat private");
 		chatPrivata.setFont(fontButton);
 		
-		chatGruppo = new JButton("Chat di gruppo");
+		chatGruppo = new Pulsanti("Chat di gruppo");
 		chatGruppo.setFont(fontButton);
 		
-		nuovaChat = new JButton("Nuova chat");
+		nuovaChat = new Pulsanti("Nuova chat");
 		nuovaChat.setFont(fontButton);
 		
-		homeChat = new JButton("Torna alla home");
+		homeChat = new Pulsanti("Torna alla home");
 		nuovaChat.setFont(fontButton);
 		
-		containerSuperiore = new Container();
+		containerSuperiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerSuperiore.setLayout(new GridLayout(2, 1));
-		containerSceltaChat = new Container();
+		containerSceltaChat = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerSceltaChat.setLayout(new GridLayout(1, 2));
-		containerInferiore = new Container();
+		containerInferiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerInferiore.setLayout(new GridLayout(2, 1));
 		
 		containerSuperiore.add(titoloChat);
@@ -63,8 +67,8 @@ public class Chat extends JFrame {
 		/*for(i=0; i < numeroChat; i++) {
 			this.add(listaChat.get(i));
 		}*/
+		
 	}
-	
 	public void aggiungiChatAllaLista(ArrayList listaChat) {
 		JLabel chat = new JLabel();
 		listaChat.add(chat);
