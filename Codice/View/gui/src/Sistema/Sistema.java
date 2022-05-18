@@ -18,7 +18,7 @@ public class Sistema {
 	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
 	    ArrayList<Profilo> r = new ArrayList<>();
-	    r.add(dbfacade.cercaProfilo(p));
+	    r.add(dbfacade.cerca(p));
 
 	    if(r.isEmpty() == true) {
 	        dbfacade.carica(p);
@@ -33,7 +33,7 @@ public class Sistema {
 		public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
 			
 	 		ArrayList<Profilo> res = new ArrayList<>();
-	 		res.add(dbfacade.cercaProfilo(new Profilo(email, null)));
+	 		res.add(dbfacade.cerca(new Profilo(email, null)));
 	 		String s = dbfacade.vediPsw(email);
 
         
@@ -53,7 +53,7 @@ public class Sistema {
     public boolean cambiaPassword(String email, String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, AccountDoesNotExist {
     	
 	 ArrayList<Profilo> res = new ArrayList<>();
-	 	    res.add(dbfacade.cercaProfilo(new Profilo(email, null)));
+	 	    res.add(dbfacade.cerca(new Profilo(email, null)));
 	 		String s = dbfacade.vediPsw(email);
 
 	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
@@ -79,7 +79,7 @@ public class Sistema {
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
-	 			setProfiloAttivo(dbfacade.cercaProfilo(new Profilo(email,null)));
+	 			setProfiloAttivo(dbfacade.cerca(new Profilo(email,null)));
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
@@ -96,7 +96,7 @@ public class Sistema {
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
         	ArrayList<Profilo> res = new ArrayList<>();
-	 			res.add	(dbfacade.cercaProfilo(new Profilo(email,null)));
+	 			res.add	(dbfacade.cerca(new Profilo(email,null)));
 	 		boolean b = dbfacade.vediSeLoggato(email);
 
 	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {

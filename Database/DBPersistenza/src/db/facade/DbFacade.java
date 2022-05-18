@@ -16,27 +16,13 @@ import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
 import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
-import db.notifica.NotificaDao;
 import db.post.PostDB;
 import db.post.PostDao;
-import db.post.multimedia.foto.FotoDao;
-import db.post.multimedia.video.VideoDB;
-import db.post.multimedia.video.VideoDao;
-import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDB;
-import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDao;
-import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDB;
-import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDao;
-import db.post.testo.TestoDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.multimedia.foto.Foto;
-import post.multimedia.video.Video;
-import post.sondaggio.SondaggioDoppiaVotazione;
-import post.sondaggio.SondaggioSceltaMultipla;
-import post.testo.Testo;
 import convertitore.ConvertitoreFacade;
 
 public class DbFacade {
@@ -80,24 +66,17 @@ public class DbFacade {
 	
 	}
 
-	public void stampaCommentiSottoPost(Commento c) {
-		ArrayList<CommentoDB> res = cDao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(c));
-		for(CommentoDB cdb : res)
-			System.out.println(cdb.toString());
+	public Commento cerca(Commento c) {
+		CommentoDB cdb = cDao.cercaCommento(ConvertitoreFacade.getIstance().converti(c));
+		return ConvertitoreFacade.getIstance().convertiInverso(cdb);
 	}
 	
-	public void stampaCommentoCercato(String c) {
-		ArrayList<CommentoDB> res = cDao.cercaCommento(c);
-		for(CommentoDB cdb : res)
-			System.out.println(cdb.toString());
-	}
-	public ArrayList<CommentoDB> CommentiSottoPost(Commento c){
-		return cDao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(c));
-	}
-	public ArrayList<CommentoDB> cercaCommento(Commento c){
-		return cDao.cercaCommento(c.getIdCommento());
+	
+	public ArrayList<Commento> selectAllCommenti(Commento c){
+		return ConvertitoreFacade.getIstance().convertiListaCommenti(cDao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(c)));
 	}
 	
+
     //Gruppi
 	
 	public boolean carica(Gruppo g) {
@@ -115,25 +94,15 @@ public class DbFacade {
 		
 	}
 
-	public ArrayList<GruppoDB> cercaGruppo(String g) {
-		return gDao.cercaGruppo(g);
+	public Gruppo cerca(Gruppo g) {
+		GruppoDB gdb = gDao.cercaGruppo(ConvertitoreFacade.getIstance().converti(g));
+		return ConvertitoreFacade.getIstance().convertiInverso(gdb);
 	}
 	
-	public ArrayList<GruppoDB> selectAllGruppo() {
-		return gDao.selectall();
+	public ArrayList<Gruppo> selectAllGruppo() {
+		return ConvertitoreFacade.getIstance().convertiListaGruppi(gDao.selectall());
 	}
 	
-	public void stampaGruppoCercato(String g) {
-		ArrayList<GruppoDB> res = gDao.cercaGruppo(g);
-		for(GruppoDB gdb : res)
-			System.out.println(gdb.toString());
-	}
-	
-	public void stampaSelectAllGruppo() {
-		ArrayList<GruppoDB> res = gDao.selectall();
-		for(GruppoDB gdb : res)
-			System.out.println(gdb.toString());
-	}
 	
 	//Messaggi
 	
@@ -153,7 +122,7 @@ public class DbFacade {
 		return mDao.rimuoviMessaggio(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
-	public Messaggio cercaMessaggio(Messaggio m){
+	public Messaggio cerca(Messaggio m){
 		mDao = Utility.convertiTipoMessaggio(m.getTipo());
 		MessaggioDB mdb = mDao.cercaMessaggio(ConvertitoreFacade.getIstance().converti(m));
 		return ConvertitoreFacade.getIstance().convertiInverso(mdb, m.getTipo());
@@ -168,7 +137,7 @@ public class DbFacade {
 	
 	public ArrayList<Messaggio> selezionaMessaggi(String s, TipoMessaggio t){
 		mDao = Utility.convertiTipoMessaggio(t);
-		return ConvertitoreFacade.getIstance().convertiLista(t, mDao.selezionaMessaggi(s));
+		return ConvertitoreFacade.getIstance().convertiListaMessaggi(t, mDao.selezionaMessaggi(s));
 	}
  	
 	
@@ -197,7 +166,7 @@ public class DbFacade {
      }
      
      
-     public Post cercaPost(Post p){
+     public Post cerca(Post p){
      	pstDao = Utility.convertiTipoPost(p.getTipo());
      	PostDB pdb = pstDao.cercaPost(ConvertitoreFacade.getIstance().converti(p));
      	return ConvertitoreFacade.getIstance().convertiInverso(pdb, p.getTipo());
@@ -207,7 +176,7 @@ public class DbFacade {
      
      public ArrayList<Post> selectAllPost(TipoPost t){
      	pstDao = Utility.convertiTipoPost(t);
-     	return ConvertitoreFacade.getIstance().convertiLista(t, pstDao.selectAll());
+     	return ConvertitoreFacade.getIstance().convertiListaPost(t, pstDao.selectAll());
 
      }
      
@@ -215,7 +184,7 @@ public class DbFacade {
 	//Profilo
 	
 	public ArrayList<Profilo> selectAllProfilo() {
-		return ConvertitoreFacade.getIstance().convertiLista(pDao.selectAll());
+		return ConvertitoreFacade.getIstance().convertiListaProfilo(pDao.selectAll());
 	}
 
 	public boolean carica(Profilo p) {
@@ -231,7 +200,7 @@ public class DbFacade {
 	}
 	
 
-	public Profilo cercaProfilo(Profilo p) {
+	public Profilo cerca(Profilo p) {
 		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
 		return ConvertitoreFacade.getIstance().convertiInverso(pdb);
 	}
@@ -279,36 +248,18 @@ public class DbFacade {
 		return flDao.rimuovi(ConvertitoreFacade.getIstance().converti(f));
 	}
 	
-	public ArrayList<FollowDB> selectAllFollow(){
-		return flDao.selectAll();
+	public ArrayList<Follow> selectAllFollow(){
+		return ConvertitoreFacade.getIstance().convertiListaFollow(flDao.selectAll());
 	}
 	
-	public void stampaSelectAllFollow(){
-		ArrayList<FollowDB> res = flDao.selectAll();
-		for(FollowDB fdb : res)
-			System.out.println(fdb.toString());
+	public Follow cerca(Follow f) {
+		FollowDB fdao = flDao.cerca(ConvertitoreFacade.getIstance().converti(f));
+		return ConvertitoreFacade.getIstance().convertiInverso(fdao);
 	}
 	
 	public ArrayList<String> cercaProfSeguito(String s){
 		return flDao.cercaProfSeguito(s);
 	}
-	
-	public void stampaProfSeguitoCercato(String profiloPersonale){
-		ArrayList<String> res = flDao.cercaProfSeguito(profiloPersonale);
-		for(String pdb : res)
-			System.out.println(pdb.toString());
-	}
-	public ArrayList<FollowDB> cercaFollow(String profiloPersonale, String profiloSeguito){
-		return flDao.cerca(profiloPersonale, profiloSeguito);
-	}
-	
-	public void stampaFollowCercati(String profiloPersonale, String profiloSeguito) {
-		ArrayList<FollowDB> res = flDao.cerca(profiloPersonale, profiloSeguito);
-		for(FollowDB fdb : res)
-			System.out.println(fdb.toString());
-	}
-	
-	
 	
 	
 	
@@ -317,8 +268,8 @@ public class DbFacade {
 	
 	//Ritorna true se l'account inserito � "seguibile"
 	public boolean profiloNonSeguito(Follow f) {
-		ArrayList<FollowDB> search = this.cercaFollow(f.getMailProfiloPersonale(), f.getMailProfiloSeguito());
-		if (search.isEmpty() == true) {
+		Follow search = this.cerca(f);
+		if (search == null) {
 			return true;
 		}
 		return false;
@@ -326,24 +277,12 @@ public class DbFacade {
 
 	//Ritorna true se l'account � esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist {
-		ArrayList<ProfiloDB> res = this.cercaProfilo(p.getIdProfilo());
-		if(res.isEmpty() == true) {
+		Profilo search = this.cerca(p);
+		if(search == null) {
 			throw new AccountDoesNotExist(p.getIdProfilo());
 		}
 		return true;
-	}
-
-	//Ritorna true se l'account � loggato
-	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
-		Profilo p = new Profilo(emailProfilo, null);
-		if(this.accountEsistente(p) == true) {
-			if(this.vediSeLoggato(emailProfilo) == true) {
-				return true;
-			}
-			throw new NotLoggedIn(emailProfilo);
-		}
-		return false;
-	}
+}
 	
 }
 

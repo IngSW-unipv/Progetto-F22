@@ -21,7 +21,7 @@ public class testfacade {
         for(String ms : res)
         	System.out.println(ms.toString());
         
-        Messaggio m = dbf.cercaMessaggio(mdg);
+        Messaggio m = dbf.cerca(mdg);
         System.out.println(m.toString());
 }
 }

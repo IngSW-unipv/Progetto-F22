@@ -8,5 +8,5 @@ public interface IFollowDao {
 	public boolean rimuovi(FollowDB f);
 	public ArrayList<FollowDB> selectAll();
 	public ArrayList<String> cercaProfSeguito(String profiloPersonale);
-	public ArrayList<FollowDB> cerca(String profiloPersonale, String profiloSeguito);
+	public FollowDB cerca(FollowDB fdb);
 }

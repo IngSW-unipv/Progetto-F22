@@ -66,7 +66,7 @@ public class ConvertitoreFacade {
 		return mUtility.ritornaCaratteristiche(m);
 	}
 	
-	public ArrayList<Messaggio> convertiLista(TipoMessaggio t, ArrayList<MessaggioDB> m){
+	public ArrayList<Messaggio> convertiListaMessaggi(TipoMessaggio t, ArrayList<MessaggioDB> m){
 		return mUtility.convertiLista(t, m);
 	}
 	
@@ -93,7 +93,7 @@ public class ConvertitoreFacade {
 		return pstUtility.ritornaChiaviBoolean(p);
 	}
 	
-	public ArrayList<Post> convertiLista(TipoPost t, ArrayList<PostDB> p){
+	public ArrayList<Post> convertiListaPost(TipoPost t, ArrayList<PostDB> p){
 		return pstUtility.convertiLista(t, p);
 	}
 	
@@ -108,32 +108,51 @@ public class ConvertitoreFacade {
 		return pUtility.convertiInverso(pdb);
 	}
 
-	public ArrayList<Profilo> convertiLista(ArrayList<ProfiloDB> p){
+	public ArrayList<Profilo> convertiListaProfilo(ArrayList<ProfiloDB> p){
 		return pUtility.convertiLista(p);
 	}
 	
 	//Commenti 
 	
 	public CommentoDB converti(Commento c) {
-		return cUtility.convertiACommentoDB(c);
+		return cUtility.converti(c);
 	}
 
 	public Commento convertiInverso(CommentoDB cdb) {
-		return cUtility.convertiACommento(cdb);
+		return cUtility.convertiInverso(cdb);
 	}
+	
+	public ArrayList<Commento> convertiListaCommenti(ArrayList<CommentoDB> res){
+		return cUtility.convertiLista(res);
+	}
+	
+	
+	//Gruppo
+	
 	public GruppoDB converti(Gruppo g) {
-		return gUtility.convertiAGruppoDB(g);
+		return gUtility.converti(g);
 	}
 
 	public Gruppo convertiInverso(GruppoDB gdb) {
-		return gUtility.convertiAGruppo(gdb);
+		return gUtility.convertiInverso(gdb);
 	}
 	
-	public FollowDB converti(Follow f) {
-		return flUtility.convertiAFollowDB(f);
+	public ArrayList<Gruppo> convertiListaGruppi(ArrayList<GruppoDB> res){
+		return gUtility.convertiLista(res);
 	}
-	public Follow convertiinverso(FollowDB f) {
-		return flUtility.convertiAFollow(f);
+	
+	//Follow 
+
+	
+	public FollowDB converti(Follow f) {
+		return flUtility.converti(f);
+	}
+	public Follow convertiInverso(FollowDB f) {
+		return flUtility.convertiInverso(f);
+	}
+	
+	public ArrayList<Follow> convertiListaFollow(ArrayList<FollowDB> res){
+		return flUtility.convertiLista(res);
 	}
 }
 
