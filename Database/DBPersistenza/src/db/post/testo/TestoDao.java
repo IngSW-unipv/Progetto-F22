@@ -18,8 +18,8 @@ public class TestoDao extends PostDao {
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<TestoDB> selectAll() {
-		 ArrayList<TestoDB> result = new ArrayList<>();
+	public ArrayList<PostDB> selectAll() {
+		 ArrayList<PostDB> result = new ArrayList<>();
 
 			conn=DBConnection.startConnection(conn,schema);
 			Statement st1;
@@ -33,9 +33,9 @@ public class TestoDao extends PostDao {
 
 				while(rs1.next())
 				{
-					TestoDB t=new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
+					TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7),rs1.getString(8),rs1.getString(9));                                     
 
-					result.add(t);
+					result.add(tdb);
 				}
 			}catch (Exception e){e.printStackTrace();}
 
@@ -50,18 +50,16 @@ public class TestoDao extends PostDao {
 
 		try
 		{
-			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
+			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, t.getIdPost());
 			st1.setDate(2, t.getDataPubblicazione());
 			st1.setTime(3, t.getOraPubblicazione());
 			st1.setString(4, t.getDescrizione());
-		    st1.setInt(5, t.getNumLike());
-		    st1.setInt(6, t.getNumDislike());
-		    st1.setBoolean(7, t.isVisibile());
-		    st1.setBoolean(8, t.isCondivisibile());
-		    st1.setString(9, t.getProfilo());
+		    st1.setBoolean(5, t.isVisibile());
+		    st1.setBoolean(6, t.isCondivisibile());
+		    st1.setString(7, t.getProfilo());
 		    
 			st1.executeUpdate();
 
@@ -76,14 +74,14 @@ public class TestoDao extends PostDao {
 	}
 	
 	@Override
-	public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+	public boolean inserisciChiavi(PostDB p, String[] s, int i, boolean b) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="update testo set font=?, titolo=? where idMsgGrp=?";
+			String query="update testo set font=?, titolo=? where idTesto=?";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s[0]);
@@ -126,8 +124,7 @@ public class TestoDao extends PostDao {
 		return esito;
 	}
 	@Override
-	public ArrayList<TestoDB> cercaTesto(String t) {
-		ArrayList<TestoDB> result = new ArrayList<>();
+	public PostDB cercaPost(PostDB t) {
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -138,26 +135,22 @@ public class TestoDao extends PostDao {
 			String query="SELECT * FROM testo WHERE idTesto=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, t);
+			st1.setString(1, t.getIdPost());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
+				TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7),rs1.getString(8),rs1.getString(9));                                     
 
-				result.add(tdb);
+				DBConnection.closeConnection(conn);
+
+				return tdb;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
-	@Override
-	public boolean inserisciChiavi(PostDB p, String s1, String s2, String s3, String s4, int i1, int i2, boolean b1,
-			boolean b2) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
+
 }

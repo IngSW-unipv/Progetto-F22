@@ -8,11 +8,10 @@ import db.post.multimedia.MultimediaDB;
 
 public class VideoDB extends MultimediaDB{
 
-	public VideoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike,
-			int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,
-			String percorso, boolean isStory, int durataInSecondi) {
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,
-				profilo,tempoCancellazione,percorso, isStory);
+	public VideoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo,
+			String percorso, int durataInSecondi) {
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,
+				profilo,percorso);
 		this.durataInSecondi = durataInSecondi;
 	}
 	
@@ -30,7 +29,7 @@ public class VideoDB extends MultimediaDB{
 	}
 	@Override
 	public PostDB inserisciCaratteristiche(PostDB p) {
-		VideoDB vdb = new VideoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.getNumLike(), p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getTempoCancellazione(), this.getPercorso(), this.isStory(), this.getDurataInSecondi());
+		VideoDB vdb = new VideoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPercorso(), this.getDurataInSecondi());
 		return vdb;
 	}
 	

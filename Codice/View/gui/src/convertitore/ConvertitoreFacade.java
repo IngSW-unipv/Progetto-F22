@@ -19,6 +19,7 @@ import db.post.PostDB;
 import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import profilo.Profilo;
 import profilo.follow.Follow;
 
@@ -40,6 +41,7 @@ public class ConvertitoreFacade {
 		mUtility = new MessaggioUtility();
 		pUtility = new ProfiloUtility();
 		flUtility = new FollowUtility();
+		pstUtility = new PostUtility();
 	}
 	
 	public static ConvertitoreFacade getIstance() {
@@ -56,6 +58,10 @@ public class ConvertitoreFacade {
 		return mUtility.converti(m);
 	}
 	
+	public Messaggio convertiInverso(MessaggioDB m, TipoMessaggio t) {
+		return mUtility.convertiInverso(m, t);
+	}
+	
 	public String [] ritorna(Messaggio m) {
 		return mUtility.ritornaCaratteristiche(m);
 	}
@@ -64,37 +70,49 @@ public class ConvertitoreFacade {
 		return mUtility.convertiLista(t, m);
 	}
 	
+	
 	//Post
 	
 	public PostDB converti(Post p) {
 		return pstUtility.converti(p);
 	}
 	
+	public Post convertiInverso(PostDB p, TipoPost t) {
+		return pstUtility.convertiInverso(p, t);
+	}
+	
 	public String[] ritornaChiaviString(Post p) {
 		return pstUtility.ritornaChiaviString(p);
 	}
 	
-	public int[] ritornaChiaviInt(Post p) {
+	public int ritornaChiaviInt(Post p) {
 		return pstUtility.ritornaChiaviInt(p);
 	}
 	
-	public boolean [] ritornaChiaviBoolean(Post p) {
+	public boolean ritornaChiaviBoolean(Post p) {
 		return pstUtility.ritornaChiaviBoolean(p);
 	}
 	
-	
+	public ArrayList<Post> convertiLista(TipoPost t, ArrayList<PostDB> p){
+		return pstUtility.convertiLista(t, p);
+	}
 	
 	
 	//Profilo
 	
 	public ProfiloDB converti(Profilo p) {
-		return pUtility.convertiAProfiloDB(p);
+		return pUtility.converti(p);
 	}
 
 	public Profilo convertiInverso(ProfiloDB pdb) {
-		return pUtility.convertiAProfilo(pdb);
+		return pUtility.convertiInverso(pdb);
 	}
 
+	public ArrayList<Profilo> convertiLista(ArrayList<ProfiloDB> p){
+		return pUtility.convertiLista(p);
+	}
+	
+	//Commenti 
 	
 	public CommentoDB converti(Commento c) {
 		return cUtility.convertiACommentoDB(c);

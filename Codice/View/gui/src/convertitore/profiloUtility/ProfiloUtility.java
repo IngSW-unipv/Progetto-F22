@@ -1,6 +1,8 @@
 package convertitore.profiloUtility;
 
 
+import java.util.ArrayList;
+
 import db.profilo.ProfiloDB;
 import profilo.EnumProfilo;
 import profilo.Profilo;
@@ -8,16 +10,22 @@ import profilo.Profilo;
 public class ProfiloUtility {
 	
 	//Le chiavi esterne sono inizialmente null. Usare il metodo inserisciChiavi per modificarne il valore
-	public ProfiloDB convertiAProfiloDB(Profilo p) {
+	public ProfiloDB converti(Profilo p) {
 		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), ProfiloUtility.trasformaEnumInString(p.getTipo()), null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), p.getPassword());
 		return pdb;
 	}
 	
-	public Profilo convertiAProfilo(ProfiloDB pdb) {
+	public Profilo convertiInverso(ProfiloDB pdb) {
 		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname(), pdb.getDescrizione(), ProfiloUtility.trasformaStringinEnum(pdb.getTipo()));
 		return p;
 	}
 	
+	public ArrayList<Profilo> convertiLista(ArrayList <ProfiloDB> res){
+		ArrayList<Profilo> pr = new ArrayList<>();
+		for(ProfiloDB pdb: res)
+			pr.add(this.convertiInverso(pdb));
+		return pr;
+	}
 	
 	static public String trasformaEnumInString(EnumProfilo e) {
 		String s;
@@ -46,4 +54,5 @@ public class ProfiloUtility {
 		return null;
 	}
 
+	
 }

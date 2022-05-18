@@ -111,8 +111,8 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
     
     
     @Override
-	public ArrayList<MessaggioDB> cercaMessaggio(String m) {
-		ArrayList<MessaggioDB> result = new ArrayList<>();
+	public MessaggioDB cercaMessaggio(MessaggioDB m) {
+		
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -123,20 +123,20 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 			String query="SELECT * FROM messaggiodigruppo WHERE idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, m);
+			st1.setString(1, m.getIdMessaggio());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
 				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
-
-				result.add(msg);
+				DBConnection.closeConnection(conn);
+             	return msg;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
 
     

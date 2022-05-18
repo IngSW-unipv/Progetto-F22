@@ -6,6 +6,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import java.util.ArrayList;
 
 import convertitore.ConvertitoreFacade;
+import db.post.PostDB;
 
 public class Tester {
 
@@ -14,11 +15,11 @@ public class Tester {
 		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, null, null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 
-		System.out.println(sdao.pubblicaSondaggio(f.converti(s)));
+		System.out.println(sdao.caricaPost(f.converti(s)));
 		
-ArrayList<SondaggioSceltaMultiplaDB> res = sdao.selectAll();
+ArrayList<PostDB> res = sdao.selectAll();
 	   
-     for(SondaggioSceltaMultiplaDB pst : res)
+     for(PostDB pst : res)
 			System.out.println(pst.toString());
 	}
 }

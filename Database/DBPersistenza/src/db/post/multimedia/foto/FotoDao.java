@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
-import post.Post;
 
 public class FotoDao extends PostDao{
 
@@ -19,8 +18,8 @@ public class FotoDao extends PostDao{
 		this.schema = "socialnetwork";
 	}
 	@Override
-	public ArrayList<FotoDB> selectAll() {
-		ArrayList<FotoDB> result = new ArrayList<>();
+	public ArrayList<PostDB> selectAll() {
+		ArrayList<PostDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -34,9 +33,9 @@ public class FotoDao extends PostDao{
 
 			while(rs1.next())
 			{
-				FotoDB f=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getInt(10), rs1.getString(11), rs1.getBoolean(12), rs1.getBoolean(13));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getBoolean(9));                                     
 
-				result.add(f);
+				result.add(fdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -80,20 +79,20 @@ public class FotoDao extends PostDao{
 	
 	
 	@Override
-	public boolean inserisciChiavi(PostDB p, String [] s, int [] i, boolean [] b) {
+	public boolean inserisciChiavi(PostDB p, String [] s, int i, boolean b) {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
 
 		try
 		{
-			String query="update foto set tempoCancellazione=?, percorso=?, isStory=?, isHd=? where idMsgGrp=?";
+			String query="update foto set tempoCancellazione=?, percorso=?, isStory=?, isHd=? where idFoto=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setInt(1, i[0]);
+			st1.setInt(1, 0);
 			st1.setString(2, s[0]);
-			st1.setBoolean(3, b[0]);
-			st1.setBoolean(4, b[1]);
+			st1.setBoolean(3, false);
+			st1.setBoolean(4, b);
 			st1.setString(5, p.getIdPost());
 			
 			st1.executeUpdate();
@@ -136,8 +135,7 @@ public class FotoDao extends PostDao{
 	}
 	
 	@Override
-	public ArrayList<FotoDB> cercaFoto(String f) {
-		ArrayList<FotoDB> result = new ArrayList<>();
+	public PostDB cercaPost(PostDB p) {
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -148,20 +146,21 @@ public class FotoDao extends PostDao{
 			String query="SELECT * FROM foto WHERE idFoto=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, f);
+			st1.setString(1, p.getIdPost());
 
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
 			{
-				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getInt(10), rs1.getString(11), rs1.getBoolean(12), rs1.getBoolean(13));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getBoolean(9));                                     
+				DBConnection.closeConnection(conn);
 
-				result.add(fdb);
+				return fdb;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
 
 }

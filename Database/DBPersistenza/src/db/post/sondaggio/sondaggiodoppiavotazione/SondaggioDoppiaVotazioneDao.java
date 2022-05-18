@@ -18,8 +18,8 @@ public SondaggioDoppiaVotazioneDao() {
 	this.schema="socialnetwork";
 }
 @Override
-public ArrayList<SondaggioDoppiaVotazioneDB> selectAll() {
-	 ArrayList<SondaggioDoppiaVotazioneDB> result = new ArrayList<>();
+public ArrayList<PostDB> selectAll() {
+	 ArrayList<PostDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
 		Statement st1;
@@ -33,8 +33,8 @@ public ArrayList<SondaggioDoppiaVotazioneDB> selectAll() {
 
 			while(rs1.next())
 			{
-			SondaggioDoppiaVotazioneDB s = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
-				result.add(s);
+				SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getString(9));
+				result.add(sdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -50,18 +50,16 @@ public boolean caricaPost(PostDB s) {
 
 	try
 	{
-		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
+		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s.getIdPost());
 		st1.setDate(2, s.getDataPubblicazione());
 		st1.setTime(3, s.getOraPubblicazione());
 		st1.setString(4, s.getDescrizione());
-		st1.setInt(5, s.getNumLike());
-        st1.setInt(6, s.getNumDislike());
-        st1.setBoolean(7, s.isVisibile());
-        st1.setBoolean(8, s.isCondivisibile());
-        st1.setString(9, s.getProfilo());
+        st1.setBoolean(5, s.isVisibile());
+        st1.setBoolean(6, s.isCondivisibile());
+        st1.setString(7, s.getProfilo());
         
 		st1.executeUpdate();
 
@@ -76,19 +74,19 @@ public boolean caricaPost(PostDB s) {
 }
 
 @Override
-public boolean inserisciChiavi(PostDB p, String[] s, int[] i, boolean[] b) {
+public boolean inserisciChiavi(PostDB p, String[] s, int i, boolean b) {
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
 	boolean esito = true;
 
 	try
 	{
-		String query="update sondaggioDoppiaVotazione set primaScelta=?, secondaScelta=? where idMsgGrp=?";
+		String query="update sondaggioDoppiaVotazione set primaScelta=?, secondaScelta=? where idSondaggio=?";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s[0]);
 		st1.setString(2, s[1]);
-		st1.setString(5, p.getIdPost());
+		st1.setString(3, p.getIdPost());
 		
 		st1.executeUpdate();
 
@@ -127,8 +125,7 @@ public boolean eliminaPost(PostDB p) {
 	return esito;
 }
 @Override
-public ArrayList<SondaggioDoppiaVotazioneDB> cercaSondaggio(String s) {
-	ArrayList<SondaggioDoppiaVotazioneDB> result = new ArrayList<>();
+public PostDB cercaPost(PostDB s) {
 
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -139,20 +136,21 @@ public ArrayList<SondaggioDoppiaVotazioneDB> cercaSondaggio(String s) {
 		String query="SELECT * FROM sondaggiodoppiavotazione WHERE idSondaggio=?";
 
 		st1 = conn.prepareStatement(query);
-		st1.setString(1, s);
+		st1.setString(1, s.getIdPost());
 
 		rs1=st1.executeQuery();
 
 		while(rs1.next())
 		{
-			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5), rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
+			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7), rs1.getString(8), rs1.getString(9));
 
-			result.add(sdb);
+			DBConnection.closeConnection(conn);
+            return sdb;
 		}
 	}catch (Exception e){e.printStackTrace();}
 
 	DBConnection.closeConnection(conn);
-	return result;
+	return null;
 }
 
 

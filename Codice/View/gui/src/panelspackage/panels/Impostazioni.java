@@ -21,8 +21,7 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class Impostazioni extends JPanel {
 	HashMap<String,JComponent> mappaPulsanti = new  HashMap<String,JComponent>();
-	private Pulsanti homeImpostazioni;
-	private Pulsanti salvaModifiche;
+	private Pulsanti homeImpostazioni, salvaModifiche;
 	private AreaDiTesto areaDescrizione, areaNuovaMail;
 	private Box areaCambioSesso;
 	private SpecificContainer containerCenter;
@@ -64,7 +63,7 @@ public class Impostazioni extends JPanel {
 		mappaPulsanti.put("visibilita", new Box(getVisibilita(), Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("visibilitapost", new Pulsanti("Visibilita' post", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("cambiaColori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("logout",new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
+		mappaPulsanti.put("logout", new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
 			
 		mappaPulsanti.forEach((key, value) -> containerWest.add(value));

@@ -7,12 +7,11 @@ import db.post.PostDB;
 
 public abstract class MultimediaDB extends PostDB{
 
-	public MultimediaDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,int numLike, int numDislike,
-			boolean visibile, boolean condivisibile, String profilo,int tempoCancellazione, String percorso, boolean isStory) {
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo);
-		this.tempoCancellazione = tempoCancellazione;
+	public MultimediaDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso) {
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo);
+		this.tempoCancellazione = 0;
 		this.percorso = percorso;
-		this.isStory = isStory;
+		this.isStory = false;
 	}
 	private int tempoCancellazione;
     private String percorso;
@@ -37,7 +36,7 @@ public abstract class MultimediaDB extends PostDB{
 	}
 	@Override
 	public String toString() {
-		return ", tempoCancellazione=" + tempoCancellazione + ", percorso=" + percorso + ", isStory="
+		return super.toString() + ", tempoCancellazione=" + tempoCancellazione + ", percorso=" + percorso + ", isStory="
 				+ isStory ;
 	}
 }

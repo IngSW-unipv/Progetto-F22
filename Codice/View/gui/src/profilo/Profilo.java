@@ -22,13 +22,14 @@ import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
 import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
+import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
-import profilo.exception.NotLoggedIn;
 import profilo.follow.Follow;
 import java.util.TimerTask;
 
@@ -65,7 +66,20 @@ public class Profilo implements IProfilo {
 		dislikeMap = new HashMap<>();
 	}
 	
-
+	public Profilo(String idProfilo) {
+		super();
+		this.dbfacade = dbfacade.getIstance();
+		this.idProfilo = idProfilo;
+		this.nickname = null;
+		this.descrizione = null;
+		this.numFollower = 0;
+		this.numSeguiti = 0;
+		this.numPost = 0;
+		this.tipo = tipo.PUBBLICO;
+		likeMap = new HashMap<>();
+		dislikeMap = new HashMap<>();
+	}
+	
 
 	//costruttore per la conversione profiloDB
 	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita) {
@@ -189,7 +203,7 @@ public String toString() {
 
 
 @Override
-//Ritorna true se l'account inserito � "seguibile"
+//Ritorna true se l'account inserito e' "seguibile"
 public boolean profiloNonSeguito(String emailProfilo) {
 	Follow f = new Follow(this.getIdProfilo(),emailProfilo);
 	if (dbfacade.profiloNonSeguito(f) == true) {
@@ -199,7 +213,7 @@ public boolean profiloNonSeguito(String emailProfilo) {
 }
 
 @Override
-//Ritorna true se l'account � esistente
+//Ritorna true se l'account e' esistente
 public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist {
 	Profilo p = new Profilo(emailProfilo,null);
 	if(dbfacade.accountEsistente(p) == false) {
@@ -209,18 +223,9 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 }
 
 @Override
-//Ritorna true se l'account � loggato
-public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
-	if(dbfacade.seiLoggato(emailProfilo) == true) {
-			return true;
-		}
-		throw new NotLoggedIn(emailProfilo);
-}
-
-@Override
-public boolean segui(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
+public boolean segui(String profiloSeguito) throws AccountDoesNotExist {
 	
-	if(this.profiloNonSeguito(profiloSeguito) == true && this.accountEsistente(profiloSeguito) == true && this.seiLoggato(this.getIdProfilo()) == true) {
+	if(this.profiloNonSeguito(profiloSeguito) == true && this.accountEsistente(profiloSeguito) == true) {
 	Follow f = new Follow(this.idProfilo, profiloSeguito);
 	dbfacade.carica(f);
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
@@ -230,48 +235,12 @@ public boolean segui(String profiloSeguito) throws AccountDoesNotExist, NotLogge
 
 }
 @Override
-public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true && this.accountEsistente(profiloSeguito) == true && this.profiloNonSeguito(profiloSeguito) == false) {
+public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist {
+	if(this.accountEsistente(profiloSeguito) == true && this.profiloNonSeguito(profiloSeguito) == false) {
 		Follow f = new Follow(this.getIdProfilo(),profiloSeguito);
 		dbfacade.rimuovi(f);
 		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
-	}
-	return false;
-}
-
-
-
-@Override
-public boolean trasformaFotoInStoria(int time, Foto f) throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-	    f.setStory(true);
-		f.setTempoCancellazione(time);
-		dbfacade.carica(f);
-		try {
-		    Thread.sleep(time * 60 * 60 * 1000);
-		} catch (InterruptedException ie) {
-		    Thread.currentThread().interrupt();
-		}	
-		dbfacade.rimuovi(f);	
-		return true;
-	}
-	return false;
-}
-
-@Override
-public boolean trasformaVideoInStoria(int time, Video v) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-	v.setStory(true);
-	v.setTempoCancellazione(time);
-	dbfacade.carica(v);
-	try {
-	    Thread.sleep(time * 60 * 60 * 1000);
-	} catch (InterruptedException ie) {
-	    Thread.currentThread().interrupt();
-	}	
-	dbfacade.rimuovi(v);	
-	return true;
 	}
 	return false;
 }
@@ -292,43 +261,35 @@ public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time ora
 	 return m;
 }
 @Override
-public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
-	 if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist {
+	
 	    	return dbfacade.carica(m);	
-	    }
-	return false;
+	  
 }
 
 @Override
-public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-    	return dbfacade.rimuovi(m);
-    }
-return false;
+public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist {
+	
+	return dbfacade.rimuovi(m);
 }
 
 @Override
-public ArrayList<Messaggio> cercaMessaggio(String id, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.cerca(id, t);
-		}
-		return null;
+public Messaggio cercaMessaggio(Messaggio m) throws AccountDoesNotExist{
+		return dbfacade.cercaMessaggio(m);
+	
 }
 
 
 @Override
-public String ottieniTestoMessaggio(Messaggio m) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public String ottieniTestoMessaggio(Messaggio m) throws AccountDoesNotExist {
 		return dbfacade.ottieniTestoMessaggio(m.getIdMessaggio(), m.getTipo());
-		}
-		return null;
+		
 }
 
 
 
 @Override
-public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) { 
+public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist {
 		
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
@@ -345,15 +306,12 @@ public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExi
 			    }
 			 }, 0,  1000 * 60 * 5);	
 			return true;
-	}
-	return false;
 
 }
 
 
 @Override
-public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) { 
+public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotExist {
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -370,8 +328,6 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotEx
 		    }
 		 }, 0,  1000 * 60 * 5);	
 		return true;
-}
-return false;
 }
 
 
@@ -394,12 +350,10 @@ public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazi
 	return v;
 }
 
-
-
 @Override
 public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
-	// TODO Auto-generated method stub
-	return null;
+	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo,font,titolo);
+	return t;
 }
 
 @Override
@@ -414,45 +368,101 @@ public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicaz
 	return s;
 }
 
+@Override
+public boolean pubblicaPost(Post p) {
+	return dbfacade.carica(p);
+}
+
+@Override
+public boolean rimuoviPost(Post p) {
+	return dbfacade.rimuovi(p);
+}
+
+@Override
+public Post cercaPost(Post p) {
+	return dbfacade.cercaPost(p);
+}
 
 
+@Override
+public void selectAllPost(TipoPost t) {
+	ArrayList<Post> p = dbfacade.selectAllPost(t);
+	for(Post ps : p)
+		System.out.println(ps.toString());
+}
 
+@Override
+public boolean pubblicaStoria(int time, Multimedia f) throws AccountDoesNotExist{
+	
+	    f.setStory(true);
+		f.setTempoCancellazione(time);
+		dbfacade.carica(f);
+		try {
+		    Thread.sleep(time * 60 * 60 * 1000);
+		} catch (InterruptedException ie) {
+		    Thread.currentThread().interrupt();
+		}	
+		dbfacade.rimuovi(f);	
+		return true;
+}
+
+
+//------------------------------------------------------------------------------------------------------------------
+
+//Profilo
+
+@Override
+public boolean stampaInfoProfilo(Profilo p) throws AccountDoesNotExist {
+
+	ArrayList<Profilo> res = new ArrayList<>();
+	Profilo prf = dbfacade.cercaProfilo(p);
+	res.add(prf);
+	if(res.isEmpty() == false) {
+		System.out.println(prf.toString());
+		}
+		throw new AccountDoesNotExist(p.getIdProfilo());
+}
+
+@Override
+public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
+	ArrayList<Profilo> res = new ArrayList<>();
+	Profilo prf = dbfacade.cercaProfilo(p);
+	res.add(prf);
+	if(res.isEmpty() == false) {
+		return prf;
+		}
+		throw new AccountDoesNotExist(p.getIdProfilo());
+}
+
+
+//--------------------------------------------------------------------------------------------------------------------
 @Override
 public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
 		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore)
-		throws AccountDoesNotExist, NotLoggedIn {
+		throws AccountDoesNotExist {
 	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		return dbfacade.carica(g);
-	}
-	return false;
-	
-	
+
 }
 
 @Override
-public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist, NotLoggedIn {
+public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist {
 	Gruppo g = new Gruppo(idGruppo,null,null,null,null,null,null,null,null,null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	
 		return dbfacade.rimuovi(g);
-	} else {
-	        return false;
-	       }
 }
 
 @Override
-public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist, NotLoggedIn {
+public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist {
 	Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	
 		return dbfacade.gestisciPartecipanti(g);
-	} else {
-	        return false;
-	       }
+	
 }
 
 @Override
-public boolean aggiungiLike(Post p) throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean aggiungiLike(Post p) throws AccountDoesNotExist{
+	
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
 	else {
@@ -463,13 +473,11 @@ public boolean aggiungiLike(Post p) throws AccountDoesNotExist, NotLoggedIn{
         likeMap.put(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
-	}
-	return false;
+	
 }
 
 @Override
-public boolean aggiungiDislike(Post p) throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo())== true) {
+public boolean aggiungiDislike(Post p) throws AccountDoesNotExist{
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
 	else {
@@ -480,14 +488,12 @@ public boolean aggiungiDislike(Post p) throws AccountDoesNotExist, NotLoggedIn{
         dislikeMap.put(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
-	}
-	return false;
 }
 
 
 @Override
-public boolean rimuoviLike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean rimuoviLike(Post p)  throws AccountDoesNotExist{
+
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumLike();
 		i--;
@@ -496,13 +502,12 @@ public boolean rimuoviLike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
 		return true;
 	}
 	return false;
-	}
-	return false;
+
 }
 
 @Override
-public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist{
+	
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumDislike();
 		i--;
@@ -511,88 +516,18 @@ public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist, NotLoggedIn{
 		return true;
 	}
 	return false;
-	}
-	return false;
+	
 }
 
 @Override
-public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist, NotLoggedIn {
+public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist {
 	Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
+	
 		return dbfacade.carica(c);
-	}
-	return false;
+
 }
 
-@Override
-public boolean pubblicaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-		boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd)
-		throws AccountDoesNotExist, NotLoggedIn {
-	      
-	       Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
-	       if(this.seiLoggato(this.getIdProfilo() ) == true){
-	    	 return dbfacade.carica(f); 
-	      } else {
-	              return false;
-	             }
-}
 
-@Override
-public boolean pubblicaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
-		boolean visibile, boolean condivisibile, String profilo, String percorso, int durataInSecondi)
-		throws AccountDoesNotExist, NotLoggedIn {
-	
-	    Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo,
-	    		             percorso, durataInSecondi);
-	    if(this.seiLoggato(this.getIdProfilo()) == true) {
-	    	return dbfacade.carica(v);
-	    } else {
-	            return false;
-	           }
-}
-
-@Override
-public boolean pubblicaSondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione,
-		                                       String descrizione, boolean visibile, boolean condivisibile, 
-		                                       String profilo, String primaScelta,String secondaScelta, int[] conteggio) 
-		                                       throws AccountDoesNotExist, NotLoggedIn {
-	
-	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, 
-			                                                profilo, primaScelta, secondaScelta, secondaScelta, primaScelta, conteggio);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.carica(s);
-	} else {
-	       return false;
-	       }
-}
-
-@Override
-public boolean pubblicaSondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, 
-		                                        boolean visibile, boolean condivisibile, String profilo, String primaScelta,
-		                                        String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio)
-		                                        throws AccountDoesNotExist, NotLoggedIn {
-	
-	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
-			                                                    profilo, primaScelta, secondaScelta, conteggio);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.carica(sdp);
-	} else {
-	        return false;
-	       }
-}
-
-@Override
-public boolean pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, 
-		                     boolean condivisibile, String profilo, String font, String titolo)
-		                     throws AccountDoesNotExist, NotLoggedIn {
-	
-	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.carica(t);
-	} else {
-	        return false;
-	       }
-}
 
 @Override
 public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist, NotLoggedIn {
@@ -605,87 +540,17 @@ public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist, No
 	       }
 }
 
-@Override
-public boolean rimuoviFoto(String idPost) throws AccountDoesNotExist, NotLoggedIn {
-	
-	Foto f = new Foto(idPost, null, null, null, false, false, null, null, false);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(f);
-	} else {
-	        return false;
-	       }
-}
-
-@Override
-public boolean rimuoviVideo(String idPost) throws AccountDoesNotExist,NotLoggedIn {
-	
-	Video v = new Video(idPost, null, null, null, false, false, null, null, 0);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(v);
-	} else {
-	        return false;
-	       }
-}
-
-@Override
-public boolean rimuoviSondaggioSceltaMultipla(String idPost) throws AccountDoesNotExist, NotLoggedIn {
-	
-	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, null, null, null, false, false, 
-			                                                 null, null, null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(s);
-	} else {
-	        return false;
-	       }
-}
-
-@Override
-public boolean rimuoviSondaggioDoppiaVotazione(String idPost) throws AccountDoesNotExist, NotLoggedIn {
-	
-	SondaggioDoppiaVotazione sdp = new SondaggioDoppiaVotazione(idPost, null, null, null, false, false, 
-			                                                    null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(sdp);
-	} else {
-	        return false;
-	       }
-}
 
 
 @Override
-public boolean rimuoviTesto(String idPost) throws AccountDoesNotExist, NotLoggedIn {
-	
-	Testo t = new Testo(idPost, null, null, null, false, false, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(t);
-	} else {
-	        return false;
-	       }
-}
+public boolean cercaCommento(String id) throws AccountDoesNotExist {
 
-@Override
-public boolean cercaProfilo(String id) throws AccountDoesNotExist, NotLoggedIn{
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-	dbfacade.stampaProfiloCercato(id);
-	}
-	return false;
-}
-
-@Override
-public boolean cercaCommento(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		dbfacade.stampaCommentoCercato(id);
 		}
 		return false;
 }
 
-@Override
-public boolean cercaFoto(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaFotoCercate(id);
-		}
-		return false;
-}
+
 
 @Override
 public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
@@ -697,38 +562,6 @@ public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
 
 
 @Override
-public boolean cercaSondaggioDoppiaVotazione(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSDVcercato(id);
-		}
-		return false;
-}
-
-@Override
-public boolean cercaSondaggioSceltaMultipla(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSSMcercato(id);
-		}
-		return false;
-}
-
-@Override
-public boolean cercaTesto(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaTestoCercato(id);
-		}
-		return false;
-}
-
-@Override
-public boolean cercaVideo(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaVideoCercato(id);
-		}
-		return false;
-}
-
-@Override
 public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist, NotLoggedIn {
 	if(this.seiLoggato(this.getIdProfilo()) == true) {
 		dbfacade.stampaCommentiSottoPost(c);
@@ -736,13 +569,6 @@ public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist
 		return false;
 }
 
-@Override
-public boolean selectAllFoto() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllFoto();
-		}
-		return false;
-}
 
 @Override
 public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
@@ -752,46 +578,8 @@ public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
 		return false;
 }
 
-@Override
-public boolean selectAllSondaggioDoppiaVotazione() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllSDV();
-		}
-		return false;
-}
 
-@Override
-public boolean selectAllSondaggioSceltaMultipla() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllSSM();
-		}
-		return false;
-}
 
-@Override
-public boolean selectAllTesto() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllTesto();
-		}
-		return false;
-}
-
-@Override
-public boolean selectAllVideo() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllVideo();
-		}
-		return false;
-}
-
-@Override
-public boolean stampaInfoProfilo() throws AccountDoesNotExist, NotLoggedIn {
-
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaProfiloCercato(this.getIdProfilo());
-		}
-		return false;
-}
 
 @Override
 public boolean vediMieiFollower(String id) throws AccountDoesNotExist, NotLoggedIn {
@@ -821,22 +609,11 @@ public boolean invitaUtenteAdIscriversi(Profilo p) {
 }
 
 
-@Override
-public boolean aggiungiSegnaLibro() {
-	// TODO Auto-generated method stub
-	return false;
-}
 
 
 
 @Override
 public boolean accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public boolean pubblicaPost(Post p) {
 	// TODO Auto-generated method stub
 	return false;
 }

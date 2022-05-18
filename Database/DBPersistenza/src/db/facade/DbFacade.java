@@ -7,7 +7,6 @@ import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
-import profilo.exception.NotLoggedIn;
 import profilo.follow.Follow;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
@@ -15,8 +14,10 @@ import db.follow.FollowDB;
 import db.follow.FollowDao;
 import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
+import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
 import db.notifica.NotificaDao;
+import db.post.PostDB;
 import db.post.PostDao;
 import db.post.multimedia.foto.FotoDao;
 import db.post.multimedia.video.VideoDB;
@@ -30,6 +31,7 @@ import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -48,7 +50,6 @@ public class DbFacade {
 	private CommentoDao cDao;
 	
 	private GruppoDao gDao;
-	private NotificaDao nDao;
 	private ProfiloDao pDao;
 	private FollowDao flDao;
 	
@@ -56,7 +57,6 @@ public class DbFacade {
 	private DbFacade() {
 		cDao = new CommentoDao();
 		gDao = new GruppoDao();
-		nDao = new NotificaDao();
 		pDao = new ProfiloDao();
 		flDao = new FollowDao();
 	}
@@ -153,9 +153,11 @@ public class DbFacade {
 		return mDao.rimuoviMessaggio(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
-	public ArrayList<Messaggio> cerca(String m, TipoMessaggio t){
-		mDao = Utility.convertiTipoMessaggio(t);
-		 return ConvertitoreFacade.getIstance().convertiLista(t, mDao.cercaMessaggio(m));
+	public Messaggio cercaMessaggio(Messaggio m){
+		mDao = Utility.convertiTipoMessaggio(m.getTipo());
+		MessaggioDB mdb = mDao.cercaMessaggio(ConvertitoreFacade.getIstance().converti(m));
+		return ConvertitoreFacade.getIstance().convertiInverso(mdb, m.getTipo());
+		
 	}
 	
 	public String ottieniTestoMessaggio(String m, TipoMessaggio t) {
@@ -176,17 +178,14 @@ public class DbFacade {
 	}
 	
 	
-	
-
-	
 	//Post
 	
      public boolean carica(Post p) {
     	pstDao = Utility.convertiTipoPost(p.getTipo());
     	boolean b = pstDao.caricaPost(ConvertitoreFacade.getIstance().converti(p));
     	String [] s = ConvertitoreFacade.getIstance().ritornaChiaviString(p);
-    	int [] i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
-    	boolean [] a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
+    	int  i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
+    	boolean a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
     	pstDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s, i, a);
     	return b;
     		
@@ -198,122 +197,27 @@ public class DbFacade {
      }
      
      
-      //______________________________________________________________________________________________
+     public Post cercaPost(Post p){
+     	pstDao = Utility.convertiTipoPost(p.getTipo());
+     	PostDB pdb = pstDao.cercaPost(ConvertitoreFacade.getIstance().converti(p));
+     	return ConvertitoreFacade.getIstance().convertiInverso(pdb, p.getTipo());
+     	
+
+     }
      
-	public ArrayList<SondaggioDoppiaVotazioneDB> selectAllSDV() {
-		return sdvDao.selectAll();
-	}
+     public ArrayList<Post> selectAllPost(TipoPost t){
+     	pstDao = Utility.convertiTipoPost(t);
+     	return ConvertitoreFacade.getIstance().convertiLista(t, pstDao.selectAll());
 
-	public void stampaSelectAllSDV() {
-		ArrayList<SondaggioDoppiaVotazioneDB> res = sdvDao.selectAll();
-		for(SondaggioDoppiaVotazioneDB sdb : res)
-			System.out.println(sdb.toString());
-	}
-
-	public ArrayList<SondaggioDoppiaVotazioneDB> cercaSDV(String s){
-		return sdvDao.cercaSondaggio(s);
-	}
-	
-	public void stampaSDVcercato(String s) {
-		ArrayList<SondaggioDoppiaVotazioneDB> res = sdvDao.cercaSondaggio(s);
-		for(SondaggioDoppiaVotazioneDB sdb : res)
-			System.out.println(sdb.toString());
-	}
-
-	
-	
-	public ArrayList<SondaggioSceltaMultiplaDB> selectAllSSM() {
-		return ssmDao.selectAll();
-	}
-
-	public void stampaSelectAllSSM() {
-		ArrayList<SondaggioSceltaMultiplaDB> res = ssmDao.selectAll();
-		for(SondaggioSceltaMultiplaDB sdb : res)
-			System.out.println(sdb.toString());
-	}
-
-	
-	public ArrayList<SondaggioSceltaMultiplaDB> cercaSSM(String s){
-		return ssmDao.cerca(s);
-	}
-	
-	public void stampaSSMcercato(String s) {
-		ArrayList<SondaggioSceltaMultiplaDB> res = ssmDao.cerca(s);
-		for(SondaggioSceltaMultiplaDB sdb : res)
-			System.out.println(sdb.toString());
-	}
-	
-	public ArrayList<TestoDB> selectAllTesto() {
-		return tDao.selectAll();
-	}
-	
-	public void stampaSelectAllTesto() {
-		ArrayList<TestoDB> res = tDao.selectAll();
-		for(TestoDB tdb: res)
-			System.out.println(tdb.toString());
-	}
-	
-	public ArrayList<TestoDB> cercaTesto(String s){
-		return tDao.cercaTesto(s);
-	}
-	
-	public void stampaTestoCercato(String s) {
-		ArrayList<TestoDB> res = tDao.cercaTesto(s);
-		for(TestoDB tdb: res)
-			System.out.println(tdb.toString());
-	}
-	
-	
-	public ArrayList<VideoDB> selectAllVideo() {
-		return vDao.selectAll();
-	}
-	
-	public void stampaSelectAllVideo() {
-		ArrayList<VideoDB> res = vDao.selectAll();
-		for(VideoDB vdb : res)
-			System.out.println(vdb.toString());
-	}
-	
-	public ArrayList<VideoDB> cercaVideo(String s){
-		return vDao.cercaVideo(s);
-	}
-	
-	public void stampaVideoCercato(String s) {
-		ArrayList<VideoDB> res = vDao.cercaVideo(s);
-		for(VideoDB vdb : res)
-			System.out.println(vdb.toString());
-	}
-	
-
-	public ArrayList<FotoDB> selectAllFoto() {
-		return fDao.selectAll();
-	}
-	public void stampaSelectAllFoto() {
-		ArrayList<FotoDB> res = fDao.selectAll();
-		for(FotoDB fdb : res)
-			System.out.println(fdb.toString());
-	}
-	public ArrayList<FotoDB> cercaFoto(String f){
-		return fDao.cercaFoto(f);
-	}
-	public void stampaFotoCercate(String f) {
-		ArrayList<FotoDB> res = fDao.cercaFoto(f);
-		for(FotoDB fdb : res)
-			System.out.println(fdb.toString());
-	}
+     }
+     
 	
 	//Profilo
 	
-	public ArrayList<ProfiloDB> selectAllProfilo() {
-		return pDao.selectAll();
+	public ArrayList<Profilo> selectAllProfilo() {
+		return ConvertitoreFacade.getIstance().convertiLista(pDao.selectAll());
 	}
-	
-	public void stampaSelectAllProfilo() {
-		ArrayList<ProfiloDB> res = pDao.selectAll();
-		for(ProfiloDB pdb : res)
-			System.out.println(pdb.toString());
-	}
-	
+
 	public boolean carica(Profilo p) {
 		return pDao.inserisciProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
@@ -326,13 +230,10 @@ public class DbFacade {
 		return pDao.rimuoviProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
-	public ArrayList<ProfiloDB> cercaProfilo(String p) {
-		return pDao.cercaProfilo(p);
-	}
-	public void stampaProfiloCercato(String p) {
-		ArrayList<ProfiloDB> res = pDao.cercaProfilo(p);
-		for(ProfiloDB pdb : res)
-			System.out.println(pdb.toString());
+
+	public Profilo cercaProfilo(Profilo p) {
+		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
+		return ConvertitoreFacade.getIstance().convertiInverso(pdb);
 	}
 	
 	public boolean vediEsiste(String idProfilo) throws AccountDoesNotExist {
@@ -369,6 +270,7 @@ public class DbFacade {
 		return pDao.modificaPsw(p, b);
 	}
 
+	//Follow
 	
 	public boolean carica(Follow f) {
 		return flDao.carica(ConvertitoreFacade.getIstance().converti(f));
@@ -413,7 +315,7 @@ public class DbFacade {
 	//Alcuni metodi utility
 	
 	
-	//Ritorna true se l'account inserito è "seguibile"
+	//Ritorna true se l'account inserito ï¿½ "seguibile"
 	public boolean profiloNonSeguito(Follow f) {
 		ArrayList<FollowDB> search = this.cercaFollow(f.getMailProfiloPersonale(), f.getMailProfiloSeguito());
 		if (search.isEmpty() == true) {
@@ -422,7 +324,7 @@ public class DbFacade {
 		return false;
 	}
 
-	//Ritorna true se l'account è esistente
+	//Ritorna true se l'account ï¿½ esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist {
 		ArrayList<ProfiloDB> res = this.cercaProfilo(p.getIdProfilo());
 		if(res.isEmpty() == true) {
@@ -431,7 +333,7 @@ public class DbFacade {
 		return true;
 	}
 
-	//Ritorna true se l'account è loggato
+	//Ritorna true se l'account ï¿½ loggato
 	public boolean seiLoggato(String emailProfilo) throws AccountDoesNotExist, NotLoggedIn {
 		Profilo p = new Profilo(emailProfilo, null);
 		if(this.accountEsistente(p) == true) {
