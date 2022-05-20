@@ -89,7 +89,10 @@ public class Frame extends JFrame {
 		
 		Ricerca ricerca = new Ricerca();
 		mappaSchermate.put("Ricerca", ricerca);
-
+		
+		PostVisualizzato postVisualizzato = new PostVisualizzato();
+		mappaSchermate.put("Postvisualizzato", postVisualizzato);
+	
 	}
 	
 	public void mostraSchermata(String Schermata) {
@@ -264,6 +267,11 @@ public class Frame extends JFrame {
 	public Etichette getEtichettaNome() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
 	}
+	
+	public JButton getPulsanteFotoProfilo() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteFotoProfilo();
+	}
+	
 	
 	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti) {
 		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);

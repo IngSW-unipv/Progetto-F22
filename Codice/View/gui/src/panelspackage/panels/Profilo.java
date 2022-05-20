@@ -27,7 +27,6 @@ public class  Profilo extends JPanel {
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		this.avvio();
 		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
-		
 	}
 	
 	public void avvio() {
@@ -68,8 +67,8 @@ public class  Profilo extends JPanel {
 		ListaEtichette = listaAreaTesto;
 	}
 	
-	public Pulsanti getHomeProfilo() {
-		return homeProfilo;
+	public Pulsanti getPulsanteFotoProfilo() {
+		return this.immagineProf;
 	}
 
 	public void setHomeProfilo(Pulsanti homeProfilo) {
@@ -87,6 +86,7 @@ public class  Profilo extends JPanel {
 	public Etichette getEtichettaNome() {
 		return etichettaNome;
 	}
+
 	
 	public void setSchermataDati(int numeroPost, int numeroFollowers, int numeroSeguiti) {
 		dati.clear();
@@ -104,5 +104,9 @@ public class  Profilo extends JPanel {
 		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);		
 		}
+	}
+
+	public Pulsanti getHomeProfilo() {
+		return homeProfilo;
 	}
 }

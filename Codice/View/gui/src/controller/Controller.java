@@ -19,7 +19,7 @@ public class Controller {
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
 						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
-						   gestoreCerca, gestoreHomeCerca;
+						   gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -118,7 +118,11 @@ public class Controller {
 		gestoreLogOut = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//model.logout(model.getProfiloAttivo());
+				try {
+					model.logout(model.getProfiloAttivo().getIdProfilo());
+				} catch (AccountDoesNotExist e1) {
+					e1.printStackTrace();
+				}
 				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Login");
 			}
@@ -181,6 +185,14 @@ public class Controller {
 		};
 		view.getHomeChatButton().addActionListener(gestoreHomeChat);
 		
+		gestoreFotoProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				settaPostVisualizzato();
+				mostraSchermata("Postvisualizzato");
+			}
+		};
+		view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
 		
 		//ActionListeners schermata Notifiche
 		gestoreHomePannelloNotifiche = new ActionListener() {
@@ -325,6 +337,9 @@ public class Controller {
 		//String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
 	}
 	
+	public void settaPostVisualizzato() {
+		
+	}
 	public void ricerca() {
 		ArrayList<String> risultatiRicerca = new  ArrayList<String>();
 		risultatiRicerca.add(view.getTestoRicerca());

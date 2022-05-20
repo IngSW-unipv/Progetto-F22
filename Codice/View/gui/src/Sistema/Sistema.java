@@ -73,7 +73,6 @@ public class Sistema {
 
     
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
-		
 			if(dbfacade.vediPswCambiata(email) == false)
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		else if (dbfacade.vediEsiste(email) == false)
@@ -82,6 +81,7 @@ public class Sistema {
 	 			dbfacade.modificaLoggato(email, true);
 	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
 	 			this.setProfiloAttivo(p);
+	 			System.out.println("fssefes" + this.getProfiloAttivo().getIdProfilo());
 	 			
 	 			return true;
 	 		}
