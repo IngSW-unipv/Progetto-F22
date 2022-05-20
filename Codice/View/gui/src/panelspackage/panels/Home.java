@@ -20,7 +20,7 @@ public class Home extends JPanel {
 	private Font fontTitle, fontText, fontButton;
 	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,buttonNotifiche,pPost,pStory,pSondaggio,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
-	private AreaDiTesto testoRicerca;
+	private JTextField testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
 
 	
@@ -49,8 +49,10 @@ public class Home extends JPanel {
 		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
 
 		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
-		areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "____", fontText), BorderLayout.CENTER);
+		//areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "", fontText), BorderLayout.CENTER);
+		areaRicerca.add(testoRicerca = new JTextField(""));
 		areaRicerca.add(searchButton = new Pulsanti("CERCA", fontButton), BorderLayout.EAST);
+		searchButton.setEnabled(true);
 		
 		SpecificContainer menuHome = new SpecificContainer();
 		containerNorth.add(menuHome, BorderLayout.NORTH);
@@ -260,5 +262,13 @@ public class Home extends JPanel {
 
 	public void setButtonNotifiche(Pulsanti buttonNotifiche) {
 		this.buttonNotifiche = buttonNotifiche;
+	}
+
+	public JTextField getTestoRicerca() {
+		return testoRicerca;
+	}
+
+	public void getTestoRicerca(JTextField testoRicerca) {
+		this.testoRicerca = testoRicerca;
 	}
 }
