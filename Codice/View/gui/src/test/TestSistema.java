@@ -1,48 +1,35 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Test.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import Sistema.Sistema;
+import db.facade.DbFacade;
 import profilo.Profilo;
 import profilo.exception.*;
 
 class TestSistema {
 
-	static Sistema sistema; 
+	static Sistema sistema = new Sistema();
+	
 
-	public static void main(String[] args) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist   {
-		sistema = new Sistema();
-
-		setUpBeforeClass();
-		
-		testSignIn("ciccioGamer@unipv.it", "ciccioGamer", "Mucca");
-		testLogIn("ciccioGamer@unipv.it", "Mucca");
-		testCambioPassword("ciccioGamer@unipv.it", "Mucca", "Lucertola");
-		testLogInConVecchiaPassWord("ciccioGamer@unipv.it", "Mucca");
-		testCreaPost();
-		
-		tearDownAfterClass();
-	}
-
-	@Before
-	static void setUpBeforeClass() { 
-		
-	}
-
-	@After
-	static void tearDownAfterClass() {
-		sistema.rimuoviAccount(new Profilo("ciccioGamer@unipv.it","ciccio"));
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		Profilo p = new Profilo("ciccioGamer@unipv.it", "Mucca");
+		DbFacade.getIstance().carica(p);
 	}
 
 	@Test
-	static	void testSignIn(String email, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
+	void testSignIn() throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist, Exception {
 		boolean esito = false;
 		try {
-			esito = sistema.signIn(email, nickName, password);
+			esito = sistema.signIn("FavijTv@unipv.it", "Favij", "youtuboanch'io");
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
 		}	
@@ -51,10 +38,25 @@ class TestSistema {
 	}
 	
 	@Test
-	static void testLogIn(String email, String passWord) {
+	void testLogIn() {
 		boolean esito = false;
 		try {
-		 	esito = sistema.login(email, passWord);
+		 	esito = sistema.login("paoloruffini@gmail.it	"	, "paoloruffini");
+	 	} catch (ChangeDefaultPassword e) {
+		 	e.printStackTrace();
+	 	} catch (AccountDoesNotExist e) {
+		 	e.printStackTrace();
+	 	} catch (PswOmailErrati e) {
+	 		e.printStackTrace();
+	 	} 
+		assertTrue(esito);
+	}
+	
+	@Test
+	void testLogInFallito() {
+		boolean esito = false;
+		try {
+		 	esito = sistema.login("lasabrigamer@unipv.it", "mucca");
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
@@ -63,43 +65,41 @@ class TestSistema {
 	 		e.printStackTrace();
 	 		
 	 	} 
-		System.out.println(esito);
-		assertTrue(esito);
+		assertFalse(esito);
 	}
-	
 	@Test
-	static void testCambioPassword(String email, String vecchiaPassword, String nuovaPassword) {
+	void testCambioPassword() {
 		boolean esito = false;
 		try {
-			esito = sistema.cambiaPassword(email,vecchiaPassword, nuovaPassword);
+			esito = sistema.cambiaPassword("lasabrigamer@unipv.it", "lasabri", "cavallo");
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
 		 	e.printStackTrace();
 	 	}
-		System.out.println(esito);
 		assertTrue(esito);
 	}
 	
-	@Test
-	static void testLogInConVecchiaPassWord(String email, String passWord) {
-		boolean esito = true;
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
 		try {
-		 	sistema.login(email, passWord);
+			try {
+				sistema.rimuoviAccount(new Profilo("FavijTv@unipv.it"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			sistema.cambiaPassword("lasabrigamer@unipv.it", "cavallo", "lasabri");
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
 		 	e.printStackTrace();
-	 	} catch (PswOmailErrati e) {
-	 		esito = false;
-	 	} 			
-			System.out.println(esito);
-	 		assertFalse(esito);
-	}
-	@Test
-	static void testCreaPost() {
-		boolean esito = false;
-		sistema.pubblicaPost("viva i ceci", null, null, "ceci", false, false, "altriceci", "directory", false);
+	 	}
 	}
 }
+	
+
 
