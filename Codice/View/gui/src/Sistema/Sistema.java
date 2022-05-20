@@ -82,6 +82,7 @@ public class Sistema {
 	 			dbfacade.modificaLoggato(email, true);
 	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
 	 			this.setProfiloAttivo(p);
+	 			
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);

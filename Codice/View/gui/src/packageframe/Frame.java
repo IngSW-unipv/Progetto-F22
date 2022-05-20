@@ -100,7 +100,6 @@ public class Frame extends JFrame {
 	public String getEmailPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
 	}
-	
 
 	public String getNickNamePerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getNickNamePerReigstrarsi();
@@ -265,4 +264,11 @@ public class Frame extends JFrame {
 		((Ricerca)mappaSchermate.get("Ricerca")).impostaStringaCercata();
 	}
 	
+	public Etichette getEtichettaNome() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
+	}
+	
+	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti) {
+		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);
+	}
 }

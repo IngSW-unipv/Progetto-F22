@@ -75,6 +75,7 @@ public class Controller {
 		gestoreProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				aggiornaSchermataProfilo();
 				mostraSchermata("Profilo");
 			}
 		};
@@ -322,4 +323,10 @@ public class Controller {
 		
 	}
 	
+	public void aggiornaSchermataProfilo() {
+
+		view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
+		view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
+		//String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
+	}
 }

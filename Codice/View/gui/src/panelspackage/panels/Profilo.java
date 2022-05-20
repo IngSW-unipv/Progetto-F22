@@ -22,7 +22,7 @@ public class  Profilo extends JPanel {
 
 	private Pulsanti homeProfilo, immagineProf;
 	private Etichette etichettaNome;
-
+	private SpecificContainer containerNorth = new SpecificContainer();
 	
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		this.avvio();
@@ -39,27 +39,10 @@ public class  Profilo extends JPanel {
 	
 	public void initComponents(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		
-		SpecificContainer containerNorth = new SpecificContainer();
 		add(containerNorth, BorderLayout.NORTH);
 		
 		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.WEST);
 		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		
-		dati.add("N.Post");
-		dati.add(Integer.toString(numeroPost));
-		dati.add("N.Follower");
-		dati.add(Integer.toString(numeroFollowers));
-		dati.add("N.Seguiti");
-		dati.add(Integer.toString(numeroSeguiti));
-		
-		ListaEtichette.clear();
-		for( i = 0; i < this.dati.size(); i++) {
-			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
-			ListaEtichette.add(etichetta);
-		}
-		
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
-		containerNorth.add(Dati, BorderLayout.SOUTH);
 		
 		SpecificContainer containerCenter = new SpecificContainer();
 		add(containerCenter, BorderLayout.CENTER);
@@ -101,4 +84,25 @@ public class  Profilo extends JPanel {
 		this.immagineProf = immagineProf;
 	}
 	
+	public Etichette getEtichettaNome() {
+		return etichettaNome;
+	}
+	
+	public void setSchermataDati(int numeroPost, int numeroFollowers, int numeroSeguiti) {
+		dati.clear();
+		dati.add("N.Post");
+		dati.add(Integer.toString(numeroPost));
+		dati.add("N.Follower");
+		dati.add(Integer.toString(numeroFollowers));
+		dati.add("N.Seguiti");
+		dati.add(Integer.toString(numeroSeguiti));
+		
+		for( i = 0; i < this.dati.size(); i++) {
+			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
+			ListaEtichette.add(etichetta);
+			
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
+		containerNorth.add(Dati, BorderLayout.SOUTH);		
+		}
+	}
 }
