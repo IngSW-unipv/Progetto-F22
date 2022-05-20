@@ -256,12 +256,9 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca();
 	}
 	
-	public void setStringaCercata(String stringaCercata) {
-		((Ricerca)mappaSchermate.get("Ricerca")).setStringCercata(stringaCercata);
-	}
-	
-	public void impostaStringaCercataInRicerca() {
-		((Ricerca)mappaSchermate.get("Ricerca")).impostaStringaCercata();
+	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
+		 ((Ricerca)mappaSchermate.get("Ricerca")).impostaRisultatiRicerca(risultatiRicerca);
+
 	}
 	
 	public Etichette getEtichettaNome() {
@@ -270,5 +267,9 @@ public class Frame extends JFrame {
 	
 	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti) {
 		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);
+	}
+	
+	public Etichette getTestoRicercaInSchermataRicerca() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
 	}
 }

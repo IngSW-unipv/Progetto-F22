@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import Sistema.Sistema;
 import convertitore.chatUtility.UtilityChat;
@@ -103,17 +104,11 @@ public class Controller {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(verificaTestoRicerca()) {
-					oggettoDaCercare();
+					ricerca();
 					mostraSchermata("Ricerca");
 					
-					
-					
-					
-					
-					
-				} else {
-					view.setTestoRicerca("Inserire un username da cercare");
-				}				
+				} else 
+					view.setTestoRicerca("Inserire un username da cercare");		
 			}
 		};
 		view.getCercaButton().addActionListener(gestoreCerca);
@@ -328,5 +323,13 @@ public class Controller {
 		view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
 		view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
 		//String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
+	}
+	
+	public void ricerca() {
+		ArrayList<String> risultatiRicerca = new  ArrayList<String>();
+		risultatiRicerca.add(view.getTestoRicerca());
+		risultatiRicerca.add(view.getTestoRicerca());
+		view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
+		view.impostaRisultatiRicerca(risultatiRicerca);
 	}
 }

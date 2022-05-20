@@ -57,7 +57,7 @@ public class  Profilo extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		containerSouth.add(homeProfilo= new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
+		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
 	}
 
 	public ArrayList<JComponent> getListaAreaTesto() {
