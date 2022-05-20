@@ -35,12 +35,9 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				/*boolean success;
-				success = login();
-				if (success == true) {
+				if (login()) {
 					mostraSchermata("Home");
-				}*/
-				mostraSchermata("Home");
+				}
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
