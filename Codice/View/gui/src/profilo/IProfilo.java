@@ -73,7 +73,8 @@ public interface IProfilo {
   
     
     //Commenti
-    public boolean creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist; 
+    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist; 
+    public boolean pubblicaCommento(Commento c);
     public boolean rimuoviCommento(Commento c);
 	public Commento cercaCommento(Commento c);
 	public void selectAllCommentiSottoPost(Commento c);

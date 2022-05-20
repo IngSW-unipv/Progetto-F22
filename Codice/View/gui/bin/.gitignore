@@ -1,22 +1,12 @@
-<<<<<<< HEAD
-/chat/
-=======
 /.DS_Store
 /Messaggio/
 /Sistema/
 /chat/
 /controller/
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 /convertitore/
 /db/
 /packageframe/
+/panelspackage/
 /post/
 /profilo/
-<<<<<<< HEAD
-/Messaggio/
-/Sistema/
-/controller/
-/panelspackage/
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 /test/

@@ -78,18 +78,16 @@ public class Sistema {
 
     
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
-			setProfiloAttivo(dbfacade.cercaProfilo(new Profilo(email,null)));
-			System.out.println("profiloattivo di: " + this.getProfiloAttivo().getIdProfilo());
+		
 			if(dbfacade.vediPswCambiata(email) == false)
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		else if (dbfacade.vediEsiste(email) == false)
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
-<<<<<<< HEAD
+	 			System.out.println("profiloattivo di: " + this.getProfiloAttivo().getIdProfilo());
 	 			setProfiloAttivo(dbfacade.cerca(new Profilo(email,null)));
-=======
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
+
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
