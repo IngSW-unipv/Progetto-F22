@@ -2,8 +2,14 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+
 import Sistema.Sistema;
+import convertitore.chatUtility.UtilityChat;
 import packageframe.Frame;
+import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
 public class Controller {
@@ -295,16 +301,18 @@ public class Controller {
 	}
 	
 	public void mostraFallimentoLogin(String codiceFallimento) {
-	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
-	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+		view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
+		view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 	}
 	
 	public void pubblicaPost() {
 		String percorsoFilePost = view.ottieniPercorsoFile();
 		String commentoPost = view.ottieniCommento();
-		System.out.println(percorsoFilePost);
-		model.pubblicaPost(commentoPost, null, null, commentoPost, false, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+		Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+		model.pubblicaPost(UtilityChat.convertiInSqlData(d), t, commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
 	}
+	
 	
 	public boolean verificaTestoRicerca() {
 		if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
