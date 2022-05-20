@@ -18,6 +18,7 @@ import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
+import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.SpecificContainer;
@@ -85,6 +86,9 @@ public class Frame extends JFrame {
 
 		CreazionePost creazionePost = new CreazionePost();
 		mappaSchermate.put("CreazionePost", creazionePost);
+		
+		Ricerca ricerca = new Ricerca();
+		mappaSchermate.put("Ricerca", ricerca);
 
 	}
 	
@@ -164,6 +168,10 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getButtonNotifiche();
 	}
 	
+	public JButton getCercaButton() {
+		return ((Home)mappaSchermate.get("Home")).getSearchButton();
+	}
+	
 	public JButton getLoginButton() {
 		return ((LogIn)mappaSchermate.get("Login")).getAccedi();
 	}
@@ -219,6 +227,11 @@ public class Frame extends JFrame {
 	public JButton getHomePannelloNotificheButton() {
 		return ((PannelloNotifiche)mappaSchermate.get("PannelloNotifiche")).getHomeNotifiche();
 	}
+	
+	public JButton getHomeRicercaButton() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getHomeRicerca();
+	}
+	
 
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
@@ -230,6 +243,26 @@ public class Frame extends JFrame {
 
 	public void setFrameMainContainer(SpecificContainer frameMainContainer) {
 		FrameMainContainer = frameMainContainer;
+	}
+	
+	public String getTestoRicerca() {
+		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
+	}
+	
+	public void setTestoRicerca(String testoDaImpostare) {
+		((Home)mappaSchermate.get("Home")).getTestoRicerca().setText(testoDaImpostare);
+	}
+	
+	public JTextField getAreaDiTestoLabel() {
+		return ((Home)mappaSchermate.get("Home")).getTestoRicerca();
+	}
+	
+	public void setStringaCercata(String stringaCercata) {
+		((Ricerca)mappaSchermate.get("Ricerca")).setStringCercata(stringaCercata);
+	}
+	
+	public void impostaStringaCercataInRicerca() {
+		((Ricerca)mappaSchermate.get("Ricerca")).impostaStringaCercata();
 	}
 	
 }

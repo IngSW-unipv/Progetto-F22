@@ -11,7 +11,8 @@ public class Controller {
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
-						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount;
+						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
+						   gestoreCerca, gestoreHomeCerca;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -28,12 +29,12 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean success;
+				/*boolean success;
 				success = login();
 				if (success == true) {
 					mostraSchermata("Home");
-				}
-				//mostraSchermata("Home");
+				}*/
+				mostraSchermata("Home");
 			}
 		};
 		view.getLoginButton().addActionListener(gestoreLogin);
@@ -50,10 +51,8 @@ public class Controller {
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean success = false;
-	
-					success = signUp();
-				if (success == true) {
+				
+				if (signUp()) {
 					mostraSchermata("Home");
 				}
 			}
@@ -95,6 +94,25 @@ public class Controller {
 			}
 		}; 
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
+		
+		gestoreCerca = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(verificaTestoRicerca()) {
+					oggettoDaCercare();
+					mostraSchermata("Ricerca");
+					
+					
+					
+					
+					
+					
+				} else {
+					view.setTestoRicerca("Inserire un username da cercare");
+				}				
+			}
+		};
+		view.getCercaButton().addActionListener(gestoreCerca);
 	
 		
 		//ActionListeners schermata Impostazioni
@@ -204,6 +222,17 @@ public class Controller {
 		};
 		view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
 		
+		//ActionListeners schermata Ricerca
+		gestoreHomeCerca = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostraSchermata("Home");
+			}
+		};
+		view.getHomeRicercaButton().addActionListener(gestoreHomeCerca);
+		
+		
+		
 	}
 	
 	public void refresh() {
@@ -269,10 +298,23 @@ public class Controller {
 	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
 	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
 	}
+	
 	public void pubblicaPost() {
 		String percorsoFilePost = view.ottieniPercorsoFile();
 		String commentoPost = view.ottieniCommento();
 		System.out.println(percorsoFilePost);
 		model.pubblicaPost(commentoPost, null, null, commentoPost, false, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
 	}
+	
+	public boolean verificaTestoRicerca() {
+		if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
+			return false;
+		}
+		return true;
+	}
+
+	public void oggettoDaCercare() {
+		
+	}
+	
 }
