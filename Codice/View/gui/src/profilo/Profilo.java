@@ -55,6 +55,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
@@ -69,6 +70,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();

@@ -32,15 +32,15 @@ public class DbFacade {
 	
 	private MessaggioDao mDao;
 	private PostDao pstDao;
-	
 	private CommentoDao cDao;
-	
 	private GruppoDao gDao;
 	private ProfiloDao pDao;
 	private FollowDao flDao;
 	
 	
 	private DbFacade() {
+		mDao = null;
+		pstDao = null;
 		cDao = new CommentoDao();
 		gDao = new GruppoDao();
 		pDao = new ProfiloDao();
@@ -203,9 +203,11 @@ public class DbFacade {
 
 	public Profilo cerca(Profilo p) {
 		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
-		System.out.println("profilo yees: "+ ConvertitoreFacade.getIstance().convertiInverso(pdb).getNickname());
-		return ConvertitoreFacade.getIstance().convertiInverso(pdb);
+		if(pdb != null)
+			return ConvertitoreFacade.getIstance().convertiInverso(pdb);
+		return null;
 	}
+	
 	
 	public boolean vediEsiste(String idProfilo) throws AccountDoesNotExist {
 		return pDao.vediSeEsiste(idProfilo);

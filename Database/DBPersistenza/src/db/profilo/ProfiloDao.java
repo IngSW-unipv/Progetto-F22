@@ -55,7 +55,7 @@ public class ProfiloDao implements IProfiloDao{
 
 		try
 		{
-			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,tipo,esiste,pswCambiata,isloggato) values (?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,tipo,esiste,pswCambiata,isloggato,psw) values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p.getIdProfilo());
@@ -68,6 +68,7 @@ public class ProfiloDao implements IProfiloDao{
 			st1.setBoolean(8, false);
 			st1.setBoolean(9, false);
 			st1.setBoolean(10, false);
+			st1.setString(11, p.getPsw());
 			
 			st1.executeUpdate();
 

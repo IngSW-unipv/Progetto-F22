@@ -19,13 +19,11 @@ public class Sistema {
 		dbfacade = DbFacade.getIstance();
 	}
 	
-	//idProfilo e Mail sono la stessa ( va sistemato il database )
+	//idProfilo e Mail sono la stessa 
 	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
-	    ArrayList<Profilo> r = new ArrayList<>();
-	    r.add(dbfacade.cerca(p));
-
-	    if(r.isEmpty() == true) {
+		
+	    if(dbfacade.cerca(p) == null) {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
             this.cambiaDefaultPassword(mail, password);
@@ -36,14 +34,12 @@ public class Sistema {
 	
 
 		public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
-			
-	 		ArrayList<Profilo> res = new ArrayList<>();
-	 		res.add(dbfacade.cerca(new Profilo(email, null)));
+			Profilo p = new Profilo(email, null);
 	 		String s = dbfacade.vediPsw(email);
 
         
 	 		//Se provo a cambiare psw ad un account che non esiste viene lanciata una eccezione
-	 	if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
+	 	if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(email) == true) {
 	 		if(s.equals("Cambiami") && nuovaPsw != "Cambiami") {
 	 			dbfacade.modificaPsw(email, nuovaPsw);
 	 			dbfacade.modificaPswCambiata(email, true);
@@ -57,11 +53,10 @@ public class Sistema {
 
     public boolean cambiaPassword(String email, String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, AccountDoesNotExist {
     	
-	 ArrayList<Profilo> res = new ArrayList<>();
-	 	    res.add(dbfacade.cerca(new Profilo(email, null)));
+    	    Profilo p = new Profilo(email,null);
 	 		String s = dbfacade.vediPsw(email);
 
-	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
+	 		if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(email) == true) {
 
 	 		    if(dbfacade.vediPswCambiata(email) == false)
 	 			   throw new ChangeDefaultPassword("Cambiami");
@@ -85,9 +80,8 @@ public class Sistema {
 	 			throw new AccountDoesNotExist(email);
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
-	 			System.out.println("profiloattivo di: " + this.getProfiloAttivo().getIdProfilo());
-	 			setProfiloAttivo(dbfacade.cerca(new Profilo(email,null)));
-
+	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
+	 			this.setProfiloAttivo(p);
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
@@ -103,11 +97,10 @@ public class Sistema {
 	 
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
-        	ArrayList<Profilo> res = new ArrayList<>();
-	 			res.add	(dbfacade.cerca(new Profilo(email,null)));
+		 Profilo p = new Profilo(email,null);
 	 		boolean b = dbfacade.vediSeLoggato(email);
 
-	 		if(res.isEmpty() == false && dbfacade.vediEsiste(email) == true) {
+	 		if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(email) == true) {
 	 			if(b == true) {
 	 				dbfacade.modificaLoggato(email, false);
 	 				System.out.println("Hai effettuato il logout con successo");
