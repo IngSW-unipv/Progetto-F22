@@ -1,21 +1,17 @@
 package panelspackage.panels;
+
+
 import packageframe.Frame;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.Pulsanti;
-import panelspackage.panels.elements.ScrollText;
 import panelspackage.panels.elements.AreaDiTesto;
-import panelspackage.panels.elements.Box;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
+
+@SuppressWarnings("serial")
 public class CreazionePost extends JPanel {
 
 	private AreaDiTesto inserimentoCommentoPost;
@@ -24,6 +20,7 @@ public class CreazionePost extends JPanel {
 	private Pulsanti caricaFile;
 	private Etichette testoInserisciCommento;
 	private JFileChooser fileChooser;
+	private Pulsanti story;
 	
 	public CreazionePost() {
 		this.avvio();
@@ -68,9 +65,13 @@ public class CreazionePost extends JPanel {
 		
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
-		containerSouth.setLayout(new GridLayout(2, 1));
+		containerSouth.setLayout(new GridLayout(3, 1));
 		containerSouth.add(pubblicaPost);
 		containerSouth.add(homeCreazionePost = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
+		
+		story = new Pulsanti("Story",Frame.COLORESECONDARIOTEMATICO, new Font("Arial", 1, 12));
+		containerSouth.add(story);
+		
 	}
 	
 	public Pulsanti getHomeCreazionePost() {
@@ -103,6 +104,30 @@ public class CreazionePost extends JPanel {
 
 	public void setFileChooser(JFileChooser fileChooser) {
 		this.fileChooser = fileChooser;
+	}
+
+	public AreaDiTesto getInserimentoCommentoPost() {
+		return inserimentoCommentoPost;
+	}
+
+	public void setInserimentoCommentoPost(AreaDiTesto inserimentoCommentoPost) {
+		this.inserimentoCommentoPost = inserimentoCommentoPost;
+	}
+
+	public Etichette getTestoInserisciCommento() {
+		return testoInserisciCommento;
+	}
+
+	public void setTestoInserisciCommento(Etichette testoInserisciCommento) {
+		this.testoInserisciCommento = testoInserisciCommento;
+	}
+
+	public Pulsanti getStory() {
+		return story;
+	}
+
+	public void setStory(Pulsanti story) {
+		this.story = story;
 	}
 	
 }

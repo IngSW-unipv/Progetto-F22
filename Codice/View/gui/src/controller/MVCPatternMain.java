@@ -2,8 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 
+
 import Sistema.Sistema;
 import packageframe.Frame;
+import panelspackage.panels.AreaChatFrame;
 
 public class MVCPatternMain {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};
@@ -17,5 +19,6 @@ public class MVCPatternMain {
 		Sistema model = new Sistema();
 		
 		Controller ctrl = new Controller(model, view);
+	
 	}
 }

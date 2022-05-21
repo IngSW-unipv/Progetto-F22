@@ -2,12 +2,10 @@ package panelspackage.panels.elements;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import packageframe.Frame;
-
+@SuppressWarnings("serial")
 public class Etichette extends JLabel {
 	
 	public Etichette(String testo, Color colore) {

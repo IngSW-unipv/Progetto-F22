@@ -3,6 +3,7 @@ package panelspackage.panels;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class ChatMessaggi extends JPanel{
 	private Container containerInferiore;
 	private JLabel nomeAccountRicevente;
