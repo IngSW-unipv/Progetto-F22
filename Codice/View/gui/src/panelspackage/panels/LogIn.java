@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.ScrollText;
 import panelspackage.panels.elements.AreaDiTesto;
@@ -23,7 +24,7 @@ public class LogIn extends JPanel {
 	
 	private Pulsanti login, signup;
 	
-	private AreaDiTesto inserimentoEmail, inserimentoPassword;
+	private InserimentoTesto inserimentoEmail, inserimentoPassword;
 	private Etichette etichettaDiSegnalazioneLoginFallito;
 	
 	
@@ -56,9 +57,9 @@ public class LogIn extends JPanel {
 		Container containerVuoto1 = new Container();
 		containerCenterAlto.add(containerVuoto1);
 		containerCenterAlto.add(new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		containerCenterAlto.add(new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "Inserire Email", 1, 1, 20, new Font("Arial", Font.BOLD, 25)), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		containerCenterAlto.add(inserimentoEmail = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
 		containerCenterAlto.add(new Etichette("PASSWORD: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		containerCenterAlto.add(new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "Inserire Password", 1, 1, 20, new Font("Arial", Font.BOLD, 25)), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		containerCenterAlto.add(inserimentoPassword = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
 		
 		SpecificContainer containerCenterBasso = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenterBasso.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
@@ -114,26 +115,26 @@ public class LogIn extends JPanel {
 		return (JButton) this.listaComponenti.get("signup");
 	}
 
-	public AreaDiTesto getInserimentoEmail() {
+	public InserimentoTesto getInserimentoEmail() {
 		return inserimentoEmail;
 	}
 
-	public void setInserimentoEmail(AreaDiTesto inserimentoEmail) {
+	public void setInserimentoEmail(InserimentoTesto inserimentoEmail) {
 		this.inserimentoEmail = inserimentoEmail;
 	}
 
-	public AreaDiTesto getInserimentoPassword() {
+	public InserimentoTesto getInserimentoPassword() {
 		return inserimentoPassword;
 	}
 
-	public void setInserimentoPassword(AreaDiTesto inserimentoPassword) {
+	public void setInserimentoPassword(InserimentoTesto inserimentoPassword) {
 		this.inserimentoPassword = inserimentoPassword;
 	}
 	public Etichette getEtichettaErroreLogin() {
 		return etichettaDiSegnalazioneLoginFallito;
 	}
 
-	public AreaDiTesto getInserimentoPwd() {
+	public InserimentoTesto getInserimentoPwd() {
 		return inserimentoPassword;
 	}
 	

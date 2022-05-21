@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
@@ -14,7 +15,7 @@ import panelspackage.panels.elements.SpecificContainer;
 public class SignUp extends JPanel {
 	
 	private JLabel titolo,testoEmail,testoPassword,testoRipetiPassword, testoUsername;
-	private AreaDiTesto email,password,ripetiPassword,username;
+	private InserimentoTesto email,password,ripetiPassword,username;
 	private Pulsanti registrati;
 	private Pulsanti indietro;
 	
@@ -48,13 +49,13 @@ public class SignUp extends JPanel {
 		add(containerGenerale, BorderLayout.CENTER);
 		
 		containerCenter.add(testoEmail = new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(email = new AreaDiTesto(new LineBorder(Frame.COLOREPRIMARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(email = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		containerCenter.add(testoPassword = new Etichette("PASSWORD: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(password = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(password = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		containerCenter.add(testoRipetiPassword = new Etichette("RIPETI PASSWORD: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(ripetiPassword = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
-		containerCenter.add(testoUsername = new Etichette("USERNAME: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(username = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(ripetiPassword = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(testoUsername = new Etichette("USERNAME: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
+		containerCenter.add(username = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		
 		containerGenerale.add(containerVuoto);
 		containerGenerale.add(containerCenter);
