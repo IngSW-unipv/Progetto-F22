@@ -19,7 +19,7 @@ public class Controller {
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
 						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
-						   gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo;
+						   gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -61,7 +61,16 @@ public class Controller {
 				}
 			}
 		};
-		view.getRegistratiButton().addActionListener(gestoreRegistrati);	
+		view.getRegistratiButton().addActionListener(gestoreRegistrati);
+		
+		
+		gestoreIndietroSignup = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					mostraSchermata("Login");
+			}
+		};
+		view.getIndietroButton().addActionListener(gestoreIndietroSignup);
 		
 		//ActionListeners schermata Home
 		gestoreImpostazioni = new ActionListener() {

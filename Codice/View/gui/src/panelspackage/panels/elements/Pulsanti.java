@@ -11,7 +11,7 @@ public class Pulsanti extends JButton{
 
 		public Pulsanti(String name, Color colore) {
 			this.setForeground(colore);
-			this.setLabel(name);
+			this.setText(name);
 			this.setVisible(true);
 		}
 		

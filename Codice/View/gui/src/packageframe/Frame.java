@@ -162,6 +162,10 @@ public class Frame extends JFrame {
 		return ((SignUp)mappaSchermate.get("Signup")).getRegistrati();
 	}
 	
+	public JButton getIndietroButton() {
+		return ((SignUp)mappaSchermate.get("Signup")).getIndietro();
+	}
+	
 	public JButton getChatButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonChat();
 	}
