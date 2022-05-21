@@ -10,8 +10,6 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class Pulsanti extends JButton{
 	
-
-		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Color colore) {
 			this.setForeground(colore);
 			this.setText(name);
@@ -48,9 +46,6 @@ public class Pulsanti extends JButton{
 		}
 		
 		
-		public Pulsanti() {
-		
-		}
 		
 		
 }

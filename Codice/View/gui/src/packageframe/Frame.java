@@ -1,5 +1,6 @@
 package packageframe;
 import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,6 @@ import javax.swing.*;
 import Sistema.Sistema;
 import controller.Controller;
 import panelspackage.panels.Chat;
-import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
@@ -23,7 +23,9 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.SpecificContainer;
 
+@SuppressWarnings("serial")
 public class Frame extends JFrame {
+
 	
 	int i;
 	
@@ -227,7 +229,7 @@ public class Frame extends JFrame {
 	}
 	
 	public JButton getHomeChatButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getHomeChat();
+		return ((Chat)mappaSchermate.get("Chat")).getHome();
 	}
 	
 	public JButton getHomePannelloNotificheButton() {

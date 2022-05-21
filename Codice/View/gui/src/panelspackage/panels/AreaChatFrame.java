@@ -34,29 +34,28 @@ public class AreaChatFrame extends JPanel {
 	
     public void initComponents() {
     	
-    	esci = new Pulsanti("C:\\Users\\aissa\\OneDrive\\Immagini\\torna.png", Color.red, new Font("Arial", 1, 12));
-    	profilo = new Pulsanti("C:\\\\Users\\\\aissa\\\\OneDrive\\\\Immagini\\\\profiler.png", new Color(204, 255, 255), new Font("Arial", 1, 12));
-    	SpecificContainer nord = new SpecificContainer();
-    	this.add(nord, BorderLayout.NORTH);
-    	nord.add(esci);
-    	nord.add(profilo);
+      esci = new Pulsanti("C:\\Users\\aissa\\OneDrive\\Immagini\\torna.png", Color.red, new Font("Arial", 1, 12));
+      profilo = new Pulsanti("C:\\\\Users\\\\aissa\\\\OneDrive\\\\Immagini\\\\profiler.png", new Color(204, 255, 255), new Font("Arial", 1, 12));
+      SpecificContainer nord = new SpecificContainer();
+      this.add(nord, BorderLayout.NORTH);
+      nord.add(esci);
+      nord.add(profilo);
     	
-    	messaggi = new AreaDiTesto(Color.pink, 70, 40, new Font("Times New Roman", 1, 12));
-    	SpecificContainer centro = new SpecificContainer(getBackground());
-    	this.add(centro, BorderLayout.CENTER);
-    	centro.add(messaggi);
+      messaggi = new AreaDiTesto(Color.pink, 70, 40, new Font("Times New Roman", 1, 12));
+      SpecificContainer centro = new SpecificContainer(getBackground());
+      this.add(centro, BorderLayout.CENTER);
+      centro.add(messaggi);
     	
-    	scriviMessaggio = new JTextField(30);
-		scriviMessaggio.setFont(new java.awt.Font("Arial", 1, 12)); 
-		scriviMessaggio.setText("Scrivi messaggio");
-		scriviMessaggio.setBackground(Color.LIGHT_GRAY);
-		//this.add(scriviMessaggio);
-		SpecificContainer sud = new SpecificContainer(getBackground());
-		this.add(sud, BorderLayout.SOUTH);
-		sud.add(scriviMessaggio);
+      scriviMessaggio = new JTextField(30);
+	  scriviMessaggio.setFont(new java.awt.Font("Arial", 1, 12)); 
+	  scriviMessaggio.setText("Scrivi messaggio");
+	  scriviMessaggio.setBackground(Color.LIGHT_GRAY);
+      SpecificContainer sud = new SpecificContainer(getBackground());
+	  this.add(sud, BorderLayout.SOUTH);
+	  sud.add(scriviMessaggio);
 		
-		invia = new Pulsanti("Invia", Color.cyan, new Font("Times New Roman", 1, 14));
-		sud.add(invia);
+	  invia = new Pulsanti("Invia", Color.cyan, new Font("Times New Roman", 1, 14));
+      sud.add(invia);
 		
     }
     
