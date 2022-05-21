@@ -8,6 +8,6 @@ public ArrayList<GruppoDB> selectall();
 public boolean creaGruppo(GruppoDB g);
 public boolean inserisciChiavi(GruppoDB g);
 public boolean cancellaGruppo(GruppoDB g);
-public ArrayList<GruppoDB> cercaGruppo(String g);
+public GruppoDB cercaGruppo(GruppoDB g);
 
 }

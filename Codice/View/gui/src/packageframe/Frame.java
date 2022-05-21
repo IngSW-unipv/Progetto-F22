@@ -18,6 +18,7 @@ import panelspackage.panels.PostVisualizzato;
 import panelspackage.panels.Profilo;
 import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
+import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.SpecificContainer;
@@ -85,7 +86,13 @@ public class Frame extends JFrame {
 
 		CreazionePost creazionePost = new CreazionePost();
 		mappaSchermate.put("CreazionePost", creazionePost);
-
+		
+		Ricerca ricerca = new Ricerca();
+		mappaSchermate.put("Ricerca", ricerca);
+		
+		PostVisualizzato postVisualizzato = new PostVisualizzato();
+		mappaSchermate.put("Postvisualizzato", postVisualizzato);
+	
 	}
 	
 	public void mostraSchermata(String Schermata) {
@@ -96,7 +103,6 @@ public class Frame extends JFrame {
 	public String getEmailPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
 	}
-	
 
 	public String getNickNamePerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getNickNamePerReigstrarsi();
@@ -135,6 +141,19 @@ public class Frame extends JFrame {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getHomeCreazionePost();
 	}
 	
+	public String ottieniPercorsoFile(){
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniPercorsoFile();
+	}
+	
+	public String ottieniCommento() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).ottieniCommento();
+	}
+	
+	public JButton getPubblicaPostButton() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getPubblicaPost();
+
+	}
+	
 	public JButton getProfiloButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonProfilo();
 	}
@@ -143,12 +162,20 @@ public class Frame extends JFrame {
 		return ((SignUp)mappaSchermate.get("Signup")).getRegistrati();
 	}
 	
+	public JButton getIndietroButton() {
+		return ((SignUp)mappaSchermate.get("Signup")).getIndietro();
+	}
+	
 	public JButton getChatButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonChat();
 	}
 	
 	public JButton getNotificheButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonNotifiche();
+	}
+	
+	public JButton getCercaButton() {
+		return ((Home)mappaSchermate.get("Home")).getSearchButton();
 	}
 	
 	public JButton getLoginButton() {
@@ -179,6 +206,22 @@ public class Frame extends JFrame {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getLogout();
 	}
 	
+	public JButton getModificaProfiloButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getModificaProfilo();
+	}
+	
+	public JButton getVisibilitaPostButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getVisibilitaPost();
+	}
+	
+	public JButton getEliminaAccountButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getEliminaAccount();
+	}
+	
+	public SpecificContainer getContainerCenterFrame() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getContainerCenter();
+	}
+	
 	public JButton getHomeProfiloButton() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getHomeProfilo();
 	}
@@ -190,6 +233,11 @@ public class Frame extends JFrame {
 	public JButton getHomePannelloNotificheButton() {
 		return ((PannelloNotifiche)mappaSchermate.get("PannelloNotifiche")).getHomeNotifiche();
 	}
+	
+	public JButton getHomeRicercaButton() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getHomeRicerca();
+	}
+	
 
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
@@ -203,4 +251,37 @@ public class Frame extends JFrame {
 		FrameMainContainer = frameMainContainer;
 	}
 	
+	public String getTestoRicerca() {
+		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
+	}
+	
+	public void setTestoRicerca(String testoDaImpostare) {
+		((Home)mappaSchermate.get("Home")).getTestoRicerca().setText(testoDaImpostare);
+	}
+	
+	public JTextField getAreaDiTestoLabel() {
+		return ((Home)mappaSchermate.get("Home")).getTestoRicerca();
+	}
+	
+	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
+		 ((Ricerca)mappaSchermate.get("Ricerca")).impostaRisultatiRicerca(risultatiRicerca);
+
+	}
+	
+	public Etichette getEtichettaNome() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
+	}
+	
+	public JButton getPulsanteFotoProfilo() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteFotoProfilo();
+	}
+	
+	
+	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti) {
+		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);
+	}
+	
+	public Etichette getTestoRicercaInSchermataRicerca() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
+	}
 }

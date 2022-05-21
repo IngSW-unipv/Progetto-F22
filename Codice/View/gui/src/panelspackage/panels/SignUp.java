@@ -15,7 +15,8 @@ public class SignUp extends JPanel {
 	
 	private JLabel titolo,testoEmail,testoPassword,testoRipetiPassword, testoUsername;
 	private AreaDiTesto email,password,ripetiPassword,username;
-	private JButton registrati;
+	private Pulsanti registrati;
+	private Pulsanti indietro;
 	
 	ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 	ArrayList<String> dati = new ArrayList<String>();
@@ -62,9 +63,11 @@ public class SignUp extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		add(containerSouth, BorderLayout.SOUTH);
 		
-		registrati = new JButton();
-		registrati.setText("REGISTRATI");
-		containerSouth.add(registrati, BorderLayout.CENTER);
+		registrati = new Pulsanti("REGISTRATI", Frame.COLOREPRIMARIOTEMATICO);
+		indietro = new Pulsanti("INDIETRO", Frame.COLOREPRIMARIOTEMATICO);
+		containerSouth.setLayout(new GridLayout(2,1));
+		containerSouth.add(registrati);
+		containerSouth.add(indietro);
 
 	}
 	public ArrayList<JComponent> getListaAreaTesto() {
@@ -75,11 +78,11 @@ public class SignUp extends JPanel {
 		ListaAreaTesto = listaAreaTesto;
 	}
 
-	public JButton getRegistrati() {
+	public Pulsanti getRegistrati() {
 		return registrati;
 	}
 
-	public void setRegistrati(JButton registrati) {
+	public void setRegistrati(Pulsanti registrati) {
 		this.registrati = registrati;
 	}
 	public String getEmailPerReigstrarsi() {
@@ -92,4 +95,13 @@ public class SignUp extends JPanel {
 	public String getNickNamePerReigstrarsi() {
 		return this.username.getText();
 	}
+
+	public Pulsanti getIndietro() {
+		return indietro;
+	}
+
+	public void setIndietro(Pulsanti indietro) {
+		this.indietro = indietro;
+	}
+	
 }

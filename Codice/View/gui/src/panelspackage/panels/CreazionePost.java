@@ -15,9 +15,7 @@ import panelspackage.panels.elements.SpecificContainer;
 public class CreazionePost extends JPanel {
 
 	private AreaDiTesto inserimentoCommentoPost;
-	private Pulsanti homeCreazionePost;
-	private Pulsanti pubblicaPost;
-	private Pulsanti caricaFile;
+	private Pulsanti homeCreazionePost, pubblicaPost,caricaFile;
 	private Etichette testoInserisciCommento;
 	private JFileChooser fileChooser;
 	private Pulsanti story;
@@ -49,7 +47,7 @@ public class CreazionePost extends JPanel {
         fileChooser.addChoosableFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter1);
         fileChooser.addChoosableFileFilter(filter2);
-		
+        
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);
 		containerCenter.add(fileChooser, BorderLayout.NORTH);
@@ -130,4 +128,11 @@ public class CreazionePost extends JPanel {
 		this.story = story;
 	}
 	
+	public String ottieniPercorsoFile() {
+		return this.fileChooser.getSelectedFile().getAbsolutePath();
+	}
+	
+	public String ottieniCommento() {
+		return this.inserimentoCommentoPost.getText();
+	}
 }

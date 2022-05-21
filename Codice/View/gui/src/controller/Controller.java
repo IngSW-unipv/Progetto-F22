@@ -2,8 +2,15 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import Sistema.Sistema;
+import convertitore.chatUtility.UtilityChat;
 import packageframe.Frame;
+import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
 public class Controller {
@@ -11,7 +18,8 @@ public class Controller {
 	private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
 						   gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
 						   gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
-						   gestoreLogOut;
+						   gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
+						   gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup;
 	Frame view;
 	Sistema model;
 	private String schermataAttuale = "Login";
@@ -28,9 +36,7 @@ public class Controller {
 		gestoreLogin = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean success;
-				success = login();
-				if (success == true) {
+				if (login()) {
 					mostraSchermata("Home");
 				}
 			}
@@ -49,15 +55,22 @@ public class Controller {
 		gestoreRegistrati = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				boolean success = false;
-	
-					success = signUp();
-				if (success == true) {
+				
+				if (signUp()) {
 					mostraSchermata("Home");
 				}
 			}
 		};
-		view.getRegistratiButton().addActionListener(gestoreRegistrati);	
+		view.getRegistratiButton().addActionListener(gestoreRegistrati);
+		
+		
+		gestoreIndietroSignup = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					mostraSchermata("Login");
+			}
+		};
+		view.getIndietroButton().addActionListener(gestoreIndietroSignup);
 		
 		//ActionListeners schermata Home
 		gestoreImpostazioni = new ActionListener() {
@@ -72,6 +85,7 @@ public class Controller {
 		gestoreProfilo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				aggiornaSchermataProfilo();
 				mostraSchermata("Profilo");
 			}
 		};
@@ -94,13 +108,31 @@ public class Controller {
 			}
 		}; 
 		view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
+		
+		gestoreCerca = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(verificaTestoRicerca()) {
+					ricerca();
+					mostraSchermata("Ricerca");
+					
+				} else 
+					view.setTestoRicerca("Inserire un username da cercare");		
+			}
+		};
+		view.getCercaButton().addActionListener(gestoreCerca);
 	
 		
 		//ActionListeners schermata Impostazioni
 		gestoreLogOut = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//model.logout(model.getProfiloAttivo());
+				try {
+					model.logout(model.getProfiloAttivo().getIdProfilo());
+				} catch (AccountDoesNotExist e1) {
+					e1.printStackTrace();
+				}
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Login");
 			}
 		};
@@ -109,10 +141,37 @@ public class Controller {
 		gestoreHomeImpostazioni = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
 				mostraSchermata("Home");
 			}
 		};
 		view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+		
+		
+		gestoreModificaProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(true);
+				refresh();
+			}
+		};
+		view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
+		
+		gestoreVisibilitaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
+		
+		gestoreEliminaAccount = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				view.getContainerCenterFrame().setVisible(false);
+			}
+		};
+		view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
 		
 		
 		
@@ -135,6 +194,14 @@ public class Controller {
 		};
 		view.getHomeChatButton().addActionListener(gestoreHomeChat);
 		
+		gestoreFotoProfilo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				settaPostVisualizzato();
+				mostraSchermata("Postvisualizzato");
+			}
+		};
+		view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
 		
 		//ActionListeners schermata Notifiche
 		gestoreHomePannelloNotifiche = new ActionListener() {
@@ -162,8 +229,38 @@ public class Controller {
 			}
 		};
 		view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
+		
+		gestorePubblicaPost = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pubblicaPost();
+			}
+				/*boolean success = false
+						if(success = true) {
+				mostraSchermata("Home");
+			}*/
+		};
+		view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
+		
+		//ActionListeners schermata Ricerca
+		gestoreHomeCerca = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostraSchermata("Home");
+			}
+		};
+		view.getHomeRicercaButton().addActionListener(gestoreHomeCerca);
+		
+		
+		
 	}
 	
+	public void refresh() {
+		view.invalidate();
+		view.validate();
+		view.repaint();
+	}
+		
 	public boolean signUp() {
 		String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
 		String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
@@ -218,8 +315,45 @@ public class Controller {
 	}
 	
 	public void mostraFallimentoLogin(String codiceFallimento) {
-	view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
-	view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+		view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
+		view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
+	}
+	
+	public void pubblicaPost() {
+		String percorsoFilePost = view.ottieniPercorsoFile();
+		String commentoPost = view.ottieniCommento();
+		Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+		model.pubblicaPost(UtilityChat.convertiInSqlData(d), t, commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+	}
+	
+	
+	public boolean verificaTestoRicerca() {
+		if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
+			return false;
+		}
+		return true;
 	}
 
+	public void oggettoDaCercare() {
+		
+	}
+	
+	public void aggiornaSchermataProfilo() {
+
+		view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
+		view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
+		//String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
+	}
+	
+	public void settaPostVisualizzato() {
+		
+	}
+	public void ricerca() {
+		ArrayList<String> risultatiRicerca = new  ArrayList<String>();
+		risultatiRicerca.add(view.getTestoRicerca());
+		risultatiRicerca.add(view.getTestoRicerca());
+		view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
+		view.impostaRisultatiRicerca(risultatiRicerca);
+	}
 }

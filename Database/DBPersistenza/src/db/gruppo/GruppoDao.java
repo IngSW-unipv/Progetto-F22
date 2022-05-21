@@ -123,8 +123,7 @@ public boolean cancellaGruppo(GruppoDB g) {
 	return esito;
 }
 @Override
-public ArrayList<GruppoDB> cercaGruppo(String g) {
-	ArrayList<GruppoDB> result = new ArrayList<>();
+public GruppoDB cercaGruppo(GruppoDB g) {
 
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -135,7 +134,7 @@ public ArrayList<GruppoDB> cercaGruppo(String g) {
 		String query="SELECT * FROM Gruppo WHERE idGruppo=?";
 
 		st1 = conn.prepareStatement(query);
-		st1.setString(1, g);
+		st1.setString(1, g.getIdGruppo());
 
 		rs1=st1.executeQuery();
 
@@ -143,11 +142,12 @@ public ArrayList<GruppoDB> cercaGruppo(String g) {
 		{
 			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
 
-			result.add(grp);
+			DBConnection.closeConnection(conn);
+			return grp;
 		}
 	}catch (Exception e){e.printStackTrace();}
 
 	DBConnection.closeConnection(conn);
-	return result;
+	return null;
 }
 }

@@ -12,7 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import packageframe.Frame;
+import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.Pulsanti;
+import panelspackage.panels.elements.SpecificContainer;
 
+<<<<<<< HEAD
 @SuppressWarnings("serial")
 public class Chat extends JPanel{
 
@@ -22,7 +27,20 @@ public class Chat extends JPanel{
 	private JComboBox<String> discussioni;
 	private JPanel panelDiscussioni;
 	private JPanel aggiornaAltriChat;
+=======
+
+public class Chat extends JPanel {
+	private ArrayList<JLabel> listaChat = new ArrayList<JLabel>();
+	private int numeroChat; 	//Numero delle chat di un account
+	private JLabel titoloChat;
+	private SpecificContainer containerSuperiore,containerSceltaChat,containerInferiore;
+	private Pulsanti chatPrivata,chatGruppo,nuovaChat,homeChat;
+	private static final long serialVersionUID = 1L;
+	private Font fontTitle = new Font("Arial", Font.BOLD | Font.ITALIC, 30);
+	private Font fontButton = new Font("Arial", Font.BOLD, 15);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	
+<<<<<<< HEAD
 		public Chat() {
 		//panello = new JPanel();
 		//panello.setLayout(null);
@@ -33,13 +51,41 @@ public class Chat extends JPanel{
 		home.setIcon(new ImageIcon("C:\\Users\\aissa\\OneDrive\\Immagini\\home.png"));
 		home.setBackground(Color.white);
 		this.add(home); 
+=======
+	public Chat() {
+		avvio();
+		initComponents();
+	}
+	
+	public void avvio() {
+		this.setVisible(true);
+		this.setLayout(new BorderLayout());
+		this.setBackground(Frame.COLOREPRIMARIOTEMATICO);	
+	}
+	
+	public void initComponents() {
+		titoloChat = new JLabel("CHAT", SwingConstants.LEFT);
+		titoloChat.setFont(fontTitle);
+		titoloChat.setForeground(Color.WHITE);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
 		mioProfilo = new JButton("Mio Profilo");
 		//panello.add(mioProfilo);
 		mioProfilo.setBackground(Color.pink);
 		this.add(mioProfilo); 
+=======
+		chatPrivata = new Pulsanti("Chat private");
+		chatPrivata.setFont(fontButton);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
+=======
+		chatGruppo = new Pulsanti("Chat di gruppo");
+		chatGruppo.setFont(fontButton);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
 		discussioni = new JComboBox<>();
 		//panello.add(discussioni);
 		discussioni.addItem("Discussioni");
@@ -85,7 +131,12 @@ public class Chat extends JPanel{
 	   aggiornaAltriChat.setBackground(Color.CYAN);
 	   this.add(aggiornaAltriChat, BorderLayout.AFTER_LAST_LINE); */
 	       
+=======
+		nuovaChat = new Pulsanti("Nuova chat");
+		nuovaChat.setFont(fontButton);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
 	/* = new JButton();
 		panelDiscussioni.add(b);
 		b.setLayout(new GridLayout(2,2));
@@ -94,15 +145,43 @@ public class Chat extends JPanel{
 		b.add(new JButton("Chat2"));
 		b.add(new JButton("Chat3"));
 		//add(new JButton("Chat4"));
+=======
+		homeChat = new Pulsanti("Torna alla home");
+		nuovaChat.setFont(fontButton);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
 		this.add(b);
 	  */
 		//id.addLayoutComponent("Chat1", b );
 		//id.addLayoutComponent("Chat2",b );
 			
+=======
+		containerSuperiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		containerSuperiore.setLayout(new GridLayout(2, 1));
+		containerSceltaChat = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		containerSceltaChat.setLayout(new GridLayout(1, 2));
+		containerInferiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		containerInferiore.setLayout(new GridLayout(2, 1));
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
+<<<<<<< HEAD
+=======
+		containerSuperiore.add(titoloChat);
+		containerSceltaChat.add(chatPrivata);
+		containerSceltaChat.add(chatGruppo);
+		containerSuperiore.add(containerSceltaChat);
+		containerInferiore.add(nuovaChat);
+		containerInferiore.add(homeChat);
+		this.add(containerSuperiore, BorderLayout.NORTH);
+		this.add(containerInferiore, BorderLayout.SOUTH);
+		/*for(i=0; i < numeroChat; i++) {
+			this.add(listaChat.get(i));
+		}*/
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 		
 	}
+<<<<<<< HEAD
 	
 	
 	
@@ -117,6 +196,12 @@ public class Chat extends JPanel{
 		chat.setLayout(new FlowLayout());
 		
 	}*/
+=======
+	public void aggiungiChatAllaLista(ArrayList listaChat) {
+		JLabel chat = new JLabel();
+		listaChat.add(chat);
+	}
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 
 
 

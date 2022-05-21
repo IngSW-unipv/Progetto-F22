@@ -5,27 +5,21 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Timer;
 
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
-import chat.Chat;
-import chat.chatDiGruppo.ChatDiGruppo;
 import chat.chatDiGruppo.gruppo.Gruppo;
-import chat.chatPrivata.ChatPrivata;
 import db.facade.DbFacade;
-import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDB;
-import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
-import db.profilo.ProfiloDB;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
+import post.sondaggio.Sondaggio;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
@@ -52,6 +46,8 @@ public class Profilo implements IProfilo {
 	private HashMap<String,String> dislikeMap;
 	
 	//funzione richiamata dal signUP
+	
+	
 	public Profilo(String idProfilo, String nickname) {
 		super();
 		this.dbfacade = dbfacade.getIstance();
@@ -61,6 +57,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
@@ -75,6 +72,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
@@ -223,10 +221,10 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 }
 
 @Override
-public boolean segui(String profiloSeguito) throws AccountDoesNotExist {
+public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
 	
-	if(this.profiloNonSeguito(profiloSeguito) == true && this.accountEsistente(profiloSeguito) == true) {
-	Follow f = new Follow(this.idProfilo, profiloSeguito);
+	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
+	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
 	dbfacade.carica(f);
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
 	return true;	
@@ -235,9 +233,9 @@ public boolean segui(String profiloSeguito) throws AccountDoesNotExist {
 
 }
 @Override
-public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist {
-	if(this.accountEsistente(profiloSeguito) == true && this.profiloNonSeguito(profiloSeguito) == false) {
-		Follow f = new Follow(this.getIdProfilo(),profiloSeguito);
+public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist {
+	if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
+		Follow f = new Follow(this.getIdProfilo(),profiloSeguito.getIdProfilo());
 		dbfacade.rimuovi(f);
 		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
@@ -245,6 +243,15 @@ public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist
 	return false;
 }
 
+
+@Override
+public void vediMieiFollower(Follow f) {
+
+		ArrayList<String> res = dbfacade.cercaProfSeguito(f.getMailProfiloSeguito());
+		for(String s : res)
+			System.out.println(s.toString());
+		
+}
 
 //Messaggi
 
@@ -275,7 +282,7 @@ public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist {
 
 @Override
 public Messaggio cercaMessaggio(Messaggio m) throws AccountDoesNotExist{
-		return dbfacade.cercaMessaggio(m);
+		return dbfacade.cerca(m);
 	
 }
 
@@ -336,6 +343,20 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotEx
 
 
 //Post
+	public void creaPost(Foto f) {
+		System.out.println(3);
+
+		dbfacade.carica(f);
+	}
+	
+	public void creaPost(Sondaggio s) {
+		dbfacade.carica(s);
+	}
+	
+	public void creaPost(Testo t) {
+		dbfacade.carica(t);
+	}
+	
 
 
 @Override
@@ -380,7 +401,7 @@ public boolean rimuoviPost(Post p) {
 
 @Override
 public Post cercaPost(Post p) {
-	return dbfacade.cercaPost(p);
+	return dbfacade.cerca(p);
 }
 
 
@@ -411,22 +432,11 @@ public boolean pubblicaStoria(int time, Multimedia f) throws AccountDoesNotExist
 
 //Profilo
 
-@Override
-public boolean stampaInfoProfilo(Profilo p) throws AccountDoesNotExist {
-
-	ArrayList<Profilo> res = new ArrayList<>();
-	Profilo prf = dbfacade.cercaProfilo(p);
-	res.add(prf);
-	if(res.isEmpty() == false) {
-		System.out.println(prf.toString());
-		}
-		throw new AccountDoesNotExist(p.getIdProfilo());
-}
 
 @Override
 public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 	ArrayList<Profilo> res = new ArrayList<>();
-	Profilo prf = dbfacade.cercaProfilo(p);
+	Profilo prf = dbfacade.cerca(p);
 	res.add(prf);
 	if(res.isEmpty() == false) {
 		return prf;
@@ -434,8 +444,52 @@ public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 		throw new AccountDoesNotExist(p.getIdProfilo());
 }
 
-
 //--------------------------------------------------------------------------------------------------------------------
+
+//Commento
+
+@Override
+public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist {
+	
+	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
+	
+		return c;
+
+}
+
+@Override
+public boolean pubblicaCommento(Commento c) {
+	
+		return dbfacade.carica(c);
+
+}
+
+
+@Override
+public boolean rimuoviCommento(Commento c)  {
+
+		return dbfacade.rimuovi(c);
+}
+
+
+
+@Override
+public Commento cercaCommento(Commento c) {
+
+		return dbfacade.cerca(c);
+}
+
+@Override
+public void selectAllCommentiSottoPost(Commento c) {
+	
+	ArrayList<Commento> res = dbfacade.selectAllCommenti(c);
+	for(Commento cdb : res)
+		System.out.println(cdb.toString());
+}
+
+//Gruppo
+
+
 @Override
 public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
 		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore)
@@ -446,19 +500,35 @@ public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo
 }
 
 @Override
-public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist {
-	Gruppo g = new Gruppo(idGruppo,null,null,null,null,null,null,null,null,null);
-	
+public boolean rimuoviGruppo(Gruppo g)  {
 		return dbfacade.rimuovi(g);
 }
 
 @Override
-public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist {
+public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6)  {
 	Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
 	
 		return dbfacade.gestisciPartecipanti(g);
 	
 }
+
+@Override
+public Gruppo cercaGruppo(Gruppo g) {
+
+		return dbfacade.cerca(g);
+
+}
+
+
+
+@Override
+public void selectAllGruppo(){
+	ArrayList<Gruppo> res = dbfacade.selectAllGruppo();
+		for(Gruppo gdb : res)
+			System.out.println(gdb.toString());
+		
+}
+//-------------------------------------------------------------------------------------------------------------------
 
 @Override
 public boolean aggiungiLike(Post p) throws AccountDoesNotExist{
@@ -518,106 +588,6 @@ public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist{
 	return false;
 	
 }
-
-@Override
-public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist {
-	Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
-	
-		return dbfacade.carica(c);
-
-}
-
-
-
-@Override
-public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist, NotLoggedIn {
-	
-	Commento c = new Commento(idCommento, null, null, null, null);
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		return dbfacade.rimuovi(c);
-	} else {
-	        return false;
-	       }
-}
-
-
-
-@Override
-public boolean cercaCommento(String id) throws AccountDoesNotExist {
-
-		dbfacade.stampaCommentoCercato(id);
-		}
-		return false;
-}
-
-
-
-@Override
-public boolean cercaGruppo(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaGruppoCercato(id);
-		}
-		return false;
-}
-
-
-@Override
-public boolean selectAllCommentiSottoPost(Commento c) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaCommentiSottoPost(c);
-		}
-		return false;
-}
-
-
-@Override
-public boolean selectAllGruppo() throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaSelectAllGruppo();
-		}
-		return false;
-}
-
-
-
-
-@Override
-public boolean vediMieiFollower(String id) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaProfiloCercato(id);
-		}
-		return false;
-}
-
-@Override
-public boolean vediProfiloCercato(String profiloPersonale, String profiloSeguito) throws AccountDoesNotExist, NotLoggedIn {
-	if(this.seiLoggato(this.getIdProfilo()) == true) {
-		dbfacade.stampaFollowCercati(profiloPersonale, profiloSeguito);
-		}
-		return false;
-}
-
-@Override
-public boolean invitaUtenteAdIscriversi(Profilo p) {
-
-	Scanner scan = new Scanner(System.in);
-	System.out.println("Digita il nome dell'utente da invitare");
-	
-	String nomeUtente = scan.nextLine();
-	// non ho finito
-	return false;
-}
-
-
-
-
-
-@Override
-public boolean accettaRichiestaDinvito() {
-	// TODO Auto-generated method stub
-	return false;
-}
-
 
 
 }

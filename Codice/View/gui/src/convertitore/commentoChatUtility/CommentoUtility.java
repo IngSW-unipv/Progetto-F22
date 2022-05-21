@@ -1,16 +1,25 @@
 package convertitore.commentoChatUtility;
 
+import java.util.ArrayList;
+
 import db.commento.CommentoDB;
 import post.commento.Commento;
 
 public class CommentoUtility {
 
-	public CommentoDB convertiACommentoDB(Commento c) {
+    public ArrayList<Commento> convertiLista(ArrayList<CommentoDB> res){
+		ArrayList<Commento> c = new ArrayList<>();
+		for(CommentoDB cdb : res)
+			c.add(this.convertiInverso(cdb));
+		return c;
+	}
+	
+	public CommentoDB converti(Commento c) {
 		CommentoDB cdb = new CommentoDB(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(),c.getTesto(),c.getPost());
 		return cdb;
 	}
-
-	public Commento convertiACommento(CommentoDB c) {
+ 
+	public Commento convertiInverso(CommentoDB c) {
 		Commento cdb = new Commento(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(), c.getTesto(), c.getPost());
 		return cdb;
 	}

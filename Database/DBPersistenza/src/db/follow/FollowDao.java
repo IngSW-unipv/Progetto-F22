@@ -115,8 +115,7 @@ public class FollowDao implements IFollowDao{
 	}
 	
 	@Override
-	public ArrayList<FollowDB> cerca(String s1, String s2) {
-		ArrayList<FollowDB> result = new ArrayList<>();
+	public FollowDB cerca(FollowDB fdb) {
 
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
@@ -127,8 +126,8 @@ public class FollowDao implements IFollowDao{
 			String query="SELECT * FROM follow WHERE profiloPersonale=? and profiloSeguito=?";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s1);
-            st1.setString(2, s2);
+			st1.setString(1, fdb.getProfiloPersonale());
+            st1.setString(2, fdb.getProfiloSeguito());
 			
 			rs1=st1.executeQuery();
 
@@ -136,12 +135,13 @@ public class FollowDao implements IFollowDao{
 			{
 				FollowDB com = new FollowDB(rs1.getString(1),rs1.getString(2));
 
-				result.add(com);
+				DBConnection.closeConnection(conn);
+				return com;
 			}
 		}catch (Exception e){e.printStackTrace();}
 
 		DBConnection.closeConnection(conn);
-		return result;
+		return null;
 	}
 
 }

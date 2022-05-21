@@ -14,7 +14,7 @@ public class Pulsanti extends JButton{
 		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Color colore) {
 			this.setForeground(colore);
-			this.setLabel(name);
+			this.setText(name);
 			this.setVisible(true);
 		}
 		

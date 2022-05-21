@@ -7,6 +7,7 @@ import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
+import chat.chatDiGruppo.gruppo.Gruppo;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
@@ -17,15 +18,15 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.follow.Follow;
 
 public interface IProfilo {
 
 
+	//Follow
 
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
-	public boolean segui(String email)throws AccountDoesNotExist;
-	public boolean smettiDiSeguire(String profiloSeguito) throws AccountDoesNotExist;
  
 	
 	//Messaggi
@@ -62,45 +63,38 @@ public interface IProfilo {
 	//Stampa le informazioni di tutti i post nel db
 	public void selectAllPost(TipoPost t);
 	
-	//L'int time rappresenta la durata in ore nel quale la storia rimarrà pubblicata. A fine di time ore, la storia sarà rimossa automaticamente
+	//L'int time rappresenta la durata in ore nel quale la storia rimarrï¿½ pubblicata. A fine di time ore, la storia sarï¿½ rimossa automaticamente
     public boolean pubblicaStoria(int time, Multimedia f)throws AccountDoesNotExist;
 	
     
     //Profilo
     
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
-    public boolean stampaInfoProfilo(Profilo p) throws AccountDoesNotExist;
+  
     
-    
-    //-----------------------------------------------------------------------------------------------------------------------------
+    //Commenti
+    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist; 
+    public boolean pubblicaCommento(Commento c);
+    public boolean rimuoviCommento(Commento c);
+	public Commento cercaCommento(Commento c);
+	public void selectAllCommentiSottoPost(Commento c);
 	
+	//Follow
 	
-	public boolean pubblicaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist; 
+	public boolean segui(Profilo email)throws AccountDoesNotExist;
+	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist;
+	public void vediMieiFollower(Follow f);
 	
-    
-    public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore)throws AccountDoesNotExist;
-    public boolean rimuoviGruppo(String idGruppo) throws AccountDoesNotExist;
-    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6) throws AccountDoesNotExist;
-
-    
+	//Gruppo
 	
+	    public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore)throws AccountDoesNotExist;
+	    public boolean rimuoviGruppo(Gruppo g);
+	    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
+        public Gruppo cercaGruppo(Gruppo g);
+		public void selectAllGruppo();
+	    
 	
-	// Rimuovi
-	public boolean rimuoviCommento(String idCommento) throws AccountDoesNotExist;
-	
-	public boolean cercaCommento(String id)throws AccountDoesNotExist;
-	public boolean cercaGruppo(String id)throws AccountDoesNotExist;
-	
-	public boolean selectAllCommentiSottoPost(Commento c)throws AccountDoesNotExist;
-	public boolean selectAllGruppo()throws AccountDoesNotExist;
-	
-	
-	public boolean vediMieiFollower(String id) throws AccountDoesNotExist;
-	public boolean vediProfiloCercato(String profiloPersonale,String profiloSeguito) throws AccountDoesNotExist;
-	
-	public boolean accettaRichiestaDinvito();
-	public boolean invitaUtenteAdIscriversi(Profilo p);
-	
+    //Like Dislike
 	
 	
 	public boolean aggiungiLike(Post p)throws AccountDoesNotExist;

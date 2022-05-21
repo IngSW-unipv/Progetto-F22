@@ -11,12 +11,12 @@ public class ProfiloUtility {
 	
 	//Le chiavi esterne sono inizialmente null. Usare il metodo inserisciChiavi per modificarne il valore
 	public ProfiloDB converti(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), ProfiloUtility.trasformaEnumInString(p.getTipo()), null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), p.getPassword());
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), null, null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami");
 		return pdb;
 	}
 	
 	public Profilo convertiInverso(ProfiloDB pdb) {
-		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname(), pdb.getDescrizione(), ProfiloUtility.trasformaStringinEnum(pdb.getTipo()));
+		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname());
 		return p;
 	}
 	
