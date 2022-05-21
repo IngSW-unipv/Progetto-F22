@@ -2,14 +2,9 @@ package panelspackage.panels.elements;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 
-import packageframe.Frame;
-
+@SuppressWarnings("serial")
 public class ScrollText extends JScrollPane  {
 
 	AreaDiTesto areaTesto;
