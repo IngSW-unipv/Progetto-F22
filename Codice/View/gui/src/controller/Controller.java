@@ -29,6 +29,7 @@ public class Controller {
 		model = s;	
 		initComponents();
 	}
+	//prova
 	
 	public void initComponents() {
 		
