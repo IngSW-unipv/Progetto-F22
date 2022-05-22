@@ -68,7 +68,9 @@ public class DbFacade {
 
 	public Commento cerca(Commento c) {
 		CommentoDB cdb = cDao.cercaCommento(ConvertitoreFacade.getIstance().converti(c));
-		return ConvertitoreFacade.getIstance().convertiInverso(cdb);
+		if(cdb != null)
+			return ConvertitoreFacade.getIstance().convertiInverso(cdb);
+		return null;
 	}
 	
 	
@@ -96,7 +98,9 @@ public class DbFacade {
 
 	public Gruppo cerca(Gruppo g) {
 		GruppoDB gdb = gDao.cercaGruppo(ConvertitoreFacade.getIstance().converti(g));
-		return ConvertitoreFacade.getIstance().convertiInverso(gdb);
+		if(gdb != null)
+		   return ConvertitoreFacade.getIstance().convertiInverso(gdb);
+		return null;
 	}
 	
 	public ArrayList<Gruppo> selectAllGruppo() {
@@ -122,11 +126,13 @@ public class DbFacade {
 		return mDao.rimuoviMessaggio(ConvertitoreFacade.getIstance().converti(m));
 	}
 	
+	
 	public Messaggio cerca(Messaggio m){
 		mDao = Utility.convertiTipoMessaggio(m.getTipo());
 		MessaggioDB mdb = mDao.cercaMessaggio(ConvertitoreFacade.getIstance().converti(m));
-		return ConvertitoreFacade.getIstance().convertiInverso(mdb, m.getTipo());
-		
+		if(mdb != null) 
+			return ConvertitoreFacade.getIstance().convertiInverso(mdb, m.getTipo());
+		return null;
 	}
 	
 	public String ottieniTestoMessaggio(String m, TipoMessaggio t) {
@@ -170,8 +176,9 @@ public class DbFacade {
      public Post cerca(Post p){
      	pstDao = Utility.convertiTipoPost(p.getTipo());
      	PostDB pdb = pstDao.cercaPost(ConvertitoreFacade.getIstance().converti(p));
-     	return ConvertitoreFacade.getIstance().convertiInverso(pdb, p.getTipo());
-     	
+     	if(pdb != null)
+     		return ConvertitoreFacade.getIstance().convertiInverso(pdb, p.getTipo());
+     	return null;
 
      }
      
@@ -258,7 +265,9 @@ public class DbFacade {
 	
 	public Follow cerca(Follow f) {
 		FollowDB fdao = flDao.cerca(ConvertitoreFacade.getIstance().converti(f));
-		return ConvertitoreFacade.getIstance().convertiInverso(fdao);
+		if(fdao != null)
+			return ConvertitoreFacade.getIstance().convertiInverso(fdao);
+		return null;
 	}
 	
 	public ArrayList<String> cercaProfSeguito(String s){
