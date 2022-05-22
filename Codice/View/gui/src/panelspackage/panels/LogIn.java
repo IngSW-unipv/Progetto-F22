@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.ScrollText;
 import panelspackage.panels.elements.AreaDiTesto;
@@ -16,14 +17,14 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class LogIn extends JPanel {
 
-	private int i;
 
 	private HashMap<String, JComponent> listaComponenti = new HashMap<String, JComponent>();
 	
 	private ArrayList<String> dati = new ArrayList<String>();
 	
-	private AreaDiTesto inserimentoEmail, inserimentoPassword;
-	private Pulsanti accedi;
+	private Pulsanti login, signup;
+	
+	private InserimentoTesto inserimentoEmail, inserimentoPassword;
 	private Etichette etichettaDiSegnalazioneLoginFallito;
 	
 	
@@ -41,22 +42,53 @@ public class LogIn extends JPanel {
 	
 	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
-		add(containerNorth, BorderLayout.NORTH);
+		this.add(containerNorth, BorderLayout.NORTH);
 
 		containerNorth.add(new Etichette("Login", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
-		listaComponenti.put("password", new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		listaComponenti.put("signup", new Pulsanti("Sign Up", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.put("email", new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));		
-		listaComponenti.put("labelEmail", new Etichette("Inserisci email", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.put("labelPwd", new Etichette("Inserisci Password", Frame.COLOREPRIMARIOTEMATICO));
-		listaComponenti.put("accedi", new Pulsanti("Accedi", Frame.COLOREPRIMARIOTEMATICO));
-		GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,3, listaComponenti.size());
-		containerNorth.add(dati, BorderLayout.SOUTH);
 		
-		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		add(containerCenter, BorderLayout.CENTER);
-		containerCenter.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		SpecificContainer containerCenter = new SpecificContainer();
+		containerCenter.setLayout(new GridLayout(2, 1));
+		this.add(containerCenter, BorderLayout.CENTER);
+		
+		SpecificContainer containerCenterAlto = new SpecificContainer();
+		containerCenterAlto.setLayout(new GridLayout(3, 2));
+		Container containerVuoto = new Container();
+		containerCenterAlto.add(containerVuoto);
+		Container containerVuoto1 = new Container();
+		containerCenterAlto.add(containerVuoto1);
+		containerCenterAlto.add(new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		containerCenterAlto.add(inserimentoEmail = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		containerCenterAlto.add(new Etichette("PASSWORD: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		containerCenterAlto.add(inserimentoPassword = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		
+		SpecificContainer containerCenterBasso = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		containerCenterBasso.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		etichettaDiSegnalazioneLoginFallito.setVisible(false);
+		
+		containerCenter.add(containerCenterAlto);
+		containerCenter.add(containerCenterBasso);
+		
+		//listaComponenti.put("labelEmail", new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		//listaComponenti.put("email", new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		//listaComponenti.put("labelPwd", new Etichette("PASSWORD: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
+		//listaComponenti.put("password", new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
+		//GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,2, listaComponenti.size());
+		//containerNorth.add(dati, BorderLayout.SOUTH);
+		
+		//SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+		//add(containerCenter, BorderLayout.CENTER);
+		//containerCenter.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		//etichettaDiSegnalazioneLoginFallito.setVisible(false);
+		
+		SpecificContainer containerSouth = new SpecificContainer();
+		add(containerSouth, BorderLayout.SOUTH);
+		containerSouth.setLayout(new GridLayout(2, 1));
+		containerSouth.add(login = new Pulsanti("LOGIN", Frame.COLOREPRIMARIOTEMATICO));
+		containerSouth.add(signup = new Pulsanti("SIGNUP", Frame.COLOREPRIMARIOTEMATICO));
+		
+		listaComponenti.put("signup", signup);
+		listaComponenti.put("accedi", login);
+		
 	}
 	
 	public void setListaComponenti(HashMap<String, JComponent> listaComponenti) {
@@ -83,26 +115,26 @@ public class LogIn extends JPanel {
 		return (JButton) this.listaComponenti.get("signup");
 	}
 
-	public AreaDiTesto getInserimentoEmail() {
+	public InserimentoTesto getInserimentoEmail() {
 		return inserimentoEmail;
 	}
 
-	public void setInserimentoEmail(AreaDiTesto inserimentoEmail) {
+	public void setInserimentoEmail(InserimentoTesto inserimentoEmail) {
 		this.inserimentoEmail = inserimentoEmail;
 	}
 
-	public AreaDiTesto getInserimentoPassword() {
+	public InserimentoTesto getInserimentoPassword() {
 		return inserimentoPassword;
 	}
 
-	public void setInserimentoPassword(AreaDiTesto inserimentoPassword) {
+	public void setInserimentoPassword(InserimentoTesto inserimentoPassword) {
 		this.inserimentoPassword = inserimentoPassword;
 	}
 	public Etichette getEtichettaErroreLogin() {
 		return etichettaDiSegnalazioneLoginFallito;
 	}
 
-	public AreaDiTesto getInserimentoPwd() {
+	public InserimentoTesto getInserimentoPwd() {
 		return inserimentoPassword;
 	}
 	

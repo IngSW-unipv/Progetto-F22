@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
@@ -14,8 +15,9 @@ import panelspackage.panels.elements.SpecificContainer;
 public class SignUp extends JPanel {
 	
 	private JLabel titolo,testoEmail,testoPassword,testoRipetiPassword, testoUsername;
-	private AreaDiTesto email,password,ripetiPassword,username;
-	private JButton registrati;
+	private InserimentoTesto email,password,ripetiPassword,username;
+	private Pulsanti registrati;
+	private Pulsanti indietro;
 	
 	ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 	ArrayList<String> dati = new ArrayList<String>();
@@ -47,13 +49,13 @@ public class SignUp extends JPanel {
 		add(containerGenerale, BorderLayout.CENTER);
 		
 		containerCenter.add(testoEmail = new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(email = new AreaDiTesto(new LineBorder(Frame.COLOREPRIMARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(email = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		containerCenter.add(testoPassword = new Etichette("PASSWORD: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(password = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(password = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		containerCenter.add(testoRipetiPassword = new Etichette("RIPETI PASSWORD: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(ripetiPassword = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
-		containerCenter.add(testoUsername = new Etichette("USERNAME: ", SwingConstants.CENTER,Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
-		containerCenter.add(username = new AreaDiTesto(new LineBorder(Frame.COLORESECONDARIOTEMATICO,1),new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(ripetiPassword = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
+		containerCenter.add(testoUsername = new Etichette("USERNAME: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO,new Font("Arial", Font.BOLD, 25)));
+		containerCenter.add(username = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.PLAIN, 30)));
 		
 		containerGenerale.add(containerVuoto);
 		containerGenerale.add(containerCenter);
@@ -62,9 +64,11 @@ public class SignUp extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		add(containerSouth, BorderLayout.SOUTH);
 		
-		registrati = new JButton();
-		registrati.setText("REGISTRATI");
-		containerSouth.add(registrati, BorderLayout.CENTER);
+		registrati = new Pulsanti("REGISTRATI", Frame.COLOREPRIMARIOTEMATICO);
+		indietro = new Pulsanti("INDIETRO", Frame.COLOREPRIMARIOTEMATICO);
+		containerSouth.setLayout(new GridLayout(2,1));
+		containerSouth.add(registrati);
+		containerSouth.add(indietro);
 
 	}
 	public ArrayList<JComponent> getListaAreaTesto() {
@@ -75,11 +79,11 @@ public class SignUp extends JPanel {
 		ListaAreaTesto = listaAreaTesto;
 	}
 
-	public JButton getRegistrati() {
+	public Pulsanti getRegistrati() {
 		return registrati;
 	}
 
-	public void setRegistrati(JButton registrati) {
+	public void setRegistrati(Pulsanti registrati) {
 		this.registrati = registrati;
 	}
 	public String getEmailPerReigstrarsi() {
@@ -92,4 +96,13 @@ public class SignUp extends JPanel {
 	public String getNickNamePerReigstrarsi() {
 		return this.username.getText();
 	}
+
+	public Pulsanti getIndietro() {
+		return indietro;
+	}
+
+	public void setIndietro(Pulsanti indietro) {
+		this.indietro = indietro;
+	}
+	
 }

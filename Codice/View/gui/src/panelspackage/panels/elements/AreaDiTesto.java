@@ -1,13 +1,13 @@
 package panelspackage.panels.elements;
+
+
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import packageframe.Frame;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
+@SuppressWarnings("serial")
 public class AreaDiTesto extends JTextArea {
 
 	public AreaDiTesto(Color colore, String stringa) {
@@ -49,5 +49,13 @@ public class AreaDiTesto extends JTextArea {
 	public AreaDiTesto(Border border, Font font) {
 	this.setBorder(border);
 	this.setFont(font);
+	}
+	
+	public AreaDiTesto(Color colore, int base, int altezza, Font font) {
+		this.setBackground(colore);
+		this.setPreferredSize(new Dimension(base, altezza));
+		this.setEditable(false);
+		this.setLineWrap(true);
+		this.setFont(font);
 	}
 }

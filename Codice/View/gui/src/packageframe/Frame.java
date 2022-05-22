@@ -1,5 +1,6 @@
 package packageframe;
 import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,6 @@ import javax.swing.*;
 import Sistema.Sistema;
 import controller.Controller;
 import panelspackage.panels.Chat;
-import panelspackage.panels.ChatMessaggi;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
@@ -23,7 +23,9 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.SpecificContainer;
 
+@SuppressWarnings("serial")
 public class Frame extends JFrame {
+
 	
 	int i;
 	
@@ -89,7 +91,10 @@ public class Frame extends JFrame {
 		
 		Ricerca ricerca = new Ricerca();
 		mappaSchermate.put("Ricerca", ricerca);
-
+		
+		PostVisualizzato postVisualizzato = new PostVisualizzato();
+		mappaSchermate.put("Postvisualizzato", postVisualizzato);
+	
 	}
 	
 	public void mostraSchermata(String Schermata) {
@@ -100,7 +105,6 @@ public class Frame extends JFrame {
 	public String getEmailPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
 	}
-	
 
 	public String getNickNamePerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getNickNamePerReigstrarsi();
@@ -158,6 +162,10 @@ public class Frame extends JFrame {
 	
 	public JButton getRegistratiButton() {
 		return ((SignUp)mappaSchermate.get("Signup")).getRegistrati();
+	}
+	
+	public JButton getIndietroButton() {
+		return ((SignUp)mappaSchermate.get("Signup")).getIndietro();
 	}
 	
 	public JButton getChatButton() {
@@ -221,7 +229,7 @@ public class Frame extends JFrame {
 	}
 	
 	public JButton getHomeChatButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getHomeChat();
+		return ((Chat)mappaSchermate.get("Chat")).getHome();
 	}
 	
 	public JButton getHomePannelloNotificheButton() {
@@ -231,8 +239,10 @@ public class Frame extends JFrame {
 	public JButton getHomeRicercaButton() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getHomeRicerca();
 	}
-	
 
+	public JButton getHomePostVisualizzatoButton() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getHomePostVisualizzato();
+	}
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
 	}
@@ -257,12 +267,25 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca();
 	}
 	
-	public void setStringaCercata(String stringaCercata) {
-		((Ricerca)mappaSchermate.get("Ricerca")).setStringCercata(stringaCercata);
+	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
+		 ((Ricerca)mappaSchermate.get("Ricerca")).impostaRisultatiRicerca(risultatiRicerca);
+
 	}
 	
-	public void impostaStringaCercataInRicerca() {
-		((Ricerca)mappaSchermate.get("Ricerca")).impostaStringaCercata();
+	public Etichette getEtichettaNome() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
 	}
 	
+	public JButton getPulsanteFotoProfilo() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteFotoProfilo();
+	}
+	
+	
+	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti) {
+		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);
+	}
+	
+	public Etichette getTestoRicercaInSchermataRicerca() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
+	}
 }

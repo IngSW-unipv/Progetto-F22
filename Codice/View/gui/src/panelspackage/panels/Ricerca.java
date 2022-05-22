@@ -17,70 +17,69 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class Ricerca extends JPanel {
 	
-	private String stringCercata = "";
-	private ArrayList<String> risultatiRicerca;
-	
+	private String stringCercata = "jkvk";
+	private ArrayList<String> risultatiRicerca = new  ArrayList<String>();
+	private SpecificContainer containerCenter = new SpecificContainer();
+	private SpecificContainer containerWest = new SpecificContainer();
+
 	private JButton homeRicerca;
-	private JLabel testoRicerca;
+	private Etichette etichetta = new Etichette("Hai cercato " + stringCercata, Frame.COLOREPRIMARIOTEMATICO);
 	
+	int i;
 
 	public Ricerca() {
 		
+		avvio();
+		initComponents();
+	}
+	
+	public void avvio() {
 		this.setOpaque(true);
 		this.setVisible(false);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
+	}
+	
+	public void initComponents( ) {
 		
-		homeRicerca = new JButton("Torna alla home");
-		
+		homeRicerca = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
 		
 		SpecificContainer containerCentrale = new SpecificContainer();
-		this.add(containerCentrale, BorderLayout.CENTER);
-		this.add(homeRicerca, BorderLayout.SOUTH);
-		
-		
+		add(containerCentrale, BorderLayout.CENTER);
+		add(homeRicerca, BorderLayout.SOUTH);
 
-		/*SpecificContainer containerNorth = new SpecificContainer();
+		
+		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 		
 		SpecificContainer containerSouth = new SpecificContainer();
-		this.add(containerNorth, BorderLayout.SOUTH);
+		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		homeRicerca = new JButton("Torna alla home");
+		Pulsanti homeRicerca = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
 		
-		JLabel etichetta = new JLabel("Hai cercato " + stringCercata);
-		
-		etichetta.setForeground(Frame.COLOREPRIMARIOTEMATICO);
-		etichetta.setVisible(true);
-		
-		containerNorth.add(etichetta);
-		containerSouth.add(homeRicerca);*/
-		
-		/*SpecificContainer containerCenter = new SpecificContainer();
-		this.add(containerCenter, BorderLayout.CENTER);
-		containerCenter.setLayout(new GridLayout(10,1));*/
-		
-		/*for (int i = 0; i < risultatiRicerca.size() & i < 10; i++) {
-			containerCenter.add(new Pulsanti(risultatiRicerca.get(i), Frame.COLOREPRIMARIOTEMATICO));
-		}*/
-		
-		/*SpecificContainer containerWest = new SpecificContainer();
-		this.add(containerWest, BorderLayout.WEST);
-		containerWest.setLayout(new GridLayout(10,1));*/
-		/*for (int i = 0; i < risultatiRicerca.size() & i < 10; i++) {
-			containerWest.add(new Etichette("risultato"+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
-		}*/
+		containerNorth.add(etichetta, BorderLayout.NORTH);
+		containerSouth.add(homeRicerca,BorderLayout.SOUTH);
 
+		add(containerCenter, BorderLayout.CENTER);
+		containerCenter.setLayout(new GridLayout(10,1));
+
+		add(containerWest, BorderLayout.WEST);
+		containerWest.setLayout(new GridLayout(10,1));
 	}
+	
+	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
 
+		for (int i = 0; i < risultatiRicerca.size() && i < 10; i++) {
+			containerWest.add(new Pulsanti("ricerca numero: "+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
+		}
+		
+		for (int i = 0; i < risultatiRicerca.size() && i < 10; i++) {
+			containerCenter.add(new Pulsanti(risultatiRicerca.get(i), Frame.COLOREPRIMARIOTEMATICO));
+		}
+	}
 
 	public String getStringCercata() {
 		return stringCercata;
-	}
-
-	public void setStringCercata(String stringCercata) {
-		
-		this.stringCercata = stringCercata;
 	}
 
 	public ArrayList<String> getRisultatiRicerca() {
@@ -91,21 +90,12 @@ public class Ricerca extends JPanel {
 		this.risultatiRicerca = risultatiRicerca;
 	}
 
-
-	public JButton getHomeRicerca() {
-		return homeRicerca;
+	public Pulsanti getHomeRicerca() {
+		return (Pulsanti) homeRicerca;
 	}
 
-
-	public void setHomeRicerca(JButton homeRicerca) {
-		this.homeRicerca = homeRicerca;
-	}
-	
-	
-	public void impostaStringaCercata() {
-		testoRicerca = new JLabel("Hai cercato: " + stringCercata);
-		testoRicerca.setForeground(Frame.COLOREPRIMARIOTEMATICO);
-		this.add(testoRicerca, BorderLayout.NORTH);
+	public Etichette getTestoRicerca() {
+		return etichetta;
 	}
 
 }

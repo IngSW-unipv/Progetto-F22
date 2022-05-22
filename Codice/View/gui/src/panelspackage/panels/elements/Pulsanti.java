@@ -1,4 +1,5 @@
 package panelspackage.panels.elements;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -6,15 +7,16 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+@SuppressWarnings("serial")
 public class Pulsanti extends JButton{
 	
-
 		public Pulsanti(String name, Color colore) {
 			this.setForeground(colore);
-			this.setLabel(name);
+			this.setText(name);
 			this.setVisible(true);
 		}
 		
+		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Font font) {
 			this.setFont(font);
 			this.setLabel(name);
@@ -22,6 +24,7 @@ public class Pulsanti extends JButton{
 		}
 		
 		
+		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Color colore, Font font) {
 			this.setFont(font);
 			this.setLabel(name);
@@ -42,9 +45,7 @@ public class Pulsanti extends JButton{
 			this.setVisible(true);
 		}
 		
-		public Pulsanti() {
 		
-		}
 		
 		
 }

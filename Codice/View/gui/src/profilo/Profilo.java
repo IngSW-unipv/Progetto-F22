@@ -46,6 +46,8 @@ public class Profilo implements IProfilo {
 	private HashMap<String,String> dislikeMap;
 	
 	//funzione richiamata dal signUP
+	
+	
 	public Profilo(String idProfilo, String nickname) {
 		super();
 		this.dbfacade = dbfacade.getIstance();

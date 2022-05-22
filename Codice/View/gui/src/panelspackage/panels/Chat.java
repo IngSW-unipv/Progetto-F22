@@ -1,117 +1,150 @@
 package panelspackage.panels;
 
-import java.awt.*;
-import java.util.ArrayList;
-
-import javax.swing.*;
-
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import packageframe.Frame;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
-
+@SuppressWarnings("serial")
 public class Chat extends JPanel {
-	private ArrayList<JLabel> listaChat = new ArrayList<JLabel>();
-	private int numeroChat; 	//Numero delle chat di un account
-	private JLabel titoloChat;
-	private SpecificContainer containerSuperiore,containerSceltaChat,containerInferiore;
-	private Pulsanti chatPrivata,chatGruppo,nuovaChat,homeChat;
-	private static final long serialVersionUID = 1L;
-	private Font fontTitle = new Font("Arial", Font.BOLD | Font.ITALIC, 30);
-	private Font fontButton = new Font("Arial", Font.BOLD, 15);
+
+	private Pulsanti home;
+	private Pulsanti mioProfilo;
+	private JComboBox<String> discussioni;
+	private SpecificContainer containerCenter;
+	private SpecificContainer containerNorth ;
+	private Pulsanti aggiornaAltriChat;
+	private SpecificContainer containerSouth;
+
 	
-	public Chat() {
-		avvio();
-		initComponents();
+
+		public Chat() {
+			avvio();
+			initComponents();
+			
 	}
-	
-	public void avvio() {
+		
+		public void avvio() {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLOREPRIMARIOTEMATICO);	
 	}
 	
 	public void initComponents() {
-		titoloChat = new JLabel("CHAT", SwingConstants.LEFT);
-		titoloChat.setFont(fontTitle);
-		titoloChat.setForeground(Color.WHITE);
 		
-		chatPrivata = new Pulsanti("Chat private");
-		chatPrivata.setFont(fontButton);
+		home = new Pulsanti("C:\\Users\\aissa\\OneDrive\\Immagini\\home.png");
+		mioProfilo = new Pulsanti("Mio Profilo", Color.pink);
+		containerNorth = new SpecificContainer();
+		this.add(containerNorth, BorderLayout.NORTH);
+		containerNorth.add(home);
+		containerNorth.add(mioProfilo);
 		
-		chatGruppo = new Pulsanti("Chat di gruppo");
-		chatGruppo.setFont(fontButton);
-		
-		nuovaChat = new Pulsanti("Nuova chat");
-		nuovaChat.setFont(fontButton);
-		
-		homeChat = new Pulsanti("Torna alla home");
-		nuovaChat.setFont(fontButton);
-		
-		containerSuperiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		containerSuperiore.setLayout(new GridLayout(2, 1));
-		containerSceltaChat = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		containerSceltaChat.setLayout(new GridLayout(1, 2));
-		containerInferiore = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		containerInferiore.setLayout(new GridLayout(2, 1));
-		
-		containerSuperiore.add(titoloChat);
-		containerSceltaChat.add(chatPrivata);
-		containerSceltaChat.add(chatGruppo);
-		containerSuperiore.add(containerSceltaChat);
-		containerInferiore.add(nuovaChat);
-		containerInferiore.add(homeChat);
-		this.add(containerSuperiore, BorderLayout.NORTH);
-		this.add(containerInferiore, BorderLayout.SOUTH);
-		/*for(i=0; i < numeroChat; i++) {
-			this.add(listaChat.get(i));
-		}*/
-		
-	}
-	public void aggiungiChatAllaLista(ArrayList listaChat) {
-		JLabel chat = new JLabel();
-		listaChat.add(chat);
-	}
-
-	public JButton getChatPrivata() {
-		return chatPrivata;
-	}
-
-	public void setChatPrivata(JButton chatPrivata) {
-		this.chatPrivata = chatPrivata;
-	}
-
-	public JButton getChatGruppo() {
-		return chatGruppo;
-	}
-
-	public void setChatGruppo(JButton chatGruppo) {
-		this.chatGruppo = chatGruppo;
-	}
-
-	public JButton getNuovaChat() {
-		return nuovaChat;
-	}
-
-	public void setNuovaChat(JButton nuovaChat) {
-		this.nuovaChat = nuovaChat;
-	}
-
-	public JButton getHomeChat() {
-		return homeChat;
-	}
-
-	public void setHomeChat(JButton homeChat) {
-		this.homeChat = homeChat;
+		discussioni = new JComboBox<>();
+		discussioni.addItem("Discussioni");
+		discussioni.addItem("Chat di gruppo");
+		discussioni.addItem("Chat personali");
+		discussioni.setFont(new Font("Arial", 1, 14));
+		discussioni.setBackground(Color.CYAN);
+		containerNorth.add(discussioni); 
+	    
+	    containerCenter = new SpecificContainer(Color.CYAN);
+	    containerCenter.setLayout(new GridLayout(10, 2));
+	    containerCenter.add(new Etichette("ChatDiGruppo1", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatPersonale1", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatDiGruppo2", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatPersonale2", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatDiGruppo3", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatPersonale3", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatDiGruppo4", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatPersonale4", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatDiGruppo5", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(new Etichette("ChatPersonale5", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    this.add(containerCenter, BorderLayout.CENTER); 
+	    
+	    
+	    containerSouth = new SpecificContainer();
+	    this.add(containerSouth);
+	    aggiornaAltriChat = new Pulsanti("Aggiorna altri chat", Color.blue, new Font("Arial", 1, 14));
+	    containerSouth.add(aggiornaAltriChat);
+	    
 	}
 	
-	public static void main(String[] args) {
+
+        
+
+		public Pulsanti getHome() {
+			return home;
+		}
+
+		public void setHome(Pulsanti home) {
+			this.home = home;
+		}
+
+		public Pulsanti getMioProfilo() {
+			return mioProfilo;
+		}
+
+		public void setMioProfilo(Pulsanti mioProfilo) {
+			this.mioProfilo = mioProfilo;
+		}
+
+		public JComboBox<String> getDiscussioni() {
+			return discussioni;
+		}
+
+		public void setDiscussioni(JComboBox<String> discussioni) {
+			this.discussioni = discussioni;
+		}
+
+		public SpecificContainer getContainerCenter() {
+			return containerCenter;
+		}
+
+		public void setContainerCenter(SpecificContainer containerCenter) {
+			this.containerCenter= containerCenter;
+		}
+
+		public SpecificContainer getContainerNorth() {
+			return containerNorth;
+		}
+
+		public void setContainerNorth(SpecificContainer containerNorth) {
+			this.containerNorth = containerNorth;
+		}
+
+		public Pulsanti getAggiornaAltriChat() {
+			return aggiornaAltriChat;
+		}
+
+		public void setAggiornaAltriChat(Pulsanti aggiornaAltriChat) {
+			this.aggiornaAltriChat = aggiornaAltriChat;
+		}
+
+		public SpecificContainer getContainerSouth() {
+			return containerSouth;
+		}
+
+		public void setContainerSouth(SpecificContainer containerSouth) {
+			this.containerSouth = containerSouth;
+		}
+	   
+	    
 		
-		Chat c = new Chat();
-		c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		c.setSize(400, 400);
-		c.setVisible(true);
-		c.setLayout(new FlowLayout(FlowLayout.LEADING));
-	}
-}
+}	
+

@@ -73,7 +73,6 @@ public class Sistema {
 
     
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
-		
 			if(dbfacade.vediPswCambiata(email) == false)
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		else if (dbfacade.vediEsiste(email) == false)
@@ -82,6 +81,8 @@ public class Sistema {
 	 			dbfacade.modificaLoggato(email, true);
 	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
 	 			this.setProfiloAttivo(p);
+	 			System.out.println("fssefes" + this.getProfiloAttivo().getIdProfilo());
+	 			
 	 			return true;
 	 		}
 	 		throw new PswOmailErrati(email,psw);
@@ -122,13 +123,27 @@ public class Sistema {
 	 			System.out.println(prof.toString());
 	 	}
 	 	
-	 	public void pubblicaPost(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 	/*public void pubblicaPost(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 
 	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
-	 	}
+	 	}*/
 	 	
 	 	public void pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
 	 		profiloAttivo.creaPost(new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo));
+	 	}
+	 	
+	 	
+		public void pubblicaPost(Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 		Foto p;
+	 		int idPostInt = (int)Math.round(Math.random() * 1000);
+	 		String idPost = Integer.toString(idPostInt);
+	 		p = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		
+	 		if(dbfacade.cerca(new Foto(idPost, null, null, null, false, false, null, null, false)) != null) {
+	 			pubblicaPost(dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		}
+	 		
+	 		profiloAttivo.creaPost(p);
 	 	}
 	 
 

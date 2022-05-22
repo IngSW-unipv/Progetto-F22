@@ -2,6 +2,7 @@ package panelspackage.panels;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.SpecificContainer;
 import java.awt.*;
@@ -20,7 +21,7 @@ public class Home extends JPanel {
 	private Font fontTitle, fontText, fontButton;
 	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,buttonNotifiche,pPost,pStory,pSondaggio,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
-	private JTextField testoRicerca;
+	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
 
 	
@@ -50,7 +51,7 @@ public class Home extends JPanel {
 
 		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
 		//areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "", fontText), BorderLayout.CENTER);
-		areaRicerca.add(testoRicerca = new JTextField(""));
+		areaRicerca.add(testoRicerca = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, fontText));
 		areaRicerca.add(searchButton = new Pulsanti("CERCA", fontButton), BorderLayout.EAST);
 		searchButton.setEnabled(true);
 		
@@ -268,7 +269,7 @@ public class Home extends JPanel {
 		return testoRicerca;
 	}
 
-	public void getTestoRicerca(JTextField testoRicerca) {
+	public void getTestoRicerca(InserimentoTesto testoRicerca) {
 		this.testoRicerca = testoRicerca;
 	}
 }

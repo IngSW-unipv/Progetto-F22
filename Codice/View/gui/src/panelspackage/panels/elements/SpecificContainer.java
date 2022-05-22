@@ -4,13 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class SpecificContainer extends Container {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	public SpecificContainer(Color colorePrimario, Color coloreSecondario) {
 		this.setLayout(new BorderLayout());
 		this.setBackground(colorePrimario);
