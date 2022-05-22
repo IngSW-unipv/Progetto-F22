@@ -239,8 +239,10 @@ public class Frame extends JFrame {
 	public JButton getHomeRicercaButton() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getHomeRicerca();
 	}
-	
 
+	public JButton getHomePostVisualizzatoButton() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getHomePostVisualizzato();
+	}
 	public HashMap<String, JPanel> getMappaSchermate() {
 		return this.mappaSchermate;
 	}

@@ -354,7 +354,7 @@ public class Controller {
         Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
         model.pubblicaPost(UtilityChat.convertiInSqlData(d), t, commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
     }
-    
+   
     
     public boolean verificaTestoRicerca() {
         if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
@@ -384,4 +384,4 @@ public class Controller {
         view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
         view.impostaRisultatiRicerca(risultatiRicerca);
     }
-}}
+}
