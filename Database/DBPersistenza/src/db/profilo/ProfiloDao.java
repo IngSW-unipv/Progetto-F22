@@ -36,7 +36,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11),rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14));                                     
+				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11),rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14),rs1.getString(15));                                     
 
 				result.add(p);
 			}
@@ -127,7 +127,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14),rs1.getString(15));
 
 				DBConnection.closeConnection(conn);
 				return prof;
@@ -409,6 +409,60 @@ public class ProfiloDao implements IProfiloDao{
 
 		DBConnection.closeConnection(conn);
 	    throw new AccountDoesNotExist(idProfilo);
+	}
+
+
+	@Override
+	public boolean cambiaImmagineProfilo(ProfiloDB p, String s) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set immagineProfilo=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
+	@Override
+	public String ottieniImmagine(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT immagineProfilo FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String s = rs1.getString("immagineProfilo");
+				DBConnection.closeConnection(conn);
+				return s;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return null;
 	}
 
 	

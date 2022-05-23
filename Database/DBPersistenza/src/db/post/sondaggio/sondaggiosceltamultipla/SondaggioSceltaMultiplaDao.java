@@ -158,4 +158,36 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		return null;
 	}
 
+	@Override
+	public String ottieniPercorso(PostDB m) {
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT idSondaggio FROM sondaggiosceltamultipla WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, idProfilo);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+                	result.add(rs1.getString("idSondaggio"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+
 }

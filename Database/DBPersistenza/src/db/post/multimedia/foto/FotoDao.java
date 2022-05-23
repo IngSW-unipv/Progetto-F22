@@ -10,7 +10,7 @@ import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
 
-public class FotoDao extends PostDao{
+public class FotoDao extends PostDao {
 
 	private Connection conn;
 	private String schema;
@@ -162,5 +162,57 @@ public class FotoDao extends PostDao{
 		DBConnection.closeConnection(conn);
 		return null;
 	}
+	
+	@Override
+	public String ottieniPercorso(PostDB m) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
 
+		try
+		{
+			String query="SELECT percorso FROM foto WHERE idFoto=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String s = rs1.getString("percorso");
+				DBConnection.closeConnection(conn);
+				return s;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return null;
+	}
+	@Override
+	public ArrayList<String> ritornaPostDiUnProfilo(String idprofilo) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT idFoto FROM foto WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, idprofilo);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+                	result.add(rs1.getString("idFoto"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
 }

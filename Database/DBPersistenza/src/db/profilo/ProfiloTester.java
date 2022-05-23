@@ -11,14 +11,15 @@ public class ProfiloTester {
 	public static void main(String[] args) {
 		ProfiloDao pdao = new ProfiloDao();
 		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
-       ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
-       ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null);
+       ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null, null);
+       ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, "003", "001", null, false, false,false, null, null);
   
 	
        System.out.println(pdao.inserisciChiavi(prof, "001", "002", "P00"));
 	
+       pdao.cambiaImmagineProfilo(prof, "fwquf3roufh");
        
-  
+
        for(ProfiloDB p : selectAll)
 			System.out.println(p.toString());
         

@@ -23,6 +23,7 @@ import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
+import post.multimedia.Multimedia;
 import convertitore.ConvertitoreFacade;
 
 public class DbFacade {
@@ -188,7 +189,18 @@ public class DbFacade {
 
      }
      
-	
+     public String ottieniPercorso(Post m) {
+    	 pstDao = Utility.convertiTipoPost(m.getTipo());
+    	 return pstDao.ottieniPercorso(ConvertitoreFacade.getIstance().converti(m));
+     }
+     
+    //Ottiene gli id dei post di un profilo 
+	public ArrayList<String> ottieniIdPost(Post p, Profilo pr){
+		pstDao = Utility.convertiTipoPost(p.getTipo());
+		return pstDao.ritornaPostDiUnProfilo(pr.getIdProfilo());
+	}
+     
+     
 	//Profilo
 	
 	public ArrayList<Profilo> selectAllProfilo() {
@@ -249,7 +261,15 @@ public class DbFacade {
 	public boolean modificaPsw(String p, String b) throws AccountDoesNotExist {
 		return pDao.modificaPsw(p, b);
 	}
+	
+	public boolean modificaImmagineProfilo(Profilo p, String immagine) {
+		return pDao.cambiaImmagineProfilo(ConvertitoreFacade.getIstance().converti(p), immagine);
+	}
 
+	public String ottieniImmagineProfilo(Profilo p) {
+		return pDao.ottieniImmagine(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
 	//Follow
 	
 	public boolean carica(Follow f) {

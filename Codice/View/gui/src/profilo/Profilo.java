@@ -200,6 +200,7 @@ public String toString() {
 }
 
 
+
 @Override
 //Ritorna true se l'account inserito e' "seguibile"
 public boolean profiloNonSeguito(String emailProfilo) {
@@ -219,6 +220,10 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 	}
 	return true;
 }
+
+
+
+//Follow
 
 @Override
 public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
@@ -245,13 +250,18 @@ public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExis
 
 
 @Override
-public void vediMieiFollower(Follow f) {
+public ArrayList<String> vediMieiFollower(Follow f) {
 
 		ArrayList<String> res = dbfacade.cercaProfSeguito(f.getMailProfiloSeguito());
-		for(String s : res)
-			System.out.println(s.toString());
+		return res;
 		
 }
+
+@Override
+public Follow cercaFollow(Follow f) {
+	return dbfacade.cerca(f);
+}
+
 
 //Messaggi
 
@@ -268,27 +278,27 @@ public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time ora
 	 return m;
 }
 @Override
-public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist {
+public boolean scriviMessaggio(Messaggio m){
 	
 	    	return dbfacade.carica(m);	
 	  
 }
 
 @Override
-public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist {
+public boolean rimuoviMessaggio(Messaggio m){
 	
 	return dbfacade.rimuovi(m);
 }
 
 @Override
-public Messaggio cercaMessaggio(Messaggio m) throws AccountDoesNotExist{
+public Messaggio cercaMessaggio(Messaggio m){
 		return dbfacade.cerca(m);
 	
 }
 
 
 @Override
-public String ottieniTestoMessaggio(Messaggio m) throws AccountDoesNotExist {
+public String ottieniTestoMessaggio(Messaggio m) {
 		return dbfacade.ottieniTestoMessaggio(m.getIdMessaggio(), m.getTipo());
 		
 }
@@ -296,7 +306,7 @@ public String ottieniTestoMessaggio(Messaggio m) throws AccountDoesNotExist {
 
 
 @Override
-public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist {
+public boolean leggiMessaggi(String s, TipoMessaggio t) {
 		
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
@@ -318,7 +328,7 @@ public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExi
 
 
 @Override
-public boolean leggiSoloTesto(String s, TipoMessaggio t) throws AccountDoesNotExist {
+public boolean leggiSoloTesto(String s, TipoMessaggio t){
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -406,14 +416,13 @@ public Post cercaPost(Post p) {
 
 
 @Override
-public void selectAllPost(TipoPost t) {
+public ArrayList<Post> selectAllPost(TipoPost t) {
 	ArrayList<Post> p = dbfacade.selectAllPost(t);
-	for(Post ps : p)
-		System.out.println(ps.toString());
+	return p;
 }
 
 @Override
-public boolean pubblicaStoria(int time, Multimedia f) throws AccountDoesNotExist{
+public boolean pubblicaStoria(int time, Multimedia f){
 	
 	    f.setStory(true);
 		f.setTempoCancellazione(time);
@@ -426,6 +435,14 @@ public boolean pubblicaStoria(int time, Multimedia f) throws AccountDoesNotExist
 		dbfacade.rimuovi(f);	
 		return true;
 }
+
+
+@Override
+public String ottieniPercorso(Post p) {
+	return dbfacade.ottieniPercorso(p);
+}
+
+
 
 
 //------------------------------------------------------------------------------------------------------------------
@@ -444,14 +461,30 @@ public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 		throw new AccountDoesNotExist(p.getIdProfilo());
 }
 
+@Override
+public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
+	return dbfacade.modificaImmagineProfilo(p, immagine);
+}
+
+@Override
+public String ottieniImmagineProfilo(Profilo p) {
+	return dbfacade.ottieniImmagineProfilo(p);
+}
+
+@Override
+public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
+	return dbfacade.ottieniIdPost(p, pr);
+}
+
+
 //--------------------------------------------------------------------------------------------------------------------
 
 //Commento
 
 @Override
-public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) throws AccountDoesNotExist {
+public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo) {
 	
-	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post);
+	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post,profilo);
 	
 		return c;
 
@@ -480,11 +513,10 @@ public Commento cercaCommento(Commento c) {
 }
 
 @Override
-public void selectAllCommentiSottoPost(Commento c) {
+public ArrayList<Commento> selectAllCommentiSottoPost(Commento c) {
 	
 	ArrayList<Commento> res = dbfacade.selectAllCommenti(c);
-	for(Commento cdb : res)
-		System.out.println(cdb.toString());
+	return res;
 }
 
 //Gruppo
@@ -522,16 +554,15 @@ public Gruppo cercaGruppo(Gruppo g) {
 
 
 @Override
-public void selectAllGruppo(){
+public ArrayList<Gruppo> selectAllGruppo(){
 	ArrayList<Gruppo> res = dbfacade.selectAllGruppo();
-		for(Gruppo gdb : res)
-			System.out.println(gdb.toString());
+		return res;
 		
 }
 //-------------------------------------------------------------------------------------------------------------------
 
 @Override
-public boolean aggiungiLike(Post p) throws AccountDoesNotExist{
+public boolean aggiungiLike(Post p){
 	
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
@@ -547,7 +578,7 @@ public boolean aggiungiLike(Post p) throws AccountDoesNotExist{
 }
 
 @Override
-public boolean aggiungiDislike(Post p) throws AccountDoesNotExist{
+public boolean aggiungiDislike(Post p){
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true)
 		return false;
 	else {
@@ -562,7 +593,7 @@ public boolean aggiungiDislike(Post p) throws AccountDoesNotExist{
 
 
 @Override
-public boolean rimuoviLike(Post p)  throws AccountDoesNotExist{
+public boolean rimuoviLike(Post p){
 
 	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumLike();
@@ -576,7 +607,7 @@ public boolean rimuoviLike(Post p)  throws AccountDoesNotExist{
 }
 
 @Override
-public boolean rimuoviDislike(Post p)  throws AccountDoesNotExist{
+public boolean rimuoviDislike(Post p){
 	
 	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true) {
 		int i = p.getNumDislike();

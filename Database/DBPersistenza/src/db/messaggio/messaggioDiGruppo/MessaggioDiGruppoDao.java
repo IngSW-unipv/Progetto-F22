@@ -151,7 +151,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by idMsgGrp";
+			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by dataInvio";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s);
@@ -210,7 +210,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="SELECT testo FROM messaggiodigruppo WHERE gruppo=?";
+			String query="SELECT testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m);

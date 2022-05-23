@@ -36,4 +36,6 @@ public interface IProfiloDao {
   	 
   	 public String ottieniTipo(String idProfilo)throws AccountDoesNotExist;
   	 
+  	 public boolean cambiaImmagineProfilo(ProfiloDB p, String s);
+  	 public String ottieniImmagine(ProfiloDB p);
 }

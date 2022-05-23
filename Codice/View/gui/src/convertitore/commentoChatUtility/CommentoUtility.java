@@ -15,12 +15,12 @@ public class CommentoUtility {
 	}
 	
 	public CommentoDB converti(Commento c) {
-		CommentoDB cdb = new CommentoDB(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(),c.getTesto(),c.getPost());
+		CommentoDB cdb = new CommentoDB(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(),c.getTesto(),c.getPost(), c.getProfilo());
 		return cdb;
 	}
  
 	public Commento convertiInverso(CommentoDB c) {
-		Commento cdb = new Commento(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(), c.getTesto(), c.getPost());
+		Commento cdb = new Commento(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(), c.getTesto(), c.getPost(), c.getProfilo());
 		return cdb;
 	}
 	

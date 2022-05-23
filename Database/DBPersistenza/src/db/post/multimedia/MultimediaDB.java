@@ -39,4 +39,5 @@ public abstract class MultimediaDB extends PostDB{
 		return super.toString() + ", tempoCancellazione=" + tempoCancellazione + ", percorso=" + percorso + ", isStory="
 				+ isStory ;
 	}
+
 }

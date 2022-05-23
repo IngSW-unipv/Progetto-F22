@@ -1,5 +1,7 @@
 package profilo;
 
+import java.util.ArrayList;
+
 import post.multimedia.foto.Foto;
 import profilo.exception.AccountDoesNotExist;
 
@@ -17,13 +19,15 @@ public class ProfiloTester {
     	/*Post pst = p.cercaPost(f);
     			System.out.println(pst.toString());*/
     	
-    	try {
+    	/*try {
 			p.pubblicaStoria(1, f);
 		} catch (AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-        
+		}*/
+       ArrayList<String> s = p.ritornaIdPost(f, p);
+       for(String res : s)
+    	   System.out.println(res.toString());
     	}
     }
 

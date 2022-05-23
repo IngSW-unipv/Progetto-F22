@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import db.connessione.DBConnection;
+import db.profilo.ProfiloDB;
 
 
 public class CommentoDao implements ICommentoDao{
@@ -25,7 +26,7 @@ public class CommentoDao implements ICommentoDao{
 
 		try
 		{
-			String query="insert into commento (idCommento,oraCommento,dataCommento,testo,post) values (?,?,?,?,?)";
+			String query="insert into commento (idCommento,oraCommento,dataCommento,testo,post,profilo) values (?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, c.getIdCommento());
@@ -33,7 +34,8 @@ public class CommentoDao implements ICommentoDao{
 			st1.setDate(3, c.getDataCommento());
 			st1.setString(4, c.getTesto());
 			st1.setString(5, c.getPost());
-		
+		    st1.setString(6, c.getProfilo());
+			
 			st1.executeUpdate();
 
 
@@ -89,7 +91,7 @@ public class CommentoDao implements ICommentoDao{
 
 			while(rs1.next())
 			{
-				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5));
+				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));
 				result.add(com);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -116,7 +118,7 @@ public class CommentoDao implements ICommentoDao{
 
 			while(rs1.next())
 			{
-				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5));
+				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));
 
 				DBConnection.closeConnection(conn);
 				return com;
@@ -125,6 +127,39 @@ public class CommentoDao implements ICommentoDao{
 
 		DBConnection.closeConnection(conn);
 		return null;
+	}
+
+	@Override
+	public ArrayList<String> ProfiloNickCommento(ProfiloDB p) {
+		ArrayList<String> res = new ArrayList<>();
+		
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="select c.profilo,p.nickname, c.testo from commento c, profilo p where c.profilo = p.idProfilo and p.idProfilo = ?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String s1 = rs1.getString("profilo");
+				String s2 = rs1.getString("nickname");
+				String s3 = rs1.getString("testo");
+				res.add(s1);
+				res.add(s2);
+				res.add(s3);
+				
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return res;
 	}
 
 

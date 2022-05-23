@@ -11,7 +11,7 @@ import db.post.PostDB;
 import db.post.PostDao;
 
 
-public class VideoDao  extends PostDao {
+public class VideoDao  extends PostDao{
 
 	private Connection conn;
 	private String schema;
@@ -157,6 +157,58 @@ public class VideoDao  extends PostDao {
 
 		DBConnection.closeConnection(conn);
 		return null;
+	}
+	@Override
+	public String ottieniPercorso(PostDB m) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT percorso FROM video WHERE idVideo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, m.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String s = rs1.getString("percorso");
+				DBConnection.closeConnection(conn);
+				return s;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return null;
+	}
+	@Override
+	public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT idVideo FROM video WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, idProfilo);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+                	result.add(rs1.getString("idVideo"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
 	}
 
 }

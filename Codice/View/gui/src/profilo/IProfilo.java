@@ -2,6 +2,7 @@ package profilo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
@@ -33,19 +34,19 @@ public interface IProfilo {
 	
 	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String idGruppo);
 	public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String idProfiloInviante, String idProfiloRicevente);
-	public boolean scriviMessaggio(Messaggio m) throws AccountDoesNotExist;
-	public boolean rimuoviMessaggio(Messaggio m) throws AccountDoesNotExist;
+	public boolean scriviMessaggio(Messaggio m);
+	public boolean rimuoviMessaggio(Messaggio m);
 	
-	public Messaggio cercaMessaggio(Messaggio m)throws AccountDoesNotExist;
+	public Messaggio cercaMessaggio(Messaggio m);
 	
-	public String ottieniTestoMessaggio(Messaggio m)throws AccountDoesNotExist;
+	public String ottieniTestoMessaggio(Messaggio m);
 	
     //Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
-	public boolean leggiMessaggi(String s, TipoMessaggio t) throws AccountDoesNotExist;
+	public boolean leggiMessaggi(String s, TipoMessaggio t);
     
 	//Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	//A differenza del metodo leggiMessaggi, verranno restituite solo le informazioni riguardanti il testo del messaggio
-	public boolean leggiSoloTesto(String s, TipoMessaggio t)throws AccountDoesNotExist;
+	public boolean leggiSoloTesto(String s, TipoMessaggio t);
 	
 	
 	//Post
@@ -60,30 +61,37 @@ public interface IProfilo {
 	public boolean rimuoviPost(Post p);
 	public Post cercaPost(Post p);
 	
-	//Stampa le informazioni di tutti i post nel db
-	public void selectAllPost(TipoPost t);
+
+	public ArrayList<Post> selectAllPost(TipoPost t);
 	
 	//L'int time rappresenta la durata in ore nel quale la storia rimarr� pubblicata. A fine di time ore, la storia sar� rimossa automaticamente
-    public boolean pubblicaStoria(int time, Multimedia f)throws AccountDoesNotExist;
+    public boolean pubblicaStoria(int time, Multimedia f);
 	
+    public String ottieniPercorso(Post p);
     
     //Profilo
     
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
-  
+    public boolean cambiaImmagineProfilo(Profilo p, String immagine);
+    public String ottieniImmagineProfilo(Profilo p);
+    public ArrayList<String> ritornaIdPost(Post p, Profilo pr);
     
     //Commenti
-    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post)throws AccountDoesNotExist; 
+    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo); 
     public boolean pubblicaCommento(Commento c);
     public boolean rimuoviCommento(Commento c);
 	public Commento cercaCommento(Commento c);
-	public void selectAllCommentiSottoPost(Commento c);
+	public ArrayList<Commento> selectAllCommentiSottoPost(Commento c);
 	
 	//Follow
 	
 	public boolean segui(Profilo email)throws AccountDoesNotExist;
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist;
-	public void vediMieiFollower(Follow f);
+	
+	//Mostra la lista di tutti i follower del profilo personale indicato
+	public ArrayList<String> vediMieiFollower(Follow f);
+	
+	public Follow cercaFollow(Follow f);
 	
 	//Gruppo
 	
@@ -91,14 +99,14 @@ public interface IProfilo {
 	    public boolean rimuoviGruppo(Gruppo g);
 	    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
         public Gruppo cercaGruppo(Gruppo g);
-		public void selectAllGruppo();
+		public ArrayList<Gruppo> selectAllGruppo();
 	    
 	
     //Like Dislike
 	
 	
-	public boolean aggiungiLike(Post p)throws AccountDoesNotExist;
-	public boolean aggiungiDislike(Post p)throws AccountDoesNotExist;
-	public boolean rimuoviLike(Post p)throws AccountDoesNotExist;
-	public boolean rimuoviDislike(Post p)throws AccountDoesNotExist;
+	public boolean aggiungiLike(Post p);
+	public boolean aggiungiDislike(Post p);
+	public boolean rimuoviLike(Post p);
+	public boolean rimuoviDislike(Post p);
 	}

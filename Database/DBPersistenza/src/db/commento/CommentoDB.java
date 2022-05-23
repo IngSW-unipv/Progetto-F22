@@ -5,19 +5,21 @@ import java.sql.Time;
 
 public class CommentoDB {
 
-	public CommentoDB(String idCommento, Time oraCommento, Date dataCommento, String testo, String post) {
+	public CommentoDB(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo) {
 		super();
 		this.idCommento = idCommento;
 		this.oraCommento = oraCommento;
 		this.dataCommento = dataCommento;
 		this.testo = testo;
 		this.post = post;
+		this.profilo = profilo;
 	}
 	private String idCommento;
 	private Time oraCommento;
 	private Date dataCommento;
 	private String testo;
 	private String post;
+	private String profilo;
 	public String getIdCommento() {
 		return idCommento;
 	}
@@ -51,6 +53,12 @@ public class CommentoDB {
 	@Override
 	public String toString() {
 		return "CommentoDB [idCommento=" + idCommento + ", oraCommento=" + oraCommento + ", dataCommento="
-				+ dataCommento + ", testo=" + testo + ", post=" + post + "]";
+				+ dataCommento + ", testo=" + testo + ", post=" + post + ", profilo=" + profilo + "]";
+	}
+	public String getProfilo() {
+		return profilo;
+	}
+	public void setProfilo(String profilo) {
+		this.profilo = profilo;
 	}
 }

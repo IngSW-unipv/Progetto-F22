@@ -11,7 +11,7 @@ public class ProfiloUtility {
 	
 	//Le chiavi esterne sono inizialmente null. Usare il metodo inserisciChiavi per modificarne il valore
 	public ProfiloDB converti(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), null, null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami");
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), this.trasformaEnumInString(p.getTipo()), null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami",null);
 		return pdb;
 	}
 	
@@ -27,7 +27,7 @@ public class ProfiloUtility {
 		return pr;
 	}
 	
-	static public String trasformaEnumInString(EnumProfilo e) {
+	 public String trasformaEnumInString(EnumProfilo e) {
 		String s;
 		switch(e) {
 		case PRIVATO: 
@@ -43,7 +43,7 @@ public class ProfiloUtility {
 		return s;
 	}
 
-	static public EnumProfilo trasformaStringinEnum(String s) {
+	 public EnumProfilo trasformaStringinEnum(String s) {
 		if(s.equals("PRIVATO")) {
 			return EnumProfilo.PRIVATO;
 		}

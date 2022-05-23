@@ -117,11 +117,12 @@ public class Sistema {
 	 }
 	 	
 
-	 	public void stampaTuttiIprofilo() {
+	 	public ArrayList<Profilo> stampaTuttiIprofilo() {
 	 		ArrayList<Profilo> res = dbfacade.selectAllProfilo();
-	 		for(Profilo prof : res)
-	 			System.out.println(prof.toString());
+	 		return res;
 	 	}
+	 	
+	 	
 	 	
 	 	/*public void pubblicaPost(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 
@@ -147,6 +148,8 @@ public class Sistema {
 	 	}
 	 
 
+		
+		
 	public Profilo getProfiloAttivo() {
 		return profiloAttivo;
 	}

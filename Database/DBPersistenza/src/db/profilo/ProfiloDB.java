@@ -3,7 +3,7 @@ package db.profilo;
 public class ProfiloDB {
 
 	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			String tipo, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw) {
+			String tipo, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw, String immagineProfilo) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -19,6 +19,7 @@ public class ProfiloDB {
 		this.pswCambiata = false;
 		this.isLoggato = false;
 		this.psw = "Cambiami"; 
+		this.immagineProfilo = immagineProfilo;
 	}
 private String idProfilo;
 private String nickname;
@@ -34,6 +35,7 @@ private boolean esiste;
 private boolean pswCambiata;
 private boolean isLoggato;
 private String psw;
+private String immagineProfilo;
 
 public String getIdProfilo() {
 	return idProfilo;
@@ -117,14 +119,21 @@ public void setLoggato(boolean isLoggato) {
 public String toString() {
 	return "ProfiloDB [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", post=" + post + ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato="
-			+ isLoggato + ", psw=" + psw + "]";
+			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", post=" + post
+			+ ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato=" + isLoggato + ", psw=" + psw
+			+ ", immagineProfilo=" + immagineProfilo + "]";
 }
 public String getPsw() {
 	return psw;
 }
 public void setPsw(String psw) {
 	this.psw = psw;
+}
+public String getImmagineProfilo() {
+	return immagineProfilo;
+}
+public void setImmagineProfilo(String immagineProfilo) {
+	this.immagineProfilo = immagineProfilo;
 }
 
 }
