@@ -406,7 +406,6 @@ public class Controller {
     	String idPost = view.getIdPostVisualizzato();
     	System.out.println(idPost);
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
-    	System.out.println("2");
     	
     }
     
