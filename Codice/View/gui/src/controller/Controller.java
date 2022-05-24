@@ -73,6 +73,7 @@ public class Controller {
                 mostraSchermata("Signup");
             }
         };
+        view.getSignUpButton().addActionListener(gestoreSignUp);
     }
     
     public void actionListenersSignUp() {
