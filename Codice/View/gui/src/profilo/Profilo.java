@@ -482,9 +482,9 @@ public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
 //Commento
 
 @Override
-public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo) {
+public Commento creaCommento(String idCommento, String post,String profilo,String testo) {
 	
-	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post,profilo);
+	   Commento c = new Commento(idCommento,testo,post,profilo);
 	
 		return c;
 
@@ -492,7 +492,7 @@ public Commento creaCommento(String idCommento, Time oraCommento, Date dataComme
 
 @Override
 public boolean pubblicaCommento(Commento c) {
-	
+		System.out.println(c.getIdCommento());
 		return dbfacade.carica(c);
 
 }

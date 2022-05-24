@@ -33,7 +33,7 @@ public class AreaCommenti extends Container {
 		JButton aggiungiLike = new JButton("+ Like");
 		JButton aggiungiDislike = new JButton("- Like");
 		
-		JButton  aggiungiCommento = new JButton("+ Commento");
+		aggiungiCommento = new JButton("+ Commento");
 	
 		SpecificContainer containerBottoniPost = new SpecificContainer();
 		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
@@ -66,4 +66,5 @@ public class AreaCommenti extends Container {
 	public JButton getAggiungiCommento() {
 		return aggiungiCommento;
 	}
+	
 }

@@ -19,7 +19,8 @@ public class Controller {
                            gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
-                           gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato;
+                           gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
+                           gestoreAggiungiCommento;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -95,6 +96,7 @@ public class Controller {
                     mostraSchermata("Login");
             }
         };
+         view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     public void actionListenersHome() {
         //ActionListeners schermata Home
@@ -278,9 +280,20 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mostraSchermata("Home");
+                aggiungiCommento();
             }
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
+        
+        
+        gestoreAggiungiCommento = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("1");
+                aggiungiCommento();
+            }
+        };
+       view.getAggiungiCommentoButtonFrame().addActionListener(gestoreAggiungiCommento);
         
     }
         
@@ -298,13 +311,13 @@ public class Controller {
         try {
             model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
         } catch (AccountGiaEsistente e1) {
-            e1.toString();
+            e1.printStackTrace();
             return false;
         } catch (ChangeDefaultPassword e2) {
-            e2.toString();
+        	e2.printStackTrace();
             return false;
         } catch (AccountDoesNotExist e3) {
-            e3.toString();
+            e3.printStackTrace();
             return false;
         }
         return true;
@@ -385,4 +398,15 @@ public class Controller {
         view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
         view.impostaRisultatiRicerca(risultatiRicerca);
     }
+    
+    public void aggiungiCommento() {
+    	String idProfilo = model.getProfiloAttivo().getIdProfilo();
+    	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
+    	String idPost = view.getIdPostVisualizzato();
+    	System.out.println(idProfilo + idPost + commentoDaAggiungere);
+    	model.carica(idProfilo, idPost, commentoDaAggiungere);
+    	System.out.println("2");
+    	
+    }
+    
 }

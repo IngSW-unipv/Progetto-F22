@@ -1,6 +1,7 @@
 package Sistema;
 
 import db.facade.DbFacade;
+import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.testo.Testo;
 
@@ -27,6 +28,7 @@ public class Sistema {
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
             this.cambiaDefaultPassword(mail, password);
+ 			this.setProfiloAttivo(p);
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
@@ -93,7 +95,21 @@ public class Sistema {
 	 public boolean rimuoviAccount(Profilo p) {
 	 	return dbfacade.rimuovi(p);
 	 }
+	  public void carica(String idProfilo, String idPost, String commento) {
+		  
+			Commento c;
+			boolean b;
+	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
+	 		String idCommento = Integer.toString(idCommentoInt);
+	 		c = new Commento(idCommento, idProfilo, idPost, commento);
+	 	
+	 		if(dbfacade.cerca(new Commento(idCommento)) != null) {
+	 			carica(idProfilo, idPost, commento);
+	 		}
+	 		System.out.println(c.getPost());
+	 		profiloAttivo.pubblicaCommento(c);
 
+	  }
 	 
 	 
 	 public boolean logout(String email) throws AccountDoesNotExist {

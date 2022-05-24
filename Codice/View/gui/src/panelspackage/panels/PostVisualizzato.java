@@ -19,9 +19,12 @@ public class PostVisualizzato extends JPanel{
 		Color NERO = new Color(0, 0, 0);
 		int i;
 		private JTextArea areaDescrizione;
+		private AreaCommenti areaCommenti;
+		private AreaDiTesto aggiungiCommento;
 		private JButton homePostVisualizzato;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
+		private String idPost = "417";
 		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		
@@ -61,8 +64,8 @@ public class PostVisualizzato extends JPanel{
 			LabeledIcon post = new LabeledIcon(fotoPath);
 			containerPost.add(post, BorderLayout.CENTER);
 
-			AreaCommenti areaCommenti =  new AreaCommenti();
-			containerPost.add(areaCommenti, BorderLayout.SOUTH);		
+			areaCommenti =  new AreaCommenti();
+			containerPost.add(areaCommenti, BorderLayout.SOUTH);
 
 			//COMMENTI
 			postCommentiConUtenti.add("ciccioGamer");
@@ -80,8 +83,22 @@ public class PostVisualizzato extends JPanel{
 				ListaAreaTesto.add(area);
 			}
 			
-			GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaAreaTesto,5,1, ListaAreaTesto.size());
-			containerCenter.add(Dati, BorderLayout.EAST);
+			SpecificContainer containerEast = new SpecificContainer();
+			this.add(containerEast, BorderLayout.EAST);
+			
+			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,5,1, ListaAreaTesto.size());
+			
+			ScrollPane scrollCommento = new ScrollPane();
+			
+			aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "prova");
+			aggiungiCommento.setRows(10);
+			
+			containerEast.add(dati, BorderLayout.CENTER);
+			containerEast.add(aggiungiCommento, BorderLayout.SOUTH);
+			
+			
+			
+
 			
 			SpecificContainer containerSouth = new SpecificContainer(NERO);
 			this.add(containerSouth, BorderLayout.SOUTH);
@@ -125,5 +142,32 @@ public class PostVisualizzato extends JPanel{
 		public SpecificContainer getContainerNorth() {
 			return containerNorth;
 		}
+
+
+		public AreaDiTesto getAggiungiCommento() {
+			return aggiungiCommento;
+		}
+
+
+		public void setAggiungiCommento(AreaDiTesto aggiungiCommento) {
+			this.aggiungiCommento = aggiungiCommento;
+		}
+		
+		public JButton getAggiungiCommentoButton() {
+			return areaCommenti.getAggiungiCommento();
+		}
+
+
+		public String getIdPost() {
+			return idPost;
+		}
+
+
+		public void setIdPost(String idPost) {
+			this.idPost = idPost;
+		}
+		
+		
+
 		
 }

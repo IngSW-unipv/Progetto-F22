@@ -127,7 +127,7 @@ public class Frame extends JFrame {
 	}
 
 	public PostVisualizzato getPostVisualizzato() {
-		return (PostVisualizzato)getMappaSchermate().get("PostVisualizzato");	
+		return (PostVisualizzato)getMappaSchermate().get("Postvisualizzato");	
 	}
 	
 	
@@ -288,4 +288,17 @@ public class Frame extends JFrame {
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
 	}
+	
+	public AreaDiTesto getCommentoDaAggiungere() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommento();
+	}
+	
+	public JButton getAggiungiCommentoButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommentoButton();
+	}
+	
+	public String getIdPostVisualizzato() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();
+	}
+	
 }
