@@ -18,7 +18,6 @@ class TestSistema {
 
 	static Sistema sistema = new Sistema();
 	
-
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		Profilo p = new Profilo("ciccioGamer@unipv.it", "Mucca");
@@ -27,21 +26,21 @@ class TestSistema {
 
 	@Test
 	void testSignIn() throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist, Exception {
-		boolean esito = false;
+		boolean esito;
 		try {
 			esito = sistema.signIn("FavijTv@unipv.it", "Favij", "youtuboanch'io");
+			assertTrue(esito);
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
 		}	
-		System.out.println(esito);
-		assertTrue(esito);
 	}
 	
 	@Test
 	void testLogIn() {
-		boolean esito = false;
+		boolean esito;
 		try {
 		 	esito = sistema.login("paoloruffini@gmail.it	"	, "paoloruffini");
+		 	assertTrue(esito);
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
@@ -49,14 +48,14 @@ class TestSistema {
 	 	} catch (PswOmailErrati e) {
 	 		e.printStackTrace();
 	 	} 
-		assertTrue(esito);
 	}
 	
 	@Test
 	void testLogInFallito() {
-		boolean esito = false;
+		boolean esito;
 		try {
 		 	esito = sistema.login("lasabrigamer@unipv.it", "mucca");
+		 	assertFalse(esito);
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
@@ -65,19 +64,19 @@ class TestSistema {
 	 		e.printStackTrace();
 	 		
 	 	} 
-		assertFalse(esito);
 	}
 	@Test
 	void testCambioPassword() {
-		boolean esito = false;
+		boolean esito;
 		try {
 			esito = sistema.cambiaPassword("lasabrigamer@unipv.it", "lasabri", "cavallo");
+			assertTrue(esito);
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
 		 	e.printStackTrace();
 	 	}
-		assertTrue(esito);
+		
 	}
 	
 	@AfterAll
