@@ -25,10 +25,12 @@ public class Sistema {
 		Profilo p =  new Profilo(mail, nickName);
 		
 	    if(dbfacade.cerca(p) == null) {
+	    	System.out.println(p.getIdProfilo() + 1);
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
             this.cambiaDefaultPassword(mail, password);
  			this.setProfiloAttivo(p);
+	    	System.out.println(this.getProfiloAttivo().getIdProfilo() + " dopo il cambiapassword");
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
@@ -102,11 +104,10 @@ public class Sistema {
 	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
 	 		String idCommento = Integer.toString(idCommentoInt);
 	 		c = new Commento(idCommento, idProfilo, idPost, commento);
-	 	
+	 		System.out.println(c.getPost() + "siamo in sistema");
 	 		if(dbfacade.cerca(new Commento(idCommento)) != null) {
 	 			carica(idProfilo, idPost, commento);
 	 		}
-	 		System.out.println(c.getPost());
 	 		profiloAttivo.pubblicaCommento(c);
 
 	  }

@@ -114,6 +114,7 @@ public class Controller {
                     public void actionPerformed(ActionEvent e) {
                         aggiornaSchermataProfilo();
                         mostraSchermata("Profilo");
+                        
                     }
                 };
                 view.getProfiloButton().addActionListener(gestoreProfilo);
@@ -403,7 +404,7 @@ public class Controller {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
-    	System.out.println(idProfilo + idPost + commentoDaAggiungere);
+    	System.out.println(idPost);
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
     	System.out.println("2");
     	

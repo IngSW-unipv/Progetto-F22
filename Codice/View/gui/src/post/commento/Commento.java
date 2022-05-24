@@ -37,7 +37,7 @@ public class Commento {
 	}
 
 	
-	public Commento(String idCommento, String idPost, String idProfilo, String commento) {
+	public Commento(String idCommento, String idProfilo, String idPost, String commento) {
 	    Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 	    Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
 	    

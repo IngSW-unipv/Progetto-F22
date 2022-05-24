@@ -24,7 +24,7 @@ public class PostVisualizzato extends JPanel{
 		private JButton homePostVisualizzato;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
-		private String idPost = "417";
+		private String idPost = "110";
 		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		

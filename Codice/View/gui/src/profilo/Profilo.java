@@ -39,6 +39,7 @@ public class Profilo implements IProfilo {
 	private int numPost;
 	private EnumProfilo tipo;
 	private String password;
+	private String fotoProfilo;
 	private boolean loggato;
 	private boolean accountesistente;
 	private boolean isPswCambiata;
@@ -57,6 +58,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.fotoProfilo = null;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
@@ -71,6 +73,7 @@ public class Profilo implements IProfilo {
 		this.descrizione = null;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
+		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
@@ -87,6 +90,7 @@ public class Profilo implements IProfilo {
 		this.descrizione = descrizione;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
+		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.tipo = visibilita;
 		this.loggato = false;
@@ -492,7 +496,7 @@ public Commento creaCommento(String idCommento, String post,String profilo,Strin
 
 @Override
 public boolean pubblicaCommento(Commento c) {
-		System.out.println(c.getIdCommento());
+		System.out.println(c.getPost() + "siamo in Profilo");
 		return dbfacade.carica(c);
 
 }
@@ -618,6 +622,13 @@ public boolean rimuoviDislike(Post p){
 	}
 	return false;
 	
+}
+
+@Override
+public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,
+		String profilo) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 
