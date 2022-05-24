@@ -386,7 +386,10 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
+        String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
         //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
+        view.setPostProfilo(postDelProfilo);
+        refresh();
     }
     
     public void settaPostVisualizzato() {

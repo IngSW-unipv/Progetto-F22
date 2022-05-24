@@ -2,12 +2,15 @@ package Sistema;
 
 import db.facade.DbFacade;
 import post.commento.Commento;
+import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.testo.Testo;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import profilo.exception.*;
 import profilo.*;
@@ -112,7 +115,19 @@ public class Sistema {
 
 	  }
 	 
-	 
+	 public String[][] caricaTuttiiPostDiUnProfilo() {
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null,null, null, false, false, null, null, false));
+		String[][] idPostConPercorsoPost = new String[idDeiPostDiUnProfilo.size()][idDeiPostDiUnProfilo.size()];
+		 for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
+			 idPostConPercorsoPost[i][0] = idDeiPostDiUnProfilo.get(i);
+			 System.out.println(((Multimedia) dbfacade.cerca(new Foto("110", null, null, null, false, false, null, null, false))).getPercorso());
+			 idPostConPercorsoPost[i][1] = ((Foto)(dbfacade.cerca(new Foto("110", null, null, null,true, false, this.getProfiloAttivo().getIdProfilo(), null, false)))).getPercorso();
+			 
+			 System.out.println(idPostConPercorsoPost[i][0] + idPostConPercorsoPost[i][1]);
+		 }
+		
+		return idPostConPercorsoPost;
+	 }
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
 		 Profilo p = new Profilo(email,null);

@@ -22,7 +22,7 @@ public class  Profilo extends JPanel {
 
 	private Pulsanti homeProfilo, immagineProf;
 	private Etichette etichettaNome;
-	private SpecificContainer containerNorth = new SpecificContainer();
+	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter;
 	
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		this.avvio();
@@ -47,11 +47,11 @@ public class  Profilo extends JPanel {
 		add(containerCenter, BorderLayout.CENTER);
 		containerCenter.setLayout(new GridLayout(3,3));
 
-		ListaPost.clear();
+		/*ListaPost.clear();
 		for( i = 0; i < immaginiPost.size() && i < 9 ; i++) {
 			ListaPost.add(new LabeledIcon(immaginiPost.get(i)));
 			containerCenter.add(ListaPost.get(i));
-		}
+		}*/
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
@@ -108,5 +108,14 @@ public class  Profilo extends JPanel {
 
 	public Pulsanti getHomeProfilo() {
 		return homeProfilo;
+	}
+
+	public void setPostProfilo(String[][] postDelProfilo) {
+		
+		ListaPost.clear();
+		for( i = 0; i < postDelProfilo.length/2 && i < 9 ; i++) {
+			ListaPost.add(new LabeledIcon(postDelProfilo[i][0]));
+			containerCenter.add(ListaPost.get(i));
+		}
 	}
 }

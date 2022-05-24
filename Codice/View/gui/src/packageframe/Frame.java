@@ -300,5 +300,10 @@ public class Frame extends JFrame {
 	public String getIdPostVisualizzato() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();
 	}
+
+
+	public void setPostProfilo(String[][] postDelProfilo) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostProfilo(postDelProfilo);
+	}
 	
 }

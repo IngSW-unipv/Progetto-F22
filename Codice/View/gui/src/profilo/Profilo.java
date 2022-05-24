@@ -565,6 +565,10 @@ public ArrayList<Gruppo> selectAllGruppo(){
 }
 //-------------------------------------------------------------------------------------------------------------------
 
+
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Foto f) {
+	return dbfacade.ottieniIdPost(f, p);
+}
 @Override
 public boolean aggiungiLike(Post p){
 	
@@ -580,6 +584,7 @@ public boolean aggiungiLike(Post p){
 	}
 	
 }
+
 
 @Override
 public boolean aggiungiDislike(Post p){

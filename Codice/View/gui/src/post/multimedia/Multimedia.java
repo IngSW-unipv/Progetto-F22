@@ -10,6 +10,7 @@ public abstract class Multimedia extends Post{
 	public Multimedia(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso) {
 		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
 				profilo);
+		
 		this.tempoCancellazione = 0;
 		this.percorso = percorso;
 		this.isStory = false;
