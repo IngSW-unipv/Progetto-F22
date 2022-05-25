@@ -2,17 +2,19 @@ package post;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 import post.enumeration.TipoPost;
 
 
 	public abstract class Post {
-		public Post(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+		
+		public Post(String idPost, String descrizione,
 		            boolean visibile, boolean condivisibile, String profilo) {
 			super();
 			this.idPost = idPost;
-			this.dataPubblicazione = dataPubblicazione;
-			this.oraPubblicazione = oraPubblicazione;
+			this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+			this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 			this.descrizione = descrizione;
 			this.numLike = 0;
 			this.numDislike = 0;

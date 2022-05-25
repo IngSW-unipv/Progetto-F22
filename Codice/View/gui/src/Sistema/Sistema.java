@@ -116,12 +116,12 @@ public class Sistema {
 	  }
 	 
 	 public String[][] caricaTuttiiPostDiUnProfilo() {
-		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null,null, null, false, false, null, null, false));
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
 		String[][] idPostConPercorsoPost = new String[idDeiPostDiUnProfilo.size()][idDeiPostDiUnProfilo.size()];
 		 for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
 			 idPostConPercorsoPost[i][0] = idDeiPostDiUnProfilo.get(i);
-			 System.out.println(((Multimedia) dbfacade.cerca(new Foto("110", null, null, null, false, false, null, null, false))).getPercorso());
-			 idPostConPercorsoPost[i][1] = ((Foto)(dbfacade.cerca(new Foto("110", null, null, null,true, false, this.getProfiloAttivo().getIdProfilo(), null, false)))).getPercorso();
+			 System.out.println(((Multimedia) dbfacade.cerca(new Foto("110",null, false, false, null, null, false))).getPercorso());
+			 idPostConPercorsoPost[i][1] = ((Foto)(dbfacade.cerca(new Foto("110", null,true, false, this.getProfiloAttivo().getIdProfilo(), null, false)))).getPercorso();
 			 
 			 System.out.println(idPostConPercorsoPost[i][0] + idPostConPercorsoPost[i][1]);
 		 }
@@ -161,19 +161,19 @@ public class Sistema {
 	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
 	 	}*/
 	 	
-	 	public void pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
-	 		profiloAttivo.creaPost(new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo));
+	 	public void pubblicaTesto(String idPost,String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
+	 		profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, condivisibile, profilo, font, titolo));
 	 	}
 	 	
 	 	
-		public void pubblicaPost(Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+		public void pubblicaPost( String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
-	 		p = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		p = new Foto(idPost, descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		
-	 		if(dbfacade.cerca(new Foto(idPost, null, null, null, false, false, null, null, false)) != null) {
-	 			pubblicaPost(dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		if(dbfacade.cerca(new Foto(idPost, null, false, false, null, null, false)) != null) {
+	 			pubblicaPost(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		}
 	 		
 	 		profiloAttivo.creaPost(p);

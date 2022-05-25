@@ -375,31 +375,31 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t){
 
 @Override
 public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
-	Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	Foto f = new Foto(idPost, descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	return f;
 }
 
 @Override
 public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, int durataInSecondi) {
-	Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
+	Video v = new Video(idPost,  descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
 	return v;
 }
 
 @Override
 public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
-	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo,font,titolo);
+	Testo t = new Testo(idPost,  descrizione, visibile, condivisibile, profilo,font,titolo);
 	return t;
 }
 
 @Override
 public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, int[] conteggio) {
-	SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, conteggio);
+	SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost,  descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, conteggio);
 	return s;
 }
 
 @Override
 public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio) {
-	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
 	return s;
 }
 
