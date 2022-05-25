@@ -79,6 +79,8 @@ public class ProfiloDao implements IProfiloDao{
 		}
 
 		DBConnection.closeConnection(conn);
+    	System.out.println(p.getIdProfilo() + 1);
+
 		return esito;
 
 	}

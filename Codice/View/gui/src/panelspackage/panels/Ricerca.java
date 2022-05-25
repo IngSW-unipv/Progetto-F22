@@ -55,8 +55,6 @@ public class Ricerca extends JPanel {
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
-		Pulsanti homeRicerca = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
-		
 		containerNorth.add(etichetta, BorderLayout.NORTH);
 		containerSouth.add(homeRicerca,BorderLayout.SOUTH);
 

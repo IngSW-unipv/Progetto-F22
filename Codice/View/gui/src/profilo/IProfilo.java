@@ -112,4 +112,5 @@ public interface IProfilo {
 	public boolean aggiungiDislike(Post p);
 	public boolean rimuoviLike(Post p);
 	public boolean rimuoviDislike(Post p);
+	Commento creaCommento(String idCommento, String post, String profilo, String testo);
 	}

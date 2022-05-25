@@ -217,6 +217,8 @@ public class DbFacade {
 	}
 
 	public boolean carica(Profilo p) {
+    	System.out.println(p.getIdProfilo() + 1);
+
 		return pDao.inserisciProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	

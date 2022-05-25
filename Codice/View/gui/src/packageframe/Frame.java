@@ -127,7 +127,7 @@ public class Frame extends JFrame {
 	}
 
 	public PostVisualizzato getPostVisualizzato() {
-		return (PostVisualizzato)getMappaSchermate().get("PostVisualizzato");	
+		return (PostVisualizzato)getMappaSchermate().get("Postvisualizzato");	
 	}
 	
 	
@@ -227,6 +227,10 @@ public class Frame extends JFrame {
 	public JButton getHomeProfiloButton() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getHomeProfilo();
 	}
+
+	public void setFotoProfilo(String percorso) {
+		 ((Profilo)mappaSchermate.get("Profilo")).setFotoProfilo(percorso);
+	}
 	
 	public JButton getHomeChatButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getHome();
@@ -288,4 +292,35 @@ public class Frame extends JFrame {
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
 	}
+	
+	public AreaDiTesto getCommentoDaAggiungere() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommento();
+	}
+	
+	public JButton getAggiungiCommentoButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommentoButton();
+	}
+	
+	public JButton getAggiungiLikeButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiLikeButton();
+	}
+	
+	public JButton getAggiungiDislikeButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiDislikeButton();
+	}
+	
+	public JButton getImpostaImmagineProfiloButton() {
+		System.out.println("siamo in frame");
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();
+	}
+	
+	public String getIdPostVisualizzato() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();
+	}
+
+
+	public void setPostProfilo(String[][] postDelProfilo) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostProfilo(postDelProfilo);
+	}
+	
 }

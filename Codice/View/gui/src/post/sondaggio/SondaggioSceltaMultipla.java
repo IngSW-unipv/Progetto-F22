@@ -10,10 +10,10 @@ import post.enumeration.TipoPost;
 
 public class SondaggioSceltaMultipla extends Sondaggio{
 
-	public SondaggioSceltaMultipla(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+	public SondaggioSceltaMultipla(String idPost, String descrizione,
 			boolean visibile, boolean condivisibile, String profilo,
 			String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,	profilo, primaScelta, secondaScelta);
+		super(idPost, descrizione, visibile, condivisibile,	profilo, primaScelta, secondaScelta);
 		this.terzaScelta = terzaScelta;
 		this.quartaScelta = quartaScelta;
 		this.conteggio = conteggio;
@@ -101,7 +101,7 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 	@Override
 	public Post inserisciCaratteristiche(Post p) {
 		
-		p = new SondaggioSceltaMultipla(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getTerzaScelta(), this.getQuartaScelta(), this.getConteggio());
+		p = new SondaggioSceltaMultipla(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getTerzaScelta(), this.getQuartaScelta(), this.getConteggio());
 
 
 		return p;

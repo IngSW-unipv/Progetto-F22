@@ -55,27 +55,27 @@ public class PostUtility {
 		
 		if(t == TipoPost.FOTO) {
 			FotoDB f = (FotoDB) p.inserisciCaratteristiche(p);
-			Foto fdb = new Foto(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
+			Foto fdb = new Foto(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
 			return fdb;
 		}
 		else if(t == TipoPost.VIDEO) {
 			VideoDB f = (VideoDB) p.inserisciCaratteristiche(p);
-			Video fdb = new Video(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi());
+			Video fdb = new Video(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi());
 			return fdb;
 		}
 		else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazioneDB f = (SondaggioDoppiaVotazioneDB) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), null); 
+			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), null); 
 			return sdv;
 		}
 		else if(t == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultiplaDB f = (SondaggioSceltaMultiplaDB) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(), null);
+			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(), null);
 			return ssm;
 		}
 		else if(t == TipoPost.TESTO) {
 			TestoDB f = (TestoDB) p.inserisciCaratteristiche(p);
-			Testo tdb = new Testo(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
+			Testo tdb = new Testo(f.getIdPost(),f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
 			return tdb;
 		}
 		

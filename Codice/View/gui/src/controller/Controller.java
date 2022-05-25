@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Sistema.Sistema;
 import convertitore.chatUtility.UtilityChat;
 import packageframe.Frame;
+import panelspackage.panels.PostVisualizzato;
 import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
@@ -19,7 +20,8 @@ public class Controller {
                            gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
-                           gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato;
+                           gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreAggiungiLikePost, gestoreAggiungiDislikePost;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -73,6 +75,7 @@ public class Controller {
                 mostraSchermata("Signup");
             }
         };
+        view.getSignUpButton().addActionListener(gestoreSignUp);
     }
     
     public void actionListenersSignUp() {
@@ -94,6 +97,7 @@ public class Controller {
                     mostraSchermata("Login");
             }
         };
+         view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     public void actionListenersHome() {
         //ActionListeners schermata Home
@@ -111,6 +115,7 @@ public class Controller {
                     public void actionPerformed(ActionEvent e) {
                         aggiornaSchermataProfilo();
                         mostraSchermata("Profilo");
+                        
                     }
                 };
                 view.getProfiloButton().addActionListener(gestoreProfilo);
@@ -147,54 +152,55 @@ public class Controller {
                 view.getCercaButton().addActionListener(gestoreCerca);
     }
     
-    public void actionListenersImpostazioni() {gestoreLogOut = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                model.logout(model.getProfiloAttivo().getIdProfilo());
-            } catch (AccountDoesNotExist e1) {
-                e1.printStackTrace();
-            }
-            view.getContainerCenterFrame().setVisible(false);
-            mostraSchermata("Login");
-        }
-    };
-    view.getLogOutButton().addActionListener(gestoreLogOut);
-    
-    gestoreHomeImpostazioni = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-            mostraSchermata("Home");
-        }
-    };
-    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
-    
-    
-    gestoreModificaProfilo = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(true);
-            refresh();
-        }
-    };
-    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
-    
-    gestoreVisibilitaPost = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-        }
-    };
-    view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
-    
-    gestoreEliminaAccount = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-        }
-    };
-    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
+    public void actionListenersImpostazioni() {
+    	gestoreLogOut = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            try {
+	                model.logout(model.getProfiloAttivo().getIdProfilo());
+	            }catch (AccountDoesNotExist e1) {
+	            	e1.printStackTrace();
+	            }
+	            view.getContainerCenterFrame().setVisible(false);
+	            mostraSchermata("Login");
+	        }
+    	};
+	    view.getLogOutButton().addActionListener(gestoreLogOut);
+	    
+	    gestoreHomeImpostazioni = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	            mostraSchermata("Home");
+	        }
+	    };
+	    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+	    
+	    
+	    gestoreModificaProfilo = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(true);
+	            refresh();
+	        }
+	    };
+	    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
+	    
+	    gestoreVisibilitaPost = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	        }
+	    };
+	    view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
+	    
+	    gestoreEliminaAccount = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	        }
+	    };
+	    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
         
     }
     
@@ -219,34 +225,34 @@ public class Controller {
     }
     
     public void actionListenersCreazionePost() {
-        //ActionListeners schermata CreazionePost
-                gestoreCreazionePost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("CreazionePost");
-                    }
-                };
-                view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
-                
-                gestoreHomeCreazionePost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("Home");
-                    }
-                };
-                view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
-                
-                gestorePubblicaPost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pubblicaPost();
-                    }
-                        /*boolean success = false
-                                if(success = true) {
-                        mostraSchermata("Home");
-                    }*/
-                };
-                view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
+    	//ActionListeners schermata CreazionePost
+        gestoreCreazionePost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("CreazionePost");
+            }
+        };
+        view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
+        
+        gestoreHomeCreazionePost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("Home");
+            }
+        };
+        view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
+        
+        gestorePubblicaPost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pubblicaPost();
+            }
+                /*boolean success = false
+                        if(success = true) {
+                mostraSchermata("Home");
+            }*/
+        };
+        view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
     
     }
     
@@ -277,9 +283,49 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mostraSchermata("Home");
+                aggiungiCommento();
             }
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
+    
+     
+        gestoreImpostaFotoProfilo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("preso bottone");
+                model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
+            }
+        };
+        view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
+        
+         
+
+        gestoreAggiungiCommento = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                aggiungiCommento();
+            }
+        };
+       view.getAggiungiCommentoButtonFrame().addActionListener(gestoreAggiungiCommento);
+       
+       
+       gestoreAggiungiLikePost = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Aggiunto like");
+    	   }
+       };
+       view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
+       
+       gestoreAggiungiDislikePost = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Aggiunto dislike");
+    	   }
+       };
+       view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
+       
+       
         
     }
         
@@ -297,13 +343,13 @@ public class Controller {
         try {
             model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
         } catch (AccountGiaEsistente e1) {
-            e1.toString();
+            e1.printStackTrace();
             return false;
         } catch (ChangeDefaultPassword e2) {
-            e2.toString();
+        	e2.printStackTrace();
             return false;
         } catch (AccountDoesNotExist e3) {
-            e3.toString();
+            e3.printStackTrace();
             return false;
         }
         return true;
@@ -350,9 +396,7 @@ public class Controller {
     public void pubblicaPost() {
         String percorsoFilePost = view.ottieniPercorsoFile();
         String commentoPost = view.ottieniCommento();
-        Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
-        Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
-        model.pubblicaPost(UtilityChat.convertiInSqlData(d), t, commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
     }
    
     
@@ -371,7 +415,12 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
+        System.out.println("percorsoFotoProfilo" + model.getProfiloAttivo().getFotoProfilo());
+        view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
+        //String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
         //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
+       // view.setPostProfilo(postDelProfilo);
+        refresh();
     }
     
     public void settaPostVisualizzato() {
@@ -384,4 +433,14 @@ public class Controller {
         view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
         view.impostaRisultatiRicerca(risultatiRicerca);
     }
+    
+    public void aggiungiCommento() {
+    	String idProfilo = model.getProfiloAttivo().getIdProfilo();
+    	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
+    	String idPost = view.getIdPostVisualizzato();
+    	System.out.println(idPost);
+    	model.carica(idProfilo, idPost, commentoDaAggiungere);
+    	
+    }
+    
 }

@@ -1,12 +1,16 @@
 package Sistema;
 
 import db.facade.DbFacade;
+import post.commento.Commento;
+import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.testo.Testo;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+
+import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import profilo.exception.*;
 import profilo.*;
@@ -24,9 +28,12 @@ public class Sistema {
 		Profilo p =  new Profilo(mail, nickName);
 		
 	    if(dbfacade.cerca(p) == null) {
+	    	System.out.println(p.getIdProfilo() + 1);
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
             this.cambiaDefaultPassword(mail, password);
+ 			this.setProfiloAttivo(p);
+	    	System.out.println(this.getProfiloAttivo().getIdProfilo() + " dopo il cambiapassword");
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
@@ -93,9 +100,34 @@ public class Sistema {
 	 public boolean rimuoviAccount(Profilo p) {
 	 	return dbfacade.rimuovi(p);
 	 }
+	  public void carica(String idProfilo, String idPost, String commento) {
+		  
+			Commento c;
+			boolean b;
+	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
+	 		String idCommento = Integer.toString(idCommentoInt);
+	 		c = new Commento(idCommento, idProfilo, idPost, commento);
+	 		System.out.println(c.getPost() + "siamo in sistema");
+	 		if(dbfacade.cerca(new Commento(idCommento)) != null) {
+	 			carica(idProfilo, idPost, commento);
+	 		}
+	 		profiloAttivo.pubblicaCommento(c);
 
+	  }
 	 
-	 
+	 public String[][] caricaTuttiiPostDiUnProfilo() {
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
+		String[][] idPostConPercorsoPost = new String[idDeiPostDiUnProfilo.size()][idDeiPostDiUnProfilo.size()];
+		 for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
+			 idPostConPercorsoPost[i][0] = idDeiPostDiUnProfilo.get(i);
+			 System.out.println(((Multimedia) dbfacade.cerca(new Foto("110",null, false, false, null, null, false))).getPercorso());
+			 idPostConPercorsoPost[i][1] = ((Foto)(dbfacade.cerca(new Foto("110", null,true, false, this.getProfiloAttivo().getIdProfilo(), null, false)))).getPercorso();
+			 
+			 System.out.println(idPostConPercorsoPost[i][0] + idPostConPercorsoPost[i][1]);
+		 }
+		
+		return idPostConPercorsoPost;
+	 }
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
 		 Profilo p = new Profilo(email,null);
@@ -129,25 +161,27 @@ public class Sistema {
 	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
 	 	}*/
 	 	
-	 	public void pubblicaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
-	 		profiloAttivo.creaPost(new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, font, titolo));
+	 	public void pubblicaTesto(String idPost,String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
+	 		profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, condivisibile, profilo, font, titolo));
 	 	}
 	 	
 	 	
-		public void pubblicaPost(Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+		public void pubblicaPost( String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
-	 		p = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		p = new Foto(idPost, descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		
-	 		if(dbfacade.cerca(new Foto(idPost, null, null, null, false, false, null, null, false)) != null) {
-	 			pubblicaPost(dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		if(dbfacade.cerca(new Foto(idPost, null, false, false, null, null, false)) != null) {
+	 			pubblicaPost(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		}
 	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
 	 
-
+	public void impostaFotoProfilo(String fotoPath) {
+		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
+	}
 		
 		
 	public Profilo getProfiloAttivo() {

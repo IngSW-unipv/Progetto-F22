@@ -44,9 +44,12 @@ public class CreazionePost extends JPanel {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Only text post (.txt)", "txt");
         FileNameExtensionFilter filter1 = new FileNameExtensionFilter("Image post (.png)", "png");
         FileNameExtensionFilter filter2 = new FileNameExtensionFilter("Image post (.jpg)", "jpg");
+        FileNameExtensionFilter filter3 = new FileNameExtensionFilter("Image post (.jpeg)", "jpeg");
+
         fileChooser.addChoosableFileFilter(filter);
         fileChooser.addChoosableFileFilter(filter1);
         fileChooser.addChoosableFileFilter(filter2);
+        fileChooser.addChoosableFileFilter(filter3);
         
 		SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);
@@ -59,16 +62,15 @@ public class CreazionePost extends JPanel {
 		containerCommento.add(testoInserisciCommento, BorderLayout.NORTH);
 		containerCommento.add(inserimentoCommentoPost, BorderLayout.CENTER);
 		
-		pubblicaPost = new Pulsanti("Pubblica post", Frame.COLORESECONDARIOTEMATICO);
+		pubblicaPost = new Pulsanti("Pubblica come post", Frame.COLORESECONDARIOTEMATICO);
 		
 		SpecificContainer containerSouth = new SpecificContainer();
 		this.add(containerSouth, BorderLayout.SOUTH);
 		containerSouth.setLayout(new GridLayout(3, 1));
 		containerSouth.add(pubblicaPost);
-		containerSouth.add(homeCreazionePost = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
-		
-		story = new Pulsanti("Story",Frame.COLORESECONDARIOTEMATICO, new Font("Arial", 1, 12));
+		story = new Pulsanti("Pubblica come story",Frame.COLORESECONDARIOTEMATICO, new Font("Arial", 1, 12));
 		containerSouth.add(story);
+		containerSouth.add(homeCreazionePost = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 		
 	}
 	

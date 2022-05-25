@@ -6,9 +6,9 @@ import post.Post;
 import post.enumeration.TipoPost;
 
 public class Testo extends Post {
-	public Testo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+	public Testo(String idPost, String descrizione,
 			boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile,
+		super(idPost, descrizione, visibile, condivisibile,
 				profilo);
 		this.font = font;
 		this.titolo = titolo;
@@ -40,7 +40,7 @@ public class Testo extends Post {
 	}
 	@Override
 	public Post inserisciCaratteristiche(Post p) {
-		p = new Testo(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
+		p = new Testo(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
 		return p;
 	}
 }

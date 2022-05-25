@@ -39,6 +39,7 @@ public class Profilo implements IProfilo {
 	private int numPost;
 	private EnumProfilo tipo;
 	private String password;
+	private String fotoProfilo;
 	private boolean loggato;
 	private boolean accountesistente;
 	private boolean isPswCambiata;
@@ -57,6 +58,7 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
+		this.fotoProfilo = null;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		this.immanineProifilo = null;
@@ -72,6 +74,7 @@ public class Profilo implements IProfilo {
 		this.descrizione = null;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
+		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
@@ -89,6 +92,7 @@ public class Profilo implements IProfilo {
 		this.descrizione = descrizione;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
+		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.tipo = visibilita;
 		this.loggato = false;
@@ -374,31 +378,31 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t){
 
 @Override
 public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
-	Foto f = new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	Foto f = new Foto(idPost, descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	return f;
 }
 
 @Override
 public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, int durataInSecondi) {
-	Video v = new Video(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
+	Video v = new Video(idPost,  descrizione, visibile, condivisibile, profilo, percorso, durataInSecondi);
 	return v;
 }
 
 @Override
 public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
-	Testo t = new Testo(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo,font,titolo);
+	Testo t = new Testo(idPost,  descrizione, visibile, condivisibile, profilo,font,titolo);
 	return t;
 }
 
 @Override
 public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, int[] conteggio) {
-	SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, conteggio);
+	SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost,  descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, conteggio);
 	return s;
 }
 
 @Override
 public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta,String secondaScelta, String terzaScelta, String quartaScelta, int[] conteggio) {
-	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
 	return s;
 }
 
@@ -476,6 +480,7 @@ public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 
 @Override
 public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
+	System.out.println("siamo in profilo e la path è "+ immagine);
 	return dbfacade.modificaImmagineProfilo(p, immagine);
 }
 
@@ -495,9 +500,17 @@ public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
 //Commento
 
 @Override
+<<<<<<< HEAD
 public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,	String idVideo,String idSDV,String idSSM, String idTesto) {
+=======
+public Commento creaCommento(String idCommento, String post,String profilo,String testo) {
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	
+<<<<<<< HEAD
 	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,profilo,idFoto,idVideo,idSDV,idSSM,idTesto);
+=======
+	   Commento c = new Commento(idCommento,testo,post,profilo);
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 	
 		return c;
 
@@ -505,7 +518,7 @@ public Commento creaCommento(String idCommento, Time oraCommento, Date dataComme
 
 @Override
 public boolean pubblicaCommento(Commento c) {
-	
+		System.out.println(c.getPost() + "siamo in Profilo");
 		return dbfacade.carica(c);
 
 }
@@ -574,6 +587,10 @@ public ArrayList<Gruppo> selectAllGruppo(){
 }
 //-------------------------------------------------------------------------------------------------------------------
 
+
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Foto f) {
+	return dbfacade.ottieniIdPost(f, p);
+}
 @Override
 public boolean aggiungiLike(Post p){
 	
@@ -589,6 +606,7 @@ public boolean aggiungiLike(Post p){
 	}
 	
 }
+
 
 @Override
 public boolean aggiungiDislike(Post p){
@@ -633,12 +651,28 @@ public boolean rimuoviDislike(Post p){
 	
 }
 
+<<<<<<< HEAD
 public String getImmanineProifilo() {
 	return immanineProifilo;
 }
 
 public void setImmanineProifilo(String immanineProifilo) {
 	this.immanineProifilo = immanineProifilo;
+=======
+@Override
+public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,
+		String profilo) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public String getFotoProfilo() {
+	return fotoProfilo;
+}
+
+public void setFotoProfilo(String fotoProfilo) {
+	this.fotoProfilo = fotoProfilo;
+>>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
 }
 
 

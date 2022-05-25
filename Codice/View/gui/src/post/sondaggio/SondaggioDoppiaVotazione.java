@@ -13,9 +13,9 @@ public class SondaggioDoppiaVotazione extends Sondaggio{
 
  
 	private int[] conteggio = new int[2];
-	public SondaggioDoppiaVotazione(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, 
+	public SondaggioDoppiaVotazione(String idPost, String descrizione, 
 			boolean visibile, boolean condivisibile, String profilo, String primaScelta, String secondaScelta, int [] conteggio) {
-		super(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta);
+		super(idPost,descrizione, visibile, condivisibile, profilo, primaScelta, secondaScelta);
 		this.conteggio = conteggio;
 	}
 
@@ -77,7 +77,7 @@ public TipoPost getTipo() {
 
 @Override
 public Post inserisciCaratteristiche(Post p) {
-	p = new SondaggioDoppiaVotazione(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getConteggio());
+	p = new SondaggioDoppiaVotazione(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta(), this.getConteggio());
 	return p;
 }
 
