@@ -1,8 +1,5 @@
 package post.multimedia.foto;
 
-import java.sql.Date;
-import java.sql.Time;
-
 import post.Post;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;

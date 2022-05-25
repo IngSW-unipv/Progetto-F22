@@ -104,7 +104,6 @@ public class Profilo implements IProfilo {
 		dislikeMap = new HashMap<>();
 	}
 
-
 public String getIdProfilo() {
 	return idProfilo;
 }
@@ -195,6 +194,14 @@ public HashMap<String, String> getDislikeMap() {
 
 public void setDislikeMap(HashMap<String, String> dislikeMap) {
 	this.dislikeMap = dislikeMap;
+}
+
+public String getFotoProfilo() {
+	return fotoProfilo;
+}
+
+public void setFotoProfilo(String fotoProfilo) {
+	this.fotoProfilo = fotoProfilo;
 }
 
 
@@ -500,25 +507,15 @@ public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
 //Commento
 
 @Override
-<<<<<<< HEAD
 public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,	String idVideo,String idSDV,String idSSM, String idTesto) {
-=======
-public Commento creaCommento(String idCommento, String post,String profilo,String testo) {
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-	
-<<<<<<< HEAD
-	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,profilo,idFoto,idVideo,idSDV,idSSM,idTesto);
-=======
-	   Commento c = new Commento(idCommento,testo,post,profilo);
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-	
-		return c;
+ 
+	Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,profilo,idFoto,idVideo,idSDV,idSSM,idTesto);
+	return c;
 
 }
 
 @Override
 public boolean pubblicaCommento(Commento c) {
-		System.out.println(c.getPost() + "siamo in Profilo");
 		return dbfacade.carica(c);
 
 }
@@ -650,31 +647,6 @@ public boolean rimuoviDislike(Post p){
 	return false;
 	
 }
-
-<<<<<<< HEAD
-public String getImmanineProifilo() {
-	return immanineProifilo;
-}
-
-public void setImmanineProifilo(String immanineProifilo) {
-	this.immanineProifilo = immanineProifilo;
-=======
-@Override
-public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,
-		String profilo) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-public String getFotoProfilo() {
-	return fotoProfilo;
-}
-
-public void setFotoProfilo(String fotoProfilo) {
-	this.fotoProfilo = fotoProfilo;
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-}
-
 
 }
 

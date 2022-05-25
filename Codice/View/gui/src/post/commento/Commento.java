@@ -7,26 +7,15 @@ import java.time.LocalDateTime;
 
 public class Commento {
 	
-	private String idCommento;
-	private Time oraCommento;
-	private Date dataCommento;
-	private String testo;
-	private String post;
-	private String profilo;
 
-<<<<<<< HEAD
 	public Commento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,
 			String idVideo,String idSDV,String idSSM, String idTesto) {
-=======
     Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
     Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 	
-	public Commento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post, String profilo) {
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-		super();
 		this.idCommento = idCommento;
-		this.oraCommento = oraCommento;
-		this.dataCommento = dataCommento;
+		this.oraCommento = t;
+		this.dataCommento = d;
 		this.testo = testo;
 		this.profilo = profilo;
 		this.idFoto = idFoto;
@@ -35,7 +24,7 @@ public class Commento {
 		this.idSSM = idSSM;
 		this.idTesto = idTesto;
 	}
-<<<<<<< HEAD
+
 	private String idCommento;
 	private Time oraCommento;
 	private Date dataCommento;
@@ -46,32 +35,9 @@ public class Commento {
 	private String idSDV;
 	private String idSSM;
 	private String idTesto;
-=======
-	public Commento(String idCommento) {
-		super();
-		this.idCommento = idCommento;
-		this.oraCommento = null;
-		this.dataCommento = null;
-		this.testo = null;
-		this.post = null;
-		this.profilo = null;
-	}
 
-	
-	public Commento(String idCommento, String idProfilo, String idPost, String commento) {
-	    Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
-	    Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
-	    
-		this.idCommento = idCommento;
-		this.oraCommento = t;
-		this.dataCommento = d;
-		this.testo = commento;
-		this.post = idPost;
-		this.profilo = idProfilo;
-		
-	}
->>>>>>> branch 'main' of https://github.com/IngSW-unipv/Progetto-F22.git
-	
+
+
 	public String getIdCommento() {
 		return idCommento;
 	}

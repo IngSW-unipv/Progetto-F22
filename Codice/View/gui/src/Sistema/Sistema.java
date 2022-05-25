@@ -107,7 +107,6 @@ public class Sistema {
 	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
 	 		String idCommento = Integer.toString(idCommentoInt);
 	 		c = new Commento(idCommento, idProfilo, idPost, commento);
-	 		System.out.println(c.getPost() + "siamo in sistema");
 	 		if(dbfacade.cerca(new Commento(idCommento)) != null) {
 	 			carica(idProfilo, idPost, commento);
 	 		}

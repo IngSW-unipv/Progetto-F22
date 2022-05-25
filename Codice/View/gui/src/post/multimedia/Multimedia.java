@@ -1,7 +1,5 @@
 package post.multimedia;
 
-import java.sql.Date;
-import java.sql.Time;
 
 import post.Post;
 

@@ -1,7 +1,5 @@
 package post.multimedia.video;
 
-import java.sql.Date;
-import java.sql.Time;
 
 import post.Post;
 import post.enumeration.TipoPost;

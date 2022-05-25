@@ -1,7 +1,5 @@
 package post.sondaggio;
 
-import java.sql.Date;
-import java.sql.Time;
 import post.Post;
 
 public abstract class Sondaggio extends Post{

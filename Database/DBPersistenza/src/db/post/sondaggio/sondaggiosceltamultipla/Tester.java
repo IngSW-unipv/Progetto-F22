@@ -12,7 +12,7 @@ public class Tester {
 
 	public static void main(String [] args) {
 		ConvertitoreFacade f = ConvertitoreFacade.getIstance();
-		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, null, null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
+		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 
 		System.out.println(sdao.caricaPost(f.converti(s)));
