@@ -3,7 +3,7 @@ package db.profilo;
 public class ProfiloDB {
 
 	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			String tipo, String messaggioDiGruppo, String messaggioPrivato, String post, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw, String immagineProfilo) {
+			String tipo, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw, String immagineProfilo) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -12,9 +12,6 @@ public class ProfiloDB {
 		this.numSeguiti = numSeguiti;
 		this.numPost = numPost;
 		this.tipo = tipo;
-		this.messaggioDiGruppo = messaggioDiGruppo;
-		this.messaggioPrivato = messaggioPrivato;
-		this.post = post;
 		this.esiste = false;
 		this.pswCambiata = false;
 		this.isLoggato = false;
@@ -28,9 +25,6 @@ private int numFollower;
 private int numSeguiti;
 private int numPost;
 private String tipo;
-private String messaggioDiGruppo;
-private String messaggioPrivato;
-private String post;
 private boolean esiste;
 private boolean pswCambiata;
 private boolean isLoggato;
@@ -79,24 +73,7 @@ public String getTipo() {
 public void setTipo(String tipo) {
 	this.tipo = tipo;
 }
-public String getMessaggioDiGruppo() {
-	return messaggioDiGruppo;
-}
-public void setMessaggioDiGruppo(String messaggioDiGruppo) {
-	this.messaggioDiGruppo = messaggioDiGruppo;
-}
-public String getMessaggioPrivato() {
-	return messaggioPrivato;
-}
-public void setMessaggioPrivato(String messaggioPrivato) {
-	this.messaggioPrivato = messaggioPrivato;
-}
-public String getPost() {
-	return post;
-}
-public void setPost(String post) {
-	this.post = post;
-}
+
 public boolean isEsiste() {
 	return esiste;
 }
@@ -119,7 +96,6 @@ public void setLoggato(boolean isLoggato) {
 public String toString() {
 	return "ProfiloDB [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", messaggioDiGruppo=" + messaggioDiGruppo + ", messaggioPrivato=" + messaggioPrivato + ", post=" + post
 			+ ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato=" + isLoggato + ", psw=" + psw
 			+ ", immagineProfilo=" + immagineProfilo + "]";
 }

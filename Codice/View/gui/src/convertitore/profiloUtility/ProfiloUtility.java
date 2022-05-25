@@ -11,7 +11,7 @@ public class ProfiloUtility {
 	
 	//Le chiavi esterne sono inizialmente null. Usare il metodo inserisciChiavi per modificarne il valore
 	public ProfiloDB converti(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), this.trasformaEnumInString(p.getTipo()), null, null, null, p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami",null);
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), this.trasformaEnumInString(p.getTipo()), p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami",null);
 		return pdb;
 	}
 	

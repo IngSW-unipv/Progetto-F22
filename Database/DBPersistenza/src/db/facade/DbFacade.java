@@ -231,9 +231,7 @@ public class DbFacade {
 		return pDao.inserisciProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
-	public boolean inserisciChiaviProfilo(Profilo p, String s1, String s2, String s3) {
-		return pDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s1, s2, s3);
-	}
+
 	
 	public boolean rimuovi(Profilo p) {
 		return pDao.rimuoviProfilo(ConvertitoreFacade.getIstance().converti(p));

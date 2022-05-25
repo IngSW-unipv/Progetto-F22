@@ -20,7 +20,6 @@ public interface IPostDao {
 	//Ritorna un'arrayList con tutte le informazioni relative ad un determinato post
 	public ArrayList<CommentoDB> mostraCommentiSottoPost(PostDB c);
 	
-	
 	//Ritorna un'arrayList di stringhe con tutti i commenti sotto ad un post
     public ArrayList<String> mostraTestoCommentiPost(PostDB c);
 }

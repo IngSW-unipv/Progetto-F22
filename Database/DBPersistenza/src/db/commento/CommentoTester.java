@@ -15,7 +15,7 @@ public class CommentoTester {
 		cdao.scriviCommento(c1);
 		cdao.scriviCommento(c2);
 		
-		ProfiloDB p = new ProfiloDB("001","", null, 0, 0, 0, null, null, null, null, false, false, false, null, null);
+		ProfiloDB p = new ProfiloDB("001","", null, 0, 0, 0, null, false, false, false, null, null);
 		
 		ArrayList<String> res = cdao.ProfiloNickCommento(p);
 		

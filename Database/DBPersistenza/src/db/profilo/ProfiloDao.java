@@ -36,9 +36,9 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB p=new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11),rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14),rs1.getString(15));                                     
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getBoolean(8), rs1.getBoolean(9),rs1.getBoolean(10),rs1.getString(11),rs1.getString(12));
 
-				result.add(p);
+				result.add(prof);
 			}
 		}catch (Exception e){e.printStackTrace();}
 
@@ -129,7 +129,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12),rs1.getBoolean(13),rs1.getString(14),rs1.getString(15));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getBoolean(8), rs1.getBoolean(9),rs1.getBoolean(10),rs1.getString(11),rs1.getString(12));
 
 				DBConnection.closeConnection(conn);
 				return prof;
@@ -138,35 +138,6 @@ public class ProfiloDao implements IProfiloDao{
 
 		DBConnection.closeConnection(conn);
 		return null;
-	}
-
-
-	@Override
-	public boolean inserisciChiavi(ProfiloDB p, String messaggioDiGruppo, String messaggioPrivato, String post) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update profilo set messaggioDiGruppo=?,messaggioPrivato=?,post=? where idProfilo=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, messaggioDiGruppo);
-			st1.setString(2, messaggioPrivato);
-			st1.setString(3, post);
-			st1.setString(4, p.getIdProfilo());
-			
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
-
-		DBConnection.closeConnection(conn);
-		return esito;
-
 	}
 
 

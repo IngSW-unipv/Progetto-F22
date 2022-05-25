@@ -61,11 +61,12 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="update messaggiodigruppo set gruppo=? where idMsgGrp=?";
+			String query="update messaggiodigruppo set profiloInviante =?, gruppo=? where idMsgGrp=?";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s1);
-			st1.setString(2, m.getIdMessaggio());
+			st1.setString(2, s2);
+			st1.setString(3, m.getIdMessaggio());
 			
 			st1.executeUpdate();
 
