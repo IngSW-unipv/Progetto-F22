@@ -101,6 +101,10 @@ public class Frame extends JFrame {
 		this.FrameMainContainer.add(mappaSchermate.get(Schermata), BorderLayout.CENTER);
 		mappaSchermate.get(Schermata).setVisible(true);
 	}
+	
+	public void mostraBottoneSuperiore(boolean condition) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).mostraBottoneSuperiore(condition);
+	}
 
 	public String getEmailPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
@@ -309,11 +313,6 @@ public class Frame extends JFrame {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiDislikeButton();
 	}
 	
-	public JButton getImpostaImmagineProfiloButton() {
-		System.out.println("siamo in frame");
-		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();
-	}
-	
 	public String getIdPostVisualizzato() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();
 	}
@@ -321,6 +320,14 @@ public class Frame extends JFrame {
 
 	public void setPostProfilo(String[][] postDelProfilo) {
 		((Profilo)mappaSchermate.get("Profilo")).setPostProfilo(postDelProfilo);
+	}
+	
+	public JButton getImpostaImmagineProfiloButton() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();
+	}
+	
+	public JButton getIniziaSeguireButton() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIniziaSeguireButton();
 	}
 	
 }

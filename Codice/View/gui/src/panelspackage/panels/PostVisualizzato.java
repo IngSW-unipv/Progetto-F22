@@ -18,11 +18,13 @@ public class PostVisualizzato extends JPanel{
 		Color ARANCIONE = new Color(255, 125, 0);
 		Color NERO = new Color(0, 0, 0);
 		int i;
+		private String messaggioBottoneSuperioreFollow = "Inizia a seguire";
+		private String messaggioBottoneSuperioreProfilo = "Imposta come immagine profilo";
 		private JTextArea areaDescrizione;
 		private AreaCommenti areaCommenti;
 		private AreaDiTesto aggiungiCommento;
 		private JButton homePostVisualizzato;
-		private Pulsanti impostaImmagineProfiloButton;
+		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
 		private String idPost = "110";
@@ -45,14 +47,19 @@ public class PostVisualizzato extends JPanel{
 		}
 		
 		public void initComponents() {
-
 			
 			SpecificContainer containerNorth = new SpecificContainer();
 			this.add(containerNorth, BorderLayout.NORTH);
-
-			 impostaImmagineProfiloButton = new Pulsanti("imposta come immagine del profilo", ARANCIONE);
-			containerNorth.add(impostaImmagineProfiloButton, BorderLayout.WEST);
 			
+			impostaImmagineProfiloButton = new Pulsanti(messaggioBottoneSuperioreProfilo, Frame.COLOREPRIMARIOTEMATICO);
+			impostaImmagineProfiloButton.setVisible(true);
+			containerNorth.add(impostaImmagineProfiloButton);
+			
+			
+			iniziaSeguireButton = new Pulsanti(messaggioBottoneSuperioreFollow, Frame.COLOREPRIMARIOTEMATICO);
+			iniziaSeguireButton.setVisible(false);
+			containerNorth.add(iniziaSeguireButton);
+
 			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
 
@@ -108,6 +115,16 @@ public class PostVisualizzato extends JPanel{
 			containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
 		
 			
+		}
+		
+		public void mostraBottoneSuperiore(boolean condition) {
+			if(condition) {
+				//iniziaSeguireButton.setVisible(false);
+				impostaImmagineProfiloButton.setVisible(true);
+			} else {
+				//impostaImmagineProfiloButton.setVisible(false);
+				iniziaSeguireButton.setVisible(true);
+			}
 		}
 		
 		public void settaPostVisualizzato(String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
@@ -177,6 +194,21 @@ public class PostVisualizzato extends JPanel{
 		public JButton getImpostaImmagineProfiloButton() {
 			return impostaImmagineProfiloButton;
 		}
+		
+		public void setImpostaImmagineProfiloButton(Pulsanti impostaImmagineProfiloButton) {
+			this.impostaImmagineProfiloButton = impostaImmagineProfiloButton;
+		}
+		
+
+		public Pulsanti getIniziaSeguireButton() {
+			return iniziaSeguireButton;
+		}
+
+
+		public void setIniziaSeguireButton(Pulsanti iniziaSeguireButton) {
+			this.iniziaSeguireButton = iniziaSeguireButton;
+		}
+
 
 		public String getFotoPath() {
 			return fotoPath;
@@ -187,9 +219,24 @@ public class PostVisualizzato extends JPanel{
 		}
 
 
+		public String getMessaggioBottoneSuperioreFollow() {
+			return messaggioBottoneSuperioreFollow;
+		}
 
-		
-		
 
+		public void setMessaggioBottoneSuperioreFollow(String messaggioBottoneSuperioreFollow) {
+			this.messaggioBottoneSuperioreFollow = messaggioBottoneSuperioreFollow;
+		}
+
+
+		public String getMessaggioBottoneSuperioreProfilo() {
+			return messaggioBottoneSuperioreProfilo;
+		}
+
+
+		public void setMessaggioBottoneSuperioreProfilo(String messaggioBottoneSuperioreProfilo) {
+			this.messaggioBottoneSuperioreProfilo = messaggioBottoneSuperioreProfilo;
+		}
+		
 		
 }
