@@ -21,7 +21,7 @@ public class Controller {
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreAggiungiLikePost, gestoreAggiungiDislikePost;
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -216,8 +216,9 @@ public class Controller {
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato();
+                settaPostVisualizzato(false);
                 mostraSchermata("Postvisualizzato");
+                
             }
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
@@ -292,11 +293,20 @@ public class Controller {
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("preso bottone");
+            	System.out.println("bottone immagine profilo");
                 model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
+        
+        
+        gestoreIniziaSeguire = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("Inizia a seguire");
+            }
+        };
+        view.getIniziaSeguireButton().addActionListener(gestoreIniziaSeguire);
         
          
 
@@ -423,9 +433,10 @@ public class Controller {
         refresh();
     }
     
-    public void settaPostVisualizzato() {
-        
+    public void settaPostVisualizzato(boolean condition) {
+       // view.mostraBottoneSuperiore(false);
     }
+    
     public void ricerca() {
         ArrayList<String> risultatiRicerca = new  ArrayList<String>();
         risultatiRicerca.add(view.getTestoRicerca());
