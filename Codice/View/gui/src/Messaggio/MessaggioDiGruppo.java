@@ -7,8 +7,8 @@ import Messaggio.enumeration.TipoMessaggio;
 
 public class MessaggioDiGruppo extends Messaggio{
 
-	public MessaggioDiGruppo(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia, String idGruppo) {
-		super(idMessaggio, dataInvio, oraInvio, testo, multimedia);
+	public MessaggioDiGruppo(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante,String idGruppo) {
+		super(idMessaggio, dataInvio, oraInvio, testo, multimedia,profiloInviante);
 		this.idGruppo = idGruppo;
 	}
 
@@ -35,7 +35,7 @@ public class MessaggioDiGruppo extends Messaggio{
 
 	@Override
 	public Messaggio inserisciCaratteristiche(Messaggio m) {
-		m = new MessaggioDiGruppo(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),this.getIdGruppo());
+		m = new MessaggioDiGruppo(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),m.getProfiloInviante(),this.getIdGruppo());
 		return m;
 		
 	}

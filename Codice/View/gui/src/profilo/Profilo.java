@@ -45,7 +45,6 @@ public class Profilo implements IProfilo {
 	private boolean isPswCambiata;
 	private HashMap<String,String> likeMap;
 	private HashMap<String,String> dislikeMap;
-	private String immanineProifilo;
 	//funzione richiamata dal signUP
 	
 	
@@ -61,7 +60,6 @@ public class Profilo implements IProfilo {
 		this.fotoProfilo = null;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
-		this.immanineProifilo = null;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
@@ -78,7 +76,6 @@ public class Profilo implements IProfilo {
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
-		this.immanineProifilo = null;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
@@ -99,7 +96,6 @@ public class Profilo implements IProfilo {
 		this.accountesistente = false;
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
-		this.immanineProifilo = null;
 		likeMap = new HashMap<>(); 
 		dislikeMap = new HashMap<>();
 	}
@@ -280,9 +276,9 @@ public Follow cercaFollow(Follow f) {
 //Messaggi
 
 @Override
-public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante,
 		String idGruppo) {
-	   MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, idGruppo);
+	   MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, profiloInviante,idGruppo);
 	   return m;
 }
 @Override
@@ -501,6 +497,15 @@ public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
 	return dbfacade.ottieniIdPost(p, pr);
 }
 
+@Override
+public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t) {
+	return dbfacade.selezionaMessaggiProfilo(p, t);
+}
+
+@Override
+public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t) {
+	return dbfacade.selezionaTestoMessaggiProfilo(p, t);
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 

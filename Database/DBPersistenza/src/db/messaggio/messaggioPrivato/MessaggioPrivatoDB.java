@@ -11,20 +11,13 @@ public class MessaggioPrivatoDB extends MessaggioDB{
 
 	public MessaggioPrivatoDB(String idMsgPvt, Date dataInvio, Time oraInvio, String testo, String multimedia,
 			String profiloInviante, String profiloRicevente) {
-		super(idMsgPvt,dataInvio,oraInvio,testo,multimedia);
-		this.profiloInviante = profiloInviante;
+		super(idMsgPvt,dataInvio,oraInvio,testo,multimedia,profiloInviante);
+
 		this.profiloRicevente = profiloRicevente;
 	}
 
-	private String profiloInviante;
 	private String profiloRicevente;
 	
-	public String getProfiloInviante() {
-		return profiloInviante;
-	}
-	public void setProfiloInviante(String profiloInviante) {
-		this.profiloInviante = profiloInviante;
-	}
 	public String getProfiloRicevente() {
 		return profiloRicevente;
 	}
@@ -38,7 +31,7 @@ public class MessaggioPrivatoDB extends MessaggioDB{
 	
 	@Override
 	public String toString() {
-		return super.toString() + ", profiloInviante = " + profiloInviante + ", profiloRicevente = " + profiloRicevente
+		return super.toString() +  ", profiloRicevente = " + profiloRicevente
 				+ "]";
 	}
 	

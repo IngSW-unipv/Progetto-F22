@@ -7,12 +7,11 @@ import db.messaggio.MessaggioDB;
 
 public class MessaggioDiGruppoDB extends MessaggioDB{
 
-	public MessaggioDiGruppoDB(String idMsgGrp, Date dataInvio, Time oraInvio, String testo, String multimedia,
+	public MessaggioDiGruppoDB(String idMsgGrp, Date dataInvio, Time oraInvio, String testo, String multimedia,String profiloInviante,
 			String idGruppo) {
-		super(idMsgGrp,dataInvio,oraInvio,testo,multimedia);
+		super(idMsgGrp,dataInvio,oraInvio,testo,multimedia,profiloInviante);
 		this.idGruppo = idGruppo;
 	}
-	
 	private String idGruppo;
 	public String getIdGruppo() {
 		return idGruppo;
@@ -22,7 +21,7 @@ public class MessaggioDiGruppoDB extends MessaggioDB{
 	}
 	
 	public  MessaggioDB inserisciCaratteristiche(MessaggioDB m) {
-		m = new MessaggioDiGruppoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), this.getIdGruppo());
+		m = new MessaggioDiGruppoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(),m.getProfiloInviante(), this.getIdGruppo());
 		return m;
 	}
 	

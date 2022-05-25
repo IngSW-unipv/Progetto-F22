@@ -32,7 +32,7 @@ public interface IProfilo {
 	
 	//Messaggi
 	
-	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String idGruppo);
+	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String profiloInviante,String idGruppo);
 	public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String idProfiloInviante, String idProfiloRicevente);
 	public boolean scriviMessaggio(Messaggio m);
 	public boolean rimuoviMessaggio(Messaggio m);
@@ -78,6 +78,12 @@ public interface IProfilo {
     public boolean cambiaImmagineProfilo(Profilo p, String immagine);
     public String ottieniImmagineProfilo(Profilo p);
     public ArrayList<String> ritornaIdPost(Post p, Profilo pr);
+    
+    //Ritorna tutti i messaggi di un profilo specificato
+    public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t);
+	
+	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);
+    
     
     //Commenti
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 

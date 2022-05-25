@@ -1,6 +1,10 @@
 package db.messaggio;
 
+
+
 import java.util.ArrayList;
+import db.profilo.ProfiloDB;
+
 
 public interface IMessaggioDao {
 
@@ -20,4 +24,8 @@ public interface IMessaggioDao {
 	
 	public ArrayList<String> ottieniTestoListaMessaggi(String s);
 	
+	
+	//Seleziona tutti i messaggi di un profilo specificato
+	public ArrayList<MessaggioDB> selezionaMessaggiProfilo(ProfiloDB p);
+	public ArrayList<String> selezionaTestoMessaggiProfilo(ProfiloDB p);
 }

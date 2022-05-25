@@ -7,21 +7,15 @@ import Messaggio.enumeration.TipoMessaggio;
 
 public class MessaggioPrivato extends Messaggio{
 
-	public MessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String idProfiloInviante, String idProfiloRicevente) {
-		super(id, dataInvio, oraInvio, testo, multimedia);
-		this.idProfiloInviante = idProfiloInviante;
+	public MessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante, String idProfiloRicevente) {
+		super(id, dataInvio, oraInvio, testo, multimedia,profiloInviante);
+
 		this.idProfiloRicevente = idProfiloRicevente;
 	}
-	private String idProfiloInviante;
+
 	private String idProfiloRicevente;
 	
-	public String getIdProfiloInviante() {
-		return idProfiloInviante;
-	}
-	public void setIdProfiloInviante(String idProfiloInviante) {
-		this.idProfiloInviante = idProfiloInviante;
-	}
-	
+
 	public String getIdProfiloRicevente() {
 		return idProfiloRicevente;
 	}
@@ -30,7 +24,7 @@ public class MessaggioPrivato extends Messaggio{
 	}
 	@Override
 	public String toString() {
-		return super.toString() + ", idProfiloInviante = " + idProfiloInviante + ", idProfiloRicevente = " + idProfiloRicevente
+		return super.toString() + ", idProfiloRicevente = " + idProfiloRicevente
 				+ "]";
 	}
 	@Override
@@ -39,7 +33,7 @@ public class MessaggioPrivato extends Messaggio{
 	}
 	@Override
 	public Messaggio inserisciCaratteristiche(Messaggio m) {
-		m = new MessaggioPrivato(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),this.getIdProfiloInviante(),this.getIdProfiloRicevente());
+		m = new MessaggioPrivato(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),m.getProfiloInviante(),this.getIdProfiloRicevente());
 		return m;
 	}
 	

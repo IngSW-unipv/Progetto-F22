@@ -152,6 +152,15 @@ public class DbFacade {
 		return  mDao.ottieniTestoListaMessaggi(m);
 	}
 	
+	public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t){
+		mDao = Utility.convertiTipoMessaggio(t);
+		return ConvertitoreFacade.getIstance().convertiListaMessaggi(t, mDao.selezionaMessaggiProfilo(ConvertitoreFacade.getIstance().converti(p)));
+	}
+	
+	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t){
+		mDao = Utility.convertiTipoMessaggio(t);
+		return mDao.selezionaTestoMessaggiProfilo(ConvertitoreFacade.getIstance().converti(p));
+	}
 	
 	//Post
 	

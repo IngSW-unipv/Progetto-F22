@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import db.connessione.DBConnection;
 import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
+import db.profilo.ProfiloDB;
 
 public class MessaggioDiGruppoDao extends MessaggioDao {
 	private String schema;
@@ -129,8 +130,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
-				DBConnection.closeConnection(conn);
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));				DBConnection.closeConnection(conn);
              	return msg;
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -151,7 +151,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by dataInvio";
+			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s);
@@ -160,8 +160,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
-
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -210,7 +209,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="SELECT testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio";
+			String query="SELECT testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m);
@@ -226,6 +225,64 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 		DBConnection.closeConnection(conn);
 		return result;
 		
+	}
+
+
+	@Override
+	public ArrayList<MessaggioDB> selezionaMessaggiProfilo(ProfiloDB p) {
+		ArrayList<MessaggioDB> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT * FROM messaggiodigruppo WHERE profiloInviante=? order by dataInvio,oraInvio";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));
+
+				result.add(msg);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+
+
+	@Override
+	public ArrayList<String> selezionaTestoMessaggiProfilo(ProfiloDB p) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT testo FROM messaggiodigruppo WHERE profiloInviante=? order by dataInvio,oraInvio";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				result.add(rs1.getString("testo"));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
 	}
 
 	

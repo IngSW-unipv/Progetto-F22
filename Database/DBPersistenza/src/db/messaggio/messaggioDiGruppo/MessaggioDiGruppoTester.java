@@ -8,7 +8,7 @@ public class MessaggioDiGruppoTester {
 
 	public static void main(String[] args) {
 		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
-		MessaggioDiGruppoDB m = new MessaggioDiGruppoDB("001", null, null, null, null, "G00");
+		MessaggioDiGruppoDB m = new MessaggioDiGruppoDB("001", null, null, null, null, "G00", null);
 	  
 		ArrayList<String> res = mdao.ottieniTestoListaMessaggi("G00");
 		for(String ms: res)

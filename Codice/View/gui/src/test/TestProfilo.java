@@ -60,7 +60,7 @@ class TestProfilo {
 	//test sui messaggi
 	@Test
 	public void testScriviMessaggioDiGruppo() {
-		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId1", null, null, "ciao come stai", "percorso1", "gruppo1");
+		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId1", null, null, "ciao come stai", "percorso1",null, "gruppo1");
 		assertTrue(profiloAttivo.scriviMessaggio(m));
 	}
 	
@@ -72,7 +72,7 @@ class TestProfilo {
 	
 	@Test
 	public void testRimuoviMessaggioDiGruppo() {
-		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId2", null, null, "tutto a posto?", "percorso3", "gruppo2");
+		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId2", null, null, "tutto a posto?", "percorso3",null,"gruppo2");
 		assertTrue(profiloAttivo.rimuoviMessaggio(m));
 	}
 	
@@ -84,7 +84,7 @@ class TestProfilo {
 	
 	@Test
 	public void testCercaMessaggioDiGruppo() {
-		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId3", null, null, "non lo so", "percorso5", "gruppo3");
+		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId3", null, null, "non lo so", "percorso5",null, "gruppo3");
 		assertNotNull(profiloAttivo.cercaMessaggio(m));
 	}
 	
@@ -96,7 +96,7 @@ class TestProfilo {
 	
 	@Test
 	public void testOttieniTestoMessaggioDiGruppo() {
-		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId4", null, null, "ci sentiamo", "percorso7", "gruppo4");
+		Messaggio m = new MessaggioDiGruppo("messaggioDiGruppoId4", null, null, "ci sentiamo", "percorso7",null, "gruppo4");
 		assertNotNull(profiloAttivo.ottieniTestoMessaggio(m));
 	}
 	

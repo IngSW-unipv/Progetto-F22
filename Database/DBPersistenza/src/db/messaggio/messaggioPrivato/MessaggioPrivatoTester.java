@@ -12,7 +12,7 @@ public static void main(String[] args) {
 	MessaggioPrivatoDB m = new MessaggioPrivatoDB("M02", null, null, "Buongiorno", null, "001", "P01");
 	MessaggioPrivatoDao mdao = new MessaggioPrivatoDao();
 	MessaggioDiGruppoDao mdgdao = new MessaggioDiGruppoDao();
-	MessaggioDiGruppoDB mdg = new MessaggioDiGruppoDB("001", null, null, null, null, null);
+	MessaggioDiGruppoDB mdg = new MessaggioDiGruppoDB("001", null, null, null, null, null, null);
 	
 	
 	ArrayList<String> res2 = mdao.ottieniTestoListaMessaggi("002");

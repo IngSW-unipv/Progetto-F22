@@ -7,13 +7,14 @@ import Messaggio.enumeration.TipoMessaggio;
 
 
 public abstract class Messaggio {
-	public Messaggio(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia) {
+	public Messaggio(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia,String profiloInviante) {
 		super();
 		this.idMessaggio = idMessaggio;
 		this.dataInvio = dataInvio;
 		this.oraInvio = oraInvio;
 		this.testo = testo;
 		this.multimedia = multimedia;
+		this.profiloInviante = profiloInviante;
 	}
 	
 	private String idMessaggio;
@@ -21,6 +22,7 @@ public abstract class Messaggio {
 	private Time oraInvio;
 	private String testo;
 	private String multimedia;
+	private String profiloInviante;
 	public String getIdMessaggio() {
 		return idMessaggio;
 	}
@@ -53,10 +55,16 @@ public abstract class Messaggio {
 	}
 	@Override
 	public String toString() {
-		return "idMessaggio = " + idMessaggio + ", dataInvio = " + dataInvio + ", oraInvio = " + oraInvio
-				+ ", testo = " + testo + ", multimedia = " + multimedia ;
+		return "Messaggio [idMessaggio=" + idMessaggio + ", dataInvio=" + dataInvio + ", oraInvio=" + oraInvio
+				+ ", testo=" + testo + ", multimedia=" + multimedia + ", profiloInviante=" + profiloInviante + "]";
 	}	
 	
 	public abstract TipoMessaggio getTipo();
 	public abstract Messaggio inserisciCaratteristiche(Messaggio m);
+	public String getProfiloInviante() {
+		return profiloInviante;
+	}
+	public void setProfiloInviante(String profiloInviante) {
+		this.profiloInviante = profiloInviante;
+	}
 }
