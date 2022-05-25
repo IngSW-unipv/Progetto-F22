@@ -296,6 +296,9 @@ public class Frame extends JFrame {
 	public JButton getAggiungiCommentoButtonFrame() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommentoButton();
 	}
+	public JButton getImpostaProfiloButton() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();
+	}
 	
 	public String getIdPostVisualizzato() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();

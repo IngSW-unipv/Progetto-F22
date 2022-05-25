@@ -179,7 +179,9 @@ public class Sistema {
 	 		profiloAttivo.creaPost(p);
 	 	}
 	 
-
+	public void impostaFotoProfilo(String fotoPath) {
+		profiloAttivo.caricaImmagineProfilo(fotoPath);
+	}
 		
 		
 	public Profilo getProfiloAttivo() {

@@ -20,7 +20,7 @@ public class Controller {
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento;
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -285,7 +285,17 @@ public class Controller {
             }
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
-        
+
+        public void actionListenersImpostaImmagineProfilo() {
+            gestoreImpostaFotoProfilo = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    model.impostaFotoProfilo(view.mappaSchermate.get("PostVisualizzato").getFotoPath());
+                }
+            };
+            view.getHomePostVisualizzatoButton().addActionListener(gestoreImpostaFotoProfilo);
+            
+            
         
         gestoreAggiungiCommento = new ActionListener() {
             @Override
@@ -386,9 +396,9 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
-        String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
+        //String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
         //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
-        view.setPostProfilo(postDelProfilo);
+       // view.setPostProfilo(postDelProfilo);
         refresh();
     }
     

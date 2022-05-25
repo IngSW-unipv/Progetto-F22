@@ -21,7 +21,7 @@ public class PostVisualizzato extends JPanel{
 		private JTextArea areaDescrizione;
 		private AreaCommenti areaCommenti;
 		private AreaDiTesto aggiungiCommento;
-		private JButton homePostVisualizzato;
+		private JButton homePostVisualizzato, impostaImmagineProfiloButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
 		private String idPost = "110";
@@ -49,8 +49,8 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerNorth = new SpecificContainer();
 			this.add(containerNorth, BorderLayout.NORTH);
 
-			Etichette etichetta = new Etichette("Post", ARANCIONE);
-			containerNorth.add(etichetta, BorderLayout.WEST);
+			Pulsanti impostaImmagineProfiloButton = new Pulsanti("imposta come immagine del profilo", ARANCIONE);
+			containerNorth.add(impostaImmagineProfiloButton, BorderLayout.WEST);
 			
 			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
@@ -165,6 +165,21 @@ public class PostVisualizzato extends JPanel{
 
 		public void setIdPost(String idPost) {
 			this.idPost = idPost;
+		}
+
+
+		public JButton getImpostaImmagineProfiloButton() {
+			return impostaImmagineProfiloButton;
+		}
+
+
+		public String getFotoPath() {
+			return fotoPath;
+		}
+
+
+		public void setFotoPath(String fotoPath) {
+			this.fotoPath = fotoPath;
 		}
 		
 		
