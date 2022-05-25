@@ -44,7 +44,7 @@ public class Profilo implements IProfilo {
 	private boolean isPswCambiata;
 	private HashMap<String,String> likeMap;
 	private HashMap<String,String> dislikeMap;
-	
+	private String immanineProifilo;
 	//funzione richiamata dal signUP
 	
 	
@@ -59,6 +59,7 @@ public class Profilo implements IProfilo {
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
+		this.immanineProifilo = null;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
@@ -74,6 +75,7 @@ public class Profilo implements IProfilo {
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
+		this.immanineProifilo = null;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
@@ -93,6 +95,7 @@ public class Profilo implements IProfilo {
 		this.accountesistente = false;
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
+		this.immanineProifilo = null;
 		likeMap = new HashMap<>(); 
 		dislikeMap = new HashMap<>();
 	}
@@ -442,6 +445,16 @@ public String ottieniPercorso(Post p) {
 	return dbfacade.ottieniPercorso(p);
 }
 
+@Override
+public ArrayList<Commento> selectAllCommentiSottoPost(Post p) {
+	return dbfacade.mostraCommentiPost(p);
+}
+
+@Override
+public ArrayList<String> testoCommentiPost(Post p) {
+	return dbfacade.mostraTestoCommentiPost(p);
+}
+
 
 
 
@@ -482,9 +495,9 @@ public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
 //Commento
 
 @Override
-public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo) {
+public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,	String idVideo,String idSDV,String idSSM, String idTesto) {
 	
-	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,post,profilo);
+	   Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,profilo,idFoto,idVideo,idSDV,idSSM,idTesto);
 	
 		return c;
 
@@ -512,11 +525,11 @@ public Commento cercaCommento(Commento c) {
 		return dbfacade.cerca(c);
 }
 
+
+
 @Override
-public ArrayList<Commento> selectAllCommentiSottoPost(Commento c) {
-	
-	ArrayList<Commento> res = dbfacade.selectAllCommenti(c);
-	return res;
+public ArrayList<String> ProfiloNickCommento(Profilo p) {
+	return dbfacade.ProfiloNickCommento(p);
 }
 
 //Gruppo
@@ -618,6 +631,14 @@ public boolean rimuoviDislike(Post p){
 	}
 	return false;
 	
+}
+
+public String getImmanineProifilo() {
+	return immanineProifilo;
+}
+
+public void setImmanineProifilo(String immanineProifilo) {
+	this.immanineProifilo = immanineProifilo;
 }
 
 

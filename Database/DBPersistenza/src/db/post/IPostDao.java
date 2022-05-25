@@ -2,6 +2,8 @@ package db.post;
 
 import java.util.ArrayList;
 
+import db.commento.CommentoDB;
+
 
 public interface IPostDao {
 
@@ -14,4 +16,11 @@ public interface IPostDao {
 	
 	//ritorna l'id di tutti i post relativi ad un profilo ordinati per dataPubblicazione, oraInvio
 	public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo);
+	
+	//Ritorna un'arrayList con tutte le informazioni relative ad un determinato post
+	public ArrayList<CommentoDB> mostraCommentiSottoPost(PostDB c);
+	
+	
+	//Ritorna un'arrayList di stringhe con tutti i commenti sotto ad un post
+    public ArrayList<String> mostraTestoCommentiPost(PostDB c);
 }

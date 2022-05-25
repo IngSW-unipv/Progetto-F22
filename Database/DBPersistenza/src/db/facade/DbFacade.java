@@ -23,7 +23,6 @@ import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.multimedia.Multimedia;
 import convertitore.ConvertitoreFacade;
 
 public class DbFacade {
@@ -74,12 +73,12 @@ public class DbFacade {
 		return null;
 	}
 	
-	
-	public ArrayList<Commento> selectAllCommenti(Commento c){
-		return ConvertitoreFacade.getIstance().convertiListaCommenti(cDao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(c)));
+
+	public ArrayList<String> ProfiloNickCommento(Profilo p){
+		return cDao.ProfiloNickCommento(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
-
+	
     //Gruppi
 	
 	public boolean carica(Gruppo g) {
@@ -200,7 +199,17 @@ public class DbFacade {
 		return pstDao.ritornaPostDiUnProfilo(pr.getIdProfilo());
 	}
      
-     
+    public ArrayList<Commento> mostraCommentiPost(Post p){ 
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+		return ConvertitoreFacade.getIstance().convertiListaCommenti(pstDao.mostraCommentiSottoPost(ConvertitoreFacade.getIstance().converti(p)));
+
+    }
+	
+    public ArrayList<String> mostraTestoCommentiPost(Post p){
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+        return pstDao.mostraTestoCommentiPost(ConvertitoreFacade.getIstance().converti(p));
+    }
+    
 	//Profilo
 	
 	public ArrayList<Profilo> selectAllProfilo() {
@@ -269,6 +278,7 @@ public class DbFacade {
 	public String ottieniImmagineProfilo(Profilo p) {
 		return pDao.ottieniImmagine(ConvertitoreFacade.getIstance().converti(p));
 	}
+
 	
 	//Follow
 	

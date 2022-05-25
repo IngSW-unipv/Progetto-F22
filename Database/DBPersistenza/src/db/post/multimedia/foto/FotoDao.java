@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import db.commento.CommentoDB;
 import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
@@ -214,5 +215,62 @@ public class FotoDao extends PostDao {
 
 		DBConnection.closeConnection(conn);
 		return result;
+	}
+	
+	
+	@Override
+	public ArrayList<CommentoDB> mostraCommentiSottoPost(PostDB c) {
+		
+		ArrayList<CommentoDB> result = new ArrayList<>();
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+		
+		try
+		{
+			String query="SELECT * FROM commento WHERE idFoto=? order by dataCommento,oraCommento";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, c.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				CommentoDB com = new CommentoDB(rs1.getString(1), rs1.getTime(2),rs1.getDate(3),rs1.getString(4),rs1.getString(5),rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+				result.add(com);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+	
+	
+	@Override
+	public ArrayList<String> mostraTestoCommentiPost(PostDB c) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+			try
+			{
+				String query="SELECT testo FROM commento WHERE idFoto=? order by dataCommento, oraCommento";
+
+				st1 = conn.prepareStatement(query);
+				st1.setString(1, c.getIdPost());
+
+				rs1=st1.executeQuery();
+
+				while(rs1.next())
+				{
+	                	result.add(rs1.getString("testo"));
+				}
+			}catch (Exception e){e.printStackTrace();}
+
+			DBConnection.closeConnection(conn);
+			return result;
 	}
 }

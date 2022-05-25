@@ -64,11 +64,14 @@ public interface IProfilo {
 
 	public ArrayList<Post> selectAllPost(TipoPost t);
 	
-	//L'int time rappresenta la durata in ore nel quale la storia rimarr� pubblicata. A fine di time ore, la storia sar� rimossa automaticamente
+	//L'int time rappresenta la durata in ore nel quale la storia rimarra' pubblicata. A fine di time ore, la storia sar� rimossa automaticamente
     public boolean pubblicaStoria(int time, Multimedia f);
 	
     public String ottieniPercorso(Post p);
     
+	public ArrayList<Commento> selectAllCommentiSottoPost(Post p);
+	public ArrayList<String> testoCommentiPost(Post p);
+	
     //Profilo
     
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
@@ -77,11 +80,11 @@ public interface IProfilo {
     public ArrayList<String> ritornaIdPost(Post p, Profilo pr);
     
     //Commenti
-    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String post,String profilo); 
+    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
     public boolean pubblicaCommento(Commento c);
     public boolean rimuoviCommento(Commento c);
 	public Commento cercaCommento(Commento c);
-	public ArrayList<Commento> selectAllCommentiSottoPost(Commento c);
+	public ArrayList<String> ProfiloNickCommento(Profilo p);
 	
 	//Follow
 	
