@@ -30,9 +30,9 @@ public class AreaCommenti extends Container {
 		numeroDislike.setForeground(Color.white);
 		JLabel numeroCommenti = new JLabel("N.Commenti");
 		numeroCommenti.setForeground(Color.white);
-		JButton aggiungiLike = new JButton("+ Like");
-		JButton aggiungiDislike = new JButton("- Like");
 		
+		aggiungiLike = new JButton("+ Like");
+		aggiungiDislike = new JButton("- Like");
 		aggiungiCommento = new JButton("+ Commento");
 	
 		SpecificContainer containerBottoniPost = new SpecificContainer();

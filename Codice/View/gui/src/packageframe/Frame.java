@@ -300,6 +300,15 @@ public class Frame extends JFrame {
 	public JButton getAggiungiCommentoButtonFrame() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommentoButton();
 	}
+	
+	public JButton getAggiungiLikeButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiLikeButton();
+	}
+	
+	public JButton getAggiungiDislikeButtonFrame() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiDislikeButton();
+	}
+	
 	public JButton getImpostaImmagineProfiloButton() {
 		System.out.println("siamo in frame");
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();

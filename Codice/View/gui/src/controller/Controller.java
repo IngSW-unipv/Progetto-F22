@@ -21,7 +21,7 @@ public class Controller {
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo;
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreAggiungiLikePost, gestoreAggiungiDislikePost;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -152,54 +152,55 @@ public class Controller {
                 view.getCercaButton().addActionListener(gestoreCerca);
     }
     
-    public void actionListenersImpostazioni() {gestoreLogOut = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            try {
-                model.logout(model.getProfiloAttivo().getIdProfilo());
-            } catch (AccountDoesNotExist e1) {
-                e1.printStackTrace();
-            }
-            view.getContainerCenterFrame().setVisible(false);
-            mostraSchermata("Login");
-        }
-    };
-    view.getLogOutButton().addActionListener(gestoreLogOut);
-    
-    gestoreHomeImpostazioni = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-            mostraSchermata("Home");
-        }
-    };
-    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
-    
-    
-    gestoreModificaProfilo = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(true);
-            refresh();
-        }
-    };
-    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
-    
-    gestoreVisibilitaPost = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-        }
-    };
-    view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
-    
-    gestoreEliminaAccount = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            view.getContainerCenterFrame().setVisible(false);
-        }
-    };
-    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
+    public void actionListenersImpostazioni() {
+    	gestoreLogOut = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            try {
+	                model.logout(model.getProfiloAttivo().getIdProfilo());
+	            }catch (AccountDoesNotExist e1) {
+	            	e1.printStackTrace();
+	            }
+	            view.getContainerCenterFrame().setVisible(false);
+	            mostraSchermata("Login");
+	        }
+    	};
+	    view.getLogOutButton().addActionListener(gestoreLogOut);
+	    
+	    gestoreHomeImpostazioni = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	            mostraSchermata("Home");
+	        }
+	    };
+	    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
+	    
+	    
+	    gestoreModificaProfilo = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(true);
+	            refresh();
+	        }
+	    };
+	    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
+	    
+	    gestoreVisibilitaPost = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	        }
+	    };
+	    view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
+	    
+	    gestoreEliminaAccount = new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            view.getContainerCenterFrame().setVisible(false);
+	        }
+	    };
+	    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
         
     }
     
@@ -224,34 +225,34 @@ public class Controller {
     }
     
     public void actionListenersCreazionePost() {
-        //ActionListeners schermata CreazionePost
-                gestoreCreazionePost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("CreazionePost");
-                    }
-                };
-                view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
-                
-                gestoreHomeCreazionePost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("Home");
-                    }
-                };
-                view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
-                
-                gestorePubblicaPost = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pubblicaPost();
-                    }
-                        /*boolean success = false
-                                if(success = true) {
-                        mostraSchermata("Home");
-                    }*/
-                };
-                view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
+    	//ActionListeners schermata CreazionePost
+        gestoreCreazionePost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("CreazionePost");
+            }
+        };
+        view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
+        
+        gestoreHomeCreazionePost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("Home");
+            }
+        };
+        view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
+        
+        gestorePubblicaPost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pubblicaPost();
+            }
+                /*boolean success = false
+                        if(success = true) {
+                mostraSchermata("Home");
+            }*/
+        };
+        view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
     
     }
     
@@ -288,25 +289,43 @@ public class Controller {
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
     
      
-            gestoreImpostaFotoProfilo = new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                	System.out.println("preso bottone");
-                    model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
-                }
-            };
-            view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
+        gestoreImpostaFotoProfilo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("preso bottone");
+                model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
+            }
+        };
+        view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
         
          
 
         gestoreAggiungiCommento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("1");
                 aggiungiCommento();
             }
         };
        view.getAggiungiCommentoButtonFrame().addActionListener(gestoreAggiungiCommento);
+       
+       
+       gestoreAggiungiLikePost = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Aggiunto like");
+    	   }
+       };
+       view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
+       
+       gestoreAggiungiDislikePost = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Aggiunto dislike");
+    	   }
+       };
+       view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
+       
+       
         
     }
         

@@ -157,7 +157,14 @@ public class PostVisualizzato extends JPanel{
 		public JButton getAggiungiCommentoButton() {
 			return areaCommenti.getAggiungiCommento();
 		}
+		
+		public JButton getAggiungiLikeButton() {
+			return areaCommenti.getAggiungiLike();
+		}
 
+		public JButton getAggiungiDislikeButton() {
+			return areaCommenti.getAggiungiDislike();
+		}
 
 		public String getIdPost() {
 			return idPost;
