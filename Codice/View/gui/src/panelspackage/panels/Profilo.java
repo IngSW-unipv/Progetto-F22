@@ -118,4 +118,9 @@ public class  Profilo extends JPanel {
 			containerCenter.add(ListaPost.get(i));
 		}
 	}
+	
+	public void setFotoProfilo(String percorso) {
+		this.immagineProf.setIcon(new ImageIcon(percorso));
+		
+	}
 }

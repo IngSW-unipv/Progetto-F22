@@ -180,7 +180,7 @@ public class Sistema {
 	 	}
 	 
 	public void impostaFotoProfilo(String fotoPath) {
-		profiloAttivo.caricaImmagineProfilo(fotoPath);
+		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
 	}
 		
 		

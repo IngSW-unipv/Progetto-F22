@@ -467,6 +467,7 @@ public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 
 @Override
 public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
+	System.out.println("siamo in profilo e la path è "+ immagine);
 	return dbfacade.modificaImmagineProfilo(p, immagine);
 }
 
@@ -634,6 +635,14 @@ public Commento creaCommento(String idCommento, Time oraCommento, Date dataComme
 		String profilo) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+public String getFotoProfilo() {
+	return fotoProfilo;
+}
+
+public void setFotoProfilo(String fotoProfilo) {
+	this.fotoProfilo = fotoProfilo;
 }
 
 

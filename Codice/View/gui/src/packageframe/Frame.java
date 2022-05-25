@@ -227,6 +227,10 @@ public class Frame extends JFrame {
 	public JButton getHomeProfiloButton() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getHomeProfilo();
 	}
+
+	public void setFotoProfilo(String percorso) {
+		 ((Profilo)mappaSchermate.get("Profilo")).setFotoProfilo(percorso);
+	}
 	
 	public JButton getHomeChatButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getHome();
@@ -296,7 +300,8 @@ public class Frame extends JFrame {
 	public JButton getAggiungiCommentoButtonFrame() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getAggiungiCommentoButton();
 	}
-	public JButton getImpostaProfiloButton() {
+	public JButton getImpostaImmagineProfiloButton() {
+		System.out.println("siamo in frame");
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getImpostaImmagineProfiloButton();
 	}
 	

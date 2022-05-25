@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Sistema.Sistema;
 import convertitore.chatUtility.UtilityChat;
 import packageframe.Frame;
+import panelspackage.panels.PostVisualizzato;
 import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
@@ -285,18 +286,19 @@ public class Controller {
             }
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
-
-        public void actionListenersImpostaImmagineProfilo() {
+    
+     
             gestoreImpostaFotoProfilo = new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    model.impostaFotoProfilo(view.mappaSchermate.get("PostVisualizzato").getFotoPath());
+                	System.out.println("preso bottone");
+                    model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
                 }
             };
-            view.getHomePostVisualizzatoButton().addActionListener(gestoreImpostaFotoProfilo);
-            
-            
+            view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
         
+         
+
         gestoreAggiungiCommento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -396,6 +398,8 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
+        System.out.println("percorsoFotoProfilo" + model.getProfiloAttivo().getFotoProfilo());
+        view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
         //String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
         //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
        // view.setPostProfilo(postDelProfilo);
