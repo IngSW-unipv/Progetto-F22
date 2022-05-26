@@ -17,11 +17,15 @@ import profilo.exception.*;
 public class Controller {
     
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
-                           gestoreChat, gestorePannelloNotifiche, gestoreHomeImpostazioni, gestoreHomeProfilo,
+                           gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost;
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
+                           gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
+                           gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
+                           gestoreQuintaChatPrivata;
+    
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -129,14 +133,6 @@ public class Controller {
                 };
                 view.getChatButton().addActionListener(gestoreChat);
                 
-                
-                gestorePannelloNotifiche = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("PannelloNotifiche");
-                    }
-                }; 
-                view.getNotificheButton().addActionListener(gestorePannelloNotifiche);
                 
                 gestoreCerca = new ActionListener() {
                     @Override
@@ -276,6 +272,97 @@ public class Controller {
             }
         };
         view.getHomeChatButton().addActionListener(gestoreHomeChat);
+        
+        
+        gestoreAggiornaChat = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("AggiornaChat");
+        	}
+        };
+        view.getAggiornaChatButton().addActionListener(gestoreAggiornaChat);
+        
+        gestorePrimaChatGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Prima chat gruppo");
+        	}
+        };
+        view.getPrimaChatGruppoButton().addActionListener(gestorePrimaChatGruppo);
+        
+        gestoreSecondaChatGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Seconda chat gruppo");
+        	}
+        };
+        view.getSecondaChatGruppoButton().addActionListener(gestoreSecondaChatGruppo);
+        
+        
+        gestoreTerzaChatGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Terza chat gruppo");
+        	}
+        };
+        view.getTerzaChatGruppoButton().addActionListener(gestoreTerzaChatGruppo);
+        
+        gestoreQuartaChatGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Quarta chat gruppo");
+        	}
+        };
+        view.getQuartaChatGruppoButton().addActionListener(gestoreQuartaChatGruppo);
+        
+        gestoreQuintaChatGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Quinta chat gruppo");
+        	}
+        };
+        view.getQuintaChatGruppoButton().addActionListener(gestoreQuintaChatGruppo);
+        
+        gestorePrimaChatPrivata = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Prima chat privata");
+        	}
+        };
+        view.getPrimaChatPrivataButton().addActionListener(gestorePrimaChatPrivata);
+        
+        gestoreSecondaChatPrivata = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Seconda chat privata");
+        	}
+        };
+        view.getSecondaChatPrivataButton().addActionListener(gestoreSecondaChatPrivata);
+        
+        
+        gestoreTerzaChatPrivata = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Terza chat privata");
+        	}
+        };
+        view.getTerzaChatPrivataButton().addActionListener(gestoreTerzaChatPrivata);
+        
+        gestoreQuartaChatPrivata = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Quarta chat privata");
+        	}
+        };
+        view.getQuartaChatPrivataButton().addActionListener(gestoreQuartaChatPrivata);
+        
+        gestoreQuintaChatPrivata = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Quinta chat privata");
+        	}
+        };
+        view.getQuintaChatPrivataButton().addActionListener(gestoreQuintaChatPrivata);
         
     }
     

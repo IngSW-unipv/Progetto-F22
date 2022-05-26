@@ -14,8 +14,9 @@ import panelspackage.panels.elements.SpecificContainer;
 @SuppressWarnings("serial")
 public class Chat extends JPanel {
 
-	private Pulsanti home;
-	private Pulsanti mioProfilo;
+	private Pulsanti tornaHome, primaChatGruppo, secondaChatGruppo, terzaChatGruppo, quartaChatGruppo, quintaChatGruppo,
+					 primaChatPrivata, secondaChatPrivata, terzaChatPrivata, quartaChatPrivata, quintaChatPrivata;
+	
 	private JComboBox<String> discussioni;
 	private SpecificContainer containerCenter;
 	private SpecificContainer containerNorth ;
@@ -27,7 +28,6 @@ public class Chat extends JPanel {
 		public Chat() {
 			avvio();
 			initComponents();
-			
 	}
 		
 		public void avvio() {
@@ -38,12 +38,9 @@ public class Chat extends JPanel {
 	
 	public void initComponents() {
 		
-		home = new Pulsanti("C:\\Users\\aissa\\OneDrive\\Immagini\\home.png");
-		mioProfilo = new Pulsanti("Mio Profilo", Color.pink);
 		containerNorth = new SpecificContainer();
+		containerNorth.setLayout(new GridLayout(2, 1));
 		this.add(containerNorth, BorderLayout.NORTH);
-		containerNorth.add(home);
-		containerNorth.add(mioProfilo);
 		
 		discussioni = new JComboBox<>();
 		discussioni.addItem("Discussioni");
@@ -56,52 +53,47 @@ public class Chat extends JPanel {
 	    containerCenter = new SpecificContainer(Color.CYAN);
 	    containerCenter.setLayout(new GridLayout(10, 2));
 	    containerCenter.add(new Etichette("ChatDiGruppo1", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(primaChatGruppo = new Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatPersonale1", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(primaChatPrivata = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatDiGruppo2", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(secondaChatGruppo = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatPersonale2", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(secondaChatPrivata = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatDiGruppo3", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(terzaChatGruppo = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatPersonale3", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(terzaChatPrivata = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatDiGruppo4", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(quartaChatGruppo = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatPersonale4", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(quartaChatPrivata = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatDiGruppo5", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(quintaChatGruppo = new  Pulsanti("Apri", Color.cyan));
 	    containerCenter.add(new Etichette("ChatPersonale5", Color.black), new Font("Times New Roman", Font.LAYOUT_LEFT_TO_RIGHT, 14));
-	    containerCenter.add(new  Pulsanti("Apri", Color.cyan));
+	    containerCenter.add(quintaChatPrivata = new  Pulsanti("Apri", Color.cyan));
 	    this.add(containerCenter, BorderLayout.CENTER); 
 	    
 	    
 	    containerSouth = new SpecificContainer();
-	    this.add(containerSouth);
+	    this.add(containerSouth, BorderLayout.SOUTH);
 	    aggiornaAltriChat = new Pulsanti("Aggiorna altri chat", Color.blue, new Font("Arial", 1, 14));
+		tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
+	    containerSouth.setLayout(new GridLayout(2, 1));
 	    containerSouth.add(aggiornaAltriChat);
+	    containerSouth.add(tornaHome);
 	    
 	}
 	
 
         
 
-		public Pulsanti getHome() {
-			return home;
+		public Pulsanti getTornaHome() {
+			return tornaHome;
 		}
 
-		public void setHome(Pulsanti home) {
-			this.home = home;
-		}
-
-		public Pulsanti getMioProfilo() {
-			return mioProfilo;
-		}
-
-		public void setMioProfilo(Pulsanti mioProfilo) {
-			this.mioProfilo = mioProfilo;
+		public void setTornaHome(Pulsanti home) {
+			this.tornaHome = home;
 		}
 
 		public JComboBox<String> getDiscussioni() {
@@ -143,8 +135,86 @@ public class Chat extends JPanel {
 		public void setContainerSouth(SpecificContainer containerSouth) {
 			this.containerSouth = containerSouth;
 		}
-	   
-	    
+
+		public Pulsanti getPrimaChatGruppo() {
+			return primaChatGruppo;
+		}
+
+		public void setPrimaChatGruppo(Pulsanti primaChatGruppo) {
+			this.primaChatGruppo = primaChatGruppo;
+		}
+
+		public Pulsanti getSecondaChatGruppo() {
+			return secondaChatGruppo;
+		}
+
+		public void setSecondaChatGruppo(Pulsanti secondaChatGruppo) {
+			this.secondaChatGruppo = secondaChatGruppo;
+		}
+
+		public Pulsanti getTerzaChatGruppo() {
+			return terzaChatGruppo;
+		}
+
+		public void setTerzaChatGruppo(Pulsanti terzaChatGruppo) {
+			this.terzaChatGruppo = terzaChatGruppo;
+		}
+
+		public Pulsanti getQuartaChatGruppo() {
+			return quartaChatGruppo;
+		}
+
+		public void setQuartaChatGruppo(Pulsanti quartaChatGruppo) {
+			this.quartaChatGruppo = quartaChatGruppo;
+		}
+
+		public Pulsanti getQuintaChatGruppo() {
+			return quintaChatGruppo;
+		}
+
+		public void setQuintaChatGruppo(Pulsanti quintaChatGruppo) {
+			this.quintaChatGruppo = quintaChatGruppo;
+		}
+
+		public Pulsanti getPrimaChatPrivata() {
+			return primaChatPrivata;
+		}
+
+		public void setPrimaChatPrivata(Pulsanti primaChatPrivata) {
+			this.primaChatPrivata = primaChatPrivata;
+		}
+
+		public Pulsanti getSecondaChatPrivata() {
+			return secondaChatPrivata;
+		}
+
+		public void setSecondaChatPrivata(Pulsanti secondaChatPrivata) {
+			this.secondaChatPrivata = secondaChatPrivata;
+		}
+
+		public Pulsanti getTerzaChatPrivata() {
+			return terzaChatPrivata;
+		}
+
+		public void setTerzaChatPrivata(Pulsanti terzaChatPrivata) {
+			this.terzaChatPrivata = terzaChatPrivata;
+		}
+
+		public Pulsanti getQuartaChatPrivata() {
+			return quartaChatPrivata;
+		}
+
+		public void setQuartaChatPrivata(Pulsanti quartaChatPrivata) {
+			this.quartaChatPrivata = quartaChatPrivata;
+		}
+
+		public Pulsanti getQuintaChatPrivata() {
+			return quintaChatPrivata;
+		}
+
+		public void setQuintaChatPrivata(Pulsanti quintaChatPrivata) {
+			this.quintaChatPrivata = quintaChatPrivata;
+		}
 		
 }	
 

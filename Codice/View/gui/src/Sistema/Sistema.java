@@ -107,7 +107,7 @@ public class Sistema {
 	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
 	 		String idCommento = Integer.toString(idCommentoInt);
 	 		c = new Commento(idCommento, idProfilo, idPost, commento);
-	 		if(dbfacade.cerca(new Commento(idCommento)) != null) {
+	 		if(dbfacade.cerca(c) != null) {
 	 			carica(idProfilo, idPost, commento);
 	 		}
 	 		profiloAttivo.pubblicaCommento(c);

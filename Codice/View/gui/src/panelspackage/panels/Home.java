@@ -19,7 +19,7 @@ public class Home extends JPanel {
 	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
-	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,buttonNotifiche,pPost,pStory,pSondaggio,pIdea, searchButton;
+	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pStory,pSondaggio,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
@@ -69,7 +69,6 @@ public class Home extends JPanel {
 		menuHomeSinistro.add(buttonProfilo = new Pulsanti("immagini/profilo.png"), BorderLayout.EAST);
 		menuHomeSinistro.add(buttonImpostazioni = new Pulsanti("immagini/impostazioni.png"), BorderLayout.WEST);
 
-		menuHomeDestro.add(buttonNotifiche = new Pulsanti("immagini/notifiche.gif"), BorderLayout.EAST);
 		menuHomeDestro.add(buttonChat = new Pulsanti("immagini/testo.jpeg"), BorderLayout.WEST);
 
 	}
@@ -255,14 +254,6 @@ public class Home extends JPanel {
 
 	public void setButtonChat(Pulsanti buttonChat) {
 		this.buttonChat = buttonChat;
-	}
-
-	public JButton getButtonNotifiche() {
-		return buttonNotifiche;
-	}
-
-	public void setButtonNotifiche(Pulsanti buttonNotifiche) {
-		this.buttonNotifiche = buttonNotifiche;
 	}
 
 	public JTextField getTestoRicerca() {

@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import Messaggio.Messaggio;
 import chat.enumeration.TipoChat;
+import panelspackage.panels.elements.Pulsanti;
 
 public abstract class Chat {
 
 	private String nomeChat;
+	
 	private int numeroMessaggi;
 	private ArrayList<Messaggio> listaMessaggi;
 	
@@ -18,6 +20,28 @@ public abstract class Chat {
 		listaMessaggi = new ArrayList<>();
 	}
 
+
+	@Override
+	public String toString() {
+		return "Chat [nomeChat=" + nomeChat + ", numeroMessaggi=" + numeroMessaggi + ", listaMessaggi=" + listaMessaggi
+				+ "]";
+	}
+	
+	public void aggiungiAllaLista(Messaggio m) {
+		ArrayList<Messaggio> res = this.getListaMessaggi();
+		res.add(m);
+		this.setListaMessaggi(res);
+	}
+	
+	public void rimuoviDallaLista(Messaggio m) {
+		ArrayList<Messaggio> res = this.getListaMessaggi();
+		res.remove(m);
+		this.setListaMessaggi(res);
+	}
+	
+	public abstract TipoChat getTipo();
+	
+	
 	public String getNomeChat() {
 		return nomeChat;
 	}
@@ -41,25 +65,5 @@ public abstract class Chat {
 	public void setListaMessaggi(ArrayList<Messaggio> listaMessaggi) {
 		this.listaMessaggi = listaMessaggi;
 	}
-
-	@Override
-	public String toString() {
-		return "Chat [nomeChat=" + nomeChat + ", numeroMessaggi=" + numeroMessaggi + ", listaMessaggi=" + listaMessaggi
-				+ "]";
-	}
-	
-	public void aggiungiAllaLista(Messaggio m) {
-		ArrayList<Messaggio> res = this.getListaMessaggi();
-		res.add(m);
-		this.setListaMessaggi(res);
-	}
-	
-	public void rimuoviDallaLista(Messaggio m) {
-		ArrayList<Messaggio> res = this.getListaMessaggi();
-		res.remove(m);
-		this.setListaMessaggi(res);
-	}
-	
-	public abstract TipoChat getTipo();
 	
 }

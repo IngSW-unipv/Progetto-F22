@@ -27,7 +27,7 @@ public class PostVisualizzato extends JPanel{
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
-		private String idPost = "110";
+		private String idPost = "421";
 		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		
@@ -56,9 +56,9 @@ public class PostVisualizzato extends JPanel{
 			containerNorth.add(impostaImmagineProfiloButton);
 			
 			
-			iniziaSeguireButton = new Pulsanti(messaggioBottoneSuperioreFollow, Frame.COLOREPRIMARIOTEMATICO);
+			/*iniziaSeguireButton = new Pulsanti(messaggioBottoneSuperioreFollow, Frame.COLOREPRIMARIOTEMATICO);
 			iniziaSeguireButton.setVisible(false);
-			containerNorth.add(iniziaSeguireButton);
+			containerNorth.add(iniziaSeguireButton);*/
 
 			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
@@ -117,7 +117,7 @@ public class PostVisualizzato extends JPanel{
 			
 		}
 		
-		public void mostraBottoneSuperiore(boolean condition) {
+		/*public void mostraBottoneSuperiore(boolean condition) {
 			if(condition) {
 				//iniziaSeguireButton.setVisible(false);
 				impostaImmagineProfiloButton.setVisible(true);
@@ -125,7 +125,7 @@ public class PostVisualizzato extends JPanel{
 				//impostaImmagineProfiloButton.setVisible(false);
 				iniziaSeguireButton.setVisible(true);
 			}
-		}
+		}*/
 		
 		public void settaPostVisualizzato(String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
 			fotoPath = path;

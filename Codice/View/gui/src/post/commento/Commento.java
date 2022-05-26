@@ -24,6 +24,23 @@ public class Commento {
 		this.idSSM = idSSM;
 		this.idTesto = idTesto;
 	}
+	
+	public Commento(String idCommento, String idProfilo, String idPost, String commento) {
+		
+	    Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+	    Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+		
+		this.idCommento = idCommento;
+		this.oraCommento = t;
+		this.dataCommento = d;
+		this.testo = commento;
+		this.profilo = idProfilo;
+		this.idFoto = idPost;
+		this.idVideo = null;
+		this.idSDV = null;
+		this.idSSM = null;
+		this.idTesto = "ajeje";
+	}
 
 	private String idCommento;
 	private Time oraCommento;

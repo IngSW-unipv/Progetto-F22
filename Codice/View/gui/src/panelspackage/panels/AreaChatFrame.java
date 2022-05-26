@@ -99,7 +99,4 @@ public class AreaChatFrame extends JPanel {
 	public void setEsci(Pulsanti esci) {
 		this.esci = esci;
 	}
-	
-	
-
 }
