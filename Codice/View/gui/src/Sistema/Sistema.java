@@ -100,6 +100,8 @@ public class Sistema {
 	 public boolean rimuoviAccount(Profilo p) {
 	 	return dbfacade.rimuovi(p);
 	 }
+	 
+	 
 	  public void carica(String idProfilo, String idPost, String commento) {
 		  
 			Commento c;

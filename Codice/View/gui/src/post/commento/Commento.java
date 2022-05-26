@@ -39,7 +39,7 @@ public class Commento {
 		this.idVideo = null;
 		this.idSDV = null;
 		this.idSSM = null;
-		this.idTesto = "ajeje";
+		this.idTesto = null;
 	}
 
 	private String idCommento;

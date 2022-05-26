@@ -17,17 +17,16 @@ public class TestSistema {
 		} catch (AccountGiaEsistente | ChangeDefaultPassword | AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		*/
-		/*try {
+		}*/
+		
+		try {
 			s.login("Dv999", "Marmellata");
 		} catch (ChangeDefaultPassword | AccountDoesNotExist | PswOmailErrati e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		
 		Profilo p = new Profilo("Dv999", "Marmellata");
-		p.cambiaImmagineProfilo(p, "canale");
 		
 		/*try {
 			s.login("DV999", "Marmellata");
@@ -36,14 +35,15 @@ public class TestSistema {
 			e.printStackTrace();
 		}*/
 		
-		try {
+	/*	try {
 			Profilo p2 = p.cercaProfilo(p);
 			System.out.println(p2.getFotoProfilo());
 		} catch (AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+	*/
+		s.carica("001", "F01", "IlMare");
 	
 	}
 }

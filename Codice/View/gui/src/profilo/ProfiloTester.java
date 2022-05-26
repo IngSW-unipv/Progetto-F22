@@ -2,6 +2,7 @@ package profilo;
 
 import java.util.ArrayList;
 
+import post.commento.Commento;
 import post.multimedia.foto.Foto;
 
 public class ProfiloTester {
@@ -11,6 +12,8 @@ public class ProfiloTester {
     //	Profilo p1 = new Profilo("P01", "Luca26");
     	Foto f = new Foto("F14", null, false, false, null, null, false);
 
+    	Commento c = new Commento("C01", "001", "F01", "aadhd");
+    	p.pubblicaCommento(c);
     //	MessaggioDiGruppo m = new MessaggioDiGruppo("006", null, null, null, null, "G00");
     //	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001", "002");
     
