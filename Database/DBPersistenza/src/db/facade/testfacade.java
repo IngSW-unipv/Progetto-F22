@@ -5,6 +5,7 @@ import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 //import profilo.Profilo;
+import profilo.Profilo;
 
 import java.util.*;
 
@@ -16,7 +17,11 @@ public class testfacade {
         //Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
-      //  Profilo p1 = dbf.cerca(p);
+        Profilo plof = new Profilo("Dv999", "Davide99");
+        
+        dbf.cerca(plof);
+        
+       
       
         
         System.out.println(dbf.carica(mpv));

@@ -11,12 +11,12 @@ public class ProfiloUtility {
 	
 	//Le chiavi esterne sono inizialmente null. Usare il metodo inserisciChiavi per modificarne il valore
 	public ProfiloDB converti(Profilo p) {
-		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), this.trasformaEnumInString(p.getTipo()), p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami",null);
+		ProfiloDB pdb = new ProfiloDB(p.getIdProfilo(), p.getNickname(), p.getDescrizione(), p.getNumFollower(), p.getNumSeguiti(), p.getNumPost(), this.trasformaEnumInString(p.getTipo()), p.isAccountesistente(), p.isPswCambiata(), p.isLoggato(), "Cambiami",p.getFotoProfilo());
 		return pdb;
 	}
 	
 	public Profilo convertiInverso(ProfiloDB pdb) {
-		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname());
+		Profilo p = new Profilo(pdb.getIdProfilo(), pdb.getNickname(),pdb.getDescrizione(),this.trasformaStringinEnum(pdb.getTipo()),pdb.getImmagineProfilo());
 		return p;
 	}
 	
@@ -53,6 +53,7 @@ public class ProfiloUtility {
 		System.out.println("La stringa inserita non corrisponde ad un tipo di profilo esistente");
 		return null;
 	}
+
 
 	
 }

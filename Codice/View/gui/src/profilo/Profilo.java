@@ -57,7 +57,6 @@ public class Profilo implements IProfilo {
 		this.numFollower = 0;
 		this.numSeguiti = 0;
 		this.numPost = 0;
-		this.fotoProfilo = null;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
@@ -72,7 +71,6 @@ public class Profilo implements IProfilo {
 		this.descrizione = null;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
-		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.password = "Cambiami";
 		this.tipo = tipo.PUBBLICO;
@@ -82,17 +80,17 @@ public class Profilo implements IProfilo {
 	
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita) {
+	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita, String fotoProfilo) {
 		this.dbfacade = dbfacade.getIstance();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
 		this.descrizione = descrizione;
 		this.numFollower = 0;
 		this.numSeguiti = 0;
-		this.fotoProfilo = null;
 		this.numPost = 0;
 		this.tipo = visibilita;
 		this.loggato = false;
+		this.fotoProfilo = fotoProfilo;
 		this.accountesistente = false;
 		this.isPswCambiata = false;
 		this.password = "Cambiami";
@@ -205,8 +203,9 @@ public void setFotoProfilo(String fotoProfilo) {
 public String toString() {
 	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", password=" + password + ", loggato=" + loggato + ", accountesistente=" + accountesistente
-			+ ", isPswCambiata=" + isPswCambiata + ", likeMap=" + likeMap + ", dislikeMap=" + dislikeMap + "]";
+			+ ", password=" + password + ", fotoProfilo=" + fotoProfilo + ", loggato=" + loggato + ", accountesistente="
+			+ accountesistente + ", isPswCambiata=" + isPswCambiata + ", likeMap=" + likeMap + ", dislikeMap="
+			+ dislikeMap + "]";
 }
 
 

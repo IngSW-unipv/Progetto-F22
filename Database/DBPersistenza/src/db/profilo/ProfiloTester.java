@@ -11,12 +11,12 @@ public class ProfiloTester {
 	public static void main(String[] args) {
 		ProfiloDao pdao = new ProfiloDao();
 		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
-       ProfiloDB prof = new ProfiloDB("002", null, null, 0, 2, 1, null, false, false,false, null, null);
+       ProfiloDB prof = new ProfiloDB("Dv999", null, null, 0, 2, 1, null, false, false,false, null, null);
        ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, false, false,false, null, null);
   
 	
 	
-       pdao.cambiaImmagineProfilo(prof, "fwquf3roufh");
+     /*  pdao.cambiaImmagineProfilo(prof, "fwquf3roufh");
        
 
        for(ProfiloDB p : selectAll)
@@ -109,7 +109,9 @@ public class ProfiloTester {
 	} catch (AccountDoesNotExist e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}*/
+      ProfiloDB plof =  pdao.cercaProfilo(prof);
+      System.out.println(plof.toString());
      }
 	}
 	
