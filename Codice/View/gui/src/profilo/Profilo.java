@@ -80,20 +80,21 @@ public class Profilo implements IProfilo {
 	
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione, EnumProfilo visibilita, String fotoProfilo) {
+	public 	Profilo(String idProfilo, String nickname, String descrizione,int numFollower,int numSeguiti, int numPost,EnumProfilo visibilita, 
+			boolean esiste, boolean pswCambiata, boolean loggato,String psw,String fotoProfilo) {
 		this.dbfacade = dbfacade.getIstance();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
 		this.descrizione = descrizione;
-		this.numFollower = 0;
-		this.numSeguiti = 0;
-		this.numPost = 0;
+		this.numFollower = numFollower;
+		this.numSeguiti = numSeguiti;
+		this.numPost = numPost;
 		this.tipo = visibilita;
-		this.loggato = false;
+		this.accountesistente = esiste;
+		this.isPswCambiata = pswCambiata;
+		this.loggato = loggato;
+		this.password = psw;
 		this.fotoProfilo = fotoProfilo;
-		this.accountesistente = false;
-		this.isPswCambiata = false;
-		this.password = "Cambiami";
 		likeMap = new HashMap<>(); 
 		dislikeMap = new HashMap<>();
 	}

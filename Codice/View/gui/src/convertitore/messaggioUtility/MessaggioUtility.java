@@ -59,7 +59,7 @@ public class MessaggioUtility{
 			MessaggioDiGruppo msg = (MessaggioDiGruppo) m.inserisciCaratteristiche(m);
 			MessaggioDiGruppoDB mdb = new MessaggioDiGruppoDB(msg.getIdMessaggio(),msg.getDataInvio(),msg.getOraInvio(),msg.getTesto(),msg.getMultimedia(),msg.getProfiloInviante(), msg.getIdGruppo());
 			s[0] = mdb.getIdGruppo();
-			s[1] = null;
+			s[1] = mdb.getProfiloInviante();
 			return s;
 			
 		}

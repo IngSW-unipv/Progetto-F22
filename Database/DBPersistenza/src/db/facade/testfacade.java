@@ -4,6 +4,7 @@ package db.facade;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
+import post.commento.Commento;
 //import profilo.Profilo;
 import profilo.Profilo;
 
@@ -14,7 +15,8 @@ public class testfacade {
 	public static void main(String[] args) {
 		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001", "002");
 		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00", null);
-        //Profilo p  = new Profilo("P00", null);
+		Commento c = new Commento("C00", null, null, null, null, "F01", null, null, null, null);
+       Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
         Profilo plof = new Profilo("Dv999", "Davide99");
@@ -33,5 +35,7 @@ public class testfacade {
         
         Messaggio m = dbf.cerca(mdg);
         System.out.println(m.toString());
+        
+		p.pubblicaCommento(c);
 }
 }
