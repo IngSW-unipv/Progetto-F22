@@ -1,5 +1,7 @@
 package Sistema;
 
+import post.multimedia.foto.Foto;
+import post.multimedia.video.Video;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AccountGiaEsistente;
@@ -11,7 +13,10 @@ public class TestSistema {
 	public static void main(String [] args) {
 		Sistema s = new Sistema();
 
-
+		Profilo p = new Profilo("DV999", "Marmellata");
+		Foto f = new Foto("F00", null, false, false, null, null, false);
+ 
+		Video v = new Video("V00", null, false, false, null, null, 0);
 		/*try {
 			System.out.println(s.signIn("DV999", "Davide99", "Marmellata"));
 		} catch (AccountGiaEsistente | ChangeDefaultPassword | AccountDoesNotExist e) {
@@ -20,13 +25,11 @@ public class TestSistema {
 		}*/
 		
 		try {
-			s.login("Dv999", "Marmellata");
+			s.login("DV999", "Marmellata");
 		} catch (ChangeDefaultPassword | AccountDoesNotExist | PswOmailErrati e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Profilo p = new Profilo("Dv999", "Marmellata");
 		
 		/*try {
 			s.login("DV999", "Marmellata");
@@ -43,7 +46,7 @@ public class TestSistema {
 			e.printStackTrace();
 		}
 	*/
-		s.carica("001", "F01", "IlMare");
+		s.caricaTuttiiPostDiUnProfilo();
 	
 	}
 }

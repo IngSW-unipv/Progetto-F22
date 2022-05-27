@@ -20,7 +20,7 @@ import post.sondaggio.SondaggioSceltaMultipla;*/
 public class PostTester {
 
 	public static void main(String[] args) {
-		FotoDB f = new FotoDB("F00", null, null, null, false, false, null, "Nel percorso", true);
+		FotoDB f = new FotoDB("F00", null, null, null, false, false, null, 0, "Nel percorso", true, false);
        // VideoDB v = new VideoDB("V11", null, null, null, false, false, null, "http://cane.com", 200);
       // SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB("S00", null, null, null, false, false, null, null, null);
       //  SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB("P00", null, null, null, false, false, null, null, null, null, null);

@@ -7,7 +7,7 @@ import db.post.PostDB;
 
 public abstract class MultimediaDB extends PostDB{
 
-	public MultimediaDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso) {
+	public MultimediaDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,String percorso,boolean isStory) {
 		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo);
 		this.tempoCancellazione = 0;
 		this.percorso = percorso;

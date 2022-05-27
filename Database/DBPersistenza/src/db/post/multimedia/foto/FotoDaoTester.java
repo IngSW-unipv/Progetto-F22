@@ -9,8 +9,9 @@ package db.post.multimedia.foto;
 public class FotoDaoTester {
 
 	public static void main(String [] args) {
-	//	FotoDao fdao = new FotoDao();
-		//Foto f = new Foto("F00", null, null, null, false, false, null, null, false);
+		FotoDao fdao = new FotoDao();
+		FotoDB f = new FotoDB("F00", null, null, "Il mio primo post", false, false, "DV999", 0, "degufg", false, false);
+		FotoDB f1 = new FotoDB("F00", null, null, null, false, false, null, 0, null, false, false);
 	//	ConvertitoreFacade fc = ConvertitoreFacade.getIstance();
 		/*System.out.println(fdao.pubblicaFoto(fc.converti(f)));
 		System.out.println(fdao.rimuoviFoto(fc.converti(f)));
@@ -20,5 +21,8 @@ public class FotoDaoTester {
 		for(FotoDB fdb : fres) {
 			System.out.println(fdb.toString());
 		}*/
+		
+		FotoDB ft = (FotoDB) fdao.cercaPost(f);
+		System.out.println(ft.toString());
 	}
 }

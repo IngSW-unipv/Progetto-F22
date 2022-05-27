@@ -5,6 +5,7 @@ import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import post.commento.Commento;
+import post.multimedia.foto.Foto;
 //import profilo.Profilo;
 import profilo.Profilo;
 
@@ -16,10 +17,11 @@ public class testfacade {
 		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001", "002");
 		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00", null);
 		Commento c = new Commento("C00", null, null, null, null, "F01", null, null, null, null);
+		Foto f = new Foto("F00", null, false, false, null, null, false);
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
-        Profilo plof = new Profilo("Dv999", "Davide99");
+        /*Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
         
@@ -36,6 +38,9 @@ public class testfacade {
         Messaggio m = dbf.cerca(mdg);
         System.out.println(m.toString());
         
-		p.pubblicaCommento(c);
+		p.pubblicaCommento(c);*/
+        
+        
+        dbf.cerca(f);
 }
 }
