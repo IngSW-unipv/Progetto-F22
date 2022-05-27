@@ -12,14 +12,16 @@ public class Tester {
 
 	public static void main(String [] args) {
 		ConvertitoreFacade f = ConvertitoreFacade.getIstance();
-		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla("P01", null, false, false, null, "Alligatore", "Coniglio", "Lepre", "Mucca", null);
+		SondaggioSceltaMultiplaDB s = new SondaggioSceltaMultiplaDB("S00", null, null, null, 0, 0, false, false, null, null, null, null, null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 
-		System.out.println(sdao.caricaPost(f.converti(s)));
+		
+		System.out.println(sdao.cercaPost(s).toString());
+		/*System.out.println(sdao.caricaPost(f.converti(s)));
 		
 ArrayList<PostDB> res = sdao.selectAll();
 	   
      for(PostDB pst : res)
-			System.out.println(pst.toString());
+			System.out.println(pst.toString());*/
 	}
 }

@@ -9,15 +9,15 @@ import db.post.sondaggio.SondaggioDB;
 public class SondaggioDoppiaVotazioneDB extends SondaggioDB{
 
 	public SondaggioDoppiaVotazioneDB(String idPost, Date dataPubblicazione, Time oraPubblicazione,
-			String descrizione, boolean visibile, boolean condivisibile, String profilo,
+			String descrizione,int numLike,int numDislike, boolean visibile, boolean condivisibile, String profilo,
 			String primaScelta, String secondaScelta) {
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo,primaScelta,secondaScelta);
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,primaScelta,secondaScelta);
 
 	}
 
 	@Override
 	public PostDB inserisciCaratteristiche(PostDB p) {
-		SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta());
+		SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(),p.getNumLike(),p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getSecondaScelta());
 		return sdb;
 	}
 

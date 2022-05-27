@@ -34,7 +34,7 @@ public class FotoDao extends PostDao {
 
 			while(rs1.next())
 			{
-				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7),rs1.getInt(8), rs1.getString(9),rs1.getBoolean(10), rs1.getBoolean(11));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getBoolean(13));                                     
 
 				result.add(fdb);
 			}
@@ -153,7 +153,7 @@ public class FotoDao extends PostDao {
 
 			while(rs1.next())
 			{
-				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4), rs1.getBoolean(5), rs1.getBoolean(6), rs1.getString(7),rs1.getInt(8), rs1.getString(9),rs1.getBoolean(10), rs1.getBoolean(11));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getBoolean(13));                                     
 
 				DBConnection.closeConnection(conn);
 

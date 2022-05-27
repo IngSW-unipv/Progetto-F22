@@ -5,14 +5,14 @@ import java.sql.Time;
 
 public abstract class PostDB {
 
-	public PostDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo) {
+	public PostDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo) {
 		super();
 		this.idPost = idPost;
 		this.dataPubblicazione = dataPubblicazione;
 		this.oraPubblicazione = oraPubblicazione;
 		this.descrizione = descrizione;
-		this.numLike = 0;
-		this.numDislike = 0;
+		this.numLike = numLike;
+		this.numDislike = numDislike;
 		this.visibile = visibile;
 		this.condivisibile = condivisibile;
 		this.profilo = profilo;

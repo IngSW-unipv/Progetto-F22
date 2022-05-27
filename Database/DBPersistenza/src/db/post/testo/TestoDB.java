@@ -8,8 +8,8 @@ import db.post.PostDB;
 public class TestoDB extends PostDB{
 	
 
-		public TestoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
-			super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo);
+		public TestoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,int numLike,int numDislike,boolean visibile, boolean condivisibile, String profilo, String font, String titolo) {
+			super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo);
 			this.font = font;
 			this.titolo = titolo;
 		}
@@ -35,7 +35,7 @@ public class TestoDB extends PostDB{
 		}
 		@Override
 		public PostDB inserisciCaratteristiche(PostDB p) {
-			TestoDB pdb = new TestoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
+			TestoDB pdb = new TestoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(),p.getNumLike(),p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
 			return pdb;
 		}
 		

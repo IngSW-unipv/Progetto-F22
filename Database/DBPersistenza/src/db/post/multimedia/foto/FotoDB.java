@@ -7,9 +7,9 @@ import db.post.PostDB;
 import db.post.multimedia.MultimediaDB;
 
 public class FotoDB extends MultimediaDB{
-	public FotoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,
+	public FotoDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,int numLike,int numDislike, boolean visibile, boolean condivisibile, String profilo, int tempoCancellazione,
 			String percorso, boolean isStory,boolean isHd) {
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory);
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,tempoCancellazione,percorso,isStory);
 		this.isHd = isHd;
 	}
 	
@@ -27,7 +27,7 @@ public class FotoDB extends MultimediaDB{
 	}
 	@Override
 	public PostDB inserisciCaratteristiche(PostDB p) {
-		FotoDB fdb = new FotoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(),this.getTempoCancellazione(), this.getPercorso(),this.isStory(), this.isHd);
+		FotoDB fdb = new FotoDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(),p.getNumLike(),p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(),this.getTempoCancellazione(), this.getPercorso(),this.isStory(), this.isHd);
 		return fdb;
 	}
     

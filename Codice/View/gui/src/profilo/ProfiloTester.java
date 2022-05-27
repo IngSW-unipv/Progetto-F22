@@ -10,7 +10,7 @@ public class ProfiloTester {
     public static void main(String [] args) {
     //	Profilo p = new Profilo("001", "Girella");
     	Profilo p1 = new Profilo("P01", "Luca26");
-    	Foto f = new Foto("357", null, false, false, null, null, false);
+    	Foto f = new Foto("F00", null, false, false, null, null, false);
     	
     //Commento c = new Commento("C01", "001", "F01", "aadhd");
     	//p.pubblicaCommento(c);
@@ -29,6 +29,8 @@ public class ProfiloTester {
       // ArrayList<String> s = p.ritornaIdPost(f, p);
        //for(String res : s)
     	//.out.println(res.toString());
+    	System.out.println(p1.cercaPost(f).toString());
+    	
     	}
     }
 
