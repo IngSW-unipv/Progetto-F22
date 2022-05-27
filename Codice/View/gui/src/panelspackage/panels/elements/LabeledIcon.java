@@ -10,4 +10,6 @@ public class LabeledIcon extends JLabel {
 	this.setVisible(true);
 	
 	}	
+
+	
 }

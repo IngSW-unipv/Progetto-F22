@@ -119,6 +119,7 @@ public class Controller {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         aggiornaSchermataProfilo();
+                        refresh();
                         mostraSchermata("Profilo");
                         
                     }
@@ -545,8 +546,8 @@ public class Controller {
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
         view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
-      //  String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
-     //   view.setPostProfilo(postDelProfilo);
+        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
+        view.setPostProfilo(postDelProfilo);
         refresh();
     }
     

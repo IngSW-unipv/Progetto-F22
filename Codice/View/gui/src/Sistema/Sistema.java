@@ -117,23 +117,15 @@ public class Sistema {
 
 	  }
 	 
-	 public String[][] caricaTuttiiPostDiUnProfilo() {
+	 public ArrayList<String> caricaTuttiiPostDiUnProfilo() {
 		 
-		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
-		String[][] idPostConPercorsoPost = new String[idDeiPostDiUnProfilo.size()][idDeiPostDiUnProfilo.size()];
-	
-		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
-			
-			 idPostConPercorsoPost[i][0] = idDeiPostDiUnProfilo.get(i);
-			 System.out.println("primo elemento matrice:" + idDeiPostDiUnProfilo.get(i + 1));
-			 Post p = (Foto)dbfacade.cerca(new Foto(idDeiPostDiUnProfilo.get(i + 1), null, false, false, null, null, false));
-			 System.out.println("la foto ha come id e path" + p.toString());
-			 idPostConPercorsoPost[i][1] = ((Foto)dbfacade.cerca(new Foto(idPostConPercorsoPost[i][0]))).getPercorso();
-			 System.out.println(idPostConPercorsoPost[i][0] + idPostConPercorsoPost[i][1]);
-		 
-		 }
 		
-		return idPostConPercorsoPost;
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
+		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
+			System.out.println(idDeiPostDiUnProfilo.get(i));
+		}
+		
+		return idDeiPostDiUnProfilo;
 	 }
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
@@ -191,17 +183,10 @@ public class Sistema {
 			
 			listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
 			
-			for (int i = 0; i <40; i++) {
-				listaCommenti.get(i).getTesto();
-				System.out.println("lista dopo averla presa" + listaCommenti.get(i).getTesto());
-			}
+		
 			for(int i=0; i<listaCommenti.size(); i++) {
-				System.out.println("commento prima:" + listaCommenti.get(i).getTesto());
-
 				listaTestiCommentiConInviante.add(listaCommenti.get(i).getProfilo());
 				listaTestiCommentiConInviante.add(listaCommenti.get(i).getTesto());
-				System.out.println("commento dopo:" + listaTestiCommentiConInviante.get(i*2 +1));
-
 			}
 	
 			return listaTestiCommentiConInviante;

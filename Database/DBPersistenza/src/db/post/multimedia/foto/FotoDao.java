@@ -201,7 +201,7 @@ public class FotoDao extends PostDao {
 
 		try
 		{
-			String query="SELECT idFoto FROM foto WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+			String query="SELECT idFoto, percorso FROM foto WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, idprofilo);
@@ -211,6 +211,9 @@ public class FotoDao extends PostDao {
 			while(rs1.next())
 			{
                 	result.add(rs1.getString("idFoto"));
+                	result.add(rs1.getString("percorso"));
+
+
 			}
 		}catch (Exception e){e.printStackTrace();}
 

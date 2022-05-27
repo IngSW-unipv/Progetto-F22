@@ -5,6 +5,7 @@ import packageframe.Frame;
 
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import panelspackage.panels.elements.GrigliaDiElementi;
@@ -17,12 +18,12 @@ public class  Profilo extends JPanel {
 
 	private int i;
 	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
-	ArrayList<JComponent> ListaPost = new ArrayList<JComponent>();
+	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
 	ArrayList<String> dati = new ArrayList<String>();
 
 	private Pulsanti homeProfilo, immagineProf;
 	private Etichette etichettaNome;
-	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter;
+	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer();
 	
 	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
 		this.avvio();
@@ -47,11 +48,11 @@ public class  Profilo extends JPanel {
 		add(containerCenter, BorderLayout.CENTER);
 		containerCenter.setLayout(new GridLayout(3,3));
 
-		/*ListaPost.clear();
-		for( i = 0; i < immaginiPost.size() && i < 9 ; i++) {
-			ListaPost.add(new LabeledIcon(immaginiPost.get(i)));
+		ListaPost.clear();
+		for( i = 0;  i < 9 ; i++) {
+			ListaPost.add(new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg"));
 			containerCenter.add(ListaPost.get(i));
-		}*/
+		}
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
@@ -110,14 +111,13 @@ public class  Profilo extends JPanel {
 		return homeProfilo;
 	}
 
-	public void setPostProfilo(String[][] postDelProfilo) {
-		
-		ListaPost.clear();
-		for( i = 0; i < postDelProfilo.length/2 && i < 9 ; i++) {
-			ListaPost.add(new LabeledIcon(postDelProfilo[i][0]));
-			containerCenter.add(ListaPost.get(i));
+	public void setPostProfilo(ArrayList<String> postDelProfilo) {
+		for (int i = 0; i < postDelProfilo.size()/2 && i < 9 ; i++) {	
+		Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
+		ListaPost.get(i).setIcon(img);
 		}
 	}
+	
 	
 	public void setFotoProfilo(String percorso) {
 		this.immagineProf.setIcon(new ImageIcon(percorso));

@@ -311,7 +311,7 @@ public class Frame extends JFrame {
 	}
 
 
-	public void setPostProfilo(String[][] postDelProfilo) {
+	public void setPostProfilo(ArrayList<String> postDelProfilo) {
 		((Profilo)mappaSchermate.get("Profilo")).setPostProfilo(postDelProfilo);
 	}
 	
