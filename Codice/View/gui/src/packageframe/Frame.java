@@ -374,4 +374,27 @@ public class Frame extends JFrame {
 	public void settaCommenti(ArrayList<String> lista) {
 		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaCommenti(lista);
 	}
+	
+	public JButton  getPrevCommento() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPrevCommento();	
+	}
+	public JButton  getNextCommento() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNextCommento();	
+	}
+	
+	public int getIndiceCommento() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIndiceCommentoCorrente();
+	}
+	
+	public void incrementaIndiceCommento() {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).incrementaIndiceCommento();
+	}
+	
+	public void decrementaIndiceCommento() {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).decrementaIndiceCommento();
+	}
+	
+	public int getNumeroCommentiTotali() {
+		return((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommentiTotali();
+	}
 }
