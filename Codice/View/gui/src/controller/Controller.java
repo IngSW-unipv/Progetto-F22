@@ -24,12 +24,13 @@ public class Controller {
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
-                           gestoreQuintaChatPrivata;
+                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento;
     
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
     private String postAttuale = "";
+    private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     
     public Controller(Sistema s, Frame f) {
         view = f;
@@ -213,7 +214,11 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 settaPostVisualizzato(false);
+                mostraCommentiPost(view.getIdPostVisualizzato());
+                refresh();
                 mostraSchermata("Postvisualizzato");
+                refresh();
+
                 
             }
         };
@@ -380,13 +385,12 @@ public class Controller {
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("bottone immagine profilo");
                 model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
         
-        
+      /*  
         gestoreIniziaSeguire = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -395,7 +399,7 @@ public class Controller {
         };
         view.getIniziaSeguireButton().addActionListener(gestoreIniziaSeguire);
         
-         
+         */
 
         gestoreAggiungiCommento = new ActionListener() {
             @Override
@@ -422,8 +426,36 @@ public class Controller {
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
        
+       gestoreNextCommento = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("NextCommento");
+ 
+    		   if (view.getIndiceCommento() < view.getNumeroCommentiTotali() - 5) {
+    			   view.incrementaIndiceCommento();
+    			   view.settaCommenti(commentiConProfiliIinvianti);
+    			   commentiConProfiliIinvianti.get(view.getIndiceCommento());
+    			   refresh();
+    		   }
+    	   }
+       };
+       view.getNextCommento().addActionListener(gestoreNextCommento);
        
-        
+       gestorePrevCommento = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("PrevCommento");
+    		   if (view.getIndiceCommento() > 0) {
+
+    			   System.out.println("prevCommentoUsabile");
+    			   view.decrementaIndiceCommento();
+    			   view.settaCommenti(commentiConProfiliIinvianti);
+    			   refresh();
+    		   }
+    	   }
+       };
+       view.getPrevCommento().addActionListener(gestorePrevCommento);
+ 
     }
         
     public void refresh() {
@@ -512,11 +544,9 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
-        System.out.println("percorsoFotoProfilo" + model.getProfiloAttivo().getFotoProfilo());
         view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
-        //String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
-        //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
-       // view.setPostProfilo(postDelProfilo);
+      //  String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
+     //   view.setPostProfilo(postDelProfilo);
         refresh();
     }
     
@@ -537,8 +567,17 @@ public class Controller {
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
     	System.out.println(idPost);
+    	System.out.println("siamo in controller " + idProfilo + idPost + commentoDaAggiungere);
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
     	
     }
     
+    public void mostraCommentiPost(String idPost) {
+    	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
+		   for (int i = 0; i < view.getNumeroCommentiTotali(); i ++) {
+    		   System.out.println(commentiConProfiliIinvianti.get(i));
+		   }
+    	System.out.println("ci arrivo");
+    	view.settaCommenti(commentiConProfiliIinvianti);
+    }
 }

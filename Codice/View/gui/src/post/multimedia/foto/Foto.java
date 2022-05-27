@@ -11,7 +11,10 @@ public class Foto extends Multimedia{
 		super(idPost, descrizione,visibile, condivisibile, profilo, percorso);
 		this.isHd = isHd;
 	}
-
+	public Foto(String idPost) {
+		super(idPost, "una descrizione",true, true, "marge", "bene");
+		this.isHd = true;
+	}
 
 	private boolean isHd;
 	

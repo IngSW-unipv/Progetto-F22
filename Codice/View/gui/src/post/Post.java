@@ -22,6 +22,19 @@ import post.enumeration.TipoPost;
 			this.condivisibile = condivisibile;
 			this.profilo = profilo;
 		}
+		
+		public Post(String idPost, String profilo) {
+		super();
+		this.idPost = idPost;
+		this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+		this.descrizione = "";
+		this.numLike = 0;
+		this.numDislike = 0;
+		this.visibile = true;
+		this.condivisibile = true;
+		this.profilo = profilo;
+	}
 	private String idPost;
 	private Date dataPubblicazione;
 	private Time oraPubblicazione;
