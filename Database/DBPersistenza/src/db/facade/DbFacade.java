@@ -184,7 +184,10 @@ public class DbFacade {
      
      public Post cerca(Post p){
      	pstDao = Utility.convertiTipoPost(p.getTipo());
+     	System.out.println("siamo in dbfacade" + p.getIdPost());
      	PostDB pdb = pstDao.cercaPost(ConvertitoreFacade.getIstance().converti(p));
+     	System.out.println("siamo in dbfacade 2" + pdb.toString());
+
      	if(pdb != null)
      		return ConvertitoreFacade.getIstance().convertiInverso(pdb, p.getTipo());
      	return null;

@@ -213,6 +213,8 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 settaPostVisualizzato(false);
+                System.out.println(view.getIdPostVisualizzato());
+                mostraCommentiPost(view.getIdPostVisualizzato());
                 mostraSchermata("Postvisualizzato");
                 
             }
@@ -386,7 +388,7 @@ public class Controller {
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
         
-        
+      /*  
         gestoreIniziaSeguire = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -395,7 +397,7 @@ public class Controller {
         };
         view.getIniziaSeguireButton().addActionListener(gestoreIniziaSeguire);
         
-         
+         */
 
         gestoreAggiungiCommento = new ActionListener() {
             @Override
@@ -512,11 +514,9 @@ public class Controller {
 
         view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
         view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
-        System.out.println("percorsoFotoProfilo" + model.getProfiloAttivo().getFotoProfilo());
         view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
         //String[][] postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
-        //String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost
-       // view.setPostProfilo(postDelProfilo);
+        //view.setPostProfilo(postDelProfilo);
         refresh();
     }
     
@@ -537,8 +537,14 @@ public class Controller {
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
     	System.out.println(idPost);
+    	System.out.println("siamo in controller " + idProfilo + idPost + commentoDaAggiungere);
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
     	
     }
     
+    public void mostraCommentiPost(String idPost) {
+    	ArrayList<String> commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
+    	System.out.println("ci arrivo");
+    	view.settaCommenti(commentiConProfiliIinvianti);
+    }
 }

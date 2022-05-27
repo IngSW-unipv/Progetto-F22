@@ -370,4 +370,8 @@ public class Frame extends JFrame {
 	public JButton getQuintaChatPrivataButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
 	}
+	
+	public void settaCommenti(ArrayList<String> lista) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaCommenti(lista);
+	}
 }

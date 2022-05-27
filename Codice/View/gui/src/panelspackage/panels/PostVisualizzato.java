@@ -27,7 +27,7 @@ public class PostVisualizzato extends JPanel{
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "immagini/kaguya.jpeg";
-		private String idPost = "421";
+		private String idPost = "357";
 		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		
@@ -238,5 +238,10 @@ public class PostVisualizzato extends JPanel{
 			this.messaggioBottoneSuperioreProfilo = messaggioBottoneSuperioreProfilo;
 		}
 		
-		
+		public void settaCommenti(ArrayList<String> commenti) {
+			for(int i=0; i < commenti.size(); i++) {
+				System.out.println("secondo ciclo");
+				((Etichette)ListaAreaTesto.get(i)).setName(commenti.get(i));
+			}
+		}
 }

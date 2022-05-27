@@ -1,6 +1,7 @@
 package Sistema;
 
 import db.facade.DbFacade;
+import post.Post;
 import post.commento.Commento;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
@@ -117,14 +118,20 @@ public class Sistema {
 	  }
 	 
 	 public String[][] caricaTuttiiPostDiUnProfilo() {
+		 
 		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
 		String[][] idPostConPercorsoPost = new String[idDeiPostDiUnProfilo.size()][idDeiPostDiUnProfilo.size()];
-		 for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
+		System.out.println("siamo in sistema: primo e secondo elemento lista" + idDeiPostDiUnProfilo.get(0) + idDeiPostDiUnProfilo.get(1));
+		System.out.println("sizeLista" +idDeiPostDiUnProfilo.size() );
+		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
+			
 			 idPostConPercorsoPost[i][0] = idDeiPostDiUnProfilo.get(i);
-			 System.out.println(((Multimedia) dbfacade.cerca(new Foto("110",null, false, false, null, null, false))).getPercorso());
-			 idPostConPercorsoPost[i][1] = ((Foto)(dbfacade.cerca(new Foto("110", null,true, false, this.getProfiloAttivo().getIdProfilo(), null, false)))).getPercorso();
-			 
+			 System.out.println("primo elemento matrice:" + idPostConPercorsoPost[i][0]);
+			 Foto f = (Foto) dbfacade.cerca(new Foto(idPostConPercorsoPost[i][0]));
+			 System.out.println("la foto ha come id e path" + f.getIdPost());
+			 idPostConPercorsoPost[i][1] = ((Foto)dbfacade.cerca(new Foto(idPostConPercorsoPost[i][0]))).getPercorso();
 			 System.out.println(idPostConPercorsoPost[i][0] + idPostConPercorsoPost[i][1]);
+		 
 		 }
 		
 		return idPostConPercorsoPost;
@@ -179,6 +186,20 @@ public class Sistema {
 	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
+		public ArrayList<String> selectAllCommentiSottoPost(String idPost) {
+			ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
+			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
+			
+			listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
+			System.out.println(listaCommenti.size());
+			for(int i=0; i<listaCommenti.size(); i = i++) {
+				
+				listaTestiCommentiConInviante.add(listaCommenti.get(i).getProfilo());
+				listaTestiCommentiConInviante.add(listaCommenti.get(i).getTesto());
+				System.out.println("primo ciclo" + listaTestiCommentiConInviante.get(i) + listaTestiCommentiConInviante.get(i +1));
+			}
+			return listaTestiCommentiConInviante;
+		}
 	 
 	public void impostaFotoProfilo(String fotoPath) {
 		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
