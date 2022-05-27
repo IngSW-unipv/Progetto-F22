@@ -191,8 +191,9 @@ public class Sistema {
 			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
 			
 			listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
-			System.out.println(listaCommenti.size());
-			for(int i=0; i<listaCommenti.size(); i = i++) {
+			System.out.println("stampa size" + listaCommenti.size());
+			
+			for(int i=0; i<listaCommenti.size(); i++) {
 				
 				listaTestiCommentiConInviante.add(listaCommenti.get(i).getProfilo());
 				listaTestiCommentiConInviante.add(listaCommenti.get(i).getTesto());

@@ -215,7 +215,10 @@ public class Controller {
                 settaPostVisualizzato(false);
                 System.out.println(view.getIdPostVisualizzato());
                 mostraCommentiPost(view.getIdPostVisualizzato());
+                refresh();
                 mostraSchermata("Postvisualizzato");
+                refresh();
+
                 
             }
         };

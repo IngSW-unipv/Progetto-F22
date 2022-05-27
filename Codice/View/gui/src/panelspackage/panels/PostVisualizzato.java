@@ -76,14 +76,21 @@ public class PostVisualizzato extends JPanel{
 			containerPost.add(areaCommenti, BorderLayout.SOUTH);
 
 			//COMMENTI
-			postCommentiConUtenti.add("ciccioGamer");
-			postCommentiConUtenti.add("bello come un cornetto in faccia");
+			postCommentiConUtenti.add("");
+			postCommentiConUtenti.add("");
 			
-			postCommentiConUtenti.add("incelHero1978");
-			postCommentiConUtenti.add("waifu");
+			postCommentiConUtenti.add("");
+			postCommentiConUtenti.add("");
 			
-			postCommentiConUtenti.add("kebabSniper");
-			postCommentiConUtenti.add("aviatore");
+			postCommentiConUtenti.add("");
+			postCommentiConUtenti.add("");
+			
+			postCommentiConUtenti.add("");
+			postCommentiConUtenti.add("");
+			
+			postCommentiConUtenti.add("");
+			postCommentiConUtenti.add("");
+			
 			
 			for( i = 0; i <  this.postCommentiConUtenti.size() - 1; i = i +2) {
 
@@ -239,9 +246,12 @@ public class PostVisualizzato extends JPanel{
 		}
 		
 		public void settaCommenti(ArrayList<String> commenti) {
-			for(int i=0; i < commenti.size(); i++) {
-				System.out.println("secondo ciclo");
-				((Etichette)ListaAreaTesto.get(i)).setName(commenti.get(i));
+			System.out.println(commenti.size());
+			System.out.println(ListaAreaTesto.size());
+			for(int i=0; i < commenti.size()/2  && i<  ListaAreaTesto.size() ; i++) {
+				
+				((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(i*2) +": " + commenti.get((i*2) + 1));
+				System.out.println("i = " + i);
 			}
 		}
 }
