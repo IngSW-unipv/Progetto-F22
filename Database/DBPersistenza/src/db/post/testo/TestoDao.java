@@ -168,7 +168,7 @@ public class TestoDao extends PostDao {
 
 		try
 		{
-			String query="SELECT idTesto FROM testo WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+			String query="SELECT idTesto,percorso FROM testo WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, idProfilo);
@@ -178,6 +178,7 @@ public class TestoDao extends PostDao {
 			while(rs1.next())
 			{
                 	result.add(rs1.getString("idTesto"));
+                	result.add(rs1.getString("percorso"));
 			}
 		}catch (Exception e){e.printStackTrace();}
 
