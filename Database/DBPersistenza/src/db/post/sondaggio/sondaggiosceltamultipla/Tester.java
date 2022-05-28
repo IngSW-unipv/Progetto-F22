@@ -8,7 +8,7 @@ import db.post.PostDB;
 public class Tester {
 
 	public static void main(String [] args) {
-		SondaggioSceltaMultiplaDB s = new SondaggioSceltaMultiplaDB("S00", null, null, null, 0, 0, false, false, null, null, null, null, null);
+		SondaggioSceltaMultiplaDB s = new SondaggioSceltaMultiplaDB("S00", null, null, null, 0, 0, false, null, null, null, null, null);
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
 
 		

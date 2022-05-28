@@ -34,7 +34,7 @@ public class FotoDao extends PostDao {
 
 			while(rs1.next())
 			{
-				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getBoolean(13));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8),rs1.getInt(9), rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12));                                     
 
 				result.add(fdb);
 			}
@@ -52,7 +52,7 @@ public class FotoDao extends PostDao {
 
 		try
 		{
-			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?,?,?)";
+			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo) values (?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, f.getIdPost());
@@ -62,8 +62,7 @@ public class FotoDao extends PostDao {
 			st1.setInt(5, f.getNumLike());
 			st1.setInt(6, f.getNumDislike());
 			st1.setBoolean(7, f.isVisibile());
-			st1.setBoolean(8, f.isCondivisibile());
-		    st1.setString(9, f.getProfilo());
+		    st1.setString(8, f.getProfilo());
 		 
 		    
 			st1.executeUpdate();
@@ -153,7 +152,7 @@ public class FotoDao extends PostDao {
 
 			while(rs1.next())
 			{
-				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getInt(10), rs1.getString(11),rs1.getBoolean(12), rs1.getBoolean(13));                                     
+				FotoDB fdb=new FotoDB(rs1.getString(1),rs1.getDate(2),rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8),rs1.getInt(9), rs1.getString(10),rs1.getBoolean(11), rs1.getBoolean(12));                                     
 
 				DBConnection.closeConnection(conn);
 

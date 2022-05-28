@@ -37,4 +37,7 @@ public interface IProfiloDao {
   	 
   	 public boolean cambiaImmagineProfilo(ProfiloDB p, String s);
   	 public String ottieniImmagine(ProfiloDB p);
+  	 
+  	 public boolean modificaTipo(ProfiloDB p, String tipo);
+  	 
 }

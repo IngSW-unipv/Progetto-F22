@@ -14,9 +14,9 @@ public class TestSistema {
 		Sistema s = new Sistema();
 
 		Profilo p = new Profilo("DV999", "Marmellata");
-		Foto f = new Foto("F00", null, false, false, null, null, false);
+		Foto f = new Foto("F00", null, false, null, null, false);
  
-		Video v = new Video("V00", null, false, false, null, null, 0);
+		Video v = new Video("V00", null, false, null, null, 0);
 		/*try {
 			System.out.println(s.signIn("DV999", "Davide99", "Marmellata"));
 		} catch (AccountGiaEsistente | ChangeDefaultPassword | AccountDoesNotExist e) {

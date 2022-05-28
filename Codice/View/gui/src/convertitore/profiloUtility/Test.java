@@ -10,7 +10,7 @@ public static void main(String[] args) {
 	ProfiloUtility u = new ProfiloUtility();
 	ProfiloDB pdb = new ProfiloDB("P01", "Giovanni", null, 0, 0, 0, null, false, false, false, null, null);
 	Profilo p1 = new Profilo("P01", "Giovanni");
-	Foto f = new Foto("F00", null, false, false, null, null, false);
+	Foto f = new Foto("F00", null, false, null, null, false);
 
 	
 	//Profilo p = u.convertiInverso(pdb);

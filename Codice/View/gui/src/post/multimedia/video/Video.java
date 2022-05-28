@@ -7,9 +7,9 @@ import post.multimedia.Multimedia;
 
 public class Video extends Multimedia{
 
-	public Video(String idPost, String descrizione, boolean visibile, boolean condivisibile, String profilo,
+	public Video(String idPost, String descrizione, boolean visibile, String profilo,
 			String percorso, int durataInSecondi) {
-		super(idPost, descrizione, visibile, condivisibile,
+		super(idPost, descrizione, visibile,
 				profilo, percorso);
 		this.durataInSecondi = durataInSecondi;
 	}
@@ -37,7 +37,7 @@ public class Video extends Multimedia{
 
 	@Override
 	public Post inserisciCaratteristiche(Post p) {
-		p = new Video(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPercorso(), this.getDurataInSecondi());
+		p = new Video(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.getProfilo(), this.getPercorso(), this.getDurataInSecondi());
 		return p;
 	}	
 }

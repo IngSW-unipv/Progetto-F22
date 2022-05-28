@@ -6,13 +6,13 @@ import post.multimedia.Multimedia;
 
 public class Foto extends Multimedia{
 
-	public Foto(String idPost, String descrizione, boolean visibile, boolean condivisibile, String profilo,
+	public Foto(String idPost, String descrizione, boolean visibile, String profilo,
 			String percorso, boolean isHd) {
-		super(idPost, descrizione,visibile, condivisibile, profilo, percorso);
+		super(idPost, descrizione,visibile, profilo, percorso);
 		this.isHd = isHd;
 	}
 	public Foto(String idPost) {
-		super(idPost, "una descrizione",true, true, "marge", "bene");
+		super(idPost, "una descrizione",true, "marge", "bene");
 		this.isHd = true;
 	}
 
@@ -39,7 +39,7 @@ public class Foto extends Multimedia{
 
 	@Override
 	public Post inserisciCaratteristiche(Post p) {
-        p = new Foto(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPercorso(), this.isHd());
+        p = new Foto(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.getProfilo(), this.getPercorso(), this.isHd());
 		return p;
 	}
 

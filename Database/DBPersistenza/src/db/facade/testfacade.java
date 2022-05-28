@@ -17,7 +17,7 @@ public class testfacade {
 		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001", "002");
 		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00", null);
 		Commento c = new Commento("C00", null, null, null, null, "F01", null, null, null, null);
-		Foto f = new Foto("F00", null, false, false, null, null, false);
+		Foto f = new Foto("F00", null, false, null, null, false);
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  

@@ -439,6 +439,34 @@ public class ProfiloDao implements IProfiloDao{
 	    return null;
 	}
 
+
+
+	@Override
+	public boolean modificaTipo(ProfiloDB p, String tipo) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set tipo=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, tipo);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
 	
 	}
 

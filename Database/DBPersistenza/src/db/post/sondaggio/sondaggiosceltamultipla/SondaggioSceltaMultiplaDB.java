@@ -10,9 +10,9 @@ import db.post.sondaggio.SondaggioDB;
 public class SondaggioSceltaMultiplaDB extends SondaggioDB{
 
 	public SondaggioSceltaMultiplaDB(String idPost, Date dataPubblicazione, Time oraPubblicazione,
-			String descrizione,int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo,
+			String descrizione,int numLike, int numDislike, boolean visibile, String profilo,
 			String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo,
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo,
 				primaScelta,secondaScelta);
 		
 		this.terzaScelta = terzaScelta;
@@ -40,7 +40,7 @@ public class SondaggioSceltaMultiplaDB extends SondaggioDB{
 	}
 	@Override
 	public PostDB inserisciCaratteristiche(PostDB p) {
-		SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(),p.getNumLike(),p.getNumDislike(), p.isVisibile(), p.isCondivisibile(), p.getProfilo(), this.getPrimaScelta(), this.getPrimaScelta(), this.getTerzaScelta(), this.getQuartaScelta());
+		SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(p.getIdPost(), p.getDataPubblicazione(), p.getOraPubblicazione(), p.getDescrizione(),p.getNumLike(),p.getNumDislike(), p.isVisibile(), p.getProfilo(), this.getPrimaScelta(), this.getPrimaScelta(), this.getTerzaScelta(), this.getQuartaScelta());
 		return sdb;
 	}
 }

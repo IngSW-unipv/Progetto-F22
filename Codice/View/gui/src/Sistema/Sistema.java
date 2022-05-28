@@ -120,7 +120,7 @@ public class Sistema {
 	 public ArrayList<String> caricaTuttiiPostDiUnProfilo() {
 		 
 		
-		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, false, null, null, false));
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, null, null, false));
 		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
 			System.out.println(idDeiPostDiUnProfilo.get(i));
 		}
@@ -160,8 +160,8 @@ public class Sistema {
 	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
 	 	}*/
 	 	
-	 	public void pubblicaTesto(String idPost,String descrizione, boolean visibile, boolean condivisibile, String profilo, boolean isHd, String font, String titolo) {
-	 		profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, condivisibile, profilo, font, titolo));
+	 	public void pubblicaTesto(String idPost,String descrizione, boolean visibile, String profilo, boolean isHd, String font, String titolo) {
+	 		profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, profilo, font, titolo));
 	 	}
 	 	
 	 	
@@ -169,9 +169,9 @@ public class Sistema {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
-	 		p = new Foto(idPost, descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 		p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
 	 		
-	 		if(dbfacade.cerca(new Foto(idPost, null, false, false, null, null, false)) != null) {
+	 		if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
 	 			pubblicaPost(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		}
 	 		

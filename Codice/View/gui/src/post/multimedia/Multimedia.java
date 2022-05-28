@@ -5,8 +5,8 @@ import post.Post;
 
 public abstract class Multimedia extends Post{
 
-	public Multimedia(String idPost, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso) {
-		super(idPost,descrizione, visibile, condivisibile,
+	public Multimedia(String idPost, String descrizione, boolean visibile, String profilo, String percorso) {
+		super(idPost,descrizione, visibile,
 				profilo);
 		
 		this.tempoCancellazione = 0;

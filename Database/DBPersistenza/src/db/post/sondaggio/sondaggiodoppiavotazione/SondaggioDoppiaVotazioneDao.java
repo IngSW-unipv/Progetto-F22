@@ -34,7 +34,7 @@ public ArrayList<PostDB> selectAll() {
 
 			while(rs1.next())
 			{
-				SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
+				SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10));
 				result.add(sdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -51,16 +51,17 @@ public boolean caricaPost(PostDB s) {
 
 	try
 	{
-		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?)";
+		String query="insert into sondaggiodoppiavotazione (idSondaggio,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo) values (?,?,?,?,?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s.getIdPost());
 		st1.setDate(2, s.getDataPubblicazione());
 		st1.setTime(3, s.getOraPubblicazione());
 		st1.setString(4, s.getDescrizione());
-        st1.setBoolean(5, s.isVisibile());
-        st1.setBoolean(6, s.isCondivisibile());
-        st1.setString(7, s.getProfilo());
+		st1.setInt(5, s.getNumLike());
+		st1.setInt(6, s.getNumDislike());
+        st1.setBoolean(7, s.isVisibile());
+        st1.setString(8, s.getProfilo());
         
 		st1.executeUpdate();
 
@@ -143,7 +144,7 @@ public PostDB cercaPost(PostDB s) {
 
 		while(rs1.next())
 		{
-			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9), rs1.getString(10), rs1.getString(11));
+			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10));
 
 			DBConnection.closeConnection(conn);
             return sdb;

@@ -23,27 +23,27 @@ public class PostUtility {
 	public PostDB converti(Post p) {
 		if(p.getTipo() == TipoPost.FOTO) {
 			Foto f = (Foto) p.inserisciCaratteristiche(p);
-			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
+			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
 			return fdb;
 		}
 		else if(p.getTipo() == TipoPost.VIDEO) {
 			Video f = (Video) p.inserisciCaratteristiche(p);
-			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
+			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
 			return vdb;
 		}
 		else if(p.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazione f = (SondaggioDoppiaVotazione) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
+			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
 			return sdv;
 		}
 		else if(p.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultipla f = (SondaggioSceltaMultipla) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
+			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
 			return ssm;
 		}
 		else if(p.getTipo() == TipoPost.TESTO) {
 			Testo f = (Testo) p.inserisciCaratteristiche(p);
-			TestoDB tdb = new TestoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
+			TestoDB tdb = new TestoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
 			return tdb;
 		}
 		
@@ -55,27 +55,27 @@ public class PostUtility {
 		
 		if(t == TipoPost.FOTO) {
 			FotoDB f = (FotoDB) p.inserisciCaratteristiche(p);
-			Foto fdb = new Foto(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
+			Foto fdb = new Foto(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
 			return fdb;
 		}
 		else if(t == TipoPost.VIDEO) {
 			VideoDB f = (VideoDB) p.inserisciCaratteristiche(p);
-			Video fdb = new Video(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi());
+			Video fdb = new Video(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi());
 			return fdb;
 		}
 		else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazioneDB f = (SondaggioDoppiaVotazioneDB) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), null); 
+			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), null); 
 			return sdv;
 		}
 		else if(t == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultiplaDB f = (SondaggioSceltaMultiplaDB) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(), null);
+			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(), null);
 			return ssm;
 		}
 		else if(t == TipoPost.TESTO) {
 			TestoDB f = (TestoDB) p.inserisciCaratteristiche(p);
-			Testo tdb = new Testo(f.getIdPost(),f.getDescrizione(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
+			Testo tdb = new Testo(f.getIdPost(),f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
 			return tdb;
 		}
 		
@@ -91,26 +91,26 @@ public class PostUtility {
 		
 		if(p.getTipo() == TipoPost.FOTO) {
 			Foto f = (Foto) p.inserisciCaratteristiche(p);
-			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
+			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
 			s[0] = fdb.getPercorso();
 			return s;
 		}
 		if(p.getTipo() == TipoPost.VIDEO) {
 			Video f = (Video) p.inserisciCaratteristiche(p);
-			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
+			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
 			s[0] = vdb.getPercorso();
 			return s;
 		}
 		if(p.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazione f = (SondaggioDoppiaVotazione) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
+			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
 			s[0] = sdv.getPrimaScelta();
 			s[1] = sdv.getSecondaScelta();
 			return s;
 		}
 		if(p.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultipla f = (SondaggioSceltaMultipla) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
+			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
 			s[0] = ssm.getPrimaScelta();
 			s[1] = ssm.getSecondaScelta();
 			s[2] = ssm.getTerzaScelta();
@@ -119,7 +119,7 @@ public class PostUtility {
 		}
 		if(p.getTipo() == TipoPost.TESTO) {
 			Testo f = (Testo) p.inserisciCaratteristiche(p);
-			TestoDB tdb = new TestoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
+			TestoDB tdb = new TestoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getFont(), f.getTitolo());
 			s[0] = tdb.getFont();
 			s[1] = tdb.getTitolo();
 			return s;
@@ -133,7 +133,7 @@ public class PostUtility {
 		int s = 0;
 		if(p.getTipo() == TipoPost.VIDEO) {
 			Video f = (Video) p.inserisciCaratteristiche(p);
-			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
+			VideoDB vdb = new VideoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(), f.getPercorso(), f.isStory(),f.getDurataInSecondi());
 			s = vdb.getDurataInSecondi();
 			return s;
 		}
@@ -147,7 +147,7 @@ public class PostUtility {
 			
 		if(p.getTipo() == TipoPost.FOTO) {
 			Foto f = (Foto) p.inserisciCaratteristiche(p);
-			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.isCondivisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
+			FotoDB fdb = new FotoDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(),f.getTempoCancellazione(),f.getPercorso(),f.isStory(), f.isHd());
 			s = fdb.isHd();
 			return s;
 		}

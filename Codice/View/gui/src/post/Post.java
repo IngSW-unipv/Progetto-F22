@@ -10,7 +10,7 @@ import post.enumeration.TipoPost;
 	public abstract class Post {
 		
 		public Post(String idPost, String descrizione,
-		            boolean visibile, boolean condivisibile, String profilo) {
+		            boolean visibile, String profilo) {
 			super();
 			this.idPost = idPost;
 			this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
@@ -19,7 +19,6 @@ import post.enumeration.TipoPost;
 			this.numLike = 0;
 			this.numDislike = 0;
 			this.visibile = visibile;
-			this.condivisibile = condivisibile;
 			this.profilo = profilo;
 		}
 		
@@ -32,7 +31,6 @@ import post.enumeration.TipoPost;
 		this.numLike = 0;
 		this.numDislike = 0;
 		this.visibile = true;
-		this.condivisibile = true;
 		this.profilo = profilo;
 	}
 	private String idPost;
@@ -42,7 +40,6 @@ import post.enumeration.TipoPost;
 	private int numLike;
 	private int numDislike;
 	private boolean visibile;
-	private boolean condivisibile;
 	private String profilo;
 	public String getIdPost() {
 		return idPost;
@@ -86,12 +83,6 @@ import post.enumeration.TipoPost;
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
 	}
-	public boolean isCondivisibile() {
-		return condivisibile;
-	}
-	public void setCondivisibile(boolean condivisibile) {
-		this.condivisibile = condivisibile;
-	}
 	public String getProfilo() {
 		return profilo;
 	}
@@ -102,7 +93,7 @@ import post.enumeration.TipoPost;
 	public String toString() {
 		return "[idPost = " + idPost + ", dataPubblicazione = " + dataPubblicazione + ", oraPubblicazione = "
 				+ oraPubblicazione + ", descrizione = " + descrizione + ", numLike = " + numLike + ", numDislike = " + numDislike
-				+ ", visibile = " + visibile + ", condivisibile = " + condivisibile + ", profilo = "
+				+ ", visibile = " + visibile + ", profilo = "
 				+ profilo;
 	}
 	

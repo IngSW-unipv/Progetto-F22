@@ -34,7 +34,7 @@ public class TestoDao extends PostDao {
 
 				while(rs1.next())
 				{
-					TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
+					TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8),rs1.getString(9),rs1.getString(10));                                     
 
 					result.add(tdb);
 				}
@@ -51,16 +51,18 @@ public class TestoDao extends PostDao {
 
 		try
 		{
-			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,visibile,condivisibile,profilo) values (?,?,?,?,?,?,?)";
+			String query="insert into testo (idTesto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo) values (?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, t.getIdPost());
 			st1.setDate(2, t.getDataPubblicazione());
 			st1.setTime(3, t.getOraPubblicazione());
 			st1.setString(4, t.getDescrizione());
-		    st1.setBoolean(5, t.isVisibile());
-		    st1.setBoolean(6, t.isCondivisibile());
-		    st1.setString(7, t.getProfilo());
+			st1.setInt(5, t.getNumLike());
+			st1.setInt(6, t.getNumDislike());
+	        st1.setBoolean(7, t.isVisibile());
+	        st1.setString(8, t.getProfilo());
+	        
 		    
 			st1.executeUpdate();
 
@@ -142,7 +144,7 @@ public class TestoDao extends PostDao {
 
 			while(rs1.next())
 			{
-				TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8), rs1.getString(9),rs1.getString(10),rs1.getString(11));                                     
+				TestoDB tdb =new TestoDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8),rs1.getString(9),rs1.getString(10));                                     
 
 				DBConnection.closeConnection(conn);
 

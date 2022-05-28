@@ -5,7 +5,7 @@ import java.sql.Time;
 
 public abstract class PostDB {
 
-	public PostDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike, int numDislike, boolean visibile, boolean condivisibile, String profilo) {
+	public PostDB(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, int numLike, int numDislike, boolean visibile, String profilo) {
 		super();
 		this.idPost = idPost;
 		this.dataPubblicazione = dataPubblicazione;
@@ -14,7 +14,6 @@ public abstract class PostDB {
 		this.numLike = numLike;
 		this.numDislike = numDislike;
 		this.visibile = visibile;
-		this.condivisibile = condivisibile;
 		this.profilo = profilo;
 	}
 	private String idPost;
@@ -24,7 +23,6 @@ public abstract class PostDB {
 	private int numLike;
 	private int numDislike;
 	private boolean visibile;
-	private boolean condivisibile;
 	private String profilo;
 	
 	public String getIdPost() {
@@ -69,12 +67,6 @@ public abstract class PostDB {
 	public void setVisibile(boolean visibile) {
 		this.visibile = visibile;
 	}
-	public boolean isCondivisibile() {
-		return condivisibile;
-	}
-	public void setCondivisibile(boolean condivisibile) {
-		this.condivisibile = condivisibile;
-	}
 	public String getProfilo() {
 		return profilo;
 	}
@@ -85,7 +77,7 @@ public abstract class PostDB {
 	public String toString() {
 		return "[idPost=" + idPost + ", dataPubblicazione=" + dataPubblicazione + ", oraPubblicazione="
 				+ oraPubblicazione + ", descrizione=" + descrizione + ", numLike=" + numLike + ", numDislike="
-				+ numDislike + ", visibile=" + visibile + ", condivisibile=" + condivisibile + ", profilo=" + profilo;
+				+ numDislike + ", visibile=" + visibile + ", profilo=" + profilo;
 	}
 	
 	public abstract PostDB inserisciCaratteristiche(PostDB p);

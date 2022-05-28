@@ -8,10 +8,10 @@ import db.post.PostDB;
 public abstract class SondaggioDB extends PostDB{
 
 	public SondaggioDB(String idPost, Date dataPubblicazione, Time oraPubblicazione,
-			String descrizione,int numLike,int numDislike, boolean visibile, boolean condivisibile, String profilo,
+			String descrizione,int numLike,int numDislike, boolean visibile, String profilo,
 			String primaScelta, String secondaScelta) {
 		
-		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,condivisibile,profilo);
+		super(idPost,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo);
 		this.primaScelta = primaScelta;
 		this.secondaScelta = secondaScelta;
 	}

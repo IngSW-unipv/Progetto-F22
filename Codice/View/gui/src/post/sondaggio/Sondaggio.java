@@ -4,9 +4,9 @@ import post.Post;
 
 public abstract class Sondaggio extends Post{
 
-	public Sondaggio(String idPost, String descrizione, boolean visibile, boolean condivisibile, String profilo, String primaScelta, 
+	public Sondaggio(String idPost, String descrizione, boolean visibile, String profilo, String primaScelta, 
 			String secondaScelta) {
-		super(idPost, descrizione, visibile, condivisibile,profilo);
+		super(idPost, descrizione, visibile,profilo);
 		
 		this.primaScelta = primaScelta;
 		this.secondaScelta = secondaScelta;
