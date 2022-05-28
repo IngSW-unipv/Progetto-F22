@@ -215,7 +215,12 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 settaPostVisualizzato(false);
-                mostraCommentiPost(view.getIdPostVisualizzato());
+                try {
+					mostraCommentiPost(view.getIdPostVisualizzato());
+				} catch (PostNonVisibile e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
                 refresh();
                 mostraSchermata("Postvisualizzato");
                 refresh();
@@ -591,7 +596,7 @@ public class Controller {
     	
     }
     
-    public void mostraCommentiPost(String idPost) {
+    public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
 		   for (int i = 0; i < view.getNumeroCommentiTotali(); i ++) {
     		   System.out.println(commentiConProfiliIinvianti.get(i));

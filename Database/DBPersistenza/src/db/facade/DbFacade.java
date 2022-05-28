@@ -203,7 +203,7 @@ public class DbFacade {
     	 return pstDao.ottieniPercorso(ConvertitoreFacade.getIstance().converti(m));
      }
      
-    //Ottiene gli id dei post di un profilo 
+    //Ottiene gli id e il percorso dei post di un profilo 
 	public ArrayList<String> ottieniIdPost(Post p, Profilo pr){
 		pstDao = Utility.convertiTipoPost(p.getTipo());
 		return pstDao.ritornaPostDiUnProfilo(pr.getIdProfilo());
@@ -219,6 +219,17 @@ public class DbFacade {
     	pstDao = Utility.convertiTipoPost(p.getTipo());
         return pstDao.mostraTestoCommentiPost(ConvertitoreFacade.getIstance().converti(p));
     }
+    
+    public boolean vediVisibilita(Post p) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+    	return pstDao.vediVisibilita(ConvertitoreFacade.getIstance().converti(p));
+    }
+    
+    public boolean modificaVisibilita(Post p, boolean b) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+    	return pstDao.modificaVisibile(ConvertitoreFacade.getIstance().converti(p), b);
+    }
+    
     
 	//Profilo
 	
@@ -277,6 +288,10 @@ public class DbFacade {
 	public String vediTipo(String idProfilo) throws AccountDoesNotExist{
 		return pDao.ottieniTipo(idProfilo);
 	}
+	public boolean modificaTipo(Profilo p, String s) {
+		return pDao.modificaTipo(ConvertitoreFacade.getIstance().converti(p), s);
+	}
+	
 	public boolean modificaPsw(String p, String b) throws AccountDoesNotExist {
 		return pDao.modificaPsw(p, b);
 	}

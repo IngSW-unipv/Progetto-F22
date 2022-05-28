@@ -276,4 +276,58 @@ public class FotoDao extends PostDao {
 			DBConnection.closeConnection(conn);
 			return result;
 	}
+	
+	
+	@Override
+	public boolean modificaVisibile(PostDB p, boolean b) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update foto set visibile=? where idFoto=?";
+			st1 = conn.prepareStatement(query);
+			st1.setBoolean(1, b);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+	
+	
+	@Override
+	public boolean vediVisibilita(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT visibile FROM foto WHERE idFoto=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				boolean b = rs1.getBoolean("visibile");
+				DBConnection.closeConnection(conn);
+				return b;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		System.out.println("Si è verificato un errore, ritorno false");
+		return false;
+	}
 }

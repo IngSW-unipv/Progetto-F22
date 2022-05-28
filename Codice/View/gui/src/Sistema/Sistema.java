@@ -179,7 +179,7 @@ public class Sistema {
 	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
-		
+
 		public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
 				String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta, int [] conteggio) {
 			
@@ -226,7 +226,7 @@ public class Sistema {
 	 		profiloAttivo.creaPost(t);
 		}
 
-		public ArrayList<String> selectAllCommentiSottoPost(String idPost) {
+		public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
 			ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
 			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
 			

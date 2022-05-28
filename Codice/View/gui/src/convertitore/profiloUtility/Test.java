@@ -4,6 +4,7 @@ package convertitore.profiloUtility;
 import db.profilo.ProfiloDB;
 import post.multimedia.foto.Foto;
 import profilo.Profilo;
+import profilo.exception.PostNonVisibile;
 
 public class Test {
 public static void main(String[] args) {
@@ -18,7 +19,12 @@ public static void main(String[] args) {
 	//ProfiloDB pfin = u.converti(p1);
 	//System.out.println(pfin.toString());
 
-	p1.cercaPost(f);
+	try {
+		p1.cercaPost(f);
+	} catch (PostNonVisibile e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	
 }
 }
