@@ -5,6 +5,8 @@ import post.Post;
 import post.commento.Commento;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
+import post.sondaggio.SondaggioDoppiaVotazione;
+import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 
 import java.sql.Date;
@@ -165,7 +167,7 @@ public class Sistema {
 	 	}
 	 	
 	 	
-		public void pubblicaPost( String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 	public void pubblicaPost(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
@@ -177,6 +179,53 @@ public class Sistema {
 	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
+
+		public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
+				String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta, int [] conteggio) {
+			
+			SondaggioSceltaMultipla s;
+	 		int idPostInt = (int)Math.round(Math.random() * 1000);
+	 		String idPost = Integer.toString(idPostInt);
+	 		
+	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	 		
+	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null, null)) != null) {
+	 			pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	 		}
+	 		
+	 		profiloAttivo.creaPost(s);
+		}
+		
+		public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta, int [] conteggio) {
+			
+			SondaggioDoppiaVotazione s;
+	 		int idPostInt = (int)Math.round(Math.random() * 1000);
+	 		String idPost = Integer.toString(idPostInt);
+	 		
+	 		s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, conteggio);
+	 		
+	 		if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null, null)) != null) {
+	 			pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta, conteggio);
+	 		}
+	 		
+	 		profiloAttivo.creaPost(s);
+		}
+		
+		public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
+			
+			Testo t;
+			int idPostInt = (int)Math.round(Math.random() * 1000);
+	 		String idPost = Integer.toString(idPostInt);
+	 		
+	 		t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
+	 		
+	 		if(dbfacade.cerca(new Testo(idPost, null, false, null, null, null)) != null) {
+	 			pubblicaTesto(descrizione, visibile, profilo, font, titolo);
+	 		}
+	 		
+	 		profiloAttivo.creaPost(t);
+		}
+
 		public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
 			ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
 			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();

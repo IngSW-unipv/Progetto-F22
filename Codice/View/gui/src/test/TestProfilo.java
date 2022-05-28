@@ -26,7 +26,7 @@ class TestProfilo {
 		profiloAttivo = new Profilo("francesco.ardizzoni@gmail.com", "frank", null, 0, 0, 0, EnumProfilo.PUBBLICO,false, false, false, null, null);
 		DbFacade.getIstance().carica(profiloAttivo);
 	}
-	
+	/*
 	@Test
 	public void testSegui() throws AccountDoesNotExist {
 		altroProfilo = new Profilo("cicciogamer89@gmail.com");
@@ -105,9 +105,12 @@ class TestProfilo {
 		Messaggio m = new MessaggioPrivato("messaggioPrivatoId4", null, null, "alla prossima", "percorso8", "profiloInviante4", profiloAttivo.getIdProfilo());
 		assertNotNull(profiloAttivo.ottieniTestoMessaggio(m));
 	}
-	
+	*/
 	
 	//test sui post
+	
+	@Test
+	
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {

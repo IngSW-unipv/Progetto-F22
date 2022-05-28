@@ -24,15 +24,17 @@ public class Controller {
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
-                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento;
+                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto;
     
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
     private String postAttuale = "";
+    private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     
-    public Controller(Sistema s, Frame f) {
+
+	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
         initComponents();
@@ -61,7 +63,7 @@ public class Controller {
             }
         };
         view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
-}
+    }
     
     public void actionListenersLogin() {
         gestoreLogin = new ActionListener() {
@@ -95,7 +97,6 @@ public class Controller {
         };
         view.getRegistratiButton().addActionListener(gestoreRegistrati);
         
-        
         gestoreIndietroSignup = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,14 +115,12 @@ public class Controller {
                 };
                 view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
                 
-                
                 gestoreProfilo = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         aggiornaSchermataProfilo();
                         refresh();
                         mostraSchermata("Profilo");
-                        
                     }
                 };
                 view.getProfiloButton().addActionListener(gestoreProfilo);
@@ -148,6 +147,17 @@ public class Controller {
                     }
                 };
                 view.getCercaButton().addActionListener(gestoreCerca);
+                
+                gestorePubblicaSoloTesto = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                    	//model.pubblicaTesto("mi piace la fava", false, null, null, null);   
+                    	setPostAttuale("postTesto");
+                    	view.getFileChooser().setVisible(false);
+                    	mostraSchermata("CreazionePost");
+                    }
+                };
+                view.getPIdeaButton().addActionListener(gestorePubblicaSoloTesto);
     }
     
     public void actionListenersImpostazioni() {
@@ -173,7 +183,6 @@ public class Controller {
 	        }
 	    };
 	    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
-	    
 	    
 	    gestoreModificaProfilo = new ActionListener() {
 	        @Override
@@ -225,11 +234,9 @@ public class Controller {
                 mostraSchermata("Postvisualizzato");
                 refresh();
 
-                
             }
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
-        
     }
     
     public void actionListenersCreazionePost() {
@@ -237,6 +244,7 @@ public class Controller {
         gestoreCreazionePost = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	setPostAttuale("postFoto");
                 mostraSchermata("CreazionePost");
             }
         };
@@ -350,7 +358,6 @@ public class Controller {
         };
         view.getSecondaChatPrivataButton().addActionListener(gestoreSecondaChatPrivata);
         
-        
         gestoreTerzaChatPrivata = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -387,16 +394,16 @@ public class Controller {
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
     
-     
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
+                System.out.println("tasto foto profilo");
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
         
-      /*  
+        /*  
         gestoreIniziaSeguire = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -414,7 +421,6 @@ public class Controller {
             }
         };
        view.getAggiungiCommentoButtonFrame().addActionListener(gestoreAggiungiCommento);
-       
        
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
@@ -531,9 +537,19 @@ public class Controller {
     public void pubblicaPost() {
         String percorsoFilePost = view.ottieniPercorsoFile();
         String commentoPost = view.ottieniCommento();
-        model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        if(getPostAttuale() == "postFoto") {
+            model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        }
+        else if(getPostAttuale() == "postTesto") {
+        	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
+        }
+        else if(getPostAttuale() == "Pubblica un sondaggio") {
+        	model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        }
+        
     }
-   
+    
+    
     
     public boolean verificaTestoRicerca() {
         if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
@@ -586,4 +602,12 @@ public class Controller {
     	System.out.println("ci arrivo");
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
+    
+    public String getPostAttuale() {
+		return postAttuale;
+	}
+
+	public void setPostAttuale(String postAttuale) {
+		this.postAttuale = postAttuale;
+	}
 }
