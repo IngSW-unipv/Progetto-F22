@@ -1,14 +1,9 @@
 package packageframe;
-import java.awt.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-
 import javax.swing.*;
-
-import Sistema.Sistema;
-import controller.Controller;
 import panelspackage.panels.Chat;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;

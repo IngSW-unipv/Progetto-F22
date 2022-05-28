@@ -2,15 +2,13 @@ package chat;
 
 
 import java.util.ArrayList;
-
 import Messaggio.Messaggio;
 import chat.enumeration.TipoChat;
-import panelspackage.panels.elements.Pulsanti;
+
 
 public abstract class Chat {
 
 	private String nomeChat;
-	
 	private int numeroMessaggi;
 	private ArrayList<Messaggio> listaMessaggi;
 	

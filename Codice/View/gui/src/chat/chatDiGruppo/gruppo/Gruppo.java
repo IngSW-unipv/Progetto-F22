@@ -29,6 +29,8 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	private String profilo5;
 	private String profilo6;
 	private String amministratore;
+	
+	
 	public String getIdGruppo() {
 	return idGruppo;
 	}
