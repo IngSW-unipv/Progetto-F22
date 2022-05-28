@@ -377,8 +377,6 @@ public boolean leggiSoloTesto(String s, TipoMessaggio t){
 		dbfacade.carica(t);
 	}
 	
-
-
 @Override
 public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
 	Foto f = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
@@ -424,7 +422,6 @@ public Post cercaPost(Post p) {
 	return dbfacade.cerca(p);
 }
 
-
 @Override
 public ArrayList<Post> selectAllPost(TipoPost t) {
 	ArrayList<Post> p = dbfacade.selectAllPost(t);
@@ -445,7 +442,6 @@ public boolean pubblicaStoria(int time, Multimedia f){
 		dbfacade.rimuovi(f);	
 		return true;
 }
-
 
 @Override
 public String ottieniPercorso(Post p) {
@@ -623,7 +619,6 @@ public boolean aggiungiDislike(Post p){
 	    return true;
 	}
 }
-
 
 @Override
 public boolean rimuoviLike(Post p){

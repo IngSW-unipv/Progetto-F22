@@ -134,6 +134,9 @@ public class Frame extends JFrame {
 		return (PostVisualizzato)getMappaSchermate().get("Postvisualizzato");	
 	}
 	
+	public JButton getPIdeaButton( ) {
+		return ((Home)mappaSchermate.get("Home")).getpIdea();
+	}
 	
 	public JButton getImpostazioniButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonImpostazioni();
@@ -396,5 +399,9 @@ public class Frame extends JFrame {
 	
 	public int getNumeroCommentiTotali() {
 		return((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommentiTotali();
+	}
+	
+	public JFileChooser getFileChooser() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();
 	}
 }
