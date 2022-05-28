@@ -9,7 +9,7 @@ import profilo.exception.PostNonVisibile;
 public class Test {
 public static void main(String[] args) {
 	ProfiloUtility u = new ProfiloUtility();
-	ProfiloDB pdb = new ProfiloDB("P01", "Giovanni", null, 0, 0, 0, null, false, false, false, null, null);
+	ProfiloDB pdb = new ProfiloDB("P01", "Giovanni", null, 0, 0, 0, false, false, false, null, null);
 	Profilo p1 = new Profilo("P01", "Giovanni");
 	Foto f = new Foto("F00", null, false, null, null, false);
 

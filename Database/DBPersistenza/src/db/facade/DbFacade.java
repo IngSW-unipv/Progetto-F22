@@ -285,13 +285,7 @@ public class DbFacade {
 	public String vediPsw(String idProfilo) throws AccountDoesNotExist {
 		return pDao.ottieniPsw(idProfilo);
 	}
-	public String vediTipo(String idProfilo) throws AccountDoesNotExist{
-		return pDao.ottieniTipo(idProfilo);
-	}
-	public boolean modificaTipo(Profilo p, String s) {
-		return pDao.modificaTipo(ConvertitoreFacade.getIstance().converti(p), s);
-	}
-	
+
 	public boolean modificaPsw(String p, String b) throws AccountDoesNotExist {
 		return pDao.modificaPsw(p, b);
 	}

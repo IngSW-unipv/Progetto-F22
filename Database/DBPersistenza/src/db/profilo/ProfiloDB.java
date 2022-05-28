@@ -2,8 +2,7 @@ package db.profilo;
 
 public class ProfiloDB {
 
-	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost,
-			String tipo, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw, String immagineProfilo) {
+	public ProfiloDB(String idProfilo, String nickname, String descrizione, int numFollower, int numSeguiti, int numPost, boolean esiste, boolean pswDaCambiare, boolean isLoggato, String psw, String immagineProfilo) {
 		super();
 		this.idProfilo = idProfilo;
 		this.nickname = nickname;
@@ -11,7 +10,6 @@ public class ProfiloDB {
 		this.numFollower = numFollower;
 		this.numSeguiti = numSeguiti;
 		this.numPost = numPost;
-		this.tipo = tipo;
 		this.esiste = false;
 		this.pswCambiata = false;
 		this.isLoggato = false;
@@ -24,7 +22,6 @@ private String descrizione;
 private int numFollower;
 private int numSeguiti;
 private int numPost;
-private String tipo;
 private boolean esiste;
 private boolean pswCambiata;
 private boolean isLoggato;
@@ -67,12 +64,6 @@ public int getNumPost() {
 public void setNumPost(int numPost) {
 	this.numPost = numPost;
 }
-public String getTipo() {
-	return tipo;
-}
-public void setTipo(String tipo) {
-	this.tipo = tipo;
-}
 
 public boolean isEsiste() {
 	return esiste;
@@ -95,8 +86,8 @@ public void setLoggato(boolean isLoggato) {
 @Override
 public String toString() {
 	return "ProfiloDB [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
-			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato=" + isLoggato + ", psw=" + psw
+			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + 
+			", esiste=" + esiste + ", pswCambiata=" + pswCambiata + ", isLoggato=" + isLoggato + ", psw=" + psw
 			+ ", immagineProfilo=" + immagineProfilo + "]";
 }
 public String getPsw() {

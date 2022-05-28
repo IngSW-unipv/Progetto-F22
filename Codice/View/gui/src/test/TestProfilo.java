@@ -23,7 +23,7 @@ class TestProfilo {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		profiloAttivo = new Profilo("francesco.ardizzoni@gmail.com", "frank", null, 0, 0, 0, EnumProfilo.PUBBLICO,false, false, false, null, null);
+		profiloAttivo = new Profilo("francesco.ardizzoni@gmail.com", "frank", null, 0, 0, 0, false, false, false, null, null);
 		DbFacade.getIstance().carica(profiloAttivo);
 	}
 	/*

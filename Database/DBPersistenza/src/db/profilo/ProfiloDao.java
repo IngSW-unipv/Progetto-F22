@@ -36,7 +36,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getBoolean(8), rs1.getBoolean(9),rs1.getBoolean(10),rs1.getString(11),rs1.getString(12));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8),rs1.getBoolean(9),rs1.getString(10),rs1.getString(11));
 
 				result.add(prof);
 			}
@@ -55,7 +55,7 @@ public class ProfiloDao implements IProfiloDao{
 
 		try
 		{
-			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,tipo,esiste,pswCambiata,isloggato,psw,immagineProfilo) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			String query="insert into profilo (idProfilo,nickname,descrizione,numFollower,numSeguiti,numPost,esiste,pswCambiata,isloggato,psw,immagineProfilo) values (?,?,?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, p.getIdProfilo());
@@ -64,12 +64,11 @@ public class ProfiloDao implements IProfiloDao{
 			st1.setInt(4, p.getNumFollower());
 			st1.setInt(5, p.getNumSeguiti());
 			st1.setInt(6, p.getNumPost());
-			st1.setString(7, p.getTipo());
+			st1.setBoolean(7, false);
 			st1.setBoolean(8, false);
 			st1.setBoolean(9, false);
-			st1.setBoolean(10, false);
-			st1.setString(11, p.getPsw());
-			st1.setString(12, p.getImmagineProfilo());
+			st1.setString(10, p.getPsw());
+			st1.setString(11, p.getImmagineProfilo());
 			
 			st1.executeUpdate();
 
@@ -130,7 +129,7 @@ public class ProfiloDao implements IProfiloDao{
 
 			while(rs1.next())
 			{
-				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getString(7),rs1.getBoolean(8), rs1.getBoolean(9),rs1.getBoolean(10),rs1.getString(11),rs1.getString(12));
+				ProfiloDB prof =new ProfiloDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getInt(4),rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getBoolean(8),rs1.getBoolean(9),rs1.getString(10),rs1.getString(11));
 
 				DBConnection.closeConnection(conn);
 				return prof;
@@ -357,35 +356,6 @@ public class ProfiloDao implements IProfiloDao{
 	    throw new AccountDoesNotExist(idProfilo);
 	}
 
-
-	@Override
-	public String ottieniTipo(String idProfilo) throws AccountDoesNotExist {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		ResultSet rs1;
-
-		try
-		{
-			String query="SELECT tipo FROM profilo WHERE idProfilo=?";
-
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, idProfilo);
-
-			rs1=st1.executeQuery();
-
-			while(rs1.next())
-			{
-				String s = rs1.getString("tipo");
-				DBConnection.closeConnection(conn);
-				return s;
-			}
-		}catch (Exception e){e.printStackTrace();}
-
-		DBConnection.closeConnection(conn);
-	    throw new AccountDoesNotExist(idProfilo);
-	}
-
-
 	@Override
 	public boolean cambiaImmagineProfilo(ProfiloDB p, String s) {
 		conn=DBConnection.startConnection(conn,schema);
@@ -438,35 +408,6 @@ public class ProfiloDao implements IProfiloDao{
 		DBConnection.closeConnection(conn);
 	    return null;
 	}
-
-
-
-	@Override
-	public boolean modificaTipo(ProfiloDB p, String tipo) {
-		conn=DBConnection.startConnection(conn,schema);
-		PreparedStatement st1;
-		boolean esito = true;
-
-		try
-		{
-			String query="update profilo set tipo=? where idProfilo=?";
-			st1 = conn.prepareStatement(query);
-			st1.setString(1, tipo);
-			st1.setString(2, p.getIdProfilo());
-		
-			st1.executeUpdate();
-
-
-		}catch (Exception e){
-			e.printStackTrace();
-			esito=false;
-		}
-
-		DBConnection.closeConnection(conn);
-		return esito;
-	}
-
-
 	
 	}
 

@@ -9,8 +9,8 @@ public class ProfiloTester {
 	public static void main(String[] args) {
 		ProfiloDao pdao = new ProfiloDao();
 		ArrayList<ProfiloDB> selectAll = pdao.selectAll();
-       ProfiloDB prof = new ProfiloDB("Dv999", null, null, 0, 2, 1, null, false, false,false, null, null);
-       ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, null, false, false,false, null, null);
+       ProfiloDB prof = new ProfiloDB("Dv999", null, null, 0, 2, 1, false, false,false, null, null);
+       ProfiloDB prof1 = new ProfiloDB("001", null, null, 0, 2, 1, false, false,false, null, null);
   
 	
 	
@@ -94,24 +94,11 @@ public class ProfiloTester {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
     
-       try {
-		String s = pdao.ottieniPsw(prof1.getIdProfilo());
-		System.out.println(s);
-	} catch (AccountDoesNotExist f) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-       }
-       try {
-		System.out.println(pdao.ottieniTipo(prof1.getIdProfilo()));
-	} catch (AccountDoesNotExist e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+   
       ProfiloDB plof =  pdao.cercaProfilo(prof);
       System.out.println(plof.toString());
      }
-	}
+	}}
 	
 	
 

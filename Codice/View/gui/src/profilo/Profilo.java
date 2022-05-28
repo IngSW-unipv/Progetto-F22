@@ -25,7 +25,6 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.PostNonVisibile;
-import profilo.exception.TipoNonEsistente;
 import profilo.follow.Follow;
 import java.util.TimerTask;
 
@@ -39,7 +38,6 @@ public class Profilo implements IProfilo {
 	private int numFollower;
 	private int numSeguiti;
 	private int numPost;
-	private EnumProfilo tipo;
 	private String password;
 	private String fotoProfilo;
 	private boolean loggato;
@@ -60,7 +58,6 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.password = "Cambiami";
-		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
@@ -75,14 +72,13 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.password = "Cambiami";
-		this.tipo = tipo.PUBBLICO;
 		likeMap = new HashMap<>();
 		dislikeMap = new HashMap<>();
 	}
 	
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione,int numFollower,int numSeguiti, int numPost,EnumProfilo visibilita, 
+	public 	Profilo(String idProfilo, String nickname, String descrizione,int numFollower,int numSeguiti, int numPost, 
 			boolean esiste, boolean pswCambiata, boolean loggato,String psw,String fotoProfilo) {
 		this.dbfacade = dbfacade.getIstance();
 		this.idProfilo = idProfilo;
@@ -91,7 +87,6 @@ public class Profilo implements IProfilo {
 		this.numFollower = numFollower;
 		this.numSeguiti = numSeguiti;
 		this.numPost = numPost;
-		this.tipo = visibilita;
 		this.accountesistente = esiste;
 		this.isPswCambiata = pswCambiata;
 		this.loggato = loggato;
@@ -137,13 +132,6 @@ public int getNumPost() {
 public void setNumPost(int numPost) {
 	this.numPost = numPost;
 }
-public EnumProfilo getTipo() {
-	return tipo;
-}
-public void setTipo(EnumProfilo tipo) {
-	this.tipo = tipo;
-}
-
 
 public boolean isLoggato() {
 	return loggato;
@@ -205,8 +193,7 @@ public void setFotoProfilo(String fotoProfilo) {
 @Override
 public String toString() {
 	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
-			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", tipo=" + tipo
-			+ ", password=" + password + ", fotoProfilo=" + fotoProfilo + ", loggato=" + loggato + ", accountesistente="
+			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", password=" + password + ", fotoProfilo=" + fotoProfilo + ", loggato=" + loggato + ", accountesistente="
 			+ accountesistente + ", isPswCambiata=" + isPswCambiata + ", likeMap=" + likeMap + ", dislikeMap="
 			+ dislikeMap + "]";
 }
@@ -523,14 +510,6 @@ public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t)
 @Override
 public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t) {
 	return dbfacade.selezionaTestoMessaggiProfilo(p, t);
-}
-
-
-@Override
-public boolean modificaTipoProfilo(Profilo p, String s) throws TipoNonEsistente{
-	if(s.equals("PUBBLICO") || s.equals("PRIVATO"))
-		return dbfacade.modificaTipo(p, s);
-		throw new TipoNonEsistente(s);
 }
 
 

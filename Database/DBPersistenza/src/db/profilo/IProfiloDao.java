@@ -33,11 +33,8 @@ public interface IProfiloDao {
   	 
   	 public String ottieniPsw(String idProfilo)throws AccountDoesNotExist;
   	 
-  	 public String ottieniTipo(String idProfilo)throws AccountDoesNotExist;
-  	 
   	 public boolean cambiaImmagineProfilo(ProfiloDB p, String s);
   	 public String ottieniImmagine(ProfiloDB p);
   	 
-  	 public boolean modificaTipo(ProfiloDB p, String tipo);
   	 
 }

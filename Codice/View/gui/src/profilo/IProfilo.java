@@ -20,7 +20,6 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.PostNonVisibile;
-import profilo.exception.TipoNonEsistente;
 import profilo.follow.Follow;
 
 public interface IProfilo {
@@ -83,9 +82,7 @@ public interface IProfilo {
     public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t);
 	
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);
-	
-	public boolean modificaTipoProfilo(Profilo p, String s)throws TipoNonEsistente;
-    
+	    
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f);
     
     //Commenti
