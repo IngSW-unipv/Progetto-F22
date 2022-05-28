@@ -8,7 +8,10 @@ public class FotoDaoTester {
 		FotoDB f = new FotoDB("F00", null, null, "Il mio primo post", 0, 0, false, "DV999", 0, "degufg", false, false);
 	
 		
-		FotoDB ft = (FotoDB) fdao.cercaPost(f);
-		System.out.println(ft.toString());
+		/*FotoDB ft = (FotoDB) fdao.cercaPost(f);
+		System.out.println(ft.toString());*/
+		fdao.modificaVisibile(f, true);
+		boolean b = fdao.vediVisibilita(f);
+		System.out.println(b);
 	}
 }

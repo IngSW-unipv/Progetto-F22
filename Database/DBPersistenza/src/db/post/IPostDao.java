@@ -22,4 +22,7 @@ public interface IPostDao {
 	
 	//Ritorna un'arrayList di stringhe con tutti i commenti sotto ad un post
     public ArrayList<String> mostraTestoCommentiPost(PostDB c);
+    
+    public boolean modificaVisibile(PostDB p, boolean b);
+    public boolean vediVisibilita(PostDB p);
 }

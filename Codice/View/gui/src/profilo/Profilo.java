@@ -24,6 +24,8 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.PostNonVisibile;
+import profilo.exception.TipoNonEsistente;
 import profilo.follow.Follow;
 import java.util.TimerTask;
 
@@ -420,15 +422,23 @@ public boolean rimuoviPost(Post p) {
 }
 
 @Override
-public Post cercaPost(Post p) {
-	return dbfacade.cerca(p);
+public Post cercaPost(Post p) throws PostNonVisibile{
+	if(dbfacade.vediVisibilita(p) == true)
+		return dbfacade.cerca(p);
+	throw new PostNonVisibile(p.getIdPost());
 }
 
 
 @Override
 public ArrayList<Post> selectAllPost(TipoPost t) {
 	ArrayList<Post> p = dbfacade.selectAllPost(t);
-	return p;
+	ArrayList<Post> p1 = new ArrayList<>();
+	for(Post res : p) {
+		if(res.isVisibile() == true)
+			p1.add(res);
+	}
+		
+	return p1;
 }
 
 @Override
@@ -448,20 +458,36 @@ public boolean pubblicaStoria(int time, Multimedia f){
 
 
 @Override
-public String ottieniPercorso(Post p) {
+public String ottieniPercorso(Post p) throws PostNonVisibile{
+if(dbfacade.vediVisibilita(p) == true)
 	return dbfacade.ottieniPercorso(p);
+	
+	throw new PostNonVisibile(p.getIdPost());
 }
 
 @Override
-public ArrayList<Commento> selectAllCommentiSottoPost(Post p) {
-	return dbfacade.mostraCommentiPost(p);
+public ArrayList<Commento> selectAllCommentiSottoPost(Post p) throws PostNonVisibile{
+	if(dbfacade.vediVisibilita(p) == true)
+		return dbfacade.mostraCommentiPost(p);
+	throw new PostNonVisibile(p.getIdPost());
 }
 
 @Override
-public ArrayList<String> testoCommentiPost(Post p) {
-	return dbfacade.mostraTestoCommentiPost(p);
+public ArrayList<String> testoCommentiPost(Post p) throws PostNonVisibile{
+	if(dbfacade.vediVisibilita(p) == true)
+		return dbfacade.mostraTestoCommentiPost(p);
+	throw new PostNonVisibile(p.getIdPost());
 }
 
+@Override
+public boolean vediVisibilita(Post p) {
+	return dbfacade.vediVisibilita(p);
+}
+
+@Override
+public boolean modificaVisibilita(Post p, boolean b) {
+	return dbfacade.modificaVisibilita(p, b);
+}
 
 
 
@@ -492,10 +518,6 @@ public String ottieniImmagineProfilo(Profilo p) {
 	return dbfacade.ottieniImmagineProfilo(p);
 }
 
-@Override
-public ArrayList<String> ritornaIdPost(Post p, Profilo pr) {
-	return dbfacade.ottieniIdPost(p, pr);
-}
 
 @Override
 public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t) {
@@ -506,6 +528,22 @@ public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t)
 public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t) {
 	return dbfacade.selezionaTestoMessaggiProfilo(p, t);
 }
+
+
+@Override
+public boolean modificaTipoProfilo(Profilo p, String s) throws TipoNonEsistente{
+	if(s.equals("PUBBLICO") || s.equals("PRIVATO"))
+		return dbfacade.modificaTipo(p, s);
+		throw new TipoNonEsistente(s);
+}
+
+
+@Override
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f) {
+	return dbfacade.ottieniIdPost(f, p);
+    
+}
+
 
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -590,9 +628,6 @@ public ArrayList<Gruppo> selectAllGruppo(){
 //-------------------------------------------------------------------------------------------------------------------
 
 
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Foto f) {
-	return dbfacade.ottieniIdPost(f, p);
-}
 @Override
 public boolean aggiungiLike(Post p){
 	
@@ -652,7 +687,6 @@ public boolean rimuoviDislike(Post p){
 	return false;
 	
 }
-
 }
 
 

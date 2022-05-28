@@ -19,15 +19,11 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.PostNonVisibile;
+import profilo.exception.TipoNonEsistente;
 import profilo.follow.Follow;
 
 public interface IProfilo {
-
-
-	//Follow
-
-	public boolean profiloNonSeguito(String emailProfilo);
-	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
  
 	
 	//Messaggi
@@ -59,7 +55,9 @@ public interface IProfilo {
 	
 	public boolean pubblicaPost(Post p);
 	public boolean rimuoviPost(Post p);
-	public Post cercaPost(Post p);
+	
+	
+    public Post cercaPost(Post p)throws PostNonVisibile;
 	
 
 	public ArrayList<Post> selectAllPost(TipoPost t);
@@ -67,23 +65,28 @@ public interface IProfilo {
 	//L'int time rappresenta la durata in ore nel quale la storia rimarra' pubblicata. A fine di time ore, la storia sar� rimossa automaticamente
     public boolean pubblicaStoria(int time, Multimedia f);
 	
-    public String ottieniPercorso(Post p);
+    public String ottieniPercorso(Post p)throws PostNonVisibile;
     
-	public ArrayList<Commento> selectAllCommentiSottoPost(Post p);
-	public ArrayList<String> testoCommentiPost(Post p);
+	public ArrayList<Commento> selectAllCommentiSottoPost(Post p)throws PostNonVisibile;
+	public ArrayList<String> testoCommentiPost(Post p)throws PostNonVisibile;
+	
+	public boolean vediVisibilita(Post p);
+	public boolean modificaVisibilita(Post p, boolean b);
 	
     //Profilo
     
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
     public boolean cambiaImmagineProfilo(Profilo p, String immagine);
     public String ottieniImmagineProfilo(Profilo p);
-    public ArrayList<String> ritornaIdPost(Post p, Profilo pr);
     
     //Ritorna tutti i messaggi di un profilo specificato
     public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t);
 	
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);
+	
+	public boolean modificaTipoProfilo(Profilo p, String s)throws TipoNonEsistente;
     
+	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f);
     
     //Commenti
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
@@ -93,7 +96,8 @@ public interface IProfilo {
 	public ArrayList<String> ProfiloNickCommento(Profilo p);
 	
 	//Follow
-	
+	public boolean profiloNonSeguito(String emailProfilo);
+	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
 	public boolean segui(Profilo email)throws AccountDoesNotExist;
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist;
 	

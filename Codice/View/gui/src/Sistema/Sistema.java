@@ -177,7 +177,7 @@ public class Sistema {
 	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
-		public ArrayList<String> selectAllCommentiSottoPost(String idPost) {
+		public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
 			ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
 			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
 			

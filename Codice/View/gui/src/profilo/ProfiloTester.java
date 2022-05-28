@@ -2,15 +2,19 @@ package profilo;
 
 import java.util.ArrayList;
 
+import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
+import profilo.exception.AccountDoesNotExist;
+import profilo.exception.PostNonVisibile;
 
 public class ProfiloTester {
 	
     public static void main(String [] args) {
     //	Profilo p = new Profilo("001", "Girella");
-    	Profilo p1 = new Profilo("P01", "Luca26");
-    	Foto f = new Foto("F00", null, false, null, null, false);
+    	Profilo p1 = new Profilo("DV999", "Luca26");
+    	Foto f = new Foto("F04", null, false, null, null, false);
     	
     //Commento c = new Commento("C01", "001", "F01", "aadhd");
     	//p.pubblicaCommento(c);
@@ -29,9 +33,18 @@ public class ProfiloTester {
       // ArrayList<String> s = p.ritornaIdPost(f, p);
        //for(String res : s)
     	//.out.println(res.toString());
-    	System.out.println(p1.cercaPost(f).toString());
+    /*	try {
+			System.out.println(p1.cercaPost(f).toString());
+		} catch (PostNonVisibile e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
-    	}
+    	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
+    	for(Post pst : res)
+   		System.out.println(pst.toString()); */
+    	
+    }
     }
 
     	   
