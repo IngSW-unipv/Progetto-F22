@@ -174,7 +174,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 
 		try
 		{
-			String query="SELECT idSondaggio FROM sondaggiosceltamultipla WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+			String query="SELECT idSondaggio,percorso FROM sondaggiosceltamultipla WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, idProfilo);
@@ -184,6 +184,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 			while(rs1.next())
 			{
                 	result.add(rs1.getString("idSondaggio"));
+                	result.add(rs1.getString("percorso"));
 			}
 		}catch (Exception e){e.printStackTrace();}
 

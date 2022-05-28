@@ -167,7 +167,7 @@ public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo) {
 
 	try
 	{
-		String query="SELECT idSondaggio FROM sondaggiodoppiavotazione WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+		String query="SELECT idSondaggio,percorso FROM sondaggiodoppiavotazione WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, idProfilo);
@@ -177,6 +177,7 @@ public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo) {
 		while(rs1.next())
 		{
             	result.add(rs1.getString("idSondaggio"));
+            	result.add(rs1.getString("percorso"));
 		}
 	}catch (Exception e){e.printStackTrace();}
 

@@ -21,7 +21,7 @@ public class testfacade {
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
-        /*Profilo plof = new Profilo("Dv999", "Davide99");
+        Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
         
@@ -38,7 +38,7 @@ public class testfacade {
         Messaggio m = dbf.cerca(mdg);
         System.out.println(m.toString());
         
-		p.pubblicaCommento(c);*/
+		p.pubblicaCommento(c);
         
         
         dbf.cerca(f);

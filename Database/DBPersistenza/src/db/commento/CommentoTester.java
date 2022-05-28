@@ -13,7 +13,7 @@ public class CommentoTester {
 		CommentoDB c2 = new CommentoDB("002", null, null, null, null, "F00", "V11", "S00", "P00", "T00");
 		
 		cdao.scriviCommento(c1);
-		/*cdao.scriviCommento(c2);
+		cdao.scriviCommento(c2);
 		
 		ProfiloDB p = new ProfiloDB("001","", null, 0, 0, 0, null, false, false, false, null, null);
 		
@@ -21,6 +21,6 @@ public class CommentoTester {
 		
 			
 		for(String str : res)
-			System.out.println(str.toString());*/
+			System.out.println(str.toString());
 	}
 }

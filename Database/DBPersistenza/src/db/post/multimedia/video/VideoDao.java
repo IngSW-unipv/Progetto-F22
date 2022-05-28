@@ -195,7 +195,7 @@ public class VideoDao  extends PostDao{
 
 		try
 		{
-			String query="SELECT idVideo FROM video WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
+			String query="SELECT idVideo,percorso FROM video WHERE profilo=? order by dataPubblicazione,oraPubblicazione";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, idProfilo);
@@ -205,6 +205,7 @@ public class VideoDao  extends PostDao{
 			while(rs1.next())
 			{
                 	result.add(rs1.getString("idVideo"));
+                	result.add(rs1.getString("percorso"));
 			}
 		}catch (Exception e){e.printStackTrace();}
 

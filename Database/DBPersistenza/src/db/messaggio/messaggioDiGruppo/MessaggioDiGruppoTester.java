@@ -1,15 +1,12 @@
 package db.messaggio.messaggioDiGruppo;
 
-import java.util.ArrayList;
 
 import Messaggio.MessaggioDiGruppo;
 import db.facade.DbFacade;
-import db.messaggio.MessaggioDB;
 
 public class MessaggioDiGruppoTester {
 
 	public static void main(String[] args) {
-		MessaggioDiGruppoDao mdao = new MessaggioDiGruppoDao();
 		MessaggioDiGruppo m = new MessaggioDiGruppo("007", null, null, null, null, "G00", "001");
 	  
 		DbFacade.getIstance().carica(m);

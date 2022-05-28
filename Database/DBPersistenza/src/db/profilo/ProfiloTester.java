@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import profilo.exception.AccountDoesNotExist;
 
-//import profilo.exception.AccountDoesNotExist;
-
 public class ProfiloTester {
 
 	public static void main(String[] args) {
@@ -16,7 +14,7 @@ public class ProfiloTester {
   
 	
 	
-     /*  pdao.cambiaImmagineProfilo(prof, "fwquf3roufh");
+    pdao.cambiaImmagineProfilo(prof, "fwquf3roufh");
        
 
        for(ProfiloDB p : selectAll)
@@ -87,7 +85,7 @@ public class ProfiloTester {
    
       
         System.out.println("Inserimento avvenuto? " +pdao.inserisciProfilo(prof));
-        System.out.println("La rimozione è avvenuta? " + pdao.rimuoviProfilo(prof));
+        System.out.println("La rimozione ï¿½ avvenuta? " + pdao.rimuoviProfilo(prof));
        
        
      try {
@@ -109,7 +107,7 @@ public class ProfiloTester {
 	} catch (AccountDoesNotExist e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}*/
+	}
       ProfiloDB plof =  pdao.cercaProfilo(prof);
       System.out.println(plof.toString());
      }

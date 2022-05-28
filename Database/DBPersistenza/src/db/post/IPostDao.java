@@ -14,7 +14,7 @@ public interface IPostDao {
 	public ArrayList<PostDB> selectAll();
 	public abstract String ottieniPercorso(PostDB m);
 	
-	//ritorna l'id di tutti i post relativi ad un profilo ordinati per dataPubblicazione, oraInvio
+	//ritorna l'id e il percorso di tutti i post relativi ad un profilo ordinati per dataPubblicazione, oraInvio
 	public ArrayList<String> ritornaPostDiUnProfilo(String idProfilo);
 	
 	//Ritorna un'arrayList con tutte le informazioni relative ad un determinato post
