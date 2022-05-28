@@ -78,7 +78,7 @@ public class Profilo implements IProfilo {
 	
 
 	//costruttore per la conversione profiloDB
-	public 	Profilo(String idProfilo, String nickname, String descrizione,int numFollower,int numSeguiti, int numPost, 
+	public Profilo(String idProfilo, String nickname, String descrizione,int numFollower,int numSeguiti, int numPost, 
 			boolean esiste, boolean pswCambiata, boolean loggato,String psw,String fotoProfilo) {
 		this.dbfacade = dbfacade.getIstance();
 		this.idProfilo = idProfilo;
