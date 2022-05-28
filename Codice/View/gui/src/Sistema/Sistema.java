@@ -167,14 +167,14 @@ public class Sistema {
 	 	}
 	 	
 	 	
-	 	public void pubblicaPost(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 	public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
 	 		p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
 	 		
 	 		if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
-	 			pubblicaPost(descrizione, visibile, condivisibile, profilo, percorso, isHd);
+	 			pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		}
 	 		
 	 		profiloAttivo.creaPost(p);

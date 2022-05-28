@@ -18,18 +18,17 @@ public class Controller {
     
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
                            gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
-                           gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePost, gestoreHomeCreazionePost,
+                           gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto;
-    
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
-    private String postAttuale = "";
+    private int postAttuale = -1;
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     
@@ -147,17 +146,9 @@ public class Controller {
                     }
                 };
                 view.getCercaButton().addActionListener(gestoreCerca);
+       
                 
-                gestorePubblicaSoloTesto = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	//model.pubblicaTesto("mi piace la fava", false, null, null, null);   
-                    	setPostAttuale("postTesto");
-                    	view.getFileChooser().setVisible(false);
-                    	mostraSchermata("CreazionePost");
-                    }
-                };
-                view.getPIdeaButton().addActionListener(gestorePubblicaSoloTesto);
+              
     }
     
     public void actionListenersImpostazioni() {
@@ -241,15 +232,17 @@ public class Controller {
     
     public void actionListenersCreazionePost() {
     	//ActionListeners schermata CreazionePost
-        gestoreCreazionePost = new ActionListener() {
+        gestoreCreazionePostFoto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	setPostAttuale("postFoto");
+            	setPostAttuale(0);
+            	System.out.println("hai cliccato Post Foto");
+            	view.getFileChooser().setVisible(true);
                 mostraSchermata("CreazionePost");
             }
         };
-        view.getCreazionePostButton().addActionListener(gestoreCreazionePost);
-        
+        view.getCreazionePostButton().addActionListener(gestoreCreazionePostFoto);
+   
         gestoreHomeCreazionePost = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -257,19 +250,25 @@ public class Controller {
             }
         };
         view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
-        
+   
         gestorePubblicaPost = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                pubblicaPost();
+            	pubblicaPost();
             }
-                /*boolean success = false
-                        if(success = true) {
-                mostraSchermata("Home");
-            }*/
         };
         view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
-    
+        
+        gestorePubblicaSoloTesto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	//model.pubblicaTesto("mi piace la fava", false, null, null, null);   
+            	setPostAttuale(1);
+            	view.getFileChooser().setVisible(false);
+            	mostraSchermata("CreazionePost");
+            }
+        };
+        view.getPIdeaButton().addActionListener(gestorePubblicaSoloTesto);
     }
     
     public void actionListenersRicerca(){
@@ -537,14 +536,17 @@ public class Controller {
     public void pubblicaPost() {
         String percorsoFilePost = view.ottieniPercorsoFile();
         String commentoPost = view.ottieniCommento();
-        if(getPostAttuale() == "postFoto") {
-            model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+    	System.out.println("post attuale =" + getPostAttuale());
+    	
+        if(getPostAttuale() == 0) {
+            model.pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
         }
-        else if(getPostAttuale() == "postTesto") {
+        else if(getPostAttuale() == 1) {
+    
         	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
         }
-        else if(getPostAttuale() == "Pubblica un sondaggio") {
-        	model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        else if(getPostAttuale() == 2) {
+        	//model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
         }
         
     }
@@ -603,11 +605,11 @@ public class Controller {
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     
-    public String getPostAttuale() {
+    public int getPostAttuale() {
 		return postAttuale;
 	}
 
-	public void setPostAttuale(String postAttuale) {
+	public void setPostAttuale(int postAttuale) {
 		this.postAttuale = postAttuale;
 	}
 }
