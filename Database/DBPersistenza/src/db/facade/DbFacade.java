@@ -8,6 +8,8 @@ import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.follow.Follow;
+import db.LikeDislike.LikeMap.LikeMapDao;
+import db.LikeDislike.dislikeMap.DislikeMapDao;
 import db.commento.CommentoDB;
 import db.commento.CommentoDao;
 import db.follow.FollowDB;
@@ -36,7 +38,8 @@ public class DbFacade {
 	private GruppoDao gDao;
 	private ProfiloDao pDao;
 	private FollowDao flDao;
-	
+	private LikeMapDao lDao;
+	private DislikeMapDao dDao;
 	
 	private DbFacade() {
 		mDao = null;
@@ -45,6 +48,8 @@ public class DbFacade {
 		gDao = new GruppoDao();
 		pDao = new ProfiloDao();
 		flDao = new FollowDao();
+		lDao = new LikeMapDao();
+		dDao = new DislikeMapDao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -364,9 +369,47 @@ public class DbFacade {
 		return flDao.cercaProfSeguito(s);
 	}
 	
+	//Like e Dislike
 	
+	public boolean caricaLikeMap(String profilo, String post) {
+	
+		return lDao.carica(profilo, post);
+	}
+	
+	public boolean rimuoviLike(String profilo,String post) {
+		return lDao.rimuovi(profilo, post);
+	}
+	
+	public ArrayList<String> cercaLikeMap(String s1, String s2){
+		return lDao.cerca(s1, s2);
+	}
+	
+	public boolean caricaDislikeMap(String profilo, String post) {
+		return dDao.carica(profilo, post);
+	}
+	public boolean rimuoviDislike(String profilo,String post) {
+		return dDao.rimuovi(profilo, post);
+	}
+	
+	public ArrayList<String> cercaDislikeMap(String s1, String s2){
+		return dDao.cerca(s1, s2);
+	}
 	
 	//Alcuni metodi utility
+	
+	public boolean presenteLikeMap(String s1,String s2) {
+		ArrayList<String> res = this.cercaLikeMap(s1, s2);
+		if(res.isEmpty() == true)
+			return false;
+		return true;
+	}
+	
+	public boolean presenteDislikeMap(String s1,String s2) {
+		ArrayList<String> res = this.cercaDislikeMap(s1, s2);
+		if(res.isEmpty() == true)
+			return false;
+		return true;
+	}
 	
 	
 	//Ritorna true se l'account inserito e' "seguibile"

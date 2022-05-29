@@ -44,8 +44,6 @@ public class Profilo implements IProfilo {
 	private boolean loggato;
 	private boolean accountesistente;
 	private boolean isPswCambiata;
-	private HashMap<String,String> likeMap;
-	private HashMap<String,String> dislikeMap;
 	//funzione richiamata dal signUP
 	
 	
@@ -59,8 +57,6 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.password = "Cambiami";
-		likeMap = new HashMap<>();
-		dislikeMap = new HashMap<>();
 	}
 	
 	public Profilo(String idProfilo) {
@@ -73,8 +69,6 @@ public class Profilo implements IProfilo {
 		this.numSeguiti = 0;
 		this.numPost = 0;
 		this.password = "Cambiami";
-		likeMap = new HashMap<>();
-		dislikeMap = new HashMap<>();
 	}
 	
 
@@ -93,8 +87,6 @@ public class Profilo implements IProfilo {
 		this.loggato = loggato;
 		this.password = psw;
 		this.fotoProfilo = fotoProfilo;
-		likeMap = new HashMap<>(); 
-		dislikeMap = new HashMap<>();
 	}
 
 public String getIdProfilo() {
@@ -166,21 +158,6 @@ public void setPassword(String password) {
 	this.password = password;
 }
 
-public HashMap<String, String> getLikeMap() {
-	return likeMap;
-}
-
-public void setLikeMap(HashMap<String, String> likeMap) {
-	this.likeMap = likeMap;
-}
-
-public HashMap<String, String> getDislikeMap() {
-	return dislikeMap;
-}
-
-public void setDislikeMap(HashMap<String, String> dislikeMap) {
-	this.dislikeMap = dislikeMap;
-}
 
 public String getFotoProfilo() {
 	return fotoProfilo;
@@ -195,8 +172,7 @@ public void setFotoProfilo(String fotoProfilo) {
 public String toString() {
 	return "Profilo [idProfilo=" + idProfilo + ", nickname=" + nickname + ", descrizione=" + descrizione
 			+ ", numFollower=" + numFollower + ", numSeguiti=" + numSeguiti + ", numPost=" + numPost + ", password=" + password + ", fotoProfilo=" + fotoProfilo + ", loggato=" + loggato + ", accountesistente="
-			+ accountesistente + ", isPswCambiata=" + isPswCambiata + ", likeMap=" + likeMap + ", dislikeMap="
-			+ dislikeMap + "]";
+			+ accountesistente + ", isPswCambiata=" + isPswCambiata + "]";
 }
 
 
@@ -654,18 +630,20 @@ public ArrayList<Gruppo> selectAllGruppo(){
 }
 //-------------------------------------------------------------------------------------------------------------------
 
-
+// Like / Dislike
 @Override
 public boolean aggiungiLike(Post p){
 	
-	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true)
+	if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+	    System.out.println("Hai gia' messo like a questo post");
 		return false;
+	}
 	else {
 				
-	    int i = p.getNumLike();
+	    int i = dbfacade.vediNumLike(p);
         i++;
-        p.setNumLike(i);
-        likeMap.put(this.getIdProfilo(), p.getIdPost());
+        dbfacade.modificaNumLike(p, i);
+        dbfacade.caricaLikeMap(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
 	
@@ -674,28 +652,32 @@ public boolean aggiungiLike(Post p){
 
 @Override
 public boolean aggiungiDislike(Post p){
-	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true)
+	if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+	    System.out.println("Hai gia' messo dislike a questo post");
 		return false;
+	}
 	else {
-				
-	    int i = p.getNumLike();
-        i++;
-        p.setNumLike(i);
-        dislikeMap.put(this.getIdProfilo(), p.getIdPost());
-	    return true;
+			
+		 int i = dbfacade.vediNumDislike(p);
+	        i++;
+	        dbfacade.modificaNumDislike(p, i);
+	        dbfacade.caricaDislikeMap(this.getIdProfilo(), p.getIdPost());
+		    return true;
 	}
 }
 
 @Override
 public boolean rimuoviLike(Post p){
 
-	if(likeMap.containsValue(p.getIdPost()) == true && likeMap.containsKey(this.getIdProfilo()) == true) {
-		int i = p.getNumLike();
-		i--;
-		p.setNumLike(i);
-		likeMap.remove(this.getIdProfilo(), p.getIdPost());
-		return true;
+	if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+		
+		int i = dbfacade.vediNumLike(p);
+        i--;
+        dbfacade.modificaNumLike(p, i);
+        dbfacade.rimuoviLike(this.getIdProfilo(), p.getIdPost());
+	    return true;
 	}
+	System.out.println("Su questo post non e' presente il tuo like");
 	return false;
 
 }
@@ -703,13 +685,15 @@ public boolean rimuoviLike(Post p){
 @Override
 public boolean rimuoviDislike(Post p){
 	
-	if(dislikeMap.containsValue(p.getIdPost()) == true && dislikeMap.containsKey(this.getIdProfilo()) == true) {
-		int i = p.getNumDislike();
-		i--;
-		p.setNumDislike(i);
-		dislikeMap.remove(this.getIdProfilo(), p.getIdPost());
-		return true;
+	if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+		
+		int i = dbfacade.vediNumDislike(p);
+        i--;
+        dbfacade.modificaNumDislike(p, i);
+        dbfacade.rimuoviDislike(this.getIdProfilo(), p.getIdPost());
+	    return true;
 	}
+	System.out.println("Su questo post non e' presente il tuo dislike");
 	return false;
 	
 }
