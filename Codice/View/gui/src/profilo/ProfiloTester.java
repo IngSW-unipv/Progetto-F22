@@ -48,7 +48,7 @@ public class ProfiloTester {
     	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
     	for(Post pst : res)
    		System.out.println(pst.toString()); */
-    	/*try {
+    	try {
 			System.out.println(p1.segui(p2));
 		} catch (AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
@@ -67,7 +67,7 @@ public class ProfiloTester {
 		} catch (AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
     	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
     	for(String str : res)
     		System.out.println(str.toString());

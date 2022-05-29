@@ -43,7 +43,7 @@ public class Testo extends Post {
 	}
 	@Override
 	public String getPercorso() {
-		return null;
+		return "null";
 	}
 }
 	
