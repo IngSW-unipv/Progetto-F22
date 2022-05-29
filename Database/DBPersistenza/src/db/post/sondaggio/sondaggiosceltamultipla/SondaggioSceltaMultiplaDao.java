@@ -34,7 +34,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 
 			while(rs1.next())
 			{
-				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12));
+				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12),rs1.getInt(13),rs1.getInt(14),rs1.getInt(15),rs1.getInt(16));
 				result.add(sdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -83,14 +83,19 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 
 		try
 		{
-			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=? where idSondaggio=?";
+			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=,count1s=?,count2s=?,count3s=?,count4s=? where idSondaggio=?";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s[0]);
 			st1.setString(2, s[1]);
 			st1.setString(3, s[2]);
 			st1.setString(4, s[3]);
-			st1.setString(5, p.getIdPost());
+			st1.setInt(5, 0);
+			st1.setInt(6, 0);
+			st1.setInt(7, 0);
+			st1.setInt(8, 0);
+
+		st1.setString(9, p.getIdPost());
 			
 			st1.executeUpdate();
 
@@ -148,7 +153,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 
 			while(rs1.next())
 			{
-				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12));
+				SondaggioSceltaMultiplaDB sdb = new SondaggioSceltaMultiplaDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4),rs1.getInt(5),rs1.getInt(6), rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10), rs1.getString(11), rs1.getString(12),rs1.getInt(13),rs1.getInt(14),rs1.getInt(15),rs1.getInt(16));
 
 				DBConnection.closeConnection(conn);
 
@@ -385,6 +390,201 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		try
 		{
 			String query="update sondaggiosceltamultipla set numDislike=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+	public int vediCount1s(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT count1s FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("count1s");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+
+	public boolean modificaCount1s(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set count1s=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+	public int vediCount2s(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT count2s FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("count2s");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+	public boolean modificaCount2s(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set count2s=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
+	public int vediCount3s(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT count3s FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("count3s");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+	public boolean modificaCount3s(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set count3s=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+	
+	public int vediCount4s(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT count4s FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("count4s");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+	public boolean modificaCount4s(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set count4s=? where idSondaggio=?";
 			st1 = conn.prepareStatement(query);
 			st1.setInt(1, n);
 			st1.setString(2, p.getIdPost());

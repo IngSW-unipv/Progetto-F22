@@ -20,11 +20,14 @@ import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
 import db.post.PostDB;
 import db.post.PostDao;
+import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDao;
+import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDao;
 import db.profilo.ProfiloDB;
 import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
+import post.sondaggio.Sondaggio;
 import convertitore.ConvertitoreFacade;
 
 public class DbFacade {
@@ -40,6 +43,9 @@ public class DbFacade {
 	private FollowDao flDao;
 	private LikeMapDao lDao;
 	private DislikeMapDao dDao;
+	private SondaggioDoppiaVotazioneDao sdv;
+	private SondaggioSceltaMultiplaDao ssm;
+	
 	
 	private DbFacade() {
 		mDao = null;
@@ -50,6 +56,8 @@ public class DbFacade {
 		flDao = new FollowDao();
 		lDao = new LikeMapDao();
 		dDao = new DislikeMapDao();
+		sdv = new SondaggioDoppiaVotazioneDao();
+		ssm = new SondaggioSceltaMultiplaDao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -252,6 +260,55 @@ public class DbFacade {
     	pstDao = Utility.convertiTipoPost(p.getTipo());
         return pstDao.modificaNumDislike(ConvertitoreFacade.getIstance().converti(p), n);
     }
+    
+    //Solo sondaggi
+    
+    public int vediCount1SDV(Post p) {
+         return sdv.vediCount1s(ConvertitoreFacade.getIstance().converti(p));
+    }
+    public int vediCount2SDV(Post p) {
+        return sdv.vediCount2s(ConvertitoreFacade.getIstance().converti(p));
+   }
+    
+    public boolean modificaCount1SDV(Post p, int n) {
+    	return sdv.modificaCount1s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    public boolean modificaCount2SDV(Post p, int n) {
+    	return sdv.modificaCount2s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    
+    
+    
+    
+    
+    
+    public int vediCount1SSM(Post p) {
+        return ssm.vediCount1s(ConvertitoreFacade.getIstance().converti(p));
+   } 
+    public int vediCount2SSM(Post p) {
+       return ssm.vediCount2s(ConvertitoreFacade.getIstance().converti(p));
+  } 
+    public int vediCount3SSM(Post p) {
+      return ssm.vediCount3s(ConvertitoreFacade.getIstance().converti(p));
+ } 
+    public int vediCount4SSM(Post p) {
+     return ssm.vediCount4s(ConvertitoreFacade.getIstance().converti(p));
+}
+    
+   
+    public boolean modificaCount1SSM(Post p, int n) {
+    	return ssm.modificaCount1s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    public boolean modificaCount2SSM(Post p, int n) {
+    	return ssm.modificaCount2s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    public boolean modificaCount3SSM(Post p, int n) {
+    	return ssm.modificaCount3s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    public boolean modificaCount4SSM(Post p, int n) {
+    	return ssm.modificaCount4s(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    
     
 	//Profilo
 	

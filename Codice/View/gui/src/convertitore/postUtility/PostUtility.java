@@ -33,12 +33,12 @@ public class PostUtility {
 		}
 		else if(p.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazione f = (SondaggioDoppiaVotazione) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
+			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(),0,0); 
 			return sdv;
 		}
 		else if(p.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultipla f = (SondaggioSceltaMultipla) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
+			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(),0,0,0,0);
 			return ssm;
 		}
 		else if(p.getTipo() == TipoPost.TESTO) {
@@ -103,14 +103,14 @@ public class PostUtility {
 		}
 		if(p.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazione f = (SondaggioDoppiaVotazione) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
+			SondaggioDoppiaVotazioneDB sdv = new SondaggioDoppiaVotazioneDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(),0,0); 
 			s[0] = sdv.getPrimaScelta();
 			s[1] = sdv.getSecondaScelta();
 			return s;
 		}
 		if(p.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultipla f = (SondaggioSceltaMultipla) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
+			SondaggioSceltaMultiplaDB ssm = new SondaggioSceltaMultiplaDB(f.getIdPost(), f.getDataPubblicazione(), f.getOraPubblicazione(), f.getDescrizione(),f.getNumLike(),f.getNumDislike(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(),0,0,0,0);
 			s[0] = ssm.getPrimaScelta();
 			s[1] = ssm.getSecondaScelta();
 			s[2] = ssm.getTerzaScelta();

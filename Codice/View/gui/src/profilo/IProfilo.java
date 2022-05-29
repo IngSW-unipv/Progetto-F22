@@ -15,11 +15,13 @@ import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
+import post.sondaggio.Sondaggio;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
 
 public interface IProfilo {
@@ -71,6 +73,9 @@ public interface IProfilo {
 	
 	public boolean vediVisibilita(Post p);
 	public boolean modificaVisibilita(Post p, boolean b);
+	
+	public boolean aggiungiVotoSondaggio(Sondaggio s)throws TastoNonEsistente;
+	public void vediRisultatiSondaggio(Sondaggio s);
 	
     //Profilo
     

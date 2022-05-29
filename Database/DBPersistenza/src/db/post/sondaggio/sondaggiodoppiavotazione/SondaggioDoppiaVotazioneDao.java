@@ -34,7 +34,7 @@ public ArrayList<PostDB> selectAll() {
 
 			while(rs1.next())
 			{
-				SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10));
+				SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10),rs1.getInt(11),rs1.getInt(12));
 				result.add(sdb);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -83,12 +83,14 @@ public boolean inserisciChiavi(PostDB p, String[] s, int i, boolean b) {
 
 	try
 	{
-		String query="update sondaggioDoppiaVotazione set primaScelta=?, secondaScelta=? where idSondaggio=?";
+		String query="update sondaggioDoppiaVotazione set primaScelta=?, secondaScelta=?, count1s=?,count2s=? where idSondaggio=?";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, s[0]);
 		st1.setString(2, s[1]);
-		st1.setString(3, p.getIdPost());
+		st1.setInt(3, 0);
+		st1.setInt(4, 0);
+		st1.setString(5, p.getIdPost());
 		
 		st1.executeUpdate();
 
@@ -144,7 +146,7 @@ public PostDB cercaPost(PostDB s) {
 
 		while(rs1.next())
 		{
-			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10));
+			SondaggioDoppiaVotazioneDB sdb = new SondaggioDoppiaVotazioneDB(rs1.getString(1), rs1.getDate(2), rs1.getTime(3), rs1.getString(4), rs1.getInt(5),rs1.getInt(6),rs1.getBoolean(7), rs1.getString(8), rs1.getString(9), rs1.getString(10),rs1.getInt(11),rs1.getInt(12));
 
 			DBConnection.closeConnection(conn);
             return sdb;
@@ -386,6 +388,102 @@ public boolean modificaNumDislike(PostDB p, int n) {
 	return esito;
 }
 
+public int vediCount1s(PostDB p) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	ResultSet rs1;
+
+	try
+	{
+		String query="SELECT count1s FROM sondaggiodoppiavotazione WHERE idSondaggio=?";
+
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, p.getIdPost());
+
+		rs1=st1.executeQuery();
+
+		while(rs1.next())
+		{
+			int i = rs1.getInt("count1s");
+			DBConnection.closeConnection(conn);
+			return i;
+		
+		}
+	}catch (Exception e){e.printStackTrace();}
+	return -1;
+}
+
+public boolean modificaCount1s(PostDB p, int n) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update sondaggiodoppiavotazione set count1s=? where idSondaggio=?";
+		st1 = conn.prepareStatement(query);
+		st1.setInt(1, n);
+		st1.setString(2, p.getIdPost());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+
+public int vediCount2s(PostDB p) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	ResultSet rs1;
+
+	try
+	{
+		String query="SELECT count2s FROM sondaggiodoppiavotazione WHERE idSondaggio=?";
+
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, p.getIdPost());
+
+		rs1=st1.executeQuery();
+
+		while(rs1.next())
+		{
+			int i = rs1.getInt("count2s");
+			DBConnection.closeConnection(conn);
+			return i;
+		
+		}
+	}catch (Exception e){e.printStackTrace();}
+	return -1;
+}
+public boolean modificaCount2s(PostDB p, int n) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update sondaggiodoppiavotazione set count2s=? where idSondaggio=?";
+		st1 = conn.prepareStatement(query);
+		st1.setInt(1, n);
+		st1.setString(2, p.getIdPost());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
 
 
 }

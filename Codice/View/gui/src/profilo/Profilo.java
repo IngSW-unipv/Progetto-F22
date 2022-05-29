@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.Timer;
 
 import Messaggio.Messaggio;
@@ -26,6 +27,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
 import java.util.TimerTask;
 
@@ -474,7 +476,81 @@ public boolean modificaVisibilita(Post p, boolean b) {
 	return dbfacade.modificaVisibilita(p, b);
 }
 
+@Override
+public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
+	if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+		SondaggioDoppiaVotazione res = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
+		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + res.getPrimaScelta() + "\n" + "2 = " + res.getSecondaScelta());
+	    Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt(); 
+        switch(a) {
+        case 1 : int i1 = dbfacade.vediCount1SDV(s);
+                 i1 = i1 + 1;
+                 dbfacade.modificaCount1SDV(s, i1);
+        	     break;
+        case 2 : 
+        	int i2 = dbfacade.vediCount2SDV(s);
+            i2 = i2 + 1;
+            dbfacade.modificaCount2SDV(s, i2);
+                 break;
+        default:
+        	scanner.close();
+        	throw new TastoNonEsistente();
+        }
+        scanner.close();
+        return true;
+	}
+	else if (s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+		SondaggioSceltaMultipla res = (SondaggioSceltaMultipla) dbfacade.cerca(s);
+		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + res.getPrimaScelta() + "\n" + "2 = " + res.getSecondaScelta() + "\n" + "3 = " + res.getTerzaScelta() + "\n" + "4 = " + res.getQuartaScelta());
+	    Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt(); 
+        switch(a) {
+        case 1 : int i1 = dbfacade.vediCount1SSM(s);
+                 i1 = i1 + 1;
+                 dbfacade.modificaCount1SSM(s, i1);
+        	     break;
+        case 2 : 
+        	int i2 = dbfacade.vediCount2SSM(s);
+            i2 = i2 + 1;
+            dbfacade.modificaCount2SSM(s, i2);
+                 break;
+        case 3:
+        	int i3 = dbfacade.vediCount3SSM(s);
+            i3 = i3 + 1;
+            dbfacade.modificaCount3SSM(s, i3);
+             break;
+        case 4:
+        	int i4 = dbfacade.vediCount4SSM(s);
+            i4 = i4 + 1;
+            dbfacade.modificaCount4SSM(s, i4);
+             break;
+        default:
+        	scanner.close();
+        	throw new TastoNonEsistente();
+        }
+        scanner.close();
+        return true;
+	}
+	return false;
+}
 
+@Override
+public void vediRisultatiSondaggio(Sondaggio s) {
+	if(s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+		SondaggioDoppiaVotazione sdv = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
+		System.out.println("L'opzione " + sdv.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SDV(s) + " voti\n"
+				+ "L'opzione " + sdv.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n");
+	}
+	else if(s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+		SondaggioSceltaMultipla ssm = (SondaggioSceltaMultipla) dbfacade.cerca(s);
+		System.out.println("L'opzione " + ssm.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SSM(s) + " voti\n"
+				+ "L'opzione " + ssm.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n"
+				+ "L'opzione " + ssm.getTerzaScelta() + " ha totalizzato " + dbfacade.vediCount3SSM(s) + " voti\n"
+				+ "L'opzione " + ssm.getQuartaScelta() + " ha totalizzato " + dbfacade.vediCount4SSM(s) + " voti\n");
+	}
+	
+}
 
 //------------------------------------------------------------------------------------------------------------------
 
@@ -697,6 +773,7 @@ public boolean rimuoviDislike(Post p){
 	return false;
 	
 }
+
 
 }
 

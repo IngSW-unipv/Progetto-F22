@@ -6,8 +6,11 @@ import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
+import post.sondaggio.SondaggioDoppiaVotazione;
+import post.sondaggio.SondaggioSceltaMultipla;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.TastoNonEsistente;
 
 public class ProfiloTester {
 	
@@ -15,7 +18,8 @@ public class ProfiloTester {
     //	Profilo p = new Profilo("001", "Girella");
     	Profilo p1 = new Profilo("DV999", "Luca26");
     	Foto f = new Foto("F01", null, false, null, null, false);
-    	
+    	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null, null);
+    	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null, null);
     //Commento c = new Commento("C01", "001", "F01", "aadhd");
     	//p.pubblicaCommento(c);
     //	MessaggioDiGruppo m = new MessaggioDiGruppo("006", null, null, null, null, "G00");
@@ -43,7 +47,7 @@ public class ProfiloTester {
     	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
     	for(Post pst : res)
    		System.out.println(pst.toString()); */
-    	System.out.println(p1.aggiungiDislike(f));
+    	p1.vediRisultatiSondaggio(sdv);
     }
     }
 
