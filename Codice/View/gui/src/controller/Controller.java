@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import Sistema.Sistema;
 import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
+import post.enumeration.TipoPost;
 import profilo.exception.*;
 
 public class Controller {
@@ -151,6 +152,7 @@ public class Controller {
                 
               
     }
+    
     
     public void actionListenersImpostazioni() {
     	gestoreLogOut = new ActionListener() {
@@ -612,7 +614,7 @@ public class Controller {
     	view.getEtichettaNome().setText(nickName);
         view.setSchermataDati(numPost, numFollower, numSeguiti);
         view.setFotoProfilo(fotoProfilo);
-        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo);
+        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
         view.setPostProfilo(postDelProfilo);
         refresh();
     }
@@ -638,10 +640,6 @@ public class Controller {
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
-		   for (int i = 0; i < view.getNumeroCommentiTotali(); i ++) {
-    		   System.out.println(commentiConProfiliIinvianti.get(i));
-		   }
-    	System.out.println("ci arrivo");
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     

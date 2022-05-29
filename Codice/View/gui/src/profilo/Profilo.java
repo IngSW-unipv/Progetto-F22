@@ -511,9 +511,9 @@ public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio 
 }
 
 
-@Override
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f) {
-	return dbfacade.ottieniIdPost(f, p);
+
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost tipoPost) {
+	return dbfacade.ottieniIdPost(tipoPost, p);
     
 }
 
@@ -658,6 +658,12 @@ public boolean rimuoviDislike(Post p){
 	}
 	return false;
 	
+}
+
+@Override
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f) {
+	// TODO Auto-generated method stub
+	return null;
 }
 }
 

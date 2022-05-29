@@ -22,7 +22,6 @@ import panelspackage.panels.elements.SpecificContainer;
 @SuppressWarnings("serial")
 public class Frame extends JFrame {
 
-	
 	int i;
 	
 	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
@@ -30,6 +29,7 @@ public class Frame extends JFrame {
 
 	private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	private SpecificContainer FrameMainContainer;
+	
 	
 	// liste di prova
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};

@@ -30,6 +30,7 @@ public class  Profilo extends JPanel {
 		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
 	}
 	
+	
 	public void avvio() {
 		this.setOpaque(true);
 		this.setVisible(true);
@@ -42,8 +43,8 @@ public class  Profilo extends JPanel {
 		add(containerNorth, BorderLayout.NORTH);
 		
 		containerNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.WEST);
-		containerNorth.add(apriChat = new Pulsanti("Apri Chat"), BorderLayout.CENTER);
+		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.CENTER);
+		containerNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		
 		SpecificContainer containerCenter = new SpecificContainer();

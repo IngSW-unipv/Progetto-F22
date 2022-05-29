@@ -28,6 +28,7 @@ public class Ricerca extends JPanel {
 	
 	int i;
 
+	
 	public Ricerca() {
 		
 		avvio();

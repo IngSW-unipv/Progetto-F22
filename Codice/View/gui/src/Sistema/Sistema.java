@@ -3,6 +3,7 @@ package Sistema;
 import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -129,10 +130,10 @@ public class Sistema {
 		  //chatCercata = dbfacade.cerca(new chatDiGruppo);
 	  }
 	 
-	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo) {
+	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo, TipoPost tipoPost) {
 		 
 		
-		ArrayList<String> idDeiPostDiUnProfilo = profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), new Foto("110", null, false, null, null, false));
+		ArrayList<String> idDeiPostDiUnProfilo = profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), tipoPost);
 		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
 		}
 		
