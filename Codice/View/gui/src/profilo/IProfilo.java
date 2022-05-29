@@ -28,7 +28,7 @@ public interface IProfilo {
 	//Messaggi
 	
 	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String profiloInviante,String idGruppo);
-	public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String idProfiloInviante, String idProfiloRicevente);
+	public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String multimedia,String idProfiloInviante, String idProfiloRicevente);
 	public boolean scriviMessaggio(Messaggio m);
 	public boolean rimuoviMessaggio(Messaggio m);
 	
@@ -119,4 +119,5 @@ public interface IProfilo {
 	public boolean aggiungiDislike(Post p);
 	public boolean rimuoviLike(Post p);
 	public boolean rimuoviDislike(Post p);
-	}
+}
+

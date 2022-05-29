@@ -20,9 +20,10 @@ public class Controller {
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
-                           gestorePulsanteSegui, gestoreApriChat;
+                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio;
     Frame view;
     Sistema model;
+    
     private String schermataAttuale = "Login";
     private int postAttuale = -1;
     private String tipoPostDaPubblicare = null;
@@ -47,6 +48,7 @@ public class Controller {
         actionListenersChat();
         actionListenersNotifiche();
         actionListenersPostVisualizzato();
+        actionListenersAreaChatFrame();
     }
 
     public void actionListenersNotifiche() {
@@ -217,8 +219,8 @@ public class Controller {
         gestoreApriChat = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("presto pulsante");
-                mostraSchermata("Chat");
+            	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
+            	mostraSchermata("AreaChatFrame");
             }
         };
         view.getApriChat().addActionListener(gestoreApriChat);
@@ -508,9 +510,21 @@ public class Controller {
     		   }
     	   }
        };
-       view.getPrevCommento().addActionListener(gestorePrevCommento);
- 
+       view.getPrevCommento().addActionListener(gestorePrevCommento);    
     }
+    public void actionListenersAreaChatFrame() {
+    	
+    	gestoreInvioMessaggio = new ActionListener() {
+     	   @Override
+     	   public void actionPerformed(ActionEvent e) {
+     		  scriviMessaggioPrivato();
+     	   }
+     	   
+        };
+        view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);    
+     }
+    	
+   
         
     public void refresh() {
         view.invalidate();
@@ -608,9 +622,6 @@ public class Controller {
     }
     
     public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfilo, String idProfilo) {
-    	//model.getProfiloAttivo().getNickname()
-    	//model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti()
-    	//model.getProfiloAttivo().getFotoProfilo()
     	view.getEtichettaNome().setText(nickName);
         view.setSchermataDati(numPost, numFollower, numSeguiti);
         view.setFotoProfilo(fotoProfilo);
@@ -628,6 +639,7 @@ public class Controller {
         view.getTestoRicercaInSchermataRicerca().setText(risultatoRicerca);
         view.impostaRisultatiRicerca(risultatoRicerca);
         model.ricerca(view.getTestoRicerca());
+        refresh();
     }
     
     public void aggiungiCommento() {
@@ -641,6 +653,10 @@ public class Controller {
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
     	view.settaCommenti(commentiConProfiliIinvianti);
+    }
+    public void scriviMessaggioPrivato() {
+    	String testoDaInviare = view.getScriviMessaggio().getText();
+    	model.scriviMessaggio(testoDaInviare, null, model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
     }
     
     public int getPostAttuale() {

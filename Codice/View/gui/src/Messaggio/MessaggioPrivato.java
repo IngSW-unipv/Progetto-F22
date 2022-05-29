@@ -12,6 +12,15 @@ public class MessaggioPrivato extends Messaggio{
 
 		this.idProfiloRicevente = idProfiloRicevente;
 	}
+	
+	public MessaggioPrivato(String id) {
+		super(id);
+	}
+	
+	public MessaggioPrivato(String id, String testo, String multimedia, String profiloInviante, String idProfiloRicevente) {
+		super(id, testo, multimedia,profiloInviante);
+		this.idProfiloRicevente = idProfiloRicevente;
+	}
 
 	private String idProfiloRicevente;
 	

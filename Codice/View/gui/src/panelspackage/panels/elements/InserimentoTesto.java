@@ -24,5 +24,6 @@ public class InserimentoTesto extends JTextField {
 		this.setForeground(colore);
 		this.setFont(font);
 		this.setSize(dim, 0);
+		this.setVisible(true);
 	}
 }

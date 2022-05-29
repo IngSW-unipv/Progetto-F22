@@ -271,9 +271,9 @@ public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time o
 	   return m;
 }
 @Override
-public MessaggioPrivato creaMessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,
+public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String multimedia,
 		String idProfiloInviante, String idProfiloRicevente) {
-	 MessaggioPrivato m = new MessaggioPrivato(id,dataInvio,oraInvio,testo,multimedia,idProfiloInviante,idProfiloRicevente);
+	 MessaggioPrivato m = new MessaggioPrivato(id,testo,multimedia,idProfiloInviante,idProfiloRicevente);
 	 return m;
 }
 @Override

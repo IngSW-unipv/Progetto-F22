@@ -18,7 +18,7 @@ public class AreaChatFrame extends JPanel {
 	private AreaDiTesto messaggi;
 	private InserimentoTesto scriviMessaggio;
 	private Pulsanti invia;
-	private Pulsanti esci;
+	private Pulsanti home;
 	
 	public AreaChatFrame() {
 		avvio();
@@ -34,11 +34,9 @@ public class AreaChatFrame extends JPanel {
 	
     public void initComponents() {
     	
-      esci = new Pulsanti("C:\\Users\\aissa\\OneDrive\\Immagini\\torna.png", Color.red, new Font("Arial", 1, 12));
       profilo = new Pulsanti("C:\\\\Users\\\\aissa\\\\OneDrive\\\\Immagini\\\\profiler.png", new Color(204, 255, 255), new Font("Arial", 1, 12));
       SpecificContainer containerNorth = new SpecificContainer();
       this.add(containerNorth, BorderLayout.NORTH);
-      containerNorth.add(esci);
       containerNorth.add(profilo);
     	
       messaggi = new AreaDiTesto(Color.pink, 70, 40, new Font("Times New Roman", 1, 12));
@@ -53,11 +51,13 @@ public class AreaChatFrame extends JPanel {
 	  scriviMessaggio.setBackground(Color.LIGHT_GRAY);
       SpecificContainer containerSouth = new SpecificContainer(getBackground());
 	  this.add(containerSouth, BorderLayout.SOUTH);
-	  containerSouth.add(scriviMessaggio);
+	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
 		
 	  invia = new Pulsanti("Invia", Color.cyan, new Font("Times New Roman", 1, 14));
-	  containerSouth.add(invia);
-		
+	  containerSouth.add(invia,BorderLayout.EAST);
+	  
+	  home = new Pulsanti("Home", Color.cyan, new Font("Times New Roman", 1, 14));
+	  containerSouth.add(home,BorderLayout.SOUTH);
     }
     
     
@@ -93,11 +93,8 @@ public class AreaChatFrame extends JPanel {
 		this.profilo = profilo;
 	}
 
-	public Pulsanti getEsci() {
-		return esci;
+	public Pulsanti getHome() {
+		return home;
 	}
 
-	public void setEsci(Pulsanti esci) {
-		this.esci = esci;
-	}
 }

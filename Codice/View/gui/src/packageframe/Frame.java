@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.*;
+
+import panelspackage.panels.AreaChatFrame;
 import panelspackage.panels.Chat;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
@@ -15,6 +17,7 @@ import panelspackage.panels.Ricerca;
 import panelspackage.panels.SignUp;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.PannelloNotifiche;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
@@ -90,6 +93,9 @@ public class Frame extends JFrame {
 		
 		PostVisualizzato postVisualizzato = new PostVisualizzato();
 		mappaSchermate.put("Postvisualizzato", postVisualizzato);
+		
+		AreaChatFrame AreaChatFrame = new AreaChatFrame();
+		mappaSchermate.put("AreaChatFrame", AreaChatFrame);
 	
 	}
 	
@@ -412,5 +418,13 @@ public class Frame extends JFrame {
 	}
 	public Pulsanti getApriChat() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getApriChat();
+	}
+	
+	public InserimentoTesto getScriviMessaggio() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getScriviMessaggio();
+	}
+	
+	public Pulsanti getInviaMessaggio() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getInvia();
 	}
 }

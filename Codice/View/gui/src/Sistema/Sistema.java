@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
+import Messaggio.MessaggioPrivato;
 import chat.Chat;
 import chat.chatDiGruppo.ChatDiGruppo;
 import profilo.exception.*;
@@ -25,7 +26,7 @@ public class Sistema {
 	
 	private DbFacade dbfacade;
 	private Profilo profiloAttivo = null;
-	private Profilo profiloCercato;
+	private Profilo profiloCercato,  profiloConCuiSiStaChattando;
 	private ChatDiGruppo chatCercata;
 	public Sistema()   {
 		dbfacade = DbFacade.getIstance();
@@ -250,6 +251,17 @@ public class Sistema {
 			return listaTestiCommentiConInviante;
 		}
 		
+	public void scriviMessaggio( String testo, String multimediale, String inviante,String ricevente) {
+
+ 		int idMessage = (int)Math.round(Math.random() * 10000);
+ 		String idMessaggio = Integer.toString(idMessage);
+
+ 		if(dbfacade.cerca(new MessaggioPrivato(idMessaggio)) != null) {
+ 			scriviMessaggio(testo, multimediale, inviante, ricevente);
+ 			System.out.println(testo);
+ 		}
+ 		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
+	}
 	public void impostaFotoProfilo(String fotoPath) {
 		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
 	}
@@ -277,6 +289,14 @@ public class Sistema {
 
 	public void setChatCercata(ChatDiGruppo chatCercata) {
 		this.chatCercata = chatCercata;
+	}
+
+	public Profilo getProfiloConCuiSiStaChattando() {
+		return profiloConCuiSiStaChattando;
+	}
+
+	public void setProfiloConCuiSiStaChattando(Profilo profiloConCuiSiStaChattando) {
+		this.profiloConCuiSiStaChattando = profiloConCuiSiStaChattando;
 	}
 	
 	
