@@ -12,6 +12,7 @@ import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
+import convertitore.ConvertitoreFacade;
 import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
@@ -541,10 +542,41 @@ public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio 
 
 
 @Override
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f) {
-	return dbfacade.ottieniIdPost(f, p);
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
+	
+	ArrayList<String> res = dbfacade.ottieniIdPost(f, p);
+	ArrayList<String> resId = new ArrayList<>();
+	ArrayList<Post> pst = new ArrayList<>();
+	ArrayList<Post> search = new ArrayList<>();
+	ArrayList<String> risultato = new ArrayList<>();
+	
+	//Ottengo una lista con solo idPost
+	for(int i=0; i<res.size(); i=i+2) {
+		resId.add(res.get(i));
+	}	
+	
+	//Costruisco una lista di tipo Post con gli idPost
+	for(String string:resId)
+		pst.add(ConvertitoreFacade.getIstance().restituisciTipo(string, f));
+	
+	//La lista search conterra' tutte le informazioni dei post specificati con gli id in precedenza
+	for(Post post : pst)
+		search.add(dbfacade.cerca(post));
+	
+	//La lista finale conterra' il percorso e l'id dei soli post visibili
+	for(Post posttt: search) {
+		if(dbfacade.vediVisibilita(posttt) == true) {
+			risultato.add(posttt.getIdPost());
+		    risultato.add(posttt.getPercorso());
+		}
+	}
+		return risultato;
+	
+	}
+	
+	
     
-}
+
 
 
 //--------------------------------------------------------------------------------------------------------------------

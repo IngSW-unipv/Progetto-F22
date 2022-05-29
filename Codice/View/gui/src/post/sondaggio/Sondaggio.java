@@ -34,7 +34,9 @@ public abstract class Sondaggio extends Post{
 	public String toString() {
 		return super.toString() + ", primaScelta = " + primaScelta + ", secondaScelta = " + secondaScelta ;
 	}
-	
+	public String getPercorso() {
+		return null;
+	}
 	public abstract void aggiungiVoto(int n);
 	public abstract void mostraRisultati();
 	

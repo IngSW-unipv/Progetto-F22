@@ -99,5 +99,6 @@ import post.enumeration.TipoPost;
 	
 	public abstract TipoPost getTipo();
 	public abstract Post inserisciCaratteristiche(Post p);
+	public abstract String getPercorso();
 	}
 

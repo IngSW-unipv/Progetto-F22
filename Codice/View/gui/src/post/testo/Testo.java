@@ -41,6 +41,10 @@ public class Testo extends Post {
 		p = new Testo(p.getIdPost(), p.getDescrizione(), p.isVisibile(), p.getProfilo(), this.getFont(), this.getTitolo());
 		return p;
 	}
+	@Override
+	public String getPercorso() {
+		return null;
+	}
 }
 	
 	

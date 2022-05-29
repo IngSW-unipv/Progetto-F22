@@ -165,7 +165,30 @@ public class PostUtility {
 	}
 	
 	
-	
+    public Post restituisciTipo(String id, TipoPost t) {
+    	Post pst;
+    	if(t == TipoPost.FOTO) {
+    		pst = new Foto(id,null,false, null, id, false);
+    		return pst;
+    	}
+    	else if(t == TipoPost.VIDEO) {
+    		pst = new Video(id,null,false, null, id, 0);
+    		return pst;
+    		}
+    	else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+    		pst = new SondaggioDoppiaVotazione(id,null,false, null, id, id, null);
+    	    return pst;
+    	}
+    	else if (t == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+    		pst = new SondaggioSceltaMultipla(id,null,false, null, id, id, id, id, null);
+    		return pst;
+    	}
+    	else if(t == TipoPost.TESTO) {
+    		pst = new Testo(id,null,false, null, id, id);
+    		return pst;
+    	}
+    	return null;
+    }
 	
 	
 	

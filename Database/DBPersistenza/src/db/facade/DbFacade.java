@@ -204,8 +204,8 @@ public class DbFacade {
      }
      
     //Ottiene gli id e il percorso dei post di un profilo 
-	public ArrayList<String> ottieniIdPost(Post p, Profilo pr){
-		pstDao = Utility.convertiTipoPost(p.getTipo());
+	public ArrayList<String> ottieniIdPost(TipoPost p, Profilo pr){
+		pstDao = Utility.convertiTipoPost(p);
 		return pstDao.ritornaPostDiUnProfilo(pr.getIdProfilo());
 	}
      

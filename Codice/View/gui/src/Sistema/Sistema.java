@@ -3,6 +3,7 @@ package Sistema;
 import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -122,7 +123,7 @@ public class Sistema {
 	 public ArrayList<String> caricaTuttiiPostDiUnProfilo() {
 		 
 		
-		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), new Foto("110", null, false, null, null, false));
+		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), TipoPost.FOTO);
 		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
 			System.out.println(idDeiPostDiUnProfilo.get(i));
 		}

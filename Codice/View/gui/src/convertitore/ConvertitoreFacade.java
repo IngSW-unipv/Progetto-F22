@@ -97,6 +97,9 @@ public class ConvertitoreFacade {
 		return pstUtility.convertiLista(t, p);
 	}
 	
+	public Post restituisciTipo(String id,TipoPost t) {
+		return pstUtility.restituisciTipo(id, t);
+	}
 	
 	//Profilo
 	

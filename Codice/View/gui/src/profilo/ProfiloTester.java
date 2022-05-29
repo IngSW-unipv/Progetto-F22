@@ -68,7 +68,9 @@ public class ProfiloTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-    	System.out.println(p1.rimuoviPost(f1));
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
+    	for(String str : res)
+    		System.out.println(str.toString());
     }
     }
 
