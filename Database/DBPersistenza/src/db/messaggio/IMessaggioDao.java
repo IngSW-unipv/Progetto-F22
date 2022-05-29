@@ -28,4 +28,6 @@ public interface IMessaggioDao {
 	//Seleziona tutti i messaggi di un profilo specificato
 	public ArrayList<MessaggioDB> selezionaMessaggiProfilo(ProfiloDB p);
 	public ArrayList<String> selezionaTestoMessaggiProfilo(ProfiloDB p);
+
+	ArrayList<MessaggioDB> caricaMessaggiChatPrivata(String inviante, String ricevente);
 }

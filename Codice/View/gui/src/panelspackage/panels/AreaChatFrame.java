@@ -24,7 +24,7 @@ public class AreaChatFrame extends JPanel {
 	private AreaDiTesto messaggi;
 	private InserimentoTesto scriviMessaggio;
 	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio;
-	private int indiceMessaggioCorrente = 0;
+	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 	public AreaChatFrame() {
 		avvio();
 		initComponents();
@@ -52,8 +52,7 @@ public class AreaChatFrame extends JPanel {
 	 
      
 		for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
-			messaggiChat.add("messaggio" + i);
-			Etichette areaMessaggio = new Etichette("messaggio" + i, Frame.COLOREPRIMARIOTEMATICO);
+			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO);
 			ListaEtichetteMessaggi.add(areaMessaggio);
 		}
       
@@ -74,8 +73,22 @@ public class AreaChatFrame extends JPanel {
 	  home = new Pulsanti("Home", Color.cyan, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
     }
-    public void aggiornaMessaggi() {
-    	
+    public void aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
+    	this.setNumeroCommentiTotali(messaggi.size()/2);
+
+    	for (int i = 0 ; i<  messaggi.size() &&  i < 9; i++) {
+    		if(messaggi.get(i).equals(inviante)) {
+    			((Etichette)ListaEtichetteMessaggi.get(i*2)).setText("");
+    			((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
+    		} else {
+    			((Etichette)ListaEtichetteMessaggi.get((i*2))).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
+				((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText("");
+    			
+    		}
+    	}
+    }
+    public void settaCommenti(ArrayList<String> commenti) {
+		this.setNumeroCommentiTotali(commenti.size()/2);
     }
     
     public AreaDiTesto getMessaggi() {
@@ -127,11 +140,27 @@ public class AreaChatFrame extends JPanel {
 	}
 
 	public void decrementaIndiceMessaggioCorrente() {
-		this.indiceMessaggioCorrente++;
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
 	}
 	
 	public void incrementaIndiceMessaggioCorrente() {
-		this.indiceMessaggioCorrente--;
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
+	}
+
+	public int getNumeroCommentiTotali() {
+		return numeroCommentiTotali;
+	}
+
+	public void setNumeroCommentiTotali(int numeroCommentiTotali) {
+		this.numeroCommentiTotali = numeroCommentiTotali;
+	}
+
+	public Pulsanti getNextMessaggio() {
+		return nextMessaggio;
+	}
+
+	public Pulsanti getPrevMessaggio() {
+		return prevMessaggio;
 	}
 	
 }

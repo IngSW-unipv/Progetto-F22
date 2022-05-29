@@ -427,4 +427,23 @@ public class Frame extends JFrame {
 	public Pulsanti getInviaMessaggio() {
 		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getInvia();
 	}
+	public void aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
+		((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).aggiornaMessaggi(messaggi, inviante);
+	}
+	public Pulsanti getNextMessaggioButton() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getNextMessaggio();
+	}
+	public Pulsanti getPrevMessaggioButton() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getPrevMessaggio();
+	}
+	public void incrementaIndiceMessaggio() {
+		((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).incrementaIndiceMessaggioCorrente();
+	}
+	public void decrementaIndiceMessaggio() {
+		((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).decrementaIndiceMessaggioCorrente();
+	}
+	public int getIndiceMessaggioCorrente() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getIndiceMessaggioCorrente();
+	}
+	
 }

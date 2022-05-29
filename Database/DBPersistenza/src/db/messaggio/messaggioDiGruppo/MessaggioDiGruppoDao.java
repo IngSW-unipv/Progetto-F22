@@ -286,5 +286,12 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 		return result;
 	}
 
+
+	@Override
+	public ArrayList<MessaggioDB> caricaMessaggiChatPrivata(String inviante, String ricevente) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }

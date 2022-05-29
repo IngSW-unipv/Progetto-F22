@@ -167,6 +167,14 @@ public class DbFacade {
 		return mDao.selezionaTestoMessaggiProfilo(ConvertitoreFacade.getIstance().converti(p));
 	}
 	
+	public ArrayList<Messaggio> caricaMessaggiChatPrivata(String inviante, String ricevente){
+		mDao = Utility.convertiTipoMessaggio(TipoMessaggio.PRIVATO);
+		return ConvertitoreFacade.getIstance().convertiListaMessaggi(TipoMessaggio.PRIVATO, mDao.caricaMessaggiChatPrivata(inviante, ricevente));
+	}
+	
+
+     
+     
 	//Post
 	
      public boolean carica(Post p) {

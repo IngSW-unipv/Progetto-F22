@@ -130,7 +130,41 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 		DBConnection.closeConnection(conn);
 		return null;
 	}
+    
+    @Override
+   	public ArrayList<MessaggioDB> caricaMessaggiChatPrivata(String inviante, String ricevente) {
+    	ArrayList<MessaggioDB> result = new ArrayList<>();
+    	
+   		conn=DBConnection.startConnection(conn,schema);
+   		PreparedStatement st1;
+   		
+   		ResultSet rs1;
 
+   		try
+   		{
+   			String query= "select * from messaggioprivato where(profiloinviante= ? and profiloRicevente =?) or (profiloinviante=? and profiloRicevente=?) order by dataInvio, oraInvio";
+
+   			st1 = conn.prepareStatement(query);
+			st1.setString(1, inviante);
+			st1.setString(2, ricevente);
+			st1.setString(3, ricevente);
+			st1.setString(4, inviante);
+   
+   			rs1=st1.executeQuery();
+
+   			while(rs1.next())
+			{
+				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7));
+				result.add(msg);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+
+		return result;
+	}
+
+ 
     
 	@Override
 	public ArrayList<MessaggioDB> selezionaMessaggi(String s) {
@@ -272,9 +306,5 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 		DBConnection.closeConnection(conn);
 		return result;
 	}
-
-
-
-
 
 }
