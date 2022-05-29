@@ -317,6 +317,10 @@ public boolean leggiMessaggi(String s, TipoMessaggio t) {
 			return true;
 
 }
+public ArrayList<Messaggio> cercaMessaggiChatPrivata(String inviante, String ricevente) {
+	 ArrayList<Messaggio> messaggi = dbfacade.caricaMessaggiChatPrivata(inviante, ricevente);
+	 return messaggi;
+}
 
 
 @Override

@@ -20,7 +20,7 @@ public class Controller {
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
-                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio;
+                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton;
     Frame view;
     Sistema model;
     
@@ -28,7 +28,7 @@ public class Controller {
     private int postAttuale = -1;
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
-    
+    private ArrayList<String> messaggiInviati = new ArrayList<String>();
 
 	public Controller(Sistema s, Frame f) {
         view = f;
@@ -220,6 +220,9 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
+            	ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+            	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+            	refresh();
             	mostraSchermata("AreaChatFrame");
             }
         };
@@ -484,9 +487,7 @@ public class Controller {
        
        gestoreNextCommento = new ActionListener() {
     	   @Override
-    	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("NextCommento");
- 
+    	   public void actionPerformed(ActionEvent e) { 
     		   if (view.getIndiceCommento() < view.getNumeroCommentiTotali() - 5) {
     			   view.incrementaIndiceCommento();
     			   view.settaCommenti(commentiConProfiliIinvianti);
@@ -500,10 +501,8 @@ public class Controller {
        gestorePrevCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("PrevCommento");
     		   if (view.getIndiceCommento() > 0) {
 
-    			   System.out.println("prevCommentoUsabile");
     			   view.decrementaIndiceCommento();
     			   view.settaCommenti(commentiConProfiliIinvianti);
     			   refresh();
@@ -521,7 +520,36 @@ public class Controller {
      	   }
      	   
         };
-        view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);    
+        view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);
+        
+        gestoreNextMessaggioButton = new ActionListener() {
+      	   @Override
+      	   public void actionPerformed(ActionEvent e) {
+      		 ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+         	
+      		   if (view.getIndiceMessaggioCorrente() < messaggi.size()/2 - 9) {
+      			    view.incrementaIndiceCommento();
+  			   		view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+  			   	refresh();
+      		   	}
+      	   	}
+ 
+         };
+         view.getNextMessaggioButton().addActionListener(gestoreNextMessaggioButton);   
+         
+         gestorePrevMessaggioButton = new ActionListener() {
+       	   @Override
+       	   public void actionPerformed(ActionEvent e) {
+       		   if (view.getIndiceCommento() > 0) {
+       			   	
+            		 ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());   
+            		 view.decrementaIndiceMessaggio();
+            		 view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+            		 refresh();
+       		   		}
+       		   	}
+          	};
+          view.getPrevMessaggioButton().addActionListener(gestorePrevMessaggioButton);   
      }
     	
    

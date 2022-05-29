@@ -3,23 +3,28 @@ package panelspackage.panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import packageframe.Frame;
 import panelspackage.panels.elements.AreaDiTesto;
+import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 
-@SuppressWarnings("serial")
 public class AreaChatFrame extends JPanel {
-
-	private Pulsanti profilo;
+	
+	ArrayList<JComponent> ListaEtichetteMessaggi = new ArrayList<JComponent>();
+	private ArrayList<String> messaggiChat = new ArrayList<String>();
 	private AreaDiTesto messaggi;
 	private InserimentoTesto scriviMessaggio;
-	private Pulsanti invia;
-	private Pulsanti home;
-	
+	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio;
+	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 	public AreaChatFrame() {
 		avvio();
 		initComponents();
@@ -34,32 +39,57 @@ public class AreaChatFrame extends JPanel {
 	
     public void initComponents() {
     	
-      profilo = new Pulsanti("C:\\\\Users\\\\aissa\\\\OneDrive\\\\Immagini\\\\profiler.png", new Color(204, 255, 255), new Font("Arial", 1, 12));
+      profilo = new Pulsanti("profiloricevente", new Color(204, 255, 255), new Font("Arial", 1, 12));
       SpecificContainer containerNorth = new SpecificContainer();
       this.add(containerNorth, BorderLayout.NORTH);
       containerNorth.add(profilo);
-    	
-      messaggi = new AreaDiTesto(Color.pink, 70, 40, new Font("Times New Roman", 1, 12));
-      SpecificContainer containerCenter = new SpecificContainer(getBackground());
-      this.add(containerCenter, BorderLayout.CENTER);
-      containerCenter.add(messaggi);
-    	
       
       scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Color.LIGHT_GRAY, new Font("Arial", 1, 12), 30);
 	  scriviMessaggio.setFont(new java.awt.Font("Arial", 1, 12)); 
 	  scriviMessaggio.setText("Scrivi messaggio");
 	  scriviMessaggio.setBackground(Color.LIGHT_GRAY);
       SpecificContainer containerSouth = new SpecificContainer(getBackground());
-	  this.add(containerSouth, BorderLayout.SOUTH);
+	 
+     
+		for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
+			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO);
+			ListaEtichetteMessaggi.add(areaMessaggio);
+		}
+      
+		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
+		
+		//SpecificContainer containerCenter = new SpecificContainer(getBackground());
+	    //add(containerCenter, BorderLayout.CENTER);
+	    GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
+		add(grigliaMessaggi, BorderLayout.CENTER);
+		
+      this.add(containerSouth, BorderLayout.SOUTH);
 	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
 		
 	  invia = new Pulsanti("Invia", Color.cyan, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(invia,BorderLayout.EAST);
-	  
+
 	  home = new Pulsanti("Home", Color.cyan, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
     }
-    
+    public void aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
+    	this.setNumeroCommentiTotali(messaggi.size()/2);
+
+    	for (int i = 0 ; i<  messaggi.size() &&  i < 9; i++) {
+    		if(messaggi.get(i).equals(inviante)) {
+    			((Etichette)ListaEtichetteMessaggi.get(i*2)).setText("");
+    			((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
+    		} else {
+    			((Etichette)ListaEtichetteMessaggi.get((i*2))).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
+				((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText("");
+    			
+    		}
+    	}
+    }
+    public void settaCommenti(ArrayList<String> commenti) {
+		this.setNumeroCommentiTotali(commenti.size()/2);
+    }
     
     public AreaDiTesto getMessaggi() {
 		return messaggi;
@@ -97,4 +127,40 @@ public class AreaChatFrame extends JPanel {
 		return home;
 	}
 
+	public ArrayList<String> getMessaggiChat() {
+		return messaggiChat;
+	}
+
+	public void setMessaggiChat(ArrayList<String> messaggiChat) {
+		this.messaggiChat = messaggiChat;
+	}
+
+	public int getIndiceMessaggioCorrente() {
+		return indiceMessaggioCorrente;
+	}
+
+	public void decrementaIndiceMessaggioCorrente() {
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
+	}
+	
+	public void incrementaIndiceMessaggioCorrente() {
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
+	}
+
+	public int getNumeroCommentiTotali() {
+		return numeroCommentiTotali;
+	}
+
+	public void setNumeroCommentiTotali(int numeroCommentiTotali) {
+		this.numeroCommentiTotali = numeroCommentiTotali;
+	}
+
+	public Pulsanti getNextMessaggio() {
+		return nextMessaggio;
+	}
+
+	public Pulsanti getPrevMessaggio() {
+		return prevMessaggio;
+	}
+	
 }

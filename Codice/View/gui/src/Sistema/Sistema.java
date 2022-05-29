@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
+import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
 import chat.Chat;
 import chat.chatDiGruppo.ChatDiGruppo;
@@ -261,6 +262,17 @@ public class Sistema {
  			System.out.println(testo);
  		}
  		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
+	}
+	
+	public ArrayList<String> cercaMessaggiChatPrivata(String inviante, String ricevente) {
+		ArrayList<Messaggio> listaMessaggi = profiloAttivo.cercaMessaggiChatPrivata(inviante, ricevente);
+		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
+		
+		for(int i = 0; i < listaMessaggi.size(); i++) {
+			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getProfiloInviante());
+			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getTesto());
+		}
+		return listaTestoEProfiloInviante;
 	}
 	public void impostaFotoProfilo(String fotoPath) {
 		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
