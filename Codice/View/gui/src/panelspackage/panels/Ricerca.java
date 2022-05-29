@@ -17,12 +17,13 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class Ricerca extends JPanel {
 	
-	private String stringCercata = "jkvk";
+	private String stringCercata = "";
 	private ArrayList<String> risultatiRicerca = new  ArrayList<String>();
 	private SpecificContainer containerCenter = new SpecificContainer();
 	private SpecificContainer containerWest = new SpecificContainer();
 
 	private JButton homeRicerca;
+	private Pulsanti profiloCercato, gruppoCercato;
 	private Etichette etichetta = new Etichette("Hai cercato " + stringCercata, Frame.COLOREPRIMARIOTEMATICO);
 	
 	int i;
@@ -63,17 +64,19 @@ public class Ricerca extends JPanel {
 
 		add(containerWest, BorderLayout.WEST);
 		containerWest.setLayout(new GridLayout(10,1));
+		
+		containerWest.add(new Etichette("mail appartenente al profilo: ", Frame.COLOREPRIMARIOTEMATICO));
+		containerWest.add(new Etichette("id appartenente alla chat: "+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
+
+		containerCenter.add(profiloCercato = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO));
+		containerCenter.add(gruppoCercato = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO));
+
 	}
 	
-	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
+	public void impostaRisultatiRicerca(String ricerca) {
 
-		for (int i = 0; i < risultatiRicerca.size() && i < 10; i++) {
-			containerWest.add(new Pulsanti("ricerca numero: "+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
-		}
-		
-		for (int i = 0; i < risultatiRicerca.size() && i < 10; i++) {
-			containerCenter.add(new Pulsanti(risultatiRicerca.get(i), Frame.COLOREPRIMARIOTEMATICO));
-		}
+			profiloCercato.setText(ricerca);
+			gruppoCercato.setText(ricerca);
 	}
 
 	public String getStringCercata() {
@@ -96,4 +99,12 @@ public class Ricerca extends JPanel {
 		return etichetta;
 	}
 
+	public Pulsanti getProfiloCercato() {
+		return (Pulsanti) profiloCercato;
+	}
+
+
+	public Pulsanti gruppoCercato() {
+		return gruppoCercato;
+	}
 }

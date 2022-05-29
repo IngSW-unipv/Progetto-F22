@@ -21,7 +21,7 @@ public class  Profilo extends JPanel {
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
 	ArrayList<String> dati = new ArrayList<String>();
 
-	private Pulsanti homeProfilo, immagineProf;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer();
 	
@@ -41,7 +41,9 @@ public class  Profilo extends JPanel {
 		
 		add(containerNorth, BorderLayout.NORTH);
 		
+		containerNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.WEST);
+		containerNorth.add(apriChat = new Pulsanti("Apri Chat"), BorderLayout.CENTER);
 		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		
 		SpecificContainer containerCenter = new SpecificContainer();
@@ -118,9 +120,17 @@ public class  Profilo extends JPanel {
 		}
 	}
 	
-	
 	public void setFotoProfilo(String percorso) {
 		this.immagineProf.setIcon(new ImageIcon(percorso));
-		
 	}
+
+	public Pulsanti getPulsanteSegui() {
+		return segui;
+	}
+
+	public Pulsanti getApriChat() {
+		return apriChat;
+	}
+	
+	
 }

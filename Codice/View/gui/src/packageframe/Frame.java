@@ -16,6 +16,7 @@ import panelspackage.panels.SignUp;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.PannelloNotifiche;
+import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 @SuppressWarnings("serial")
@@ -266,7 +267,7 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca();
 	}
 	
-	public void impostaRisultatiRicerca(ArrayList<String> risultatiRicerca) {
+	public void impostaRisultatiRicerca(String risultatiRicerca) {
 		 ((Ricerca)mappaSchermate.get("Ricerca")).impostaRisultatiRicerca(risultatiRicerca);
 
 	}
@@ -398,5 +399,18 @@ public class Frame extends JFrame {
 	
 	public JFileChooser getFileChooser() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();
+	}
+	
+	public Pulsanti getPulsanteRicercaProfilo() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).getProfiloCercato();
+	}
+	public Pulsanti getPulsanteRicercaChat() {
+		return ((Ricerca)mappaSchermate.get("Ricerca")).gruppoCercato();
+	}
+	public Pulsanti getPulsanteSegui() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSegui();
+	}
+	public Pulsanti getApriChat() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getApriChat();
 	}
 }

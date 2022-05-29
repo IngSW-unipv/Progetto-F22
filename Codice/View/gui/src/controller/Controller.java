@@ -18,7 +18,8 @@ public class Controller {
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
-                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto;
+                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
+                           gestorePulsanteSegui, gestoreApriChat;
     Frame view;
     Sistema model;
     private String schermataAttuale = "Login";
@@ -111,7 +112,13 @@ public class Controller {
                 gestoreProfilo = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        aggiornaSchermataProfilo();
+                        String nickName = model.getProfiloAttivo().getNickname();
+                    	int numPost = model.getProfiloAttivo().getNumPost();
+                        int numFollower = model.getProfiloAttivo().getNumFollower();
+                        int numSeguiti = model.getProfiloAttivo().getNumSeguiti();
+                        String fotoProfilo = model.getProfiloAttivo().getFotoProfilo();
+                        String idProfilo = model.getProfiloAttivo().getIdProfilo();
+                        aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
                         refresh();
                         mostraSchermata("Profilo");
                     }
@@ -205,6 +212,31 @@ public class Controller {
         };
         view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
         
+        gestoreApriChat = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("presto pulsante");
+                mostraSchermata("Chat");
+            }
+        };
+        view.getApriChat().addActionListener(gestoreApriChat);
+        
+        
+        
+        gestorePulsanteSegui = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("hai seguito");
+            	try {
+					model.getProfiloAttivo().segui(model.getProfiloCercato());
+				} catch (AccountDoesNotExist e1) {
+					e1.printStackTrace();
+				}
+            }
+        };
+        view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
+        
+        
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -212,7 +244,6 @@ public class Controller {
                 try {
 					mostraCommentiPost(view.getIdPostVisualizzato());
 				} catch (PostNonVisibile e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
                 refresh();
@@ -273,6 +304,22 @@ public class Controller {
             }
         };
         view.getHomeRicercaButton().addActionListener(gestoreHomeCerca);
+        
+        gestoreProfiloCercato = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nickName = model.getProfiloCercato().getNickname();
+            	int numPost = model.getProfiloCercato().getNumPost();
+                int numFollower = model.getProfiloCercato().getNumFollower();
+                int numSeguiti = model.getProfiloCercato().getNumSeguiti();
+                String fotoProfilo = model.getProfiloCercato().getFotoProfilo();
+                String idProfilo = model.getProfiloCercato().getIdProfilo();
+                aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
+            	mostraSchermata("Profilo");
+            }
+        };
+        view.getPulsanteRicercaProfilo().addActionListener(gestoreProfiloCercato);
+        
     }
     
     
@@ -284,7 +331,7 @@ public class Controller {
             }
         };
         view.getHomeChatButton().addActionListener(gestoreHomeChat);
-        
+     
         
         gestoreAggiornaChat = new ActionListener() {
         	@Override
@@ -558,12 +605,14 @@ public class Controller {
         
     }
     
-    public void aggiornaSchermataProfilo() {
-
-        view.getEtichettaNome().setText(model.getProfiloAttivo().getNickname());
-        view.setSchermataDati(model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti());
-        view.setFotoProfilo(model.getProfiloAttivo().getFotoProfilo());
-        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo();
+    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfilo, String idProfilo) {
+    	//model.getProfiloAttivo().getNickname()
+    	//model.getProfiloAttivo().getNumPost(), model.getProfiloAttivo().getNumFollower(), model.getProfiloAttivo().getNumSeguiti()
+    	//model.getProfiloAttivo().getFotoProfilo()
+    	view.getEtichettaNome().setText(nickName);
+        view.setSchermataDati(numPost, numFollower, numSeguiti);
+        view.setFotoProfilo(fotoProfilo);
+        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo);
         view.setPostProfilo(postDelProfilo);
         refresh();
     }
@@ -573,19 +622,16 @@ public class Controller {
     }
     
     public void ricerca() {
-        ArrayList<String> risultatiRicerca = new  ArrayList<String>();
-        risultatiRicerca.add(view.getTestoRicerca());
-        risultatiRicerca.add(view.getTestoRicerca());
-        view.getTestoRicercaInSchermataRicerca().setText(view.getTestoRicerca());
-        view.impostaRisultatiRicerca(risultatiRicerca);
+        String risultatoRicerca = view.getTestoRicerca();
+        view.getTestoRicercaInSchermataRicerca().setText(risultatoRicerca);
+        view.impostaRisultatiRicerca(risultatoRicerca);
+        model.ricerca(view.getTestoRicerca());
     }
     
     public void aggiungiCommento() {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
-    	System.out.println(idPost);
-    	System.out.println("siamo in controller " + idProfilo + idPost + commentoDaAggiungere);
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
     	
     }

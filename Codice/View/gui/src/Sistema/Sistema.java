@@ -3,7 +3,6 @@ package Sistema;
 import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
-import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -16,6 +15,8 @@ import java.util.ArrayList;
 
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
+import chat.Chat;
+import chat.chatDiGruppo.ChatDiGruppo;
 import profilo.exception.*;
 import profilo.*;
 
@@ -23,6 +24,8 @@ public class Sistema {
 	
 	private DbFacade dbfacade;
 	private Profilo profiloAttivo = null;
+	private Profilo profiloCercato;
+	private ChatDiGruppo chatCercata;
 	public Sistema()   {
 		dbfacade = DbFacade.getIstance();
 	}
@@ -30,6 +33,7 @@ public class Sistema {
 	//idProfilo e Mail sono la stessa 
 	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
+		
 		
 	    if(dbfacade.cerca(p) == null) {
 	    	System.out.println(p.getIdProfilo() + 1);
@@ -119,13 +123,17 @@ public class Sistema {
 	 		profiloAttivo.pubblicaCommento(c);
 
 	  }
+	  
+	  public void ricerca(String idDaCercare) {
+		  setProfiloCercato(dbfacade.cerca(new Profilo(idDaCercare)));
+		  //chatCercata = dbfacade.cerca(new chatDiGruppo);
+	  }
 	 
-	 public ArrayList<String> caricaTuttiiPostDiUnProfilo() {
+	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo) {
 		 
 		
-		ArrayList<String> idDeiPostDiUnProfilo = this.profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(this.getProfiloAttivo().getIdProfilo()), TipoPost.FOTO);
+		ArrayList<String> idDeiPostDiUnProfilo = profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), new Foto("110", null, false, null, null, false));
 		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
-			System.out.println(idDeiPostDiUnProfilo.get(i));
 		}
 		
 		return idDeiPostDiUnProfilo;
@@ -177,7 +185,6 @@ public class Sistema {
 	 		if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
 	 			pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 		}
-	 		
 	 		profiloAttivo.creaPost(p);
 	 	}
 
@@ -254,7 +261,24 @@ public class Sistema {
 	public void setProfiloAttivo(Profilo profiloAttivo) {
 		this.profiloAttivo = profiloAttivo;
 	}
-	 
+
+	public Profilo getProfiloCercato() {
+		return profiloCercato;
+	}
+
+	public void setProfiloCercato(Profilo profiloCercato) {
+		this.profiloCercato = profiloCercato;
+	}
+
+	public ChatDiGruppo getChatCercata() {
+		return chatCercata;
+	}
+
+	public void setChatCercata(ChatDiGruppo chatCercata) {
+		this.chatCercata = chatCercata;
+	}
+	
+	
 
 }
 
