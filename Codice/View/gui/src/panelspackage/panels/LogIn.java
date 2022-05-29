@@ -1,20 +1,16 @@
 package panelspackage.panels;
+
 import packageframe.Frame;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
-import panelspackage.panels.elements.ScrollText;
-import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
+@SuppressWarnings("serial")
 public class LogIn extends JPanel {
 
 
@@ -95,6 +91,7 @@ public class LogIn extends JPanel {
 		this.listaComponenti = listaComponenti;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public HashMap getListaComponenti() {
 		return this.listaComponenti;
 	}

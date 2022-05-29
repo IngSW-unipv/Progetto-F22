@@ -1,11 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
-
-
 import Sistema.Sistema;
 import packageframe.Frame;
-import panelspackage.panels.AreaChatFrame;
+
 
 public class MVCPatternMain {
 	static String listaImmaginiPost[] = {"immagini/Bruce.jpeg","immagini/Natasha.jpeg","immagini/Clint.jpeg","immagini/Steve.jpeg"};

@@ -2,16 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-
 import Sistema.Sistema;
-import convertitore.chatUtility.UtilityChat;
 import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
-import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
 public class Controller {
