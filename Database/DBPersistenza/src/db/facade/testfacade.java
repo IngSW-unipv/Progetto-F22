@@ -21,7 +21,7 @@ public class testfacade {
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
-        Profilo plof = new Profilo("Dv999", "Davide99");
+       /* Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
         
@@ -41,6 +41,9 @@ public class testfacade {
 		p.pubblicaCommento(c);
         
         
-        dbf.cerca(f);
+        dbf.cerca(f);*/
+        
+        boolean b = DbFacade.getIstance().presenteLikeMap("D99", "F04");
+        System.out.println(b);
 }
 }

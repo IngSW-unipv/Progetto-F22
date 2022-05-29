@@ -299,4 +299,106 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		return false;
 	}
 
+	@Override
+	public int vediNumLike(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT numLike FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("numLike");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+
+	@Override
+	public boolean modificaNumLike(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set numLike=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+	@Override
+	public int vediNumDislike(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT numDislike FROM sondaggiosceltamultipla WHERE idSondaggio=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("numDislike");
+				DBConnection.closeConnection(conn);
+				return i;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		return -1;
+	}
+
+	@Override
+	public boolean modificaNumDislike(PostDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update sondaggiosceltamultipla set numDislike=? where idSondaggio=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdPost());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
 }

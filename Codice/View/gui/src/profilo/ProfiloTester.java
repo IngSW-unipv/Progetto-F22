@@ -14,7 +14,7 @@ public class ProfiloTester {
     public static void main(String [] args) {
     //	Profilo p = new Profilo("001", "Girella");
     	Profilo p1 = new Profilo("DV999", "Luca26");
-    	Foto f = new Foto("F04", null, false, null, null, false);
+    	Foto f = new Foto("F01", null, false, null, null, false);
     	
     //Commento c = new Commento("C01", "001", "F01", "aadhd");
     	//p.pubblicaCommento(c);
@@ -43,7 +43,7 @@ public class ProfiloTester {
     	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
     	for(Post pst : res)
    		System.out.println(pst.toString()); */
-    	
+    	System.out.println(p1.aggiungiDislike(f));
     }
     }
 

@@ -25,4 +25,10 @@ public interface IPostDao {
     
     public boolean modificaVisibile(PostDB p, boolean b);
     public boolean vediVisibilita(PostDB p);
+    
+    public int vediNumLike(PostDB p);
+    public boolean modificaNumLike(PostDB p, int n);
+    
+    public int vediNumDislike(PostDB p);
+    public boolean modificaNumDislike(PostDB p, int n);
 }

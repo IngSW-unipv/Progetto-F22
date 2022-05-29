@@ -83,7 +83,7 @@ public interface IProfilo {
 	
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);
 	    
-	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f);
+	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f);
     
     //Commenti
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
