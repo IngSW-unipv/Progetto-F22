@@ -36,5 +36,11 @@ public interface IProfiloDao {
   	 public boolean cambiaImmagineProfilo(ProfiloDB p, String s);
   	 public String ottieniImmagine(ProfiloDB p);
   	 
+  	 public int vediSeguiti(ProfiloDB p);
+  	 public int vediFollower(ProfiloDB p);
+  	 public boolean modificaSeguiti(ProfiloDB p, int n);
+  	 public boolean modificaFollower(ProfiloDB p, int n);
   	 
+  	 public int vediNumPost(ProfiloDB p);
+  	 public boolean modificaNumPost(ProfiloDB p, int n);
 }

@@ -298,6 +298,30 @@ public class DbFacade {
 		return pDao.ottieniImmagine(ConvertitoreFacade.getIstance().converti(p));
 	}
 
+	public int vediNumSeguiti(Profilo p) {
+		return pDao.vediSeguiti(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
+	public boolean modificaNumSeguiti(Profilo p, int n) {
+		return pDao.modificaSeguiti(ConvertitoreFacade.getIstance().converti(p), n);
+	}
+	
+	public int vediNumFollower(Profilo p) {
+		return pDao.vediFollower(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
+	public boolean modificaNumFollower(Profilo p, int n) {
+		return pDao.modificaFollower(ConvertitoreFacade.getIstance().converti(p), n);
+	}
+	
+	public int vediNumPost(Profilo p) {
+		return pDao.vediNumPost(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
+	public boolean modificaNumPost(Profilo p, int n) {
+		return pDao.modificaNumPost(ConvertitoreFacade.getIstance().converti(p),n);
+	}
+	
 	
 	//Follow
 	
@@ -328,7 +352,7 @@ public class DbFacade {
 	//Alcuni metodi utility
 	
 	
-	//Ritorna true se l'account inserito � "seguibile"
+	//Ritorna true se l'account inserito e' "seguibile"
 	public boolean profiloNonSeguito(Follow f) {
 		Follow search = this.cerca(f);
 		if (search == null) {

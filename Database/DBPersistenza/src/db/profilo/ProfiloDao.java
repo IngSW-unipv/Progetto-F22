@@ -408,6 +408,168 @@ public class ProfiloDao implements IProfiloDao{
 		DBConnection.closeConnection(conn);
 	    return null;
 	}
+
+
+	@Override
+	public int vediSeguiti(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT numSeguiti FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("numSeguiti");
+				DBConnection.closeConnection(conn);
+				return i;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return -1;
+	}
+
+
+	@Override
+	public int vediFollower(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT numFollower FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("numFollower");
+				DBConnection.closeConnection(conn);
+				return i;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return -1;
+	}
+
+
+	@Override
+	public boolean modificaSeguiti(ProfiloDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set numSeguiti=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
+	@Override
+	public boolean modificaFollower(ProfiloDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set numFollower=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
+	@Override
+	public int vediNumPost(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT numPost FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				int i = rs1.getInt("numPost");
+				DBConnection.closeConnection(conn);
+				return i;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return -1;
+	}
+
+
+	@Override
+	public boolean modificaNumPost(ProfiloDB p, int n) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set numPost=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setInt(1, n);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
 	
 	}
 

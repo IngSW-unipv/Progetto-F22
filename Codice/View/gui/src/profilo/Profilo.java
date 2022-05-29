@@ -230,9 +230,16 @@ public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
 	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
 	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
 	dbfacade.carica(f);
+	int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+	int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+	seguiti ++;
+	follower ++;
+	dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
+	dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
 	return true;	
 	}
+	System.out.println("Stai gia' seguendo l'account : " + profiloSeguito.getIdProfilo());
 	return false;
 
 }
@@ -241,9 +248,16 @@ public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExis
 	if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
 		Follow f = new Follow(this.getIdProfilo(),profiloSeguito.getIdProfilo());
 		dbfacade.rimuovi(f);
-		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
+		int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+		int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+		seguiti --;
+		follower --;
+		dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
+		dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
+		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito.getIdProfilo());
 		return true;
 	}
+	System.out.println("Non seguivi gia' l'account : " + profiloSeguito.getIdProfilo());
 	return false;
 }
 
@@ -398,12 +412,25 @@ public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicaz
 
 @Override
 public boolean pubblicaPost(Post p) {
-	return dbfacade.carica(p);
+	boolean b = dbfacade.carica(p);
+	String s = dbfacade.cerca(p).getProfilo();
+	if(s != null) {
+	int n = dbfacade.vediNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null));
+	n++;
+	dbfacade.modificaNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null), n);
+	return b;}
+	return false;
 }
 
 @Override
 public boolean rimuoviPost(Post p) {
-	return dbfacade.rimuovi(p);
+	String s = dbfacade.cerca(p).getProfilo();
+	if(s!= null) {
+	int n = dbfacade.vediNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null));
+	n--;
+	dbfacade.modificaNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null), n);
+	return dbfacade.rimuovi(p);}
+	return false;
 }
 
 @Override
