@@ -12,6 +12,7 @@ import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
+import convertitore.ConvertitoreFacade;
 import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
@@ -229,10 +230,16 @@ public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
 	
 	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
 	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
-	dbfacade.carica(f);
+	dbfacade.carica(f);int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+	int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+	seguiti ++;
+	follower ++;
+	dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
+	dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
 	return true;	
 	}
+	System.out.println("Stai gia' seguendo l'account : " + profiloSeguito.getIdProfilo());
 	return false;
 
 }
@@ -241,9 +248,17 @@ public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExis
 	if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
 		Follow f = new Follow(this.getIdProfilo(),profiloSeguito.getIdProfilo());
 		dbfacade.rimuovi(f);
+		int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+		int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+		seguiti --;
+		follower --;
+		dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
+		dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
+		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito.getIdProfilo());
 		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
 	}
+	System.out.println("Non seguivi gia' l'account : " + profiloSeguito.getIdProfilo());
 	return false;
 }
 
@@ -398,12 +413,25 @@ public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicaz
 
 @Override
 public boolean pubblicaPost(Post p) {
-	return dbfacade.carica(p);
+	boolean b = dbfacade.carica(p);
+	String s = dbfacade.cerca(p).getProfilo();
+	if(s != null) {
+	int n = dbfacade.vediNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null));
+	n++;
+	dbfacade.modificaNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null), n);
+	return b;}
+	return false;
 }
 
 @Override
 public boolean rimuoviPost(Post p) {
-	return dbfacade.rimuovi(p);
+	String s = dbfacade.cerca(p).getProfilo();
+	if(s!= null) {
+	int n = dbfacade.vediNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null));
+	n--;
+	dbfacade.modificaNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null), n);
+	return dbfacade.rimuovi(p);}
+	return false;
 }
 
 @Override
@@ -512,8 +540,34 @@ public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio 
 
 
 
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost tipoPost) {
-	return dbfacade.ottieniIdPost(tipoPost, p);
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
+	ArrayList<String> res = dbfacade.ottieniIdPost(f, p);
+	ArrayList<String> resId = new ArrayList<>();
+	ArrayList<Post> pst = new ArrayList<>();
+	ArrayList<Post> search = new ArrayList<>();
+	ArrayList<String> risultato = new ArrayList<>();
+
+	//Ottengo una lista con solo idPost
+	for(int i=0; i<res.size(); i=i+2) {
+		resId.add(res.get(i));
+	}	
+
+	//Costruisco una lista di tipo Post con gli idPost
+	for(String string:resId)
+		pst.add(ConvertitoreFacade.getIstance().restituisciTipo(string, f));
+
+	//La lista search conterra' tutte le informazioni dei post specificati con gli id in precedenza
+	for(Post post : pst)
+		search.add(dbfacade.cerca(post));
+
+	//La lista finale conterra' il percorso e l'id dei soli post visibili
+	for(Post posttt: search) {
+		if(dbfacade.vediVisibilita(posttt) == true) {
+			risultato.add(posttt.getIdPost());
+		    risultato.add(posttt.getPercorso());
+		}
+	}
+		return risultato;
     
 }
 
@@ -660,11 +714,6 @@ public boolean rimuoviDislike(Post p){
 	
 }
 
-@Override
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, Post f) {
-	// TODO Auto-generated method stub
-	return null;
-}
 }
 
 

@@ -230,6 +230,23 @@ public class DbFacade {
     	return pstDao.modificaVisibile(ConvertitoreFacade.getIstance().converti(p), b);
     }
     
+    public int vediNumLike(Post p) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+        return pstDao.vediNumLike(ConvertitoreFacade.getIstance().converti(p));
+    }
+    public boolean modificaNumLike(Post p, int n) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+        return pstDao.modificaNumLike(ConvertitoreFacade.getIstance().converti(p), n);
+    }
+    
+    public int vediNumDislike(Post p) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+        return pstDao.vediNumDislike(ConvertitoreFacade.getIstance().converti(p));
+    }
+    public boolean modificaNumDislike(Post p, int n) {
+    	pstDao = Utility.convertiTipoPost(p.getTipo());
+        return pstDao.modificaNumDislike(ConvertitoreFacade.getIstance().converti(p), n);
+    }
     
 	//Profilo
 	
