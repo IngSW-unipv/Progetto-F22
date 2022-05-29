@@ -59,7 +59,7 @@ public interface IProfilo {
     public Post cercaPost(Post p)throws PostNonVisibile;
 	
 
-	public ArrayList<Post> selectAllPost(TipoPost t);
+	/*-------------------*/public ArrayList<Post> selectAllPost(TipoPost t);
 	
 	//L'int time rappresenta la durata in ore nel quale la storia rimarra' pubblicata. A fine di time ore, la storia sar� rimossa automaticamente
     public boolean pubblicaStoria(int time, Multimedia f);
