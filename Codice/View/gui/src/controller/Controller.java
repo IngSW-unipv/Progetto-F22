@@ -220,6 +220,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
+            	ArrayList<me>model.getProfiloAttivo().mess
             	mostraSchermata("AreaChatFrame");
             }
         };
