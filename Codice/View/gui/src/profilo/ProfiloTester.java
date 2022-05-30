@@ -47,7 +47,12 @@ public class ProfiloTester {
     	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
     	for(Post pst : res)
    		System.out.println(pst.toString()); */
-    	p1.vediRisultatiSondaggio(sdv);
+    	try {
+			p1.aggiungiVotoSondaggio(ssm);
+		} catch (TastoNonEsistente e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     }
 

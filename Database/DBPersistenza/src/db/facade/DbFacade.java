@@ -20,6 +20,8 @@ import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
 import db.post.PostDB;
 import db.post.PostDao;
+import db.post.sondaggio.sondaggioMap.SondaggioMapDao;
+import db.post.sondaggio.sondaggioMap1.SondaggioMap1Dao;
 import db.post.sondaggio.sondaggiodoppiavotazione.SondaggioDoppiaVotazioneDao;
 import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDao;
 import db.profilo.ProfiloDB;
@@ -27,7 +29,6 @@ import db.profilo.ProfiloDao;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.sondaggio.Sondaggio;
 import convertitore.ConvertitoreFacade;
 
 public class DbFacade {
@@ -45,6 +46,8 @@ public class DbFacade {
 	private DislikeMapDao dDao;
 	private SondaggioDoppiaVotazioneDao sdv;
 	private SondaggioSceltaMultiplaDao ssm;
+	private SondaggioMapDao smDao;
+	private SondaggioMap1Dao smDao1;
 	
 	
 	private DbFacade() {
@@ -58,6 +61,8 @@ public class DbFacade {
 		dDao = new DislikeMapDao();
 		sdv = new SondaggioDoppiaVotazioneDao();
 		ssm = new SondaggioSceltaMultiplaDao();
+		smDao = new SondaggioMapDao();
+		smDao1 = new SondaggioMap1Dao();
 	}
 	
 	public static DbFacade getIstance() {
@@ -459,6 +464,23 @@ public class DbFacade {
 	public ArrayList<String> cercaDislikeMap(String s1, String s2){
 		return dDao.cerca(s1, s2);
 	}
+	//SondaggioMap
+	
+	public boolean caricaSondaggioMap(String profilo, String sondaggio) {
+		return smDao.carica(profilo, sondaggio);
+	}
+	
+	public ArrayList<String> cercaSondaggioMap(String profilo, String sondaggio){
+		return smDao.cerca(profilo, sondaggio);
+	}
+	
+	public boolean caricaSondaggioMap1(String profilo, String sondaggio) {
+		return smDao1.carica(profilo, sondaggio);
+	}
+	
+	public ArrayList<String> cercaSondaggioMap1(String profilo, String sondaggio){
+		return smDao1.cerca(profilo, sondaggio);
+	}
 	
 	//Alcuni metodi utility
 	
@@ -477,6 +499,22 @@ public class DbFacade {
 	}
 	
 	
+	public boolean presenteSondaggioMap(String s1, String s2) {
+		ArrayList<String> res = this.cercaSondaggioMap(s1, s2);
+		if(res.isEmpty() == true)
+			return false;
+		return true;
+	}
+	
+	
+	public boolean presenteSondaggioMap1(String s1, String s2) {
+		ArrayList<String> res = this.cercaSondaggioMap1(s1, s2);
+		if(res.isEmpty() == true)
+			return false;
+		return true;
+	}
+	
+	
 	//Ritorna true se l'account inserito e' "seguibile"
 	public boolean profiloNonSeguito(Follow f) {
 		Follow search = this.cerca(f);
@@ -486,7 +524,7 @@ public class DbFacade {
 		return false;
 	}
 
-	//Ritorna true se l'account � esistente
+	//Ritorna true se l'account e' esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist {
 		Profilo search = this.cerca(p);
 		if(search == null) {

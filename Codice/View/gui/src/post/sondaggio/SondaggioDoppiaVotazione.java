@@ -1,8 +1,6 @@
 package post.sondaggio;
 
 import java.util.Arrays;
-import java.util.Scanner;
-
 import post.Post;
 import post.enumeration.TipoPost;
 
@@ -23,28 +21,6 @@ public class SondaggioDoppiaVotazione extends Sondaggio{
 	}
 	
 	
-	@Override
-	public void aggiungiVoto(int n) {
-		this.azzeraConteggio(conteggio);
-		for(int i = 0; i < n; i++) {
-		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + this.getPrimaScelta() + "\n" + "2 = " + this.getSecondaScelta());
-		    Scanner scanner = new Scanner(System.in);
-	        int a = scanner.nextInt(); 
-	        switch(a) {
-	        case 1 : conteggio[0] += 1;
-	        	     break;
-	        case 2 : 
-	        	     conteggio[1] += 1;
-	                 break;
-	        default: System.out.println("Voto non valido, Scegli un valore esistente");
-	        }
-	        
-	        if(i == (n - 1)) {
-	        	scanner.close();
-	        }
-		}
-		
-	}
 
 @Override
 public String toString() {
@@ -58,14 +34,6 @@ public int[] getConteggio() {
 
 public void setConteggio(int[] conteggio) {
 	this.conteggio = conteggio;
-}
-
-
-@Override
-public void mostraRisultati() {
-	System.out.println("L'opzione " + this.getPrimaScelta() + " ha totalizzato " + this.conteggio[0] + " voti\n"
-			+ "L'opzione " + this.getSecondaScelta() + " ha totalizzato " + this.conteggio[1] + " voti\n");
-	
 }
 
 @Override

@@ -482,7 +482,7 @@ public boolean modificaVisibilita(Post p, boolean b) {
 
 @Override
 public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
-	if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+	if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), s.getIdPost()) == false) {
 		SondaggioDoppiaVotazione res = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
 		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + res.getPrimaScelta() + "\n" + "2 = " + res.getSecondaScelta());
 	    Scanner scanner = new Scanner(System.in);
@@ -501,10 +501,11 @@ public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
         	scanner.close();
         	throw new TastoNonEsistente();
         }
+        dbfacade.caricaSondaggioMap(this.getIdProfilo(), s.getIdPost());
         scanner.close();
         return true;
 	}
-	else if (s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+	else if (s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA && dbfacade.presenteSondaggioMap1(this.getIdProfilo(), s.getIdPost()) == false) {
 		SondaggioSceltaMultipla res = (SondaggioSceltaMultipla) dbfacade.cerca(s);
 		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + res.getPrimaScelta() + "\n" + "2 = " + res.getSecondaScelta() + "\n" + "3 = " + res.getTerzaScelta() + "\n" + "4 = " + res.getQuartaScelta());
 	    Scanner scanner = new Scanner(System.in);
@@ -533,9 +534,11 @@ public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
         	scanner.close();
         	throw new TastoNonEsistente();
         }
+        dbfacade.caricaSondaggioMap1(this.getIdProfilo(), s.getIdPost());
         scanner.close();
         return true;
 	}
+	System.out.println("Hai gia' votato a questo sondaggio");
 	return false;
 }
 

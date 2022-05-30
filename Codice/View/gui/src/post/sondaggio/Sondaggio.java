@@ -37,8 +37,6 @@ public abstract class Sondaggio extends Post{
 	public String getPercorso() {
 		return "null";
 	}
-	public abstract void aggiungiVoto(int n);
-	public abstract void mostraRisultati();
 	
 	}
 
