@@ -25,9 +25,9 @@ public class  Profilo extends JPanel {
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer();
 	
-	public Profilo(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
+	public Profilo(ArrayList<String> immaginiPost) {
 		this.avvio();
-		this.initComponents( NickName,  numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, immaginiPost);
+		this.initComponents(immaginiPost);
 	}
 	
 	
@@ -38,14 +38,30 @@ public class  Profilo extends JPanel {
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
 	}
 	
-	public void initComponents(String NickName, int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, ArrayList<String> immaginiPost) {
+	public void initComponents(ArrayList<String> immaginiPost) {
 		
 		add(containerNorth, BorderLayout.NORTH);
 		
 		containerNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerNorth.add(immagineProf = new Pulsanti(immagineProfilo), BorderLayout.CENTER);
+		containerNorth.add(immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg"), BorderLayout.CENTER);
 		containerNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerNorth.add(etichettaNome = new Etichette(NickName, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		containerNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		
+		dati.add("N.Post");
+		dati.add(Integer.toString(0));
+		dati.add("N.Follower");
+		dati.add(Integer.toString(0));
+		dati.add("N.Seguiti");
+		dati.add(Integer.toString(0));
+		
+		for( i = 0; i < this.dati.size(); i++) {
+			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
+			ListaEtichette.add(etichetta);
+			
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
+		containerNorth.add(Dati, BorderLayout.SOUTH);		
+		}
+		
 		
 		SpecificContainer containerCenter = new SpecificContainer();
 		add(containerCenter, BorderLayout.CENTER);
@@ -92,22 +108,10 @@ public class  Profilo extends JPanel {
 	}
 
 	
-	public void setSchermataDati(int numeroPost, int numeroFollowers, int numeroSeguiti) {
-		dati.clear();
-		dati.add("N.Post");
-		dati.add(Integer.toString(numeroPost));
-		dati.add("N.Follower");
-		dati.add(Integer.toString(numeroFollowers));
-		dati.add("N.Seguiti");
-		dati.add(Integer.toString(numeroSeguiti));
-		
-		for( i = 0; i < this.dati.size(); i++) {
-			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
-			ListaEtichette.add(etichetta);
-			
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
-		containerNorth.add(Dati, BorderLayout.SOUTH);		
-		}
+	public void setSchermataDati(int nFollower, int nSeguiti, int nPost) {
+		((JLabel) ListaEtichette.get(1)).setText(String.valueOf(nFollower));
+		((JLabel) ListaEtichette.get(3)).setText(String.valueOf(nSeguiti));
+		((JLabel) ListaEtichette.get(5)).setText(String.valueOf(nPost));
 	}
 
 	public Pulsanti getHomeProfilo() {

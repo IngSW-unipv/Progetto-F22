@@ -76,7 +76,7 @@ public class Frame extends JFrame {
 		Impostazioni impostazioni = new Impostazioni("Stringa profilo prova");
 		mappaSchermate.put("Impostazioni", impostazioni);
 
-		Profilo profilo = new Profilo("Tony Stark", 10, 20, 30, bufferStories.get(2), listaPost);
+		Profilo profilo = new Profilo(listaPost);
 		mappaSchermate.put("Profilo", profilo);
 
 		Chat chat = new Chat();

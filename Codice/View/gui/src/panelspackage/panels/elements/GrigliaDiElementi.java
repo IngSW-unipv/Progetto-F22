@@ -8,10 +8,7 @@ import javax.swing.JComponent;
 
 public class GrigliaDiElementi extends Container {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 	int i;
 	
 	public GrigliaDiElementi(ArrayList<JComponent> listaComponenti, int row, int column, int numeroComponenti) {	
@@ -21,6 +18,7 @@ public class GrigliaDiElementi extends Container {
 			this.add(listaComponenti.get(i));
 		}
 	}
+	
 	
 	public GrigliaDiElementi(HashMap<String, JComponent> listaComponenti, int row, int column, int numeroComponenti) {	
 		this.setLayout(new GridLayout(row, column));
