@@ -494,4 +494,16 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getpSondaggioSceltaMultipla();
 	}
 
+	public InserimentoTesto getPrimaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio1();
+	}
+	public InserimentoTesto getSecondaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio2();
+	}
+	public InserimentoTesto getTerzaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio3();
+	}
+	public InserimentoTesto getQuartaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio4();
+	}
 }

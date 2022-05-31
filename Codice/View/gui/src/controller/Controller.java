@@ -726,11 +726,12 @@ public class Controller {
     }
     
     public void pubblicaPost() {
-        String percorsoFilePost = view.ottieniPercorsoFile();
         String commentoPost = view.ottieniCommento();
     	System.out.println("post attuale =" + getPostAttuale());
     	
         if(getPostAttuale() == 0) {
+            String percorsoFilePost = view.ottieniPercorsoFile();
+
             model.pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
         }
         else if(getPostAttuale() == 1) {
@@ -738,11 +739,18 @@ public class Controller {
         	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
         }
         else if(getPostAttuale() == 2) {
-        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), null, null, null);
+        	String scelta1 = view.getPrimaScelta().getText();
+        	String scelta2 = view.getSecondaScelta().getText();
+        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, null);
         }
         
         else if (getPostAttuale() == 3) {
-        	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null);
+        	String scelta1 = view.getPrimaScelta().getText();
+        	String scelta2 = view.getSecondaScelta().getText();
+        	String scelta3 = view.getTerzaScelta().getText();
+        	String scelta4 = view.getQuartaScelta().getText();
+        	System.out.println(scelta1 + scelta2 + scelta3 + scelta4);
+        	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, scelta3, scelta4);
         }
     }
 

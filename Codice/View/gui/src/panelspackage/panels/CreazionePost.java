@@ -156,4 +156,21 @@ SpecificContainer containerNorthCenter = new SpecificContainer();
 	public String ottieniCommento() {
 		return this.inserimentoCommentoPost.getText();
 	}
+
+	public InserimentoTesto getSceltaSondaggio1() {
+		return sceltaSondaggio1;
+	}
+
+	public InserimentoTesto getSceltaSondaggio2() {
+		return sceltaSondaggio2;
+	}
+
+	public InserimentoTesto getSceltaSondaggio3() {
+		return sceltaSondaggio3;
+	}
+
+	public InserimentoTesto getSceltaSondaggio4() {
+		return sceltaSondaggio4;
+	}
+	
 }
