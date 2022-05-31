@@ -12,7 +12,7 @@ public class Foto extends Multimedia{
 		this.isHd = isHd;
 	}
 	public Foto(String idPost) {
-		super(idPost, "una descrizione",true, "marge", "bene");
+		super(idPost, "una descrizione", true, "marge", "bene");
 		this.isHd = true;
 	}
 

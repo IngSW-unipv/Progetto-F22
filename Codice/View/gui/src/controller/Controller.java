@@ -7,6 +7,7 @@ import Sistema.Sistema;
 import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
 import post.enumeration.TipoPost;
+import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
 public class Controller {
@@ -117,13 +118,26 @@ public class Controller {
                 gestoreProfilo = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        
+
                         String nickName = model.getProfiloAttivo().getNickname();
                     	int numPost = model.getProfiloAttivo().getNumPost();
                         int numFollower = model.getProfiloAttivo().getNumFollower();
                         int numSeguiti = model.getProfiloAttivo().getNumSeguiti();
-                        String fotoProfilo = model.getProfiloAttivo().getFotoProfilo();
                         String idProfilo = model.getProfiloAttivo().getIdProfilo();
-                        aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
+
+                        String fotoProfiloPercorso = null;
+                        System.out.println("id:" + model.getProfiloAttivo().getFotoProfilo());
+                       try {
+                            fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
+                       } catch (PostNonVisibile errore1) {
+                       
+                       } 
+                        try {
+							aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo);
+						} catch (PostNonVisibile e1) {
+							e1.printStackTrace();
+						}
                         refresh();
                         mostraSchermata("Profilo");
                     }
@@ -250,15 +264,23 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 settaPostVisualizzato(false);
+                Foto f = new Foto(null);
                 try {
 					mostraCommentiPost(view.getIdPostVisualizzato());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
                 refresh();
+                
+                try {
+					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+
+                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size());
                 mostraSchermata("Postvisualizzato");
                 refresh();
-
             }
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
@@ -267,7 +289,7 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		//Prova con la prima foto per vedere se funziona
-        		view.setPostVisualizzato(postDelProfilo.get(1),"Descrizione del post", 10, 20, 30);    
+        		//view.setPostVisualizzato(postDelProfilo.get(1),"Descrizione del post", 10, 20, 30);    
         		mostraSchermata("Postvisualizzato");
         	}
         };
@@ -428,7 +450,11 @@ public class Controller {
                 int numSeguiti = model.getProfiloCercato().getNumSeguiti();
                 String fotoProfilo = model.getProfiloCercato().getFotoProfilo();
                 String idProfilo = model.getProfiloCercato().getIdProfilo();
-                aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
+                try {
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
             	mostraSchermata("Profilo");
             }
         };
@@ -551,8 +577,7 @@ public class Controller {
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getFotoPath());
-                System.out.println("tasto foto profilo");
+                model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getIdPost());
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
@@ -765,10 +790,10 @@ public class Controller {
         
     }
     
-    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfilo, String idProfilo) {
+    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo) throws PostNonVisibile {
     	view.getEtichettaNome().setText(nickName);
         view.setSchermataDati(numPost, numFollower, numSeguiti);
-        view.setFotoProfilo(fotoProfilo);
+        view.setFotoProfilo(fotoProfiloPercorso);
         postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
         view.setPostProfilo(postDelProfilo);
         refresh();
@@ -791,11 +816,13 @@ public class Controller {
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
     	model.carica(idProfilo, idPost, commentoDaAggiungere);
-    	
     }
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
+    	for(int i = 0; i< commentiConProfiliIinvianti.size(); i++) {
+    		System.out.println(commentiConProfiliIinvianti.get(i));
+    	}
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     

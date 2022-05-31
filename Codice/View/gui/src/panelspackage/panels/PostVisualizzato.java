@@ -108,7 +108,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerEast = new SpecificContainer();
 			this.add(containerEast, BorderLayout.EAST);
 			
-			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,6,2, ListaAreaTesto.size());
+			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,10,2, ListaAreaTesto.size());
 			
 			ScrollPane scrollCommento = new ScrollPane();
 			
@@ -138,19 +138,21 @@ public class PostVisualizzato extends JPanel{
 			}
 		}*/
 		
-		public void settaCommenti(ArrayList<String> commenti) {
-			this.setNumeroCommentiTotali(commenti.size()/2);
-			
-			for(int i = 0 ; i<  10 ; i = i + 2) {
-				System.out.println("indice corrente" + i );
-				System.out.println("indice usato" + ( i + getIndiceCommentoCorrente()) );
-
-				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i + getIndiceCommentoCorrente()));
-				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(i + 1 +getIndiceCommentoCorrente()));
+		public boolean settaCommenti(ArrayList<String> commenti) {
+			if(commenti.size() == 0) {
+				return false;
+			} 
+			System.out.println("postvisualizzato" + commenti.size());
+			for(int i = 0 ; i < 10 && i < this.getNumeroCommentiTotali(); i = i + 2) {
+				 
+				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i*2 + getIndiceCommentoCorrente()));
+				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(i*2 + 1 +getIndiceCommentoCorrente()));
 			}
+			return true;
 		}
 		
-		public void settaPostVisualizzato(String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+			idPost = iDpost;
 			fotoPath = path;
 			numeroMiPiace = numeroLike;
 			numeroNonMiPiace = numeroDislike;

@@ -418,9 +418,7 @@ public boolean rimuoviPost(Post p) {
 
 @Override
 public Post cercaPost(Post p) throws PostNonVisibile{
-	if(dbfacade.vediVisibilita(p) == true)
 		return dbfacade.cerca(p);
-	throw new PostNonVisibile(p.getIdPost());
 }
 
 @Override

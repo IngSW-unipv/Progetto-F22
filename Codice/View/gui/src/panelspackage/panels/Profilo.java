@@ -23,7 +23,7 @@ public class  Profilo extends JPanel {
 
 	private Pulsanti homeProfilo, immagineProf, segui, apriChat;
 	private Etichette etichettaNome;
-	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer();
+	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
 	public Profilo(ArrayList<String> immaginiPost) {
 		this.avvio();
@@ -41,12 +41,13 @@ public class  Profilo extends JPanel {
 	public void initComponents(ArrayList<String> immaginiPost) {
 		
 		add(containerNorth, BorderLayout.NORTH);
+		containerNorth.add(containerNorthNorth, BorderLayout.NORTH);
+		containerNorthNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerNorthNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerNorthNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		
-		containerNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerNorth.add(immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg"), BorderLayout.CENTER);
-		containerNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		
+
 		dati.add("N.Post");
 		dati.add(Integer.toString(0));
 		dati.add("N.Follower");
@@ -100,6 +101,7 @@ public class  Profilo extends JPanel {
 	}
 
 	public void setImmagineProf(Pulsanti immagineProf) {
+		
 		this.immagineProf = immagineProf;
 	}
 	
@@ -126,7 +128,8 @@ public class  Profilo extends JPanel {
 	}
 	
 	public void setFotoProfilo(String percorso) {
-		this.immagineProf.setIcon(new ImageIcon(percorso));
+		Pulsanti nuovaImmagine = new Pulsanti(percorso);
+		this.setImmagineProf(nuovaImmagine);
 	}
 
 	public Pulsanti getPulsanteSegui() {
