@@ -19,7 +19,7 @@ public class Home extends JPanel {
 	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
-	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pStory,pSondaggio,pIdea, searchButton;
+	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
@@ -131,8 +131,8 @@ public class Home extends JPanel {
 			containerSud.setLayout(new GridLayout(1,4));
 
 			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
-			containerSud.add(pStory =  new Pulsanti("Pubblica una story", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggio =  new Pulsanti("Pubblica sondaggio", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pSondaggioDoppiaScelta =  new Pulsanti("Sondaggio due scelte", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio più scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 			
 		}
@@ -212,17 +212,17 @@ public class Home extends JPanel {
 	public void setpPost(Pulsanti pPost) {
 		this.pPost = pPost;
 	}
-	public Pulsanti getpStory() {
-		return pStory;
+	public Pulsanti getpSondaggioDoppiaVotazione() {
+		return pSondaggioDoppiaScelta;
 	}
-	public void setpStory(Pulsanti pStory) {
-		this.pStory = pStory;
+	public void setpSondaggioDoppiaVotazione(Pulsanti pSondaggioDoppiaScelta) {
+		this.pSondaggioDoppiaScelta = pSondaggioDoppiaScelta;
 	}
-	public Pulsanti getpSondaggio() {
-		return pSondaggio;
+	public Pulsanti getpSondaggioSceltaMultipla() {
+		return pSondaggioSceltaMultipla;
 	}
-	public void setpSondaggio(Pulsanti pSondaggio) {
-		this.pSondaggio = pSondaggio;
+	public void setpSondaggioSceltaMultipla(Pulsanti pSondaggioSceltaMultipla) {
+		this.pSondaggioSceltaMultipla = pSondaggioSceltaMultipla;
 	}
 	public Pulsanti getpIdea() {
 		return pIdea;

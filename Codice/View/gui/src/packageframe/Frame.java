@@ -486,5 +486,12 @@ public class Frame extends JFrame {
 	public int getIndiceMessaggioCorrente() {
 		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getIndiceMessaggioCorrente();
 	}
+	public JButton getPSondaggioDoppiaVotazioneButton( ) {
+		return ((Home)mappaSchermate.get("Home")).getpSondaggioDoppiaVotazione();
+	}
 	
+	public JButton getPSondaggioSceltaMultiplaButton( ) {
+		return ((Home)mappaSchermate.get("Home")).getpSondaggioSceltaMultipla();
+	}
+
 }

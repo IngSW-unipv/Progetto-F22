@@ -13,6 +13,12 @@ public class InserimentoTesto extends JTextField {
 		this.setVisible(true);
 	} 
 	
+	public InserimentoTesto(String testo, Color colore) {
+		this.setText(testo);
+		this.setForeground(colore);
+		this.setVisible(true);
+	} 
+	
 	public InserimentoTesto(Color colore, Font font) {
 		this.setForeground(colore);
 		this.setFont(font);

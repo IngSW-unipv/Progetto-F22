@@ -20,8 +20,8 @@ public class Controller {
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
-                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton, gestorePost1,
-                           gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9;
+                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
+                           gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9;
     Frame view;
     Sistema model;
     
@@ -387,6 +387,27 @@ public class Controller {
             }
         };
         view.getPIdeaButton().addActionListener(gestorePubblicaSoloTesto);
+        
+        gestorePubblicaSondaggioDoppiaVotazione = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		setPostAttuale(2);
+            	view.getFileChooser().setVisible(false);
+            	mostraSchermata("CreazionePost");
+        	}
+        };
+        view.getPSondaggioDoppiaVotazioneButton().addActionListener(gestorePubblicaSondaggioDoppiaVotazione);
+        
+        gestorePubblicaSondaggioSceltaMultipla = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		setPostAttuale(3);
+            	view.getFileChooser().setVisible(false);
+            	mostraSchermata("CreazionePost");
+        	}
+        };
+        view.getPSondaggioSceltaMultiplaButton().addActionListener(gestorePubblicaSondaggioSceltaMultipla);
+
     }
     
     public void actionListenersRicerca(){
@@ -717,13 +738,14 @@ public class Controller {
         	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
         }
         else if(getPostAttuale() == 2) {
-        	//model.pubblicaPost(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), null, null, null);
         }
         
+        else if (getPostAttuale() == 3) {
+        	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null);
+        }
     }
-    
-    
-    
+
     public boolean verificaTestoRicerca() {
         if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
             return false;
