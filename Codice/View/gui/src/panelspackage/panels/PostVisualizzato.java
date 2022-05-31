@@ -156,6 +156,7 @@ public class PostVisualizzato extends JPanel{
 			numeroNonMiPiace = numeroDislike;
 			numeroComm = numeroCommenti;
 		}
+		
 		public ArrayList<JComponent> getListaAreaTesto() {
 			return ListaAreaTesto;
 		}

@@ -132,6 +132,18 @@ public class  Profilo extends JPanel {
 	public Pulsanti getApriChat() {
 		return apriChat;
 	}
+
+
+	public ArrayList<Pulsanti> getListaPost() {
+		return ListaPost;
+	}
+
+
+	public void setListaPost(ArrayList<Pulsanti> listaPost) {
+		ListaPost = listaPost;
+	}
+	
+	
 	
 	
 }

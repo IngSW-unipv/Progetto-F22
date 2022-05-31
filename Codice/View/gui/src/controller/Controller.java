@@ -20,7 +20,8 @@ public class Controller {
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
-                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton;
+                           gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton, gestorePost1,
+                           gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9;
     Frame view;
     Sistema model;
     
@@ -29,6 +30,7 @@ public class Controller {
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
+    private ArrayList<String> postDelProfilo = new ArrayList<String>();
 
 	public Controller(Sistema s, Frame f) {
         view = f;
@@ -260,6 +262,90 @@ public class Controller {
             }
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
+        
+        gestorePost1 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Prova con la prima foto per vedere se funziona
+        		view.setPostVisualizzato(postDelProfilo.get(1),"Descrizione del post", 10, 20, 30);    
+        		mostraSchermata("Postvisualizzato");
+        	}
+        };
+        view.getPost1().addActionListener(gestorePost1);
+        
+        gestorePost2 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Secondo post");
+        	}
+        };
+        view.getPost2().addActionListener(gestorePost2);
+        
+        
+        gestorePost3 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Terzo post");
+        	}
+        };
+        view.getPost3().addActionListener(gestorePost3);
+        
+        gestorePost4 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Quarto post");
+        	}
+        };
+        view.getPost4().addActionListener(gestorePost4);
+        
+        gestorePost5 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Quinto post");
+        	}
+        };
+        view.getPost5().addActionListener(gestorePost5);
+        
+        gestorePost6 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Sesto post");
+        	}
+        };
+        view.getPost6().addActionListener(gestorePost6);
+        
+        gestorePost7 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Settimo post");
+        	}
+        };
+        view.getPost7().addActionListener(gestorePost7);
+        
+        gestorePost8= new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Ottavo post");
+        	}
+        };
+        view.getPost8().addActionListener(gestorePost8);
+        
+        gestorePost9 = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Postvisualizzato");
+        		System.out.println("Nono post");
+        	}
+        };
+        view.getPost9().addActionListener(gestorePost9);
+        
     }
     
     public void actionListenersCreazionePost() {
@@ -653,7 +739,7 @@ public class Controller {
     	view.getEtichettaNome().setText(nickName);
         view.setSchermataDati(numPost, numFollower, numSeguiti);
         view.setFotoProfilo(fotoProfilo);
-        ArrayList<String> postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
+        postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
         view.setPostProfilo(postDelProfilo);
         refresh();
     }
@@ -682,6 +768,7 @@ public class Controller {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
+    
     public void scriviMessaggioPrivato() {
     	String testoDaInviare = view.getScriviMessaggio().getText();
     	model.scriviMessaggio(testoDaInviare, null, model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
