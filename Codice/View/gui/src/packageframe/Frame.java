@@ -506,4 +506,8 @@ public class Frame extends JFrame {
 	public InserimentoTesto getQuartaScelta( ) {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio4();
 	}
+	
+	public void impostaFotoPostVisualizzato(String percorso) {
+		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
+	}
 }

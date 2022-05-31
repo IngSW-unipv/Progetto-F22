@@ -2,11 +2,20 @@ package panelspackage.panels.elements;
 
 import java.awt.Color;
 import java.awt.Font;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class Etichette extends JLabel {
+	
+	public Etichette(String percorso) {
+		Icon icona = new ImageIcon(percorso);
+		this.setIcon(icona);
+		this.setVisible(true);
+	}
 	
 	public Etichette(String testo, Color colore) {
 		

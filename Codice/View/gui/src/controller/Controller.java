@@ -277,7 +277,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-
+                System.out.println("siamo al gestore foto profilo :" + f.getPercorso());
                 view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size());
                 mostraSchermata("Postvisualizzato");
                 refresh();

@@ -128,8 +128,7 @@ public class  Profilo extends JPanel {
 	}
 	
 	public void setFotoProfilo(String percorso) {
-		Pulsanti nuovaImmagine = new Pulsanti(percorso);
-		this.setImmagineProf(nuovaImmagine);
+		this.immagineProf.setIcon(new ImageIcon(percorso));
 	}
 
 	public Pulsanti getPulsanteSegui() {

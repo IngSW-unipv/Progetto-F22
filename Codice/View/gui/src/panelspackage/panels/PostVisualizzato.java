@@ -30,9 +30,8 @@ public class PostVisualizzato extends JPanel{
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
-		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
-		
+		private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
 		int numeroMiPiace = 10, numeroNonMiPiace = 20, numeroComm = 3;
 		
 		public PostVisualizzato() {
@@ -71,8 +70,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerPost = new SpecificContainer();
 			containerCenter.add(containerPost, BorderLayout.CENTER);
 			
-			LabeledIcon post = new LabeledIcon(fotoPath);
-			containerPost.add(post, BorderLayout.CENTER);
+			containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
 
 			areaCommenti =  new AreaCommenti();
 			containerPost.add(areaCommenti, BorderLayout.SOUTH);
@@ -142,7 +140,6 @@ public class PostVisualizzato extends JPanel{
 			if(commenti.size() == 0) {
 				return false;
 			} 
-			System.out.println("postvisualizzato" + commenti.size());
 			for(int i = 0 ; i < 10 && i < this.getNumeroCommentiTotali(); i = i + 2) {
 				 
 				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i*2 + getIndiceCommentoCorrente()));
@@ -153,6 +150,7 @@ public class PostVisualizzato extends JPanel{
 		
 		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
 			idPost = iDpost;
+			this.cambiaFoto(path);
 			fotoPath = path;
 			numeroMiPiace = numeroLike;
 			numeroNonMiPiace = numeroDislike;
@@ -239,9 +237,9 @@ public class PostVisualizzato extends JPanel{
 		public String getFotoPath() {
 			return fotoPath;
 		}
-
-		public void setFotoPath(String fotoPath) {
-			this.fotoPath = fotoPath;
+		
+		public void cambiaFoto(String fotoPath) {
+			this.fotoVisualizzata.setIcon(new ImageIcon(fotoPath));
 		}
 
 
