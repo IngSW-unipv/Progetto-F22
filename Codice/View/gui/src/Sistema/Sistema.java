@@ -1,24 +1,18 @@
 package Sistema;
 
 import db.facade.DbFacade;
-import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
-import chat.Chat;
 import chat.chatDiGruppo.ChatDiGruppo;
 import profilo.exception.*;
 import profilo.*;
@@ -116,7 +110,6 @@ public class Sistema {
 	  public void carica(String idProfilo, String idPost, String commento) {
 		  
 			Commento c;
-			boolean b;
 	 		int idCommentoInt = (int)Math.round(Math.random() * 1000);
 	 		String idCommento = Integer.toString(idCommentoInt);
 	 		c = new Commento(idCommento, idProfilo, idPost, commento);
@@ -198,7 +191,7 @@ public class Sistema {
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
+	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, null);
 	 		
 	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null, null)) != null) {
 	        	System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
