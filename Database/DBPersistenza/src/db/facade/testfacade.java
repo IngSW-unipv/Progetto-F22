@@ -4,8 +4,11 @@ package db.facade;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
+import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDB;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
+import post.sondaggio.SondaggioDoppiaVotazione;
+import post.sondaggio.SondaggioSceltaMultipla;
 //import profilo.Profilo;
 import profilo.Profilo;
 
@@ -21,6 +24,7 @@ public class testfacade {
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
+       SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto", null);        
        /* Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
@@ -43,7 +47,10 @@ public class testfacade {
         
         dbf.cerca(f);*/
         
-        boolean b = DbFacade.getIstance().presenteLikeMap("D99", "F04");
-        System.out.println(b);
+        /*boolean b = DbFacade.getIstance().presenteLikeMap("D99", "F04");
+        System.out.println(b);*/
+        
+        
+        System.out.println(dbf.carica(sdv));
 }
 }

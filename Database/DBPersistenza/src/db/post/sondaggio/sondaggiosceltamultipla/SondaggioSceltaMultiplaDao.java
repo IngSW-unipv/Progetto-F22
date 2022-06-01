@@ -83,7 +83,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 
 		try
 		{
-			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=,count1s=?,count2s=?,count3s=?,count4s=? where idSondaggio=?";
+			String query="update sondaggioSceltaMultipla set primaScelta=?, secondaScelta=?, terzaScelta=?, quartaScelta=?,count1s=?,count2s=?,count3s=?,count4s=? where idSondaggio=?";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, s[0]);
@@ -95,7 +95,7 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 			st1.setInt(7, 0);
 			st1.setInt(8, 0);
 
-		st1.setString(9, p.getIdPost());
+		    st1.setString(9, p.getIdPost());
 			
 			st1.executeUpdate();
 
