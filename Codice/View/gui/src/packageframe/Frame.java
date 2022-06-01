@@ -439,10 +439,9 @@ public class Frame extends JFrame {
 		return((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommentiTotali();
 	}
 	
-	public void setPostVisualizzato(String idPost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
-		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaPostVisualizzato(idPost,path, descrizionePost, numeroLike, numeroDislike, numeroCommenti);
+	public void setPostVisualizzato(String idPost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti, ArrayList<String> commentiConProfiloInviante) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaPostVisualizzato(idPost,path, descrizionePost, numeroLike, numeroDislike, numeroCommenti, commentiConProfiloInviante);
 	}
-	
 	
 	public JFileChooser getFileChooser() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();

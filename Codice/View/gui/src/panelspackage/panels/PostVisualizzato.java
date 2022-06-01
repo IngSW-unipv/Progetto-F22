@@ -140,15 +140,18 @@ public class PostVisualizzato extends JPanel{
 			if(commenti.size() == 0) {
 				return false;
 			} 
-			for(int i = 0 ; i < 10 && i < this.getNumeroCommentiTotali(); i = i + 2) {
-				 
-				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i*2 + getIndiceCommentoCorrente()));
-				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(i*2 + 1 +getIndiceCommentoCorrente()));
+			for(int i = 0 ; i < 10 || i < this.getNumeroCommentiTotali() - this.getIndiceCommentoCorrente()/2; i = i + 2) {
+				int indiceCorrente2 = i + getIndiceCommentoCorrente();
+				System.out.println("nuovo indice: "+ indiceCorrente2);
+				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
+				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
+				//System.out.println("etichetta: " +  + this.getIndiceCommentoCorrente() + ((Etichette) ListaAreaTesto.get((i*2) + 1)).getText());
 			}
 			return true;
 		}
 		
-		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+			settaCommenti(commenti);
 			idPost = iDpost;
 			this.cambiaFoto(path);
 			fotoPath = path;
@@ -277,10 +280,13 @@ public class PostVisualizzato extends JPanel{
 
 
 		public void incrementaIndiceCommento() {
+			System.out.println("prima: " + this.indiceCommentoCorrente);
 			this.indiceCommentoCorrente = indiceCommentoCorrente + 2;
+			System.out.println("dopo" + this.indiceCommentoCorrente);
+
 		}
 		public void decrementaIndiceCommento() {
-			this.indiceCommentoCorrente = indiceCommentoCorrente + -2;
+			this.indiceCommentoCorrente = indiceCommentoCorrente -2;
 		}
 
 

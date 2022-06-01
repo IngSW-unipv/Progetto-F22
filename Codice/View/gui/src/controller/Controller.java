@@ -118,7 +118,6 @@ public class Controller {
                 gestoreProfilo = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        
 
                         String nickName = model.getProfiloAttivo().getNickname();
                     	int numPost = model.getProfiloAttivo().getNumPost();
@@ -263,22 +262,23 @@ public class Controller {
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 settaPostVisualizzato(false);
                 Foto f = new Foto(null);
-                try {
-					mostraCommentiPost(view.getIdPostVisualizzato());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-                refresh();
                 
                 try {
 					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-                System.out.println("siamo al gestore foto profilo :" + f.getPercorso());
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size());
+            	try {
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+
+
+                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();
             }
@@ -620,12 +620,11 @@ public class Controller {
        gestoreNextCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) { 
-    		   if (view.getIndiceCommento() < view.getNumeroCommentiTotali() - 5) {
+ 
     			   view.incrementaIndiceCommento();
     			   view.settaCommenti(commentiConProfiliIinvianti);
-    			   commentiConProfiliIinvianti.get(view.getIndiceCommento());
     			   refresh();
-    		   }
+    		   
     	   }
        };
        view.getNextCommento().addActionListener(gestoreNextCommento);
@@ -633,12 +632,11 @@ public class Controller {
        gestorePrevCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   if (view.getIndiceCommento() > 0) {
-
+    		   
     			   view.decrementaIndiceCommento();
     			   view.settaCommenti(commentiConProfiliIinvianti);
     			   refresh();
-    		   }
+    		   
     	   }
        };
        view.getPrevCommento().addActionListener(gestorePrevCommento);    
@@ -774,7 +772,6 @@ public class Controller {
         	String scelta2 = view.getSecondaScelta().getText();
         	String scelta3 = view.getTerzaScelta().getText();
         	String scelta4 = view.getQuartaScelta().getText();
-        	System.out.println(scelta1 + scelta2 + scelta3 + scelta4);
         	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, scelta3, scelta4);
         }
     }
@@ -820,9 +817,6 @@ public class Controller {
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
-    	for(int i = 0; i< commentiConProfiliIinvianti.size(); i++) {
-    		System.out.println(commentiConProfiliIinvianti.get(i));
-    	}
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     
