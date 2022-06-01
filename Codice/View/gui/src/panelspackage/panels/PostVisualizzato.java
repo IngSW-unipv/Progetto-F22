@@ -30,9 +30,8 @@ public class PostVisualizzato extends JPanel{
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
 		private SpecificContainer containerNorth;
 		private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
-		private LabeledIcon post;
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
-		
+		private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
 		int numeroMiPiace = 10, numeroNonMiPiace = 20, numeroComm = 3;
 		
 		public PostVisualizzato() {
@@ -71,8 +70,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerPost = new SpecificContainer();
 			containerCenter.add(containerPost, BorderLayout.CENTER);
 			
-			LabeledIcon post = new LabeledIcon(fotoPath);
-			containerPost.add(post, BorderLayout.CENTER);
+			containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
 
 			areaCommenti =  new AreaCommenti();
 			containerPost.add(areaCommenti, BorderLayout.SOUTH);
@@ -108,7 +106,7 @@ public class PostVisualizzato extends JPanel{
 			SpecificContainer containerEast = new SpecificContainer();
 			this.add(containerEast, BorderLayout.EAST);
 			
-			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,6,2, ListaAreaTesto.size());
+			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,10,2, ListaAreaTesto.size());
 			
 			ScrollPane scrollCommento = new ScrollPane();
 			
@@ -138,24 +136,27 @@ public class PostVisualizzato extends JPanel{
 			}
 		}*/
 		
-		public void settaCommenti(ArrayList<String> commenti) {
-			this.setNumeroCommentiTotali(commenti.size()/2);
-			
-			for(int i = 0 ; i<  10 ; i = i + 2) {
-				System.out.println("indice corrente" + i );
-				System.out.println("indice usato" + ( i + getIndiceCommentoCorrente()) );
-
-				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i + getIndiceCommentoCorrente()));
-				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(i + 1 +getIndiceCommentoCorrente()));
+		public boolean settaCommenti(ArrayList<String> commenti) {
+			if(commenti.size() == 0) {
+				return false;
+			} 
+			for(int i = 0 ; i < 10 && i < this.getNumeroCommentiTotali(); i = i + 2) {
+				 
+				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(i*2 + getIndiceCommentoCorrente()));
+				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(i*2 + 1 +getIndiceCommentoCorrente()));
 			}
+			return true;
 		}
 		
-		public void settaPostVisualizzato(String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+			idPost = iDpost;
+			this.cambiaFoto(path);
 			fotoPath = path;
 			numeroMiPiace = numeroLike;
 			numeroNonMiPiace = numeroDislike;
 			numeroComm = numeroCommenti;
 		}
+		
 		public ArrayList<JComponent> getListaAreaTesto() {
 			return ListaAreaTesto;
 		}
@@ -236,9 +237,9 @@ public class PostVisualizzato extends JPanel{
 		public String getFotoPath() {
 			return fotoPath;
 		}
-
-		public void setFotoPath(String fotoPath) {
-			this.fotoPath = fotoPath;
+		
+		public void cambiaFoto(String fotoPath) {
+			this.fotoVisualizzata.setIcon(new ImageIcon(fotoPath));
 		}
 
 

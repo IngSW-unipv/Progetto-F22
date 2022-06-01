@@ -8,6 +8,7 @@ import java.awt.*;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
+import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.SpecificContainer;
 
 
@@ -19,6 +20,7 @@ public class CreazionePost extends JPanel {
 	private Etichette testoInserisciCommento;
 	private JFileChooser fileChooser;
 	private Pulsanti story;
+	private InserimentoTesto sceltaSondaggio1, sceltaSondaggio2, sceltaSondaggio3, sceltaSondaggio4;
 	
 	public CreazionePost() {
 		this.avvio();
@@ -38,6 +40,23 @@ public class CreazionePost extends JPanel {
 		this.add(containerNorth, BorderLayout.NORTH);
 
 		containerNorth.add(new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
+		
+SpecificContainer containerNorthCenter = new SpecificContainer();
+
+		sceltaSondaggio1 = new InserimentoTesto("scelta1", Frame.COLOREPRIMARIOTEMATICO);
+		sceltaSondaggio2 = new InserimentoTesto("scelta2", Frame.COLOREPRIMARIOTEMATICO);
+		
+		containerNorth.add(sceltaSondaggio1, BorderLayout.EAST);
+		containerNorth.add(sceltaSondaggio2, BorderLayout.WEST);
+		containerNorth.add(containerNorthCenter, BorderLayout.CENTER);
+		
+		sceltaSondaggio3 = new InserimentoTesto("scelta3", Frame.COLOREPRIMARIOTEMATICO);
+		sceltaSondaggio4 = new InserimentoTesto("scelta4", Frame.COLOREPRIMARIOTEMATICO);
+		
+		containerNorthCenter.add(sceltaSondaggio3, BorderLayout.EAST);
+		containerNorthCenter.add(sceltaSondaggio4, BorderLayout.WEST);
+		
+
 		
 		fileChooser = new JFileChooser();
 		fileChooser.setAcceptAllFileFilterUsed(false);
@@ -137,4 +156,21 @@ public class CreazionePost extends JPanel {
 	public String ottieniCommento() {
 		return this.inserimentoCommentoPost.getText();
 	}
+
+	public InserimentoTesto getSceltaSondaggio1() {
+		return sceltaSondaggio1;
+	}
+
+	public InserimentoTesto getSceltaSondaggio2() {
+		return sceltaSondaggio2;
+	}
+
+	public InserimentoTesto getSceltaSondaggio3() {
+		return sceltaSondaggio3;
+	}
+
+	public InserimentoTesto getSceltaSondaggio4() {
+		return sceltaSondaggio4;
+	}
+	
 }

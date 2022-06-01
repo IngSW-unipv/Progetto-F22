@@ -192,18 +192,20 @@ public class Sistema {
 	 	}
 
 		public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
-				String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta, int [] conteggio) {
+				String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
 			
 			SondaggioSceltaMultipla s;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		
 	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null, null)) != null) {
-	 			pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, conteggio);
+	        	System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
+	 			pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		}
-	 		
+        	System.out.println(s.getPrimaScelta() + s.getSecondaScelta() + s.getTerzaScelta() + s.getQuartaScelta());
+
 	 		profiloAttivo.creaPost(s);
 		}
 		

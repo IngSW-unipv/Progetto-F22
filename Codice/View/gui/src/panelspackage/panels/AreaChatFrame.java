@@ -17,6 +17,7 @@ import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 
+@SuppressWarnings("serial")
 public class AreaChatFrame extends JPanel {
 	
 	ArrayList<JComponent> ListaEtichetteMessaggi = new ArrayList<JComponent>();

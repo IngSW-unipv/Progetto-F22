@@ -76,7 +76,7 @@ public class Frame extends JFrame {
 		Impostazioni impostazioni = new Impostazioni("Stringa profilo prova");
 		mappaSchermate.put("Impostazioni", impostazioni);
 
-		Profilo profilo = new Profilo("Tony Stark", 10, 20, 30, bufferStories.get(2), listaPost);
+		Profilo profilo = new Profilo(listaPost);
 		mappaSchermate.put("Profilo", profilo);
 
 		Chat chat = new Chat();
@@ -291,6 +291,42 @@ public class Frame extends JFrame {
 		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti);
 	}
 	
+	public JButton getPost1() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(0);
+	}
+	
+	public JButton getPost2() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(1);
+	}
+	
+	public JButton getPost3() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(2);
+	}
+	
+	public JButton getPost4() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(3);
+	}
+	
+	public JButton getPost5() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(4);
+	}
+	
+	public JButton getPost6() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(5);
+	}
+	
+	public JButton getPost7() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(6);
+	}
+	
+	public JButton getPost8() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(7);
+	}
+	
+	public JButton getPost9() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(8);
+	}
+	
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
 	}
@@ -403,6 +439,11 @@ public class Frame extends JFrame {
 		return((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommentiTotali();
 	}
 	
+	public void setPostVisualizzato(String idPost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaPostVisualizzato(idPost,path, descrizionePost, numeroLike, numeroDislike, numeroCommenti);
+	}
+	
+	
 	public JFileChooser getFileChooser() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();
 	}
@@ -445,5 +486,28 @@ public class Frame extends JFrame {
 	public int getIndiceMessaggioCorrente() {
 		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getIndiceMessaggioCorrente();
 	}
+	public JButton getPSondaggioDoppiaVotazioneButton( ) {
+		return ((Home)mappaSchermate.get("Home")).getpSondaggioDoppiaVotazione();
+	}
 	
+	public JButton getPSondaggioSceltaMultiplaButton( ) {
+		return ((Home)mappaSchermate.get("Home")).getpSondaggioSceltaMultipla();
+	}
+
+	public InserimentoTesto getPrimaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio1();
+	}
+	public InserimentoTesto getSecondaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio2();
+	}
+	public InserimentoTesto getTerzaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio3();
+	}
+	public InserimentoTesto getQuartaScelta( ) {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio4();
+	}
+	
+	public void impostaFotoPostVisualizzato(String percorso) {
+		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
+	}
 }
