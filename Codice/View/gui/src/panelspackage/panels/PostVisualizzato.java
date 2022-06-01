@@ -15,6 +15,7 @@ import panelspackage.panels.*;
 public class PostVisualizzato extends JPanel{
 
 	
+	
 		ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 		ArrayList<String> dati = new ArrayList<String>();
 		Color ARANCIONE = new Color(255, 125, 0);
@@ -142,10 +143,8 @@ public class PostVisualizzato extends JPanel{
 			} 
 			for(int i = 0 ; i < 10 || i < this.getNumeroCommentiTotali() - this.getIndiceCommentoCorrente()/2; i = i + 2) {
 				int indiceCorrente2 = i + getIndiceCommentoCorrente();
-				System.out.println("nuovo indice: "+ indiceCorrente2);
 				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
 				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
-				//System.out.println("etichetta: " +  + this.getIndiceCommentoCorrente() + ((Etichette) ListaAreaTesto.get((i*2) + 1)).getText());
 			}
 			return true;
 		}
@@ -280,9 +279,7 @@ public class PostVisualizzato extends JPanel{
 
 
 		public void incrementaIndiceCommento() {
-			System.out.println("prima: " + this.indiceCommentoCorrente);
 			this.indiceCommentoCorrente = indiceCommentoCorrente + 2;
-			System.out.println("dopo" + this.indiceCommentoCorrente);
 
 		}
 		public void decrementaIndiceCommento() {

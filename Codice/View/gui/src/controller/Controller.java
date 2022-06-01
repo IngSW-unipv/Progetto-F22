@@ -11,7 +11,6 @@ import post.multimedia.foto.Foto;
 import profilo.exception.*;
 
 public class Controller {
-    
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
                            gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
@@ -32,7 +31,7 @@ public class Controller {
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
-
+    ArrayList<String> messaggi = new ArrayList<String>();
 	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
@@ -54,6 +53,7 @@ public class Controller {
         actionListenersAreaChatFrame();
     }
 
+    
     public void actionListenersNotifiche() {
         
         gestoreHomePannelloNotifiche = new ActionListener() {
@@ -235,7 +235,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
-            	ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+            	 messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
             	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
             	refresh();
             	mostraSchermata("AreaChatFrame");
@@ -655,28 +655,27 @@ public class Controller {
         gestoreNextMessaggioButton = new ActionListener() {
       	   @Override
       	   public void actionPerformed(ActionEvent e) {
-      		 ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
-         	
-      		   if (view.getIndiceMessaggioCorrente() < messaggi.size()/2 - 9) {
-      			    view.incrementaIndiceCommento();
-  			   		view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+      			
+      		   	
+      		   view.incrementaIndiceMessaggio();
+      		   
+      		   for (int i = 0; i < messaggi.size(); i++) {
+          		   System.out.println(messaggi.get(i));
+      		   }
+  			   	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
   			   	refresh();
       		   	}
-      	   	}
- 
          };
          view.getNextMessaggioButton().addActionListener(gestoreNextMessaggioButton);   
          
          gestorePrevMessaggioButton = new ActionListener() {
        	   @Override
        	   public void actionPerformed(ActionEvent e) {
-       		   if (view.getIndiceCommento() > 0) {
        			   	
-            		 ArrayList<String> messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());   
             		 view.decrementaIndiceMessaggio();
             		 view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
             		 refresh();
-       		   		}
+       		   		
        		   	}
           	};
           view.getPrevMessaggioButton().addActionListener(gestorePrevMessaggioButton);   

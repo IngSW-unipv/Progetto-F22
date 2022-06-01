@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -74,20 +75,29 @@ public class AreaChatFrame extends JPanel {
 	  home = new Pulsanti("Home", Color.cyan, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
     }
-    public void aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
-    	this.setNumeroCommentiTotali(messaggi.size()/2);
+    
+	public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
+		if(messaggi.size() == 0) {
+			return false;
+		} 
+		System.out.println("la funzione viene chiamata");
 
-    	for (int i = 0 ; i<  messaggi.size() &&  i < 9; i++) {
-    		if(messaggi.get(i).equals(inviante)) {
-    			((Etichette)ListaEtichetteMessaggi.get(i*2)).setText("");
-    			((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
-    		} else {
-    			((Etichette)ListaEtichetteMessaggi.get((i*2))).setText(messaggi.get(i*2 + 1 + getIndiceMessaggioCorrente()));
-				((Etichette)ListaEtichetteMessaggi.get((i*2)+1)).setText("");
-    			
-    		}
-    	}
-    }
+		for(int i = 0 ; i < 20 && i < messaggi.size() - this.getIndiceMessaggioCorrente()/2; i = i + 2) {
+			System.out.println("ciclo numero" + i);
+
+			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
+			System.out.println("indice : " + getIndiceMessaggioCorrente());
+			if (messaggi.get(indiceCorrente2).equals(inviante)) {
+			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
+			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
+				}
+			else {
+				((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2 + 1));
+				((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText("");
+				}
+			}
+		return true;
+	}
     public void settaCommenti(ArrayList<String> commenti) {
 		this.setNumeroCommentiTotali(commenti.size()/2);
     }
@@ -141,11 +151,12 @@ public class AreaChatFrame extends JPanel {
 	}
 
 	public void decrementaIndiceMessaggioCorrente() {
-		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
 	}
 	
 	public void incrementaIndiceMessaggioCorrente() {
-		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
+
 	}
 
 	public int getNumeroCommentiTotali() {
