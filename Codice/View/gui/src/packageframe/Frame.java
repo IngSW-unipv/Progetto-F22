@@ -56,7 +56,7 @@ public class Frame extends JFrame {
 	
 	public void settingParametriFrame() {
 		setTitle("Social Network");
-		setSize(814,813);
+		setSize(500,500);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
