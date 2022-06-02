@@ -31,6 +31,7 @@ public class Chat extends JPanel {
 	}
 		
 		public void avvio() {
+		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLOREPRIMARIOTEMATICO);	
@@ -77,7 +78,7 @@ public class Chat extends JPanel {
 	    
 	    containerSouth = new SpecificContainer();
 	    this.add(containerSouth, BorderLayout.SOUTH);
-	    aggiornaAltriChat = new Pulsanti("Aggiorna altri chat", Color.blue, new Font("Arial", 1, 14));
+	    aggiornaAltriChat = new Pulsanti("Aggiorna altri chat", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14));
 		tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
 	    containerSouth.setLayout(new GridLayout(2, 1));
 	    containerSouth.add(aggiornaAltriChat);
