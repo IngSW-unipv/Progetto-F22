@@ -414,6 +414,22 @@ public class DbFacade {
 		return pDao.modificaNumPost(ConvertitoreFacade.getIstance().converti(p),n);
 	}
 	
+	public String vediNickname(Profilo p) {
+		return pDao.vediNickname(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
+	public boolean modificaNickname(Profilo p, String n) {
+		return pDao.modificaNickname(ConvertitoreFacade.getIstance().converti(p),n);
+	}
+	
+	public String vediDescrizione(Profilo p) {
+		return pDao.vediDescrizione(ConvertitoreFacade.getIstance().converti(p));
+	}
+	
+	public boolean modificaDescrizione(Profilo p, String n) {
+		return pDao.modificaDescrizione(ConvertitoreFacade.getIstance().converti(p),n);
+	}
+	
 	
 	//Follow
 	

@@ -628,6 +628,25 @@ public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
     
 }
 
+@Override
+public String vediNickname(Profilo p) {
+	return dbfacade.vediNickname(p);
+}
+
+@Override
+public boolean modificaNickname(Profilo p, String n) {
+	return dbfacade.modificaNickname(p, n);
+}
+
+@Override
+public String vediDescrizione(Profilo p) {
+	return dbfacade.vediDescrizione(p);
+}
+
+@Override
+public boolean modificaDescrizione(Profilo p, String n) {
+	return dbfacade.modificaDescrizione(p, n);
+}
 
 //--------------------------------------------------------------------------------------------------------------------
 

@@ -570,6 +570,114 @@ public class ProfiloDao implements IProfiloDao{
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+
+
+	@Override
+	public String vediDescrizione(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT descrizione FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String i = rs1.getString("descrizione");
+				DBConnection.closeConnection(conn);
+				return i;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return null;
+	}
+
+
+	@Override
+	public boolean modificaDescrizione(ProfiloDB p, String s) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set descrizione=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
+
+
+	@Override
+	public String vediNickname(ProfiloDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT nickname FROM profilo WHERE idProfilo=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdProfilo());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String i = rs1.getString("nickname");
+				DBConnection.closeConnection(conn);
+				return i;
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+	    return null;
+	}
+
+
+	@Override
+	public boolean modificaNickname(ProfiloDB p, String s) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		boolean esito = true;
+
+		try
+		{
+			String query="update profilo set nickname=? where idProfilo=?";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, s);
+			st1.setString(2, p.getIdProfilo());
+		
+			st1.executeUpdate();
+
+
+		}catch (Exception e){
+			e.printStackTrace();
+			esito=false;
+		}
+
+		DBConnection.closeConnection(conn);
+		return esito;
+	}
 	
 	}
 

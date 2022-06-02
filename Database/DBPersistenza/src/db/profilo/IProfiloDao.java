@@ -43,4 +43,12 @@ public interface IProfiloDao {
   	 
   	 public int vediNumPost(ProfiloDB p);
   	 public boolean modificaNumPost(ProfiloDB p, int n);
+  	 
+  	 public String vediDescrizione(ProfiloDB p);
+  	 public boolean modificaDescrizione(ProfiloDB p, String s);
+  	 
+  	 public String vediNickname(ProfiloDB p);
+  	 public boolean modificaNickname(ProfiloDB p, String s);
+  	 
+  	 
 }

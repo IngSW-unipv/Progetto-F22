@@ -90,6 +90,12 @@ public interface IProfilo {
 	    
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f);
     
+	public String vediNickname(Profilo p);
+	public boolean modificaNickname(Profilo p, String n);
+	
+	public String vediDescrizione(Profilo p);
+	public boolean modificaDescrizione(Profilo p, String n);
+	
     //Commenti
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
     public boolean pubblicaCommento(Commento c);
