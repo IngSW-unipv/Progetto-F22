@@ -3,7 +3,6 @@ package chat;
 
 import java.util.ArrayList;
 import Messaggio.Messaggio;
-import Messaggio.enumeration.TipoMessaggio;
 import chat.enumeration.TipoChat;
 
 
@@ -25,8 +24,6 @@ public abstract class Chat {
 	}
 	
 	public abstract TipoChat getTipo();
-	public abstract boolean setLista(String idGruppo, String nuull, TipoMessaggio t);
-
 	
 	public String getNomeChat() {
 		return nomeChat;
