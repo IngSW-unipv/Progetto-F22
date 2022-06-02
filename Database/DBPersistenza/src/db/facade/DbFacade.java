@@ -31,7 +31,7 @@ import post.commento.Commento;
 import post.enumeration.TipoPost;
 import convertitore.ConvertitoreFacade;
 
-public class DbFacade {
+public class DbFacade implements IDbFacade{
 	
 	private static DbFacade istance;
 	

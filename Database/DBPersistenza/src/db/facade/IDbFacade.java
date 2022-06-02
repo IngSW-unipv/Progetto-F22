@@ -86,9 +86,9 @@ public interface IDbFacade {
 	public boolean carica(Profilo p);
     public boolean rimuovi(Profilo p);
 	public Profilo cerca(Profilo p);
-	public boolean vediEsiste(String idProfilo);
+	public boolean vediEsiste(String idProfilo) throws AccountDoesNotExist;
 	public boolean modificaEsiste(String p, Boolean b);
-	public boolean vediPswCambiata(String idProfilo);
+	public boolean vediPswCambiata(String idProfilo) throws AccountDoesNotExist;
 	public boolean modificaPswCambiata(String p, Boolean b);
 	public boolean vediSeLoggato(String idProfilo) throws AccountDoesNotExist;
 	public boolean modificaLoggato(String p, Boolean b);
