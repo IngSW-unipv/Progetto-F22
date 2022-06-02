@@ -56,7 +56,8 @@ public class Frame extends JFrame {
 	
 	public void settingParametriFrame() {
 		setTitle("Social Network");
-		setSize(500,500);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	    this.setSize(screenSize.width , screenSize.height );
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -436,6 +437,10 @@ public class Frame extends JFrame {
 		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).decrementaIndiceCommento();
 	}
 	
+	public void ripristinaIndiceCommento() {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).ripristinaIndiceCommento();
+	}
+	
 	public int getNumeroCommentiTotali() {
 		return((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommentiTotali();
 	}
@@ -476,6 +481,9 @@ public class Frame extends JFrame {
 	}
 	public Pulsanti getPrevMessaggioButton() {
 		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getPrevMessaggio();
+	}
+	public Pulsanti getPulsanteHomeAreaChatFrame() {
+		return ((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).getHome();
 	}
 	public void incrementaIndiceMessaggio() {
 		((AreaChatFrame)mappaSchermate.get("AreaChatFrame")).incrementaIndiceMessaggioCorrente();

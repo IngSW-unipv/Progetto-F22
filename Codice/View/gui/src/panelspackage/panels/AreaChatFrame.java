@@ -1,12 +1,9 @@
 package panelspackage.panels;
 
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-
-import javax.swing.AbstractButton;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import packageframe.Frame;
@@ -41,15 +38,13 @@ public class AreaChatFrame extends JPanel {
 	
     public void initComponents() {
     	
-      profilo = new Pulsanti("profiloricevente", new Color(204, 255, 255), new Font("Arial", 1, 12));
+      profilo = new Pulsanti("profiloricevente", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12));
       SpecificContainer containerNorth = new SpecificContainer();
       this.add(containerNorth, BorderLayout.NORTH);
       containerNorth.add(profilo);
       
-      scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Color.LIGHT_GRAY, new Font("Arial", 1, 12), 30);
-	  scriviMessaggio.setFont(new java.awt.Font("Arial", 1, 12)); 
-	  scriviMessaggio.setText("Scrivi messaggio");
-	  scriviMessaggio.setBackground(Color.LIGHT_GRAY);
+      scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
+	  scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
       SpecificContainer containerSouth = new SpecificContainer(getBackground());
 	 
      
@@ -69,10 +64,10 @@ public class AreaChatFrame extends JPanel {
       this.add(containerSouth, BorderLayout.SOUTH);
 	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
 		
-	  invia = new Pulsanti("Invia", Color.cyan, new Font("Times New Roman", 1, 14));
+	  invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(invia,BorderLayout.EAST);
 
-	  home = new Pulsanti("Home", Color.cyan, new Font("Times New Roman", 1, 14));
+	  home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
     }
     

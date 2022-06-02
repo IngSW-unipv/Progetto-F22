@@ -29,7 +29,7 @@ public class InserimentoTesto extends JTextField {
 		this.setText(text);
 		this.setForeground(colore);
 		this.setFont(font);
-		this.setSize(dim, 0);
+		this.setSize(dim,0);
 		this.setVisible(true);
 	}
 }

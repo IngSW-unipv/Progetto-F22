@@ -141,7 +141,7 @@ public class PostVisualizzato extends JPanel{
 			if(commenti.size() == 0) {
 				return false;
 			} 
-			for(int i = 0 ; i < 10 || i < this.getNumeroCommentiTotali() - this.getIndiceCommentoCorrente()/2; i = i + 2) {
+			for(int i = 0 ; i < 10 && i < this.getNumeroCommentiTotali() - this.getIndiceCommentoCorrente()/2; i = i + 2) {
 				int indiceCorrente2 = i + getIndiceCommentoCorrente();
 				((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
 				((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
@@ -284,6 +284,9 @@ public class PostVisualizzato extends JPanel{
 		}
 		public void decrementaIndiceCommento() {
 			this.indiceCommentoCorrente = indiceCommentoCorrente -2;
+		}
+		public void ripristinaIndiceCommento() {
+			this.indiceCommentoCorrente = 0;
 		}
 
 
