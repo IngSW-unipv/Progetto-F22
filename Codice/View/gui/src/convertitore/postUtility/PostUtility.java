@@ -65,12 +65,12 @@ public class PostUtility {
 		}
 		else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 			SondaggioDoppiaVotazioneDB f = (SondaggioDoppiaVotazioneDB) p.inserisciCaratteristiche(p);
-			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), null); 
+			SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta()); 
 			return sdv;
 		}
 		else if(t == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultiplaDB f = (SondaggioSceltaMultiplaDB) p.inserisciCaratteristiche(p);
-			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta(), null);
+			SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPrimaScelta(), f.getSecondaScelta(), f.getTerzaScelta(), f.getQuartaScelta());
 			return ssm;
 		}
 		else if(t == TipoPost.TESTO) {
@@ -168,23 +168,23 @@ public class PostUtility {
     public Post restituisciTipo(String id, TipoPost t) {
     	Post pst;
     	if(t == TipoPost.FOTO) {
-    		pst = new Foto(id,null,false, null, id, false);
+    		pst = new Foto(id,null,false, null, null, false);
     		return pst;
     	}
     	else if(t == TipoPost.VIDEO) {
-    		pst = new Video(id,null,false, null, id, 0);
+    		pst = new Video(id,null,false, null, null, 0);
     		return pst;
     		}
     	else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
-    		pst = new SondaggioDoppiaVotazione(id,null,false, null, id, id, null);
+    		pst = new SondaggioDoppiaVotazione(id,null,false, null, null, null);
     	    return pst;
     	}
     	else if (t == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
-    		pst = new SondaggioSceltaMultipla(id,null,false, null, id, id, id, id, null);
+    		pst = new SondaggioSceltaMultipla(id,null,false, null, null, null, null, null);
     		return pst;
     	}
     	else if(t == TipoPost.TESTO) {
-    		pst = new Testo(id,null,false, null, id, id);
+    		pst = new Testo(id,null,false, null, null, null);
     		return pst;
     	}
     	return null;

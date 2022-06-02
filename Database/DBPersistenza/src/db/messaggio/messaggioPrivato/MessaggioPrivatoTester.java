@@ -15,7 +15,7 @@ public static void main(String[] args) {
 	MessaggioDiGruppoDB mdg = new MessaggioDiGruppoDB("001", null, null, null, null, null, null);
 	
 	
-	ArrayList<String> res2 = mdao.ottieniTestoListaMessaggi("002", "DV999");
+	ArrayList<String> res2 = mdao.ottieniTestoListaMessaggi("Davide99", "DV999");
 	for(String mess : res2)
 		System.out.println(mess.toString());
 

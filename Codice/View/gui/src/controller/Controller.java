@@ -976,7 +976,7 @@ public class Controller {
         else if(getPostAttuale() == 2) {
         	String scelta1 = view.getPrimaScelta().getText();
         	String scelta2 = view.getSecondaScelta().getText();
-        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, null);
+        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2);
         }
         
         else if (getPostAttuale() == 3) {

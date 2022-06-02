@@ -191,9 +191,9 @@ public class Sistema {
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta, null);
+	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		
-	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null, null)) != null) {
+	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
 	        	System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
 	 			pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		}
@@ -202,16 +202,16 @@ public class Sistema {
 	 		profiloAttivo.creaPost(s);
 		}
 		
-		public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta, int [] conteggio) {
+		public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
 			
 			SondaggioDoppiaVotazione s;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
 	 		String idPost = Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, conteggio);
+	 		s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
 	 		
-	 		if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null, null)) != null) {
-	 			pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta, conteggio);
+	 		if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null)) != null) {
+	 			pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
 	 		}
 	 		
 	 		profiloAttivo.creaPost(s);

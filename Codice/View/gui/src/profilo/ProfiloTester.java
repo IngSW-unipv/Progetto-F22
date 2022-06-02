@@ -18,8 +18,8 @@ public class ProfiloTester {
     //	Profilo p = new Profilo("001", "Girella");
     	Profilo p1 = new Profilo("DV999", "Luca26");
     	Foto f = new Foto("F01", null, false, null, null, false);
-    	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null, null);
-    	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null, null);
+    	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null);
+    	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null);
     //Commento c = new Commento("C01", "001", "F01", "aadhd");
     	//p.pubblicaCommento(c);
     //	MessaggioDiGruppo m = new MessaggioDiGruppo("006", null, null, null, null, "G00");

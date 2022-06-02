@@ -21,7 +21,7 @@ public class testfacade {
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
  
-       SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto", null);        
+       SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto");        
         Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
