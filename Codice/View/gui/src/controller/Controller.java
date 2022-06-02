@@ -254,6 +254,9 @@ public class Controller {
 					model.getProfiloAttivo().segui(model.getProfiloCercato());
 				} catch (AccountDoesNotExist e1) {
 					e1.printStackTrace();
+				} catch (AzioneNonConsentita e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
             }
         };

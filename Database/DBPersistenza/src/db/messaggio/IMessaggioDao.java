@@ -20,9 +20,9 @@ public interface IMessaggioDao {
 	
 	
 	//Seleziona tutti i messaggi inviati da un gruppo o una persona specificata
-	public ArrayList<MessaggioDB> selezionaMessaggi(String s);
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s1, String s2);
 	
-	public ArrayList<String> ottieniTestoListaMessaggi(String s);
+	public ArrayList<String> ottieniTestoListaMessaggi(String s1, String s2);
 	
 	
 	//Seleziona tutti i messaggi di un profilo specificato

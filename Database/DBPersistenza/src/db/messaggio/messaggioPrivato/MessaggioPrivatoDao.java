@@ -167,7 +167,7 @@ public class MessaggioPrivatoDao extends MessaggioDao {
  
     
 	@Override
-	public ArrayList<MessaggioDB> selezionaMessaggi(String s) {
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s1, String s2) {
 		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -176,11 +176,12 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 		
 		try
 		{
-			String query="SELECT * FROM messaggioprivato WHERE profiloRicevente=? order by dataInvio,oraInvio";
+			String query="SELECT * FROM messaggioprivato WHERE profiloInviante=? and profiloRicevente=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s);
-
+			st1.setString(1, s1);
+            st1.setString(2, s2);
+			
 			rs1=st1.executeQuery();
 
 			while(rs1.next())
@@ -226,7 +227,7 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 	}
 
 	@Override
-	public ArrayList<String> ottieniTestoListaMessaggi(String s) {
+	public ArrayList<String> ottieniTestoListaMessaggi(String s1, String s2) {
 		ArrayList<String> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -235,11 +236,12 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 		
 		try
 		{
-			String query="SELECT testo FROM messaggioprivato WHERE profiloRicevente=? order by dataInvio,oraInvio";
+			String query="SELECT testo FROM messaggioprivato WHERE profiloInviante=? and profiloRicevente=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s);
-
+			st1.setString(1, s1);
+            st1.setString(2, s2);
+			
 			rs1=st1.executeQuery();
 
 			while(rs1.next())

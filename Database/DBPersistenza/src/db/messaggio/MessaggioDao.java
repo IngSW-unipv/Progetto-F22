@@ -15,8 +15,8 @@ public abstract class MessaggioDao implements IMessaggioDao{
 	@Override
 	public abstract String ottieniTestoMessaggio(String m);
 	@Override
-	public abstract ArrayList<MessaggioDB> selezionaMessaggi(String s);
+	public abstract ArrayList<MessaggioDB> selezionaMessaggi(String s1, String s2);
 	@Override
-	public abstract ArrayList<String> ottieniTestoListaMessaggi(String s);
+	public abstract ArrayList<String> ottieniTestoListaMessaggi(String s1, String s2);
 	
 }

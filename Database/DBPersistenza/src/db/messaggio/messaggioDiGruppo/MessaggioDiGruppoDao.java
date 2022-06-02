@@ -143,7 +143,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
     
     
 	@Override
-	public ArrayList<MessaggioDB> selezionaMessaggi(String s) {
+	public ArrayList<MessaggioDB> selezionaMessaggi(String s1, String s2) {
 		ArrayList<MessaggioDB> result = new ArrayList<>();
 
 		conn=DBConnection.startConnection(conn,schema);
@@ -155,7 +155,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 			String query="SELECT * FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
-			st1.setString(1, s);
+			st1.setString(1, s1);
 
 			rs1=st1.executeQuery();
 
@@ -200,7 +200,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 
 	@Override
-	public ArrayList<String> ottieniTestoListaMessaggi(String m) {
+	public ArrayList<String> ottieniTestoListaMessaggi(String m, String m1) {
 
 		ArrayList<String> result = new ArrayList<>();
 
@@ -289,7 +289,6 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 	@Override
 	public ArrayList<MessaggioDB> caricaMessaggiChatPrivata(String inviante, String ricevente) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -15,12 +15,12 @@ public static void main(String[] args) {
 	MessaggioDiGruppoDB mdg = new MessaggioDiGruppoDB("001", null, null, null, null, null, null);
 	
 	
-	ArrayList<String> res2 = mdao.ottieniTestoListaMessaggi("002");
+	ArrayList<String> res2 = mdao.ottieniTestoListaMessaggi("002", "DV999");
 	for(String mess : res2)
 		System.out.println(mess.toString());
 
 	
-	ArrayList <MessaggioDB> res1 = mdao.selezionaMessaggi("002");
+	ArrayList <MessaggioDB> res1 = mdao.selezionaMessaggi("002","DV999");
 	for(MessaggioDB ms : res1)
 		System.out.println(ms.toString());
 	

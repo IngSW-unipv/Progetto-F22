@@ -4,12 +4,9 @@ package db.facade;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
-import db.post.sondaggio.sondaggiosceltamultipla.SondaggioSceltaMultiplaDB;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
-import post.sondaggio.SondaggioSceltaMultipla;
-//import profilo.Profilo;
 import profilo.Profilo;
 
 import java.util.*;
@@ -25,7 +22,7 @@ public class testfacade {
         DbFacade dbf = DbFacade.getIstance();
  
        SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto", null);        
-       /* Profilo plof = new Profilo("Dv999", "Davide99");
+        Profilo plof = new Profilo("Dv999", "Davide99");
         
         dbf.cerca(plof);
         
@@ -35,7 +32,7 @@ public class testfacade {
         System.out.println(dbf.carica(mpv));
         System.out.println(dbf.carica(mdg));
        
-        ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(), mdg.getTipo());
+        ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(),null, mdg.getTipo());
         for(String ms : res)
         	System.out.println(ms.toString());
         
@@ -45,7 +42,7 @@ public class testfacade {
 		p.pubblicaCommento(c);
         
         
-        dbf.cerca(f);*/
+        dbf.cerca(f);
         
         /*boolean b = DbFacade.getIstance().presenteLikeMap("D99", "F04");
         System.out.println(b);*/

@@ -20,6 +20,7 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.AzioneNonConsentita;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -39,11 +40,11 @@ public interface IProfilo {
 	public String ottieniTestoMessaggio(Messaggio m);
 	
     //Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
-	public boolean leggiMessaggi(String s, TipoMessaggio t);
+	public boolean leggiMessaggi(String profiloInviante,String profiloRicevente, TipoMessaggio t);
     
 	//Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	//A differenza del metodo leggiMessaggi, verranno restituite solo le informazioni riguardanti il testo del messaggio
-	public boolean leggiSoloTesto(String s, TipoMessaggio t);
+	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t);
 	
 	
 	//Post
@@ -106,8 +107,8 @@ public interface IProfilo {
 	//Follow
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
-	public boolean segui(Profilo email)throws AccountDoesNotExist;
-	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist;
+	public boolean segui(Profilo email)throws AccountDoesNotExist, AzioneNonConsentita;
+	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita;
 	
 	//Mostra la lista di tutti i follower del profilo personale indicato
 	public ArrayList<String> vediMieiFollower(Follow f);
@@ -126,9 +127,9 @@ public interface IProfilo {
     //Like Dislike
 	
 	
-	public boolean aggiungiLike(Post p);
-	public boolean aggiungiDislike(Post p);
-	public boolean rimuoviLike(Post p);
-	public boolean rimuoviDislike(Post p);
+	public boolean aggiungiLike(Post p)throws AzioneNonConsentita;
+	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita;
+	public boolean rimuoviLike(Post p)throws AzioneNonConsentita;
+	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita;
 }
 

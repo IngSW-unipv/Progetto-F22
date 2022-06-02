@@ -26,6 +26,7 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.AzioneNonConsentita;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -204,7 +205,7 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 //Follow
 
 @Override
-public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
+public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
 	
 	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
 	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
@@ -217,12 +218,11 @@ public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist {
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
 	return true;	
 	}
-	System.out.println("Stai gia' seguendo l'account : " + profiloSeguito.getIdProfilo());
-	return false;
+	throw new AzioneNonConsentita();
 
 }
 @Override
-public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist {
+public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
 	if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
 		Follow f = new Follow(this.getIdProfilo(),profiloSeguito.getIdProfilo());
 		dbfacade.rimuovi(f);
@@ -236,8 +236,7 @@ public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExis
 		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
 	}
-	System.out.println("Non seguivi gia' l'account : " + profiloSeguito.getIdProfilo());
-	return false;
+	throw new AzioneNonConsentita();
 }
 
 
@@ -298,14 +297,14 @@ public String ottieniTestoMessaggio(Messaggio m) {
 
 
 @Override
-public boolean leggiMessaggi(String s, TipoMessaggio t) {
+public boolean leggiMessaggi(String profiloInviante,String profiloRicevente, TipoMessaggio t) {
 		
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
 				int i = 0;
 			    public void run() {
 			      
-			    	ArrayList<Messaggio> mess = dbfacade.selezionaMessaggi(s, t);
+			    	ArrayList<Messaggio> mess = dbfacade.selezionaMessaggi(profiloInviante,profiloRicevente, t);
 			    	for(Messaggio lis : mess)
 			    		System.out.println(lis.toString());
 			    	
@@ -324,14 +323,14 @@ public ArrayList<Messaggio> cercaMessaggiChatPrivata(String inviante, String ric
 
 
 @Override
-public boolean leggiSoloTesto(String s, TipoMessaggio t){
+public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t){
 		
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			int i = 0;
 		    public void run() {
 		      
-		       ArrayList<String> res = dbfacade.ottieniTestoListaMessaggi(s, t);
+		       ArrayList<String> res = dbfacade.ottieniTestoListaMessaggi(profiloInviante,profiloRicevente, t);
 		    	for(String msg : res)
 		    		System.out.println(msg.toString());
 		       
@@ -575,7 +574,6 @@ public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 
 @Override
 public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
-	System.out.println("siamo in profilo e la path è "+ immagine);
 	return dbfacade.modificaImmagineProfilo(p, immagine);
 }
 
@@ -732,11 +730,10 @@ public ArrayList<Gruppo> selectAllGruppo(){
 
 // Like / Dislike
 @Override
-public boolean aggiungiLike(Post p){
+public boolean aggiungiLike(Post p)throws AzioneNonConsentita{
 	
 	if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
-	    System.out.println("Hai gia' messo like a questo post");
-		return false;
+	    throw new AzioneNonConsentita();
 	}
 	else {
 				
@@ -751,10 +748,9 @@ public boolean aggiungiLike(Post p){
 
 
 @Override
-public boolean aggiungiDislike(Post p){
+public boolean aggiungiDislike(Post p)throws AzioneNonConsentita{
 	if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
-	    System.out.println("Hai gia' messo dislike a questo post");
-		return false;
+	    throw new AzioneNonConsentita();
 	}
 	else {
 			
@@ -767,7 +763,7 @@ public boolean aggiungiDislike(Post p){
 }
 
 @Override
-public boolean rimuoviLike(Post p){
+public boolean rimuoviLike(Post p)throws AzioneNonConsentita{
 
 	if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
 		
@@ -777,13 +773,12 @@ public boolean rimuoviLike(Post p){
         dbfacade.rimuoviLike(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
-	System.out.println("Su questo post non e' presente il tuo like");
-	return false;
+	throw new AzioneNonConsentita();
 
 }
 
 @Override
-public boolean rimuoviDislike(Post p){
+public boolean rimuoviDislike(Post p)throws AzioneNonConsentita{
 	
 	if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
 		
@@ -793,8 +788,7 @@ public boolean rimuoviDislike(Post p){
         dbfacade.rimuoviDislike(this.getIdProfilo(), p.getIdPost());
 	    return true;
 	}
-	System.out.println("Su questo post non e' presente il tuo dislike");
-	return false;
+	throw new AzioneNonConsentita();
 	
 }
 

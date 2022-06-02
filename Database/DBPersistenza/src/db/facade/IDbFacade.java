@@ -39,11 +39,11 @@ public interface IDbFacade {
 	public boolean rimuovi(Messaggio m);
 	public Messaggio cerca(Messaggio m);
 	public String ottieniTestoMessaggio(String m, TipoMessaggio t);
-	public ArrayList<Messaggio> selezionaMessaggi(String s, TipoMessaggio t);
+	public ArrayList<Messaggio> selezionaMessaggi(String s1, String s2, TipoMessaggio t);
 	public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t);
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);
 	public ArrayList<Messaggio> caricaMessaggiChatPrivata(String inviante, String ricevente);
-
+	public ArrayList<String> ottieniTestoListaMessaggi(String m1, String m2, TipoMessaggio t);
      
      
 	//Post
