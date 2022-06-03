@@ -22,7 +22,7 @@ public class Controller {
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
-                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppo, gestoreNextTipoPost,gestorePrevTipoPost;
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo;
     Frame view;
     Sistema model;
     
@@ -52,6 +52,7 @@ public class Controller {
         actionListenersNotifiche();
         actionListenersPostVisualizzato();
         actionListenersAreaChatFrame();
+        actionListenerCreaChatDiGruppo();
     }
 
     
@@ -116,13 +117,13 @@ public class Controller {
                 };
                 view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
                 
-                gestoreCreaUnaChatDiGruppo = new ActionListener() {
+                gestoreCreaUnaChatDiGruppoHome = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         mostraSchermata("CreazioneChatDiGruppo");
                     }
                 };
-                view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppo);
+                view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppoHome);
                 
                 gestoreProfilo = new ActionListener() {
                     @Override
@@ -976,6 +977,28 @@ public class Controller {
           	};
           view.getPrevMessaggioButton().addActionListener(gestorePrevMessaggioButton);   
      }
+    
+    public void actionListenerCreaChatDiGruppo(){
+    	
+    	gestoreCreaChatDiGruppo = new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			String nomeGruppo = view.getNomeGruppo().getText();
+    			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
+    			String immagineGruppo = view.getPercorsoImmagineGruppo();
+    			try {
+    				model.getProfiloAttivo().creaGruppo("4", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo());
+    			} catch (AccountDoesNotExist e1) {
+    				e1.printStackTrace();
+    			}
+    			System.out.println(nomeGruppo);
+    			System.out.println(descrizioneGruppo);
+    			System.out.println(immagineGruppo);
+    		}
+    	};
+    	
+    	view.getCreaGruppo().addActionListener(gestoreCreaChatDiGruppo);
+    }
     	
    
         

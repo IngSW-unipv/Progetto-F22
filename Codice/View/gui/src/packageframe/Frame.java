@@ -533,4 +533,21 @@ public class Frame extends JFrame {
 	public JButton getPrevTipoPost() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPrevTipoPost();
 	}
+	
+	public JButton getCreaGruppo() {
+		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getCreaGruppo();
+	}
+	
+	public InserimentoTesto getNomeGruppo() {
+		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getNomeGruppo();
+	}
+	
+	public InserimentoTesto getDescrizioneGruppo() {
+		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getDescrizioneGruppo();
+	}
+	
+	public String getPercorsoImmagineGruppo() {
+		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getPercorsoImmagineGruppo();
+	}
+	
 }
