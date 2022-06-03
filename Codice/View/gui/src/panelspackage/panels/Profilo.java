@@ -16,12 +16,12 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 public class  Profilo extends JPanel {
 
-	private int i;
+	private String idProfilo;
 	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
 	ArrayList<String> dati = new ArrayList<String>();
 
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextPost,prevPost, nextTipoPost,prevTipoPost;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
@@ -55,7 +55,7 @@ public class  Profilo extends JPanel {
 		dati.add("N.Seguiti");
 		dati.add(Integer.toString(0));
 		
-		for( i = 0; i < this.dati.size(); i++) {
+		for(int i = 0; i < this.dati.size(); i++) {
 			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
 			ListaEtichette.add(etichetta);
 			
@@ -69,13 +69,22 @@ public class  Profilo extends JPanel {
 		containerCenter.setLayout(new GridLayout(3,3));
 
 		ListaPost.clear();
-		for( i = 0;  i < 9 ; i++) {
+		for(int i = 0;  i < 9 ; i++) {
 			ListaPost.add(new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg"));
 			containerCenter.add(ListaPost.get(i));
 		}
+		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
+
+		SpecificContainer containerSouthWest = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
+		containerSouth.add(containerSouthWest,BorderLayout.SOUTH);
+		
+		containerSouthWest.add(prevTipoPost = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerSouthWest.add(nextTipoPost = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+
 		
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
 	}
@@ -121,9 +130,19 @@ public class  Profilo extends JPanel {
 	}
 
 	public void setPostProfilo(ArrayList<String> postDelProfilo) {
-		for (int i = 0; i < postDelProfilo.size()/2 && i < 9 ; i++) {	
+		for (int i = 0; i < postDelProfilo.size()/2 && i < 9 ; i++) {
 		Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
 		ListaPost.get(i).setIcon(img);
+		System.out.println("stampa il numero del ciclo: " + i);
+		System.out.println("stampa il numerodella size " + ((postDelProfilo.size()/2) - 1));
+		if (i == (postDelProfilo.size()/2) - 1) {
+			for (int j = i; j < 9; j++) {
+				System.out.println("stampa il numero ciclo J " + j );
+
+				Icon img2=new ImageIcon("immagini/images.png");
+				ListaPost.get(j).setIcon(img2);
+			}
+		}
 		}
 	}
 	
@@ -148,8 +167,24 @@ public class  Profilo extends JPanel {
 	public void setListaPost(ArrayList<Pulsanti> listaPost) {
 		ListaPost = listaPost;
 	}
-	
-	
-	
-	
+
+
+	public Pulsanti getNextPost() {
+		return nextPost;
+	}
+
+
+	public Pulsanti getPrevPost() {
+		return prevPost;
+	}
+
+
+	public Pulsanti getNextTipoPost() {
+		return nextTipoPost;
+	}
+
+
+	public Pulsanti getPrevTipoPost() {
+		return prevTipoPost;
+	}
 }

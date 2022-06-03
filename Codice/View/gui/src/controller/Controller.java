@@ -22,7 +22,7 @@ public class Controller {
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
-                           gestoreChatFrameHome;
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppo, gestoreNextTipoPost,gestorePrevTipoPost;
     Frame view;
     Sistema model;
     
@@ -116,6 +116,14 @@ public class Controller {
                 };
                 view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
                 
+                gestoreCreaUnaChatDiGruppo = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        mostraSchermata("CreazioneChatDiGruppo");
+                    }
+                };
+                view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppo);
+                
                 gestoreProfilo = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -125,14 +133,17 @@ public class Controller {
                         int numFollower = model.getProfiloAttivo().getNumFollower();
                         int numSeguiti = model.getProfiloAttivo().getNumSeguiti();
                         String idProfilo = model.getProfiloAttivo().getIdProfilo();
-
                         String fotoProfiloPercorso = null;
-                        System.out.println("id:" + model.getProfiloAttivo().getFotoProfilo());
+                        
                        try {
-                            fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
+                    	   fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
                        } catch (PostNonVisibile errore1) {
-                       
-                       } 
+                      
+                       } catch (FotoProfiloNonAncoraImpostata e1) {
+                    	   fotoProfiloPercorso = "immagini/images.png";
+						e1.printStackTrace();
+					} 
+
                         try {
 							aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo);
 						} catch (PostNonVisibile e1) {
@@ -255,12 +266,28 @@ public class Controller {
 				} catch (AccountDoesNotExist e1) {
 					e1.printStackTrace();
 				} catch (AzioneNonConsentita e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
             }
         };
         view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
+        
+        gestorePrevTipoPost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("prev Post");
+            }
+        };
+        view.getPrevTipoPost().addActionListener(gestorePrevTipoPost);
+        
+        
+        gestoreNextTipoPost = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	System.out.println("next post");
+            }
+        };
+        view.getNextTipoPost().addActionListener(gestoreNextTipoPost);
         
         
         gestoreFotoProfilo = new ActionListener() {
@@ -268,12 +295,16 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
 
                 settaPostVisualizzato(false);
+                String percorsoFotoProfilo = null;
                 Foto f = new Foto(null);
                 
                 try {
 					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e2) {
+					 percorsoFotoProfilo = "immagini/images.png";;
+					e2.printStackTrace();
 				}
             	try {
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
@@ -296,7 +327,11 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -327,7 +362,12 @@ public class Controller {
                     Foto f = new Foto(null);
                     
                     try {
-    					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + getBasePostAttuale())));
+    					try {
+							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + getBasePostAttuale())));
+						} catch (FotoProfiloNonAncoraImpostata e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
@@ -359,7 +399,12 @@ public class Controller {
                     Foto f = new Foto(null);
                     
                     try {
-    					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + getBasePostAttuale())));
+    					try {
+							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + getBasePostAttuale())));
+						} catch (FotoProfiloNonAncoraImpostata e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
@@ -393,6 +438,9 @@ public class Controller {
 					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(6 + getBasePostAttuale())));
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
             	try {
 
@@ -421,7 +469,12 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(8 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(8 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -452,7 +505,12 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(10 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(10 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -483,7 +541,12 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(12 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(12 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -514,7 +577,12 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(14 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(14 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -545,7 +613,12 @@ public class Controller {
                 Foto f = new Foto(null);
                 
                 try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(16 + getBasePostAttuale())));
+					try {
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(16 + getBasePostAttuale())));
+					} catch (FotoProfiloNonAncoraImpostata e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -649,10 +722,20 @@ public class Controller {
             	int numPost = model.getProfiloCercato().getNumPost();
                 int numFollower = model.getProfiloCercato().getNumFollower();
                 int numSeguiti = model.getProfiloCercato().getNumSeguiti();
-                String fotoProfilo = model.getProfiloCercato().getFotoProfilo();
                 String idProfilo = model.getProfiloCercato().getIdProfilo();
+                String percorsoFotoProfilo = null;
+                
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfilo, idProfilo);
+                	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo())).getPercorso();
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e2) {
+					 percorsoFotoProfilo = "immagini/images.png";
+					e2.printStackTrace();
+				}
+                
+                try {
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}

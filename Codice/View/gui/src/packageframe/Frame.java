@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import panelspackage.panels.AreaChatFrame;
 import panelspackage.panels.Chat;
+import panelspackage.panels.CreazioneChatDiGruppo;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
 import panelspackage.panels.Impostazioni;
@@ -98,6 +99,10 @@ public class Frame extends JFrame {
 		
 		AreaChatFrame AreaChatFrame = new AreaChatFrame();
 		mappaSchermate.put("AreaChatFrame", AreaChatFrame);
+		
+		CreazioneChatDiGruppo creazioneChatDiGruppo = new CreazioneChatDiGruppo();
+		mappaSchermate.put("CreazioneChatDiGruppo", creazioneChatDiGruppo);
+	
 	
 	}
 	
@@ -501,6 +506,9 @@ public class Frame extends JFrame {
 	public JButton getPSondaggioSceltaMultiplaButton( ) {
 		return ((Home)mappaSchermate.get("Home")).getpSondaggioSceltaMultipla();
 	}
+	public JButton getCreaUnaChatDiGruppo( ) {
+		return ((Home)mappaSchermate.get("Home")).getCreaUnaChatDiGruppo();
+	}
 
 	public InserimentoTesto getPrimaScelta( ) {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio1();
@@ -517,5 +525,12 @@ public class Frame extends JFrame {
 	
 	public void impostaFotoPostVisualizzato(String percorso) {
 		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
+	}
+	public JButton getNextTipoPost( ) {
+		return ((Profilo)mappaSchermate.get("Profilo")).getNextTipoPost();
+	}
+	
+	public JButton getPrevTipoPost() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPrevTipoPost();
 	}
 }

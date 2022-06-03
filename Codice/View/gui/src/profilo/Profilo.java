@@ -27,6 +27,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -416,8 +417,11 @@ public boolean rimuoviPost(Post p) {
 }
 
 @Override
-public Post cercaPost(Post p) throws PostNonVisibile{
-		return dbfacade.cerca(p);
+public Post cercaPost(Post p) throws PostNonVisibile, FotoProfiloNonAncoraImpostata{
+		if (dbfacade.cerca(p) == null) {
+			throw new FotoProfiloNonAncoraImpostata();
+		}
+	return dbfacade.cerca(p);
 }
 
 @Override

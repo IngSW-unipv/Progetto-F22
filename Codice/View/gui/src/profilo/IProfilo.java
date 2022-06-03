@@ -21,6 +21,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -59,7 +60,7 @@ public interface IProfilo {
 	public boolean rimuoviPost(Post p);
 	
 	
-    public Post cercaPost(Post p)throws PostNonVisibile;
+    public Post cercaPost(Post p)throws PostNonVisibile, FotoProfiloNonAncoraImpostata;
 	
 
 	public ArrayList<Post> selectAllPost(TipoPost t);

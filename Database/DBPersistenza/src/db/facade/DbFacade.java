@@ -7,6 +7,7 @@ import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.follow.Follow;
 import db.LikeDislike.LikeMap.LikeMapDao;
 import db.LikeDislike.dislikeMap.DislikeMapDao;
@@ -357,7 +358,9 @@ public class DbFacade implements IDbFacade{
 	
 	@Override
 	public Profilo cerca(Profilo p) {
-		ProfiloDB pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
+		ProfiloDB pdb;
+			pdb = pDao.cercaProfilo(ConvertitoreFacade.getIstance().converti(p));
+		
 		if(pdb != null)
 			return ConvertitoreFacade.getIstance().convertiInverso(pdb);
 		return null;

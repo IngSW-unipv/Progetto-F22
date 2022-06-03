@@ -21,6 +21,7 @@ import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
 import profilo.Profilo;
+import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.follow.Follow;
 
 public class ConvertitoreFacade {

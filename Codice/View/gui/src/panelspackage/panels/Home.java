@@ -19,7 +19,7 @@ public class Home extends JPanel {
 	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
-	private Pulsanti buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
+	private Pulsanti creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
@@ -128,13 +128,14 @@ public class Home extends JPanel {
 			SpecificContainer containerSud = new SpecificContainer();
 			this.add(containerSud, BorderLayout.SOUTH);
 			
-			containerSud.setLayout(new GridLayout(1,4));
+			containerSud.setLayout(new GridLayout(1,5));
 
 			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pSondaggioDoppiaScelta =  new Pulsanti("Sondaggio due scelte", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio più scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio piï¿½ scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			
+			containerSud.add(creaUnaChatDiGruppo =  new Pulsanti("CreaChatDiGruppo", Frame.COLOREPRIMARIOTEMATICO,fontButton));
+
 		}
 		
 	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
@@ -263,4 +264,10 @@ public class Home extends JPanel {
 	public void getTestoRicerca(InserimentoTesto testoRicerca) {
 		this.testoRicerca = testoRicerca;
 	}
+
+
+	public Pulsanti getCreaUnaChatDiGruppo() {
+		return creaUnaChatDiGruppo;
+	}
+	
 }
