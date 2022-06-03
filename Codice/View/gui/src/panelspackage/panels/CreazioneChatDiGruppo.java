@@ -16,8 +16,6 @@ public class CreazioneChatDiGruppo extends JPanel {
 	
 	private InserimentoTesto nomeGruppo;
 	private AreaDiTesto descrizioneGruppo;
-	private InserimentoTesto inserisciNomeUtente;
-	private Pulsanti aggiungiUtente;
 	private JFileChooser fotoDiProfiloGruppo;
 	private Pulsanti creaGruppo;
 	
@@ -41,24 +39,16 @@ public class CreazioneChatDiGruppo extends JPanel {
 		nomeGruppo = new InserimentoTesto("Nome del gruppo", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14), 30);
 		containerNorth.add(nomeGruppo);
 		
-		descrizioneGruppo = new AreaDiTesto(Frame.COLORESECONDARIOTEMATICO, 50, 10, new Font("Arial", 1, 12));
+		descrizioneGruppo = new AreaDiTesto(Frame.COLORESECONDARIOTEMATICO, 70, 10, new Font("Arial", 1, 12));
 		SpecificContainer containerCenter = new SpecificContainer();
 		this.add(containerCenter, BorderLayout.CENTER);
 		
 		SpecificContainer containerSouth = new SpecificContainer();
-		containerSouth.setLayout(new GridLayout(2,1));
-		this.add(containerSouth, BorderLayout.SOUTH);
-		inserisciNomeUtente = new InserimentoTesto("Inserici nome utente", Frame.COLORESECONDARIOTEMATICO, new Font("Times New Roman", 1, 12));
-		aggiungiUtente = new Pulsanti("Aggiungi un utente", Frame.COLOREPRIMARIOTEMATICO);
-		containerSouth.add(inserisciNomeUtente, aggiungiUtente);
-		
 		fotoDiProfiloGruppo = new JFileChooser();
 		containerSouth.add(fotoDiProfiloGruppo);
 		
-		SpecificContainer containerEndPage = new SpecificContainer();
-	    this.add(containerEndPage);
 		creaGruppo = new Pulsanti(" Crea un chat di gruppo", Frame.COLOREPRIMARIOTEMATICO);
-		containerEndPage.add(creaGruppo);
+		containerSouth.add(creaGruppo);
 		
 	}
 	
@@ -79,21 +69,7 @@ public class CreazioneChatDiGruppo extends JPanel {
 		this.descrizioneGruppo = descrizioneGruppo;
 	}
 	
-	public InserimentoTesto getInserisciNomeUtente() {
-		return inserisciNomeUtente;
-	}
 	
-	public void setInserisciNomeUtente(InserimentoTesto inserisciNomeUtente) {
-		this.inserisciNomeUtente = inserisciNomeUtente;
-	}
-	
-	public Pulsanti getAggiungiUtente() {
-		return aggiungiUtente;
-	}
-	
-	public void setAggiungiUtente(Pulsanti aggiungiUtente) {
-		this.aggiungiUtente = aggiungiUtente;
-	}
 	
 	public JFileChooser getFotoDiProfiloGruppo() {
 		return fotoDiProfiloGruppo;
