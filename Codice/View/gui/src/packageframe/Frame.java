@@ -172,6 +172,11 @@ public class Frame extends JFrame {
 
 	}
 	
+	public JButton getPubblicaStoryButton() {
+		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getStory();
+	}
+
+	
 	public JButton getProfiloButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonProfilo();
 	}

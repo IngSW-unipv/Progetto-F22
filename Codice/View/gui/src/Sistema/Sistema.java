@@ -3,6 +3,7 @@ package Sistema;
 import db.facade.DbFacade;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
+import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
@@ -230,6 +231,10 @@ public class Sistema {
 	 		}
 	 		
 	 		profiloAttivo.creaPost(t);
+		}
+		
+		public void pubblicaStory(int time, Multimedia f) {
+			profiloAttivo.pubblicaStoria(time, f);
 		}
 
 		public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {

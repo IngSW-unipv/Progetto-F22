@@ -22,7 +22,7 @@ public class Controller {
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
-                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo;
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestorePubblicaStory;
     Frame view;
     Sistema model;
     
@@ -653,6 +653,10 @@ public class Controller {
             	setPostAttuale(0);
             	System.out.println("hai cliccato Post Foto");
             	view.getFileChooser().setVisible(true);
+            	view.getPrimaScelta().setVisible(false);
+            	view.getSecondaScelta().setVisible(false);
+            	view.getTerzaScelta().setVisible(false);
+            	view.getQuartaScelta().setVisible(false);
                 mostraSchermata("CreazionePost");
             }
         };
@@ -674,12 +678,24 @@ public class Controller {
         };
         view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
         
+        gestorePubblicaStory = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+            	pubblicaStory();
+            }
+        };
+        view.getPubblicaStoryButton().addActionListener(gestorePubblicaStory);
+        
         gestorePubblicaSoloTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	//model.pubblicaTesto("mi piace la fava", false, null, null, null);   
             	setPostAttuale(1);
             	view.getFileChooser().setVisible(false);
+            	view.getPrimaScelta().setVisible(false);
+            	view.getSecondaScelta().setVisible(false);
+            	view.getTerzaScelta().setVisible(false);
+            	view.getQuartaScelta().setVisible(false);
             	mostraSchermata("CreazionePost");
             }
         };
@@ -690,6 +706,10 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		setPostAttuale(2);
             	view.getFileChooser().setVisible(false);
+            	view.getTerzaScelta().setVisible(false);
+            	view.getQuartaScelta().setVisible(false);
+            	view.getPrimaScelta().setVisible(true);
+            	view.getSecondaScelta().setVisible(true);
             	mostraSchermata("CreazionePost");
         	}
         };
@@ -700,12 +720,17 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		setPostAttuale(3);
             	view.getFileChooser().setVisible(false);
+            	view.getTerzaScelta().setVisible(true);
+            	view.getQuartaScelta().setVisible(true);
+            	view.getPrimaScelta().setVisible(true);
+            	view.getSecondaScelta().setVisible(true);
             	mostraSchermata("CreazionePost");
         	}
         };
         view.getPSondaggioSceltaMultiplaButton().addActionListener(gestorePubblicaSondaggioSceltaMultipla);
 
     }
+
     
     public void actionListenersRicerca(){
         gestoreHomeCerca = new ActionListener() {
@@ -1093,6 +1118,16 @@ public class Controller {
         	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, scelta3, scelta4);
         }
     }
+    
+    public void pubblicaStory() {
+   	 
+    	String commentoPost = view.ottieniCommento();
+    	String percorsoFilePost = view.ottieniPercorsoFile();
+    	Foto f = new Foto(commentoPost, null, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, true);
+    	
+    	model.pubblicaStory(24, f);
+    }
+
 
     public boolean verificaTestoRicerca() {
         if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
