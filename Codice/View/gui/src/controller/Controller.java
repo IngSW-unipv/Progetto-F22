@@ -277,27 +277,16 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                settaPostVisualizzato(false);
-                String percorsoFotoProfilo = null;
+
                 Foto f = new Foto(null);
                 
                 try {
 					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e2) {
-					 percorsoFotoProfilo = "immagini/images.png";;
-					e2.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata| PostNonVisibile e1) {
+					 f.setPercorso("immagini/images.png"); 
 				}
                 
-            	try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                visualizzaPostFoto(f);
                 mostraSchermata("Postvisualizzato");
                 refresh();
             }
@@ -872,7 +861,9 @@ public class Controller {
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                model.impostaFotoProfilo(((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getIdPost());
+            	String iDNuovaFotoProfilo = ((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getIdPost();
+                model.impostaFotoProfilo(iDNuovaFotoProfilo);
+                model.getProfiloAttivo().setFotoProfilo(iDNuovaFotoProfilo);
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
@@ -919,7 +910,6 @@ public class Controller {
     			   view.incrementaIndiceCommento();
     			   view.settaCommenti(commentiConProfiliIinvianti);
     			   refresh();
-    		   
     	   }
        };
        view.getNextCommento().addActionListener(gestoreNextCommento);
@@ -961,14 +951,9 @@ public class Controller {
         gestoreNextMessaggioButton = new ActionListener() {
       	   @Override
       	   public void actionPerformed(ActionEvent e) {
-      			
-      		   	
+      				   	
       		   view.incrementaIndiceMessaggio();
-      		   
-      		   for (int i = 0; i < messaggi.size(); i++) {
-          		   System.out.println(messaggi.get(i));
-      		   }
-  			   	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+      		   view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
   			   	refresh();
       		   	}
          };
@@ -1000,9 +985,6 @@ public class Controller {
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}
-    			System.out.println(nomeGruppo);
-    			System.out.println(descrizioneGruppo);
-    			System.out.println(immagineGruppo);
     		}
     	};
     	
@@ -1196,6 +1178,15 @@ public class Controller {
 		} catch (AccountDoesNotExist e) {
 			e.printStackTrace();
 		}
+    }
+    public void visualizzaPostFoto(Foto f) {
+    	  
+      		try {
+				commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+			} catch (PostNonVisibile e1) {
+				e1.printStackTrace();
+			}
+          view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
     }
     
     public int getPostAttuale() {
