@@ -39,23 +39,23 @@ public class CreazionePost extends JPanel {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 
-		containerNorth.add(new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40)), BorderLayout.CENTER);
+		containerNorth.setLayout(new GridLayout(2, 1));
+		Etichette labelSuperiore = new Etichette("Personalizza il tuo post", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN | Font.ITALIC, 40));
+		containerNorth.add(labelSuperiore);
 		
-SpecificContainer containerNorthCenter = new SpecificContainer();
+		SpecificContainer containerNorthInferiore = new SpecificContainer();
+		containerNorthInferiore.setLayout(new GridLayout(1, 4));
+		containerNorth.add(containerNorthInferiore);
 
 		sceltaSondaggio1 = new InserimentoTesto("scelta1", Frame.COLOREPRIMARIOTEMATICO);
 		sceltaSondaggio2 = new InserimentoTesto("scelta2", Frame.COLOREPRIMARIOTEMATICO);
-		
-		containerNorth.add(sceltaSondaggio1, BorderLayout.EAST);
-		containerNorth.add(sceltaSondaggio2, BorderLayout.WEST);
-		containerNorth.add(containerNorthCenter, BorderLayout.CENTER);
-		
 		sceltaSondaggio3 = new InserimentoTesto("scelta3", Frame.COLOREPRIMARIOTEMATICO);
 		sceltaSondaggio4 = new InserimentoTesto("scelta4", Frame.COLOREPRIMARIOTEMATICO);
 		
-		containerNorthCenter.add(sceltaSondaggio3, BorderLayout.EAST);
-		containerNorthCenter.add(sceltaSondaggio4, BorderLayout.WEST);
-		
+		containerNorthInferiore.add(sceltaSondaggio1);
+		containerNorthInferiore.add(sceltaSondaggio2);
+		containerNorthInferiore.add(sceltaSondaggio3);
+		containerNorthInferiore.add(sceltaSondaggio4);
 
 		
 		fileChooser = new JFileChooser();
