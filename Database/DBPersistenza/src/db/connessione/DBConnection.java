@@ -15,8 +15,8 @@ public class DBConnection {
 
 		DbDriver = "com.mysql.cj.jdbc.Driver";
 		DbURL = "jdbc:mysql://127.0.0.1:3306/socialnetwork";
-		username = "aissa";
-		password = "";
+		username = "root";
+		password = "Dadeinter99";
 		if ( isOpen(conn) )
 			closeConnection(conn);
 		try
