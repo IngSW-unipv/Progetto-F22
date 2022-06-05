@@ -13,7 +13,7 @@ public class ChatTester {
 	public static void main(String[] args) {
 		Profilo p1 = new Profilo("Davide99",null);
 		Profilo p2 = new Profilo("DV999",null);
-		Gruppo g = new Gruppo("G00", null, null, null, null, null, null, null, null, null);
+		Gruppo g = new Gruppo("G00", null, null, null, null, null, null, null, null, null, null);
 		Chat c = new ChatPrivata("CavalliPazzi", p1, p2);
 		Chat c1 = new ChatDiGruppo("Galline", g);
 		

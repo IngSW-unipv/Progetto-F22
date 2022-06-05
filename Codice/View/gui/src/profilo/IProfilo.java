@@ -118,12 +118,13 @@ public interface IProfilo {
 	
 	//Gruppo
 	
-	    public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore)throws AccountDoesNotExist;
+	    public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo);
 	    public boolean rimuoviGruppo(Gruppo g);
-	    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
+	    public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String fotoGruppo);
         public Gruppo cercaGruppo(Gruppo g);
 		public ArrayList<Gruppo> selectAllGruppo();
-	    
+	    public boolean modificaFotoGruppo(Gruppo g, String s);
+	    public String vediFotoGruppo(Gruppo g);
 	
     //Like Dislike
 	

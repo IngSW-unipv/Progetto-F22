@@ -3,7 +3,7 @@ package db.gruppo;
 public class GruppoDB {
 
 	public GruppoDB(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
-			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore) {
+			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo) {
 		super();
 		this.idGruppo = idGruppo;
 		this.descrizione = descrizione;
@@ -15,6 +15,7 @@ public class GruppoDB {
 		this.profilo5 = profilo5;
 		this.profilo6 = profilo6;
 		Amministratore = amministratore;
+		this.fotoGruppo = fotoGruppo;
 	}
 	private String idGruppo;
 	private String descrizione;
@@ -26,6 +27,7 @@ public class GruppoDB {
 	private String profilo5;
 	private String profilo6;
 	private String Amministratore;
+	private String fotoGruppo;
 	public String getIdGruppo() {
 		return idGruppo;
 	}
@@ -91,6 +93,12 @@ public class GruppoDB {
 		return "GruppoDB [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", nomeGruppo=" + nomeGruppo
 				+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
 				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + Amministratore
-				+ "]";
+				+ ", fotoGruppo=" + fotoGruppo + "]";
+	}
+	public String getFotoGruppo() {
+		return fotoGruppo;
+	}
+	public void setFotoGruppo(String fotoGruppo) {
+		this.fotoGruppo = fotoGruppo;
 	}
 }
