@@ -19,7 +19,7 @@ public class  Profilo extends JPanel {
 	private String idProfilo;
 	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
-	ArrayList<JScrollPane> ListaTesti = new ArrayList<JScrollPane>();
+	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
 	ArrayList<String> dati = new ArrayList<String>();
 
 	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost;
@@ -82,8 +82,8 @@ public class  Profilo extends JPanel {
 		ListaTesti.clear();
 		for(int i = 0;  i < 3 ; i++) {
 			AreaDiTesto textArea = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaTesti.add( new JScrollPane(textArea));
-			containerWest.add(ListaTesti.get(i), BorderLayout.PAGE_START);
+			ListaTesti.add(textArea);
+			containerWest.add(new JScrollPane(ListaTesti.get(i)), BorderLayout.PAGE_START);
 		}
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
@@ -165,9 +165,8 @@ public class  Profilo extends JPanel {
 	}
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
-		int i;
-		for (i = 0; i < postTestoDelProfilo.size()/2 && i < 3 ; i++) {
-			((JTextArea) ListaTesti.get(i).getComponent(0)).setText("nuovo");
+		for (int i = 0; i < postTestoDelProfilo.size() && i < 3 ; i++) {
+			ListaTesti.get(i).setText(postTestoDelProfilo.get(i));
 		}
 	}
 	public void setFotoProfilo(String percorso) {

@@ -134,7 +134,12 @@ public class Controller {
                     public void actionPerformed(ActionEvent e) {
                     	
                     	aggiornaSchermataProfiloAttivo();
+                    	ArrayList<String> testi = new ArrayList<String>();
+                    	testi.add("uova");
+                    	testi.add("latte");
+                    	testi.add("maionese");
                         refresh();
+                        view.setPostTestoProfilo(testi);
                         mostraSchermata("Profilo");
                     }
                 };
@@ -256,22 +261,6 @@ public class Controller {
             }
         };
         view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
-        
-        gestorePrevTipoPost = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        };
-        view.getPrevTipoPost().addActionListener(gestorePrevTipoPost);
-        
-        
-        gestoreNextTipoPost = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        };
-        view.getNextTipoPost().addActionListener(gestoreNextTipoPost);
-        
         
         gestoreFotoProfilo = new ActionListener() {
             @Override
@@ -401,6 +390,7 @@ public class Controller {
         };
         view.getPost3().addActionListener(gestorePost3);
         
+        /*
         gestorePost4 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -614,7 +604,8 @@ public class Controller {
         	}
         };
         view.getPost9().addActionListener(gestorePost9);
-        
+
+    */
     }
     
     public void actionListenersCreazionePost() {
