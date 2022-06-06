@@ -262,7 +262,9 @@ public class Frame extends JFrame {
 	public JButton getVisibilitaPostButton() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getVisibilitaPost();
 	}
-	
+	public Pulsanti getSalvaModificheButton() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getSalvaModifiche();
+	}
 	
 	public JButton getEliminaAccountButton() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getEliminaAccount();
@@ -699,6 +701,9 @@ public class Frame extends JFrame {
 	
 	public String getPercorsoImmagineGruppo() {
 		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getPercorsoImmagineGruppo();
+	}
+	public AreaDiTesto getDescrizione() {
+		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getAreaDescrizione();
 	}
 	
 	public Pulsanti getHomeCreazioneChatDiGruppo() {

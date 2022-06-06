@@ -22,7 +22,8 @@ public class Controller {
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
-                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory;
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
+                           gestoreSalvaLeModifiche;
     Frame view;
     Sistema model;
     
@@ -222,6 +223,14 @@ public class Controller {
 	    };
 	    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
         
+	    gestoreSalvaLeModifiche = new ActionListener() {
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		aggiungiDescrizione();
+	    	}
+	    };
+	    view.getSalvaModificheButton().addActionListener(gestoreSalvaLeModifiche);
+
     }
     
     public void actionListenersProfilo() {
@@ -1201,5 +1210,13 @@ public class Controller {
 	public void setBasePostAttuale(int basePostAttuale) {
 		this.basePostAttuale = basePostAttuale;
 	}
+	
+	public void aggiungiDescrizione() {
+		String profilo = model.getProfiloAttivo().getIdProfilo();
+    	String descrizione = view.getDescrizione().getText();
+    	model.carica(profilo, descrizione);
+    	model.getProfiloAttivo().setDescrizione(descrizione);
+	}
+
 	
 }

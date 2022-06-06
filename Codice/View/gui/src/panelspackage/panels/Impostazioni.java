@@ -111,5 +111,13 @@ public class Impostazioni extends JPanel {
 		return salvaModifiche;
 	}
 
+	public AreaDiTesto getAreaDescrizione() {
+		return areaDescrizione;
+	}
+
+	public void setAreaDescrizione(AreaDiTesto areaDescrizione) {
+		this.areaDescrizione = areaDescrizione;
+	}
+
 }
 	

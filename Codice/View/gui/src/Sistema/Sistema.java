@@ -277,7 +277,11 @@ public class Sistema {
 	public void impostaFotoProfilo(String fotoPath) {
 		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
 	}
-		
+	
+	public void carica(String idProfilo, String descrizione) {
+		 profiloAttivo.modificaDescrizione(profiloAttivo, descrizione);
+	 }
+	
 		
 	public Profilo getProfiloAttivo() {
 		return profiloAttivo;
