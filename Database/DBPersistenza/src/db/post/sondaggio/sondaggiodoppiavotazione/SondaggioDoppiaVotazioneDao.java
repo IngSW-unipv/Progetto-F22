@@ -11,7 +11,6 @@ import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
 
-
 public class SondaggioDoppiaVotazioneDao extends PostDao {
 private Connection conn;
 private String schema; 
@@ -483,6 +482,14 @@ public boolean modificaCount2s(PostDB p, int n) {
 
 	DBConnection.closeConnection(conn);
 	return esito;
+}
+@Override
+public boolean modificaTempoCancellazione(PostDB m, int t) {
+	return false;
+}
+@Override
+public boolean modificaIsStory(PostDB m, boolean b) {
+	return false;
 }
 
 

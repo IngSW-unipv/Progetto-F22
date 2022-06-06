@@ -50,13 +50,13 @@ public boolean creaGruppo(GruppoDB g) {
 
 	try
 	{
-		String query="insert into gruppo (idGruppo,descrizione,nomeGruppo,fotoGruppo) values (?,?,?,?)";
+		String query="insert into gruppo (idGruppo,descrizione,nomeGruppo) values (?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, g.getIdGruppo());
 		st1.setString(2, g.getDescrizione());
 		st1.setString(3, g.getNomeGruppo());
-		st1.setString(4, g.getFotoGruppo());
+
 		st1.executeUpdate();
 
 
@@ -76,7 +76,7 @@ public boolean inserisciChiavi(GruppoDB g) {
 
 	try
 	{
-		String query="update gruppo set profilo1=?,profilo2=?,profilo3=?,profilo4=?,profilo5=?,profilo6=?,amministratore=? where idGruppo=?";
+		String query="update gruppo set profilo1=?,profilo2=?,profilo3=?,profilo4=?,profilo5=?,profilo6=?,amministratore=?,fotoGruppo=? where idGruppo=?";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, g.getProfilo1());
@@ -86,7 +86,8 @@ public boolean inserisciChiavi(GruppoDB g) {
 		st1.setString(5, g.getProfilo5());
 		st1.setString(6, g.getProfilo6());
 		st1.setString(7, g.getAmministratore());
-		st1.setString(8, g.getIdGruppo());
+		st1.setString(8, g.getFotoGruppo());
+		st1.setString(9, g.getIdGruppo());
 		
 		st1.executeUpdate();
 

@@ -439,9 +439,9 @@ public ArrayList<Post> selectAllPost(TipoPost t) {
 @Override
 public boolean pubblicaStoria(int time, Multimedia f){
 	
-	    f.setStory(true);
-		f.setTempoCancellazione(time);
 		dbfacade.carica(f);
+		dbfacade.modificaIsStory(f, true);
+		dbfacade.modificaTempoCancellazione(f, time);
 		try {
 		    Thread.sleep(time * 60 * 60 * 1000);
 		} catch (InterruptedException ie) {

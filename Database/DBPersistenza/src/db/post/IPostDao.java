@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import db.commento.CommentoDB;
 
-
 public interface IPostDao {
 
 	public boolean caricaPost(PostDB p);
@@ -31,4 +30,8 @@ public interface IPostDao {
     
     public int vediNumDislike(PostDB p);
     public boolean modificaNumDislike(PostDB p, int n);
+    
+    public boolean modificaTempoCancellazione(PostDB m,int tempo);
+    public boolean modificaIsStory(PostDB m,boolean b);
+    
 }

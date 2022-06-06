@@ -4,6 +4,7 @@ package db.facade;
 import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
+import chat.chatDiGruppo.gruppo.Gruppo;
 import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -20,11 +21,11 @@ public class testfacade {
 		Foto f = new Foto("F00", null, false, null, null, false);
        Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
- 
+        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999", "F00");
        SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto");        
         Profilo plof = new Profilo("Dv999", "Davide99");
         
-        dbf.cerca(plof);
+     /*   dbf.cerca(plof);
         
        
       
@@ -48,6 +49,8 @@ public class testfacade {
         System.out.println(b);*/
         
         
-        System.out.println(dbf.carica(sdv));
+      //  System.out.println(dbf.carica(sdv));
+        
+        System.out.println(DbFacade.getIstance().carica(g));
 }
 }

@@ -7,7 +7,6 @@ import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
-import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.follow.Follow;
 import db.LikeDislike.LikeMap.LikeMapDao;
 import db.LikeDislike.dislikeMap.DislikeMapDao;
@@ -104,8 +103,9 @@ public class DbFacade implements IDbFacade{
     //Gruppi
 	@Override
 	public boolean carica(Gruppo g) {
-		return gDao.creaGruppo(ConvertitoreFacade.getIstance().converti(g));
-	
+		boolean b = gDao.creaGruppo(ConvertitoreFacade.getIstance().converti(g));
+		gDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(g));
+	    return b;
 	}
 	@Override
 	public boolean rimuovi(Gruppo g) {
@@ -288,6 +288,15 @@ public class DbFacade implements IDbFacade{
         return pstDao.modificaNumDislike(ConvertitoreFacade.getIstance().converti(p), n);
     }
     
+	public boolean modificaTempoCancellazione(Post m,int tempo) {
+		pstDao = Utility.convertiTipoPost(m.getTipo());
+        return pstDao.modificaTempoCancellazione(ConvertitoreFacade.getIstance().converti(m), tempo);
+	}
+    public boolean modificaIsStory(Post m,boolean b) {
+    	pstDao = Utility.convertiTipoPost(m.getTipo());
+        return pstDao.modificaIsStory(ConvertitoreFacade.getIstance().converti(m), b);
+    }
+	
     //Solo sondaggi
 	@Override
     public int vediCount1SDV(Post p) {

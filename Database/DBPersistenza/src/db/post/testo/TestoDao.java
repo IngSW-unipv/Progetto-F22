@@ -388,5 +388,13 @@ public class TestoDao extends PostDao {
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+	@Override
+	public boolean modificaTempoCancellazione(PostDB m, int n) {
+		return false;
+	}
+	@Override
+	public boolean modificaIsStory(PostDB m, boolean b) {
+		return false;
+	}
 
 }

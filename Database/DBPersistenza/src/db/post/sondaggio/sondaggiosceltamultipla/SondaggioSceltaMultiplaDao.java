@@ -601,4 +601,14 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		return esito;
 	}
 
+	@Override
+	public boolean modificaTempoCancellazione(PostDB m, int t) {
+		return false;
+	}
+
+	@Override
+	public boolean modificaIsStory(PostDB m, boolean b) {
+		return false;
+	}
+
 }

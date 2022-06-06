@@ -64,6 +64,9 @@ public interface IDbFacade {
     public boolean modificaNumLike(Post p, int n);
     public int vediNumDislike(Post p);
     public boolean modificaNumDislike(Post p, int n);
+    public boolean modificaTempoCancellazione(Post m,int tempo);
+    public boolean modificaIsStory(Post m,boolean b);
+    
     //Solo sondaggi
     
     public int vediCount1SDV(Post p);
