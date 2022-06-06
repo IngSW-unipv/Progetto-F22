@@ -19,6 +19,7 @@ public class  Profilo extends JPanel {
 	private String idProfilo;
 	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
+	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
 	ArrayList<String> dati = new ArrayList<String>();
 
 	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost;
@@ -73,16 +74,16 @@ public class  Profilo extends JPanel {
 			ListaPost.add(new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg"));
 			containerCenter.add(ListaPost.get(i));
 		}
-		/*
+		
 		SpecificContainer containerWest = new SpecificContainer();
-		add(containerCenter, BorderLayout.WEST);
-		containerCenter.setLayout(new GridLayout(3,1));
+		add(containerWest, BorderLayout.WEST);
+		containerWest.setLayout(new GridLayout(3,1));
 
-		ListaPost.clear();
+		ListaTesti.clear();
 		for(int i = 0;  i < 3 ; i++) {
-			ListaPost.add(new AreaDiTesto("prova"));
-			containerCenter.add(ListaPost.get(i));
-		}*/
+			ListaTesti.add(new AreaDiTesto(Frame.getColoreprimariotematico(), "provfekjnslknfeslkjnfsefneslkfjneslkjfna"));
+			containerWest.add(ListaTesti.get(i));
+		}
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
