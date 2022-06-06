@@ -21,7 +21,7 @@ public class  Profilo extends JPanel {
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
 	ArrayList<String> dati = new ArrayList<String>();
 
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextPost,prevPost, nextTipoPost,prevTipoPost;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
@@ -66,26 +66,40 @@ public class  Profilo extends JPanel {
 		
 		SpecificContainer containerCenter = new SpecificContainer();
 		add(containerCenter, BorderLayout.CENTER);
-		containerCenter.setLayout(new GridLayout(3,3));
+		containerCenter.setLayout(new GridLayout(3,1));
 
 		ListaPost.clear();
-		for(int i = 0;  i < 9 ; i++) {
+		for(int i = 0;  i < 3 ; i++) {
 			ListaPost.add(new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg"));
 			containerCenter.add(ListaPost.get(i));
 		}
+		/*
+		SpecificContainer containerWest = new SpecificContainer();
+		add(containerCenter, BorderLayout.WEST);
+		containerCenter.setLayout(new GridLayout(3,1));
+
+		ListaPost.clear();
+		for(int i = 0;  i < 3 ; i++) {
+			ListaPost.add(new AreaDiTesto("prova"));
+			containerCenter.add(ListaPost.get(i));
+		}*/
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
 
-		SpecificContainer containerSouthWest = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
-		containerSouth.add(containerSouthWest,BorderLayout.SOUTH);
+		SpecificContainer containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
+		containerGrigliaSouth.setLayout(new GridLayout(1,6));
 		
-		containerSouthWest.add(prevTipoPost = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerSouthWest.add(nextTipoPost = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevTesto = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextTesto = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevFoto = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextFoto = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 
-		
+		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
 	}
 
@@ -130,19 +144,21 @@ public class  Profilo extends JPanel {
 	}
 
 	public void setPostProfilo(ArrayList<String> postDelProfilo) {
-		for (int i = 0; i < postDelProfilo.size()/2 && i < 9 ; i++) {
-		Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
-		ListaPost.get(i).setIcon(img);
-		System.out.println("stampa il numero del ciclo: " + i);
-		System.out.println("stampa il numerodella size " + ((postDelProfilo.size()/2) - 1));
-		if (i == (postDelProfilo.size()/2) - 1) {
-			for (int j = i; j < 9; j++) {
-				System.out.println("stampa il numero ciclo J " + j );
-
+		int i;
+		for (i = 0; i < postDelProfilo.size()/2 && i < 3 ; i++) {
+			//System.out.println("stiamo aggiungendo : " + postDelProfilo.get((i*2)+1));
+		//Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
+			int indice =(i*2)+1;
+			System.out.println("indice : " + indice);
+			System.out.println(postDelProfilo.get(indice));
+		ListaPost.get(i).setIcon(new ImageIcon(postDelProfilo.get(indice)));
+		}
+		if (i<3) {
+			for (int j = i; j < 3; j++) {
+				System.out.println("ciclo numero : " + j);
 				Icon img2=new ImageIcon("immagini/images.png");
 				ListaPost.get(j).setIcon(img2);
 			}
-		}
 		}
 	}
 	
@@ -170,12 +186,12 @@ public class  Profilo extends JPanel {
 
 
 	public Pulsanti getNextPost() {
-		return nextPost;
+		return nextTesto;
 	}
 
 
 	public Pulsanti getPrevPost() {
-		return prevPost;
+		return prevTesto;
 	}
 
 
