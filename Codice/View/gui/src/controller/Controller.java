@@ -22,7 +22,7 @@ public class Controller {
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
-                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestorePubblicaStory;
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory;
     Frame view;
     Sistema model;
     
@@ -981,7 +981,7 @@ public class Controller {
     			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
     			String immagineGruppo = view.getPercorsoImmagineGruppo();
     			try {
-    				model.getProfiloAttivo().creaGruppo("4", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
+    				model.getProfiloAttivo().creaGruppo("2", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}
@@ -989,10 +989,16 @@ public class Controller {
     	};
     	
     	view.getCreaGruppo().addActionListener(gestoreCreaChatDiGruppo);
-    }
     	
-   
-        
+    	gestoreHomeChatDiGruppo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("Home");
+            }
+        };
+        view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
+    }
+    	        
     public void refresh() {
         view.invalidate();
         view.validate();

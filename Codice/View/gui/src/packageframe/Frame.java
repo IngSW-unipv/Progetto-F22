@@ -698,4 +698,8 @@ public class Frame extends JFrame {
 		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getPercorsoImmagineGruppo();
 	}
 	
+	public Pulsanti getHomeCreazioneChatDiGruppo() {
+		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getHome();
+	}
+	
 }
