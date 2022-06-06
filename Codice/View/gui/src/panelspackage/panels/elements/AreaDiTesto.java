@@ -25,11 +25,20 @@ public class AreaDiTesto extends JTextArea {
 		this.setBounds(0, 0, numeroRighe,lunghezzaMassimaTesto );
 	}
 	
-	public AreaDiTesto(Color colore, String stringa, int i, int numeroRighe, int lunghezzaMassimaTesto) {
+	public AreaDiTesto(Color colore, String stringa, int numeroRighe, int lunghezzaMassimaTesto) {
 		this.setText(stringa);
 		this.setBackground(colore);
 		this.setVisible(true);
 		this.setBounds(0, 0, numeroRighe, lunghezzaMassimaTesto);
+	}
+
+	public AreaDiTesto(Color colore, int numeroRighe, int lunghezzaMassimaTesto) {
+		this.setText("");
+		this.setBackground(colore);
+		this.setVisible(true);
+		this.setEditable(false);
+		this.setColumns(lunghezzaMassimaTesto); 
+		this.setRows(numeroRighe); 
 	}
 	
 	public AreaDiTesto(Color colore1, Color colore2, String stringa, Font font) {

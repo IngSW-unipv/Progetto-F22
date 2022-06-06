@@ -76,7 +76,7 @@ public class CreazionePost extends JPanel {
 		
 		SpecificContainer containerCommento = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenter.add(containerCommento);
-		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20);
+		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 20);
 		testoInserisciCommento = new Etichette("Inserire il commento al post:", SwingConstants.LEFT, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN, 20));
 		containerCommento.add(testoInserisciCommento, BorderLayout.NORTH);
 		containerCommento.add(inserimentoCommentoPost, BorderLayout.CENTER);

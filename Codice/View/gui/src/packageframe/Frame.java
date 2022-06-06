@@ -405,7 +405,10 @@ public class Frame extends JFrame {
 		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(8);
 	}
 	
-	
+	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostTestoProfilo(postTestoDelProfilo);
+	}
+
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
 	}
