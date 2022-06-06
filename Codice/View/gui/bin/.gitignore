@@ -1,6 +1,12 @@
+/.DS_Store
+/Messaggio/
+/Sistema/
+/chat/
+/controller/
 /convertitore/
 /db/
-/chat/
-/profilo/
-/controller/
+/packageframe/
 /panelspackage/
+/post/
+/profilo/
+/test/

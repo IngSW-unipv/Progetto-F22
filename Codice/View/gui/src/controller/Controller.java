@@ -981,7 +981,7 @@ public class Controller {
     			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
     			String immagineGruppo = view.getPercorsoImmagineGruppo();
     			try {
-    				model.getProfiloAttivo().creaGruppo("4", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo());
+    				model.getProfiloAttivo().creaGruppo("4", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}

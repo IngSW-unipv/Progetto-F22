@@ -694,7 +694,7 @@ public ArrayList<String> ProfiloNickCommento(Profilo p) {
 
 
 @Override
-public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) {
+public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
 	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore, fotoGruppo);
 		return dbfacade.carica(g);
 
