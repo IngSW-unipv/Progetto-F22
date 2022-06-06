@@ -77,12 +77,14 @@ public class  Profilo extends JPanel {
 		
 		SpecificContainer containerWest = new SpecificContainer();
 		add(containerWest, BorderLayout.WEST);
-		containerWest.setLayout(new GridLayout(3,1));
+		containerWest.setLayout(new GridLayout(6,1));
 
 		ListaTesti.clear();
 		for(int i = 0;  i < 3 ; i++) {
 			AreaDiTesto textArea = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaTesti.add(textArea);
+			containerWest.add(new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+
 			containerWest.add(new JScrollPane(ListaTesti.get(i)), BorderLayout.PAGE_START);
 		}
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
@@ -166,7 +168,7 @@ public class  Profilo extends JPanel {
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
 		for (int i = 0; i < postTestoDelProfilo.size() && i < 3 ; i++) {
-			ListaTesti.get(i).setText(postTestoDelProfilo.get(i));
+			ListaTesti.get(i).setText(postTestoDelProfilo.get((i*2) + 1));
 		}
 	}
 	public void setFotoProfilo(String percorso) {

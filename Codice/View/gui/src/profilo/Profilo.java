@@ -600,7 +600,14 @@ public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio 
 
 
 public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
+	System.out.println("siamo in profilo" + p.getIdProfilo() + f.toString());
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, p);
+	for(int i = 0; i < res.size(); i++) {
+		System.out.println("siamo ancora in profilo: " + res.get(i));
+		res.get(i);
+	}
+	return res;
+	/*
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
 	ArrayList<Post> search = new ArrayList<>();
@@ -627,7 +634,7 @@ public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
 		}
 	}
 		return risultato;
-    
+    */
 }
 
 @Override
