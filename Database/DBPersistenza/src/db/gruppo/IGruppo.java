@@ -10,4 +10,8 @@ public boolean inserisciChiavi(GruppoDB g);
 public boolean cancellaGruppo(GruppoDB g);
 public GruppoDB cercaGruppo(GruppoDB g);
 
+public String vediFotoGruppo(GruppoDB g);
+public boolean cambiaFotoGruppo(GruppoDB g, String s);
+
+
 }

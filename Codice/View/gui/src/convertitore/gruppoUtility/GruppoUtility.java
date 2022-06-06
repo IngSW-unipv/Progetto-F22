@@ -15,12 +15,12 @@ public class GruppoUtility {
 	}
 	
 	public GruppoDB converti(Gruppo g) {
-		GruppoDB grdb = new GruppoDB(g.getIdGruppo(),g.getDescrizione(),g.getNomeGruppo(),g.getProfilo1(),g.getProfilo2(),g.getProfilo3(),g.getProfilo4(),g.getProfilo5(),g.getProfilo6(),g.getAmministratore());
+		GruppoDB grdb = new GruppoDB(g.getIdGruppo(),g.getDescrizione(),g.getNomeGruppo(),g.getProfilo1(),g.getProfilo2(),g.getProfilo3(),g.getProfilo4(),g.getProfilo5(),g.getProfilo6(),g.getAmministratore(),g.getFotoGruppo());
 		return grdb;
 	}
 	
 	public Gruppo convertiInverso(GruppoDB g) {
-		Gruppo gdb = new Gruppo(g.getIdGruppo(), g.getDescrizione(), g.getNomeGruppo(), g.getProfilo1(), g.getProfilo2(), g.getProfilo3(), g.getProfilo4(), g.getProfilo5(), g.getProfilo6(), g.getAmministratore());
+		Gruppo gdb = new Gruppo(g.getIdGruppo(), g.getDescrizione(), g.getNomeGruppo(), g.getProfilo1(), g.getProfilo2(), g.getProfilo3(), g.getProfilo4(), g.getProfilo5(), g.getProfilo6(), g.getAmministratore(),g.getFotoGruppo());
 		return gdb;
 	}
 }

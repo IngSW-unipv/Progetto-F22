@@ -6,9 +6,7 @@ import java.awt.GridLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 import packageframe.Frame;
-import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
@@ -21,6 +19,7 @@ public class CreazioneChatDiGruppo extends JPanel {
 	private InserimentoTesto descrizioneGruppo;
 	private JFileChooser fotoDiProfiloGruppo;
 	private Pulsanti creaGruppo;
+	private Pulsanti home;
 	
 	public CreazioneChatDiGruppo() {
 		avvio();
@@ -49,7 +48,6 @@ public class CreazioneChatDiGruppo extends JPanel {
 		containerNorth.add(descrizioneGruppo);
 		containerNorth.add(new Etichette("Scegliere l'immagine del gruppo: ", Frame.COLOREPRIMARIOTEMATICO));
 		
-		
 		SpecificContainer containerCenter = new SpecificContainer();
 		this.add(containerCenter, BorderLayout.CENTER);
 		
@@ -67,10 +65,13 @@ public class CreazioneChatDiGruppo extends JPanel {
 		
 		
 		SpecificContainer containerSouth = new SpecificContainer();
+		containerSouth.setLayout(new GridLayout(2,1));
 		this.add(containerSouth, BorderLayout.SOUTH);
 		
 		creaGruppo = new Pulsanti("Crea chat", Frame.COLOREPRIMARIOTEMATICO);
+		home = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
 		containerSouth.add(creaGruppo);
+		containerSouth.add(home);
 		
 	}
 	
@@ -109,6 +110,14 @@ public class CreazioneChatDiGruppo extends JPanel {
 	
 	public String getPercorsoImmagineGruppo() {
 		return this.fotoDiProfiloGruppo.getSelectedFile().getAbsolutePath();
+	}
+
+	public Pulsanti getHome() {
+		return home;
+	}
+
+	public void setHome(Pulsanti home) {
+		this.home = home;
 	}
 	
 	

@@ -694,10 +694,8 @@ public ArrayList<String> ProfiloNickCommento(Profilo p) {
 
 
 @Override
-public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
-		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore)
-		throws AccountDoesNotExist {
-	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore);
+public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) {
+	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore, fotoGruppo);
 		return dbfacade.carica(g);
 
 }
@@ -708,8 +706,8 @@ public boolean rimuoviGruppo(Gruppo g)  {
 }
 
 @Override
-public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6)  {
-	Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
+public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String fotoGruppo)  {
+	Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null,fotoGruppo);
 	
 		return dbfacade.gestisciPartecipanti(g);
 	
@@ -730,6 +728,20 @@ public ArrayList<Gruppo> selectAllGruppo(){
 		return res;
 		
 }
+
+
+@Override
+public boolean modificaFotoGruppo(Gruppo g, String s) {
+ 
+	return dbfacade.cambiaFotoGruppo(g, s);
+}
+
+@Override
+public String vediFotoGruppo(Gruppo g) {
+	return dbfacade.vediFotoGruppo(g);
+}
+
+
 //-------------------------------------------------------------------------------------------------------------------
 
 // Like / Dislike
@@ -795,8 +807,6 @@ public boolean rimuoviDislike(Post p)throws AzioneNonConsentita{
 	throw new AzioneNonConsentita();
 	
 }
-
-
 }
 
 

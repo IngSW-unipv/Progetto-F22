@@ -129,6 +129,13 @@ public class DbFacade implements IDbFacade{
 		return ConvertitoreFacade.getIstance().convertiListaGruppi(gDao.selectall());
 	}
 	
+	public boolean cambiaFotoGruppo(Gruppo g, String foto) {
+		return gDao.cambiaFotoGruppo(ConvertitoreFacade.getIstance().converti(g), foto);
+	}
+	
+	public String vediFotoGruppo(Gruppo g) {
+		return gDao.vediFotoGruppo(ConvertitoreFacade.getIstance().converti(g));
+	}
 	
 	//Messaggi
 	

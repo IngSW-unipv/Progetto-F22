@@ -32,7 +32,7 @@ public ArrayList<GruppoDB> selectall() {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10), rs1.getString(11));
 
 			result.add(grp);
 		}
@@ -50,13 +50,13 @@ public boolean creaGruppo(GruppoDB g) {
 
 	try
 	{
-		String query="insert into gruppo (idGruppo,descrizione,nomeGruppo) values (?,?,?)";
+		String query="insert into gruppo (idGruppo,descrizione,nomeGruppo,fotoGruppo) values (?,?,?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, g.getIdGruppo());
 		st1.setString(2, g.getDescrizione());
 		st1.setString(3, g.getNomeGruppo());
-		
+		st1.setString(4, g.getFotoGruppo());
 		st1.executeUpdate();
 
 
@@ -140,7 +140,7 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));
 
 			DBConnection.closeConnection(conn);
 			return grp;
@@ -149,5 +149,57 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 
 	DBConnection.closeConnection(conn);
 	return null;
+}
+
+@Override
+public String vediFotoGruppo(GruppoDB g) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	ResultSet rs1;
+
+	try
+	{
+		String query="SELECT fotoGruppo FROM gruppo WHERE idGruppo=?";
+
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, g.getIdGruppo());
+
+		rs1=st1.executeQuery();
+
+		while(rs1.next())
+		{
+			String i = rs1.getString("fotoGruppo");
+			DBConnection.closeConnection(conn);
+			return i;
+		}
+	}catch (Exception e){e.printStackTrace();}
+
+	DBConnection.closeConnection(conn);
+    return null;
+}
+
+@Override
+public boolean cambiaFotoGruppo(GruppoDB g, String s) {
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set fotoGruppo=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, s);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
 }
 }

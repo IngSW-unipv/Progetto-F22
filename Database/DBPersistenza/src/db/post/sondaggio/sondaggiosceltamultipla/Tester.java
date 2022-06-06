@@ -12,13 +12,13 @@ public class Tester {
 		SondaggioSceltaMultiplaDao sdao = new SondaggioSceltaMultiplaDao();
         
 		
-	/*	System.out.println(sdao.cercaPost(s).toString());
+		System.out.println(sdao.cercaPost(s).toString());
 	
 		
 ArrayList<PostDB> res = sdao.selectAll();
 	   
      for(PostDB pst : res)
-			System.out.println(pst.toString());*/
+			System.out.println(pst.toString());
 		System.out.println(sdao.caricaPost(s));
 	}
 }

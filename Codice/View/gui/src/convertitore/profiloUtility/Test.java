@@ -4,6 +4,7 @@ package convertitore.profiloUtility;
 import db.profilo.ProfiloDB;
 import post.multimedia.foto.Foto;
 import profilo.Profilo;
+import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.exception.PostNonVisibile;
 
 public class Test {
@@ -14,13 +15,18 @@ public static void main(String[] args) {
 	Foto f = new Foto("F00", null, false, null, null, false);
 
 	
-	//Profilo p = u.convertiInverso(pdb);
-	//System.out.println(p.toString());
-	//ProfiloDB pfin = u.converti(p1);
-	//System.out.println(pfin.toString());
+	Profilo p = u.convertiInverso(pdb);
+	System.out.println(p.toString());
+	ProfiloDB pfin = u.converti(p1);
+	System.out.println(pfin.toString());
 
 	try {
-		p1.cercaPost(f);
+		try {
+			p1.cercaPost(f);
+		} catch (FotoProfiloNonAncoraImpostata e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} catch (PostNonVisibile e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
