@@ -50,7 +50,10 @@ public class ProfiloTester {
 		}
         
         System.out.println(p1.modificaFotoGruppo(g, f.getIdPost()));*/
-    	p1.pubblicaStoria(2, f);
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
+    	for(String str : res)
+    		System.out.println(str.toString());
+    	
     }
     }
 
