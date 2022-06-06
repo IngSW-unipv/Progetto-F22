@@ -130,9 +130,6 @@ public class Sistema {
 		 
 		
 		ArrayList<String> idDeiPostDiUnProfilo = profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), tipoPost);
-		for(int i = 0; i < idDeiPostDiUnProfilo.size(); i++) {
-			System.out.println("siamo in sistema: " + idDeiPostDiUnProfilo.get(i));
-		}
 		
 		return idDeiPostDiUnProfilo;
 	 }

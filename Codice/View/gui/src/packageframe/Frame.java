@@ -465,7 +465,6 @@ public class Frame extends JFrame {
 		return ((Chat)mappaSchermate.get("Chat")).getAggiornaAltriChat();
 	}
 	
-	
 	public JButton getPrimaChatGruppoButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getPrimaChatGruppo();
 	}
@@ -587,6 +586,10 @@ public class Frame extends JFrame {
 	public Pulsanti getApriChat() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getApriChat();
 	}
+	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioProfilo(postSondaggioDelProfilo);
+	}
+
 	
 	
 	public InserimentoTesto getScriviMessaggio() {

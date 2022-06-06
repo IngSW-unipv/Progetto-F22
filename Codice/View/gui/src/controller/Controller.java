@@ -163,9 +163,6 @@ public class Controller {
                     }
                 };
                 view.getCercaButton().addActionListener(gestoreCerca);
-       
-                
-              
     }
     
     
@@ -728,7 +725,7 @@ public class Controller {
 				}
                 
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo, postDelProfilo, null);
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo, postDelProfilo, null, null);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1106,12 +1103,13 @@ public class Controller {
         
     }
     
-    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto) throws PostNonVisibile {
+    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio) throws PostNonVisibile {
     	view.getEtichettaNome().setText(nickName);
         view.setSchermataDati(numPost, numFollower, numSeguiti);
         view.setFotoProfilo(fotoProfiloPercorso);
         view.setPostProfilo(postFotoProfilo);
         view.setPostTestoProfilo(percorsiPostTesto);
+        view.setPostSondaggioProfilo(percorsiPostSondaggio);
         refresh();
     }
     
@@ -1151,10 +1149,9 @@ public class Controller {
         String idProfilo = model.getProfiloAttivo().getIdProfilo();
         postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
         percorsiPostTesto = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-        System.out.println("ci arrivo qui?");
-        for ( int i = 0; i < percorsiPostTesto.size(); i++) {
-        	System.out.println(percorsiPostTesto.get(i));
-        }
+        percorsiPostSondaggio = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+        
+    
         String fotoProfiloPercorso = null;
         
         try {
@@ -1163,7 +1160,7 @@ public class Controller {
     	   fotoProfiloPercorso = "immagini/images.png";
         } 
         try {
-			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo,postDelProfilo,percorsiPostTesto);
+			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo,postDelProfilo,percorsiPostTesto, percorsiPostSondaggio);
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
