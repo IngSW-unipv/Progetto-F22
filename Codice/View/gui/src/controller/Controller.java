@@ -398,7 +398,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla("798", null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(0), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
 					e1.printStackTrace();
 				}
