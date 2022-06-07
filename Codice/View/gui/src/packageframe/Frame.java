@@ -428,10 +428,6 @@ public class Frame extends JFrame {
 		((Profilo)mappaSchermate.get("Profilo")).setContatoreTesto(nuovoContatore);
 	}
 
-
-
-
-
 	public JButton getNextFoto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getNextFoto();
 	}
@@ -455,8 +451,6 @@ public class Frame extends JFrame {
 	public JButton getPrevSondaggio() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPrevSondaggio();
 	}
-	
-	
 
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
@@ -608,8 +602,23 @@ public class Frame extends JFrame {
 		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaPostVisualizzato(idPost,path, descrizionePost, numeroLike, numeroDislike, 
 				                                                                          numeroCommenti, commentiConProfiloInviante);
 	}
+		
+	public JButton getPulsantePrimaScelta() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPulsantePrimaScelta();
+	}
 	
+	public JButton getPulsanteSecondaScelta() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPulsanteSecondaScelta();
+	}
 	
+	public JButton getPulsanteTerzaScelta() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPulsanteTerzaScelta();
+	}
+	
+	public JButton getPulsanteQuartaScelta() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPulsanteQuartaScelta();
+	}
+
 	public JFileChooser getFileChooser() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();
 	}

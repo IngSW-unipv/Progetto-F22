@@ -24,7 +24,8 @@ public class Controller {
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
-                           gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio;
+                           gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
+                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta;
     Frame view;
     Sistema model;
     
@@ -1043,6 +1044,39 @@ public class Controller {
     	   }
        };
        view.getPrevCommento().addActionListener(gestorePrevCommento);    
+       
+       gestorePulsantePrimaScelta = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Prima scelta");
+    	   }
+       };
+       view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
+       
+       gestorePulsanteSecondaScelta = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Seconda scelta");
+    	   }
+       };
+       view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
+       
+       gestorePulsanteTerzaScelta = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Terza scelta");
+    	   }
+       };
+       view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
+       
+       gestorePulsanteQuartaScelta = new ActionListener() {
+    	   @Override
+    	   public void actionPerformed(ActionEvent e) {
+    		   System.out.println("Quarta scelta");
+    	   }
+       };
+       view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
+       
     }
     
     public void actionListenersAreaChatFrame() {

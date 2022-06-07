@@ -171,10 +171,15 @@ public class PostVisualizzato extends JPanel{
             SpecificContainer containerScelte = new SpecificContainer();
             containerScelte.setLayout(new GridLayout(4, 1));
             
-            containerScelte.add( pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO));
+            pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO);
+            
+            containerScelte.add(pulsantePrimaScelta);
+            containerScelte.add(pulsanteSecondaScelta);
+            containerScelte.add(pulsanteTerzaScelta);
+            containerScelte.add(pulsanteQuartaScelta);
             
             containerSondaggio.add(containerScelte, BorderLayout.EAST);
             
@@ -324,4 +329,45 @@ public class PostVisualizzato extends JPanel{
 		public void setNumeroCommentiTotali(int numeroCommentiTotali) {
 			this.numeroCommentiTotali = numeroCommentiTotali;
 		}
+
+
+		public Pulsanti getPulsantePrimaScelta() {
+			return pulsantePrimaScelta;
+		}
+
+
+		public void setPulsantePrimaScelta(Pulsanti pulsantePrimaScelta) {
+			this.pulsantePrimaScelta = pulsantePrimaScelta;
+		}
+
+
+		public Pulsanti getPulsanteSecondaScelta() {
+			return pulsanteSecondaScelta;
+		}
+
+
+		public void setPulsanteSecondaScelta(Pulsanti pulsanteSecondaScelta) {
+			this.pulsanteSecondaScelta = pulsanteSecondaScelta;
+		}
+
+
+		public Pulsanti getPulsanteTerzaScelta() {
+			return pulsanteTerzaScelta;
+		}
+
+
+		public void setPulsanteTerzaScelta(Pulsanti pulsanteTerzaScelta) {
+			this.pulsanteTerzaScelta = pulsanteTerzaScelta;
+		}
+
+
+		public Pulsanti getPulsanteQuartaScelta() {
+			return pulsanteQuartaScelta;
+		}
+
+
+		public void setPulsanteQuartaScelta(Pulsanti pulsanteQuartaScelta) {
+			this.pulsanteQuartaScelta = pulsanteQuartaScelta;
+		}
+
 }
