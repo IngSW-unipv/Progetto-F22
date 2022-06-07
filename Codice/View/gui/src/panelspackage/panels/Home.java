@@ -65,7 +65,6 @@ public class Home extends JPanel {
 		SpecificContainer menuHomeDestro = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO, Frame.COLORESECONDARIOTEMATICO);
 		containerNorth.add(menuHomeDestro, BorderLayout.EAST);			
 
-
 		menuHomeSinistro.add(buttonProfilo = new Pulsanti("immagini/profilo.png"), BorderLayout.EAST);
 		menuHomeSinistro.add(buttonImpostazioni = new Pulsanti("immagini/impostazioni.png"), BorderLayout.WEST);
 
@@ -89,17 +88,17 @@ public class Home extends JPanel {
 		containerBottoniPost.add(buttonPrevPost = new Pulsanti("Post precedente", fontButton));
 		containerBottoniPost.add(buttonNextPost = new Pulsanti("Post successivo",fontButton));
 		
-		SpecificContainer containerLikeDislikeComm = new SpecificContainer();
-		containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
-		containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
+		//SpecificContainer containerLikeDislikeComm = new SpecificContainer();
+		//containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
+		/*containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
 		containerLikeDislikeComm.add(numeroDislike = new Etichette("N.dislike", Color.white));
 		containerLikeDislikeComm.add(numeroCommenti = new Etichette("N.Commenti", Color.white));
 		containerLikeDislikeComm.add(aggiungiLike = new Pulsanti("+ Like", Frame.COLORESECONDARIOTEMATICO));
 		containerLikeDislikeComm.add(aggiungiDislike = new Pulsanti("+ Dislike", Frame.COLORESECONDARIOTEMATICO));
 		containerLikeDislikeComm.add(aggiungiCommento = new Pulsanti("+ Commento", Frame.COLORESECONDARIOTEMATICO));
-		
-		containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
-		containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
+		*/
+		//containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
+		//containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
 		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
 		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
 	}
