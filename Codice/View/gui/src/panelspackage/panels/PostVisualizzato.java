@@ -28,8 +28,8 @@ public class PostVisualizzato extends JPanel{
 		private AreaCommenti areaCommenti;
 		private AreaDiTesto aggiungiCommento;
 		private JButton homePostVisualizzato,nextCommento, prevCommento;
-		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton;
-		private SpecificContainer containerNorth;
+		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta,pulsanteSecondaScelta,pulsanteTerzaScelta,pulsanteQuartaScelta;
+		private SpecificContainer containerNorth, containerPost = new SpecificContainer();
 		private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
@@ -159,7 +159,27 @@ public class PostVisualizzato extends JPanel{
 			numeroNonMiPiace = numeroDislike;
 			numeroComm = numeroCommenti;
 		}
-		
+        public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+            numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            settaCommenti(commenti);
+            idPost = iDpost;
+            
+            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, " nuova roba", 10, 20);
+            JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
+            SpecificContainer containerSondaggio = new SpecificContainer();
+            containerSondaggio.add(scrollCommento, BorderLayout.CENTER);
+            
+            SpecificContainer containerScelte = new SpecificContainer();
+            containerScelte.setLayout(new GridLayout(4, 1));
+            
+            pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO);
+        }
+
 		public ArrayList<JComponent> getListaAreaTesto() {
 			return ListaAreaTesto;
 		}

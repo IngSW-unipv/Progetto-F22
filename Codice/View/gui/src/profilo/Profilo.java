@@ -601,11 +601,11 @@ public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio 
 
 public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, p);
-	/*for(int i = 0; i < res.size(); i++) {
+	for(int i = 0; i < res.size(); i++) {
 		res.get(i);
 	}
 	return res;
-	*/
+	/*
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
 	ArrayList<Post> search = new ArrayList<>();
@@ -630,9 +630,9 @@ public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
 			risultato.add(posttt.getIdPost());
 		    risultato.add(posttt.getPercorso());
 		}
-	}
+	} 
 		return risultato;
-    
+    */
 }
 
 @Override

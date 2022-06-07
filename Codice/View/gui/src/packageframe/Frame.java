@@ -325,7 +325,9 @@ public class Frame extends JFrame {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getHomePostVisualizzato();
 	}
 	
-	
+    public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, commenti);
+    }
 	
 	public String getTestoRicerca() {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
