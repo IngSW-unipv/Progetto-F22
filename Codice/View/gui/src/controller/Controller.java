@@ -756,6 +756,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	view.ripristinaIndiceCommento();
+            	resetContatori();
                 mostraSchermata("Home");
             }
         };
