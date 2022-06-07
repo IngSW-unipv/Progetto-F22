@@ -853,7 +853,7 @@ public class Controller {
 				}
                 
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo, postDelProfilo, percorsiPostTesto, percorsiPostSondaggio);
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo,  postDelProfilo, percorsiPostTesto, percorsiPostSondaggio);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1267,8 +1267,7 @@ public class Controller {
     }
     
     public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio) throws PostNonVisibile {
-    	view.getEtichettaNome().setText(nickName);
-        view.setSchermataDati(numPost, numFollower, numSeguiti);
+        view.setSchermataDati(numPost, numFollower, numSeguiti, nickName);
         view.setFotoProfilo(fotoProfiloPercorso);
         view.setPostProfilo(postFotoProfilo);
         view.setPostTestoProfilo(percorsiPostTesto);
@@ -1323,7 +1322,7 @@ public class Controller {
     	   fotoProfiloPercorso = "immagini/images.png";
         } 
         try {
-			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo,postDelProfilo,percorsiPostTesto, percorsiPostSondaggio);
+			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo, postDelProfilo,percorsiPostTesto, percorsiPostSondaggio);
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}

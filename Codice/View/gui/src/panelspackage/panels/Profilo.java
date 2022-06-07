@@ -76,7 +76,9 @@ public class  Profilo extends JPanel {
 		ListaPost.clear();
 		for(int i = 0;  i < 3 ; i++) {
 			ListaPost.add(new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg"));
-			containerCenter.add(ListaPost.get(i));
+			JScrollPane pannelloPostFoto= new JScrollPane(ListaPost.get(i));
+			pannelloPostFoto.setPreferredSize(new Dimension(100,100));
+			containerCenter.add(pannelloPostFoto);
 		}
 		
 		SpecificContainer containerWest = new SpecificContainer();
@@ -161,10 +163,11 @@ public class  Profilo extends JPanel {
 	}
 
 	
-	public void setSchermataDati(int nFollower, int nSeguiti, int nPost) {
+	public void setSchermataDati(int nFollower, int nSeguiti, int nPost, String nickName) {
 		((JLabel) ListaEtichette.get(1)).setText(String.valueOf(nFollower));
 		((JLabel) ListaEtichette.get(3)).setText(String.valueOf(nSeguiti));
 		((JLabel) ListaEtichette.get(5)).setText(String.valueOf(nPost));
+		etichettaNome.setText(nickName);
 	}
 
 	public Pulsanti getHomeProfilo() {
@@ -189,18 +192,18 @@ public class  Profilo extends JPanel {
 	}
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
-		for (int i = 0; i < postTestoDelProfilo.size() && i < 3 ; i++) {
+		for (int i = 0; i < postTestoDelProfilo.size()/2 && i < 3 ; i++) {
 			ListaTesti.get(i).setText(postTestoDelProfilo.get((i*2) + 1));
 		}
 	}
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
-		if(postSondaggioDelProfilo.size() < 3)  {
-			for (int i = 0; i < postSondaggioDelProfilo.size() && i < 3 ; i++) {
+		if(postSondaggioDelProfilo.size()/2 < 3)  {
+			for (int i = 0; i < postSondaggioDelProfilo.size(); i++) {
 		
 			ListaSondaggi.get(i).setText("");
 			}
 		} else
-		for (int i = 0; i < postSondaggioDelProfilo.size() && i < 6 ; i++) {
+		for (int i = 0; i < 3 ; i++) {
 			ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get((i*2) + 1));
 		}
 	}

@@ -28,7 +28,7 @@ public class PostVisualizzato extends JPanel{
 		private AreaDiTesto aggiungiCommento;
 		private JButton homePostVisualizzato,nextCommento, prevCommento;
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta,pulsanteSecondaScelta,pulsanteTerzaScelta,pulsanteQuartaScelta;
-		private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
+		private SpecificContainer containerNorth, containerScelte, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
 		private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
@@ -63,6 +63,23 @@ public class PostVisualizzato extends JPanel{
 			this.add(containerCenter, BorderLayout.CENTER);
 			
 			//POST
+            containerScelte = new SpecificContainer();
+            containerScelte.setLayout(new GridLayout(4, 1));
+            
+            pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteSecondaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteTerzaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
+            pulsanteQuartaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
+            
+            containerScelte.add(pulsantePrimaScelta);
+            containerScelte.add(pulsanteSecondaScelta);
+            containerScelte.add(pulsanteTerzaScelta);
+            containerScelte.add(pulsanteQuartaScelta);
+            
+            containerSondaggio.add(containerScelte, BorderLayout.EAST);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(false);
+            
 			
 			containerCenter.add(containerPost, BorderLayout.CENTER);
 			containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
@@ -168,23 +185,21 @@ public class PostVisualizzato extends JPanel{
             containerSondaggio = new SpecificContainer();
             containerSondaggio.add(scrollCommento, BorderLayout.CENTER);
             
-            SpecificContainer containerScelte = new SpecificContainer();
-            containerScelte.setLayout(new GridLayout(4, 1));
+
             
-            pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO);
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText(scelta3);
+            pulsanteQuartaScelta.setText(scelta4);
             
             containerScelte.add(pulsantePrimaScelta);
             containerScelte.add(pulsanteSecondaScelta);
             containerScelte.add(pulsanteTerzaScelta);
             containerScelte.add(pulsanteQuartaScelta);
             
-            containerSondaggio.add(containerScelte, BorderLayout.EAST);
-            
+
             containerPost.setVisible(false);
-            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+
             containerSondaggio.setVisible(true);
             impostaImmagineProfiloButton.setVisible(false);
 
