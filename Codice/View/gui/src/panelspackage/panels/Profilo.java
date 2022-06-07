@@ -22,7 +22,7 @@ public class  Profilo extends JPanel {
 	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
 	ArrayList<String> dati = new ArrayList<String>();
 	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
@@ -92,12 +92,21 @@ public class  Profilo extends JPanel {
 
 		
 		ListaSondaggi.clear();
-		for(int i = 0;  i < 3 ; i++) {
-			AreaDiTesto textArea = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaSondaggi.add(textArea);
-			containerEast.add(new Pulsanti("sondaggio" + i, Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
-			containerEast.add(new JScrollPane(ListaSondaggi.get(i)), BorderLayout.PAGE_START);
-		}
+			AreaDiTesto testoPrimoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoPrimoSondaggio);
+			containerEast.add(pulsantePrimoSondaggio = new Pulsanti("Primo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(0)), BorderLayout.PAGE_START);
+			
+			AreaDiTesto testoSecondoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoSecondoSondaggio);
+			containerEast.add(pulsanteSecondoSondaggio = new Pulsanti("Secondo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(1)), BorderLayout.PAGE_START);
+			
+			AreaDiTesto testoTerzoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoTerzoSondaggio);
+			containerEast.add(pulsanteTerzoSondaggio = new Pulsanti("Terzo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(2)), BorderLayout.PAGE_START);
+
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
@@ -226,4 +235,20 @@ public class  Profilo extends JPanel {
 	public Pulsanti getPrevTipoPost() {
 		return prevTipoPost;
 	}
+
+
+	public Pulsanti getPulsantePrimoSondaggio() {
+		return pulsantePrimoSondaggio;
+	}
+
+
+	public Pulsanti getPulsanteSecondoSondaggio() {
+		return pulsanteSecondoSondaggio;
+	}
+
+
+	public Pulsanti getPulsanteTerzoSondaggio() {
+		return pulsanteTerzoSondaggio;
+	}
+	
 }

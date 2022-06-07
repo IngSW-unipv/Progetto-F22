@@ -8,6 +8,7 @@ import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
 import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
+import post.sondaggio.SondaggioSceltaMultipla;
 import profilo.exception.*;
 
 public class Controller {
@@ -21,7 +22,7 @@ public class Controller {
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
-                           gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestorePost7, gestorePost8, gestorePost9,
+                           gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche;
     Frame view;
@@ -389,6 +390,74 @@ public class Controller {
         	}
         };
         view.getPost3().addActionListener(gestorePost3);
+        
+        
+        gestoreSondaggio1 = new ActionListener() {
+        	@Override
+        		public void actionPerformed(ActionEvent e) {
+        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
+        		try {
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(0), null, false, null, null, null, null, null));
+				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+					e1.printStackTrace();
+				}
+        		try {
+
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+                refresh();
+        		mostraSchermata("Postvisualizzato");
+        	}
+        };
+        view.getPulsantePrimoSondaggio().addActionListener(gestoreSondaggio1);
+        
+        gestoreSondaggio2 = new ActionListener() {
+        	@Override
+        		public void actionPerformed(ActionEvent e) {
+        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
+        		try {
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(2), null, false, null, null, null, null, null));
+				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+					e1.printStackTrace();
+				}
+        		try {
+
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+                refresh();
+        		mostraSchermata("Postvisualizzato");
+        	}
+        };
+        view.getPulsanteSecondoSondaggio().addActionListener(gestoreSondaggio2);
+        
+        gestoreSondaggio3 = new ActionListener() {
+        	@Override
+        		public void actionPerformed(ActionEvent e) {
+        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
+        		try {
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(4), null, false, null, null, null, null, null));
+				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+					e1.printStackTrace();
+				}
+        		try {
+
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+                refresh();
+        		mostraSchermata("Postvisualizzato");
+        	}
+        };
+        view.getPulsanteTerzoSondaggio().addActionListener(gestoreSondaggio3);
+        
         
         /*
         gestorePost4 = new ActionListener() {

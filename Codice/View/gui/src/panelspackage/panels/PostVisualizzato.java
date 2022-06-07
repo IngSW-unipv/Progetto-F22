@@ -18,8 +18,7 @@ public class PostVisualizzato extends JPanel{
 	
 		ArrayList<JComponent> ListaAreaTesto = new ArrayList<JComponent>();
 		ArrayList<String> dati = new ArrayList<String>();
-		Color ARANCIONE = new Color(255, 125, 0);
-		Color NERO = new Color(0, 0, 0);
+
 		int indiceCommentoCorrente = 0;
 		int numeroCommentiTotali = 5;
 		private String messaggioBottoneSuperioreFollow = "Inizia a seguire";
@@ -29,7 +28,7 @@ public class PostVisualizzato extends JPanel{
 		private AreaDiTesto aggiungiCommento;
 		private JButton homePostVisualizzato,nextCommento, prevCommento;
 		private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta,pulsanteSecondaScelta,pulsanteTerzaScelta,pulsanteQuartaScelta;
-		private SpecificContainer containerNorth, containerPost = new SpecificContainer();
+		private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
 		private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
 		private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
 		private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
@@ -45,7 +44,7 @@ public class PostVisualizzato extends JPanel{
 			this.setOpaque(true);
 			this.setVisible(true);
 			this.setLayout(new BorderLayout());
-			this.setBackground(NERO);
+			this.setBackground(Frame.COLORESECONDARIOTEMATICO);
 		}
 		
 		public void initComponents() {
@@ -54,7 +53,6 @@ public class PostVisualizzato extends JPanel{
 			this.add(containerNorth, BorderLayout.NORTH);
 			
 			impostaImmagineProfiloButton = new Pulsanti(messaggioBottoneSuperioreProfilo, Frame.COLOREPRIMARIOTEMATICO);
-			impostaImmagineProfiloButton.setVisible(true);
 			containerNorth.add(impostaImmagineProfiloButton);
 			
 			
@@ -62,15 +60,12 @@ public class PostVisualizzato extends JPanel{
 			iniziaSeguireButton.setVisible(false);
 			containerNorth.add(iniziaSeguireButton);*/
 
-			SpecificContainer containerCenter = new SpecificContainer(ARANCIONE);
 			this.add(containerCenter, BorderLayout.CENTER);
 
 			
 			//POST
 			
-			SpecificContainer containerPost = new SpecificContainer();
 			containerCenter.add(containerPost, BorderLayout.CENTER);
-			
 			containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
 
 			areaCommenti =  new AreaCommenti();
@@ -109,22 +104,21 @@ public class PostVisualizzato extends JPanel{
 			
 			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,10,2, ListaAreaTesto.size());
 			
-			ScrollPane scrollCommento = new ScrollPane();
 			
-			aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "prova");
-			aggiungiCommento.setRows(10);
-			
+			aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, 10, 20);
+			aggiungiCommento.setEditable(true);
+			JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
+
 			containerEast.add(dati, BorderLayout.CENTER);
-			containerEast.add(aggiungiCommento, BorderLayout.SOUTH);
+			containerEast.add(scrollCommento,  BorderLayout.SOUTH);
 			
 				
-			SpecificContainer containerSouth = new SpecificContainer(NERO);
+			SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 			this.add(containerSouth, BorderLayout.SOUTH);
 			
-			homePostVisualizzato = new Pulsanti("Home", ARANCIONE);
+			homePostVisualizzato = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO);
 			containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
-		
-			
+	
 		}
 		
 		/*public void mostraBottoneSuperiore(boolean condition) {
@@ -158,6 +152,8 @@ public class PostVisualizzato extends JPanel{
 			numeroMiPiace = numeroLike;
 			numeroNonMiPiace = numeroDislike;
 			numeroComm = numeroCommenti;
+			containerSondaggio.setVisible(false);
+			containerPost.setVisible(true);
 		}
         public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
             numeroMiPiace = numeroLike;
@@ -168,16 +164,23 @@ public class PostVisualizzato extends JPanel{
             
             aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, " nuova roba", 10, 20);
             JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
-            SpecificContainer containerSondaggio = new SpecificContainer();
+            containerSondaggio = new SpecificContainer();
             containerSondaggio.add(scrollCommento, BorderLayout.CENTER);
             
             SpecificContainer containerScelte = new SpecificContainer();
             containerScelte.setLayout(new GridLayout(4, 1));
             
-            pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO);
-            pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO);
+            containerScelte.add( pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO));
+            containerScelte.add( pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO));
+            containerScelte.add( pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO));
+            containerScelte.add( pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO));
+            
+            containerSondaggio.add(containerScelte, BorderLayout.EAST);
+            
+            containerPost.setVisible(false);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(true);
+
         }
 
 		public ArrayList<JComponent> getListaAreaTesto() {

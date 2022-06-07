@@ -328,6 +328,7 @@ public class Frame extends JFrame {
     public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
         ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, commenti);
     }
+    
 	
 	public String getTestoRicerca() {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
@@ -380,33 +381,21 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public JButton getPost4() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(3);
+
+	
+	
+	public Pulsanti getPulsantePrimoSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoSondaggio();
 	}
-	
-	
-	public JButton getPost5() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(4);
+
+
+	public Pulsanti getPulsanteSecondoSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSecondoSondaggio();
 	}
-	
-	
-	public JButton getPost6() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(5);
-	}
-	
-	
-	public JButton getPost7() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(6);
-	}
-	
-	
-	public JButton getPost8() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(7);
-	}
-	
-	
-	public JButton getPost9() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getListaPost().get(8);
+
+
+	public Pulsanti getPulsanteTerzoSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoSondaggio();
 	}
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
