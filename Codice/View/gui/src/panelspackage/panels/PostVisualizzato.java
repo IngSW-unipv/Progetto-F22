@@ -61,7 +61,6 @@ public class PostVisualizzato extends JPanel{
 			containerNorth.add(iniziaSeguireButton);*/
 
 			this.add(containerCenter, BorderLayout.CENTER);
-
 			
 			//POST
 			
@@ -105,7 +104,7 @@ public class PostVisualizzato extends JPanel{
 			GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,10,2, ListaAreaTesto.size());
 			
 			
-			aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, 10, 20);
+			aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, 10, 35);
 			aggiungiCommento.setEditable(true);
 			JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
 
@@ -154,6 +153,7 @@ public class PostVisualizzato extends JPanel{
 			numeroComm = numeroCommenti;
 			containerSondaggio.setVisible(false);
 			containerPost.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(true);
 		}
         public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
             numeroMiPiace = numeroLike;
@@ -162,7 +162,8 @@ public class PostVisualizzato extends JPanel{
             settaCommenti(commenti);
             idPost = iDpost;
             
-            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, " nuova roba", 10, 20);
+            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, descrizionePost, 10, 20);
+            aggiungiCommento.setEditable(false);
             JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
             containerSondaggio = new SpecificContainer();
             containerSondaggio.add(scrollCommento, BorderLayout.CENTER);
@@ -180,6 +181,7 @@ public class PostVisualizzato extends JPanel{
             containerPost.setVisible(false);
             containerCenter.add(containerSondaggio, BorderLayout.CENTER);
             containerSondaggio.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(false);
 
         }
 
