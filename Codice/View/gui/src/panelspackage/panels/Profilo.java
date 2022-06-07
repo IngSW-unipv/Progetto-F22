@@ -26,6 +26,8 @@ public class  Profilo extends JPanel {
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
+	private int contatoreFoto = 0, contatoreTesto = 0, contatoreSondaggio = 0;
+	
 	public Profilo(ArrayList<String> immaginiPost) {
 		this.avvio();
 		this.initComponents(immaginiPost);
@@ -225,13 +227,8 @@ public class  Profilo extends JPanel {
 	}
 
 
-	public Pulsanti getNextPost() {
-		return nextTesto;
-	}
-
-
-	public Pulsanti getPrevPost() {
-		return prevTesto;
+	public Pulsanti getNextFoto() {
+		return nextFoto;
 	}
 
 
@@ -258,5 +255,88 @@ public class  Profilo extends JPanel {
 	public Pulsanti getPulsanteTerzoSondaggio() {
 		return pulsanteTerzoSondaggio;
 	}
+
+
+	public int getContatoreFoto() {
+		return contatoreFoto;
+	}
+
 	
+	public void setContatoreFoto(int contatoreFoto) {
+		this.contatoreFoto = contatoreFoto;
+	}
+
+	
+	public int getContatoreTesto() {
+		return contatoreTesto;
+	}
+
+
+	public void setContatoreTesto(int contatoreTesto) {
+		this.contatoreTesto = contatoreTesto;
+	}
+
+
+	public int getContatoreSondaggio() {
+		return contatoreSondaggio;
+	}
+
+
+	public void setContatoreSondaggio(int contatoreSondaggio) {
+		this.contatoreSondaggio = contatoreSondaggio;
+	}
+	
+	public void setNextFoto(Pulsanti nextFoto) {
+		this.nextFoto = nextFoto;
+	}
+
+
+	public Pulsanti getPrevFoto() {
+		return prevFoto;
+	}
+
+
+	public void setPrevFoto(Pulsanti prevFoto) {
+		this.prevFoto = prevFoto;
+	}
+
+
+	public Pulsanti getNextSondaggio() {
+		return nextSondaggio;
+	}
+
+
+	public void setNextSondaggio(Pulsanti nextSondaggio) {
+		this.nextSondaggio = nextSondaggio;
+	}
+
+
+	public Pulsanti getPrevSondaggio() {
+		return prevSondaggio;
+	}
+
+
+	public void setPrevSondaggio(Pulsanti prevSondaggio) {
+		this.prevSondaggio = prevSondaggio;
+	}
+
+
+	public Pulsanti getNextTesto() {
+		return nextTesto;
+	}
+
+
+	public void setNextTesto(Pulsanti nextTesto) {
+		this.nextTesto = nextTesto;
+	}
+
+
+	public Pulsanti getPrevTesto() {
+		return prevTesto;
+	}
+
+
+	public void setPrevTesto(Pulsanti prevTesto) {
+		this.prevTesto = prevTesto;
+	}
 }

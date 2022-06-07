@@ -401,6 +401,62 @@ public class Frame extends JFrame {
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
 		((Profilo)mappaSchermate.get("Profilo")).setPostTestoProfilo(postTestoDelProfilo);
 	}
+	
+	
+	public int getContatoreFoto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreFoto();
+	}
+	
+	public int getContatoreSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreSondaggio();
+	}
+	
+	public int getContatoreTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreTesto();
+	}
+	
+	
+	public void setContatoreFoto(int nuovoContatore) {
+		((Profilo)mappaSchermate.get("Profilo")).setContatoreFoto(nuovoContatore);
+	}
+	
+	public void setContatoreSondaggio(int nuovoContatore) {
+		((Profilo)mappaSchermate.get("Profilo")).setContatoreSondaggio(nuovoContatore);
+	}
+	
+	public void setContatoreTesto(int nuovoContatore) {
+		((Profilo)mappaSchermate.get("Profilo")).setContatoreTesto(nuovoContatore);
+	}
+
+
+
+
+
+	public JButton getNextFoto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getNextFoto();
+	}
+	
+	public JButton getPrevFoto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPrevFoto();
+	}
+	
+	public JButton getNextTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getNextTesto();
+	}
+
+	public JButton getPrevTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPrevTesto();
+	}
+	
+	public JButton getNextSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getNextSondaggio();
+	}
+	
+	public JButton getPrevSondaggio() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPrevSondaggio();
+	}
+	
+	
 
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();

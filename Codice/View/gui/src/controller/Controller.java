@@ -24,7 +24,7 @@ public class Controller {
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
-                           gestoreSalvaLeModifiche;
+                           gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio;
     Frame view;
     Sistema model;
     
@@ -675,7 +675,60 @@ public class Controller {
         };
         view.getPost9().addActionListener(gestorePost9);
 
-    */
+    */        
+        gestoreNextFoto = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Incrementa contatore foto
+        		view.setContatoreFoto(view.getContatoreFoto() + 2);
+        	}
+        };
+        view.getNextFoto().addActionListener(gestoreNextFoto);
+        
+        gestorePrevFoto = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Decrementa contatore foto
+        		view.setContatoreFoto(view.getContatoreFoto() - 2);
+        	}
+        };
+        view.getPrevFoto().addActionListener(gestorePrevFoto);
+        
+        gestoreNextTesto = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Incrementa contatore testo
+        		view.setContatoreTesto(view.getContatoreTesto() + 2);
+        	}
+        };
+        view.getNextTesto().addActionListener(gestoreNextTesto);
+        
+        gestorePrevTesto = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Decrementa contatore testo
+        		view.setContatoreTesto(view.getContatoreTesto() - 2);
+        	}
+        };
+        view.getPrevTesto().addActionListener(gestorePrevTesto);
+        
+        gestoreNextSondaggio = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Incrementa contatore sondaggio
+        		view.setContatoreSondaggio(view.getContatoreSondaggio() + 2);
+        	}
+        };
+        view.getNextSondaggio().addActionListener(gestoreNextSondaggio);
+        
+        gestorePrevSondaggio = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//Decrementa contatore sondaggio
+        		view.setContatoreSondaggio(view.getContatoreSondaggio() - 2);
+        	}
+        };
+        view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
     }
     
     public void actionListenersCreazionePost() {
