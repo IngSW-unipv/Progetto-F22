@@ -259,6 +259,8 @@ public class Controller {
 					e1.printStackTrace();
 				} catch (AzioneNonConsentita e1) {
 					e1.printStackTrace();
+				} catch (FollowYourself e1) {
+					e1.printStackTrace();
 				}
             }
         };

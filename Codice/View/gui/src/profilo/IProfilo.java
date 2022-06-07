@@ -21,6 +21,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.FollowYourself;
 import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -108,7 +109,7 @@ public interface IProfilo {
 	//Follow
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
-	public boolean segui(Profilo email)throws AccountDoesNotExist, AzioneNonConsentita;
+	public boolean segui(Profilo email)throws AccountDoesNotExist, AzioneNonConsentita, FollowYourself;
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita;
 	
 	//Mostra la lista di tutti i follower del profilo personale indicato

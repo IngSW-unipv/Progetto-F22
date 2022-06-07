@@ -27,6 +27,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.FollowYourself;
 import profilo.exception.FotoProfiloNonAncoraImpostata;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -206,9 +207,12 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 //Follow
 
 @Override
-public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
+public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita, FollowYourself {
 	
 	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
+		if(this.profiloNonSeguito(this.getIdProfilo())) {
+			throw new FollowYourself(this.getIdProfilo());
+		}
 	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
 	dbfacade.carica(f);int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
 	int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
@@ -222,6 +226,7 @@ public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneN
 	throw new AzioneNonConsentita();
 
 }
+
 @Override
 public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
 	if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
