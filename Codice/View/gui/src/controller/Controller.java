@@ -231,6 +231,7 @@ public class Controller {
         gestoreHomeProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	resetContatori();
                 mostraSchermata("Home");
             }
         };
@@ -253,7 +254,6 @@ public class Controller {
         gestorePulsanteSegui = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("hai seguito");
             	try {
 					model.getProfiloAttivo().segui(model.getProfiloCercato());
 				} catch (AccountDoesNotExist e1) {
@@ -295,7 +295,7 @@ public class Controller {
                 
                 try {
 					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + getBasePostAttuale())));
+						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + view.getContatoreFoto())));
 					} catch (FotoProfiloNonAncoraImpostata e1) {
 						e1.printStackTrace();
 					}
@@ -329,7 +329,7 @@ public class Controller {
                     
                     try {
     					try {
-							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + getBasePostAttuale())));
+							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + view.getContatoreFoto())));
 						} catch (FotoProfiloNonAncoraImpostata e1) {
 							e1.printStackTrace();
 						}
@@ -365,9 +365,8 @@ public class Controller {
                     
                     try {
     					try {
-							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + getBasePostAttuale())));
+							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + view.getContatoreFoto())));
 						} catch (FotoProfiloNonAncoraImpostata e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
     				} catch (PostNonVisibile e1) {
@@ -460,228 +459,13 @@ public class Controller {
         };
         view.getPulsanteTerzoSondaggio().addActionListener(gestoreSondaggio3);
         
-        
-        /*
-        gestorePost4 = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(6 + getBasePostAttuale())));
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            	try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost4().addActionListener(gestorePost4);
-        
-        gestorePost5 = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(8 + getBasePostAttuale())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost5().addActionListener(gestorePost5);
-        
-        gestorePost6 = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(10 + getBasePostAttuale())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost6().addActionListener(gestorePost6);
-        
-        gestorePost7 = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(12 + getBasePostAttuale())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost7().addActionListener(gestorePost7);
-        
-        gestorePost8= new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(14 + getBasePostAttuale())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost8().addActionListener(gestorePost8);
-        
-        gestorePost9 = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-                settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
-                try {
-					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(16 + getBasePostAttuale())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		System.out.println(f.getIdPost());
-
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();
-        	}
-        };
-        view.getPost9().addActionListener(gestorePost9);
-
-    */        
         gestoreNextFoto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		//Incrementa contatore foto
         		view.setContatoreFoto(view.getContatoreFoto() + 2);
+        		view.setPostProfilo(postDelProfilo);
         	}
         };
         view.getNextFoto().addActionListener(gestoreNextFoto);
@@ -691,6 +475,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		//Decrementa contatore foto
         		view.setContatoreFoto(view.getContatoreFoto() - 2);
+        		view.setPostProfilo(postDelProfilo);
         	}
         };
         view.getPrevFoto().addActionListener(gestorePrevFoto);
@@ -700,6 +485,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		//Incrementa contatore testo
         		view.setContatoreTesto(view.getContatoreTesto() + 2);
+        		view.setPostTestoProfilo(percorsiPostTesto);
         	}
         };
         view.getNextTesto().addActionListener(gestoreNextTesto);
@@ -709,6 +495,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		//Decrementa contatore testo
         		view.setContatoreTesto(view.getContatoreTesto() - 2);
+        		view.setPostTestoProfilo(percorsiPostTesto);
         	}
         };
         view.getPrevTesto().addActionListener(gestorePrevTesto);
@@ -716,8 +503,8 @@ public class Controller {
         gestoreNextSondaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Incrementa contatore sondaggio
         		view.setContatoreSondaggio(view.getContatoreSondaggio() + 2);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggio);
         	}
         };
         view.getNextSondaggio().addActionListener(gestoreNextSondaggio);
@@ -725,20 +512,18 @@ public class Controller {
         gestorePrevSondaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Decrementa contatore sondaggio
         		view.setContatoreSondaggio(view.getContatoreSondaggio() - 2);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggio);
         	}
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
     }
     
     public void actionListenersCreazionePost() {
-    	//ActionListeners schermata CreazionePost
         gestoreCreazionePostFoto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	setPostAttuale(0);
-            	System.out.println("hai cliccato Post Foto");
             	view.getFileChooser().setVisible(true);
             	view.getPrimaScelta().setVisible(false);
             	view.getSecondaScelta().setVisible(false);
@@ -972,7 +757,6 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	view.ripristinaIndiceCommento();
                 mostraSchermata("Home");
-                aggiungiCommento();
             }
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
@@ -1009,7 +793,6 @@ public class Controller {
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Aggiunto like");
     	   }
        };
        view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
@@ -1017,7 +800,6 @@ public class Controller {
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Aggiunto dislike");
     	   }
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
@@ -1221,11 +1003,11 @@ public class Controller {
     	
         if(getPostAttuale() == 0) {
             String percorsoFilePost = view.ottieniPercorsoFile();
-
+            if (percorsoFilePost != null) {
             model.pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+            }
         }
         else if(getPostAttuale() == 1) {
-    
         	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
         }
         else if(getPostAttuale() == 2) {
@@ -1376,6 +1158,10 @@ public class Controller {
     	model.carica(profilo, descrizione);
     	model.getProfiloAttivo().setDescrizione(descrizione);
 	}
-
+	public void resetContatori() {
+		view.setContatoreFoto(0);
+		view.setContatoreSondaggio(0);
+		view.setContatoreTesto(0);
+	}
 	
 }
