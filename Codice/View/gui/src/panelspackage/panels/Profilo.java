@@ -46,8 +46,10 @@ public class  Profilo extends JPanel {
 		containerNorthNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerNorthNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerNorthNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		
-		containerNorth.add(immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg"), BorderLayout.CENTER);
+		immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg");
+		JScrollPane pannelloFoto = new JScrollPane(immagineProf);
+		pannelloFoto.setPreferredSize(new Dimension(500,500));
+		containerNorth.add(pannelloFoto, BorderLayout.PAGE_START);
 
 		dati.add("N.Post");
 		dati.add(Integer.toString(0));
