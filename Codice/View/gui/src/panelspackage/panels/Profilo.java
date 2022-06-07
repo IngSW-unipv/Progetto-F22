@@ -190,6 +190,12 @@ public class  Profilo extends JPanel {
 		}
 	}
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
+		if(postSondaggioDelProfilo.size() < 3)  {
+			for (int i = 0; i < postSondaggioDelProfilo.size() && i < 3 ; i++) {
+		
+			ListaSondaggi.get(i).setText("");
+			}
+		} else
 		for (int i = 0; i < postSondaggioDelProfilo.size() && i < 3 ; i++) {
 			ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get((i*2) + 1));
 		}

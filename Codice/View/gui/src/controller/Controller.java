@@ -781,8 +781,12 @@ public class Controller {
                 int numSeguiti = model.getProfiloCercato().getNumSeguiti();
                 String idProfilo = model.getProfiloCercato().getIdProfilo();
                 String percorsoFotoProfilo = null;
+                System.out.println("prilo cerccat : " + idProfilo);
                 postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
-
+                percorsiPostTesto = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
+                percorsiPostSondaggio = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+                
+            
                 try {
                 	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo())).getPercorso();
 				} catch (PostNonVisibile e1) {
@@ -793,7 +797,7 @@ public class Controller {
 				}
                 
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo, postDelProfilo, null, null);
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo, postDelProfilo, percorsiPostTesto, percorsiPostSondaggio);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
