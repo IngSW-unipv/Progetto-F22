@@ -1084,9 +1084,11 @@ public class Controller {
     
     public void pubblicaStory() {
    	 
+    	int idPostInt = (int)Math.round(Math.random() * 1000);
+ 		String idPost = "F" + Integer.toString(idPostInt);
     	String commentoPost = view.ottieniCommento();
     	String percorsoFilePost = view.ottieniPercorsoFile();
-    	Foto f = new Foto(commentoPost, null, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, true);
+    	Foto f = new Foto(idPost, commentoPost, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, true);
     	
     	model.pubblicaStory(24, f);
     }

@@ -174,7 +174,7 @@ public class Sistema {
 	 	public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 	 		Foto p;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = Integer.toString(idPostInt);
+	 		String idPost = "F" + Integer.toString(idPostInt);
 	 		p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
 	 		
 	 		if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
@@ -188,7 +188,7 @@ public class Sistema {
 			
 			SondaggioSceltaMultipla s;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = Integer.toString(idPostInt);
+	 		String idPost = "S" + Integer.toString(idPostInt);
 	 		
 	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		
@@ -205,7 +205,7 @@ public class Sistema {
 			
 			SondaggioDoppiaVotazione s;
 	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = Integer.toString(idPostInt);
+	 		String idPost = "S" + Integer.toString(idPostInt);
 	 		
 	 		s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
 	 		
@@ -220,7 +220,7 @@ public class Sistema {
 			
 			Testo t;
 			int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = Integer.toString(idPostInt);
+	 		String idPost = "T" + Integer.toString(idPostInt);
 	 		
 	 		t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
 	 		
