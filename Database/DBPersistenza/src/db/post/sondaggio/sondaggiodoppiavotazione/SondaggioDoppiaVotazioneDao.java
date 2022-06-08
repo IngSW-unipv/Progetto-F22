@@ -17,6 +17,35 @@ private String schema;
 public SondaggioDoppiaVotazioneDao() {
 	this.schema="socialnetwork";
 }
+
+@Override
+public ArrayList<String> caricaPostProfiliSeguiti(String profilo) {
+	ArrayList<String> result = new ArrayList<>();
+
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+
+	ResultSet rs1;
+
+	try
+	{
+		String query="select idSondaggio from sondaggiodoppiavotazione f, follow fo where f.profilo = fo.profiloSeguito and profiloPersonale=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, profilo);
+		rs1=st1.executeQuery();
+
+		while(rs1.next())
+		{
+			String idNuovo=rs1.getString(1);
+			result.add(idNuovo);
+		}
+	}catch (Exception e){e.printStackTrace();}
+
+	DBConnection.closeConnection(conn);
+	
+	return result;
+	}
+
 @Override
 public ArrayList<PostDB> selectAll() {
 	 ArrayList<PostDB> result = new ArrayList<>();
