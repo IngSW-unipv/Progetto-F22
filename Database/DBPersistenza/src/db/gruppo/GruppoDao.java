@@ -203,4 +203,35 @@ public boolean cambiaFotoGruppo(GruppoDB g, String s) {
 	DBConnection.closeConnection(conn);
 	return esito;
 }
+
+public ArrayList<String> caricaGruppiProfilo(String profilo) {
+	ArrayList<String> result = new ArrayList<>();
+	
+	conn = DBConnection.startConnection(conn, schema);
+	PreparedStatement st1;
+	
+	ResultSet rs1;
+	
+	try {
+		
+		String query = "select distinct idGruppo from gruppo g, profilo p where p.idProfilo = g.profilo1 or p.idProfilo = g.profilo2 or p.idProfilo = g.profilo3 or p.idProfilo = g.profilo4 or p.idProfilo = g.profilo5 or p.idProfilo = g.profilo6 or p.idProfilo = g.amministratore and p.idProfilo =?";
+		
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, profilo);
+		rs1 = st1.executeQuery();
+		
+		while(rs1.next())
+		{
+			String idNuovo=rs1.getString(1);
+			result.add(idNuovo);
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+	
+	DBConnection.closeConnection(conn);
+	
+	return result;
+}
+
 }

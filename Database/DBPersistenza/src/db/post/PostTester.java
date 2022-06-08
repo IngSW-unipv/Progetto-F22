@@ -21,21 +21,21 @@ public class PostTester {
         
         
 		FotoDao pdao = new FotoDao();
-		ArrayList<String> prova = pdao.caricaPostProfiliSeguiti("marge");
-		for (int i = 0; i< prova.size(); i++) {
-			System.out.println(prova.get(i));
+		ArrayList<String> prova = pdao.caricaPostProfiliSeguiti("frank");
+		for (String p : prova) {
+			System.out.println(p);
 		}
       // VideoDao vdao = new VideoDao();
       //  SondaggioDoppiaVotazioneDao sdvdao = new SondaggioDoppiaVotazioneDao();
 		//SondaggioSceltaMultiplaDao smdao = new SondaggioSceltaMultiplaDao();
         FotoDao tdao = new FotoDao();
-   
+   /*
         ArrayList<CommentoDB> res = tdao.mostraCommentiSottoPost(f);
         for(CommentoDB c: res)
         	System.out.println(c.toString());
         System.out.println(pdao.caricaPost(f));
       
-
+*/
 		
 		
 	}
