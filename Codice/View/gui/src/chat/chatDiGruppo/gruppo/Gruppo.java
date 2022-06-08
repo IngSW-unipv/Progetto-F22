@@ -19,6 +19,19 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 		this.amministratore = amministratore;
 	}
 
+	public Gruppo(String idGruppo) {
+		this.idGruppo = idGruppo;
+		this.descrizione = null;
+		this.nomeGruppo = null;
+		this.profilo1 = null;
+		this.profilo2 = null;
+		this.profilo3 = null;
+		this.profilo4 = null;
+		this.profilo5 = null;
+		this.profilo6 = null;
+		this.amministratore = null;
+}
+
 	private String idGruppo;
 	private String descrizione;
 	private String nomeGruppo;

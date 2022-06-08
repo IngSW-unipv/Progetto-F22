@@ -41,7 +41,7 @@ public class Controller {
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
     private ArrayList<String> percorsiPostTesto = new ArrayList<String>();
     private ArrayList<String> percorsiPostSondaggio = new ArrayList<String>();
-    private ArrayList<String> ListaGruppi = new ArrayList<String>();
+    private ArrayList<String> listaGruppi = new ArrayList<String>();
     
     ArrayList<String> messaggi = new ArrayList<String>();
 	public Controller(Sistema s, Frame f) {
@@ -106,10 +106,10 @@ public class Controller {
         gestoreRegistrati = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                if (signUp()) {
+            	mostraSchermata("ChatDiGruppoFrame");
+               /* if (signUp()) {
                     mostraSchermata("Home");
-                }
+                }*/
             }
         };
         view.getRegistratiButton().addActionListener(gestoreRegistrati);
@@ -133,7 +133,6 @@ public class Controller {
         gestorePostPrecedente = new ActionListener() {
             @Override
              public void actionPerformed(ActionEvent e) {
-                System.out.println("precedente");
             	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
             }
         };
@@ -173,6 +172,10 @@ public class Controller {
                 gestoreChat = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                    	listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+                    	for(int i = 0; i < listaGruppi.size(); i++ ) {
+                    		listaGruppi.get(i);
+                    	}
                         mostraSchermata("Chat");
                     }
                 };
@@ -1032,7 +1035,8 @@ public class Controller {
     			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
     			String immagineGruppo = view.getPercorsoImmagineGruppo();
     			try {
-    				model.getProfiloAttivo().creaGruppo("2", descrizioneGruppo, nomeGruppo, "1", "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
+    				
+    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}
@@ -1235,7 +1239,7 @@ public class Controller {
         percorsiPostFoto.clear();
         percorsiPostTesto.clear();
         percorsiPostSondaggio.clear();
-        ListaGruppi.clear();
+        listaGruppi.clear();
         
         try {
 			model.setProfiloAttivo(model.getProfiloAttivo().cercaProfilo(model.getProfiloAttivo()));

@@ -136,11 +136,13 @@ public class DbFacade implements IDbFacade{
 	public String vediFotoGruppo(Gruppo g) {
 		return gDao.vediFotoGruppo(ConvertitoreFacade.getIstance().converti(g));
 	}
-	/* è sbagliata
-	public ArrayList<String> caricaGruppiProfilo(Gruppo g) {
-		return gDao.caricaGruppiProfilo(ConvertitoreFacade.getIstance().converti(g));
+
+	public ArrayList<String> caricaGruppiProfilo(String profilo) {
+		ArrayList<String> listaGruppi = gDao.caricaGruppiProfilo(profilo);
+		return listaGruppi;
 	}
-	*/
+		
+	
 	//Messaggi
 	
 	@Override

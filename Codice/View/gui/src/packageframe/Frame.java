@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.swing.*;
 import panelspackage.panels.AreaChatFrame;
 import panelspackage.panels.Chat;
+import panelspackage.panels.ChatDiGruppoFrame;
 import panelspackage.panels.CreazioneChatDiGruppo;
 import panelspackage.panels.CreazionePost;
 import panelspackage.panels.Home;
@@ -111,7 +112,8 @@ public class Frame extends JFrame {
 		CreazioneChatDiGruppo creazioneChatDiGruppo = new CreazioneChatDiGruppo();
 		mappaSchermate.put("CreazioneChatDiGruppo", creazioneChatDiGruppo);
 	
-	
+		ChatDiGruppoFrame chatDiGruppoFrame = new ChatDiGruppoFrame();
+		mappaSchermate.put("ChatDiGruppoFrame", chatDiGruppoFrame);
 	}
 	
 	

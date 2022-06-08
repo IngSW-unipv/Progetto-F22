@@ -707,11 +707,17 @@ public ArrayList<String> ProfiloNickCommento(Profilo p) {
 //Gruppo
 
 
-@Override
-public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
-	Gruppo g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore, fotoGruppo);
-		return dbfacade.carica(g);
-
+public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
+		Gruppo g;
+		int idGruppoInt = (int)Math.round(Math.random() * 1000);
+		String idGruppo = Integer.toString(idGruppoInt);
+		g = new Gruppo(idGruppo);
+		if(dbfacade.cerca(g) != null) {
+			creaGruppo(descrizione, nomeGruppo, profilo1,profilo2,profilo3,profilo4,profilo5,profilo6, amministratore, fotoGruppo);
+		}
+		g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore, fotoGruppo);
+	
+	return dbfacade.carica(g);
 }
 
 @Override
@@ -733,6 +739,9 @@ public Gruppo cercaGruppo(Gruppo g) {
 		return dbfacade.cerca(g);
 
 }
+	public ArrayList<String> caricaGruppiProfilo(String profilo) {
+		return dbfacade.caricaGruppiProfilo(profilo);
+	}
 
 
 
@@ -820,6 +829,14 @@ public boolean rimuoviDislike(Post p)throws AzioneNonConsentita{
 	}
 	throw new AzioneNonConsentita();
 	
+}
+
+@Override
+public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
+		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo)
+		throws AccountDoesNotExist {
+	// TODO Auto-generated method stub
+	return false;
 }
 }
 
