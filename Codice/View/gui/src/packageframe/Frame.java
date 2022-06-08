@@ -24,7 +24,6 @@ import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 
-@SuppressWarnings("serial")
 public class Frame extends JFrame {
 	
 	int i;
@@ -33,7 +32,6 @@ public class Frame extends JFrame {
     private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	private SpecificContainer FrameMainContainer;
 	
-	// liste di prova
 	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
 	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
 	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10",
@@ -186,11 +184,29 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getButtonImpostazioni();
 	}
 	
-	
 	public JButton getCreazionePostButton() {
 		return ((Home)mappaSchermate.get("Home")).getpPost();
 	}
 	
+	public JButton getButtonNextPost() {
+		return ((Home)mappaSchermate.get("Home")).getButtonNextPost();
+	}
+	public int getContatorePost() {
+		return ((Home)mappaSchermate.get("Home")).getContatorePost();
+	}
+	public int getContatoreStory() {
+		return ((Home)mappaSchermate.get("Home")).getContatoreStory();
+	}
+	
+	public void setContatorePost(int valore) {
+		return ((Home)mappaSchermate.get("Home")).setContatorePost(valore);
+	}
+	public void setContatoreStory(int valore) {
+		return ((Home)mappaSchermate.get("Home")).setContatoreStory(valore);
+		
+	public JButton getButtonPrevPost() {
+		return ((Home)mappaSchermate.get("Home")).getButtonPrevPost();
+	}
 	
 	public JButton getHomeCreazionePostButton() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getHomeCreazionePost();

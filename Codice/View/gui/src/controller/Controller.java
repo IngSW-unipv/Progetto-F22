@@ -25,7 +25,7 @@ public class Controller {
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
-                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta;
+                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo;
     Frame view;
     Sistema model;
     
@@ -121,6 +121,25 @@ public class Controller {
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     public void actionListenersHome() {
+    	gestorePostSuccessivo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.setContatorePost(view.getContatorePost() + 1);
+            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            }
+        };
+        gestorePostPrecedente = new ActionListener() {
+            @Override
+             public void actionPerformed(ActionEvent e) {
+                System.out.println("precedente");
+            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            }
+        };
+            view.getButtonPrevPost().addActionListener(gestorePostPrecedente);
+            
+        view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
+        
+        
                 gestoreImpostazioni = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
