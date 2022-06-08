@@ -21,6 +21,7 @@ public class PostVisualizzato extends JPanel{
 
 		int indiceCommentoCorrente = 0;
 		int numeroCommentiTotali = 5;
+		private String tipoPost = "foto";
 		private String messaggioBottoneSuperioreFollow = "Inizia a seguire";
 		private String messaggioBottoneSuperioreProfilo = "Imposta come immagine profilo";
 		private JTextArea areaDescrizione;
@@ -161,6 +162,7 @@ public class PostVisualizzato extends JPanel{
 		}
 		
 		public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+			cambiaDescrizionePost(descrizionePost);
 			settaCommenti(commenti);
 			idPost = iDpost;
 			this.cambiaFoto(path);
@@ -384,5 +386,18 @@ public class PostVisualizzato extends JPanel{
 		public void setPulsanteQuartaScelta(Pulsanti pulsanteQuartaScelta) {
 			this.pulsanteQuartaScelta = pulsanteQuartaScelta;
 		}
+		public void cambiaDescrizionePost(String nuovaDescrizione) {
+			areaCommenti.getAreaDescrizione().setText(nuovaDescrizione);
+		}
 
+
+		public String getTipoPost() {
+			return tipoPost;
+		}
+
+
+		public void setTipoPost(String tipoPost) {
+			this.tipoPost = tipoPost;
+		}
+		
 }
