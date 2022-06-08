@@ -1,4 +1,3 @@
-
 package panelspackage.panels;
 import javax.swing.*;
 import packageframe.Frame;
@@ -22,7 +21,7 @@ public class  Profilo extends JPanel {
 	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
 	ArrayList<String> dati = new ArrayList<String>();
 	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, pulsanteSecondoTesto, pulsanteTerzoTesto;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
@@ -86,12 +85,21 @@ public class  Profilo extends JPanel {
 		containerWest.setLayout(new GridLayout(6,1));
 
 		ListaTesti.clear();
-		for(int i = 0;  i < 3 ; i++) {
-			AreaDiTesto textArea = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaTesti.add(textArea);
-			containerWest.add(new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
-			containerWest.add(new JScrollPane(ListaTesti.get(i)), BorderLayout.PAGE_START);
-		}
+			AreaDiTesto primoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaTesti.add(primoTesto);
+			containerWest.add(pulsantePrimoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(new JScrollPane(ListaTesti.get(0)), BorderLayout.PAGE_START);
+		
+			AreaDiTesto secondoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaTesti.add(secondoTesto);
+			containerWest.add(pulsanteSecondoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(new JScrollPane(ListaTesti.get(1)), BorderLayout.PAGE_START);
+		
+			AreaDiTesto terzoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaTesti.add(terzoTesto);
+			containerWest.add(pulsanteTerzoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(new JScrollPane(ListaTesti.get(2)), BorderLayout.PAGE_START);
+		
 		SpecificContainer containerEast = new SpecificContainer();
 		add(containerEast, BorderLayout.EAST);
 		containerEast.setLayout(new GridLayout(6,1));
@@ -350,4 +358,20 @@ public class  Profilo extends JPanel {
 	public void setPrevTesto(Pulsanti prevTesto) {
 		this.prevTesto = prevTesto;
 	}
+
+
+	public Pulsanti getPulsantePrimoTesto() {
+		return pulsantePrimoTesto;
+	}
+
+
+	public Pulsanti getPulsanteSecondoTesto() {
+		return pulsanteSecondoTesto;
+	}
+
+
+	public Pulsanti getPulsanteTerzoTesto() {
+		return pulsanteTerzoTesto;
+	}
+	
 }
