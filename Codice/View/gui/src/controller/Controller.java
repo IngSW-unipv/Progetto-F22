@@ -186,7 +186,8 @@ public class Controller {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
-                        mostraSchermata("Chat");
+                        view.settaSchermataChat(listaGruppi);
+                    	mostraSchermata("Chat");
                     }
                 };
                 view.getChatButton().addActionListener(gestoreChat);

@@ -816,5 +816,9 @@ public class Frame extends JFrame {
 	public void rimuoviPostHome() {
 		((Home)mappaSchermate.get("Home")).rimuoviPostHome();
 	}
+    public void settaSchermataChat(ArrayList<String> gruppi) {
+        ((Chat)mappaSchermate.get("Chat")).settaSchermataChat(gruppi);
+
+    }
 	
 }
