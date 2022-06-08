@@ -84,9 +84,6 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 if (login()) {
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                    for(int i= 0; i < postSchermataHome.size(); i++) {
-                    	System.out.println(postSchermataHome.get(i));
-                    }
                 	mostraSchermata("Home");
                 }
             }

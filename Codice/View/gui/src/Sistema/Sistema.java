@@ -94,7 +94,6 @@ public class Sistema {
 	 			dbfacade.modificaLoggato(email, true);
 	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
 	 			this.setProfiloAttivo(p);
-	 			System.out.println("fssefes" + this.getProfiloAttivo().getIdProfilo());
 	 			
 	 			return true;
 	 		}
