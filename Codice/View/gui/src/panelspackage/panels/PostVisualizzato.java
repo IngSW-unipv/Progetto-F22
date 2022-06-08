@@ -172,7 +172,7 @@ public class PostVisualizzato extends JPanel{
 			numeroComm = numeroCommenti;
 			containerSondaggio.setVisible(false);
 			containerPost.setVisible(true);
-            impostaImmagineProfiloButton.setVisible(true);
+
 		}
         public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
             numeroMiPiace = numeroLike;

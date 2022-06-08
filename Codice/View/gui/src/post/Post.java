@@ -33,6 +33,18 @@ import post.enumeration.TipoPost;
 		this.visibile = true;
 		this.profilo = profilo;
 	}
+	public Post(String idProfilo) {
+		super();
+		this.idPost = idProfilo;
+		this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
+		this.descrizione = "";
+		this.numLike = 0;
+		this.numDislike = 0;
+		this.visibile = true;
+		this.profilo = null;
+		}
+	
 	private String idPost;
 	private Date dataPubblicazione;
 	private Time oraPubblicazione;

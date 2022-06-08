@@ -12,6 +12,11 @@ public class Testo extends Post {
 		this.titolo = titolo;
 		
 	}
+	public Testo(String idPost) {
+		super(idPost);
+		this.font = null;
+		this.titolo = null;
+		}
 	private String font;
 	private String titolo;
 	

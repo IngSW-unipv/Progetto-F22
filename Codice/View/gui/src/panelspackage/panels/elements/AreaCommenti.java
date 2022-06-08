@@ -13,13 +13,12 @@ import javax.swing.JTextArea;
 
 public class AreaCommenti extends Container {
 	
-	JTextArea areaDescrizione;
+	JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
 	JButton aggiungiLike, aggiungiDislike,aggiungiCommento;
 	
 	public AreaCommenti() {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
-		JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
 		areaDescrizione.setPreferredSize(new Dimension(400, 130));
 		areaDescrizione.setEditable(false);
 		areaDescrizione.setLineWrap(true);

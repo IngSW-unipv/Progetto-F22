@@ -9,6 +9,7 @@ import panelspackage.panels.PostVisualizzato;
 import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioSceltaMultipla;
+import post.testo.Testo;
 import profilo.exception.*;
 
 public class Controller {
@@ -17,15 +18,16 @@ public class Controller {
                            gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo, gestoreIniziaSeguire, gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
                            gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
-                           gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
-                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
+                           gestorePost1, gestorePost2, gestorePost3, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
+                           gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
-                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo;
+                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
+                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto;
     Frame view;
     Sistema model;
     
@@ -311,6 +313,94 @@ public class Controller {
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
         
+        gestorePulsantePrimoTesto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	settaPostVisualizzato(false);
+                Testo t = new Testo(null);
+                
+                try {
+					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(0 + view.getContatoreTesto())));
+					
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e1) {
+					e1.printStackTrace();
+				}
+            	try {
+            		System.out.println(t.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                mostraSchermata("Postvisualizzato");
+                refresh();
+            }
+        };
+        view.getPulsantePrimoTesto().addActionListener(gestorePulsantePrimoTesto);
+        
+        gestorePulsanteSecondoTesto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	settaPostVisualizzato(false);
+                Testo t = new Testo(null);
+                
+                try {
+					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(2+ view.getContatoreTesto())));
+					
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e1) {
+				} 
+            	try {
+
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                mostraSchermata("Postvisualizzato");
+                refresh();    
+            }
+        };
+        view.getPulsanteSecondoTesto().addActionListener(gestorePulsanteSecondoTesto);
+        
+        gestorePulsanteTerzoTesto = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	settaPostVisualizzato(false);
+                Testo t = new Testo(null);
+                
+                try {
+					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(4 + view.getContatoreTesto())));
+					
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				} catch (FotoProfiloNonAncoraImpostata e1) {
+					e1.printStackTrace();
+				}
+            	try {
+
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                mostraSchermata("Postvisualizzato");
+                refresh();
+            }
+        };
+        view.getPulsanteTerzoTesto().addActionListener(gestorePulsanteTerzoTesto);
+        
+        
+        
+        
         gestorePost1 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -338,7 +428,8 @@ public class Controller {
             	}
 
 
-                view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+            	view.getImpostaImmagineProfiloButton().setVisible(true);
+            	view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();    
         	}
@@ -372,7 +463,7 @@ public class Controller {
                 		System.out.println(commentiConProfiliIinvianti.get(i));
                 	}
 
-
+                	view.getImpostaImmagineProfiloButton().setVisible(true);
                     view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                     mostraSchermata("Postvisualizzato");
                     refresh();
@@ -402,11 +493,7 @@ public class Controller {
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
-            		System.out.println(f.getIdPost());
-
-                	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-                		System.out.println(commentiConProfiliIinvianti.get(i));
-                	}
+                	view.getImpostaImmagineProfiloButton().setVisible(true);
 
 
                     view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
@@ -432,6 +519,8 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+        		
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -454,6 +543,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -476,6 +566,8 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+            	view.getImpostaImmagineProfiloButton().setVisible(false);
+
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");

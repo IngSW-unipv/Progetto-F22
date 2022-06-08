@@ -786,5 +786,17 @@ public class Frame extends JFrame {
 	public Pulsanti getHomeCreazioneChatDiGruppo() {
 		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getHome();
 	}
+
+	public Pulsanti getPulsantePrimoTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoTesto();
+	}
+	
+	public Pulsanti getPulsanteSecondoTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSecondoTesto();
+	}
+	
+	public Pulsanti getPulsanteTerzoTesto() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoTesto();
+	}
 	
 }
