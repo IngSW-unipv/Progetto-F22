@@ -23,7 +23,7 @@ public class Home extends JPanel {
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
-
+	private int contatorePost = 0, contatoreStory = 0;
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		int indiceBufferPosts = 0;
@@ -267,6 +267,26 @@ public class Home extends JPanel {
 
 	public Pulsanti getCreaUnaChatDiGruppo() {
 		return creaUnaChatDiGruppo;
+	}
+
+
+	public int getContatorePost() {
+		return contatorePost;
+	}
+
+
+	public void setContatorePost(int contatorePost) {
+		this.contatorePost = contatorePost;
+	}
+
+
+	public int getContatoreStory() {
+		return contatoreStory;
+	}
+
+
+	public void setContatoreStory(int contatoreStory) {
+		this.contatoreStory = contatoreStory;
 	}
 	
 }

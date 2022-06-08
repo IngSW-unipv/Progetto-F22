@@ -429,6 +429,10 @@ public Post cercaPost(Post p) throws PostNonVisibile, FotoProfiloNonAncoraImpost
 	return dbfacade.cerca(p);
 }
 
+	public ArrayList<String> caricaPostProfiliSeguiti(String profilo, TipoPost tipo) {
+		ArrayList<String> postDeiProfiliSeguiti = dbfacade.caricaPostProfiliSeguiti(profilo, tipo);
+		return postDeiProfiliSeguiti;
+	}
 @Override
 public ArrayList<Post> selectAllPost(TipoPost t) {
 	ArrayList<Post> p = dbfacade.selectAllPost(t);

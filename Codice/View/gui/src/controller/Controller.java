@@ -25,7 +25,7 @@ public class Controller {
                            gestorePost1, gestorePost2, gestorePost3, gestorePost4, gestorePost5, gestorePost6, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreNextTipoPost,gestorePrevTipoPost, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
-                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta;
+                           gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo;
     Frame view;
     Sistema model;
     
@@ -34,6 +34,7 @@ public class Controller {
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
+    private ArrayList<String> postSchermataHome = new ArrayList<String>();
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
     private ArrayList<String> percorsiPostTesto = new ArrayList<String>();
@@ -80,7 +81,11 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (login()) {
-                    mostraSchermata("Home");
+                	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+                    for(int i= 0; i < postSchermataHome.size(); i++) {
+                    	System.out.println(postSchermataHome.get(i));
+                    }
+                	mostraSchermata("Home");
                 }
             }
         };
@@ -116,6 +121,25 @@ public class Controller {
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     public void actionListenersHome() {
+    	gestorePostSuccessivo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                view.setContatorePost(view.getContatorePost() + 1);
+            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            }
+        };
+        gestorePostPrecedente = new ActionListener() {
+            @Override
+             public void actionPerformed(ActionEvent e) {
+                System.out.println("precedente");
+            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            }
+        };
+            view.getButtonPrevPost().addActionListener(gestorePostPrecedente);
+            
+        view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
+        
+        
                 gestoreImpostazioni = new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

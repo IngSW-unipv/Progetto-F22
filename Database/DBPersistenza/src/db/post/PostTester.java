@@ -21,6 +21,10 @@ public class PostTester {
         
         
 		FotoDao pdao = new FotoDao();
+		ArrayList<String> prova = pdao.caricaPostProfiliSeguiti("marge");
+		for (int i = 0; i< prova.size(); i++) {
+			System.out.println(prova.get(i));
+		}
       // VideoDao vdao = new VideoDao();
       //  SondaggioDoppiaVotazioneDao sdvdao = new SondaggioDoppiaVotazioneDao();
 		//SondaggioSceltaMultiplaDao smdao = new SondaggioSceltaMultiplaDao();
