@@ -212,6 +212,12 @@ public class DbFacade implements IDbFacade{
     	return b;
     		
     }
+	
+	public  ArrayList<String> caricaPostProfiliSeguiti(String profilo, TipoPost tipo) {
+		pstDao = Utility.convertiTipoPost(tipo);
+		ArrayList<String> postDiUnProfilo = pstDao.caricaPostProfiliSeguiti(profilo);
+		return postDiUnProfilo;		
+	}
 	@Override
      public boolean rimuovi(Post p) {
     	 pstDao = Utility.convertiTipoPost(p.getTipo());
