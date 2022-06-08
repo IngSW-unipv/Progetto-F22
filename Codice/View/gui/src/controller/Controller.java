@@ -173,9 +173,6 @@ public class Controller {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                     	listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
-                    	for(int i = 0; i < listaGruppi.size(); i++ ) {
-                    		listaGruppi.get(i);
-                    	}
                         mostraSchermata("Chat");
                     }
                 };
@@ -1036,7 +1033,7 @@ public class Controller {
     			String immagineGruppo = view.getPercorsoImmagineGruppo();
     			try {
     				
-    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), "2", "3", "4", "5", "6", model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
+    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null, model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}
