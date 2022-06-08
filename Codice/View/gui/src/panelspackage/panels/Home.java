@@ -16,14 +16,15 @@ public class Home extends JPanel {
 	
 	int i;
 
-	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter;
+	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter, containerPost;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
-	private Pulsanti creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
+	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
 	private int contatorePost = 0, contatoreStory = 0;
+	private String percorsoPost;
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		int indiceBufferPosts = 0;
@@ -72,11 +73,23 @@ public class Home extends JPanel {
 
 	}
 	
+	public void aggiornaPostHome() {
+		containerPost.add(postPrincipale = new Pulsanti(percorsoPost));
+        this.invalidate();
+        this.validate();
+        this.repaint();
+	}
+	
+	public void rimuoviPostHome() {
+		containerPost.remove(postPrincipale);
+	}
+	
+	
 	public void areaPost(ArrayList<String>  bufferPosts) {
-		SpecificContainer containerPost = new SpecificContainer();
+		containerPost = new SpecificContainer();
 		containerCenter.add(containerPost, BorderLayout.CENTER);
 		
-		containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
+		//containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
 		
 		SpecificContainer containerCosePost = new SpecificContainer();
 		
@@ -288,5 +301,14 @@ public class Home extends JPanel {
 	public void setContatoreStory(int contatoreStory) {
 		this.contatoreStory = contatoreStory;
 	}
+
+	public String getPercorsoPost() {
+		return percorsoPost;
+	}
+
+	public void setPercorsoPost(String percorsoPost) {
+		this.percorsoPost = percorsoPost;
+	}
+	
 	
 }

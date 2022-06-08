@@ -48,9 +48,9 @@ public class  Profilo extends JPanel {
 		containerNorthNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerNorthNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg");
-		JScrollPane pannelloFoto = new JScrollPane(immagineProf);
-		pannelloFoto.setPreferredSize(new Dimension(500,500));
-		containerNorth.add(pannelloFoto, BorderLayout.PAGE_START);
+		//JScrollPane pannelloFoto = new JScrollPane(immagineProf);
+		//pannelloFoto.setPreferredSize(new Dimension(500,500));
+		//containerNorth.add(pannelloFoto, BorderLayout.PAGE_START);
 
 		dati.add("N.Post");
 		dati.add(Integer.toString(0));
@@ -201,6 +201,8 @@ public class  Profilo extends JPanel {
 			}
 		}
 	}
+	
+	
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
 		if(postTestoDelProfilo.size()/2 < 3)  {

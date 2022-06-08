@@ -801,4 +801,20 @@ public class Frame extends JFrame {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoTesto();
 	}
 	
+	public void setPercorsoPost(String percorsoPost) {
+		((Home)mappaSchermate.get("Home")).setPercorsoPost(percorsoPost);
+	}
+	
+	public String getPercorsoPost() {
+		return ((Home)mappaSchermate.get("Home")).getPercorsoPost();
+	}
+	
+	public void aggiornaPostHome() {
+		((Home)mappaSchermate.get("Home")).aggiornaPostHome();
+	}
+	
+	public void rimuoviPostHome() {
+		((Home)mappaSchermate.get("Home")).rimuoviPostHome();
+	}
+	
 }

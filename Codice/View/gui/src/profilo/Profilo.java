@@ -207,12 +207,12 @@ public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist 
 //Follow
 
 @Override
-public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita, FollowYourself {
+public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita/*, FollowYourself */{
 	
-	if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
+	/*if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
 		if(this.profiloNonSeguito(this.getIdProfilo())) {
 			throw new FollowYourself(this.getIdProfilo());
-		}
+		}*/
 	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
 	dbfacade.carica(f);int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
 	int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
@@ -222,8 +222,8 @@ public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneN
 	dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
 	System.out.println("Hai cominciato a seguire con successo l'account : " + profiloSeguito);
 	return true;	
-	}
-	throw new AzioneNonConsentita();
+	//}
+	//throw new AzioneNonConsentita();
 
 }
 

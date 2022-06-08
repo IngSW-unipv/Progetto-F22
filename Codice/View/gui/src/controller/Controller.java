@@ -84,7 +84,13 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 if (login()) {
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	mostraSchermata("Home");
+                	if(postSchermataHome.size() == 0) {
+                		mostraSchermata("Home");
+                	} else {
+                		view.setPercorsoPost(ottieniPost(0));
+                		view.aggiornaPostHome();
+                    	mostraSchermata("Home");
+                	}
                 }
             }
         };
@@ -103,10 +109,10 @@ public class Controller {
         gestoreRegistrati = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	mostraSchermata("ChatDiGruppoFrame");
-               /* if (signUp()) {
+            	//mostraSchermata("ChatDiGruppoFrame");
+                if (signUp()) {
                     mostraSchermata("Home");
-                }*/
+                }
             }
         };
         view.getRegistratiButton().addActionListener(gestoreRegistrati);
@@ -125,17 +131,27 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 view.setContatorePost(view.getContatorePost() + 1);
             	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            	view.rimuoviPostHome();
+            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
+            	view.aggiornaPostHome();
+            	refresh();
             }
         };
+        view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
+        
         gestorePostPrecedente = new ActionListener() {
             @Override
              public void actionPerformed(ActionEvent e) {
+            	view.setContatorePost(view.getContatorePost() - 1);
             	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+               	view.rimuoviPostHome();
+            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
+            	view.aggiornaPostHome();
+            	refresh();
             }
         };
-            view.getButtonPrevPost().addActionListener(gestorePostPrecedente);
-            
-        view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
+        view.getButtonPrevPost().addActionListener(gestorePostPrecedente);
+         
         
         
                 gestoreImpostazioni = new ActionListener() {
@@ -283,9 +299,10 @@ public class Controller {
 					e1.printStackTrace();
 				} catch (AzioneNonConsentita e1) {
 					e1.printStackTrace();
-				} catch (FollowYourself e1) {
-					e1.printStackTrace();
 				}
+			/*	} catch (FollowYourself e1) {
+					e1.printStackTrace();
+				}*/
             }
         };
         view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
@@ -1277,6 +1294,19 @@ public class Controller {
 		view.setContatoreFoto(0);
 		view.setContatoreSondaggio(0);
 		view.setContatoreTesto(0);
+	}
+	
+	public String ottieniPost(int indicePost) {
+		String percorsoPost = "";
+		
+		try {
+			percorsoPost = model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(indicePost))).getPercorso();
+		} catch(PostNonVisibile | FotoProfiloNonAncoraImpostata e) {
+			e.printStackTrace();
+			System.out.println("Post home non caricato");
+		}
+		
+		return percorsoPost;
 	}
 	
 }
