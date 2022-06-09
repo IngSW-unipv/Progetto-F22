@@ -18,6 +18,7 @@ import db.gruppo.GruppoDB;
 import db.gruppo.GruppoDao;
 import db.messaggio.MessaggioDB;
 import db.messaggio.MessaggioDao;
+import db.messaggio.messaggioDiGruppo.MessaggioDiGruppoDao;
 import db.post.PostDB;
 import db.post.PostDao;
 import db.post.sondaggio.sondaggioMap.SondaggioMapDao;
@@ -51,7 +52,7 @@ public class DbFacade implements IDbFacade{
 	
 	
 	private DbFacade() {
-		mDao = null;
+		mDao = new MessaggioDiGruppoDao();
 		pstDao = null;
 		cDao = new CommentoDao();
 		gDao = new GruppoDao();
@@ -180,7 +181,10 @@ public class DbFacade implements IDbFacade{
 		mDao = Utility.convertiTipoMessaggio(t);
 		return ConvertitoreFacade.getIstance().convertiListaMessaggi(t, mDao.selezionaMessaggi(s1,s2));
 	}
- 	
+	public ArrayList<String> caricaMessaggiChatGruppoConProfiloInviante(String idGruppo) {
+		return mDao.caricaMessaggiChatConProfiloInviante(idGruppo);
+	}
+
 	@Override
 	public ArrayList<String> ottieniTestoListaMessaggi(String m1,String m2, TipoMessaggio t){
 		mDao = Utility.convertiTipoMessaggio(t);

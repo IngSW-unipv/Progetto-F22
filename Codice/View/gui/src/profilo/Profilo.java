@@ -844,7 +844,12 @@ public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo
 		if(dbfacade.cerca(new MessaggioDiGruppo(idMessaggio)) != null) {
 			scriviMessaggioGruppo(testo, idGruppo);
 		}
+		System.out.println("siamo in gruppo" +m.getIdGruppo());
 		dbfacade.carica(m);
+	}
+	
+	public ArrayList<String> caricaMessaggiChatGruppoConProfiloInviante(String idGruppo) {
+		return dbfacade.caricaMessaggiChatGruppoConProfiloInviante(idGruppo);
 	}
 }
 

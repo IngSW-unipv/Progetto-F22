@@ -38,6 +38,8 @@ public class Controller {
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
+    private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
+
     private ArrayList<String> postSchermataHome = new ArrayList<String>();
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
@@ -1358,5 +1360,9 @@ public class Controller {
 	private void settaSchermataGruppo(Gruppo g) {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.getDescrizioneGroupe().setText(g.getDescrizione());
+		messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+		for(int i=0; i <messaggiInviatiGruppoConInviante.size(); i++ ) {
+			System.out.println(messaggiInviatiGruppoConInviante.get(i));
+		}
 	}
 }

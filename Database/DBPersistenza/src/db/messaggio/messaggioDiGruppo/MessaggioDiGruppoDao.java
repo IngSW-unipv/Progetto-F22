@@ -171,6 +171,33 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 	}
 
 	@Override
+	public ArrayList<String> caricaMessaggiChatConProfiloInviante(String idGruppo) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT idMsgGrp, testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, idGruppo);
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				result.add(rs1.getString(1));
+				result.add(rs1.getString(2));
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		return result;
+	}
+	@Override
 	public String ottieniTestoMessaggio(String m) {
 	
 		conn=DBConnection.startConnection(conn,schema);

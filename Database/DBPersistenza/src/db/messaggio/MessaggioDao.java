@@ -18,5 +18,9 @@ public abstract class MessaggioDao implements IMessaggioDao{
 	public abstract ArrayList<MessaggioDB> selezionaMessaggi(String s1, String s2);
 	@Override
 	public abstract ArrayList<String> ottieniTestoListaMessaggi(String s1, String s2);
+	public ArrayList<String> caricaMessaggiChatConProfiloInviante(String idGruppo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

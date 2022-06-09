@@ -30,4 +30,6 @@ public interface IMessaggioDao {
 	public ArrayList<String> selezionaTestoMessaggiProfilo(ProfiloDB p);
 
 	ArrayList<MessaggioDB> caricaMessaggiChatPrivata(String inviante, String ricevente);
+
+	ArrayList<String> caricaMessaggiChatConProfiloInviante(String idGruppo);
 }
