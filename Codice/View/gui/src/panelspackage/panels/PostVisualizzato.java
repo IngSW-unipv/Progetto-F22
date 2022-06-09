@@ -3,16 +3,14 @@ package panelspackage.panels;
     import java.awt.*;
     import java.util.ArrayList;
     import panelspackage.panels.elements.GrigliaDiElementi;
-    import panelspackage.panels.elements.LabeledIcon;
-import panelspackage.panels.elements.Pulsanti;
-import panelspackage.panels.*;
+    import panelspackage.panels.elements.Pulsanti;
     import panelspackage.panels.elements.AreaCommenti;
     import panelspackage.panels.elements.AreaDiTesto;
     import panelspackage.panels.elements.Etichette;
     import panelspackage.panels.elements.SpecificContainer;
     import packageframe.Frame;
     
-public class PostVisualizzato extends JPanel{
+    public class PostVisualizzato extends JPanel{
 
     
     

@@ -47,9 +47,10 @@ public class Home extends JPanel {
 	}
 
 	public void menuHome() {
+		postPrincipale = new Pulsanti("");
 		SpecificContainer areaRicerca = new SpecificContainer();
 		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
-
+		
 		areaRicerca.add(etichettaRicerca = new Etichette("Cerca un profilo: ", Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO,fontText), BorderLayout.WEST);
 		//areaRicerca.add(testoRicerca = new AreaDiTesto(Color.LIGHT_GRAY, Frame.COLOREPRIMARIOTEMATICO, "", fontText), BorderLayout.CENTER);
 		areaRicerca.add(testoRicerca = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, fontText));
@@ -309,6 +310,12 @@ public class Home extends JPanel {
 	public void setPercorsoPost(String percorsoPost) {
 		this.percorsoPost = percorsoPost;
 	}
+
+
+	public Pulsanti getPostPrincipale() {
+		return postPrincipale;
+	}
+	
 	
 	
 }

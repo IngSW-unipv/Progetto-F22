@@ -7,7 +7,7 @@ import javax.swing.border.LineBorder;
 
 import java.awt.Color;
 import java.awt.Font;
-@SuppressWarnings("serial")
+
 public class Pulsanti extends JButton{
 	
 		
@@ -17,7 +17,6 @@ public class Pulsanti extends JButton{
 			this.setVisible(true);
 		}
 		
-		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Font font) {
 			this.setFont(font);
 			this.setLabel(name);
@@ -25,7 +24,6 @@ public class Pulsanti extends JButton{
 		}
 		
 		
-		@SuppressWarnings("deprecation")
 		public Pulsanti(String name, Color colore, Font font) {
 			this.setFont(font);
 			this.setLabel(name);

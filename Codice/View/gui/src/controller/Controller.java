@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import Sistema.Sistema;
+import chat.chatDiGruppo.gruppo.Gruppo;
 import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
 import post.enumeration.TipoPost;
@@ -27,7 +28,7 @@ public class Controller {
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
-                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto;
+                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame, gestoreInviaMessaggioGruppo;
     Frame view;
     Sistema model;
     
@@ -64,6 +65,7 @@ public class Controller {
         actionListenersPostVisualizzato();
         actionListenersAreaChatFrame();
         actionListenerCreaChatDiGruppo();
+        actionListenerChatDiGruppoFrame();
     }
 
     
@@ -126,6 +128,17 @@ public class Controller {
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     public void actionListenersHome() {
+
+    	gestorePulsanteFotoHome = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("fknskjesfs");
+            }
+        };
+        view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
+        
+        
+        
     	gestorePostSuccessivo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -802,7 +815,9 @@ public class Controller {
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Prima chat gruppo");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
+        		settaSchermataGruppo(g);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
         view.getPrimaChatGruppoButton().addActionListener(gestorePrimaChatGruppo);
@@ -965,7 +980,7 @@ public class Controller {
     		   System.out.println("Prima scelta");
     	   }
        };
-       view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
+       //view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
        
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
@@ -973,7 +988,7 @@ public class Controller {
     		   System.out.println("Seconda scelta");
     	   }
        };
-       view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
+       //view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
        
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
@@ -981,7 +996,7 @@ public class Controller {
     		   System.out.println("Terza scelta");
     	   }
        };
-       view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
+       //view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
        
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
@@ -989,7 +1004,7 @@ public class Controller {
     		   System.out.println("Quarta scelta");
     	   }
        };
-       view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
+       //view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
        
     }
     
@@ -1065,6 +1080,36 @@ public class Controller {
         };
         view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
     }
+    
+    public void  actionListenerChatDiGruppoFrame() {
+    	gestoreHomeGruppoFrame = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("Home");
+            }
+        };
+        view.getHomeGruppo().addActionListener(gestoreHomeGruppoFrame);
+    
+    
+    	gestoreInviaMessaggioGruppo = new ActionListener() {
+    		@Override
+    		public void actionPerformed(ActionEvent e) {
+    			String messaggio = view.getScriviMessaggioGruppo().getText();
+    			//model.getProfiloAttivo().scriviMessaggioGruppo(messaggio);
+    		}
+    	};
+    	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
+	
+
+	gestoreHomeChatDiGruppo = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			mostraSchermata("Home");
+			}
+		};
+	view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
+    }
+
     	        
     public void refresh() {
         view.invalidate();
@@ -1309,5 +1354,7 @@ public class Controller {
 		
 		return percorsoPost;
 	}
-	
+	private void settaSchermataGruppo(Gruppo g) {
+		view.getDescrizioneGroupe().setText(g.getDescrizione());
+	}
 }

@@ -181,6 +181,9 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getpIdea();
 	}
 	
+	public Pulsanti getPostPrincipale() {
+		return ((Home)mappaSchermate.get("Home")).getPostPrincipale();
+	}
 	
 	public JButton getImpostazioniButton() {
 		return ((Home)mappaSchermate.get("Home")).getButtonImpostazioni();
@@ -657,8 +660,9 @@ public class Frame extends JFrame {
 	public Pulsanti getPulsanteSegui() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSegui();
 	}
+
 	
-	
+
 	public Pulsanti getApriChat() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getApriChat();
 	}
@@ -800,7 +804,31 @@ public class Frame extends JFrame {
 	public Pulsanti getPulsanteTerzoTesto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoTesto();
 	}
+	public Pulsanti getAggiungiUtente() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getAggiungiUtente();
+	}
 	
+	public AreaDiTesto getDescrizioneGroupe() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getDescrizione();
+	}
+	public InserimentoTesto getTestoRimuoviUtente() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getRimuovi();
+	}
+	public InserimentoTesto getAggiungi() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getAggiungi();
+    }
+	
+	public InserimentoTesto getScriviMessaggioGruppo() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getScriviMessaggio();	}
+
+	public Pulsanti getInvia() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getInvia();	
+	}
+
+	public Pulsanti getHomeGruppo() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getHome();	
+	}
+
 	public void setPercorsoPost(String percorsoPost) {
 		((Home)mappaSchermate.get("Home")).setPercorsoPost(percorsoPost);
 	}

@@ -12,6 +12,11 @@ public class MessaggioDiGruppo extends Messaggio{
 		this.idGruppo = idGruppo;
 	}
 
+	public MessaggioDiGruppo(String idMessaggio, String testo, String profiloInviante,String idGruppo) {
+		super(idMessaggio, testo, profiloInviante);
+		this.idGruppo = idGruppo;
+	}
+
 	private String idGruppo;
 
 	public String getIdGruppo() {

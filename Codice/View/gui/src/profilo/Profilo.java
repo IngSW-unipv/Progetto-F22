@@ -276,7 +276,6 @@ public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String mul
 }
 @Override
 public boolean scriviMessaggio(Messaggio m){
-	
 	    	return dbfacade.carica(m);	
 	  
 }
@@ -838,6 +837,10 @@ public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo
 	// TODO Auto-generated method stub
 	return false;
 }
+
+public void scriviMessaggioGruppo(String testo, String idGruppo) {
+	   MessaggioDiGruppo m = new MessaggioDiGruppo(null, testo, this.getIdProfilo(), idGruppo);
+	}
 }
 
 

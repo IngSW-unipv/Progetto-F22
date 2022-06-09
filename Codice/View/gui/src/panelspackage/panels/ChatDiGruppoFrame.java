@@ -24,10 +24,8 @@ public class ChatDiGruppoFrame extends JPanel {
     private ArrayList<JComponent> ListaEtichetteMessaggi  = new ArrayList<JComponent>();
     private Pulsanti foto, nextMessaggio, prevMessaggio;
     private AreaDiTesto descrizione;
-    private InserimentoTesto aggiungi;
-    private Pulsanti aggiungiUtente;
-    private InserimentoTesto rimuovi;
-    private Pulsanti rimuoviUtente;
+    private InserimentoTesto aggiungi, rimuovi, scriviMessaggio;
+    private Pulsanti rimuoviUtente, aggiungiUtente, invia, home;
 
     public ChatDiGruppoFrame() {
         avvio();
@@ -38,8 +36,7 @@ public class ChatDiGruppoFrame extends JPanel {
         this.setOpaque(true);
         this.setVisible(true);
         this.setLayout(new BorderLayout());
-        this.setBackground(Frame.COLORESECONDARIOTEMATICO);
-        
+        this.setBackground(Frame.COLORESECONDARIOTEMATICO);   
     }
     
     
@@ -48,17 +45,17 @@ public class ChatDiGruppoFrame extends JPanel {
         SpecificContainer containerNorth = new SpecificContainer();
         this.add(containerNorth, BorderLayout.NORTH);
         
-        foto = new Pulsanti("C:/Users/aissa/OneDrive/Immagini/We can.jpg");
+        /* foto = new Pulsanti("");
         JScrollPane panel = new JScrollPane(foto);
-        panel.setPreferredSize(new Dimension(500,500));
+        panel.setPreferredSize(new Dimension(300,300));
         containerNorth.add(panel, BorderLayout.PAGE_START);
-        
+        */
         descrizione = new AreaDiTesto("", 60, 20);
         SpecificContainer containerNorthNorth = new SpecificContainer();
         containerNorthNorth.setLayout(new GridLayout(2, 1));
-        this.add(containerNorthNorth, BorderLayout.NORTH);
+        containerNorth.add(containerNorthNorth, BorderLayout.NORTH);
         containerNorthNorth.add(descrizione);
-        containerNorth.add(new Etichette("Inserire la descrizione", Frame.COLOREPRIMARIOTEMATICO) );
+        containerNorthNorth.add(new Etichette("Inserire la descrizione", Frame.COLOREPRIMARIOTEMATICO));
         
         
         aggiungi = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14), 30);
@@ -82,12 +79,22 @@ public class ChatDiGruppoFrame extends JPanel {
         ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
         ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
         
-        //SpecificContainer containerCenter = new SpecificContainer(getBackground());
         //add(containerCenter, BorderLayout.CENTER);
         GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
-        add(grigliaMessaggi, BorderLayout.CENTER);
+        this.add(grigliaMessaggi, BorderLayout.CENTER);
         
         
+        SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+        this.add(containerSouth, BorderLayout.SOUTH);
+        containerSouth.setVisible(true);
+        scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
+  	  	
+  	  	containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
+        invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
+  	  	containerSouth.add(invia,BorderLayout.EAST);
+
+  	  	home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
+  	  	containerSouth.add(home,BorderLayout.SOUTH);
     }
 
     public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
@@ -104,6 +111,7 @@ public class ChatDiGruppoFrame extends JPanel {
             }
         return true;
     }
+    
     
     public Pulsanti getFoto() {
         return foto;
@@ -176,6 +184,18 @@ public class ChatDiGruppoFrame extends JPanel {
     public void setMessaggioCorrente(int messaggioCorrente) {
         this.messaggioCorrente = messaggioCorrente;
     }
+
+	public InserimentoTesto getScriviMessaggio() {
+		return scriviMessaggio;
+	}
+
+	public Pulsanti getInvia() {
+		return invia;
+	}
+
+	public Pulsanti getHome() {
+		return home;
+	}
     
 
 }

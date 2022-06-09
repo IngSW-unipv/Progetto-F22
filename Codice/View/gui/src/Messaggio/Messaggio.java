@@ -39,6 +39,16 @@ public abstract class Messaggio {
 		this.profiloInviante = null;
 	}
 
+	public Messaggio(String idMessaggio, String testo, String profiloInviante) {
+		super();
+		this.idMessaggio = idMessaggio;
+		this.dataInvio = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		this.oraInvio = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());	
+		this.testo = testo;
+		this.multimedia = null;
+		this.profiloInviante = profiloInviante;
+	}
+
 	private String idMessaggio;
 	private Date dataInvio;
 	private Time oraInvio;
