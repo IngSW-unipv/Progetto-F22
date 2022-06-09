@@ -4,7 +4,7 @@ package convertitore.profiloUtility;
 import db.profilo.ProfiloDB;
 import post.multimedia.foto.Foto;
 import profilo.Profilo;
-import profilo.exception.FotoProfiloNonAncoraImpostata;
+import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 
 public class Test {
@@ -23,7 +23,7 @@ public static void main(String[] args) {
 	try {
 		try {
 			p1.cercaPost(f);
-		} catch (FotoProfiloNonAncoraImpostata e) {
+		} catch (PostNonPresente e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -28,7 +28,7 @@ import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.FollowYourself;
-import profilo.exception.FotoProfiloNonAncoraImpostata;
+import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -418,9 +418,9 @@ public boolean rimuoviPost(Post p) {
 }
 
 @Override
-public Post cercaPost(Post p) throws PostNonVisibile, FotoProfiloNonAncoraImpostata{
+public Post cercaPost(Post p) throws PostNonVisibile, PostNonPresente{
 		if (dbfacade.cerca(p) == null) {
-			throw new FotoProfiloNonAncoraImpostata();
+			throw new PostNonPresente(p.getIdPost());
 		}
 	return dbfacade.cerca(p);
 }

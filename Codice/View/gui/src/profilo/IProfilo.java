@@ -22,7 +22,7 @@ import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.FollowYourself;
-import profilo.exception.FotoProfiloNonAncoraImpostata;
+import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
@@ -61,7 +61,7 @@ public interface IProfilo {
 	public boolean rimuoviPost(Post p);
 	
 	
-    public Post cercaPost(Post p)throws PostNonVisibile, FotoProfiloNonAncoraImpostata;
+    public Post cercaPost(Post p)throws PostNonVisibile, PostNonPresente;
 	
 
 	public ArrayList<Post> selectAllPost(TipoPost t);

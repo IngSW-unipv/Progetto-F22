@@ -333,7 +333,7 @@ public class Controller {
                 
                 try {
 					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
-				} catch (FotoProfiloNonAncoraImpostata| PostNonVisibile e1) {
+				} catch (PostNonPresente| PostNonVisibile e1) {
 					 f.setPercorso("immagini/images.png"); 
 				}
                 
@@ -355,7 +355,7 @@ public class Controller {
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonPresente e1) {
 					e1.printStackTrace();
 				}
             	try {
@@ -384,7 +384,7 @@ public class Controller {
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonPresente e1) {
 				} 
             	try {
 
@@ -411,7 +411,7 @@ public class Controller {
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonPresente e1) {
 					e1.printStackTrace();
 				}
             	try {
@@ -441,7 +441,7 @@ public class Controller {
                 try {
 					try {
 						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + view.getContatoreFoto())));
-					} catch (FotoProfiloNonAncoraImpostata e1) {
+					} catch (PostNonPresente e1) {
 						e1.printStackTrace();
 					}
 				} catch (PostNonVisibile e1) {
@@ -476,7 +476,7 @@ public class Controller {
                     try {
     					try {
 							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + view.getContatoreFoto())));
-						} catch (FotoProfiloNonAncoraImpostata e1) {
+						} catch (PostNonPresente e1) {
 							e1.printStackTrace();
 						}
     				} catch (PostNonVisibile e1) {
@@ -512,7 +512,7 @@ public class Controller {
                     try {
     					try {
 							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + view.getContatoreFoto())));
-						} catch (FotoProfiloNonAncoraImpostata e1) {
+						} catch (PostNonPresente e1) {
 							e1.printStackTrace();
 						}
     				} catch (PostNonVisibile e1) {
@@ -541,7 +541,7 @@ public class Controller {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
         			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(0), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
@@ -565,7 +565,7 @@ public class Controller {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
         			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(2), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
@@ -588,7 +588,7 @@ public class Controller {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
         			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(4), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
@@ -779,7 +779,7 @@ public class Controller {
                 	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo())).getPercorso();
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
-				} catch (FotoProfiloNonAncoraImpostata e2) {
+				} catch (PostNonPresente e2) {
 					 percorsoFotoProfilo = "immagini/images.png";
 					e2.printStackTrace();
 				}
@@ -1281,7 +1281,7 @@ public class Controller {
         
         try {
     	   fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
-        } catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e1) {
+        } catch (PostNonVisibile | PostNonPresente e1) {
     	   fotoProfiloPercorso = "immagini/images.png";
         } 
         try {
@@ -1350,7 +1350,7 @@ public class Controller {
 		
 		try {
 			percorsoPost = model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(indicePost))).getPercorso();
-		} catch(PostNonVisibile | FotoProfiloNonAncoraImpostata e) {
+		} catch(PostNonVisibile | PostNonPresente e) {
 			e.printStackTrace();
 			System.out.println("Post home non caricato");
 		}
