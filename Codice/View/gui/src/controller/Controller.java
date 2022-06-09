@@ -33,6 +33,7 @@ public class Controller {
     Sistema model;
     
     private String schermataAttuale = "Login";
+    private String gruppoAttuale = "";
     private int postAttuale = -1,basePostAttuale = 0;
     private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
@@ -1095,7 +1096,7 @@ public class Controller {
     		@Override
     		public void actionPerformed(ActionEvent e) {
     			String messaggio = view.getScriviMessaggioGruppo().getText();
-    			//model.getProfiloAttivo().scriviMessaggioGruppo(messaggio);
+    			model.getProfiloAttivo().scriviMessaggioGruppo(messaggio,  gruppoAttuale );
     		}
     	};
     	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
@@ -1355,6 +1356,7 @@ public class Controller {
 		return percorsoPost;
 	}
 	private void settaSchermataGruppo(Gruppo g) {
+		this.gruppoAttuale = g.getIdGruppo();
 		view.getDescrizioneGroupe().setText(g.getDescrizione());
 	}
 }

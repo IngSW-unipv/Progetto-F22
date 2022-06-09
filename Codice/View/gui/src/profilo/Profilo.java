@@ -238,8 +238,6 @@ public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExis
 		follower --;
 		dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
 		dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
-		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito.getIdProfilo());
-		System.out.println("Hai smesso di seguire l'account : " + profiloSeguito);
 		return true;
 	}
 	throw new AzioneNonConsentita();
@@ -354,7 +352,6 @@ public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, Ti
 
 //Post
 	public void creaPost(Foto f) {
-		System.out.println(3);
 
 		dbfacade.carica(f);
 	}
@@ -838,8 +835,16 @@ public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo
 	return false;
 }
 
-public void scriviMessaggioGruppo(String testo, String idGruppo) {
-	   MessaggioDiGruppo m = new MessaggioDiGruppo(null, testo, this.getIdProfilo(), idGruppo);
+	public void scriviMessaggioGruppo(String testo, String idGruppo) {
+		MessaggioDiGruppo m;
+		int idMessaggioInt = (int)Math.round(Math.random() * 1000);
+		String idMessaggio = "M" + Integer.toString(idMessaggioInt);
+		m = new MessaggioDiGruppo(idMessaggio,testo, this.getIdProfilo(), idGruppo);
+		
+		if(dbfacade.cerca(new MessaggioDiGruppo(idMessaggio)) != null) {
+			scriviMessaggioGruppo(testo, idGruppo);
+		}
+		dbfacade.carica(m);
 	}
 }
 

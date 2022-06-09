@@ -26,7 +26,6 @@ public class ChatDiGruppoFrame extends JPanel {
     private AreaDiTesto descrizione;
     private InserimentoTesto aggiungi, rimuovi, scriviMessaggio;
     private Pulsanti rimuoviUtente, aggiungiUtente, invia, home;
-
     public ChatDiGruppoFrame() {
         avvio();
         initComponents();
