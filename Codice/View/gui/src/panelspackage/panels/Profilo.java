@@ -215,10 +215,14 @@ public class  Profilo extends JPanel {
 		}
 	}
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
+
 		if(postSondaggioDelProfilo.size()/2 < 3)  {
-			for (int i = 0; i < postSondaggioDelProfilo.size(); i++) {
-		
-			ListaSondaggi.get(i).setText("");
+			int i;
+			for ( i = 0; i < postSondaggioDelProfilo.size()/2 ; i++) {
+				ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
+			}
+			for (int j = i; j < 3; j++) {
+			ListaSondaggi.get(j).setText("");
 			}
 		} else
 		for (int i = 0; i < 3 ; i++) {

@@ -14,6 +14,12 @@ public class SondaggioSceltaMultipla extends Sondaggio{
 
 	}
 
+	public SondaggioSceltaMultipla(String idSondaggio) {
+		super(idSondaggio);
+		this.terzaScelta = null;
+		this.quartaScelta = null;
+	}
+
 	private String terzaScelta;
 	private String quartaScelta;
 	

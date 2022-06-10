@@ -137,5 +137,7 @@ public interface IProfilo {
 	boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1, String profilo2, String profilo3,
 			String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo)
 			throws AccountDoesNotExist;
+	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta)
+			throws TastoNonEsistente, PostNonVisibile, PostNonPresente;
 }
 

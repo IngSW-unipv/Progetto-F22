@@ -25,11 +25,11 @@ package panelspackage.panels;
         private AreaCommenti areaCommenti;
         private AreaDiTesto aggiungiCommento;
         private JButton homePostVisualizzato,nextCommento, prevCommento;
-        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta,pulsanteSecondaScelta,pulsanteTerzaScelta,pulsanteQuartaScelta;
+        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteSecondaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteTerzaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteQuartaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
         private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
         private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
         private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
-        private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg");
+        private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg"), etichettaPrimoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaSecondoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaTerzoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaQuartoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO);
         int numeroMiPiace = 10, numeroNonMiPiace = 20, numeroComm = 3;
         
         public PostVisualizzato() {
@@ -115,6 +115,25 @@ package panelspackage.panels;
             
             homePostVisualizzato = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO);
             containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
+            
+            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "", 10, 20);
+            aggiungiCommento.setEditable(false);
+            JScrollPane scrollCommento2 = new JScrollPane(aggiungiCommento);
+            containerSondaggio = new SpecificContainer();
+            containerSondaggio.add(scrollCommento2, BorderLayout.CENTER);
+            
+            SpecificContainer containerScelte = new SpecificContainer();
+            containerScelte.setLayout(new GridLayout(4, 2));
+            
+            containerScelte.add(pulsantePrimaScelta);
+            containerScelte.add(etichettaPrimoRisultato);
+            containerScelte.add(pulsanteSecondaScelta);
+            containerScelte.add(etichettaSecondoRisultato);
+            containerScelte.add(pulsanteTerzaScelta);
+            containerScelte.add(etichettaTerzoRisultato);
+            containerScelte.add(pulsanteQuartaScelta);
+            containerScelte.add(etichettaQuartoRisultato);
+            containerSondaggio.add(containerScelte, BorderLayout.EAST);
     
         }
         
@@ -160,22 +179,20 @@ package panelspackage.panels;
             settaCommenti(commenti);
             idPost = iDpost;
             
-            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, descrizionePost, 10, 20);
-            aggiungiCommento.setEditable(false);
-            JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
-            containerSondaggio = new SpecificContainer();
-            containerSondaggio.add(scrollCommento, BorderLayout.CENTER);
+           
+
             
-            SpecificContainer containerScelte = new SpecificContainer();
-            containerScelte.setLayout(new GridLayout(4, 1));
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText(scelta3);
+            pulsanteQuartaScelta.setText(scelta4);
             
-            containerScelte.add( pulsantePrimaScelta = new Pulsanti(scelta1, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteSecondaScelta = new Pulsanti(scelta2, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteTerzaScelta = new Pulsanti(scelta3, Frame.COLOREPRIMARIOTEMATICO));
-            containerScelte.add( pulsanteQuartaScelta = new Pulsanti(scelta4, Frame.COLOREPRIMARIOTEMATICO));
-            
-            containerSondaggio.add(containerScelte, BorderLayout.EAST);
-            
+            etichettaPrimoRisultato.setText("fes");
+            etichettaSecondoRisultato.setText("fis");
+            etichettaTerzoRisultato.setText("p3");
+            etichettaQuartoRisultato.setText("fs");
+            aggiungiCommento.setText(descrizionePost);
+
             containerPost.setVisible(false);
             containerCenter.add(containerSondaggio, BorderLayout.CENTER);
             containerSondaggio.setVisible(true);

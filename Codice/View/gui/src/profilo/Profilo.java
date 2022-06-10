@@ -487,13 +487,13 @@ public boolean modificaVisibilita(Post p, boolean b) {
 }
 
 @Override
-public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
-	if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), s.getIdPost()) == false) {
+public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta) throws TastoNonEsistente, PostNonVisibile, PostNonPresente{
+		SondaggioSceltaMultipla s = (SondaggioSceltaMultipla)cercaPost(new SondaggioSceltaMultipla(idSondaggio));
+		if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), s.getIdPost()) == false) {
 		SondaggioDoppiaVotazione res = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
-		System.out.println("Inserisci il numero corrispondente alla tua scelta : \n" + "1 = " + res.getPrimaScelta() + "\n" + "2 = " + res.getSecondaScelta());
 	    Scanner scanner = new Scanner(System.in);
         int a = scanner.nextInt(); 
-        switch(a) {
+        switch(scelta) {
         case 1 : int i1 = dbfacade.vediCount1SDV(s);
                  i1 = i1 + 1;
                  dbfacade.modificaCount1SDV(s, i1);
@@ -544,7 +544,6 @@ public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
         scanner.close();
         return true;
 	}
-	System.out.println("Hai gia' votato a questo sondaggio");
 	return false;
 }
 
@@ -552,15 +551,9 @@ public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente{
 public void vediRisultatiSondaggio(Sondaggio s) {
 	if(s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 		SondaggioDoppiaVotazione sdv = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
-		System.out.println("L'opzione " + sdv.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SDV(s) + " voti\n"
-				+ "L'opzione " + sdv.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n");
 	}
 	else if(s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 		SondaggioSceltaMultipla ssm = (SondaggioSceltaMultipla) dbfacade.cerca(s);
-		System.out.println("L'opzione " + ssm.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SSM(s) + " voti\n"
-				+ "L'opzione " + ssm.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n"
-				+ "L'opzione " + ssm.getTerzaScelta() + " ha totalizzato " + dbfacade.vediCount3SSM(s) + " voti\n"
-				+ "L'opzione " + ssm.getQuartaScelta() + " ha totalizzato " + dbfacade.vediCount4SSM(s) + " voti\n");
 	}
 	
 }
@@ -850,6 +843,12 @@ public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo
 	
 	public ArrayList<String> caricaMessaggiChatGruppoConProfiloInviante(String idGruppo) {
 		return dbfacade.caricaMessaggiChatGruppoConProfiloInviante(idGruppo);
+	}
+
+	@Override
+	public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
 

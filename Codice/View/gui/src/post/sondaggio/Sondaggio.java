@@ -12,6 +12,11 @@ public abstract class Sondaggio extends Post{
 		this.secondaScelta = secondaScelta;
 
 	}
+	public Sondaggio(String idSondaggio) {
+		super(idSondaggio);
+		this.primaScelta = null;
+		this.secondaScelta = null;
+	}
 	private String primaScelta;
 	private String secondaScelta;
   

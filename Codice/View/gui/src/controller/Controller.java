@@ -981,33 +981,49 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   System.out.println("Prima scelta");
+    		   try {
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1);
+   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   			}
     	   }
        };
-       //view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
+       view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
        
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   System.out.println("Seconda scelta");
+    		   try {
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2);
+   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   			}
     	   }
        };
-       //view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
+       view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
        
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   System.out.println("Terza scelta");
+    		   try {
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3);
+   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   			}
     	   }
        };
-       //view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
+       view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
        
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Quarta scelta");
+    		   System.out.println("siamo in controller: " + view.getPostVisualizzato().getIdPost());
+    		   try {
+				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4);
+			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+			}
     	   }
        };
-       //view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
+       view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
        
     }
     
