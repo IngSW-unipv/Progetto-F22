@@ -1,3 +1,7 @@
+/.DS_Store
+/Messaggio/
+/Sistema/
+/chat/
 /controller/
 /convertitore/
 /db/
@@ -6,4 +10,3 @@
 /post/
 /profilo/
 /test/
-/Sistema/

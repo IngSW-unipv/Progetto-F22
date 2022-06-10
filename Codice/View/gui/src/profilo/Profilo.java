@@ -560,12 +560,7 @@ public class Profilo implements IProfilo {
 
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
-		ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(idProfilo));
-		for(int i = 0; i < res.size(); i++) {
-		res.get(i);
-		}
-		return res;
-	/*
+	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(idProfilo));
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
 	ArrayList<Post> search = new ArrayList<>();
@@ -592,7 +587,7 @@ public class Profilo implements IProfilo {
 		}
 	} 
 		return risultato;
-    */
+    
 }
 
 	@Override
