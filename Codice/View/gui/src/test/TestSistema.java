@@ -62,25 +62,12 @@ class TestSistema {
 	 		
 	 	} 
 	}
-	@Test
-	void testCambioPassword() {
-		boolean esito;
-		try {
-			esito = sistema.cambiaPassword("lasabrigamer@unipv.it", "lasabri", "cavallo");
-			assertTrue(esito);
-	 	} catch (ChangeDefaultPassword e) {
-		 	e.printStackTrace();
-	 	} catch (AccountDoesNotExist e) {
-		 	e.printStackTrace();
-	 	}
-		
-	}
-	
+
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		try {
 			try {
-				sistema.rimuoviAccount(new Profilo("FavijTv@unipv.it"));
+				sistema.getProfiloAttivo.rimuoviAccount(new Profilo("FavijTv@unipv.it"));
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

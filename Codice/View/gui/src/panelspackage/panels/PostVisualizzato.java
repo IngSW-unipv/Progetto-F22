@@ -23,7 +23,7 @@ package panelspackage.panels;
         private String messaggioBottoneSuperioreProfilo = "Imposta come immagine profilo";
         private JTextArea areaDescrizione;
         private AreaCommenti areaCommenti;
-        private AreaDiTesto aggiungiCommento;
+        private AreaDiTesto aggiungiCommento, descrizionePost;
         private JButton homePostVisualizzato,nextCommento, prevCommento;
         private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteSecondaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteTerzaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteQuartaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
         private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
@@ -116,11 +116,12 @@ package panelspackage.panels;
             homePostVisualizzato = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO);
             containerSouth.add(homePostVisualizzato, BorderLayout.CENTER);
             
-            aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "", 10, 20);
-            aggiungiCommento.setEditable(false);
-            JScrollPane scrollCommento2 = new JScrollPane(aggiungiCommento);
+            
+            descrizionePost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "", 10, 20);
+            descrizionePost.setEditable(false);
+            JScrollPane scrollDescrizionePost = new JScrollPane(descrizionePost);
             containerSondaggio = new SpecificContainer();
-            containerSondaggio.add(scrollCommento2, BorderLayout.CENTER);
+            containerSondaggio.add(scrollDescrizionePost, BorderLayout.CENTER);
             
             SpecificContainer containerScelte = new SpecificContainer();
             containerScelte.setLayout(new GridLayout(4, 2));
@@ -172,16 +173,13 @@ package panelspackage.panels;
             containerPost.setVisible(true);
             impostaImmagineProfiloButton.setVisible(true);
         }
-        public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
             numeroMiPiace = numeroLike;
             numeroNonMiPiace = numeroDislike;
             numeroComm = numeroCommenti;
             settaCommenti(commenti);
             idPost = iDpost;
-            
-           
-
-            
+              
             pulsantePrimaScelta.setText(scelta1);
             pulsanteSecondaScelta.setText(scelta2);
             pulsanteTerzaScelta.setText(scelta3);
@@ -191,13 +189,12 @@ package panelspackage.panels;
             etichettaSecondoRisultato.setText("fis");
             etichettaTerzoRisultato.setText("p3");
             etichettaQuartoRisultato.setText("fs");
-            aggiungiCommento.setText(descrizionePost);
+            descrizionePost.setText(descrizioneSondaggio);
 
             containerPost.setVisible(false);
             containerCenter.add(containerSondaggio, BorderLayout.CENTER);
             containerSondaggio.setVisible(true);
             impostaImmagineProfiloButton.setVisible(false);
-
         }
         
         

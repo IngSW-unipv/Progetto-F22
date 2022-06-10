@@ -45,7 +45,5 @@ public class TestSistema {
 			e.printStackTrace();
 		}
 	
-		
-		s.pubblicaTesto("testo di prova", false, null, null, null);
 	}
 }

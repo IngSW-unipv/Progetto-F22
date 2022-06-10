@@ -766,10 +766,9 @@ public class Controller {
                 int numSeguiti = model.getProfiloCercato().getNumSeguiti();
                 String idProfilo = model.getProfiloCercato().getIdProfilo();
                 String percorsoFotoProfilo = null;
-                System.out.println("prilo cerccat : " + idProfilo);
-                postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
-                percorsiPostTesto = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-                percorsiPostSondaggio = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+                postDelProfilo = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
+                percorsiPostTesto = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
+                percorsiPostSondaggio = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
                 
             
                 try {
@@ -955,9 +954,9 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) { 
  
-    			   view.incrementaIndiceCommento();
-    			   view.settaCommenti(commentiConProfiliIinvianti);
-    			   refresh();
+    		   view.incrementaIndiceCommento();
+    		   view.settaCommenti(commentiConProfiliIinvianti);
+    		   refresh();
     	   }
        };
        view.getNextCommento().addActionListener(gestoreNextCommento);
@@ -966,10 +965,10 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   
-    			   view.decrementaIndiceCommento();
-    			   view.settaCommenti(commentiConProfiliIinvianti);
-    			   refresh();
-    		   
+    		   view.decrementaIndiceCommento();
+    		   view.settaCommenti(commentiConProfiliIinvianti);
+    		   refresh();
+    		
     	   }
        };
        view.getPrevCommento().addActionListener(gestorePrevCommento);    
@@ -977,11 +976,10 @@ public class Controller {
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Prima scelta");
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1);
-   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
-   			}
+   					} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   				}
     	   }
        };
        view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
@@ -989,7 +987,6 @@ public class Controller {
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Seconda scelta");
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2);
    			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
@@ -1001,7 +998,6 @@ public class Controller {
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("Terza scelta");
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3);
    			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
@@ -1013,7 +1009,6 @@ public class Controller {
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   System.out.println("siamo in controller: " + view.getPostVisualizzato().getIdPost());
     		   try {
 				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4);
 			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
@@ -1285,10 +1280,10 @@ public class Controller {
         int numFollower = model.getProfiloAttivo().getNumFollower();
         int numSeguiti = model.getProfiloAttivo().getNumSeguiti();
         String idProfilo = model.getProfiloAttivo().getIdProfilo();
-        postDelProfilo = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
-        percorsiPostTesto = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-        percorsiPostSondaggio = model.caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
-        
+        postDelProfilo = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
+        percorsiPostTesto = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
+        percorsiPostSondaggio = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+
     
         String fotoProfiloPercorso = null;
         

@@ -64,11 +64,7 @@ public class Sistema {
 		  setProfiloCercato(dbfacade.cerca(new Profilo(idDaCercare)));
 		  //chatCercata = dbfacade.cerca(new chatDiGruppo);
 	  }
-	 
-	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo, TipoPost tipoPost) {	 
-		return profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), tipoPost);
-	 }
-	 
+
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
 		 Profilo p = new Profilo(email,null);

@@ -926,7 +926,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 				dbfacade.inserisciPartecipante6(idProfilo, g);
 			}
 		}
-		//aggiungere exception gruppo già pieno
+		//aggiungere exception gruppo giï¿½ pieno
 		return false;
 		
 	}
