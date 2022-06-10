@@ -295,11 +295,16 @@ public class Profilo implements IProfilo {
 			 }, 0,  1000 * 60 * 5);	
 		return true;
 	}
-	public ArrayList<Messaggio> cercaMessaggiChatPrivata(String inviante, String ricevente) {
-			ArrayList<Messaggio> messaggi = dbfacade.caricaMessaggiChatPrivata(inviante, ricevente);
-	 return messaggi;
+	public ArrayList<String> cercaMessaggiChatPrivata(String inviante, String ricevente) {
+		ArrayList<Messaggio> listaMessaggi = dbfacade.caricaMessaggiChatPrivata(inviante, ricevente);
+		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
+		
+		for(int i = 0; i < listaMessaggi.size(); i++) {
+			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getProfiloInviante());
+			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getTesto());
+		}
+		return listaTestoEProfiloInviante;
 	}
-
 
 	@Override
 	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t){
@@ -531,8 +536,8 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
-		return dbfacade.modificaImmagineProfilo(p, immagine);
+	public boolean cambiaImmagineProfilo(String immagine) {
+		return dbfacade.modificaImmagineProfilo(new Profilo(this.getIdProfilo()), immagine);
 	}
 
 	@Override
@@ -828,6 +833,45 @@ public class Profilo implements IProfilo {
 		 }
 		dbfacade.carica(p);
 	}
+	 
+	public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
+			
+		SondaggioDoppiaVotazione s;
+		String idPost = "S" + Integer.toString((int)Math.round(Math.random() * 1000));
+		 		
+		 s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
+		 		
+		 if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost)) != null) {
+		 	pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
+		 	}
+		 	dbfacade.carica(s);
+		}
+	
+	public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
+		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
+				
+		SondaggioSceltaMultipla s;
+		String idPost = "S" + Integer.toString((int)Math.round(Math.random() * 1000));
+		 		
+		 s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
+		 		
+		 if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
+		 	pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
+		 }
+		dbfacade.carica(s);
+	}
+	public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
+		
+		String idPost = "T" + Integer.toString((int)Math.round(Math.random() * 1000));
+	 		
+	 	Testo t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
+	 		
+	 	if(dbfacade.cerca(new Testo(idPost)) != null) {
+	 		pubblicaTesto(descrizione, visibile, profilo, font, titolo);
+	 	}
+	 	dbfacade.carica(t);
+	}
+	
 }
 
 	

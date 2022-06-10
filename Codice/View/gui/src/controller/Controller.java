@@ -356,12 +356,7 @@ public class Controller {
 				} catch (PostNonPresente e1) {
 					e1.printStackTrace();
 				}
-            	try {
-            		System.out.println(t.getIdPost());
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
+            	commentiConProfiliIinvianti = model.getProfiloAttivo().selectAllCommentiSottoPost(t.getIdPost());
 
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
@@ -913,7 +908,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	String iDNuovaFotoProfilo = ((PostVisualizzato)view.mappaSchermate.get("Postvisualizzato")).getIdPost();
-                model.impostaFotoProfilo(iDNuovaFotoProfilo);
+                model.getProfiloAttivo().cambiaImmagineProfilo(iDNuovaFotoProfilo);
                 model.getProfiloAttivo().setFotoProfilo(iDNuovaFotoProfilo);
             }
         };
@@ -1203,12 +1198,12 @@ public class Controller {
             }
         }
         else if(getPostAttuale() == 1) {
-        	model.pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
+        	model.getProfiloAttivo().pubblicaTesto(commentoPost, false, model.getProfiloAttivo().getIdProfilo(), null, null);
         }
         else if(getPostAttuale() == 2) {
         	String scelta1 = view.getPrimaScelta().getText();
         	String scelta2 = view.getSecondaScelta().getText();
-        	model.pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2);
+        	model.getProfiloAttivo().pubblicaSondaggioDoppiaVotazione(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2);
         }
         
         else if (getPostAttuale() == 3) {
@@ -1216,7 +1211,7 @@ public class Controller {
         	String scelta2 = view.getSecondaScelta().getText();
         	String scelta3 = view.getTerzaScelta().getText();
         	String scelta4 = view.getQuartaScelta().getText();
-        	model.pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, scelta3, scelta4);
+        	model.getProfiloAttivo().pubblicaSondaggioSceltaMultipla(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), scelta1, scelta2, scelta3, scelta4);
         }
     }
     
@@ -1228,7 +1223,7 @@ public class Controller {
     	String percorsoFilePost = view.ottieniPercorsoFile();
     	Foto f = new Foto(idPost, commentoPost, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, true);
     	
-    	model.pubblicaStory(24, f);
+    	model.getProfiloAttivo().pubblicaStoria(24, f);
     }
 
 

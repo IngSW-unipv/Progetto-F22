@@ -87,58 +87,6 @@ public class Sistema {
 	 	else
 	 	    throw new AccountDoesNotExist(email);
 	 }
-	 
-
-	public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
-		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
-			
-		SondaggioSceltaMultipla s;
-	 	int idPostInt = (int)Math.round(Math.random() * 1000);
-	 	String idPost = "S" + Integer.toString(idPostInt);
-	 		
-	 	s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
-	 		
-	 	if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
-	        System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
-	 		pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
-	 		}
-        System.out.println(s.getPrimaScelta() + s.getSecondaScelta() + s.getTerzaScelta() + s.getQuartaScelta());
-
-	 	profiloAttivo.creaPost(s);
-		}
-		
-	public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
-			
-		SondaggioDoppiaVotazione s;
-	 	int idPostInt = (int)Math.round(Math.random() * 1000);
-	 	String idPost = "S" + Integer.toString(idPostInt);
-	 		
-	 	s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
-	 		
-	 	if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null)) != null) {
-	 		pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
-	 		}
-	 		
-	 	profiloAttivo.creaPost(s);
-		}
-		
-	public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
-			
-		Testo t;
-		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 	String idPost = "T" + Integer.toString(idPostInt);
-	 		
-	 	t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
-	 		
-	 	if(dbfacade.cerca(new Testo(idPost, null, false, null, null, null)) != null) {
-	 		pubblicaTesto(descrizione, visibile, profilo, font, titolo);
-	 	}
-	 		dbfacade.carica(t);
-		}
-		
-	public void pubblicaStory(int time, Multimedia f) {
-		profiloAttivo.pubblicaStoria(time, f);
-	}
 
 	public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
 		ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
@@ -161,7 +109,6 @@ public class Sistema {
 
  		if(dbfacade.cerca(new MessaggioPrivato(idMessaggio)) != null) {
  			scriviMessaggio(testo, multimediale, inviante, ricevente);
- 			System.out.println(testo);
  		}
  		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
 	}
@@ -176,10 +123,7 @@ public class Sistema {
 		}
 		return listaTestoEProfiloInviante;
 	}
-	public void impostaFotoProfilo(String fotoPath) {
-		profiloAttivo.cambiaImmagineProfilo(this.getProfiloAttivo(), fotoPath);
-	}
-	
+
 	public void carica(String idProfilo, String descrizione) {
 		 profiloAttivo.modificaDescrizione(profiloAttivo, descrizione);
 	 }
