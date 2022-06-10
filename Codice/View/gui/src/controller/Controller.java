@@ -11,6 +11,7 @@ import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
+import profilo.Profilo;
 import profilo.exception.*;
 
 public class Controller {
@@ -35,7 +36,6 @@ public class Controller {
     private String schermataAttuale = "Login";
     private String gruppoAttuale = "";
     private int postAttuale = -1,basePostAttuale = 0;
-    private String tipoPostDaPubblicare = null;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
     private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
@@ -114,7 +114,6 @@ public class Controller {
         gestoreRegistrati = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//mostraSchermata("ChatDiGruppoFrame");
                 if (signUp()) {
                     mostraSchermata("Home");
                 }
@@ -135,7 +134,6 @@ public class Controller {
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("fknskjesfs");
             }
         };
         view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
@@ -1368,17 +1366,15 @@ public class Controller {
 			percorsoPost = model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(indicePost))).getPercorso();
 		} catch(PostNonVisibile | PostNonPresente e) {
 			e.printStackTrace();
-			System.out.println("Post home non caricato");
 		}
 		
 		return percorsoPost;
 	}
-	private void settaSchermataGruppo(Gruppo g) {
+	public void settaSchermataGruppo(Gruppo g) {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.getDescrizioneGroupe().setText(g.getDescrizione());
 		messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
 		for(int i=0; i <messaggiInviatiGruppoConInviante.size(); i++ ) {
-			System.out.println(messaggiInviatiGruppoConInviante.get(i));
 		}
 	}
 }
