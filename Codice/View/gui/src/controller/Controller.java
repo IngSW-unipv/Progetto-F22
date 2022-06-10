@@ -1268,7 +1268,8 @@ public class Controller {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
-    	model.carica(idProfilo, idPost, commentoDaAggiungere);
+    	System.out.println("siamo in controller: " +  commentoDaAggiungere);
+    	model.getProfiloAttivo().pubblicaCommento(idProfilo, idPost, commentoDaAggiungere);
     }
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {

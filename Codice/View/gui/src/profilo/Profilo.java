@@ -27,6 +27,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.ChangeDefaultPassword;
 import profilo.exception.FollowYourself;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
@@ -620,7 +621,14 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public boolean pubblicaCommento(Commento c) {
+	public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento) {
+		Commento c;
+		String idCommento = Integer.toString((int)Math.round(Math.random() * 1000));
+	 		c = new Commento(idCommento, idProfilo, idPost, testoCommento);
+	 		if(dbfacade.cerca(c) != null) {
+	 			pubblicaCommento(idProfilo, idPost, testoCommento);
+	 		}
+	 		System.out.println(c.toString());
 		return dbfacade.carica(c);
 	}
 
@@ -768,8 +776,52 @@ public class Profilo implements IProfilo {
 	public ArrayList<String> caricaMessaggiChatGruppoConProfiloInviante(String idGruppo) {
 		return dbfacade.caricaMessaggiChatGruppoConProfiloInviante(idGruppo);
 	}
-}
 
+	@Override
+	public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public boolean cambiaDefaultPassword (String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
+		Profilo p = new Profilo(this.getIdProfilo(), null);
+	 	String s = dbfacade.vediPsw(this.getIdProfilo());
+
+	 	if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(this.getIdProfilo()) == true) {
+	 		if(s.equals("Cambiami") && nuovaPsw != "Cambiami") {
+	 			dbfacade.modificaPsw(this.getIdProfilo(), nuovaPsw);
+	 			dbfacade.modificaPswCambiata(this.getIdProfilo(), true);
+	 			return true;
+	 		}
+	 		throw new ChangeDefaultPassword("Cambiami");
+	 	}else
+	 		throw new AccountDoesNotExist(this.getIdProfilo());
+		}
+
+	public boolean cambiaPassword(String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, AccountDoesNotExist {
+		
+		Profilo p = new Profilo(this.getIdProfilo());
+		String s = dbfacade.vediPsw(this.getIdProfilo());
+
+		if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(this.getIdProfilo()) == true) {
+
+		    if(dbfacade.vediPswCambiata(this.getIdProfilo()) == false)
+			   throw new ChangeDefaultPassword("Cambiami");
+
+		    else if(s.equals(vecchiaPassword)) {
+		    	dbfacade.modificaPsw(this.getIdProfilo(), nuovaPassword);
+		    		return true;
+		    }
+		}
+		else
+		    throw new AccountDoesNotExist(this.getIdProfilo());
+		return false;	
+	}
+	
+	public boolean rimuoviQuestoProfilo() {
+	 	return dbfacade.rimuovi(new Profilo(this.getIdProfilo()));
+	 }		
+}
 
 	
 

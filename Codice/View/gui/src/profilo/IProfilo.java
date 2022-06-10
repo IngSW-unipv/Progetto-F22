@@ -69,7 +69,6 @@ public interface IProfilo {
 	public String vediDescrizione(Profilo p);
 	public boolean modificaDescrizione(Profilo p, String n);
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
-    public boolean pubblicaCommento(Commento c);
     public boolean rimuoviCommento(Commento c);
 	public Commento cercaCommento(Commento c);
 	public ArrayList<String> ProfiloNickCommento(Profilo p);
@@ -95,5 +94,6 @@ public interface IProfilo {
 			throws AccountDoesNotExist;
 	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta)
 			throws TastoNonEsistente, PostNonVisibile, PostNonPresente;
+	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento);
 }
 
