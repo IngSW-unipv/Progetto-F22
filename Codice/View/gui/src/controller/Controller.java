@@ -1199,7 +1199,7 @@ public class Controller {
         if(getPostAttuale() == 0) {
             String percorsoFilePost = view.ottieniPercorsoFile();
             if (percorsoFilePost != null) {
-            model.pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+            model.getProfiloAttivo().pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
             }
         }
         else if(getPostAttuale() == 1) {
@@ -1268,7 +1268,6 @@ public class Controller {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
-    	System.out.println("siamo in controller: " +  commentoDaAggiungere);
     	model.getProfiloAttivo().pubblicaCommento(idProfilo, idPost, commentoDaAggiungere);
     }
     

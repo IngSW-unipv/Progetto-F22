@@ -328,10 +328,6 @@ public class Profilo implements IProfilo {
 		dbfacade.carica(s);
 	}
 	
-	public void creaPost(Testo t) {
-		dbfacade.carica(t);
-	}
-	
 	@Override
 	public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
 		Foto f = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
@@ -634,13 +630,13 @@ public class Profilo implements IProfilo {
 
 
 	@Override
-	public boolean rimuoviCommento(Commento c)  {
-		return dbfacade.rimuovi(c);
+	public boolean rimuoviCommento(String idCommento)  {
+		return dbfacade.rimuovi(new Commento(idCommento));
 	}
 
 	@Override
-	public Commento cercaCommento(Commento c) {
-		return dbfacade.cerca(c);
+	public Commento cercaCommento(String idCommento) {
+		return dbfacade.cerca(new Commento(idCommento));
 	}
 
 	@Override
@@ -650,8 +646,8 @@ public class Profilo implements IProfilo {
 
 	public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
 		Gruppo g;
-		int idGruppoInt = (int)Math.round(Math.random() * 1000);
-		String idGruppo = Integer.toString(idGruppoInt);
+		String idGruppo  = Integer.toString((int)Math.round(Math.random() * 1000));
+		
 		g = new Gruppo(idGruppo);
 		if(dbfacade.cerca(g) != null) {
 			creaGruppo(descrizione, nomeGruppo, profilo1,profilo2,profilo3,profilo4,profilo5,profilo6, amministratore, fotoGruppo);
@@ -821,6 +817,17 @@ public class Profilo implements IProfilo {
 	public boolean rimuoviQuestoProfilo() {
 	 	return dbfacade.rimuovi(new Profilo(this.getIdProfilo()));
 	 }		
+	
+	 public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+		 Foto p;
+		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
+		 p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
+		 		
+		 if(dbfacade.cerca(new Foto(idPost)) != null) {
+		 pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
+		 }
+		dbfacade.carica(p);
+	}
 }
 
 	

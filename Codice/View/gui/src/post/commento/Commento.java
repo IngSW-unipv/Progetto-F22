@@ -36,10 +36,10 @@ public class Commento {
 		this.testo = commento;
 		this.profilo = idProfilo;
 		this.idFoto = idPost;
-		this.idVideo = null;
-		this.idSDV = null;
-		this.idSSM = null;
-		this.idTesto = null;
+	}
+	
+	public Commento(String idCommento) {
+		this.idCommento = idCommento;
 	}
 
 	private String idCommento;
