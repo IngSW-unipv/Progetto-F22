@@ -143,5 +143,10 @@ public class Sistema {
 	public void setProfiloConCuiSiStaChattando(Profilo profiloConCuiSiStaChattando) {
 		this.profiloConCuiSiStaChattando = profiloConCuiSiStaChattando;
 	}
+	
+	public void aggiungiPartecipante(String idGruppo, String idProfilo) {
+		profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo);
+	}
+
 }
 

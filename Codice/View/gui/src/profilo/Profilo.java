@@ -871,8 +871,66 @@ public class Profilo implements IProfilo {
 	 	}
 	 	dbfacade.carica(t);
 	}
-	
-	
+
+	@Override
+	public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean modificaDescrizione(Profilo p, String n) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Commento cercaCommento(Commento c) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean modificaDescrizione(String idProfilo, String n) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+@Override
+public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
+		
+		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
+		
+		if(g != null) {
+			if(g.getProfilo1() == null) {
+				dbfacade.inserisciPartecipante1(idProfilo, g);
+			}
+			else if(g.getProfilo2() == null) {
+				dbfacade.inserisciPartecipante2(idProfilo, g);
+			}
+			else if(g.getProfilo3() == null) {
+				dbfacade.inserisciPartecipante3(idProfilo, g);
+			}
+			else if(g.getProfilo4() == null) {
+				dbfacade.inserisciPartecipante4(idProfilo, g);
+			}
+			else if(g.getProfilo5() == null) {
+				dbfacade.inserisciPartecipante5(idProfilo, g);
+			}
+			else if(g.getProfilo6() == null) {
+				dbfacade.inserisciPartecipante6(idProfilo, g);
+			}
+		}
+		//aggiungere exception gruppo già pieno
+		return false;
+		
+	}
+
 }
 
 	

@@ -142,7 +142,31 @@ public class DbFacade implements IDbFacade{
 		ArrayList<String> listaGruppi = gDao.caricaGruppiProfilo(profilo);
 		return listaGruppi;
 	}
-		
+	@Override
+	public boolean inserisciPartecipante1(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante1(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	@Override
+	public boolean inserisciPartecipante2(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante2(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	@Override
+	public boolean inserisciPartecipante3(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante3(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	@Override
+	public boolean inserisciPartecipante4(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante4(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	@Override
+	public boolean inserisciPartecipante5(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante5(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	@Override
+	public boolean inserisciPartecipante6(String idProfilo, Gruppo g) {
+		return gDao.inserisciPartecipante6(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	}
+	
 	
 	//Messaggi
 	

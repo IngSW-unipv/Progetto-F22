@@ -30,7 +30,12 @@ public interface IDbFacade {
 	public boolean gestisciPartecipanti(Gruppo g);
     public Gruppo cerca(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
-	
+	boolean inserisciPartecipante1(String idProfilo, Gruppo g);
+	boolean inserisciPartecipante2(String idProfilo, Gruppo g);
+	boolean inserisciPartecipante3(String idProfilo, Gruppo g);
+	boolean inserisciPartecipante4(String idProfilo, Gruppo g);
+	boolean inserisciPartecipante5(String idProfilo, Gruppo g);
+	boolean inserisciPartecipante6(String idProfilo, Gruppo g);
 	
 	//Messaggi
 	
@@ -148,6 +153,7 @@ public interface IDbFacade {
 
 	//Ritorna true se l'account e' esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist ;
+	
 
 
 }

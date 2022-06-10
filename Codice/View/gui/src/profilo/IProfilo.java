@@ -99,5 +99,6 @@ public interface IProfilo {
 	boolean cambiaImmagineProfilo(String immagine);
 	boolean modificaDescrizione(String idProfilo, String n);
 	boolean modificaDescrizione(String n);
+	boolean aggiungiPartecipante(String idGruppo, String idProfilo);
 }
 

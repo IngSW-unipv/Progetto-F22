@@ -237,4 +237,156 @@ public ArrayList<String> caricaGruppiProfilo(String profilo) {
 	return result;
 }
 
+@Override
+public boolean inserisciPartecipante1(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo1=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+@Override
+public boolean inserisciPartecipante2(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo2=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+@Override
+public boolean inserisciPartecipante3(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo3=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+@Override
+public boolean inserisciPartecipante4(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo4=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+@Override
+public boolean inserisciPartecipante5(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo5=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+@Override
+public boolean inserisciPartecipante6(String idProfilo, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
+
+	try
+	{
+		String query="update gruppo set profilo6=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, idProfilo);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
+
+
 }
