@@ -38,7 +38,6 @@ public class Sistema {
 	        dbfacade.modificaEsiste(mail, true);
             this.getProfiloAttivo().cambiaDefaultPassword(password);
  			this.setProfiloAttivo(p);
-	    	System.out.println(this.getProfiloAttivo().getIdProfilo() + " dopo il cambiapassword");
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
@@ -112,17 +111,7 @@ public class Sistema {
  		}
  		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
 	}
-	
-	public ArrayList<String> cercaMessaggiChatPrivata(String inviante, String ricevente) {
-		ArrayList<Messaggio> listaMessaggi = profiloAttivo.cercaMessaggiChatPrivata(inviante, ricevente);
-		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
-		
-		for(int i = 0; i < listaMessaggi.size(); i++) {
-			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getProfiloInviante());
-			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getTesto());
-		}
-		return listaTestoEProfiloInviante;
-	}
+
 
 	public void carica(String idProfilo, String descrizione) {
 		 profiloAttivo.modificaDescrizione(profiloAttivo, descrizione);
