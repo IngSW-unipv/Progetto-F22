@@ -32,7 +32,6 @@ public class Sistema {
 	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
 		
-		
 	    if(dbfacade.cerca(p) == null) {
 	    	System.out.println(p.getIdProfilo() + 1);
 	        dbfacade.carica(p);
@@ -46,12 +45,10 @@ public class Sistema {
 	}
 	
 
-		public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
-			Profilo p = new Profilo(email, null);
-	 		String s = dbfacade.vediPsw(email);
+	public boolean cambiaDefaultPassword (String email, String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
+		Profilo p = new Profilo(email, null);
+	 	String s = dbfacade.vediPsw(email);
 
-        
-	 		//Se provo a cambiare psw ad un account che non esiste viene lanciata una eccezione
 	 	if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(email) == true) {
 	 		if(s.equals("Cambiami") && nuovaPsw != "Cambiami") {
 	 			dbfacade.modificaPsw(email, nuovaPsw);
@@ -86,7 +83,8 @@ public class Sistema {
 
     
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
-			if(dbfacade.vediPswCambiata(email) == false)
+			
+		if(dbfacade.vediPswCambiata(email) == false)
 	 			throw new ChangeDefaultPassword("Cambiami");
 	 		else if (dbfacade.vediEsiste(email) == false)
 	 			throw new AccountDoesNotExist(email);
@@ -99,13 +97,10 @@ public class Sistema {
 	 		}
 	 		throw new PswOmailErrati(email,psw);
 	 	}
-
-	
 	
 	 public boolean rimuoviAccount(Profilo p) {
 	 	return dbfacade.rimuovi(p);
 	 }
-	 
 	 
 	  public void carica(String idProfilo, String idPost, String commento) {
 		  
@@ -117,7 +112,6 @@ public class Sistema {
 	 			carica(idProfilo, idPost, commento);
 	 		}
 	 		profiloAttivo.pubblicaCommento(c);
-
 	  }
 	  
 	  public void ricerca(String idDaCercare) {
@@ -125,17 +119,14 @@ public class Sistema {
 		  //chatCercata = dbfacade.cerca(new chatDiGruppo);
 	  }
 	 
-	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo, TipoPost tipoPost) {
-		 
-		
-		ArrayList<String> idDeiPostDiUnProfilo = profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), tipoPost);
-		
-		return idDeiPostDiUnProfilo;
+	 public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo, TipoPost tipoPost) {	 
+		return profiloAttivo.caricaTuttiiPostDiUnProfilo(new Profilo(idProfilo), tipoPost);
 	 }
+	 
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
 		 Profilo p = new Profilo(email,null);
-	 		boolean b = dbfacade.vediSeLoggato(email);
+		 boolean b = dbfacade.vediSeLoggato(email);
 
 	 		if(dbfacade.cerca(p) != null && dbfacade.vediEsiste(email) == true) {
 	 			if(b == true) {
@@ -147,107 +138,101 @@ public class Sistema {
 	 			else 
 	 				return false;
 	 		}
-	 		
 	 	else
 	 	    throw new AccountDoesNotExist(email);
 	 }
 	 	
-
-	 	public ArrayList<Profilo> stampaTuttiIprofilo() {
+	 public ArrayList<Profilo> stampaTuttiIprofilo() {
 	 		ArrayList<Profilo> res = dbfacade.selectAllProfilo();
 	 		return res;
 	 	}
-	 	
-	 	
-	 	
 	 	/*public void pubblicaPost(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
 
 	 		profiloAttivo.creaPost(new Foto(idPost, dataPubblicazione, oraPubblicazione, descrizione, visibile, condivisibile, profilo, percorso, isHd));
 	 	}*/
 	 	
-	 	public void pubblicaTesto(String idPost,String descrizione, boolean visibile, String profilo, boolean isHd, String font, String titolo) {
-	 		profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, profilo, font, titolo));
+	 public void pubblicaTesto(String idPost,String descrizione, boolean visibile, String profilo, boolean isHd, String font, String titolo) {
+	 	profiloAttivo.creaPost(new Testo(idPost,descrizione, visibile, profilo, font, titolo));
 	 	}
 	 	
 	 	
-	 	public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
-	 		Foto p;
-	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = "F" + Integer.toString(idPostInt);
-	 		p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
+	 public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 	Foto p;
+	 	int idPostInt = (int)Math.round(Math.random() * 1000);
+	 	String idPost = "F" + Integer.toString(idPostInt);
+	 	p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
 	 		
-	 		if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
-	 			pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
-	 		}
-	 		profiloAttivo.creaPost(p);
+	 	if(dbfacade.cerca(new Foto(idPost, null, false, null, null, false)) != null) {
+	 		pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
 	 	}
+	 	profiloAttivo.creaPost(p);
+	 }
 
-		public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
-				String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
+	public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
+		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
 			
-			SondaggioSceltaMultipla s;
-	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = "S" + Integer.toString(idPostInt);
+		SondaggioSceltaMultipla s;
+	 	int idPostInt = (int)Math.round(Math.random() * 1000);
+	 	String idPost = "S" + Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
+	 	s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		
-	 		if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
-	        	System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
-	 			pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
+	 	if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
+	        System.out.println(primaScelta + secondaScelta + terzaScelta + quartaScelta);
+	 		pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 	 		}
-        	System.out.println(s.getPrimaScelta() + s.getSecondaScelta() + s.getTerzaScelta() + s.getQuartaScelta());
+        System.out.println(s.getPrimaScelta() + s.getSecondaScelta() + s.getTerzaScelta() + s.getQuartaScelta());
 
-	 		profiloAttivo.creaPost(s);
+	 	profiloAttivo.creaPost(s);
 		}
 		
-		public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
+	public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
 			
-			SondaggioDoppiaVotazione s;
-	 		int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = "S" + Integer.toString(idPostInt);
+		SondaggioDoppiaVotazione s;
+	 	int idPostInt = (int)Math.round(Math.random() * 1000);
+	 	String idPost = "S" + Integer.toString(idPostInt);
 	 		
-	 		s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
+	 	s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
 	 		
-	 		if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null)) != null) {
-	 			pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
-	 		}
-	 		
-	 		profiloAttivo.creaPost(s);
-		}
-		
-		public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
-			
-			Testo t;
-			int idPostInt = (int)Math.round(Math.random() * 1000);
-	 		String idPost = "T" + Integer.toString(idPostInt);
-	 		
-	 		t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
-	 		
-	 		if(dbfacade.cerca(new Testo(idPost, null, false, null, null, null)) != null) {
-	 			pubblicaTesto(descrizione, visibile, profilo, font, titolo);
+	 	if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost, null, false, null, null, null)) != null) {
+	 		pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
 	 		}
 	 		
-	 		profiloAttivo.creaPost(t);
+	 	profiloAttivo.creaPost(s);
 		}
 		
-		public void pubblicaStory(int time, Multimedia f) {
-			profiloAttivo.pubblicaStoria(time, f);
+	public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
+			
+		Testo t;
+		int idPostInt = (int)Math.round(Math.random() * 1000);
+	 	String idPost = "T" + Integer.toString(idPostInt);
+	 		
+	 	t = new Testo(idPost, descrizione, visibile, profilo, font, titolo);
+	 		
+	 	if(dbfacade.cerca(new Testo(idPost, null, false, null, null, null)) != null) {
+	 		pubblicaTesto(descrizione, visibile, profilo, font, titolo);
+	 	}
+	 		
+	 	profiloAttivo.creaPost(t);
 		}
+		
+	public void pubblicaStory(int time, Multimedia f) {
+		profiloAttivo.pubblicaStoria(time, f);
+	}
 
-		public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
-			ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
-			ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
+	public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
+		ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
+		ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
 			
-			listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
+		listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
 			
 		
-			for(int i=0; i<listaCommenti.size(); i++) {
-				listaTestiCommentiConInviante.add(listaCommenti.get(i).getProfilo());
-				listaTestiCommentiConInviante.add(listaCommenti.get(i).getTesto());
-			}
-	
-			return listaTestiCommentiConInviante;
+		for(int i=0; i<listaCommenti.size(); i++) {
+			listaTestiCommentiConInviante.add(listaCommenti.get(i).getProfilo());
+			listaTestiCommentiConInviante.add(listaCommenti.get(i).getTesto());
 		}
+		return listaTestiCommentiConInviante;
+	}
 		
 	public void scriviMessaggio( String testo, String multimediale, String inviante,String ricevente) {
 
@@ -311,8 +296,5 @@ public class Sistema {
 	public void setProfiloConCuiSiStaChattando(Profilo profiloConCuiSiStaChattando) {
 		this.profiloConCuiSiStaChattando = profiloConCuiSiStaChattando;
 	}
-	
-	
-
 }
 
