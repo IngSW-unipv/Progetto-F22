@@ -295,7 +295,7 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
-            	messaggi = model.cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+            	messaggi = model.getProfiloAttivo().cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
             	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
             	refresh();
             	mostraSchermata("AreaChatFrame");
@@ -356,7 +356,11 @@ public class Controller {
 				} catch (PostNonPresente e1) {
 					e1.printStackTrace();
 				}
-            	commentiConProfiliIinvianti = model.getProfiloAttivo().selectAllCommentiSottoPost(t.getIdPost());
+            	try {
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+				} catch (PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
 
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
@@ -1343,11 +1347,11 @@ public class Controller {
 	}
 	
 	public void aggiungiDescrizione() {
-		String profilo = model.getProfiloAttivo().getIdProfilo();
     	String descrizione = view.getDescrizione().getText();
-    	model.carica(profilo, descrizione);
+    	model.getProfiloAttivo().modificaDescrizione(descrizione);
     	model.getProfiloAttivo().setDescrizione(descrizione);
 	}
+	
 	public void resetContatori() {
 		view.setContatoreFoto(0);
 		view.setContatoreSondaggio(0);

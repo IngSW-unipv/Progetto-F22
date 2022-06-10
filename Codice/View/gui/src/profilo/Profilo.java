@@ -558,8 +558,9 @@ public class Profilo implements IProfilo {
 
 
 
-	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
-		ArrayList<String> res = dbfacade.ottieniIdPost(f, p);
+	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
+	
+		ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(idProfilo));
 		for(int i = 0; i < res.size(); i++) {
 		res.get(i);
 		}
@@ -610,8 +611,8 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public boolean modificaDescrizione(Profilo p, String n) {
-		return dbfacade.modificaDescrizione(p, n);
+	public boolean modificaDescrizione(String n) {
+		return dbfacade.modificaDescrizione(new Profilo(this.getIdProfilo()), n);
 	}
 
 	@Override
@@ -629,7 +630,6 @@ public class Profilo implements IProfilo {
 	 		if(dbfacade.cerca(c) != null) {
 	 			pubblicaCommento(idProfilo, idPost, testoCommento);
 	 		}
-	 		System.out.println(c.toString());
 		return dbfacade.carica(c);
 	}
 
@@ -871,6 +871,7 @@ public class Profilo implements IProfilo {
 	 	}
 	 	dbfacade.carica(t);
 	}
+	
 	
 }
 

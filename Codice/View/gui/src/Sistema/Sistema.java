@@ -101,7 +101,7 @@ public class Sistema {
 		return listaTestiCommentiConInviante;
 	}
 		
-	public void scriviMessaggio( String testo, String multimediale, String inviante,String ricevente) {
+	public void scriviMessaggio(String testo, String multimediale, String inviante,String ricevente) {
 
  		int idMessage = (int)Math.round(Math.random() * 10000);
  		String idMessaggio = Integer.toString(idMessage);
@@ -111,12 +111,6 @@ public class Sistema {
  		}
  		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
 	}
-
-
-	public void carica(String idProfilo, String descrizione) {
-		 profiloAttivo.modificaDescrizione(profiloAttivo, descrizione);
-	 }
-	
 		
 	public Profilo getProfiloAttivo() {
 		return profiloAttivo;

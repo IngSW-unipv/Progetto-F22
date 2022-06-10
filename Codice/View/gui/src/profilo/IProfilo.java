@@ -97,5 +97,7 @@ public interface IProfilo {
 	boolean rimuoviCommento(String idCommento);
 	Commento cercaCommento(String idCommento);
 	boolean cambiaImmagineProfilo(String immagine);
+	boolean modificaDescrizione(String idProfilo, String n);
+	boolean modificaDescrizione(String n);
 }
 
