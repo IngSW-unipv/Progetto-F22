@@ -54,7 +54,6 @@ public class Impostazioni extends JPanel {
 		containerWest.setLayout(new GridLayout(8,1));
 		
 		mappaPulsanti.put("modificaprofilo", new Pulsanti("Modifica profilo", Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("visibilitapost", new Pulsanti("Visibilita' post", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("cambiaColori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("logout", new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
@@ -64,7 +63,7 @@ public class Impostazioni extends JPanel {
 		containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);
 
-		containerCenter.setLayout(new GridLayout(4,1));
+		containerCenter.setLayout(new GridLayout(3,1));
 
 		containerCenter.add(areaDescrizione = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "inserisci la tua nuova descrizione profilo"));
 		containerCenter.setVisible(false);
