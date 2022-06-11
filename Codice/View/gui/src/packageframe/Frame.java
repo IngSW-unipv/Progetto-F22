@@ -519,11 +519,6 @@ public class Frame extends JFrame {
 		return ((Chat)mappaSchermate.get("Chat")).getTornaHome();
 	}
 	
-	
-	public JButton getAggiornaChatButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getAggiornaAltriChat();
-	}
-	
 	public JButton getPrimaChatGruppoButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getPrimaChatGruppo();
 	}

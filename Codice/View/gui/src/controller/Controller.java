@@ -794,16 +794,7 @@ public class Controller {
             }
         };
         view.getHomeChatButton().addActionListener(gestoreHomeChat);
-     
-        
-        gestoreAggiornaChat = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		System.out.println("AggiornaChat");
-        	}
-        };
-        view.getAggiornaChatButton().addActionListener(gestoreAggiornaChat);
-        
+             
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {

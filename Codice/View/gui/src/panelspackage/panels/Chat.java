@@ -21,10 +21,9 @@ public class Chat extends JPanel {
     private Pulsanti tornaHome, primaChatGruppo, secondaChatGruppo, terzaChatGruppo, quartaChatGruppo, quintaChatGruppo,
                      primaChatPrivata, secondaChatPrivata, terzaChatPrivata, quartaChatPrivata, quintaChatPrivata;
     private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
-    private JComboBox<String> discussioni;
+    //private JComboBox<String> discussioni;
     private SpecificContainer containerCenter;
     private SpecificContainer containerNorth ;
-    private Pulsanti aggiornaAltriChat;
     private SpecificContainer containerSouth;
 
     
@@ -47,13 +46,7 @@ public class Chat extends JPanel {
         containerNorth.setLayout(new GridLayout(2, 1));
         this.add(containerNorth, BorderLayout.NORTH);
         
-        discussioni = new JComboBox<>();
-        discussioni.addItem("Discussioni");
-        discussioni.addItem("Chat di gruppo");
-        discussioni.addItem("Chat personali");
-        discussioni.setFont(new Font("Arial", 1, 14));
-        discussioni.setBackground(Frame.COLOREPRIMARIOTEMATICO);
-        containerNorth.add(discussioni); 
+        
         
         containerCenter = new SpecificContainer(Color.CYAN);
         containerCenter.setLayout(new GridLayout(10, 2));
@@ -87,10 +80,8 @@ public class Chat extends JPanel {
         
         containerSouth = new SpecificContainer();
         this.add(containerSouth, BorderLayout.SOUTH);
-        aggiornaAltriChat = new Pulsanti("Aggiorna altri chat", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14));
         tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
-        containerSouth.setLayout(new GridLayout(2, 1));
-        containerSouth.add(aggiornaAltriChat);
+        containerSouth.setLayout(new GridLayout(1, 1));
         containerSouth.add(tornaHome);
         
     }
@@ -110,13 +101,7 @@ public class Chat extends JPanel {
             this.tornaHome = home;
         }
 
-        public JComboBox<String> getDiscussioni() {
-            return discussioni;
-        }
 
-        public void setDiscussioni(JComboBox<String> discussioni) {
-            this.discussioni = discussioni;
-        }
 
         public SpecificContainer getContainerCenter() {
             return containerCenter;
@@ -132,14 +117,6 @@ public class Chat extends JPanel {
 
         public void setContainerNorth(SpecificContainer containerNorth) {
             this.containerNorth = containerNorth;
-        }
-
-        public Pulsanti getAggiornaAltriChat() {
-            return aggiornaAltriChat;
-        }
-
-        public void setAggiornaAltriChat(Pulsanti aggiornaAltriChat) {
-            this.aggiornaAltriChat = aggiornaAltriChat;
         }
 
         public SpecificContainer getContainerSouth() {
