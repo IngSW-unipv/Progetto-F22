@@ -164,9 +164,7 @@ public class Controller {
             	refresh();
             }
         };
-        view.getButtonPrevPost().addActionListener(gestorePostPrecedente);
-         
-        
+        view.getButtonPrevPost().addActionListener(gestorePostPrecedente);      
         
         gestoreImpostazioni = new ActionListener() {
         	@Override
@@ -304,9 +302,7 @@ public class Controller {
             }
         };
         view.getApriChat().addActionListener(gestoreApriChat);
-        
-        
-        
+
         gestorePulsanteSegui = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -672,6 +668,7 @@ public class Controller {
             	view.getSecondaScelta().setVisible(false);
             	view.getTerzaScelta().setVisible(false);
             	view.getQuartaScelta().setVisible(false);
+            	view.getPubblicaStoryButton().setVisible(true);
                 mostraSchermata("CreazionePost");
             }
         };
@@ -711,6 +708,7 @@ public class Controller {
             	view.getSecondaScelta().setVisible(false);
             	view.getTerzaScelta().setVisible(false);
             	view.getQuartaScelta().setVisible(false);
+            	view.getPubblicaStoryButton().setVisible(false);
             	mostraSchermata("CreazionePost");
             }
         };
@@ -725,6 +723,7 @@ public class Controller {
             	view.getQuartaScelta().setVisible(false);
             	view.getPrimaScelta().setVisible(true);
             	view.getSecondaScelta().setVisible(true);
+            	view.getPubblicaStoryButton().setVisible(false);
             	mostraSchermata("CreazionePost");
         	}
         };
@@ -739,6 +738,7 @@ public class Controller {
             	view.getQuartaScelta().setVisible(true);
             	view.getPrimaScelta().setVisible(true);
             	view.getSecondaScelta().setVisible(true);
+            	view.getPubblicaStoryButton().setVisible(false);
             	mostraSchermata("CreazionePost");
         	}
         };
