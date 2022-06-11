@@ -931,23 +931,29 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo) {
 	Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 	
 	if(g != null) {
-		if(g.getProfilo1() == idProfilo) {
-			dbfacade.gestisciPartecipante1(null, g);
+		if(g.getProfilo1().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante1(idProfilo, g);
 		}
-		else if(g.getProfilo2() == idProfilo) {
-			dbfacade.gestisciPartecipante2(null, g);
+		else if(g.getProfilo2().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante2(idProfilo, g);
 		}
-		else if(g.getProfilo3() == idProfilo) {
-			dbfacade.gestisciPartecipante3(null, g);
+		else if(g.getProfilo3().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante3(idProfilo, g);
 		}
-		else if(g.getProfilo4() == idProfilo) {
-			dbfacade.gestisciPartecipante4(null, g);
+		else if(g.getProfilo4().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante4(idProfilo, g);
 		}
-		else if(g.getProfilo5() == idProfilo) {
-			dbfacade.gestisciPartecipante5(null, g);
+		else if(g.getProfilo5().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante5(idProfilo, g);
 		}
-		else if(g.getProfilo6() == idProfilo) {
-			dbfacade.gestisciPartecipante6(null, g);
+		else if(g.getProfilo6().equals(idProfilo)) {
+			idProfilo = null;
+			dbfacade.gestisciPartecipante6(idProfilo, g);
 		}
 	}
 	//aggiungere exception gruppo gi� pieno
