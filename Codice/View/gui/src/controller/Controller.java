@@ -168,10 +168,10 @@ public class Controller {
          
         
         
-                gestoreImpostazioni = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("Impostazioni");
+        gestoreImpostazioni = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		mostraSchermata("Impostazioni");
                     }
                 };
                 view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
@@ -190,6 +190,8 @@ public class Controller {
                     	
                     	aggiornaSchermataProfiloAttivo();
                         refresh();
+                        view.getPulsanteSegui().setVisible(false);
+                        view.getApriChat().setVisible(false);
                         mostraSchermata("Profilo");
                     }
                 };
@@ -607,7 +609,6 @@ public class Controller {
         gestoreNextFoto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Incrementa contatore foto
         		view.setContatoreFoto(view.getContatoreFoto() + 2);
         		view.setPostProfilo(postDelProfilo);
         	}
@@ -617,7 +618,6 @@ public class Controller {
         gestorePrevFoto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Decrementa contatore foto
         		view.setContatoreFoto(view.getContatoreFoto() - 2);
         		view.setPostProfilo(postDelProfilo);
         	}
@@ -627,7 +627,6 @@ public class Controller {
         gestoreNextTesto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Incrementa contatore testo
         		view.setContatoreTesto(view.getContatoreTesto() + 2);
         		view.setPostTestoProfilo(percorsiPostTesto);
         	}
@@ -766,13 +765,13 @@ public class Controller {
                 int numSeguiti = model.getProfiloCercato().getNumSeguiti();
                 String idProfilo = model.getProfiloCercato().getIdProfilo();
                 String percorsoFotoProfilo = null;
-                postDelProfilo = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
-                percorsiPostTesto = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-                percorsiPostSondaggio = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+                postDelProfilo = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
+                percorsiPostTesto = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
+                percorsiPostSondaggio = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
                 
             
                 try {
-                	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo())).getPercorso();
+                	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo())).getPercorso();
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				} catch (PostNonPresente e2) {
@@ -785,6 +784,8 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+                view.getPulsanteSegui().setVisible(true);
+                view.getApriChat().setVisible(true);
             	mostraSchermata("Profilo");
             }
         };
@@ -1238,7 +1239,7 @@ public class Controller {
     }
     
     public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio) throws PostNonVisibile {
-        view.setSchermataDati(numPost, numFollower, numSeguiti, nickName);
+    	view.setSchermataDati(numPost, numFollower, numSeguiti, nickName);
         view.setFotoProfilo(fotoProfiloPercorso);
         view.setPostProfilo(postFotoProfilo);
         view.setPostTestoProfilo(percorsiPostTesto);
@@ -1284,8 +1285,11 @@ public class Controller {
         percorsiPostTesto = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
         percorsiPostSondaggio = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
 
-    
         String fotoProfiloPercorso = null;
+        
+        for(int i =0; i < percorsiPostTesto.size() ; i++) {
+        	System.out.println("testi :"+ percorsiPostTesto.size());
+        }
         
         try {
     	   fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
