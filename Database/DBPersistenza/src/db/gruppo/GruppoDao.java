@@ -238,7 +238,7 @@ public ArrayList<String> caricaGruppiProfilo(String profilo) {
 }
 
 @Override
-public boolean inserisciPartecipante1(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante1(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -263,7 +263,7 @@ public boolean inserisciPartecipante1(String idProfilo, GruppoDB g) {
 	return esito;
 }
 @Override
-public boolean inserisciPartecipante2(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante2(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -288,7 +288,7 @@ public boolean inserisciPartecipante2(String idProfilo, GruppoDB g) {
 	return esito;
 }
 @Override
-public boolean inserisciPartecipante3(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante3(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -313,7 +313,7 @@ public boolean inserisciPartecipante3(String idProfilo, GruppoDB g) {
 	return esito;
 }
 @Override
-public boolean inserisciPartecipante4(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante4(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -338,7 +338,7 @@ public boolean inserisciPartecipante4(String idProfilo, GruppoDB g) {
 	return esito;
 }
 @Override
-public boolean inserisciPartecipante5(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante5(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;
@@ -363,7 +363,7 @@ public boolean inserisciPartecipante5(String idProfilo, GruppoDB g) {
 	return esito;
 }
 @Override
-public boolean inserisciPartecipante6(String idProfilo, GruppoDB g) {
+public boolean gestisciPartecipante6(String idProfilo, GruppoDB g) {
 	
 	conn=DBConnection.startConnection(conn,schema);
 	PreparedStatement st1;

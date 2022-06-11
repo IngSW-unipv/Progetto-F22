@@ -903,28 +903,57 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 		
 		if(g != null) {
 			if(g.getProfilo1() == null) {
-				dbfacade.inserisciPartecipante1(idProfilo, g);
+				dbfacade.gestisciPartecipante1(idProfilo, g);
 			}
 			else if(g.getProfilo2() == null) {
-				dbfacade.inserisciPartecipante2(idProfilo, g);
+				dbfacade.gestisciPartecipante2(idProfilo, g);
 			}
 			else if(g.getProfilo3() == null) {
-				dbfacade.inserisciPartecipante3(idProfilo, g);
+				dbfacade.gestisciPartecipante3(idProfilo, g);
 			}
 			else if(g.getProfilo4() == null) {
-				dbfacade.inserisciPartecipante4(idProfilo, g);
+				dbfacade.gestisciPartecipante4(idProfilo, g);
 			}
 			else if(g.getProfilo5() == null) {
-				dbfacade.inserisciPartecipante5(idProfilo, g);
+				dbfacade.gestisciPartecipante5(idProfilo, g);
 			}
 			else if(g.getProfilo6() == null) {
-				dbfacade.inserisciPartecipante6(idProfilo, g);
+				dbfacade.gestisciPartecipante6(idProfilo, g);
 			}
 		}
 		//aggiungere exception gruppo gi� pieno
 		return false;
 		
 	}
+@Override
+public boolean rimuoviPartecipante(String idGruppo, String idProfilo) {
+	
+	Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
+	
+	if(g != null) {
+		if(g.getProfilo1() == idProfilo) {
+			dbfacade.gestisciPartecipante1(null, g);
+		}
+		else if(g.getProfilo2() == idProfilo) {
+			dbfacade.gestisciPartecipante2(null, g);
+		}
+		else if(g.getProfilo3() == idProfilo) {
+			dbfacade.gestisciPartecipante3(null, g);
+		}
+		else if(g.getProfilo4() == idProfilo) {
+			dbfacade.gestisciPartecipante4(null, g);
+		}
+		else if(g.getProfilo5() == idProfilo) {
+			dbfacade.gestisciPartecipante5(null, g);
+		}
+		else if(g.getProfilo6() == idProfilo) {
+			dbfacade.gestisciPartecipante6(null, g);
+		}
+	}
+	//aggiungere exception gruppo gi� pieno
+	return false;
+	
+}
 
 }
 

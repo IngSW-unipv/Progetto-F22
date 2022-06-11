@@ -100,5 +100,6 @@ public interface IProfilo {
 	boolean modificaDescrizione(String idProfilo, String n);
 	boolean modificaDescrizione(String n);
 	boolean aggiungiPartecipante(String idGruppo, String idProfilo);
+	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
 }
 

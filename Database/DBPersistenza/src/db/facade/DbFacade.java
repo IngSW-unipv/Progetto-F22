@@ -143,28 +143,28 @@ public class DbFacade implements IDbFacade{
 		return listaGruppi;
 	}
 	@Override
-	public boolean inserisciPartecipante1(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante1(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante1(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante1(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	@Override
-	public boolean inserisciPartecipante2(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante2(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante2(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante2(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	@Override
-	public boolean inserisciPartecipante3(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante3(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante3(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante3(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	@Override
-	public boolean inserisciPartecipante4(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante4(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante4(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante4(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	@Override
-	public boolean inserisciPartecipante5(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante5(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante5(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante5(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	@Override
-	public boolean inserisciPartecipante6(String idProfilo, Gruppo g) {
-		return gDao.inserisciPartecipante6(idProfilo, ConvertitoreFacade.getIstance().converti(g));
+	public boolean gestisciPartecipante6(String idProfilo, Gruppo g) {
+		return gDao.gestisciPartecipante6(idProfilo, ConvertitoreFacade.getIstance().converti(g));
 	}
 	
 	

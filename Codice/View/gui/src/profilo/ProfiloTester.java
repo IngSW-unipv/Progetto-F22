@@ -57,7 +57,7 @@ public class ProfiloTester {
     	/*ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
     	for(String str : res)
     		System.out.println(str.toString());*/
-    	
+    	/*
     	try {
 			Video v1 = (Video) p1.cercaPost(v);
 			System.out.println(v1.toString());
@@ -88,8 +88,11 @@ public class ProfiloTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	*/
+    	Profilo p2 = new Profilo("dilo");
+    	p2.rimuoviPartecipante("G6", "frank");
     }
-    }
+}
 
     	   
 

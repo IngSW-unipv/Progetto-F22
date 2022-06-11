@@ -30,12 +30,12 @@ public interface IDbFacade {
 	public boolean gestisciPartecipanti(Gruppo g);
     public Gruppo cerca(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
-	boolean inserisciPartecipante1(String idProfilo, Gruppo g);
-	boolean inserisciPartecipante2(String idProfilo, Gruppo g);
-	boolean inserisciPartecipante3(String idProfilo, Gruppo g);
-	boolean inserisciPartecipante4(String idProfilo, Gruppo g);
-	boolean inserisciPartecipante5(String idProfilo, Gruppo g);
-	boolean inserisciPartecipante6(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante1(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante2(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante3(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante4(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante5(String idProfilo, Gruppo g);
+	boolean gestisciPartecipante6(String idProfilo, Gruppo g);
 	
 	//Messaggi
 	

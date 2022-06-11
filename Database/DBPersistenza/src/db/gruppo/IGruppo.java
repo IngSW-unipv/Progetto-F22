@@ -12,12 +12,12 @@ public GruppoDB cercaGruppo(GruppoDB g);
 
 public String vediFotoGruppo(GruppoDB g);
 public boolean cambiaFotoGruppo(GruppoDB g, String s);
-boolean inserisciPartecipante3(String idProfilo, GruppoDB g);
-boolean inserisciPartecipante2(String idProfilo, GruppoDB g);
-boolean inserisciPartecipante1(String idProfilo, GruppoDB g);
-boolean inserisciPartecipante4(String idProfilo, GruppoDB g);
-boolean inserisciPartecipante5(String idProfilo, GruppoDB g);
-boolean inserisciPartecipante6(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante3(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante2(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante1(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante4(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante5(String idProfilo, GruppoDB g);
+boolean gestisciPartecipante6(String idProfilo, GruppoDB g);
 
 
 }
