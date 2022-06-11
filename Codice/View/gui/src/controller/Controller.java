@@ -255,14 +255,6 @@ public class Controller {
 	    };
 	    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
 	    
-	    gestoreVisibilitaPost = new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            view.getContainerCenterFrame().setVisible(false);
-	        }
-	    };
-	    view.getVisibilitaPostButton().addActionListener(gestoreVisibilitaPost);
-	    
 	    gestoreEliminaAccount = new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {

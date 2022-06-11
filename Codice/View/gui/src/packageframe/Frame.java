@@ -280,10 +280,6 @@ public class Frame extends JFrame {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getModificaProfilo();
 	}
 	
-	
-	public JButton getVisibilitaPostButton() {
-		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getVisibilitaPost();
-	}
 	public Pulsanti getSalvaModificheButton() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getSalvaModifiche();
 	}
