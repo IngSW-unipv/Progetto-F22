@@ -834,6 +834,15 @@ public class Frame extends JFrame {
 	public void rimuoviPostHome() {
 		((Home)mappaSchermate.get("Home")).rimuoviPostHome();
 	}
+	
+	public JButton getButtonPrevStory() {
+		return ((Home)mappaSchermate.get("Home")).getButtonPrevStory();
+	}
+	
+	public JButton getButtonNextStory() {
+		return ((Home)mappaSchermate.get("Home")).getButtonNextStory();
+	}
+	
     public void settaSchermataChat(ArrayList<String> gruppi) {
         ((Chat)mappaSchermate.get("Chat")).settaSchermataChat(gruppi);
 

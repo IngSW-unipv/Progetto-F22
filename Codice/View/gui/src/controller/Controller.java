@@ -29,7 +29,8 @@ public class Controller {
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
-                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame, gestoreInviaMessaggioGruppo;
+                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame, gestoreInviaMessaggioGruppo,
+                           gestoreStorySuccessiva, gestoreStoryPrecedente;
     Frame view;
     Sistema model;
     
@@ -41,6 +42,8 @@ public class Controller {
     private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
 
     private ArrayList<String> postSchermataHome = new ArrayList<String>();
+    private ArrayList<String> strorySchermataHome = new ArrayList<String>();
+    
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
     private ArrayList<String> percorsiPostTesto = new ArrayList<String>();
@@ -184,7 +187,23 @@ public class Controller {
             	}
             }
         };
-        view.getButtonPrevPost().addActionListener(gestorePostPrecedente);      
+        view.getButtonPrevPost().addActionListener(gestorePostPrecedente); 
+        
+        gestoreStorySuccessiva = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Storia precedente");
+        	}
+        };
+        view.getButtonNextStory().addActionListener(gestoreStorySuccessiva);
+        
+        gestoreStoryPrecedente = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Storia successiva");
+        	}
+        };
+        view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);
         
         gestoreImpostazioni = new ActionListener() {
         	@Override
