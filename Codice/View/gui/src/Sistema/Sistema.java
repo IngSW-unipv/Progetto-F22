@@ -41,11 +41,10 @@ public class Sistema {
 		Profilo p =  new Profilo(mail, nickName);
 		
 	    if(dbfacade.cerca(p) == null) {
-	    	System.out.println(p.getIdProfilo() + 1);
 	        dbfacade.carica(p);
 	        dbfacade.modificaEsiste(mail, true);
+	        this.setProfiloAttivo(p);
             this.getProfiloAttivo().cambiaDefaultPassword(password);
- 			this.setProfiloAttivo(p);
             return true;
         }
 	  throw new AccountGiaEsistente(mail);  
