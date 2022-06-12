@@ -58,6 +58,7 @@ public interface IProfilo {
 	public boolean modificaVisibilita(Post p, boolean b);
 	public boolean aggiungiVotoSondaggio(String idSondaggio,int scelta, TipoPost t)throws TastoNonEsistente, AzioneNonConsentita;
 	public void vediRisultatiSondaggio(Sondaggio s);
+	public int[] ottieniConteggiSondaggio(String idSondaggio,TipoPost p);
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
     public boolean cambiaImmagineProfilo(String immagine);
     public String ottieniImmagineProfilo(Profilo p);

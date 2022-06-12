@@ -929,6 +929,25 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws Grup
 	
 }
 
+@Override
+public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
+	if(p == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+		int [] i = new int [2];
+		i[0] = dbfacade.vediCount1SDV(new SondaggioDoppiaVotazione(idSondaggio));
+		i[1] = dbfacade.vediCount2SDV(new SondaggioDoppiaVotazione(idSondaggio));
+		return i;
+	}
+	else if(p == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+		int [] i = new int [4];
+		i[0] = dbfacade.vediCount1SSM(new SondaggioSceltaMultipla(idSondaggio));
+		i[1] = dbfacade.vediCount2SSM(new SondaggioSceltaMultipla(idSondaggio));
+		i[2] = dbfacade.vediCount3SSM(new SondaggioSceltaMultipla(idSondaggio));
+		i[3] = dbfacade.vediCount4SSM(new SondaggioSceltaMultipla(idSondaggio));
+		return i;
+	}
+	return null;
+}
+
 }
 
 	
