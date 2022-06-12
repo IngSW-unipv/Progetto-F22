@@ -88,7 +88,7 @@ public boolean caricaPost(PostDB s) {
 		st1.setString(4, s.getDescrizione());
 		st1.setInt(5, s.getNumLike());
 		st1.setInt(6, s.getNumDislike());
-        st1.setBoolean(7, s.isVisibile());
+        st1.setBoolean(7, true);
         st1.setString(8, s.getProfilo());
         
 		st1.executeUpdate();

@@ -91,7 +91,7 @@ public class VideoDao  extends PostDao{
 		    st1.setString(4, v.getDescrizione());
 			st1.setInt(5, v.getNumLike());
 			st1.setInt(6, v.getNumDislike());
-			st1.setBoolean(7, v.isVisibile());
+			st1.setBoolean(7, true);
 		    st1.setString(8, v.getProfilo());
 		    
 			st1.executeUpdate();

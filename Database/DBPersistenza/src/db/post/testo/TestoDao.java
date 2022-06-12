@@ -89,7 +89,7 @@ public class TestoDao extends PostDao {
 			st1.setString(4, t.getDescrizione());
 			st1.setInt(5, t.getNumLike());
 			st1.setInt(6, t.getNumDislike());
-	        st1.setBoolean(7, t.isVisibile());
+	        st1.setBoolean(7, true);
 	        st1.setString(8, t.getProfilo());
 	        
 		    

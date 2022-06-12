@@ -89,7 +89,7 @@ public class FotoDao extends PostDao {
 		    st1.setString(4, f.getDescrizione());
 			st1.setInt(5, f.getNumLike());
 			st1.setInt(6, f.getNumDislike());
-			st1.setBoolean(7, f.isVisibile());
+			st1.setBoolean(7, true);
 		    st1.setString(8, f.getProfilo());
 		 
 		    
