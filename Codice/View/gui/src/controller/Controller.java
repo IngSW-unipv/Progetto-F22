@@ -134,7 +134,15 @@ public class Controller {
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println("ciao");
+            	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(0 + view.getContatorePost())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
             }
         };
         view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
