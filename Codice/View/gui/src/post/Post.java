@@ -13,7 +13,7 @@ import post.enumeration.TipoPost;
 		            boolean visibile, String profilo) {
 			super();
 			this.idPost = idPost;
-			this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+			this.dataPubblicazione = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth());
 			this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 			this.descrizione = descrizione;
 			this.numLike = 0;
@@ -25,7 +25,7 @@ import post.enumeration.TipoPost;
 		public Post(String idPost, String profilo) {
 		super();
 		this.idPost = idPost;
-		this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		this.dataPubblicazione = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth());
 		this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 		this.descrizione = "";
 		this.numLike = 0;
@@ -36,7 +36,7 @@ import post.enumeration.TipoPost;
 	public Post(String idProfilo) {
 		super();
 		this.idPost = idProfilo;
-		this.dataPubblicazione = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+		this.dataPubblicazione = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth());
 		this.oraPubblicazione = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 		this.descrizione = "";
 		this.numLike = 0;

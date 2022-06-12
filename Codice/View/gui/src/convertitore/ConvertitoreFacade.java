@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Messaggio.Messaggio;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
-import convertitore.commentoChatUtility.CommentoUtility;
+import convertitore.commentoUtility.CommentoUtility;
 import convertitore.followUtility.FollowUtility;
 import convertitore.profiloUtility.ProfiloUtility;
 import convertitore.gruppoUtility.GruppoUtility;

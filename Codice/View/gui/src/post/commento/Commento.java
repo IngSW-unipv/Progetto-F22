@@ -27,9 +27,8 @@ public class Commento {
 	
 	public Commento(String idCommento, String idProfilo, String idPost, String commento) {
 		
-	    Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+	    Date d = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth());
 	    Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
-		
 		this.idCommento = idCommento;
 		this.oraCommento = t;
 		this.dataCommento = d;

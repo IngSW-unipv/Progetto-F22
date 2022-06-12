@@ -90,12 +90,7 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
     	*/
-    	try {
-			System.out.println(p1.segui(p));
-		} catch (AccountDoesNotExist | AzioneNonConsentita e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+    	p.pubblicaFoto("F57", false, false, null, null, false);
     }
 }
 
