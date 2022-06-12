@@ -480,9 +480,7 @@ public class Profilo implements IProfilo {
 		
 		else if (t == TipoPost.SONDAGGIOSCELTAMULTIPLA && dbfacade.presenteSondaggioMap1(this.getIdProfilo(), idSondaggio) == false) {
 			SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idSondaggio);
-			Scanner scanner = new Scanner(System.in);
-			int a = scanner.nextInt(); 
-			switch(a) {
+			switch(scelta) {
 			case 1 : int i1 = dbfacade.vediCount1SSM(s);
                  i1 = i1 + 1;
                  dbfacade.modificaCount1SSM(s, i1);

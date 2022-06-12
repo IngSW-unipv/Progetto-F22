@@ -94,7 +94,7 @@ public class ProfiloTester {
  
 
     	try {
-			p1.aggiungiVotoSondaggio("S00", 2, TipoPost.SONDAGGIODOPPIAVOTAZIONE);
+			p1.aggiungiVotoSondaggio("S05", 3, TipoPost.SONDAGGIOSCELTAMULTIPLA);
 		} catch (TastoNonEsistente e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
