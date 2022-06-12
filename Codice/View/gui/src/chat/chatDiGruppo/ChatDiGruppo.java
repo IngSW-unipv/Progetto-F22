@@ -25,6 +25,12 @@ public class ChatDiGruppo extends Chat{
 		return TipoChat.DIGRUPPO;
 	}
 
+	/**
+	 * Setta la lista con i messaggi inviati un gruppo
+	 * @param Gruppo nel quale verrà inviato il messaggio
+	 * @param Il parametro s sarà settato a null perchè non è funzionale per i messaggi di gruppo
+	 * @param tipo di gruppo del messaggio
+	 */
 	public boolean setLista(Gruppo g, String s, TipoMessaggio t) {
 		ArrayList<Messaggio> res = DbFacade.getIstance().selezionaMessaggi(g.getIdGruppo(), s, t);
 		super.setListaMessaggi(res);

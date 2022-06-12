@@ -122,6 +122,10 @@ public class Commento {
 		this.idTesto = idTesto;
 	}
 	
+	/**
+	 * Assegna idPost all'attributo id (idFoto,idVideo,idSDV,idSSM,idTesto) corrispondente in base al prefisso di quest'ultimo
+	 * @param idPost da inserire nel modo corretto
+	 **/
 	public void scegliTipoId(String idPost) {
 		if(idPost.substring(0, 1).equals("F")) 
 			this.setIdFoto(idPost);

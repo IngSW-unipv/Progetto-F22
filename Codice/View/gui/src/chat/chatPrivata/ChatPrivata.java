@@ -21,6 +21,12 @@ public class ChatPrivata extends Chat {
 		this.setLista(profiloInviante, profiloRicevente, TipoMessaggio.PRIVATO);
 	}
 	
+	/**
+	 * Setta la lista con i messaggi Privati inviati un una chat
+	 * @param email del profilo che invia il messaggio
+	 * @param email del profilo che riceve il messaggio
+	 * @param tipo privato del messaggio
+	 */
 	public boolean setLista(Profilo Inviante, Profilo profiloRicevente, TipoMessaggio t) {
 		ArrayList<Messaggio> res = DbFacade.getIstance().selezionaMessaggi(profiloInviante.getIdProfilo(), profiloRicevente.getIdProfilo(), t);
 		super.setListaMessaggi(res);

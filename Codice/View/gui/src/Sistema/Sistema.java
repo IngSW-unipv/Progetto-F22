@@ -28,7 +28,15 @@ public class Sistema {
 		dbfacade = DbFacade.getIstance();
 	}
 	
-	//idProfilo e Mail sono la stessa 
+	/**
+	 * Permette ad un profilo di iscriversi al social network
+	 * @param mail scelta 
+	 * @param nickname scelto
+	 * @param password scelta
+	 * @return true se l'account viene creato con successo
+	 * @exception eccezione se non ho cambiato la password di default
+	 * @exception Eccezione se l'account che sto creando esiste già
+	 */
 	public boolean signIn(String mail, String nickName, String password) throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p =  new Profilo(mail, nickName);
 		
@@ -43,6 +51,15 @@ public class Sistema {
 	  throw new AccountGiaEsistente(mail);  
 	}
     
+	/**
+	 * Permette ad un utente di loggarsi nel proprio profilo inserendo le proprie credenziale
+	 * @param email del profilo
+	 * @param password del profilo
+	 * @return true se l'utente si locca correttamente
+	 * @exception eccezione se non ho cambiato la password di default
+	 * @exception Eccezione se l'account a cui sto cercando di accedere non esiste
+	 *@exception Eccezione se la psw o la mail sono errati
+	 */
 	public boolean login(String email, String psw) throws ChangeDefaultPassword, AccountDoesNotExist, PswOmailErrati {
 			
 		if(dbfacade.vediPswCambiata(email) == false)
@@ -52,6 +69,7 @@ public class Sistema {
 	 		else if(dbfacade.vediPsw(email).equals(psw)) {
 	 			dbfacade.modificaLoggato(email, true);
 	 			Profilo p = dbfacade.cerca(new Profilo(email,null));
+	 	
 	 			this.setProfiloAttivo(p);
 	 			
 	 			return true;
@@ -60,11 +78,21 @@ public class Sistema {
 	 	}
 
 	  
+	/**
+	 * Permette la ricerca di un oggetto nel database
+	 */
 	  public void ricerca(String idDaCercare) {
 		  setProfiloCercato(dbfacade.cerca(new Profilo(idDaCercare)));
 		  //chatCercata = dbfacade.cerca(new chatDiGruppo);
 	  }
 
+
+	  /**
+		 * Permette ad un utente di uscire dal proprio account
+		 * @param email del profilo
+         * @return true se l'utente esegue correttamente il logout
+		 *@exception Eccezione se l'account indicato non esiste
+		 */
 	 public boolean logout(String email) throws AccountDoesNotExist {
 	 	
 		 Profilo p = new Profilo(email,null);
@@ -83,6 +111,12 @@ public class Sistema {
 	 	    throw new AccountDoesNotExist(email);
 	 }
 
+	 /**
+		 * Restituisce tutti i commenti sotto un post
+		 * @param id del post a cui voglio vedere i commenti
+		 * @return ArrayList con i Commenti di un relativo post
+		 *@exception Eccezione se il post non è visibile
+		 */
 	public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
 		ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
 		ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
@@ -97,13 +131,19 @@ public class Sistema {
 		return listaTestiCommentiConInviante;
 	}
 		
-	public void scriviMessaggio(String testo, String multimediale, String inviante,String ricevente) {
+	/**
+	 * Permette di inviare un messaggio
+	 * @param testo del messaggio
+	 * @param id del profilo inviante
+	 * @param id del profilo che riceverà il messaggio
+	 */
+	public void scriviMessaggio(String testo, String inviante,String ricevente) {
 
  		int idMessage = (int)Math.round(Math.random() * 10000);
  		String idMessaggio = Integer.toString(idMessage);
 
  		if(dbfacade.cerca(new MessaggioPrivato(idMessaggio)) != null) {
- 			scriviMessaggio(testo, multimediale, inviante, ricevente);
+ 			scriviMessaggio(testo, inviante, ricevente);
  		}
  		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, inviante, ricevente));
 	}
