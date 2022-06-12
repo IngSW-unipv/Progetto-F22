@@ -178,7 +178,11 @@ public class Profilo implements IProfilo {
 	}
 
 
-
+	/**
+	 * Controlla se un profilo sta seguendo già un altro profilo
+	 * @param id del profilo da controllare
+	 * @return true se il mio profilo non sta seguendo il profilo indicato, false altrimenti
+	 */
 	@Override
 	public boolean profiloNonSeguito(String emailProfilo) {
 		Follow f = new Follow(this.getIdProfilo(),emailProfilo);
@@ -188,6 +192,12 @@ public class Profilo implements IProfilo {
 		return false;
 	}
 
+	/**
+	 * Controlla se un profilo esiste già
+	 * @param id del profilo da controllare
+	 * @return true se il profilo esiste
+	 * @exception Eccezione se il profilo non esiste
+	 */
 	@Override
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist {
 		Profilo p = new Profilo(emailProfilo,null);
@@ -197,6 +207,12 @@ public class Profilo implements IProfilo {
 		return true;
 	}
 
+	/**
+	 * Permette di cominciare a seguire una persona
+	 * @param id del profilo che si vuole seguire 
+	 * @return true se l'operazione avviene con successo
+	 * @exception Eccezione se il profilo non è seguibile
+	 */
 	@Override
 	public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita{
 
@@ -220,6 +236,12 @@ public class Profilo implements IProfilo {
 	}
 
 
+	/**
+	 * Permette di smettere di seguire una persona
+	 * @param id del profilo che si vuole smettere di seguire 
+	 * @return true se l'operazione avviene con successo
+	 * @exception Eccezione se il profilo non è possibile smettere di seguire un profilo
+	 */
 	@Override
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
 		if(this.accountEsistente(profiloSeguito.getIdProfilo()) == true && this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == false) {
@@ -239,12 +261,18 @@ public class Profilo implements IProfilo {
 	}
 
 
+	/**
+	 * Ottengo la lista di tutti i miei follower
+	 */
 	@Override
 	public ArrayList<String> vediMieiFollower(Follow f) {
 		ArrayList<String> res = dbfacade.cercaProfSeguito(f.getMailProfiloSeguito());
 		return res;	
 	}
 
+	/**
+	 * Controllo se il follower inserito come parametro è presente nel db
+	 */
 	@Override
 	public Follow cercaFollow(Follow f) {
 	return dbfacade.cerca(f);
@@ -262,25 +290,45 @@ public class Profilo implements IProfilo {
 		MessaggioPrivato m = new MessaggioPrivato(id,testo,idProfiloInviante,idProfiloRicevente);
 		return m;
 	}
+	
+	/**
+	 * Carica il messaggio passato come parametro nel database
+	 */
 	@Override
 	public boolean scriviMessaggio(Messaggio m){
 	    	return dbfacade.carica(m);	
 	}
 
+	/**
+	 * Rimuove il messaggio passato come parametro dal database
+	 */
 	@Override
 	public boolean rimuoviMessaggio(Messaggio m){
 	return dbfacade.rimuovi(m);
 	}
+	
+	/**
+	 * Controllo se il messaggio inserito come parametro è presente nel db
+	 */
 	@Override
 	public Messaggio cercaMessaggio(Messaggio m){
 		return dbfacade.cerca(m);	
 	}
 
+	/**
+	 * Cerco dal database il valore del testo di un messaggio inserito come parametro
+	 */
 	@Override
 	public String ottieniTestoMessaggio(Messaggio m) {
 		return dbfacade.ottieniTestoMessaggio(m.getIdMessaggio(), m.getTipo());
 	}
 
+	/**
+	 * Funzione che mi permette di leggere tutti i messaggi inviati (con tutte le informazioni) da un certo utente, ogni minuto, per cinque minuti
+	 * @param id del profilo che invia
+	 * @param email del profilo che riceve
+	 * @param Tipo del messaggio da leggere
+	 */
 	@Override
 	public boolean leggiMessaggi(String profiloInviante,String profiloRicevente, TipoMessaggio t) {
 		
@@ -298,6 +346,13 @@ public class Profilo implements IProfilo {
 			 }, 0,  1000 * 60 * 5);	
 		return true;
 	}
+	
+	/**
+	 * Funzione che permette di cercare nel database una chat indicata
+	 * @param id del profilo che invia
+	 * @param email del profilo che riceve
+	 * @return lista che contiene il testo dei messaggi e email del profilo che li invia
+	 */
 	public ArrayList<String> cercaMessaggiChatPrivata(String inviante, String ricevente) {
 		ArrayList<Messaggio> listaMessaggi = dbfacade.caricaMessaggiChatPrivata(inviante, ricevente);
 		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
@@ -309,6 +364,13 @@ public class Profilo implements IProfilo {
 		return listaTestoEProfiloInviante;
 	}
 
+	
+	/**
+	 * Funzione che mi permette di leggere tutti i messaggi (solamente il testo) inviati da un certo utente, ogni minuto, per cinque minuti
+	 * @param id del profilo che invia
+	 * @param email del profilo che riceve
+	 * @param Tipo del messaggio da leggere
+	 */
 	@Override
 	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t){
 		Timer timer = new Timer();
@@ -326,14 +388,6 @@ public class Profilo implements IProfilo {
 		    }
 		 }, 0,  1000 * 60 * 5);	
 		return true;
-	}
-
-	public void creaPost(Foto f) {
-		dbfacade.carica(f);
-	}
-	
-	public void creaPost(Sondaggio s) {
-		dbfacade.carica(s);
 	}
 	
 	@Override
@@ -366,6 +420,9 @@ public class Profilo implements IProfilo {
 		return s;
 	}
 
+	/**
+	 *Carica un post nel database
+	 */
 	@Override
 	public boolean pubblicaPost(Post p) {
 		boolean b = dbfacade.carica(p);
@@ -378,6 +435,9 @@ public class Profilo implements IProfilo {
 		return false;
 	}
 
+	/**
+	 *Rimuove un post dal database
+	 */
 	@Override
 	public boolean rimuoviPost(Post p) {
 		String s = dbfacade.cerca(p).getProfilo();
@@ -389,6 +449,11 @@ public class Profilo implements IProfilo {
 		return false;
 	}
 
+	/**
+	 *Cerca un post nel database
+	 *@return post cercato
+	 *@exception eccezione se il post non esiste
+	 */
 	@Override
 	public Post cercaPost(Post p) throws PostNonVisibile, PostNonPresente{
 		if (dbfacade.cerca(p) == null) {
@@ -397,10 +462,18 @@ public class Profilo implements IProfilo {
 		return dbfacade.cerca(p);
 	}
 
+	/**
+	 * Ritorna la lista dei post di tutti i profili che seguo
+	 * @return ArrayList di stringhe con gli id dei post che seguo
+	 */
 	public ArrayList<String> caricaPostProfiliSeguiti(String profilo, TipoPost tipo) {
 		ArrayList<String> postDeiProfiliSeguiti = dbfacade.caricaPostProfiliSeguiti(profilo, tipo);
 		return postDeiProfiliSeguiti;
 	}
+	
+	/**
+	 * Ritorna la lista dei post visibili del tipo specificato nel parametro 
+	 */
 	@Override
 	public ArrayList<Post> selectAllPost(TipoPost t) {
 		ArrayList<Post> p = dbfacade.selectAllPost(t);
@@ -412,6 +485,11 @@ public class Profilo implements IProfilo {
 		return p1;
 	}
 
+	/**
+	 * Carica un post che si elimina in automatico dopo time ore
+	 * @param ore in cui voglio che il post sia nel database
+	 * @param multimedia, cioè foto o video, che voglio caricare
+	 */
 	@Override
 	public boolean pubblicaStoria(int time, Multimedia f){
 	
@@ -427,6 +505,9 @@ public class Profilo implements IProfilo {
 		return true;
 	}
 
+	/**
+	 * Restituisce il path all' interno del pc del post specificato
+	 */
 	@Override
 	public String ottieniPercorso(Post p) throws PostNonVisibile{
 		if(dbfacade.vediVisibilita(p) == true)
@@ -435,11 +516,19 @@ public class Profilo implements IProfilo {
 		throw new PostNonVisibile(p.getIdPost());
 	}
 
+	
+	/**
+	 * Restituisce la lista di tutti i commenti(con tutte le iformazioni) sotto un post
+	 */
 	@Override
 	public ArrayList<Commento> selectAllCommentiSottoPost(Post p) {
 		return dbfacade.mostraCommentiPost(p);
 	}
 
+	
+	/**
+	 * Restituisce la lista di tutti i commenti(solo testo) sotto un post
+	 */
 	@Override
 	public ArrayList<String> testoCommentiPost(Post p) throws PostNonVisibile{
 		if(dbfacade.vediVisibilita(p) == true)
@@ -447,16 +536,31 @@ public class Profilo implements IProfilo {
 		throw new PostNonVisibile(p.getIdPost());
 	}
 
+	/**
+	 * Mi dice se il post è visibile
+	 */
 	@Override
 	public boolean vediVisibilita(Post p) {
 		return dbfacade.vediVisibilita(p);
 	}
 
+	/**
+	 * Modifica la visibilita di un post
+	 */
 	@Override
 	public boolean modificaVisibilita(Post p, boolean b) {
 		return dbfacade.modificaVisibilita(p, b);
 	}
 
+	/**
+	 * Permette di aggiungere un voto ad un sondaggio
+	 * @param id del sondaggio a cui si vuole votare
+	 * @param opzione del sondaggio scelta
+	 * @param tipo di sondaggio a cui vogliamo votare
+	 * @return true se la votazione è avvenuta correttamente
+	 * @exception Eccezione se inserisco una opzione che non esiste
+	 * @exception Eccezione se cerco di v otare due volte allo stesso sondaggio
+	 */
 	@Override
 	public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, TipoPost t) throws TastoNonEsistente, AzioneNonConsentita{
 
@@ -510,6 +614,9 @@ public class Profilo implements IProfilo {
 		throw new AzioneNonConsentita();
 	}
 
+	/**
+	 * Stampa a schermo i risultati che ha ottenuto un certo sondaggio
+	 */
 	@Override
 	public void vediRisultatiSondaggio(Sondaggio s) {
 		if(s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
@@ -526,6 +633,10 @@ public class Profilo implements IProfilo {
 		}	
 	}
 
+	/**
+	 * Cerca un profilo nel database
+	 * @return ritorna il profilo cercato
+	 */
 	@Override
 	public Profilo cercaProfilo(Profilo p) throws AccountDoesNotExist {
 		ArrayList<Profilo> res = new ArrayList<>();
@@ -537,22 +648,39 @@ public class Profilo implements IProfilo {
 		throw new AccountDoesNotExist(p.getIdProfilo());
 	}
 
+	/**
+	 * Modifica l'immagine di profilo
+	 * @param path dell'immagine da inserire
+	 */
 	@Override
 	public boolean cambiaImmagineProfilo(String immagine) {
 		return dbfacade.modificaImmagineProfilo(new Profilo(this.getIdProfilo()), immagine);
 	}
 
+	/**
+	 * Mostra l'immagine di profilo del profilo indicato
+	 */
 	@Override
 	public String ottieniImmagineProfilo(Profilo p) {
 		return dbfacade.ottieniImmagineProfilo(p);
 	}
 
 
+	/**
+	 * Restituisce un arrayList con tutte le info dei messaggi relativi ad un profilo
+	 * @param profilo di cui vogliamo vedere i messaggi
+	 * @param Tipo di messaggi che vogliamo vedere
+	 */
 	@Override
 	public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t) {
 		return dbfacade.selezionaMessaggiProfilo(p, t);
 	}
 
+	/**
+	 * Restituisce un arrayList con il testo dei messaggi relativi ad un profilo
+	 * @param profilo di cui vogliamo vedere i messaggi
+	 * @param Tipo di messaggi che vogliamo vedere
+	 */
 	@Override
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t) {
 		return dbfacade.selezionaTestoMessaggiProfilo(p, t);
@@ -560,6 +688,13 @@ public class Profilo implements IProfilo {
 
 
 
+	/**
+	 * Restituisce tutti i post visibili di un profilo. Restituisce anche i non visibili se cerco i post del mio profilo
+	 * @param profilo di cui vogliamo vedere i post
+	 * @param Tipo di Post che vogliamo vedere
+	 * @return Arraylist di stringhe in cui abbiamo idPost e percorso se il post è multimediale(foto,video)
+	 *  e abbiamo idPost e descrizione per gli altri tipi di post
+	 */
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(pr,null));
@@ -601,21 +736,33 @@ public class Profilo implements IProfilo {
     
 }
 
+	/**
+	 * Mostra il nickname di un profilo indicato
+	 */
 	@Override
 	public String vediNickname(Profilo p) {
 		return dbfacade.vediNickname(p);
 	}
 
+	/**
+	 * Modifica il nickname di un profilo indicato
+	 */
 	@Override
 	public boolean modificaNickname(Profilo p, String n) {
 		return dbfacade.modificaNickname(p, n);
 	}
 
+	/**
+	 * Mostra la descrizione di un profilo indicato
+	 */
 	@Override
 	public String vediDescrizione(Profilo p) {
 		return dbfacade.vediDescrizione(p);
 	}
 
+	/**
+	 * Modifica la descrizione di un profilo indicato
+	 */
 	@Override
 	public boolean modificaDescrizione(String n) {
 		return dbfacade.modificaDescrizione(new Profilo(this.getIdProfilo()), n);
@@ -628,6 +775,12 @@ public class Profilo implements IProfilo {
 		return c;
 	}
 
+	/**
+	 * Carica un commento nel database
+	 * @param id del profilo sotto cui sarà scritto il commento
+	 * @param id del post sotto cui sarà scritto il commento
+	 * @param testo del commento
+	 */
 	@Override
 	public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento) {
 		Commento c;
@@ -640,21 +793,40 @@ public class Profilo implements IProfilo {
 	}
 
 
+	/**
+	 * Rimuove un commento dal database
+	 * @param id del commento da rimuovere
+	 */
 	@Override
 	public boolean rimuoviCommento(String idCommento)  {
 		return dbfacade.rimuovi(new Commento(idCommento));
 	}
 
+	/**
+	 * cerca un commento nel database
+	 * @return commento trovato
+	 */
 	@Override
 	public Commento cercaCommento(String idCommento) {
 		return dbfacade.cerca(new Commento(idCommento));
 	}
 
+	/**
+	 * Ritorna una lista con l'id e il nickname di un profilo seguito dall'id commento
+	 */
 	@Override
 	public ArrayList<String> ProfiloNickCommento(Profilo p) {
 		return dbfacade.ProfiloNickCommento(p);
 	}
 
+	/**
+	 * Crea un gruppo e lo carica nel database
+	 * @param descrizione del gruppo 
+	 * @param nome del gruppo
+	 * @param id dei profili partecipanti
+	 * @param id dell'amministratore del gruppo
+	 * @param path della foto del gruppo
+	 */
 	public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
 		Gruppo g;
 		String idGruppo  = Integer.toString((int)Math.round(Math.random() * 1000));
@@ -668,28 +840,45 @@ public class Profilo implements IProfilo {
 		return dbfacade.carica(g);
 	}
 
+	/**
+	 * Rimuove un gruppo dal database
+	 */
 	@Override
 	public boolean rimuoviGruppo(Gruppo g)  {
 		return dbfacade.rimuovi(g);
 	}
 
+	/**
+	 * Modifica i partecipanti ad un gruppo
+	 * @param id del gruppo
+	 * @param id dei partecipanti da modificare
+	 */
 	@Override
 	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String fotoGruppo)  {
 		Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null,fotoGruppo);
 		return dbfacade.gestisciPartecipanti(g);
 	}
 
+	/**
+	 * Cerca nel database il gruppo indicato
+	 */
 	@Override
 	public Gruppo cercaGruppo(Gruppo g) {
 		return dbfacade.cerca(g);
 	}
 	
+	/**
+	 * Carica l'id e il nome di un gruppo di cui il profilo indicato fa parte
+	 */
 	public ArrayList<String> caricaGruppiProfilo(String profilo) {
 		return dbfacade.caricaGruppiProfilo(profilo);
 	}
 
 
 
+	/**
+	 * Mostra tutte le informazioni di tutti i gruppi
+	 */
 	@Override
 	public ArrayList<Gruppo> selectAllGruppo(){
 		ArrayList<Gruppo> res = dbfacade.selectAllGruppo();
@@ -697,16 +886,28 @@ public class Profilo implements IProfilo {
 		}
 
 
+	/**
+	 * Modifica la foto di un gruppo
+	 * @param gruppo da modificare
+	 * @param path della foto da inserire
+	 */
 	@Override
 	public boolean modificaFotoGruppo(Gruppo g, String s) {
 		return dbfacade.cambiaFotoGruppo(g, s);
 	}
 
+	/**
+	 * Mostra il path della foto di un gruppo
+	 */
 	@Override
 	public String vediFotoGruppo(Gruppo g) {
 		return dbfacade.vediFotoGruppo(g);
 	}	
 
+	/**
+	 * Permette di aggiungere like ad un post
+	 * @exception se provo a mettere like due volte
+	 */
 	@Override
 	public boolean aggiungiLike(Post p)throws AzioneNonConsentita{	
 		if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
@@ -722,6 +923,10 @@ public class Profilo implements IProfilo {
 	}
 
 
+	/**
+	 * Permette di aggiungere dislike ad un post
+	 * @exception se provo a mettere like due volte
+	 */
 	@Override
 	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita{
 		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
@@ -735,6 +940,10 @@ public class Profilo implements IProfilo {
 		}
 	}
 
+	/**
+	 * Permette di rimuovere il like ad un post
+	 * @exception se provo a togliere like quando non c'è
+	 */
 	@Override
 	public boolean rimuoviLike(Post p)throws AzioneNonConsentita{
 
@@ -749,6 +958,10 @@ public class Profilo implements IProfilo {
 
 	}
 
+	/**
+	 * Permette di rimuovere il dislike ad un post
+	 * @exception se provo a togliere dislike quando non c'è
+	 */
 	@Override
 	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita{
 		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {	
@@ -761,13 +974,12 @@ public class Profilo implements IProfilo {
 		throw new AzioneNonConsentita();
 	}
 
-	@Override
-	public boolean creaGruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
-		String profilo3, String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo)
-		throws AccountDoesNotExist {
-		return false;
-	}
 
+	/**
+	 * Carica nel database un messaggio di gruppo (Utile per il controller)
+	 * @param testo del messaggio da scrivere
+	 * @param id del gruppo 
+	 */
 	public void scriviMessaggioGruppo(String testo, String idGruppo) {
 		MessaggioDiGruppo m;
 		int idMessaggioInt = (int)Math.round(Math.random() * 1000);
@@ -784,6 +996,10 @@ public class Profilo implements IProfilo {
 		return dbfacade.caricaMessaggiChatGruppoConProfiloInviante(idGruppo);
 	}
 
+	/**
+	 * Cambia la password "Cambiami" inserita di default nel profilo
+	 * @param nuova password da inserire
+	 */
 	public boolean cambiaDefaultPassword (String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p = new Profilo(this.getIdProfilo(), null);
 	 	String s = dbfacade.vediPsw(this.getIdProfilo());
@@ -799,6 +1015,11 @@ public class Profilo implements IProfilo {
 	 		throw new AccountDoesNotExist(this.getIdProfilo());
 		}
 
+	/**
+	 * Permette di modifica l'attuale psw di un profilo
+	 * @param vecchia password
+	 * @param nuova password da inserire
+	 */
 	public boolean cambiaPassword(String vecchiaPassword, String nuovaPassword) throws ChangeDefaultPassword, AccountDoesNotExist {
 		
 		Profilo p = new Profilo(this.getIdProfilo());
@@ -819,10 +1040,21 @@ public class Profilo implements IProfilo {
 		return false;	
 	}
 	
+	/**
+	 * Funzione che permette di rimuovere dal database il profilo personale di un utente
+	 */
 	public boolean rimuoviQuestoProfilo() {
 	 	return dbfacade.rimuovi(new Profilo(this.getIdProfilo()));
 	 }		
 	
+	/**
+	 * Carica nel database una foto (Utile per il controller)
+	 * @param descrizione della foto
+	 * @param visibilita della foto
+	 * @param profilo nel quale caricare la foto
+	 * @param path della foto
+	 * @param mi dice se la foto è in alta definizione 
+	 */
 	 public void pubblicaFoto(String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
@@ -834,6 +1066,14 @@ public class Profilo implements IProfilo {
 		this.pubblicaPost(p);
 	}
 	 
+	 /**
+		 * Carica nel database un sondaggio doppia votazione (Utile per il controller)
+		 * @param descrizione del sondaggio
+		 * @param visibilita del sondaggio
+		 * @param profilo nel quale caricare il sondaggio
+		 * @param prima scelta del sondaggio
+		 * @param seconda opzione del sondaggio
+		 */
 	public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
 			
 		SondaggioDoppiaVotazione s;
@@ -847,6 +1087,16 @@ public class Profilo implements IProfilo {
 		 this.pubblicaPost(s);
 		}
 	
+	/**
+	 * Carica nel database un sondaggio scelta multipla (Utile per il controller)
+	 * @param descrizione del sondaggio
+	 * @param visibilita del sondaggio
+	 * @param profilo nel quale caricare il sondaggio
+	 * @param prima scelta del sondaggio
+	 * @param seconda opzione del sondaggio
+	 * @param terza opzione del sondaggio
+	 * @param quarta opzione del sondaggio
+	 */
 	public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
 		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
 				
@@ -860,6 +1110,15 @@ public class Profilo implements IProfilo {
 		 }
 		 this.pubblicaPost(s);
 	}
+	
+	/**
+	 * Carica nel database un testo (Utile per il controller)
+	 * @param descrizione del testo
+	 * @param visibilita del testo
+	 * @param profilo nel quale caricare il testo
+	 * @param stringa che indica il font utilizzato
+	 * @param titolo del testo
+	 */
 	public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
 		
 		String idPost = "T" + Integer.toString((int)Math.round(Math.random() * 1000));
@@ -948,6 +1207,8 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 	}
 	return null;
 }
+
+
 
 }
 
