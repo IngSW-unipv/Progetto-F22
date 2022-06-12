@@ -180,7 +180,7 @@ public class Frame extends JFrame {
 		return ((Home)mappaSchermate.get("Home")).getpIdea();
 	}
 	
-	public Pulsanti getPostPrincipale() {
+	public JButton getPostPrincipale() {
 		return ((Home)mappaSchermate.get("Home")).getPostPrincipale();
 	}
 	
