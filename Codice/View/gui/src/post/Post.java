@@ -109,8 +109,19 @@ import post.enumeration.TipoPost;
 				+ profilo;
 	}
 	
+	/**
+	 * Ritorna il tipo del messaggio "reale"
+	 */
 	public abstract TipoPost getTipo();
+	
+	/**
+	 * Inserisce alcune caratteristiche specifiche relative al tipo di messaggio derivato
+	 */
 	public abstract Post inserisciCaratteristiche(Post p);
+	
+	/**
+	 * Ritorna, se esiste, il path di un oggetto multimediale presente nel pc
+	 */
 	public abstract String getPercorso();
 	}
 

@@ -12,6 +12,10 @@ import db.messaggio.messaggioPrivato.MessaggioPrivatoDB;
 
 public class MessaggioUtility{
 
+	/**
+	 * Converte un Messaggio in un MessaggioDB corrispondente al rispettivo tipo
+	 * @param un oggetto di tipo Messaggio "reale"
+	 */
 	public MessaggioDB converti(Messaggio mess) {
 		if(mess.getTipo() == TipoMessaggio.PRIVATO) {
 			MessaggioPrivato msg = (MessaggioPrivato) mess.inserisciCaratteristiche(mess);
@@ -26,7 +30,10 @@ public class MessaggioUtility{
 		return null;
 	}
 
-	
+	/**
+	 * Converte un MessaggioDB in un Messaggio in base al tipo
+	 * @param Oggetto di tipo Messaggio utilizzabile solo per eseguire le query
+	 */
 	public Messaggio convertiInverso(MessaggioDB mess, TipoMessaggio tipo) {
 
 		if(tipo == TipoMessaggio.PRIVATO) {
@@ -45,7 +52,10 @@ public class MessaggioUtility{
 	}
 	
 	
-	
+	/**
+	 * Metodo che ottiene le informazioni riguardo le chiavi esterne ad un oggetto di tipo messaggio
+	 * @return Vettore di stringhe con all'interno le informazioni relative alle chiavi esterne
+	 */
 	public String [] ritornaCaratteristiche(Messaggio m) {
 		String [] s = new String [2];
 		if(m.getTipo() == TipoMessaggio.PRIVATO){
@@ -67,6 +77,10 @@ public class MessaggioUtility{
 	}
 
 
+	/**
+	 * Converte una lista di MessaggioDB in una lista di Messaggio
+	 * @param ArrayList di MessaggioDB, tipo utilizzabile solo nel database
+	 */
 public ArrayList<Messaggio> convertiLista(TipoMessaggio t, ArrayList<MessaggioDB> m){
 	ArrayList<Messaggio> ms = new ArrayList<>();;
 	   for(MessaggioDB msg : m)

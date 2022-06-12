@@ -20,6 +20,11 @@ import post.testo.Testo;
 
 public class PostUtility {
 
+	
+	/**
+	 * Converte un Post in un PostDB corrispondente al rispettivo tipo
+	 * @param un oggetto di tipo Post "reale"
+	 */
 	public PostDB converti(Post p) {
 		if(p.getTipo() == TipoPost.FOTO) {
 			Foto f = (Foto) p.inserisciCaratteristiche(p);
@@ -51,6 +56,10 @@ public class PostUtility {
 	}
 	
 	
+	/**
+	 * Converte un PostDB in un Post in base al tipo
+	 * @param Oggetto di tipo Post utilizzabile solo per eseguire le query
+	 */
 	public Post convertiInverso(PostDB p, TipoPost t) {
 		
 		if(t == TipoPost.FOTO) {
@@ -83,6 +92,10 @@ public class PostUtility {
 	}
 	
 	
+	/**
+	 * Metodo che ottiene le informazioni riguardo le chiavi esterne di tipo string ad un oggetto di tipo Post
+	 * @return Vettore di stringhe con all'interno le informazioni relative alle chiavi esterne
+	 */
 	public String[] ritornaChiaviString(Post p) {
 		String s[] = new String[4];
 		
@@ -128,7 +141,10 @@ public class PostUtility {
 		return null;
 	}
 	
-	
+	/**
+	 * Metodo che ottiene le informazioni riguardo le chiavi esterne di tipo int ad un oggetto di tipo Post
+	 * @return intero con all'interno le informazioni relative alla chiave esterna
+	 */
 	public int ritornaChiaviInt(Post p) {
 		int s = 0;
 		if(p.getTipo() == TipoPost.VIDEO) {
@@ -141,7 +157,10 @@ public class PostUtility {
 		return -1;
 	}
 	
-	
+	/**
+	 * Metodo che ottiene le informazioni riguardo le chiavi esterne di tipo boolean ad un oggetto di tipo Post
+	 * @return boolean con all'interno le informazioni relative alla chiave esterna
+	 */
 	public boolean ritornaChiaviBoolean(Post p) {
 		boolean s = false;
 			
@@ -156,7 +175,10 @@ public class PostUtility {
 	}
 	
 
-	
+	/**
+	 * Converte una lista di PostDB in una lista di Post
+	 * @param ArrayList di PostDB, tipo utilizzabile solo nel database
+	 */
 	public ArrayList<Post> convertiLista(TipoPost t, ArrayList<PostDB> p){
 		ArrayList<Post> res = new ArrayList<>();
 		for(PostDB ps : p)
@@ -165,6 +187,12 @@ public class PostUtility {
 	}
 	
 	
+	/**
+	 * Metodo che restituisce una istanza del tipo di post inserito 
+	 * @param id dell'oggetto da costruire
+	 * @param Tipo dell'oggetto da costruire
+	 * @return istanza dell'oggetto costruito
+	 */
     public Post restituisciTipo(String id, TipoPost t) {
     	Post pst;
     	if(t == TipoPost.FOTO) {

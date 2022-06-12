@@ -70,8 +70,17 @@ public abstract class Messaggio {
 				+ ", testo=" + testo + ", profiloInviante=" + profiloInviante + "]";
 	}	
 	
+	/**
+	 * Ritorna il tipo del messaggio "reale"
+	 */
 	public abstract TipoMessaggio getTipo();
+	
+	/**
+	 * Inserisce alcune caratteristiche specifiche relative al tipo di messaggio derivato
+	 */
 	public abstract Messaggio inserisciCaratteristiche(Messaggio m);
+	
+	
 	public String getProfiloInviante() {
 		return profiloInviante;
 	}
