@@ -289,7 +289,8 @@ public class Profilo implements IProfilo {
 		int i = 0;
 		public void run() {
 				ArrayList<Messaggio> mess = dbfacade.selezionaMessaggi(profiloInviante,profiloRicevente, t);
-			    for(Messaggio lis : mess)		    	
+			    for(Messaggio lis : mess)	
+			    	System.out.println(lis.toString());
 			    	i++;
 		               if(i == 5) 
 		        	      timer.cancel();
@@ -830,34 +831,34 @@ public class Profilo implements IProfilo {
 		 if(dbfacade.cerca(new Foto(idPost)) != null) {
 		 pubblicaFoto(descrizione, visibile, profilo, percorso, isHd);
 		 }
-		dbfacade.carica(p);
+		this.pubblicaPost(p);
 	}
 	 
 	public void pubblicaSondaggioDoppiaVotazione(String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
 			
 		SondaggioDoppiaVotazione s;
-		String idPost = "S" + Integer.toString((int)Math.round(Math.random() * 1000));
+		String idPost = "SD" + Integer.toString((int)Math.round(Math.random() * 1000));
 		 		
 		 s = new SondaggioDoppiaVotazione(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta);
 		 		
 		 if(dbfacade.cerca(new SondaggioDoppiaVotazione(idPost)) != null) {
 		 	pubblicaSondaggioDoppiaVotazione(descrizione, visibile, profilo, primaScelta, secondaScelta);
 		 	}
-		 	dbfacade.carica(s);
+		 this.pubblicaPost(s);
 		}
 	
 	public void pubblicaSondaggioSceltaMultipla(String descrizione, boolean visibile, String profilo,
 		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
 				
 		SondaggioSceltaMultipla s;
-		String idPost = "S" + Integer.toString((int)Math.round(Math.random() * 1000));
+		String idPost = "SM" + Integer.toString((int)Math.round(Math.random() * 1000));
 		 		
 		 s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 		 		
 		 if(dbfacade.cerca(new SondaggioSceltaMultipla(idPost, null, false, null, null, null, null, null)) != null) {
 		 	pubblicaSondaggioSceltaMultipla(descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
 		 }
-		dbfacade.carica(s);
+		 this.pubblicaPost(s);
 	}
 	public void pubblicaTesto(String descrizione, boolean visibile, String profilo, String font, String titolo) {
 		
@@ -868,7 +869,7 @@ public class Profilo implements IProfilo {
 	 	if(dbfacade.cerca(new Testo(idPost)) != null) {
 	 		pubblicaTesto(descrizione, visibile, profilo, font, titolo);
 	 	}
-	 	dbfacade.carica(t);
+	 	this.pubblicaPost(t);
 	}
 
 @Override
