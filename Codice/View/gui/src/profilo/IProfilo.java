@@ -28,8 +28,8 @@ import profilo.follow.Follow;
 
 public interface IProfilo {
  
-	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia,String profiloInviante,String idGruppo);
-	public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String multimedia,String idProfiloInviante, String idProfiloRicevente);
+	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo,String profiloInviante,String idGruppo);
+	public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String idProfiloInviante, String idProfiloRicevente);
 	public boolean scriviMessaggio(Messaggio m);
 	public boolean rimuoviMessaggio(Messaggio m);
 	public Messaggio cercaMessaggio(Messaggio m);

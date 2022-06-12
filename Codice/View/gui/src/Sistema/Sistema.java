@@ -105,7 +105,7 @@ public class Sistema {
  		if(dbfacade.cerca(new MessaggioPrivato(idMessaggio)) != null) {
  			scriviMessaggio(testo, multimediale, inviante, ricevente);
  		}
- 		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, multimediale, inviante, ricevente));
+ 		profiloAttivo.scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, inviante, ricevente));
 	}
 		
 	public Profilo getProfiloAttivo() {

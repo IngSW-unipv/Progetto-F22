@@ -16,8 +16,8 @@ import java.util.*;
 public class testfacade {
 
 	public static void main(String[] args) {
-		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001", "002");
-		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00", null);
+		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001");
+		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00");
 	//	Commento c = new Commento("C00", null, null, null, null, "F01", null, null, null, null);
 		Foto f = new Foto("F00", null, false, null, null, false);
      //  Profilo p  = new Profilo("P00", null);

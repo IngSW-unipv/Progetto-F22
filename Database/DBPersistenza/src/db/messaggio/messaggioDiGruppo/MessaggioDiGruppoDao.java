@@ -29,14 +29,13 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo,multimedia) values (?,?,?,?,?)";
+			String query="insert into messaggiodigruppo (idMsgGrp,dataInvio,oraInvio,testo) values (?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, m.getIdMessaggio());
 			st1.setDate(2, m.getDataInvio());
 			st1.setTime(3, m.getOraInvio());
 			st1.setString(4, m.getTesto());
-			st1.setString(5, m.getMultimedia());
 			
 			st1.executeUpdate();
 
@@ -131,7 +130,8 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));				DBConnection.closeConnection(conn);
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));	
+				DBConnection.closeConnection(conn);
              	return msg;
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -161,7 +161,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));		
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}
@@ -275,8 +275,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 			while(rs1.next())
 			{
-				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6), rs1.getString(7));
-
+				MessaggioDiGruppoDB msg=new MessaggioDiGruppoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5),rs1.getString(6));
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}

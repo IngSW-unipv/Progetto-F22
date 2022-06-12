@@ -7,8 +7,8 @@ import Messaggio.enumeration.TipoMessaggio;
 
 public class MessaggioPrivato extends Messaggio{
 
-	public MessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante, String idProfiloRicevente) {
-		super(id, dataInvio, oraInvio, testo, multimedia,profiloInviante);
+	public MessaggioPrivato(String id, Date dataInvio, Time oraInvio, String testo, String profiloInviante, String idProfiloRicevente) {
+		super(id, dataInvio, oraInvio, testo,profiloInviante);
 
 		this.idProfiloRicevente = idProfiloRicevente;
 	}
@@ -17,8 +17,8 @@ public class MessaggioPrivato extends Messaggio{
 		super(id);
 	}
 	
-	public MessaggioPrivato(String id, String testo, String multimedia, String profiloInviante, String idProfiloRicevente) {
-		super(id, testo, multimedia,profiloInviante);
+	public MessaggioPrivato(String id, String testo, String profiloInviante, String idProfiloRicevente) {
+		super(id, testo,profiloInviante);
 		this.idProfiloRicevente = idProfiloRicevente;
 	}
 
@@ -42,7 +42,7 @@ public class MessaggioPrivato extends Messaggio{
 	}
 	@Override
 	public Messaggio inserisciCaratteristiche(Messaggio m) {
-		m = new MessaggioPrivato(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getMultimedia(),m.getProfiloInviante(),this.getIdProfiloRicevente());
+		m = new MessaggioPrivato(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getProfiloInviante(),this.getIdProfiloRicevente());
 		return m;
 	}
 	

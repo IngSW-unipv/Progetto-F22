@@ -5,20 +5,18 @@ import java.sql.Time;
 
 public abstract class MessaggioDB {
 
-	public MessaggioDB(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante) {
+	public MessaggioDB(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String profiloInviante) {
 		super();
 		this.idMessaggio = idMessaggio;
 		this.dataInvio = dataInvio;
 		this.oraInvio = oraInvio;
 		this.testo = testo;
-		this.multimedia = multimedia;
 		this.profiloInviante = profiloInviante;
 	}
 	private String idMessaggio;
 	private Date dataInvio;
 	private Time oraInvio;
 	private String testo;
-	private String multimedia;
 	private String profiloInviante;
 	public String getIdMessaggio() {
 		return idMessaggio;
@@ -44,16 +42,11 @@ public abstract class MessaggioDB {
 	public void setTesto(String testo) {
 		this.testo = testo;
 	}
-	public String getMultimedia() {
-		return multimedia;
-	}
-	public void setMultimedia(String multimedia) {
-		this.multimedia = multimedia;
-	}
+
 	@Override
 	public String toString() {
 		return "[idMessaggio=" + idMessaggio + ", dataInvio=" + dataInvio + ", oraInvio=" + oraInvio
-				+ ", testo=" + testo + ", multimedia=" + multimedia + ", profiloInviante=" + profiloInviante + "]";
+				+ ", testo=" + testo + ", profiloInviante=" + profiloInviante + "]";
 	} 
 	public abstract MessaggioDB inserisciCaratteristiche(MessaggioDB m);
 	public String getProfiloInviante() {

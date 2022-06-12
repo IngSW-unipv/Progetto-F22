@@ -34,8 +34,8 @@ public class ProfiloTester {
         Commento c = new Commento("C01", "001", "F01", "aadhd");
         Profilo plof = new Profilo("Dal",null);
     	// p.pubblicaCommento(c);
-    	MessaggioDiGruppo m = new MessaggioDiGruppo("MDG00", null, null, "ciaoooo", "F00", "G00", "DV999");
-    	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001", "002");
+    	MessaggioDiGruppo m = new MessaggioDiGruppo("MDG00", null, null, "ciaoooo", "F00", "G00");
+    	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001");
     
       
     	/*try {

@@ -250,15 +250,15 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String multimedia, String profiloInviante,
+	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo, String profiloInviante,
 		String idGruppo) {
-		MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, multimedia, profiloInviante,idGruppo);
+		MessaggioDiGruppo m = new MessaggioDiGruppo(id, dataInvio, oraInvio, testo, profiloInviante,idGruppo);
 		return m;
 	}
 	@Override
-	public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String multimedia,
+	public MessaggioPrivato creaMessaggioPrivato(String id, String testo,
 		String idProfiloInviante, String idProfiloRicevente) {
-		MessaggioPrivato m = new MessaggioPrivato(id,testo,multimedia,idProfiloInviante,idProfiloRicevente);
+		MessaggioPrivato m = new MessaggioPrivato(id,testo,idProfiloInviante,idProfiloRicevente);
 		return m;
 	}
 	@Override
@@ -519,9 +519,15 @@ public class Profilo implements IProfilo {
 	public void vediRisultatiSondaggio(Sondaggio s) {
 		if(s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
 		SondaggioDoppiaVotazione sdv = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
+		System.out.println("L'opzione " + sdv.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SDV(s) + " voti\n"
+				+ "L'opzione " + sdv.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n");
 		}
 		else if(s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
 			SondaggioSceltaMultipla ssm = (SondaggioSceltaMultipla) dbfacade.cerca(s);
+			System.out.println("L'opzione " + ssm.getPrimaScelta() + " ha totalizzato " + dbfacade.vediCount1SSM(s) + " voti\n"
+					+ "L'opzione " + ssm.getSecondaScelta() + " ha totalizzato " + dbfacade.vediCount2SDV(s) + " voti\n"
+					+ "L'opzione " + ssm.getTerzaScelta() + " ha totalizzato " + dbfacade.vediCount3SSM(s) + " voti\n"
+					+ "L'opzione " + ssm.getQuartaScelta() + " ha totalizzato " + dbfacade.vediCount4SSM(s) + " voti\n");
 		}	
 	}
 
@@ -562,6 +568,12 @@ public class Profilo implements IProfilo {
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(pr,null));
+	
+	//Se i post sono miei ritona anche quelli non visibili
+	if(pr.equals(this.getIdProfilo()))
+		return res;
+	
+	
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
 	ArrayList<Post> search = new ArrayList<>();

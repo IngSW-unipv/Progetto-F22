@@ -7,7 +7,7 @@ import db.facade.DbFacade;
 public class MessaggioDiGruppoTester {
 
 	public static void main(String[] args) {
-		MessaggioDiGruppo m = new MessaggioDiGruppo("007", null, null, null, null, "G00", "001");
+		MessaggioDiGruppo m = new MessaggioDiGruppo("007", null, null, null, null, "G00");
 	  
 		DbFacade.getIstance().carica(m);
 		/*ArrayList<String> res = mdao.ottieniTestoListaMessaggi("G00");

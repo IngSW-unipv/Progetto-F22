@@ -9,9 +9,9 @@ import db.messaggio.MessaggioDB;
 
 public class MessaggioPrivatoDB extends MessaggioDB{
 
-	public MessaggioPrivatoDB(String idMsgPvt, Date dataInvio, Time oraInvio, String testo, String multimedia,
+	public MessaggioPrivatoDB(String idMsgPvt, Date dataInvio, Time oraInvio, String testo,
 			String profiloInviante, String profiloRicevente) {
-		super(idMsgPvt,dataInvio,oraInvio,testo,multimedia,profiloInviante);
+		super(idMsgPvt,dataInvio,oraInvio,testo,profiloInviante);
 
 		this.profiloRicevente = profiloRicevente;
 	}
@@ -25,7 +25,7 @@ public class MessaggioPrivatoDB extends MessaggioDB{
 		this.profiloRicevente = profiloRicevente;
 	}
 	public  MessaggioDB inserisciCaratteristiche(MessaggioDB m) {
-		m = new MessaggioPrivatoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), m.getMultimedia(), this.getProfiloInviante(), this.getProfiloRicevente());
+		m = new MessaggioPrivatoDB(m.getIdMessaggio(), m.getDataInvio(), m.getOraInvio(), m.getTesto(), this.getProfiloInviante(), this.getProfiloRicevente());
 		return m;
 	}
 	
