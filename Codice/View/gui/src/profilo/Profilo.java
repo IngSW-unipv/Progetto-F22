@@ -28,6 +28,7 @@ import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.ChangeDefaultPassword;
+import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -456,12 +457,10 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta) throws TastoNonEsistente, PostNonVisibile, PostNonPresente{
-		SondaggioSceltaMultipla s = (SondaggioSceltaMultipla)cercaPost(new SondaggioSceltaMultipla(idSondaggio));
-		if (s.getTipo() == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), s.getIdPost()) == false) {
-			SondaggioDoppiaVotazione res = (SondaggioDoppiaVotazione) dbfacade.cerca(s);
-			Scanner scanner = new Scanner(System.in);
-			int a = scanner.nextInt(); 
+	public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, TipoPost t) throws TastoNonEsistente, AzioneNonConsentita{
+
+		if (t == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), idSondaggio) == false) {
+			Sondaggio s = new SondaggioDoppiaVotazione(idSondaggio);
 			switch(scelta) {
 			case 1 : int i1 = dbfacade.vediCount1SDV(s);
                  i1 = i1 + 1;
@@ -473,15 +472,14 @@ public class Profilo implements IProfilo {
 				dbfacade.modificaCount2SDV(s, i2);
                  break;
 			default:
-				scanner.close();
 				throw new TastoNonEsistente();
 			}
 			dbfacade.caricaSondaggioMap(this.getIdProfilo(), s.getIdPost());
-			scanner.close();
 		return true;
 		}
-		else if (s.getTipo() == TipoPost.SONDAGGIOSCELTAMULTIPLA && dbfacade.presenteSondaggioMap1(this.getIdProfilo(), s.getIdPost()) == false) {
-			SondaggioSceltaMultipla res = (SondaggioSceltaMultipla) dbfacade.cerca(s);
+		
+		else if (t == TipoPost.SONDAGGIOSCELTAMULTIPLA && dbfacade.presenteSondaggioMap1(this.getIdProfilo(), idSondaggio) == false) {
+			SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idSondaggio);
 			Scanner scanner = new Scanner(System.in);
 			int a = scanner.nextInt(); 
 			switch(a) {
@@ -505,14 +503,12 @@ public class Profilo implements IProfilo {
 				dbfacade.modificaCount4SSM(s, i4);
 				break;
 			default:
-				scanner.close();
 				throw new TastoNonEsistente();
 			}
 			dbfacade.caricaSondaggioMap1(this.getIdProfilo(), s.getIdPost());
-        	scanner.close();
         	return true;
 		}
-		return false;
+		throw new AzioneNonConsentita();
 	}
 
 	@Override
@@ -907,7 +903,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 		
 	}
 @Override
-public boolean rimuoviPartecipante(String idGruppo, String idProfilo) {
+public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws GruppoGiaPieno {
 	
 	Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 	
@@ -931,47 +927,8 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo) {
 			dbfacade.gestisciPartecipante6(null, g);
 		}
 	}
-	//aggiungere exception gruppo gi� pieno
-	return false;
+	throw new GruppoGiaPieno(idGruppo);
 	
-}
-
-
-@Override
-public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-
-@Override
-public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public boolean modificaDescrizione(Profilo p, String n) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public Commento cercaCommento(Commento c) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-@Override
-public boolean modificaDescrizione(String idProfilo, String n) {
-	// TODO Auto-generated method stub
-	return false;
 }
 
 }

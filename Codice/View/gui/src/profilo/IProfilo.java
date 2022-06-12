@@ -21,6 +21,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -55,20 +56,18 @@ public interface IProfilo {
 	public ArrayList<String> testoCommentiPost(Post p)throws PostNonVisibile;
 	public boolean vediVisibilita(Post p);
 	public boolean modificaVisibilita(Post p, boolean b);
-	public boolean aggiungiVotoSondaggio(Sondaggio s)throws TastoNonEsistente;
+	public boolean aggiungiVotoSondaggio(String idSondaggio,int scelta, TipoPost t)throws TastoNonEsistente, AzioneNonConsentita;
 	public void vediRisultatiSondaggio(Sondaggio s);
     public Profilo cercaProfilo(Profilo p)throws AccountDoesNotExist;
-    public boolean cambiaImmagineProfilo(Profilo p, String immagine);
+    public boolean cambiaImmagineProfilo(String immagine);
     public String ottieniImmagineProfilo(Profilo p);
     public ArrayList<Messaggio> selezionaMessaggiProfilo(Profilo p, TipoMessaggio t);
 	public ArrayList<String> selezionaTestoMessaggiProfilo(Profilo p, TipoMessaggio t);  
-	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f);
+	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String idProfilo, TipoPost f);
 	public String vediNickname(Profilo p);
 	public boolean modificaNickname(Profilo p, String n);
 	public String vediDescrizione(Profilo p);
-	public boolean modificaDescrizione(Profilo p, String n);
     public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
-	public Commento cercaCommento(Commento c);
 	public ArrayList<String> ProfiloNickCommento(Profilo p);
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
@@ -90,15 +89,11 @@ public interface IProfilo {
 	boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1, String profilo2, String profilo3,
 			String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo)
 			throws AccountDoesNotExist;
-	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta)
-			throws TastoNonEsistente, PostNonVisibile, PostNonPresente;
 	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento);
 	boolean rimuoviCommento(String idCommento);
-	Commento cercaCommento(String idCommento);
-	boolean cambiaImmagineProfilo(String immagine);
-	boolean modificaDescrizione(String idProfilo, String n);
+	public Commento cercaCommento(String idCommento);
 	boolean modificaDescrizione(String n);
 	boolean aggiungiPartecipante(String idGruppo, String idProfilo);
-	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
+	boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws GruppoGiaPieno;
 }
 

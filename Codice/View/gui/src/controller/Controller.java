@@ -973,7 +973,7 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1);
-   					} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   					} catch (TastoNonEsistente e1) {
    				}
     	   }
        };
@@ -984,7 +984,7 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2);
-   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   			} catch (TastoNonEsistente e1) {
    			}
     	   }
        };
@@ -995,7 +995,7 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3);
-   			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+   			} catch (TastoNonEsistente e1) {
    			}
     	   }
        };
@@ -1006,7 +1006,7 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {
     		   try {
 				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4);
-			} catch (TastoNonEsistente | PostNonVisibile | PostNonPresente e1) {
+			} catch (TastoNonEsistente e1) {
 			}
     	   }
        };
