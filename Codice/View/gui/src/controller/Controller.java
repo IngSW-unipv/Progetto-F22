@@ -143,12 +143,18 @@ public class Controller {
     	gestorePostSuccessivo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                view.setContatorePost(view.getContatorePost() + 1);
-            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-            	view.rimuoviPostHome();
-            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
-            	view.aggiornaPostHome();
-            	refresh();
+            	System.out.println(view.getContatorePost());
+            	System.out.println(postSchermataHome.size());
+            	if(view.getContatorePost() <= postSchermataHome.size() - 2) {
+	                view.setContatorePost(view.getContatorePost() + 1);
+	            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+	            	view.rimuoviPostHome();
+	            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
+	            	view.aggiornaPostHome();
+	            	refresh();
+            	} else {
+            		System.out.println("Non ci sono altri post, array finito");
+            	}
             }
         };
         view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
@@ -156,12 +162,16 @@ public class Controller {
         gestorePostPrecedente = new ActionListener() {
             @Override
              public void actionPerformed(ActionEvent e) {
-            	view.setContatorePost(view.getContatorePost() - 1);
-            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-               	view.rimuoviPostHome();
-            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
-            	view.aggiornaPostHome();
-            	refresh();
+            	if(view.getContatorePost() >= 1) {
+	            	view.setContatorePost(view.getContatorePost() - 1);
+	            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+	               	view.rimuoviPostHome();
+	            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
+	            	view.aggiornaPostHome();
+	            	refresh();
+            	} else {
+            		System.out.println("Contatore uguale a 0, non ci sono post precedenti");
+            	}
             }
         };
         view.getButtonPrevPost().addActionListener(gestorePostPrecedente);      
