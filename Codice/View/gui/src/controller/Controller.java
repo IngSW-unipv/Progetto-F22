@@ -1177,7 +1177,7 @@ public class Controller {
         if(getPostAttuale() == 0) {
             String percorsoFilePost = view.ottieniPercorsoFile();
             if (percorsoFilePost != null) {
-            model.getProfiloAttivo().pubblicaFoto(commentoPost, true, false, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+            model.getProfiloAttivo().pubblicaFoto(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
             }
         }
         else if(getPostAttuale() == 1) {

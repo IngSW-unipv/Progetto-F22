@@ -32,6 +32,7 @@ public class ProfiloTester {
         Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999", "F00");
 
         Commento c = new Commento("C01", "001", "F01", "aadhd");
+        Profilo plof = new Profilo("Dal",null);
     	// p.pubblicaCommento(c);
     	MessaggioDiGruppo m = new MessaggioDiGruppo("MDG00", null, null, "ciaoooo", "F00", "G00", "DV999");
     	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001", "002");
@@ -90,7 +91,11 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
     	*/
-    	p.pubblicaFoto("F57", false, false, null, null, false);
+ 
+
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("Dal", TipoPost.FOTO);
+    	for(String s:res)
+    		System.out.println(s.toString());
     }
 }
 

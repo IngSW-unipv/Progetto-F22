@@ -5,6 +5,7 @@ import Messaggio.Messaggio;
 import Messaggio.MessaggioDiGruppo;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.gruppo.Gruppo;
+import post.enumeration.TipoPost;
 //import post.commento.Commento;
 import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
@@ -23,14 +24,14 @@ public class testfacade {
         DbFacade dbf = DbFacade.getIstance();
         Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999", "F00");
        SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto");        
-        Profilo plof = new Profilo("Dv999", "Davide99");
+        Profilo plof = new Profilo("DV999", "Davide99");
         
        dbf.cerca(plof);
         
        
       
         
-        System.out.println(dbf.carica(mpv));
+      /*  System.out.println(dbf.carica(mpv));
         System.out.println(dbf.carica(mdg));
        
         ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(),null, mdg.getTipo());
@@ -49,6 +50,9 @@ public class testfacade {
         
         System.out.println(dbf.carica(sdv));
         
-        System.out.println(DbFacade.getIstance().carica(g));
+        System.out.println(DbFacade.getIstance().carica(g));*/
+       ArrayList<String> res = DbFacade.getIstance().ottieniIdPost(TipoPost.TESTO,new Profilo("DV999", null));
+       for(String s : res)
+    	   System.out.println(s.toString());
 }
 }

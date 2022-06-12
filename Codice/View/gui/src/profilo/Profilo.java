@@ -561,7 +561,7 @@ public class Profilo implements IProfilo {
 
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
-	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(idProfilo));
+	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(pr,null));
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
 	ArrayList<Post> search = new ArrayList<>();
@@ -584,9 +584,12 @@ public class Profilo implements IProfilo {
 	for(Post posttt: search) {
 		if(dbfacade.vediVisibilita(posttt) == true) {
 			risultato.add(posttt.getIdPost());
-		    risultato.add(posttt.getPercorso());
+			if(f == TipoPost.FOTO || f == TipoPost.VIDEO)
+		        risultato.add(posttt.getPercorso());
+			else if(f == TipoPost.SONDAGGIODOPPIAVOTAZIONE || f == TipoPost.SONDAGGIOSCELTAMULTIPLA || f == TipoPost.TESTO)
+				risultato.add(posttt.getDescrizione());
 		}
-	} 
+	}
 		return risultato;
     
 }
@@ -813,13 +816,13 @@ public class Profilo implements IProfilo {
 	 	return dbfacade.rimuovi(new Profilo(this.getIdProfilo()));
 	 }		
 	
-	 public void pubblicaFoto(String descrizione, boolean visibile, boolean condivisibile, String profilo, String percorso, boolean isHd) {
+	 public void pubblicaFoto(String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
 		 p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
 		 		
 		 if(dbfacade.cerca(new Foto(idPost)) != null) {
-		 pubblicaFoto(descrizione, visibile, condivisibile, profilo, percorso, isHd);
+		 pubblicaFoto(descrizione, visibile, profilo, percorso, isHd);
 		 }
 		dbfacade.carica(p);
 	}
