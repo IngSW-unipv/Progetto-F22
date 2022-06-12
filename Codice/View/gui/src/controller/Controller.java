@@ -134,6 +134,7 @@ public class Controller {
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	System.out.println("ciao");
             }
         };
         view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
@@ -143,9 +144,9 @@ public class Controller {
     	gestorePostSuccessivo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	System.out.println(view.getContatorePost());
-            	System.out.println(postSchermataHome.size());
-            	if(view.getContatorePost() <= postSchermataHome.size() - 2) {
+            	//System.out.println(view.getContatorePost());
+            	//System.out.println(postSchermataHome.size());
+            	if(view.getContatorePost() <= postSchermataHome.size() - 2) {	//DA RIVEDERE
 	                view.setContatorePost(view.getContatorePost() + 1);
 	            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
 	            	view.rimuoviPostHome();
@@ -180,55 +181,55 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		mostraSchermata("Impostazioni");
-                    }
-                };
-                view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
+        	}
+        };
+        view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
                 
-                gestoreCreaUnaChatDiGruppoHome = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        mostraSchermata("CreazioneChatDiGruppo");
-                    }
-                };
-                view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppoHome);
+        gestoreCreaUnaChatDiGruppoHome = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mostraSchermata("CreazioneChatDiGruppo");
+            }
+        };
+        view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppoHome);
                 
-                gestoreProfilo = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	
-                    	aggiornaSchermataProfiloAttivo();
-                        refresh();
-                        view.getPulsanteSegui().setVisible(false);
-                        view.getApriChat().setVisible(false);
-                        mostraSchermata("Profilo");
-                    }
-                };
-                view.getProfiloButton().addActionListener(gestoreProfilo);
-                
-                
-                gestoreChat = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                    	listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
-                        view.settaSchermataChat(listaGruppi);
-                    	mostraSchermata("Chat");
-                    }
-                };
-                view.getChatButton().addActionListener(gestoreChat);
+        gestoreProfilo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	
+            	aggiornaSchermataProfiloAttivo();
+                refresh();
+                view.getPulsanteSegui().setVisible(false);
+                view.getApriChat().setVisible(false);
+                mostraSchermata("Profilo");
+            }
+        };
+        view.getProfiloButton().addActionListener(gestoreProfilo);
                 
                 
-                gestoreCerca = new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if(verificaTestoRicerca()) {
-                            ricerca();
-                            mostraSchermata("Ricerca");
-                            
-                        } else 
-                            view.setTestoRicerca("Inserire un username da cercare");        
-                    }
-                };
-                view.getCercaButton().addActionListener(gestoreCerca);
+        gestoreChat = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+                view.settaSchermataChat(listaGruppi);
+            	mostraSchermata("Chat");
+            }
+        };
+        view.getChatButton().addActionListener(gestoreChat);
+                
+                
+        gestoreCerca = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(verificaTestoRicerca()) {
+                    ricerca();
+                    mostraSchermata("Ricerca");
+                    
+                } else 
+                    view.setTestoRicerca("Inserire un username da cercare");        
+            }
+        };
+        view.getCercaButton().addActionListener(gestoreCerca);
     }
     
     

@@ -19,7 +19,8 @@ public class Home extends JPanel {
 	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter, containerPost;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
-	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
+	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,
+					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
@@ -31,7 +32,6 @@ public class Home extends JPanel {
 		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
 		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
 		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
-		
 		avvio();		
 		this.initComponents(bufferPosts, bufferStories);
 	}
@@ -75,7 +75,8 @@ public class Home extends JPanel {
 	}
 	
 	public void aggiornaPostHome() {
-		containerPost.add(postPrincipale = new Pulsanti(percorsoPost));
+		postPrincipale.impostaPercorsoPost(percorsoPost);	//Aggiorna il percorso del post che deve essere visualizzato
+		containerPost.add(postPrincipale);
         this.invalidate();
         this.validate();
         this.repaint();
@@ -315,6 +316,13 @@ public class Home extends JPanel {
 	public Pulsanti getPostPrincipale() {
 		return postPrincipale;
 	}
+
+
+	public void setPostPrincipale(Pulsanti postPrincipale) {
+		this.postPrincipale = postPrincipale;
+	}
+	
+	
 	
 	
 	

@@ -46,6 +46,12 @@ public class Pulsanti extends JButton{
 			this.setVisible(true);
 		}
 		
+		public void impostaPercorsoPost(String percorsoPost) {
+			Icon profileLabel = new ImageIcon(percorsoPost);
+			this.setIcon(profileLabel);
+			this.setVisible(true);
+		}
+		
 
 		
 		
