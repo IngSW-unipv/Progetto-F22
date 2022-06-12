@@ -143,6 +143,7 @@ public class Controller {
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
             }
         };
         view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
