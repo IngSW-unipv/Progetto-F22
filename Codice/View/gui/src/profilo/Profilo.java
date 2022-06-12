@@ -1131,6 +1131,11 @@ public class Profilo implements IProfilo {
 	 	this.pubblicaPost(t);
 	}
 
+	/**
+	 * Permette di aggiungere un partecipante ad un gruppo
+	 * @param id del gruppo 
+	 * @param id del profilo da aggiungere
+	 */
 @Override
 public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 		
@@ -1160,6 +1165,11 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 		return false;
 		
 	}
+/**
+ * Permette di rimuovere un partecipante da un gruppo
+ * @param id del gruppo 
+ * @param id del profilo da aggiungere
+ */
 @Override
 public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws GruppoGiaPieno {
 	
@@ -1188,7 +1198,12 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws Grup
 	throw new GruppoGiaPieno(idGruppo);
 	
 }
-
+/**
+ * Ritorna il conteggio di un determinato sondaggio
+ * @param id del sondaggio 
+ * @param tipo di sondaggio
+ * @return vettore di interi con i punteggi effettuati da ciascuna opzione
+ */
 @Override
 public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 	if(p == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
