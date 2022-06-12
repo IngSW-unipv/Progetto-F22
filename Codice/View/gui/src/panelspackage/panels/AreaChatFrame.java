@@ -3,8 +3,10 @@ package panelspackage.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import packageframe.Frame;
 import panelspackage.panels.elements.AreaDiTesto;
@@ -24,6 +26,13 @@ public class AreaChatFrame extends JPanel {
 	private InserimentoTesto scriviMessaggio;
 	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio;
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
+	private Pulsanti refresh;
+	private Pulsanti eliminaChat;
+	private Pulsanti aggiungiUtente;
+	private JFileChooser modifica;
+	private Pulsanti modificaFoto;
+	private Pulsanti eliminaGruppo;
+	
 	public AreaChatFrame() {
 		avvio();
 		initComponents();
@@ -45,7 +54,10 @@ public class AreaChatFrame extends JPanel {
       
       scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
 	  scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
-      SpecificContainer containerSouth = new SpecificContainer(getBackground());
+	  
+      SpecificContainer containerSouth1 = new SpecificContainer(getBackground());
+      containerSouth1.setLayout(new GridLayout(3, 1));
+      this.add(containerSouth1, BorderLayout.SOUTH);
 	 
      
 		for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
@@ -56,19 +68,41 @@ public class AreaChatFrame extends JPanel {
 		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
+		SpecificContainer containerCenter = new SpecificContainer();
+		this.add(containerCenter, BorderLayout.CENTER);
+		
+		eliminaChat = (new Pulsanti("Elmina chat", Frame.COLOREPRIMARIOTEMATICO));
+		aggiungiUtente = (new Pulsanti("Aggiungi un utente", Frame.COLOREPRIMARIOTEMATICO));
+		modifica = new JFileChooser();
+		modificaFoto = new Pulsanti("Modifica la foto", Frame.COLOREPRIMARIOTEMATICO);
+		eliminaGruppo = new Pulsanti("Elimina il gruppo", Frame.COLOREPRIMARIOTEMATICO);
+		
+		containerCenter.add(eliminaChat);
+		containerCenter.add(aggiungiUtente);
+		containerCenter.add(modifica);
+		containerCenter.add(modificaFoto);
+		containerCenter.add(eliminaGruppo);
+		
+		
 		//SpecificContainer containerCenter = new SpecificContainer(getBackground());
 	    //add(containerCenter, BorderLayout.CENTER);
 	    GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
 		add(grigliaMessaggi, BorderLayout.CENTER);
 		
-      this.add(containerSouth, BorderLayout.SOUTH);
-	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
-		
+      
+	  
+	  
+	  refresh = new Pulsanti("Refresh", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
+	  containerSouth1.add(refresh);
+	  containerSouth1.add(scriviMessaggio);
+	  
 	  invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-	  containerSouth.add(invia,BorderLayout.EAST);
-
+	  containerSouth1.add(invia,BorderLayout.EAST);
+      
+	  SpecificContainer containerSouth2 = new SpecificContainer();
+	  this.add(containerSouth2, BorderLayout.SOUTH);
 	  home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-	  containerSouth.add(home,BorderLayout.SOUTH);
+	  containerSouth2.add(home,BorderLayout.SOUTH);
     }
     
 	public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
@@ -93,6 +127,7 @@ public class AreaChatFrame extends JPanel {
 			}
 		return true;
 	}
+	
     public void settaCommenti(ArrayList<String> commenti) {
 		this.setNumeroCommentiTotali(commenti.size()/2);
     }
@@ -168,6 +203,46 @@ public class AreaChatFrame extends JPanel {
 
 	public Pulsanti getPrevMessaggio() {
 		return prevMessaggio;
+	}
+
+	public Pulsanti getEliminaChat() {
+		return eliminaChat;
+	}
+
+	public void setEliminaChat(Pulsanti eliminaChat) {
+		this.eliminaChat = eliminaChat;
+	}
+
+	public JFileChooser getModifica() {
+		return modifica;
+	}
+
+	public void setModifica(JFileChooser modifica) {
+		this.modifica = modifica;
+	}
+
+	public Pulsanti getAggiungiUtente() {
+		return aggiungiUtente;
+	}
+
+	public void setAggiungiUtente(Pulsanti aggiungiUtente) {
+		this.aggiungiUtente = aggiungiUtente;
+	}
+
+	public Pulsanti getEliminaGruppo() {
+		return eliminaGruppo;
+	}
+
+	public void setEliminaGruppo(Pulsanti eliminaGruppo) {
+		this.eliminaGruppo = eliminaGruppo;
+	}
+
+	public Pulsanti getModificaFoto() {
+		return modificaFoto;
+	}
+
+	public void setModificaFoto(Pulsanti modificaFoto) {
+		this.modificaFoto = modificaFoto;
 	}
 	
 }
