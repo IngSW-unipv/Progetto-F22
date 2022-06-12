@@ -28,7 +28,6 @@ import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.ChangeDefaultPassword;
-import profilo.exception.FollowYourself;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -198,14 +197,13 @@ public class Profilo implements IProfilo {
 	}
 
 	@Override
-	public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita/*, FollowYourself */{
-	
-		/*if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true) {
-		if(this.profiloNonSeguito(this.getIdProfilo())) {
-			throw new FollowYourself(this.getIdProfilo());
-		}*/
-	Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
-	dbfacade.carica(f);int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
+	public boolean segui(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita{
+
+    if(this.profiloNonSeguito(profiloSeguito.getIdProfilo()) == true && this.accountEsistente(profiloSeguito.getIdProfilo()) == true && (profiloSeguito.getIdProfilo().equals(this.getIdProfilo()) == false)) {
+    
+    Follow f = new Follow(this.idProfilo, profiloSeguito.getIdProfilo());
+	dbfacade.carica(f);
+	int seguiti = dbfacade.vediNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
 	int follower = dbfacade.vediNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null));
 	
 	seguiti ++;
@@ -214,9 +212,12 @@ public class Profilo implements IProfilo {
 	dbfacade.modificaNumSeguiti(new Profilo(this.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), seguiti);
 	dbfacade.modificaNumFollower(new Profilo(profiloSeguito.getIdProfilo(),null,null, 0, 0, 0, false, false, false, null, null), follower);
 	return true;	
-	//}
-	//throw new AzioneNonConsentita();
-}
+	}
+      throw new AzioneNonConsentita();
+
+
+	}
+
 
 	@Override
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita {
@@ -773,12 +774,6 @@ public class Profilo implements IProfilo {
 		return dbfacade.caricaMessaggiChatGruppoConProfiloInviante(idGruppo);
 	}
 
-	@Override
-	public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	
 	public boolean cambiaDefaultPassword (String nuovaPsw) throws ChangeDefaultPassword, AccountDoesNotExist {
 		Profilo p = new Profilo(this.getIdProfilo(), null);
 	 	String s = dbfacade.vediPsw(this.getIdProfilo());
@@ -867,35 +862,6 @@ public class Profilo implements IProfilo {
 	 	dbfacade.carica(t);
 	}
 
-	@Override
-	public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean modificaDescrizione(Profilo p, String n) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Commento cercaCommento(Commento c) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean modificaDescrizione(String idProfilo, String n) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 @Override
 public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
 		
@@ -953,6 +919,44 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo) {
 	//aggiungere exception gruppo gi� pieno
 	return false;
 	
+}
+
+
+@Override
+public boolean aggiungiVotoSondaggio(Sondaggio s) throws TastoNonEsistente {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+
+@Override
+public boolean cambiaImmagineProfilo(Profilo p, String immagine) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public ArrayList<String> caricaTuttiiPostDiUnProfilo(Profilo p, TipoPost f) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public boolean modificaDescrizione(Profilo p, String n) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public Commento cercaCommento(Commento c) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public boolean modificaDescrizione(String idProfilo, String n) {
+	// TODO Auto-generated method stub
+	return false;
 }
 
 }

@@ -21,7 +21,6 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
-import profilo.exception.FollowYourself;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -73,7 +72,7 @@ public interface IProfilo {
 	public ArrayList<String> ProfiloNickCommento(Profilo p);
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;
-	public boolean segui(Profilo email)throws AccountDoesNotExist, AzioneNonConsentita, FollowYourself;
+	public boolean segui(Profilo email)throws AccountDoesNotExist, AzioneNonConsentita;
 	public boolean smettiDiSeguire(Profilo profiloSeguito) throws AccountDoesNotExist, AzioneNonConsentita;
 	public ArrayList<String> vediMieiFollower(Follow f);
 	public Follow cercaFollow(Follow f);

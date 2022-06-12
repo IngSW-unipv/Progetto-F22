@@ -14,6 +14,7 @@ import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
+import profilo.exception.AzioneNonConsentita;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -89,8 +90,12 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
     	*/
-    	Profilo p2 = new Profilo("dilo");
-    	p2.rimuoviPartecipante("G6", "frank");
+    	try {
+			System.out.println(p1.segui(p));
+		} catch (AccountDoesNotExist | AzioneNonConsentita e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
 

@@ -10,7 +10,7 @@ public class Commento {
 
 	public Commento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,
 			String idVideo,String idSDV,String idSSM, String idTesto) {
-    Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
+	Date d = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfMonth());
     Time t = new Time(LocalDateTime.now().getHour(), LocalDateTime.now().getMinute(), LocalDateTime.now().getSecond());
 	
 		this.idCommento = idCommento;
