@@ -197,6 +197,30 @@ package panelspackage.panels;
             impostaImmagineProfiloButton.setVisible(false);
         }
         
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+            numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            settaCommenti(commenti);
+            idPost = iDpost;
+              
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText("");
+            pulsanteQuartaScelta.setText("");
+            
+            etichettaPrimoRisultato.setText("fes");
+            etichettaSecondoRisultato.setText("fis");
+            etichettaTerzoRisultato.setText("");
+            etichettaQuartoRisultato.setText("");
+            descrizionePost.setText(descrizioneSondaggio);
+
+            containerPost.setVisible(false);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(false);
+        }
+        
         
 
         public ArrayList<JComponent> getListaAreaTesto() {

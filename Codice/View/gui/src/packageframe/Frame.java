@@ -347,6 +347,11 @@ public class Frame extends JFrame {
         ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, commenti);
     }
     
+    public void settaSondaggioVisualizzatoSceltaDoppia(String iDpost, String descrizionePost, String scelta1, String scelta2, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2,  numeroLike, numeroDislike, numeroCommenti, commenti);
+    }
+    
+    
 	
 	public String getTestoRicerca() {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
@@ -400,7 +405,20 @@ public class Frame extends JFrame {
 	
 	
 
-	
+	public Pulsanti getPulsantePrimoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoSondaggioDoppia();
+	}
+
+
+	public Pulsanti getPulsanteSecondoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSecondoSondaggioDoppia();
+	}
+
+
+	public Pulsanti getPulsanteTerzoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoSondaggioDoppia();
+	}
+
 	
 	public Pulsanti getPulsantePrimoSondaggio() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoSondaggio();
@@ -420,6 +438,10 @@ public class Frame extends JFrame {
 		((Profilo)mappaSchermate.get("Profilo")).setPostTestoProfilo(postTestoDelProfilo);
 	}
 	
+
+	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> percorsiPostSondaggioDoppiaScelta) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
+	}
 	
 	public int getContatoreFoto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreFoto();
@@ -847,5 +869,6 @@ public class Frame extends JFrame {
         ((Chat)mappaSchermate.get("Chat")).settaSchermataChat(gruppi);
 
     }
+
 	
 }
