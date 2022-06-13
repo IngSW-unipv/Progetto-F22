@@ -195,15 +195,17 @@ public class Controller {
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		view.rimuoviStorieHome();
-        		view.setPercorsiStorie("C:\\Users\\mamon\\Pictures\\malta 2018\\20180714_224630.jpg",
-        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145011.jpg",
-        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145014.jpg",
-        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145041.jpg",
-        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_151020.jpg");
-        		view.aggiornaStorieHome();
+        		//view.rimuoviStorieHome();
+        		//view.setPercorsiStorie("C:\\Users\\mamon\\Pictures\\malta 2018\\20180714_224630.jpg",
+        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145011.jpg",
+        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145014.jpg",
+        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145041.jpg",
+        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_151020.jpg");
+        		//view.aggiornaStorieHome();
         		refresh();
+        	
         	}
+        	
         };
         view.getButtonNextStory().addActionListener(gestoreStorySuccessiva);
         
@@ -955,7 +957,8 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
-        		settaSchermataGruppo(g);
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -964,7 +967,10 @@ public class Controller {
         gestoreSecondaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Seconda chat gruppo");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
         view.getSecondaChatGruppoButton().addActionListener(gestoreSecondaChatGruppo);
@@ -1519,11 +1525,11 @@ public class Controller {
 		model.getProfiloAttivo().rimuoviQuestoProfilo();
 	}
 	
-	public void settaSchermataGruppo(Gruppo g) {
+	public void settaSchermataGruppo(Gruppo g, ArrayList<String> commenti) {
 		this.gruppoAttuale = g.getIdGruppo();
+		view.setIdGruppo(g.getIdGruppo());
+		view.aggiornaMessaggiGruppo(commenti);
 		//view.getDescrizioneGroupe().setText(g.getDescrizione());
-		messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
-		for(int i=0; i <messaggiInviatiGruppoConInviante.size(); i++ ) {
-		}
+		//messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
 	}
 }

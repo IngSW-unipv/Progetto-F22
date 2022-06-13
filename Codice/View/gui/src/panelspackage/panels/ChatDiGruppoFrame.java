@@ -30,6 +30,7 @@ public class ChatDiGruppoFrame extends JPanel {
 	private SpecificContainer containerAmministratore;
 	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio, utenteDaEliminareButton, utenteDaAggiungereButton;
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
+	private String idGruppo;
 
 	
 	public ChatDiGruppoFrame() {
@@ -97,22 +98,15 @@ public class ChatDiGruppoFrame extends JPanel {
     }
     
     
-	public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
+	public boolean aggiornaMessaggiGruppo(ArrayList<String> messaggi) {
 		if(messaggi.size() == 0) {
 			return false;
 		} 
 
-		for(int i = 0 ; i < 20 || i < messaggi.size(); i = i + 2) {
+		for(int i = 0 ; i < 10 || i < messaggi.size(); i++) {
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
-			if (messaggi.get(indiceCorrente2).equals(inviante)) {
-			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
-			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
-				}
-			else {
-				((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2 + 1));
-				((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText("");
-				}
-			}
+			((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2));
+		}
 		return true;
 	}
 	
@@ -273,4 +267,11 @@ public class ChatDiGruppoFrame extends JPanel {
 		this.indiceMessaggioCorrente = indiceMessaggioCorrente;
 	}
 
+	public String getIdGruppo() {
+		return idGruppo;
+	}
+
+	public void setIdGruppo(String idGruppo) {
+		this.idGruppo = idGruppo;
+	}
 }

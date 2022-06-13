@@ -568,9 +568,9 @@ public class Profilo implements IProfilo {
 	 * @exception Eccezione se inserisco una opzione che non esiste
 	 * @exception Eccezione se cerco di v otare due volte allo stesso sondaggio
 	 */
-	@Override
-	public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, TipoPost t) throws TastoNonEsistente, AzioneNonConsentita{
-
+	public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost) throws TastoNonEsistente, AzioneNonConsentita{
+		TipoPost t = null;
+		t.valueOf(tipoPost);
 		if (t == TipoPost.SONDAGGIODOPPIAVOTAZIONE && dbfacade.presenteSondaggioMap(this.getIdProfilo(), idSondaggio) == false) {
 			Sondaggio s = new SondaggioDoppiaVotazione(idSondaggio);
 			switch(scelta) {

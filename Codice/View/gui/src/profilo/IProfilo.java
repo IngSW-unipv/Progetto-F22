@@ -96,5 +96,16 @@ public interface IProfilo {
 	boolean modificaDescrizione(String n);
 	boolean aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) throws GruppoGiaPieno, ProfiloGiaInserito;
 	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
+	/**
+	 * Permette di aggiungere un voto ad un sondaggio
+	 * @param id del sondaggio a cui si vuole votare
+	 * @param opzione del sondaggio scelta
+	 * @param tipo di sondaggio a cui vogliamo votare
+	 * @return true se la votazione è avvenuta correttamente
+	 * @exception Eccezione se inserisco una opzione che non esiste
+	 * @exception Eccezione se cerco di v otare due volte allo stesso sondaggio
+	 */
+	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost)
+			throws TastoNonEsistente, AzioneNonConsentita;
 }
 
