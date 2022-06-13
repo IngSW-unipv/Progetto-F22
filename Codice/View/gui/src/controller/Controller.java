@@ -52,7 +52,7 @@ public class Controller {
     private ArrayList<String> percorsiPostSondaggioDoppiaScelta = new ArrayList<String>();
 
     private ArrayList<String> listaGruppi = new ArrayList<String>();
-    
+    private TipoPost tipoPostAttuale;
     ArrayList<String> messaggi = new ArrayList<String>();
 	public Controller(Sistema s, Frame f) {
         view = f;
@@ -500,11 +500,6 @@ public class Controller {
 					e1.printStackTrace();
 				}
 
-            	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println(commentiConProfiliIinvianti.get(i));
-            	}
-
-
             	view.getImpostaImmagineProfiloButton().setVisible(true);
             	view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
@@ -534,11 +529,7 @@ public class Controller {
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
-            		System.out.println(f.getIdPost());
-
-                	for(int i=0; i < commentiConProfiliIinvianti.size(); i++) {
-                		System.out.println(commentiConProfiliIinvianti.get(i));
-                	}
+          
 
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
                     view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
@@ -596,7 +587,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		
+        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
@@ -621,6 +612,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
@@ -646,6 +638,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
@@ -670,9 +663,9 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
+                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -695,8 +688,9 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
+                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -719,8 +713,9 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
+                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -1120,13 +1115,16 @@ public class Controller {
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   /*
-    	   }
+    		  
+    	   
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, view.getTipoSondaggio());
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, tipoPostAttuale);
    					} catch (TastoNonEsistente e1) {
-   				}
-   				*/
+   				} catch (AzioneNonConsentita e1) {
+   					System.out.println("sondaggio andato male");
+						e1.printStackTrace();
+					}
+   				
     	   }
     	   
        };
@@ -1134,13 +1132,13 @@ public class Controller {
        
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
-    	   public void actionPerformed(ActionEvent e) {
-    		   /*
-    	   }
-    		   try {
-   				//model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, view.getTipoSondaggio());
-   			} catch (TastoNonEsistente e1) {
-   			}*/
+    	   public void actionPerformed(ActionEvent e) {		     	   
+    		   	try {
+   					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, tipoPostAttuale);
+   					} catch (TastoNonEsistente e1) {
+   				} catch (AzioneNonConsentita e1) {
+						e1.printStackTrace();
+				}
     	   }
        };
        view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
@@ -1148,24 +1146,28 @@ public class Controller {
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   /*
+    		   
     		   try {
-   				//model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3),  view.getTipoSondaggio();
-   			} catch (TastoNonEsistente e1) {
-   			}*/
+  					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3, tipoPostAttuale);
+  					} catch (TastoNonEsistente e1) {
+  				} catch (AzioneNonConsentita e1) {
+						e1.printStackTrace();
+				}
     	   }
-       };
+      };
        view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
        
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   /*
+    		   
     		   try {
-				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  view.getTipoSondaggio());
-			} catch (TastoNonEsistente e1) {
-			}*/
-    	   }
+				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  tipoPostAttuale);
+    		   	} catch (TastoNonEsistente e1) {
+				} catch (AzioneNonConsentita e1) {
+					e1.printStackTrace();
+				}
+    	   	}
        };
        view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
        
