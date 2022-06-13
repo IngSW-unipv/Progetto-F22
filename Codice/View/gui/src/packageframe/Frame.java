@@ -537,6 +537,24 @@ public class Frame extends JFrame {
 	}
 	
 	
+	public void incrementaIndiceMessaggioChat() {
+		((Chat)mappaSchermate.get("Chat")).incrementaIndiceMessaggioCorrente();
+	}	
+	public void decrementaIndiceMessaggioChat() {
+		((Chat)mappaSchermate.get("Chat")).decrementaIndiceMessaggioCorrente();
+	}
+	public int getIndiceMessaggioCorrenteChat() {
+		return ((Chat)mappaSchermate.get("Chat")).getIndiceMessaggioCorrente();
+	}
+	public Pulsanti getProssimoMessaggioButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getProssimoMessaggio();
+	}
+	public Pulsanti getMessaggioPrecedenteButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getMessaggioPrecedente();
+	}	
+	
+	
+	
 	public JButton getHomeChatButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getTornaHome();
 	}

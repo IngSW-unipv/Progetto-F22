@@ -30,7 +30,7 @@ public class Controller {
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame, gestoreInviaMessaggioGruppo,
-                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3;
+                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente;
     Frame view;
     Sistema model;
     
@@ -309,7 +309,16 @@ public class Controller {
 	    	}
 	    };
 	    view.getSalvaModificheButton().addActionListener(gestoreSalvaLeModifiche);
-
+	    
+	    gestoreRimuoviAccount = new ActionListener() {
+	    	    	@Override
+	    	    	public void actionPerformed(ActionEvent e) {
+	    			//view.getContainerCenterFrame().setVisible(false);
+	    	    		rimuoviProfilo();
+	    	    		mostraSchermata("Login");
+	    	    	}
+	    	    };
+	    	    view.getEliminaAccountButton().addActionListener(gestoreRimuoviAccount);
     }
     
     public void actionListenersProfilo() {
@@ -905,6 +914,20 @@ public class Controller {
         };
         view.getHomeChatButton().addActionListener(gestoreHomeChat);
              
+        gestoreProssimoMessaggio = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		view.incrementaIndiceMessaggioChat();
+        	}
+        };
+        view.getProssimoMessaggioButton().addActionListener(gestoreProssimoMessaggio);
+        
+        gestoreMessaggioPrecedente = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		view.decrementaIndiceMessaggioChat();
+        	}
+        };
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1463,6 +1486,11 @@ public class Controller {
 		
 		return percorsoPost;
 	}
+	
+	public void rimuoviProfilo() {
+		model.getProfiloAttivo().rimuoviQuestoProfilo();
+	}
+	
 	public void settaSchermataGruppo(Gruppo g) {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.getDescrizioneGroupe().setText(g.getDescrizione());
