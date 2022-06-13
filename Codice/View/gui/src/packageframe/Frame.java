@@ -846,24 +846,80 @@ public class Frame extends JFrame {
 	public Pulsanti getPulsanteTerzoTesto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoTesto();
 	}
-	public Pulsanti getAggiungiUtente() {
-		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getAggiungiUtente();
+	//iniizo
+	public void aggiornaMessaggiGruppo(ArrayList<String> messaggi) {
+	}
+
+
+
+	public Pulsanti getInvia() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getInvia();
+	}
+
+
+	public int getIndiceMessaggioCorrenteGruppo() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getIndiceMessaggioCorrente();
 	}
 	
-	public AreaDiTesto getDescrizioneGroupe() {
-		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getDescrizione();
+	public void decrementaIndiceMessaggioCorrenteGruppo() {
+		((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).decrementaIndiceMessaggioCorrente();	
 	}
-	public InserimentoTesto getTestoRimuoviUtente() {
-		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getRimuovi();
+	
+	public void incrementaIndiceMessaggioCorrenteGruppo() {
+		((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).incrementaIndiceMessaggioCorrente();;
 	}
-	public InserimentoTesto getAggiungi() {
-		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getAggiungi();
-    }
+
+	public Pulsanti getNextMessaggiGruppo() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getNextMessaggio();
+	}
+
+	public Pulsanti getPrevMessaggioGruppo() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getPrevMessaggio();
+
+	}
+
+
+	public AreaDiTesto getTestoDescrizione() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getTestoDescrizione();
+	}
+
+	public AreaDiTesto getTestoDescrizioneNuova() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getTestoDescrizioneNuova();
+	}
+
+	public InserimentoTesto getUtenteDaEliminare() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaEliminare();
+	}
+
+	public InserimentoTesto getUtenteDaAggiungere() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaAggiungere();
+	}
+
+
+	public SpecificContainer getContainerAmministratore() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getContainerAmministratore();
+
+	}
+
+	public Pulsanti getUtenteDaEliminareButton() {
+		 return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaEliminareButton();
+
+	}
+
+	public Pulsanti getUtenteDaAggiungereButton() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaAggiungereButton();	
+	}
+
+
+	public Pulsanti setNextMessaggio(Pulsanti nextMessaggio) {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getPrevMessaggio();	
+
+	}
 	
 	public InserimentoTesto getScriviMessaggioGruppo() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getScriviMessaggio();	}
 
-	public Pulsanti getInvia() {
+	public Pulsanti getInviaGruppo() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getInvia();	
 	}
 

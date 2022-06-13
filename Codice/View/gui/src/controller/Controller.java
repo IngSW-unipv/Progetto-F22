@@ -29,8 +29,9 @@ public class Controller {
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
-                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame, gestoreInviaMessaggioGruppo,
-                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente;
+                           gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
+                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
+    						gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo;
     Frame view;
     Sistema model;
     
@@ -1514,7 +1515,7 @@ public class Controller {
 	
 	public void settaSchermataGruppo(Gruppo g) {
 		this.gruppoAttuale = g.getIdGruppo();
-		view.getDescrizioneGroupe().setText(g.getDescrizione());
+		//view.getDescrizioneGroupe().setText(g.getDescrizione());
 		messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
 		for(int i=0; i <messaggiInviatiGruppoConInviante.size(); i++ ) {
 		}

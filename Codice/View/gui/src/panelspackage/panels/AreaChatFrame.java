@@ -15,7 +15,6 @@ import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
 
-@SuppressWarnings("serial")
 public class AreaChatFrame extends JPanel {
 	
 	ArrayList<JComponent> ListaEtichetteMessaggi = new ArrayList<JComponent>();
@@ -91,10 +90,7 @@ public class AreaChatFrame extends JPanel {
 		} 
 
 		for(int i = 0 ; i < 20 || i < messaggi.size(); i = i + 2) {
-			System.out.println("ciclo numero :" +  messaggi.size());
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
-			System.out.println("ciclo numero :" + indiceCorrente2);
-
 			if (messaggi.get(indiceCorrente2).equals(inviante)) {
 			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
 			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
