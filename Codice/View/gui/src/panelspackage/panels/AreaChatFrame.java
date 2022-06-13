@@ -24,7 +24,7 @@ public class AreaChatFrame extends JPanel {
 	private InserimentoTesto scriviMessaggio;
 	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio;
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
-	
+
 	
 	public AreaChatFrame() {
 		avvio();
@@ -48,9 +48,12 @@ public class AreaChatFrame extends JPanel {
       
       scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
 	  scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
+
 	  
       SpecificContainer containerSouth = new SpecificContainer(getBackground());
       this.add(containerSouth, BorderLayout.SOUTH);
+      
+     
 	 
       containerSouth.add(scriviMessaggio);
      
@@ -62,22 +65,23 @@ public class AreaChatFrame extends JPanel {
 		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
-		
-		
-		
+
 		//SpecificContainer containerCenter = new SpecificContainer(getBackground());
 	    //add(containerCenter, BorderLayout.CENTER);
 	    GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
 		add(grigliaMessaggi, BorderLayout.CENTER);
 		
-      
-	  
+
+      this.add(containerSouth, BorderLayout.SOUTH);
+	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
+		
+
 	  invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(invia,BorderLayout.EAST);
-      
+
 	  home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
-    
+
     }
     
     
@@ -85,13 +89,12 @@ public class AreaChatFrame extends JPanel {
 		if(messaggi.size() == 0) {
 			return false;
 		} 
-		System.out.println("la funzione viene chiamata");
 
-		for(int i = 0 ; i < 20 && i < messaggi.size() - this.getIndiceMessaggioCorrente()/2; i = i + 2) {
-			System.out.println("ciclo numero" + i);
-
+		for(int i = 0 ; i < 20 || i < messaggi.size(); i = i + 2) {
+			System.out.println("ciclo numero :" +  messaggi.size());
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
-			System.out.println("indice : " + getIndiceMessaggioCorrente());
+			System.out.println("ciclo numero :" + indiceCorrente2);
+
 			if (messaggi.get(indiceCorrente2).equals(inviante)) {
 			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
 			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
@@ -180,6 +183,5 @@ public class AreaChatFrame extends JPanel {
 	public Pulsanti getPrevMessaggio() {
 		return prevMessaggio;
 	}
-
 
 }

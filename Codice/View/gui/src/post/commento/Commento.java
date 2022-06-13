@@ -34,7 +34,7 @@ public class Commento {
 		this.dataCommento = d;
 		this.testo = commento;
 		this.profilo = idProfilo;
-		this.idFoto = idPost;
+	    this.scegliTipoId(idPost);
 	}
 	
 	public Commento(String idCommento) {
@@ -120,5 +120,23 @@ public class Commento {
 	}
 	public void setIdTesto(String idTesto) {
 		this.idTesto = idTesto;
+	}
+	
+	/**
+	 * Assegna idPost all'attributo id (idFoto,idVideo,idSDV,idSSM,idTesto) corrispondente in base al prefisso di quest'ultimo
+	 * @param idPost da inserire nel modo corretto
+	 **/
+	public void scegliTipoId(String idPost) {
+		if(idPost.substring(0, 1).equals("F")) 
+			this.setIdFoto(idPost);
+		
+		else if(idPost.substring(0, 2).equals("SD")) 
+			this.setIdSDV(idPost);
+		
+		else if(idPost.substring(0, 2).equals("SM"))
+			this.setIdSSM(idPost);
+		
+		else if(idPost.substring(0, 1).equals("T"))
+			this.setTesto(idPost);
 	}
 }

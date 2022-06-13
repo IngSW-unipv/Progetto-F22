@@ -93,9 +93,15 @@ public class ProfiloTester {
     	*/
  
 
-    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("Dal", TipoPost.FOTO);
-    	for(String s:res)
-    		System.out.println(s.toString());
+    	try {
+			p1.aggiungiVotoSondaggio("S05", 3, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+		} catch (TastoNonEsistente e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AzioneNonConsentita e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }
 

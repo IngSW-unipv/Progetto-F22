@@ -347,6 +347,11 @@ public class Frame extends JFrame {
         ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, commenti);
     }
     
+    public void settaSondaggioVisualizzatoSceltaDoppia(String iDpost, String descrizionePost, String scelta1, String scelta2, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2,  numeroLike, numeroDislike, numeroCommenti, commenti);
+    }
+    
+    
 	
 	public String getTestoRicerca() {
 		return ((Home)mappaSchermate.get("Home")).getTestoRicerca().getText();
@@ -400,7 +405,20 @@ public class Frame extends JFrame {
 	
 	
 
-	
+	public Pulsanti getPulsantePrimoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoSondaggioDoppia();
+	}
+
+
+	public Pulsanti getPulsanteSecondoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteSecondoSondaggioDoppia();
+	}
+
+
+	public Pulsanti getPulsanteTerzoSondaggioDoppia() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteTerzoSondaggioDoppia();
+	}
+
 	
 	public Pulsanti getPulsantePrimoSondaggio() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsantePrimoSondaggio();
@@ -420,6 +438,10 @@ public class Frame extends JFrame {
 		((Profilo)mappaSchermate.get("Profilo")).setPostTestoProfilo(postTestoDelProfilo);
 	}
 	
+
+	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> percorsiPostSondaggioDoppiaScelta) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
+	}
 	
 	public int getContatoreFoto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreFoto();
@@ -515,6 +537,24 @@ public class Frame extends JFrame {
 	}
 	
 	
+	public void incrementaIndiceMessaggioChat() {
+		((Chat)mappaSchermate.get("Chat")).incrementaIndiceMessaggioCorrente();
+	}	
+	public void decrementaIndiceMessaggioChat() {
+		((Chat)mappaSchermate.get("Chat")).decrementaIndiceMessaggioCorrente();
+	}
+	public int getIndiceMessaggioCorrenteChat() {
+		return ((Chat)mappaSchermate.get("Chat")).getIndiceMessaggioCorrente();
+	}
+	public Pulsanti getProssimoMessaggioButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getProssimoMessaggio();
+	}
+	public Pulsanti getMessaggioPrecedenteButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getMessaggioPrecedente();
+	}	
+	
+	
+	
 	public JButton getHomeChatButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getTornaHome();
 	}
@@ -568,6 +608,19 @@ public class Frame extends JFrame {
 		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
 	}
 	
+	
+	public void impostaFotoPostVisualizzato(String percorso) {
+		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
+	}
+	
+	public String getTipoSondaggio() {
+		return 	((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getTipoSondaggio();
+	}
+
+
+	public void setTipoSondaggio(String tipoSondaggio) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).setTipoSondaggio(tipoSondaggio);
+	}
 	
 	public void settaCommenti(ArrayList<String> lista) {
 		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaCommenti(lista);
@@ -742,9 +795,7 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public void impostaFotoPostVisualizzato(String percorso) {
-		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
-	}
+
 	
 	
 	public JButton getNextTipoPost( ) {
@@ -835,9 +886,19 @@ public class Frame extends JFrame {
 	public void rimuoviPostHome() {
 		((Home)mappaSchermate.get("Home")).rimuoviPostHome();
 	}
+	
+	public JButton getButtonPrevStory() {
+		return ((Home)mappaSchermate.get("Home")).getButtonPrevStory();
+	}
+	
+	public JButton getButtonNextStory() {
+		return ((Home)mappaSchermate.get("Home")).getButtonNextStory();
+	}
+	
     public void settaSchermataChat(ArrayList<String> gruppi) {
         ((Chat)mappaSchermate.get("Chat")).settaSchermataChat(gruppi);
 
     }
+
 	
 }

@@ -1,0 +1,528 @@
+CREATE SCHEMA `socialNetwork` ;
+
+CREATE TABLE `commento` (
+  `IdCommento` varchar(35) NOT NULL,
+ 
+
+ `oraCommento` time DEFAULT NULL,
+  `dataCommento` date DEFAULT NULL,
+  `testo` varchar(200) DEFAULT NULL,
+ 
+
+ `post` varchar(35) NOT NULL,
+  PRIMARY KEY (`IdCommento`,`post`)
+) ;
+
+
+CREATE TABLE `foto` (
+  
+
+`idFoto` varchar(60) NOT NULL,
+  `dataPubblicazione` date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT 
+
+NULL,
+  `descrizione` varchar(200) DEFAULT NULL,
+  `numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT 
+
+NULL,
+  `visibile` tinyint(1) DEFAULT NULL,
+  `condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar
+
+(60) DEFAULT NULL,
+  `tempoCancellazione` int DEFAULT NULL,
+  `percorso` varchar(60) DEFAULT NULL,
+  
+
+`isStory` tinyint(1) DEFAULT NULL,
+  `isHd` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idFoto`)
+) ;
+
+
+CREATE TABLE `gruppo` (
+  `idGruppo` varchar(35) NOT NULL,
+  `descrizione` varchar(200) DEFAULT NULL,
+  
+
+`nomeGruppo` varchar(30) DEFAULT NULL,
+  `profilo1` varchar(40) DEFAULT NULL,
+  `profilo2` varchar(40) 
+
+DEFAULT NULL,
+  `profilo3` varchar(40) DEFAULT NULL,
+  `profilo4` varchar(40) DEFAULT NULL,
+  `profilo5` 
+
+varchar(40) DEFAULT NULL,
+  `profilo6` varchar(40) DEFAULT NULL,
+  `amministratore` varchar(40) DEFAULT 
+
+NULL,
+  PRIMARY KEY (`idGruppo`)
+) ;
+
+
+CREATE TABLE `messaggiaregruppo` (
+  
+
+`messaggioDiGruppo` varchar(35) NOT NULL,
+  `profilo` varchar(35) NOT NULL,
+  PRIMARY KEY 
+
+(`messaggioDiGruppo`,`profilo`)
+);
+
+
+CREATE TABLE `messaggiodigruppo` (
+  `idMsgGrp` 
+
+varchar(40) NOT NULL,
+  `dataInvio` date DEFAULT NULL,
+  `oraInvio` time DEFAULT NULL,
+  `testo` varchar
+
+(200) DEFAULT NULL,
+  `multimedia` varchar(100) DEFAULT NULL,
+  `gruppo` varchar(40) DEFAULT NULL,
+  
+
+PRIMARY KEY (`idMsgGrp`)
+) ;
+
+
+
+CREATE TABLE `messaggioprivato` (
+  `idMsgPvt` varchar(35) 
+
+NOT NULL,
+  `dataInvio` date DEFAULT NULL,
+  `oraInvio` time DEFAULT NULL,
+  `testo` varchar(200) DEFAULT 
+
+NULL,
+  `multimedia` varchar(100) DEFAULT NULL,
+  `profiloInviante` varchar(30) DEFAULT NULL,
+  
+
+`profiloRicevente` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idMsgPvt`)
+) ;
+
+
+
+CREATE TABLE `post` (
+ 
+
+ `idPost` varchar(30) NOT NULL,
+  `dataPubblicazione` date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT 
+
+NULL,
+  `Descrizione` varchar(200) DEFAULT NULL,
+  `numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT 
+
+NULL,
+  `visibile` tinyint(1) DEFAULT NULL,
+  `condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar
+
+(30) DEFAULT NULL,
+  PRIMARY KEY (`idPost`)
+);
+
+
+CREATE TABLE `profilo` (
+  `idProfilo` varchar(35) 
+
+NOT NULL,
+  `nickname` varchar(40) DEFAULT NULL,
+  `descrizione` varchar(200) DEFAULT NULL,
+  `numFollower` 
+
+int DEFAULT NULL,
+  `numSeguiti` int DEFAULT NULL,
+  `numPost` int DEFAULT NULL,
+  `tipo` varchar(20) 
+
+DEFAULT NULL,
+  `messaggioDiGruppo` varchar(35) DEFAULT NULL,
+  `messaggioPrivato` varchar(35) DEFAULT 
+
+NULL,
+  `utente` varchar(35) DEFAULT NULL,
+  `post` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`idProfilo`)
+);
+
+
+CREATE TABLE `sondaggiodoppiavotazione` (
+  `idSondaggio` varchar(60) NOT 
+
+NULL,
+  `dataPubblicazione` date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT NULL,
+  `descrizione` 
+
+varchar(200) DEFAULT NULL,
+  `numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT NULL,
+  `visibile` 
+
+tinyint(1) DEFAULT NULL,
+  `condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar(60) DEFAULT NULL,
+  
+
+`primaScelta` varchar(60) DEFAULT NULL,
+  `secondaScelta` varchar(60) DEFAULT NULL,
+  PRIMARY KEY 
+
+(`idSondaggio`)
+);
+
+
+
+CREATE TABLE `sondaggiosceltamultipla` (
+  `idSondaggio` 
+
+varchar(60) NOT NULL,
+  `dataPubblicazione` date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT NULL,
+  
+
+`descrizione` varchar(200) DEFAULT NULL,
+  `numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT NULL,
+  
+
+`visibile` tinyint(1) DEFAULT NULL,
+  `condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar(60) 
+
+DEFAULT NULL,
+  `primaScelta` varchar(60) DEFAULT NULL,
+  `secondaScelta` varchar(60) DEFAULT NULL,
+  
+
+`terzaScelta` varchar(60) DEFAULT NULL,
+  `quartaScelta` varchar(60) DEFAULT NULL,
+  PRIMARY KEY 
+
+(`idSondaggio`)
+);
+
+CREATE TABLE `testo` (
+  `idTesto` varchar(60) NOT NULL,
+  `dataPubblicazione` 
+
+date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT NULL,
+  `descrizione` varchar(200) DEFAULT NULL,
+  
+
+`numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT NULL,
+  `visibile` tinyint(1) DEFAULT NULL,
+  
+
+`condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar(60) DEFAULT NULL,
+  `font` varchar(60) 
+
+DEFAULT NULL,
+  `titolo` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`idTesto`)
+);
+
+
+CREATE TABLE 
+
+`utente` (
+  `IdUtente` varchar(35) NOT NULL,
+  `Nome` varchar(30) DEFAULT NULL,
+  `cognome` varchar(30) 
+
+DEFAULT NULL,
+  `eta` int DEFAULT NULL,
+  PRIMARY KEY (`IdUtente`)
+) ;
+
+
+CREATE TABLE `video` (
+  
+
+`idVideo` varchar(60) NOT NULL,
+  `dataPubblicazione` date DEFAULT NULL,
+  `oraPubblicazione` time DEFAULT 
+
+NULL,
+  `descrizione` varchar(200) DEFAULT NULL,
+  `numLike` int DEFAULT NULL,
+  `numDislike` int DEFAULT 
+
+NULL,
+  `visibile` tinyint(1) DEFAULT NULL,
+  `condivisibile` tinyint(1) DEFAULT NULL,
+  `profilo` varchar
+
+(60) DEFAULT NULL,
+  `tempoCancellazione` int DEFAULT NULL,
+  `percorso` varchar(60) DEFAULT NULL,
+  
+
+`isStory` tinyint(1) DEFAULT NULL,
+  `durataInSecondi` int DEFAULT NULL,
+  PRIMARY KEY (`idVideo`)
+) ;
+
+ 
+ alter table 
+
+profilo drop column utente;
+ 
+ drop table utente;
+ 
+ alter table profilo add column esiste boolean default 
+
+false;
+ 
+ alter table profilo add column pswCambiata boolean;
+ 
+ alter table profilo add column isLoggato 
+
+boolean;
+ 
+ alter table profilo add column psw varchar (40);
+ 
+ alter table profilo add foreign key 
+
+(messaggioPrivato) references messaggioprivato (idMsgPvt)  on update cascade
+on delete set null;
+
+ alter table profilo add FOREIGN KEY 
+
+(`messaggioDiGruppo`) REFERENCES `messaggiodigruppo` (`idMsgGrp`)  on update cascade
+on delete set null;
+ 
+ alter table profilo add  FOREIGN KEY 
+
+(`post`) REFERENCES `post` (`idPost`)  on update cascade
+on delete set null;
+ 
+ alter table commento add FOREIGN KEY (`post`) REFERENCES `post` 
+
+(`idPost`)  on update cascade
+on delete set null;
+ 
+ alter table foto add FOREIGN KEY (`profilo`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+ 
+ alter 
+
+table gruppo add FOREIGN KEY (`profilo1`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+  alter table gruppo add 
+
+FOREIGN KEY (`profilo2`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+  alter table gruppo add FOREIGN KEY 
+
+(`profilo3`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+  alter table gruppo add FOREIGN KEY (`profilo4`) 
+
+REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+  alter table gruppo add FOREIGN KEY (`profilo5`) REFERENCES 
+
+`profilo` (`idProfilo`)  on update cascade
+on delete set null;
+ alter table gruppo add FOREIGN KEY (`profilo6`) REFERENCES `profilo` 
+
+(`idProfilo`)  on update cascade
+on delete set null;
+  alter table gruppo add FOREIGN KEY (`amministratore`) REFERENCES `profilo` 
+
+(`idProfilo`)  on update cascade
+on delete set null;
+  
+  
+  alter table messaggiaregruppo add FOREIGN KEY (`messaggioDiGruppo`) REFERENCES 
+
+`messaggiodigruppo` (`idMsgGrp`)  on update cascade
+on delete set null;
+  alter table messaggiaregruppo add FOREIGN KEY (`profilo`) REFERENCES 
+
+`profilo` (`idProfilo`)  on update cascade
+on delete set null;
+ 
+ 
+ alter table messaggiodigruppo add FOREIGN KEY (`gruppo`) REFERENCES `gruppo` 
+
+(`idGruppo`)  on update cascade
+on delete set null;
+ 
+ alter table messaggioprivato add FOREIGN KEY (`profiloInviante`) REFERENCES `profilo` 
+
+(`idProfilo`)  on update cascade
+on delete set null;
+  alter table messaggioprivato add FOREIGN KEY (`profiloRicevente`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+ drop table commento ;
+
+CREATE TABLE `commento` (
+  `IdCommento` varchar(35) NOT NULL,
+  `oraCommento` time DEFAULT NULL,
+  `dataCommento` date DEFAULT NULL,
+  `testo` varchar(200) DEFAULT NULL,
+  `post` varchar(35) DEFAULT NULL,
+  PRIMARY KEY (`IdCommento`),
+  KEY `post` (`idCommento`),
+  CONSTRAINT `commento_ibfk_1` FOREIGN KEY (`post`) REFERENCES `post` (`idPost`)
+);
+
+create table follow(
+profiloPersonale varchar(40),
+profiloSeguito varchar(40),
+primary key (profiloPersonale, profiloSeguito),
+foreign key (profiloPersonale) references profilo(idProfilo),
+foreign key (profiloSeguito) references profilo(idProfilo)
+);
+
+alter table messaggiodigruppo change testo testo varchar(200) default "null";
+alter table messaggioprivato change testo testo varchar(200) default "null";
+
+
+
+alter table profilo add column immagineProfilo varchar(200);
+alter table commento add column profilo varchar(200) ;
+ alter table commento add FOREIGN KEY (`profilo`) REFERENCES `profilo` (`idProfilo`)  on update cascade
+on delete set null;
+
+
+
+
+alter table commento drop foreign key `commento_ibfk_1`;
+alter table commento drop column post;
+alter table commento add column idFoto varchar(20);
+alter table commento add column idVideo varchar(20);
+alter table commento add column idSDV varchar(20);
+alter table commento add column idSSM varchar(20);
+alter table commento add column idTesto varchar(20);
+
+
+
+alter table commento add FOREIGN KEY (`idFoto`) REFERENCES `foto` (`idFoto`)  on update cascade
+on delete set null;
+alter table commento add FOREIGN KEY (`idVideo`) REFERENCES `video` (`idVideo`)  on update cascade
+on delete set null;
+alter table commento add FOREIGN KEY (`idSDV`) REFERENCES `sondaggiodoppiavotazione` (`idSondaggio`)  on update cascade
+on delete set null;
+alter table commento add FOREIGN KEY (`idSSM`) REFERENCES `sondaggiosceltamultipla` (`idSondaggio`)  on update cascade
+on delete set null;
+alter table commento add FOREIGN KEY (`idTesto`) REFERENCES `testo` (`idTesto`)  on update cascade
+on delete set null;
+
+
+
+
+
+
+
+
+
+
+alter table messaggiodigruppo add column profiloInviante varchar(40);
+alter table messaggiodigruppo add foreign key (profiloInviante) references profilo(idProfilo)  on update cascade
+on delete set null;
+
+
+
+
+
+
+
+
+alter table profilo drop foreign key `profilo_ibfk_1`;
+alter table profilo drop foreign key `profilo_ibfk_2`;
+alter table profilo drop foreign key `profilo_ibfk_3`;
+
+ alter table profilo drop column messaggioPrivato;
+alter table profilo drop column messaggioDiGruppo;
+alter table profilo drop column post;
+
+
+
+
+
+
+alter table foto drop column condivisibile;
+alter table video drop column condivisibile;
+alter table sondaggiodoppiavotazione drop column condivisibile;
+alter table sondaggiosceltamultipla drop column condivisibile;
+alter table testo drop column condivisibile;
+
+
+--Roba aggiunta oggi 29/05
+
+alter table profilo drop column tipo;
+
+
+create table likemap(
+profilo varchar(50),
+post varchar(50),
+primary key(profilo,post));
+
+create table dislikemap(
+profilo varchar(50),
+post varchar(50),
+primary key(profilo,post));
+
+
+alter table sondaggiodoppiavotazione add column count1s int;
+alter table sondaggiodoppiavotazione add column count2s int;
+alter table sondaggiosceltamultipla add column count1s int;
+alter table sondaggiosceltamultipla add column count2s int;
+alter table sondaggiosceltamultipla add column count3s int;
+alter table sondaggiosceltamultipla add column count4s int;
+
+
+
+
+create table sondaggiomap(
+profilo varchar(50),
+sondaggio varchar(50),
+primary key (profilo,sondaggio)
+);
+
+create table sondaggiomap1(
+profilo varchar(50),
+sondaggio varchar(50),
+primary key (profilo,sondaggio)
+);
+
+
+alter table profilo add foreign key (immagineProfilo) references foto(idFoto)  on update cascade
+on delete set null;
+
+alter table gruppo add column fotoGruppo varchar(50);
+alter table gruppo add foreign key (fotoGruppo) references foto(idFoto)  on update cascade
+on delete set null;
+
+
+alter table gruppo drop foreign key `gruppo_ibfk_8`;
+alter table gruppo change fotoGruppo fotoGruppo varchar(200);
+
+
+alter table foto change percorso percorso varchar(200) default "null";
+alter table video change percorso percorso varchar(200) default "null";
+alter table sondaggiodoppiavotazione change descrizione descrizione varchar(200) default "null";
+alter table sondaggiosceltamultipla change descrizione descrizione varchar(200) default "null";
+alter table testo change descrizione descrizione varchar(200) default "null";
+
+alter table messaggiodigruppo drop column multimedia;
+alter table messaggioprivato drop column multimedia;

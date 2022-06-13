@@ -19,14 +19,13 @@ import panelspackage.panels.elements.SpecificContainer;
 public class Chat extends JPanel {
 
     private Pulsanti tornaHome, primaChatGruppo, secondaChatGruppo, terzaChatGruppo, quartaChatGruppo, quintaChatGruppo,
-                     primaChatPrivata, secondaChatPrivata, terzaChatPrivata, quartaChatPrivata, quintaChatPrivata;
+                     primaChatPrivata, secondaChatPrivata, terzaChatPrivata, quartaChatPrivata, quintaChatPrivata,
+                     messaggioPrecedente, prossimoMessaggio;
     private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
     //private JComboBox<String> discussioni;
-    private SpecificContainer containerCenter;
-    private SpecificContainer containerNorth ;
-    private SpecificContainer containerSouth;
-
+    private SpecificContainer containerCenter, containerNorth,containerSouth, containerGrigliaSouth;
     
+    private int indiceMessaggioCorrente  = 0;
 
         public Chat() {
             avvio();
@@ -81,14 +80,24 @@ public class Chat extends JPanel {
         containerSouth = new SpecificContainer();
         this.add(containerSouth, BorderLayout.SOUTH);
         tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
-        containerSouth.setLayout(new GridLayout(1, 1));
+        containerSouth.setLayout(new GridLayout(2, 1));
         containerSouth.add(tornaHome);
         
+
+        containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
+        containerSouth.add(containerGrigliaSouth);
+		containerGrigliaSouth.setLayout(new GridLayout(1,2));
+		containerGrigliaSouth.add(messaggioPrecedente = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(prossimoMessaggio = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+
+     
     }
+    
         
         public void settaSchermataChat(ArrayList<String> gruppi) {
             for(int i=0; i < gruppi.size()/2 && i < 10; i++) {
-                ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get((i*2) +1));               
+            	int indicechat = (i*2) + 1 +  this.getIndiceMessaggioCorrente();
+                ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get(indicechat));               
             }       
         }
         
@@ -100,7 +109,6 @@ public class Chat extends JPanel {
         public void setTornaHome(Pulsanti home) {
             this.tornaHome = home;
         }
-
 
 
         public SpecificContainer getContainerCenter() {
@@ -206,5 +214,32 @@ public class Chat extends JPanel {
         public void setQuintaChatPrivata(Pulsanti quintaChatPrivata) {
             this.quintaChatPrivata = quintaChatPrivata;
         }
-        
+        public int getIndiceMessaggioCorrente() {
+			return indiceMessaggioCorrente;
+		}
+
+		public void decrementaIndiceMessaggioCorrente() {
+			this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
+		}
+		
+		public void incrementaIndiceMessaggioCorrente() {
+			this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
+
+		}
+
+		public Pulsanti getMessaggioPrecedente() {
+			return messaggioPrecedente;
+		}
+
+		public void setMessaggioPrecedente(Pulsanti messaggioPrecedente) {
+			this.messaggioPrecedente = messaggioPrecedente;
+		}
+
+		public Pulsanti getProssimoMessaggio() {
+			return prossimoMessaggio;
+		}
+
+		public void setProssimoMessaggio(Pulsanti prossimoMessaggio) {
+			this.prossimoMessaggio = prossimoMessaggio;
+		}       
 }   

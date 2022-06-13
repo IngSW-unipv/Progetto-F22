@@ -19,6 +19,7 @@ package panelspackage.panels;
 
         int indiceCommentoCorrente = 0;
         int numeroCommentiTotali = 5;
+        private String tipoSondaggio;
         private String messaggioBottoneSuperioreFollow = "Inizia a seguire";
         private String messaggioBottoneSuperioreProfilo = "Imposta come immagine profilo";
         private JTextArea areaDescrizione;
@@ -189,6 +190,30 @@ package panelspackage.panels;
             etichettaSecondoRisultato.setText("fis");
             etichettaTerzoRisultato.setText("p3");
             etichettaQuartoRisultato.setText("fs");
+            descrizionePost.setText(descrizioneSondaggio);
+
+            containerPost.setVisible(false);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(false);
+        }
+        
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+            numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            settaCommenti(commenti);
+            idPost = iDpost;
+              
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText("");
+            pulsanteQuartaScelta.setText("");
+            
+            etichettaPrimoRisultato.setText("fes");
+            etichettaSecondoRisultato.setText("fis");
+            etichettaTerzoRisultato.setText("");
+            etichettaQuartoRisultato.setText("");
             descrizionePost.setText(descrizioneSondaggio);
 
             containerPost.setVisible(false);
@@ -378,5 +403,16 @@ package panelspackage.panels;
 		public void setPulsanteQuartaScelta(Pulsanti pulsanteQuartaScelta) {
 			this.pulsanteQuartaScelta = pulsanteQuartaScelta;
 		}
+
+
+		public String getTipoSondaggio() {
+			return tipoSondaggio;
+		}
+
+
+		public void setTipoSondaggio(String tipoSondaggio) {
+			this.tipoSondaggio = tipoSondaggio;
+		}
+		
 
 }

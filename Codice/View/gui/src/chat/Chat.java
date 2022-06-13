@@ -1,6 +1,5 @@
 package chat;
 
-
 import java.util.ArrayList;
 import Messaggio.Messaggio;
 import chat.enumeration.TipoChat;
@@ -36,7 +35,6 @@ public abstract class Chat {
 	public ArrayList<Messaggio> getListaMessaggi() {
 		return listaMessaggi;
 	}
-
 	public void setListaMessaggi(ArrayList<Messaggio> listaMessaggi) {
 		this.listaMessaggi = listaMessaggi;
 	}

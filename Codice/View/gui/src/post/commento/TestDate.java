@@ -11,13 +11,10 @@ public class TestDate {
 	public static void main(String[] args) {
 		LocalDateTime now = LocalDateTime.now();
 		System.out.println(now.getDayOfMonth());
-  
-		Profilo p = new Profilo("DV999","CavalloPazzo");
-		Commento c = new Commento("Cm00", "DV999", "F00", "belpost");
-		System.out.println(c.getDataCommento());
-		CommentoDB cdb = ConvertitoreFacade.getIstance().converti(c);
-		System.out.println(cdb.toString());
-	
+ 
+		Commento c = new Commento("C00", "DV999", "F900", "L'alpaca si nutre di fruttolo");
+        System.out.println(c.toString());
+		
 	}
 
 }
