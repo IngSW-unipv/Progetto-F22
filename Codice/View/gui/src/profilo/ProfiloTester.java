@@ -15,6 +15,7 @@ import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
+import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
 import profilo.exception.TastoNonEsistente;
@@ -22,14 +23,14 @@ import profilo.exception.TastoNonEsistente;
 public class ProfiloTester {
 	
     public static void main(String [] args) throws AccountDoesNotExist {
-    	Profilo p = new Profilo("001", "Girella");
-    	Profilo p1 = new Profilo("DV999", "Luca26");
+    	Profilo p = new Profilo("frank");
+    	/*Profilo p1 = new Profilo("DV999", "Luca26");
     	Video v = new Video("V00", null, false, null, null, 0);
     	Foto f = new Foto("F15", null, false, null, null, false);
     	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null);
     	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null);
     	Testo t = new Testo("374");
-        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999", "F00");
+        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999");
 
         Commento c = new Commento("C01", "001", "F01", "aadhd");
         Profilo plof = new Profilo("Dal",null);
@@ -90,7 +91,7 @@ public class ProfiloTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	*/
+    	
  
 
     	try {
@@ -102,6 +103,16 @@ public class ProfiloTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	*/
+    	
+    	try {
+			p.aggiungiPartecipante("142", "frank");
+		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	//p.rimuoviPartecipante("142", "frank");
     }
 }
 

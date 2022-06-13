@@ -1217,10 +1217,9 @@ public class Controller {
     		public void actionPerformed(ActionEvent e) {
     			String nomeGruppo = view.getNomeGruppo().getText();
     			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
-    			String immagineGruppo = view.getPercorsoImmagineGruppo();
     			try {
     				
-    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null, model.getProfiloAttivo().getIdProfilo(), immagineGruppo);
+    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null, model.getProfiloAttivo().getIdProfilo());
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}

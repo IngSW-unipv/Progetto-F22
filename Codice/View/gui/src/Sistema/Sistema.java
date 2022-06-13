@@ -180,7 +180,12 @@ public class Sistema {
 	}
 	
 	public void aggiungiPartecipante(String idGruppo, String idProfilo) {
-		profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo);
+		try {
+			profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo);
+		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

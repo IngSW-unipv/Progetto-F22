@@ -293,12 +293,17 @@ class TestProfilo {
 	public void testAggiungiPartecipante() {
 		Gruppo g = new Gruppo("G123", null, null, null, null, null, null, null, null,profiloAttivo.getIdProfilo());
 		altroProfilo = new Profilo("alfredo");
-		assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo()));
+		try {
+			assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo()));
+		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Test
 	public void testRimuoviPartecipante() {
 		Gruppo g = new Gruppo("G345", null, null, "profilo1", "profilo2", "profilo3", "profilo4", "profilo5", "profilo6",profiloAttivo.getIdProfilo());
-		assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), "profilo4"));
+		assertTrue(profiloAttivo.rimuoviPartecipante(g.getIdGruppo(), "profilo4"));
 	}
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {

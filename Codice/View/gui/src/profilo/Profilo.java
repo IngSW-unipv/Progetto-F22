@@ -833,15 +833,15 @@ public class Profilo implements IProfilo {
 	 * @param id dell'amministratore del gruppo
 	 * @param path della foto del gruppo
 	 */
-	public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore, String fotoGruppo) throws AccountDoesNotExist{
+	public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore) throws AccountDoesNotExist{
 		Gruppo g;
 		String idGruppo  = Integer.toString((int)Math.round(Math.random() * 1000));
 		
 		g = new Gruppo(idGruppo);
 		if(dbfacade.cerca(g) != null) {
-			creaGruppo(descrizione, nomeGruppo, profilo1,profilo2,profilo3,profilo4,profilo5,profilo6, amministratore, fotoGruppo);
+			creaGruppo(descrizione, nomeGruppo, profilo1,profilo2,profilo3,profilo4,profilo5,profilo6, amministratore);
 		}
-		g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore, fotoGruppo);
+		g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore);
 	
 		return dbfacade.carica(g);
 	}
@@ -860,8 +860,8 @@ public class Profilo implements IProfilo {
 	 * @param id dei partecipanti da modificare
 	 */
 	@Override
-	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String fotoGruppo)  {
-		Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null,fotoGruppo);
+	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6)  {
+		Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
 		return dbfacade.gestisciPartecipanti(g);
 	}
 
@@ -889,26 +889,7 @@ public class Profilo implements IProfilo {
 	public ArrayList<Gruppo> selectAllGruppo(){
 		ArrayList<Gruppo> res = dbfacade.selectAllGruppo();
 		return res;
-		}
-
-
-	/**
-	 * Modifica la foto di un gruppo
-	 * @param gruppo da modificare
-	 * @param path della foto da inserire
-	 */
-	@Override
-	public boolean modificaFotoGruppo(Gruppo g, String s) {
-		return dbfacade.cambiaFotoGruppo(g, s);
-	}
-
-	/**
-	 * Mostra il path della foto di un gruppo
-	 */
-	@Override
-	public String vediFotoGruppo(Gruppo g) {
-		return dbfacade.vediFotoGruppo(g);
-	}	
+		}	
 
 	/**
 	 * Permette di aggiungere like ad un post
@@ -1155,32 +1136,37 @@ public class Profilo implements IProfilo {
 	 * @param id del profilo da aggiungere
 	 */
 @Override
-public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
+public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno {
 		
 		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 		
 		if(g != null) {
 			if(g.getProfilo1() == null) {
 				dbfacade.gestisciPartecipante1(idProfilo, g);
+				return true;
 			}
 			else if(g.getProfilo2() == null) {
 				dbfacade.gestisciPartecipante2(idProfilo, g);
+				return true;
 			}
 			else if(g.getProfilo3() == null) {
 				dbfacade.gestisciPartecipante3(idProfilo, g);
+				return true;
 			}
 			else if(g.getProfilo4() == null) {
 				dbfacade.gestisciPartecipante4(idProfilo, g);
+				return true;
 			}
 			else if(g.getProfilo5() == null) {
 				dbfacade.gestisciPartecipante5(idProfilo, g);
+				return true;
 			}
 			else if(g.getProfilo6() == null) {
 				dbfacade.gestisciPartecipante6(idProfilo, g);
+				return true;
 			}
 		}
-		//aggiungere exception gruppo gi� pieno
-		return false;
+		throw new GruppoGiaPieno(idGruppo);
 		
 	}
 /**
@@ -1189,7 +1175,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) {
  * @param id del profilo da aggiungere
  */
 @Override
-public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws GruppoGiaPieno {
+public boolean rimuoviPartecipante(String idGruppo, String idProfilo){
 	
 	Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 	
@@ -1213,8 +1199,8 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws Grup
 			dbfacade.gestisciPartecipante6(null, g);
 		}
 	}
-	throw new GruppoGiaPieno(idGruppo);
 	
+	return true;
 }
 /**
  * Ritorna il conteggio di un determinato sondaggio
@@ -1239,7 +1225,19 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 		return i;
 		}
 	return null;
-	}	
+	}
+
+@Override
+public boolean modificaFotoGruppo(Gruppo g, String s) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public String vediFotoGruppo(Gruppo g) {
+	// TODO Auto-generated method stub
+	return null;
+}	
 }
 
 	

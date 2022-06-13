@@ -23,7 +23,7 @@ public class GruppoUtility {
 	 * @param un oggetto di tipo Gruppo "reale"
 	 */
 	public GruppoDB converti(Gruppo g) {
-		GruppoDB grdb = new GruppoDB(g.getIdGruppo(),g.getDescrizione(),g.getNomeGruppo(),g.getProfilo1(),g.getProfilo2(),g.getProfilo3(),g.getProfilo4(),g.getProfilo5(),g.getProfilo6(),g.getAmministratore(),g.getFotoGruppo());
+		GruppoDB grdb = new GruppoDB(g.getIdGruppo(),g.getDescrizione(),g.getNomeGruppo(),g.getProfilo1(),g.getProfilo2(),g.getProfilo3(),g.getProfilo4(),g.getProfilo5(),g.getProfilo6(),g.getAmministratore());
 		return grdb;
 	}
 	
@@ -32,7 +32,7 @@ public class GruppoUtility {
 	 * @param Oggetto di tipo Gruppo utilizzabile solo per eseguire le query
 	 */
 	public Gruppo convertiInverso(GruppoDB g) {
-		Gruppo gdb = new Gruppo(g.getIdGruppo(), g.getDescrizione(), g.getNomeGruppo(), g.getProfilo1(), g.getProfilo2(), g.getProfilo3(), g.getProfilo4(), g.getProfilo5(), g.getProfilo6(), g.getAmministratore(),g.getFotoGruppo());
+		Gruppo gdb = new Gruppo(g.getIdGruppo(), g.getDescrizione(), g.getNomeGruppo(), g.getProfilo1(), g.getProfilo2(), g.getProfilo3(), g.getProfilo4(), g.getProfilo5(), g.getProfilo6(), g.getAmministratore());
 		return gdb;
 	}
 }

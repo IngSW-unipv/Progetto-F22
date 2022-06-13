@@ -77,7 +77,7 @@ public interface IProfilo {
 	public ArrayList<String> vediMieiFollower(Follow f);
 	public Follow cercaFollow(Follow f);
 	public boolean rimuoviGruppo(Gruppo g);
-	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String fotoGruppo);
+	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
     public Gruppo cercaGruppo(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
 	public boolean modificaFotoGruppo(Gruppo g, String s);
@@ -87,13 +87,13 @@ public interface IProfilo {
 	public boolean rimuoviLike(Post p)throws AzioneNonConsentita;
 	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita;
 	boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1, String profilo2, String profilo3,
-			String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo)
+			String profilo4, String profilo5, String profilo6, String amministratore)
 			throws AccountDoesNotExist;
 	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento);
 	boolean rimuoviCommento(String idCommento);
 	public Commento cercaCommento(String idCommento);
 	boolean modificaDescrizione(String n);
-	boolean aggiungiPartecipante(String idGruppo, String idProfilo);
-	boolean rimuoviPartecipante(String idGruppo, String idProfilo)throws GruppoGiaPieno;
+	boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno;
+	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
 }
 

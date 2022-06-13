@@ -4,7 +4,7 @@ package chat.chatDiGruppo.gruppo;
 public class Gruppo {
 	
 public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
-			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore, String fotoGruppo) {
+			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore) {
 	
 		super();
 		this.idGruppo = idGruppo;
@@ -17,7 +17,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 		this.profilo5 = profilo5;
 		this.profilo6 = profilo6;
 		this.amministratore = amministratore;
-		this.fotoGruppo = fotoGruppo;
 	}
 
 	public Gruppo(String idGruppo) {
@@ -31,7 +30,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 		this.profilo5 = null;
 		this.profilo6 = null;
 		this.amministratore = null;
-		this.fotoGruppo = null;
 }
 
 	private String idGruppo;
@@ -44,7 +42,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	private String profilo5;
 	private String profilo6;
 	private String amministratore;
-	private String fotoGruppo;
 	
 	public String getIdGruppo() {
 	return idGruppo;
@@ -90,15 +87,7 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", nomeGruppo=" + nomeGruppo
 				+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
 				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", amministratore=" + amministratore
-				+ ", fotoGruppo=" + fotoGruppo + "]";
-	}
-
-	public String getFotoGruppo() {
-		return fotoGruppo;
-	}
-
-	public void setFotoGruppo(String fotoGruppo) {
-		this.fotoGruppo = fotoGruppo;
+				+ ", fotoGruppo=" + "]";
 	}
 
 	public void setIdGruppo(String idGruppo) {

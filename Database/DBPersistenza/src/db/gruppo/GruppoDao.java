@@ -32,7 +32,7 @@ public ArrayList<GruppoDB> selectall() {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10), rs1.getString(11));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
 
 			result.add(grp);
 		}
@@ -86,8 +86,7 @@ public boolean inserisciChiavi(GruppoDB g) {
 		st1.setString(5, g.getProfilo5());
 		st1.setString(6, g.getProfilo6());
 		st1.setString(7, g.getAmministratore());
-		st1.setString(8, g.getFotoGruppo());
-		st1.setString(9, g.getIdGruppo());
+		st1.setString(8, g.getIdGruppo());
 		
 		st1.executeUpdate();
 
@@ -141,7 +140,7 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10),rs1.getString(11));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
 
 			DBConnection.closeConnection(conn);
 			return grp;
@@ -152,57 +151,6 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 	return null;
 }
 
-@Override
-public String vediFotoGruppo(GruppoDB g) {
-	conn=DBConnection.startConnection(conn,schema);
-	PreparedStatement st1;
-	ResultSet rs1;
-
-	try
-	{
-		String query="SELECT fotoGruppo FROM gruppo WHERE idGruppo=?";
-
-		st1 = conn.prepareStatement(query);
-		st1.setString(1, g.getIdGruppo());
-
-		rs1=st1.executeQuery();
-
-		while(rs1.next())
-		{
-			String i = rs1.getString("fotoGruppo");
-			DBConnection.closeConnection(conn);
-			return i;
-		}
-	}catch (Exception e){e.printStackTrace();}
-
-	DBConnection.closeConnection(conn);
-    return null;
-}
-
-@Override
-public boolean cambiaFotoGruppo(GruppoDB g, String s) {
-	conn=DBConnection.startConnection(conn,schema);
-	PreparedStatement st1;
-	boolean esito = true;
-
-	try
-	{
-		String query="update gruppo set fotoGruppo=? where idGruppo=?";
-		st1 = conn.prepareStatement(query);
-		st1.setString(1, s);
-		st1.setString(2, g.getIdGruppo());
-	
-		st1.executeUpdate();
-
-
-	}catch (Exception e){
-		e.printStackTrace();
-		esito=false;
-	}
-
-	DBConnection.closeConnection(conn);
-	return esito;
-}
 
 public ArrayList<String> caricaGruppiProfilo(String profilo) {
 	ArrayList<String> result = new ArrayList<>();
@@ -386,6 +334,18 @@ public boolean gestisciPartecipante6(String idProfilo, GruppoDB g) {
 
 	DBConnection.closeConnection(conn);
 	return esito;
+}
+
+@Override
+public boolean cambiaFotoGruppo(GruppoDB g, String s) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public String vediFotoGruppo(GruppoDB g) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 
