@@ -589,6 +589,7 @@ public class Controller {
             	view.getImpostaImmagineProfiloButton().setVisible(false);
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
+                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		mostraSchermata("Postvisualizzato");
         	}
         };
@@ -610,8 +611,10 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
+                
         		mostraSchermata("Postvisualizzato");
         	}
         };
@@ -633,7 +636,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-
+                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -658,6 +661,7 @@ public class Controller {
 				}
         		
             	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -681,6 +685,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -704,6 +709,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	view.getImpostaImmagineProfiloButton().setVisible(false);
+                view.setTipoSondaggio("SONDAGGIODOPPIASCELTA");
         		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
@@ -744,7 +750,6 @@ public class Controller {
         gestorePrevTesto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//Decrementa contatore testo
         		view.setContatoreTesto(view.getContatoreTesto() - 2);
         		view.setPostTestoProfilo(percorsiPostTesto);
         	}
@@ -1094,7 +1099,7 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1);
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, view.getTipoSondaggio());
    					} catch (TastoNonEsistente e1) {
    				}
     	   }
@@ -1105,7 +1110,7 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2);
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, view.getTipoSondaggio());
    			} catch (TastoNonEsistente e1) {
    			}
     	   }
@@ -1116,7 +1121,7 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3);
+   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3),  view.getTipoSondaggio();
    			} catch (TastoNonEsistente e1) {
    			}
     	   }
@@ -1127,7 +1132,7 @@ public class Controller {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
     		   try {
-				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4);
+				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  view.getTipoSondaggio());
 			} catch (TastoNonEsistente e1) {
 			}
     	   }

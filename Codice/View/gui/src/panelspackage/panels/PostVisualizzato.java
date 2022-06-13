@@ -19,6 +19,7 @@ package panelspackage.panels;
 
         int indiceCommentoCorrente = 0;
         int numeroCommentiTotali = 5;
+        private String tipoSondaggio;
         private String messaggioBottoneSuperioreFollow = "Inizia a seguire";
         private String messaggioBottoneSuperioreProfilo = "Imposta come immagine profilo";
         private JTextArea areaDescrizione;
@@ -402,5 +403,16 @@ package panelspackage.panels;
 		public void setPulsanteQuartaScelta(Pulsanti pulsanteQuartaScelta) {
 			this.pulsanteQuartaScelta = pulsanteQuartaScelta;
 		}
+
+
+		public String getTipoSondaggio() {
+			return tipoSondaggio;
+		}
+
+
+		public void setTipoSondaggio(String tipoSondaggio) {
+			this.tipoSondaggio = tipoSondaggio;
+		}
+		
 
 }

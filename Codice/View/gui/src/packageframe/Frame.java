@@ -609,6 +609,19 @@ public class Frame extends JFrame {
 	}
 	
 	
+	public void impostaFotoPostVisualizzato(String percorso) {
+		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
+	}
+	
+	public String getTipoSondaggio() {
+		return 	((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getTipoSondaggio();
+	}
+
+
+	public void setTipoSondaggio(String tipoSondaggio) {
+		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).setTipoSondaggio(tipoSondaggio);
+	}
+	
 	public void settaCommenti(ArrayList<String> lista) {
 		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaCommenti(lista);
 	}
@@ -782,9 +795,7 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public void impostaFotoPostVisualizzato(String percorso) {
-		((PostVisualizzato)mappaSchermate.get("PostVisualizzato")).cambiaFoto(percorso);
-	}
+
 	
 	
 	public JButton getNextTipoPost( ) {
