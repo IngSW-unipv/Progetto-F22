@@ -923,6 +923,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		view.incrementaIndiceMessaggioChat();
+        		System.out.println("indice messaggio corrente" + view.getIndiceMessaggioCorrenteChat());
+        		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+                view.settaSchermataChat(listaGruppi);
         	}
         };
         view.getProssimoMessaggioButton().addActionListener(gestoreProssimoMessaggio);
@@ -931,6 +934,10 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		view.decrementaIndiceMessaggioChat();
+        		System.out.println("indice messaggio corrente" + view.getIndiceMessaggioCorrenteChat());
+
+        		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+                view.settaSchermataChat(listaGruppi);
         	}
         };
         gestorePrimaChatGruppo = new ActionListener() {
@@ -1088,9 +1095,7 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {
     		   
     		   view.decrementaIndiceCommento();
-    		   view.settaCommenti(commentiConProfiliIinvianti);
-    		   refresh();
-    		
+    		   view.settaCommenti(commentiConProfiliIinvianti);    		
     	   }
        };
        view.getPrevCommento().addActionListener(gestorePrevCommento);    
@@ -1098,21 +1103,27 @@ public class Controller {
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   /*
+    	   }
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, view.getTipoSondaggio());
    					} catch (TastoNonEsistente e1) {
    				}
+   				*/
     	   }
+    	   
        };
        view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
        
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   /*
+    	   }
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, view.getTipoSondaggio());
+   				//model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, view.getTipoSondaggio());
    			} catch (TastoNonEsistente e1) {
-   			}
+   			}*/
     	   }
        };
        view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
@@ -1120,10 +1131,11 @@ public class Controller {
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   /*
     		   try {
-   				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3),  view.getTipoSondaggio();
+   				//model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3),  view.getTipoSondaggio();
    			} catch (TastoNonEsistente e1) {
-   			}
+   			}*/
     	   }
        };
        view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
@@ -1131,10 +1143,11 @@ public class Controller {
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   /*
     		   try {
 				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  view.getTipoSondaggio());
 			} catch (TastoNonEsistente e1) {
-			}
+			}*/
     	   }
        };
        view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);

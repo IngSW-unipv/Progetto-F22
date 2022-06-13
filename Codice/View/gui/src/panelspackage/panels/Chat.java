@@ -92,10 +92,12 @@ public class Chat extends JPanel {
 
      
     }
+    
         
         public void settaSchermataChat(ArrayList<String> gruppi) {
             for(int i=0; i < gruppi.size()/2 && i < 10; i++) {
-                ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get((i*2) +1));               
+            	int indicechat = (i*2) + 1 +  this.getIndiceMessaggioCorrente();
+                ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get(indicechat));               
             }       
         }
         
@@ -107,7 +109,6 @@ public class Chat extends JPanel {
         public void setTornaHome(Pulsanti home) {
             this.tornaHome = home;
         }
-
 
 
         public SpecificContainer getContainerCenter() {
@@ -240,7 +241,5 @@ public class Chat extends JPanel {
 
 		public void setProssimoMessaggio(Pulsanti prossimoMessaggio) {
 			this.prossimoMessaggio = prossimoMessaggio;
-		}
-
-        
+		}       
 }   
