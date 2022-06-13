@@ -107,5 +107,12 @@ public interface IProfilo {
 	 */
 	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost)
 			throws TastoNonEsistente, AzioneNonConsentita;
+	/**
+	 * Carica un commento nel database
+	 * @param id del profilo sotto cui sarà scritto il commento
+	 * @param id del post sotto cui sarà scritto il commento
+	 * @param testo del commento
+	 */
+	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t);
 }
 

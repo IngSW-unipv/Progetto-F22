@@ -790,8 +790,7 @@ public class Profilo implements IProfilo {
 	 * @param id del post sotto cui sarà scritto il commento
 	 * @param testo del commento
 	 */
-	@Override
-	public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento) {
+	public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t) {
 		Commento c;
 		String idCommento = Integer.toString((int)Math.round(Math.random() * 1000));
 	 		c = new Commento(idCommento, idProfilo, idPost, testoCommento);

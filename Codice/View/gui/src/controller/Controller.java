@@ -410,7 +410,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-
+            	tipoPostAttuale = TipoPost.TESTO;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
@@ -438,6 +438,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+            	tipoPostAttuale = TipoPost.TESTO;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
@@ -461,7 +462,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	try {
-
+                	tipoPostAttuale = TipoPost.TESTO;
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
@@ -499,6 +500,7 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+            	tipoPostAttuale = TipoPost.FOTO;
 
             	view.getImpostaImmagineProfiloButton().setVisible(true);
             	view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
@@ -530,7 +532,7 @@ public class Controller {
     					e1.printStackTrace();
     				}
           
-
+                	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
                     view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                     mostraSchermata("Postvisualizzato");
@@ -561,9 +563,9 @@ public class Controller {
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
+                	
+                	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
-
-
                     view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
                     mostraSchermata("Postvisualizzato");
                     refresh();
@@ -1416,7 +1418,7 @@ public class Controller {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
-    	model.getProfiloAttivo().pubblicaCommento(idProfilo, idPost, commentoDaAggiungere);
+    	model.getProfiloAttivo().pubblicaCommento(idProfilo, idPost, commentoDaAggiungere, tipoPostAttuale);
     }
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
