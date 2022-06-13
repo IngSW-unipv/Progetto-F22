@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 public class Pulsanti extends JButton{
@@ -52,6 +53,9 @@ public class Pulsanti extends JButton{
 			this.setVisible(true);
 		}
 		
+		public Pulsanti(String icona, int dim1, int dim2) {
+			this.setPreferredSize(new Dimension(dim1, dim2));
+		}
 
 		
 		

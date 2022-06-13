@@ -43,7 +43,7 @@ public class Controller {
     private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
 
     private ArrayList<String> postSchermataHome = new ArrayList<String>();
-    private ArrayList<String> strorySchermataHome = new ArrayList<String>();
+    private ArrayList<String> storySchermataHome = new ArrayList<String>();
     
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
@@ -195,6 +195,14 @@ public class Controller {
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		view.rimuoviStorieHome();
+        		view.setPercorsiStorie("C:\\Users\\mamon\\Pictures\\malta 2018\\20180714_224630.jpg",
+        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145011.jpg",
+        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145014.jpg",
+        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145041.jpg",
+        							   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_151020.jpg");
+        		view.aggiornaStorieHome();
+        		refresh();
         	}
         };
         view.getButtonNextStory().addActionListener(gestoreStorySuccessiva);
@@ -818,8 +826,7 @@ public class Controller {
         
         gestorePubblicaSoloTesto = new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-            	//model.pubblicaTesto("mi piace la fava", false, null, null, null);   
+            public void actionPerformed(ActionEvent e) {   
             	setPostAttuale(1);
             	view.getFileChooser().setVisible(false);
             	view.getPrimaScelta().setVisible(false);

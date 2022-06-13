@@ -16,16 +16,19 @@ public class Home extends JPanel {
 	
 	int i;
 
-	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter, containerPost;
+	SpecificContainer containerNorth, containerSouth, containerEast, containerWest, containerCenter, containerPost, containerStory;
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
 	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,
-					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton;
+					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton, primaStoria, secondaStoria,
+					 terzaStoria, quartaStoria, quintaStoria;
+	
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
 	private int contatorePost = 0, contatoreStory = 0;
-	private String percorsoPost;
+	private String percorsoPost, percorsoPrimaStoria, percorsoSecondaStoria, percorsoTerzaStoria, percorsoQuartaStoria, percorsoQuintaStoria;
+	private ArrayList<Pulsanti> listaPost = new ArrayList<Pulsanti>();
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		int indiceBufferPosts = 0;
@@ -118,9 +121,35 @@ public class Home extends JPanel {
 		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
 	}
 	
-	public void areaStories(ArrayList<String>  bufferStories) {
+	public void aggiornaStorieHome() {
+		//Imposta i nuovi percorsi per le storie da visualizzare
+		primaStoria.impostaPercorsoPost(percorsoPrimaStoria);
+		secondaStoria.impostaPercorsoPost(percorsoSecondaStoria);
+		terzaStoria.impostaPercorsoPost(percorsoTerzaStoria);
+		quartaStoria.impostaPercorsoPost(percorsoQuartaStoria);
+		quintaStoria.impostaPercorsoPost(percorsoQuintaStoria);
+		containerStory.add(primaStoria);
+		containerStory.add(secondaStoria);
+		containerStory.add(terzaStoria);
+		containerStory.add(quartaStoria);
+		containerStory.add(quintaStoria);
+
+        this.invalidate();
+        this.validate();
+        this.repaint();
+	}
+	
+	public void rimuoviStorieHome() {
+		containerStory.remove(primaStoria);
+		containerStory.remove(secondaStoria);
+		containerStory.remove(terzaStoria);
+		containerStory.remove(quartaStoria);
+		containerStory.remove(quintaStoria);
+	}
+	
+	public void areaStories() {
 		SpecificContainer containerWest = new SpecificContainer();
-		SpecificContainer containerStory = new SpecificContainer();
+		containerStory = new SpecificContainer();
 		SpecificContainer containerButtonStory = new SpecificContainer();
 		
 		containerWest.add(containerStory = new SpecificContainer(), BorderLayout.CENTER);
@@ -128,13 +157,22 @@ public class Home extends JPanel {
 		containerCenter.add(containerWest, BorderLayout.WEST);
 	
 		containerButtonStory.setLayout(new GridLayout(1, 2));
-		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
 		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
+		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
 		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
 		
-		for (i = 0; i < 5; i++) {
-			containerStory.add(new Pulsanti(bufferStories.get(this.getIndiceBufferStories()+ i), Frame.COLORESECONDARIOTEMATICO, 4));
-		}	
+		primaStoria = new Pulsanti("", 150, 150);
+		secondaStoria = new Pulsanti("", 150, 150);
+		terzaStoria = new Pulsanti("", 150, 150);
+		quartaStoria = new Pulsanti("", 150, 150);
+		quintaStoria = new Pulsanti("", 150, 150);
+		
+		containerStory.add(primaStoria);
+		containerStory.add(secondaStoria);
+		containerStory.add(terzaStoria);
+		containerStory.add(quartaStoria);
+		containerStory.add(quintaStoria);
+			
 	}
 	
 		public void sezionePubblicaPost() {
@@ -155,7 +193,7 @@ public class Home extends JPanel {
 	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
 		menuHome();
 		areaPost(bufferPosts);
-		areaStories(bufferStories);
+		areaStories();
 		sezionePubblicaPost();
 	}
 	
@@ -320,6 +358,14 @@ public class Home extends JPanel {
 
 	public void setPostPrincipale(Pulsanti postPrincipale) {
 		this.postPrincipale = postPrincipale;
+	}
+	
+	public void setPercorsiStorie(String percorsoPrimaStoria, String percorsoSecondaStoria, String percorsoTerzaStoria, String percorsoQuartaStoria, String percorsoQuintaStoria) {
+		this.percorsoPrimaStoria = percorsoPrimaStoria;
+		this.percorsoSecondaStoria = percorsoSecondaStoria;
+		this.percorsoTerzaStoria = percorsoTerzaStoria;
+		this.percorsoQuartaStoria = percorsoQuartaStoria;
+		this.percorsoQuintaStoria = percorsoQuintaStoria;
 	}
 	
 	

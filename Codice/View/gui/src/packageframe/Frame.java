@@ -955,6 +955,18 @@ public class Frame extends JFrame {
         ((Chat)mappaSchermate.get("Chat")).settaSchermataChat(gruppi);
 
     }
+    
+	public void aggiornaStorieHome() {
+		((Home)mappaSchermate.get("Home")).aggiornaStorieHome();
+	}
+	
+	public void rimuoviStorieHome() {
+		((Home)mappaSchermate.get("Home")).rimuoviStorieHome();
+	}
+	
+	public void setPercorsiStorie(String percorsoPrimaStoria, String percorsoSecondaStoria, String percorsoTerzaStoria, String percorsoQuartaStoria, String percorsoQuintaStoria) {
+		((Home)mappaSchermate.get("Home")).setPercorsiStorie(percorsoPrimaStoria, percorsoSecondaStoria, percorsoTerzaStoria, percorsoQuartaStoria, percorsoQuintaStoria);;
+	}
 
 	
 }
