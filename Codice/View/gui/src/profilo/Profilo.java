@@ -357,10 +357,16 @@ public class Profilo implements IProfilo {
 		ArrayList<Messaggio> listaMessaggi = dbfacade.caricaMessaggiChatPrivata(inviante, ricevente);
 		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
 		
+		
+		
 		for(int i = 0; i < listaMessaggi.size(); i++) {
 			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getProfiloInviante());
 			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getTesto());
 		}
+		for(int i = 0; i < listaMessaggi.size(); i++) {
+			System.out.println(listaMessaggi.get(i));
+		}
+		
 		return listaTestoEProfiloInviante;
 	}
 

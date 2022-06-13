@@ -21,7 +21,9 @@ public class  Profilo extends JPanel {
 	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
 	ArrayList<String> dati = new ArrayList<String>();
 	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, pulsanteSecondoTesto, pulsanteTerzoTesto;
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, 
+	nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, 
+	pulsanteSecondoTesto, pulsanteTerzoTesto,pulsantePrimoSondaggioDoppia, pulsanteSecondoSondaggioDoppia, pulsanteTerzoSondaggioDoppia;
 	private Etichette etichettaNome;
 	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
 	
@@ -101,25 +103,40 @@ public class  Profilo extends JPanel {
 		
 		SpecificContainer containerEast = new SpecificContainer();
 		add(containerEast, BorderLayout.EAST);
-		containerEast.setLayout(new GridLayout(6,1));
+		containerEast.setLayout(new GridLayout(6,2));
 
 		
 		ListaSondaggi.clear();
+			AreaDiTesto testoPrimoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoPrimoSondaggioDoppia);
+			containerEast.add(pulsantePrimoSondaggioDoppia = new Pulsanti("Primo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(0)), BorderLayout.PAGE_START);
+			
+			AreaDiTesto testoSecondoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoSecondoSondaggioDoppia);
+			containerEast.add(pulsanteSecondoSondaggioDoppia = new Pulsanti("Secondo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(1)), BorderLayout.PAGE_START);
+			
+			AreaDiTesto testoTerzoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
+			ListaSondaggi.add(testoTerzoSondaggioDoppia);
+			containerEast.add(pulsanteTerzoSondaggioDoppia = new Pulsanti("Terzo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(ListaSondaggi.get(2)), BorderLayout.PAGE_START);
+
+			ListaSondaggi.clear();
 			AreaDiTesto testoPrimoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoPrimoSondaggio);
-			containerEast.add(pulsantePrimoSondaggio = new Pulsanti("Primo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsantePrimoSondaggioDoppia = new Pulsanti("Primo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(0)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoSecondoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoSecondoSondaggio);
-			containerEast.add(pulsanteSecondoSondaggio = new Pulsanti("Secondo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteSecondoSondaggio = new Pulsanti("Secondo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(1)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoTerzoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoTerzoSondaggio);
-			containerEast.add(pulsanteTerzoSondaggio = new Pulsanti("Terzo sondaggio", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteTerzoSondaggio = new Pulsanti("Terzo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(2)), BorderLayout.PAGE_START);
-
 		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		

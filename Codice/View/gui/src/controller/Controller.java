@@ -47,7 +47,9 @@ public class Controller {
     private ArrayList<String> postDelProfilo = new ArrayList<String>();
     private ArrayList<String> percorsiPostFoto = new ArrayList<String>();
     private ArrayList<String> percorsiPostTesto = new ArrayList<String>();
-    private ArrayList<String> percorsiPostSondaggio = new ArrayList<String>();
+    private ArrayList<String> percorsiPostSondaggioSceltaMultipla = new ArrayList<String>();
+    private ArrayList<String> percorsiPostSondaggioDoppiaScelta = new ArrayList<String>();
+
     private ArrayList<String> listaGruppi = new ArrayList<String>();
     
     ArrayList<String> messaggi = new ArrayList<String>();
@@ -327,7 +329,8 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
             	messaggi = model.getProfiloAttivo().cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
-            	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+            	System.out.println(model.getProfiloAttivo().getIdProfilo());
+            	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getNickname());
             	refresh();
             	mostraSchermata("AreaChatFrame");
             }
@@ -566,7 +569,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(0), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(0), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
@@ -590,7 +593,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(2), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(2), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
@@ -613,7 +616,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggio.get(4), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(4), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
@@ -674,7 +677,7 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		view.setContatoreSondaggio(view.getContatoreSondaggio() + 2);
-        		view.setPostSondaggioProfilo(percorsiPostSondaggio);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggioSceltaMultipla);
         	}
         };
         view.getNextSondaggio().addActionListener(gestoreNextSondaggio);
@@ -683,7 +686,7 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		view.setContatoreSondaggio(view.getContatoreSondaggio() - 2);
-        		view.setPostSondaggioProfilo(percorsiPostSondaggio);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggioSceltaMultipla);
         	}
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
@@ -798,20 +801,18 @@ public class Controller {
                 String percorsoFotoProfilo = null;
                 postDelProfilo = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
                 percorsiPostTesto = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-                percorsiPostSondaggio = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+                percorsiPostSondaggioSceltaMultipla = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
                 
-            
                 try {
                 	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo())).getPercorso();
 				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
+					percorsoFotoProfilo = "immagini/images.png";
 				} catch (PostNonPresente e2) {
 					 percorsoFotoProfilo = "immagini/images.png";
-					e2.printStackTrace();
 				}
                 
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo,  postDelProfilo, percorsiPostTesto, percorsiPostSondaggio);
+					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo,  postDelProfilo, percorsiPostTesto, percorsiPostSondaggioSceltaMultipla);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1305,7 +1306,7 @@ public class Controller {
         String idProfilo = model.getProfiloAttivo().getIdProfilo();
         postDelProfilo = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.FOTO);
         percorsiPostTesto = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
-        percorsiPostSondaggio = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
+        percorsiPostSondaggioSceltaMultipla = model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
 
         String fotoProfiloPercorso = null;
         
@@ -1319,7 +1320,7 @@ public class Controller {
     	   fotoProfiloPercorso = "immagini/images.png";
         } 
         try {
-			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo, postDelProfilo,percorsiPostTesto, percorsiPostSondaggio);
+			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo, postDelProfilo,percorsiPostTesto, percorsiPostSondaggioSceltaMultipla);
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
@@ -1332,7 +1333,7 @@ public class Controller {
         postDelProfilo.clear();
         percorsiPostFoto.clear();
         percorsiPostTesto.clear();
-        percorsiPostSondaggio.clear();
+        percorsiPostSondaggioSceltaMultipla.clear();
         listaGruppi.clear();
         
         try {
