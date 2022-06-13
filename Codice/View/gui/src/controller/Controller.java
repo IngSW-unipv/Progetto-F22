@@ -1295,7 +1295,7 @@ public class Controller {
     
     public void scriviMessaggioPrivato() {
     	String testoDaInviare = view.getScriviMessaggio().getText();
-    	model.scriviMessaggio(testoDaInviare, null, model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+    	model.getProfiloAttivo().scriviMessaggioPrivato(testoDaInviare, model.getProfiloConCuiSiStaChattando().getIdProfilo());
     }
     public void aggiornaSchermataProfiloAttivo() {
     	String nickName = model.getProfiloAttivo().getNickname();

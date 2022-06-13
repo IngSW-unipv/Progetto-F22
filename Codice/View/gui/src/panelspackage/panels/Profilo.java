@@ -49,7 +49,7 @@ public class  Profilo extends JPanel {
 		immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg");
 		JScrollPane pannelloFoto = new JScrollPane(immagineProf);
 		pannelloFoto.setPreferredSize(new Dimension(80,80));
-		containerNorth.add(pannelloFoto,BorderLayout.PAGE_START);
+		containerNorthNorth.add(pannelloFoto,BorderLayout.PAGE_START);
 
 		dati.add("N.Post");
 		dati.add(Integer.toString(0));

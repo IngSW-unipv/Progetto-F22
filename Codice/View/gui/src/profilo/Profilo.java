@@ -973,7 +973,19 @@ public class Profilo implements IProfilo {
 		}
 		throw new AzioneNonConsentita();
 	}
+	
+	
+	public void scriviMessaggioPrivato(String testo, String ricevente) {
 
+ 		int idMessage = (int)Math.round(Math.random() * 10000);
+ 		String idMessaggio = Integer.toString(idMessage);
+
+ 		if(dbfacade.cerca(new MessaggioPrivato(idMessaggio)) != null) {
+ 			scriviMessaggioPrivato(testo, ricevente);
+ 		}
+ 		scriviMessaggio(new MessaggioPrivato(idMessaggio, testo, this.getIdProfilo(), ricevente));
+	}
+		
 
 	/**
 	 * Carica nel database un messaggio di gruppo (Utile per il controller)
@@ -1219,12 +1231,9 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 		i[2] = dbfacade.vediCount3SSM(new SondaggioSceltaMultipla(idSondaggio));
 		i[3] = dbfacade.vediCount4SSM(new SondaggioSceltaMultipla(idSondaggio));
 		return i;
-	}
+		}
 	return null;
-}
-
-
-
+	}	
 }
 
 	
