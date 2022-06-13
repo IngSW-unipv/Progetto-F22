@@ -1,12 +1,13 @@
 package panelspackage.panels;
 
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import packageframe.Frame;
@@ -17,22 +18,30 @@ import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
+
+@SuppressWarnings("serial")
 public class ChatDiGruppoFrame extends JPanel {
     
     private int messaggioCorrente = 0;
-    
     private ArrayList<JComponent> ListaEtichetteMessaggi  = new ArrayList<JComponent>();
     private Pulsanti foto, nextMessaggio, prevMessaggio;
-    private AreaDiTesto descrizione;
+    private AreaDiTesto descrizione, modificaDesc; 
     private InserimentoTesto aggiungi, rimuovi, scriviMessaggio;
-    private Pulsanti rimuoviUtente, aggiungiUtente, invia, home;
+    private Pulsanti rimuoviUtente, aggiungiUtente, invia, home, eliminaGruppo, refresh, modificaDescrizione;
+    private JFileChooser modificaFoto;
+   
+    
+    
     public ChatDiGruppoFrame() {
-        avvio();
+        
+    	avvio();
         initComponents();
     }
     
+    
     public void avvio() {
-        this.setOpaque(true);
+        
+    	this.setOpaque(true);
         this.setVisible(true);
         this.setLayout(new BorderLayout());
         this.setBackground(Frame.COLORESECONDARIOTEMATICO);   
@@ -44,58 +53,80 @@ public class ChatDiGruppoFrame extends JPanel {
         SpecificContainer containerNorth = new SpecificContainer();
         this.add(containerNorth, BorderLayout.NORTH);
         
-        /* foto = new Pulsanti("");
+        containerNorth.setLayout(new GridLayout( 4, 1));
+        containerNorth.add(new Etichette("Modifica la foto di profilo del gruppo", Frame.COLOREPRIMARIOTEMATICO));
+        
+        modificaFoto = new JFileChooser();
+        containerNorth.add(modificaFoto);
+        
+        foto = new Pulsanti("/Users/aissa/OneDrive/Immagini/Saved Pictures/roses.jpg");
         JScrollPane panel = new JScrollPane(foto);
-        panel.setPreferredSize(new Dimension(300,300));
-        containerNorth.add(panel, BorderLayout.PAGE_START);
-        */
+        panel.setPreferredSize(new Dimension(60,60));
+        containerNorth.add(panel);
+        
         descrizione = new AreaDiTesto("", 60, 20);
         SpecificContainer containerNorthNorth = new SpecificContainer();
         containerNorthNorth.setLayout(new GridLayout(2, 1));
-        containerNorth.add(containerNorthNorth, BorderLayout.NORTH);
-        containerNorthNorth.add(descrizione);
+        
+        containerNorth.add(containerNorthNorth);
         containerNorthNorth.add(new Etichette("Inserire la descrizione", Frame.COLOREPRIMARIOTEMATICO));
-        
-        
-        aggiungi = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14), 30);
-        aggiungiUtente = new Pulsanti("Aggiungi utente", Frame.COLOREPRIMARIOTEMATICO);
-        rimuovi = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14), 30);
-        rimuoviUtente = new Pulsanti("Rimuovi utente", Frame.COLOREPRIMARIOTEMATICO);
-        
-        SpecificContainer containerNorthCenter = new SpecificContainer();
-        containerNorthCenter.setLayout(new GridLayout(2, 2));
-        this.add(containerNorthCenter, BorderLayout.CENTER);
-        containerNorthCenter.add(aggiungi);
-        containerNorthCenter.add(aggiungiUtente);
-        containerNorthCenter.add(rimuovi);
-        containerNorthCenter.add(rimuoviUtente);
+        containerNorthNorth.add(descrizione);
         
         for(int i = getMessaggioCorrente();  i <  20; i++) {
             Etichette areaMessaggio = new Etichette("" + i, Frame.COLOREPRIMARIOTEMATICO);
             ListaEtichetteMessaggi.add(areaMessaggio);
         }
-      
+        
+        
         ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
         ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
         
-        //add(containerCenter, BorderLayout.CENTER);
         GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
         this.add(grigliaMessaggi, BorderLayout.CENTER);
         
+        aggiungi = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14), 30);
+        aggiungiUtente = new Pulsanti("Aggiungi utente", Frame.COLOREPRIMARIOTEMATICO);
+        rimuovi = new InserimentoTesto("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14), 30);
+        rimuoviUtente = new Pulsanti("Rimuovi utente", Frame.COLOREPRIMARIOTEMATICO);
+        eliminaGruppo = new Pulsanti("Elimina il gruppo", Frame.COLOREPRIMARIOTEMATICO);
+        modificaDesc = new AreaDiTesto("", 60, 20);
+        modificaDescrizione = new Pulsanti("Modifica la descrizione del gruppo", Frame.COLOREPRIMARIOTEMATICO);
+        
+        
+        SpecificContainer containerNorthCenter = new SpecificContainer();
+        containerNorthCenter.setLayout(new GridLayout(4, 4));
+        this.add(containerNorthCenter, BorderLayout.CENTER);
+        
+        containerNorthCenter.add(aggiungi);
+        containerNorthCenter.add(aggiungiUtente);
+        containerNorthCenter.add(rimuovi);
+        containerNorthCenter.add(rimuoviUtente);
+        containerNorthCenter.add(modificaDesc);
+        containerNorthCenter.add(modificaDescrizione);
+        containerNorthCenter.add(eliminaGruppo);
         
         SpecificContainer containerSouth = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
         this.add(containerSouth, BorderLayout.SOUTH);
+        containerSouth.setLayout(new GridLayout(1, 3));
         containerSouth.setVisible(true);
-        scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
-  	  	
-  	  	containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
+        
+        refresh = new Pulsanti("Refresh", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
         invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-  	  	containerSouth.add(invia,BorderLayout.EAST);
-
+        scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
+        
+        containerSouth.add(refresh);
+  	    containerSouth.add(scriviMessaggio);
+        containerSouth.add(invia);
+        
+        SpecificContainer containerSouthSouth = new SpecificContainer();
+        containerSouthSouth.setLayout(new GridLayout(1, 1));
+        this.add(containerSouthSouth, BorderLayout.SOUTH);
+        
   	  	home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-  	  	containerSouth.add(home,BorderLayout.SOUTH);
+  	  	containerSouthSouth.add(home, BorderLayout.SOUTH);
     }
 
+    
     public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
         if(messaggi.size() == 0) {
             return false;

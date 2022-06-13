@@ -775,6 +775,7 @@ public class Frame extends JFrame {
 	public String getPercorsoImmagineGruppo() {
 		return ((CreazioneChatDiGruppo)mappaSchermate.get("CreazioneChatDiGruppo")).getPercorsoImmagineGruppo();
 	}
+	
 	public AreaDiTesto getDescrizione() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getAreaDescrizione();
 	}

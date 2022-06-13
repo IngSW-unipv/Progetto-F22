@@ -1,18 +1,18 @@
 package panelspackage.panels;
+
 import javax.swing.*;
 import packageframe.Frame;
-
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
 import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
+
+
 public class  Profilo extends JPanel {
 
 	private String idProfilo;
