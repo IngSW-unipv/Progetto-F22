@@ -922,10 +922,11 @@ public class Controller {
         gestoreProssimoMessaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		if(view.getIndiceMessaggioCorrenteChat() < listaGruppi.size()-20) {
         		view.incrementaIndiceMessaggioChat();
-        		System.out.println("indice messaggio corrente" + view.getIndiceMessaggioCorrenteChat());
         		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
                 view.settaSchermataChat(listaGruppi);
+        		}
         	}
         };
         view.getProssimoMessaggioButton().addActionListener(gestoreProssimoMessaggio);
@@ -933,13 +934,15 @@ public class Controller {
         gestoreMessaggioPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		if(view.getIndiceMessaggioCorrenteChat() > 0) {
         		view.decrementaIndiceMessaggioChat();
-        		System.out.println("indice messaggio corrente" + view.getIndiceMessaggioCorrenteChat());
-
         		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
                 view.settaSchermataChat(listaGruppi);
+        		}
         	}
         };
+        view.getMessaggioPrecedenteButton().addActionListener(gestoreMessaggioPrecedente);
+
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
