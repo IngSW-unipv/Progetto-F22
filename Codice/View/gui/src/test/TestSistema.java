@@ -17,7 +17,7 @@ class TestSistema {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
-		Profilo p = new Profilo("ciccioGamer@unipv.it", "Mucca");
+		Profilo p = new Profilo("lollo", "cortomuso");
 		DbFacade.getIstance().carica(p);
 	}
 
@@ -25,7 +25,7 @@ class TestSistema {
 	void testSignIn() throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist, Exception {
 		boolean esito;
 		try {
-			esito = sistema.signIn("FavijTv@unipv.it", "Favij", "youtuboanch'io");
+			esito = sistema.signIn("ciccioGamer89", "ciccio", "akunaMatata");
 			assertTrue(esito);
 		} catch (AccountGiaEsistente e) {
 			e.printStackTrace();
@@ -36,7 +36,7 @@ class TestSistema {
 	void testLogIn() {
 		boolean esito;
 		try {
-		 	esito = sistema.login("paoloruffini@gmail.it	"	, "paoloruffini");
+		 	esito = sistema.login("dilo", "dilonudo");
 		 	assertTrue(esito);
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
@@ -46,12 +46,12 @@ class TestSistema {
 	 		e.printStackTrace();
 	 	} 
 	}
-	
+
 	@Test
 	void testLogInFallito() {
 		boolean esito;
 		try {
-		 	esito = sistema.login("lasabrigamer@unipv.it", "mucca");
+		 	esito = sistema.login("dilo", "mucca");
 		 	assertFalse(esito);
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
@@ -62,12 +62,17 @@ class TestSistema {
 	 		
 	 	} 
 	}
-
+	
+	@Test
+	void testRimuoviProfilo() {
+		assertTrue(sistema.getProfiloAttivo().rimuoviQuestoProfilo());
+	}
+	/*
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		try {
 			try {
-				sistema.getProfiloAttivo.rimuoviAccount(new Profilo("FavijTv@unipv.it"));
+				assertTrue(sistema.getProfiloAttivo().rimuoviQuestoProfilo());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -75,14 +80,11 @@ class TestSistema {
 			e.printStackTrace();
 		}
 		try {
-			sistema.cambiaPassword("lasabrigamer@unipv.it", "cavallo", "lasabri");
+			sistema.getProfiloAttivo().cambiaPassword("cavallo", "lasabri");
 	 	} catch (ChangeDefaultPassword e) {
 		 	e.printStackTrace();
 	 	} catch (AccountDoesNotExist e) {
 		 	e.printStackTrace();
 	 	}
-	}
+	}*/
 }
-	
-
-
