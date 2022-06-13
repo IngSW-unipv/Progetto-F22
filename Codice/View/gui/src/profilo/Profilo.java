@@ -31,6 +31,7 @@ import profilo.exception.ChangeDefaultPassword;
 import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.ProfiloGiaInserito;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
 import java.util.TimerTask;
@@ -1136,33 +1137,59 @@ public class Profilo implements IProfilo {
 	 * @param id del profilo da aggiungere
 	 */
 @Override
-public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno {
+public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) throws GruppoGiaPieno, ProfiloGiaInserito {
 		
 		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 		
 		if(g != null) {
 			if(g.getProfilo1() == null) {
 				dbfacade.gestisciPartecipante1(idProfilo, g);
+				g.setProfilo1(idProfilo);
 				return true;
 			}
 			else if(g.getProfilo2() == null) {
 				dbfacade.gestisciPartecipante2(idProfilo, g);
+				g.setProfilo2(idProfilo);
+				if(g.getProfilo2().equals(g.getProfilo1())) {
+					dbfacade.gestisciPartecipante2(null, g);
+					throw new ProfiloGiaInserito(nickName);
+				}
 				return true;
 			}
 			else if(g.getProfilo3() == null) {
 				dbfacade.gestisciPartecipante3(idProfilo, g);
+				g.setProfilo3(idProfilo);
+				if(g.getProfilo3().equals(g.getProfilo1()) || g.getProfilo3().equals(g.getProfilo2())) {
+					dbfacade.gestisciPartecipante3(null, g);
+					throw new ProfiloGiaInserito(nickName);
+				}
 				return true;
 			}
 			else if(g.getProfilo4() == null) {
 				dbfacade.gestisciPartecipante4(idProfilo, g);
+				g.setProfilo4(idProfilo);
+				if(g.getProfilo4().equals(g.getProfilo1()) || g.getProfilo4().equals(g.getProfilo2()) || g.getProfilo4().equals(g.getProfilo3())) {
+					dbfacade.gestisciPartecipante4(null, g);
+					throw new ProfiloGiaInserito(nickName);
+				}
 				return true;
 			}
 			else if(g.getProfilo5() == null) {
 				dbfacade.gestisciPartecipante5(idProfilo, g);
+				g.setProfilo5(idProfilo);
+				if(g.getProfilo5().equals(g.getProfilo1()) || g.getProfilo5().equals(g.getProfilo2()) || g.getProfilo5().equals(g.getProfilo3()) || g.getProfilo5().equals(g.getProfilo4())) {
+					dbfacade.gestisciPartecipante5(null, g);
+					throw new ProfiloGiaInserito(nickName);
+				}
 				return true;
 			}
 			else if(g.getProfilo6() == null) {
 				dbfacade.gestisciPartecipante6(idProfilo, g);
+				g.setProfilo6(idProfilo);
+				if(g.getProfilo6().equals(g.getProfilo1()) || g.getProfilo6().equals(g.getProfilo2()) || g.getProfilo6().equals(g.getProfilo3()) || g.getProfilo6().equals(g.getProfilo4()) || g.getProfilo6().equals(g.getProfilo5())) {
+					dbfacade.gestisciPartecipante6(null, g);
+					throw new ProfiloGiaInserito(nickName);
+				}
 				return true;
 			}
 		}
@@ -1182,18 +1209,23 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo){
 	if(g != null) {
 		if(g.getProfilo1() == null || g.getProfilo1().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante1(null, g);
+			
 		}
 		if(g.getProfilo2() == null || g.getProfilo2().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante2(null, g);
+			
 		}
 		if(g.getProfilo3() == null || g.getProfilo3().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante3(null, g);
+			
 		}
 		if(g.getProfilo4() == null || g.getProfilo4().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante4(null, g);
+			
 		}
-		if(g.getProfilo5() == null || g.getProfilo5().equals(idProfilo)) {
+		else if(g.getProfilo5() == null || g.getProfilo5().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante5(null, g);
+			
 		}
 		if(g.getProfilo6() == null || g.getProfilo6().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante6(null, g);

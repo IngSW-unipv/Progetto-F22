@@ -23,6 +23,7 @@ import profilo.*;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.GruppoGiaPieno;
+import profilo.exception.ProfiloGiaInserito;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
 
@@ -294,8 +295,11 @@ class TestProfilo {
 		Gruppo g = new Gruppo("G123", null, null, null, null, null, null, null, null,profiloAttivo.getIdProfilo());
 		altroProfilo = new Profilo("alfredo");
 		try {
-			assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo()));
+			assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo(), altroProfilo.getNickname()));
 		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProfiloGiaInserito e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -24,6 +24,7 @@ import profilo.exception.AzioneNonConsentita;
 import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.ProfiloGiaInserito;
 import profilo.exception.TastoNonEsistente;
 import profilo.follow.Follow;
 
@@ -93,7 +94,7 @@ public interface IProfilo {
 	boolean rimuoviCommento(String idCommento);
 	public Commento cercaCommento(String idCommento);
 	boolean modificaDescrizione(String n);
-	boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno;
+	boolean aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) throws GruppoGiaPieno, ProfiloGiaInserito;
 	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
 }
 

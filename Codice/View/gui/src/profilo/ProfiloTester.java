@@ -18,13 +18,14 @@ import profilo.exception.AzioneNonConsentita;
 import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
+import profilo.exception.ProfiloGiaInserito;
 import profilo.exception.TastoNonEsistente;
 
 public class ProfiloTester {
 	
     public static void main(String [] args) throws AccountDoesNotExist {
     	Profilo p = new Profilo("frank");
-    	/*Profilo p1 = new Profilo("DV999", "Luca26");
+    	Profilo p1 = new Profilo("DV999", "Luca26");
     	Video v = new Video("V00", null, false, null, null, 0);
     	Foto f = new Foto("F15", null, false, null, null, false);
     	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null);
@@ -38,8 +39,8 @@ public class ProfiloTester {
     	MessaggioDiGruppo m = new MessaggioDiGruppo("MDG00", null, null, "ciaoooo", "F00", "G00");
     	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001");
     
-      
-    	/*try {
+      /*
+    	try {
 			System.out.println(p1.cercaPost(f).toString());
 		} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e) {
 			// TODO Auto-generated catch block
@@ -56,11 +57,11 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
         
-        System.out.println(p1.modificaFotoGruppo(g, f.getIdPost()));*/
-    	/*ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
+        System.out.println(p1.modificaFotoGruppo(g, f.getIdPost()));
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
     	for(String str : res)
-    		System.out.println(str.toString());*/
-    	/*
+    		System.out.println(str.toString());
+    	
     	try {
 			Video v1 = (Video) p1.cercaPost(v);
 			System.out.println(v1.toString());
@@ -104,15 +105,17 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
     	*/
-    	
     	try {
-			p.aggiungiPartecipante("142", "frank");
+			p.aggiungiPartecipante("188", "dilo", "dilo");
 		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProfiloGiaInserito e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-    	//p.rimuoviPartecipante("142", "frank");
+    	//p.rimuoviPartecipante("188", "frank");
     }
 }
 

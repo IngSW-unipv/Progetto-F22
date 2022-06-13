@@ -179,10 +179,13 @@ public class Sistema {
 		this.profiloConCuiSiStaChattando = profiloConCuiSiStaChattando;
 	}
 	
-	public void aggiungiPartecipante(String idGruppo, String idProfilo) {
+	public void aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) {
 		try {
-			profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo);
+			profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo, nickName);
 		} catch (GruppoGiaPieno e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ProfiloGiaInserito e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
