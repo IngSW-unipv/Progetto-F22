@@ -19,7 +19,7 @@ import panelspackage.panels.elements.SpecificContainer;
 public class Chat extends JPanel {
 
     private Pulsanti tornaHome, primaChatGruppo, secondaChatGruppo, terzaChatGruppo, quartaChatGruppo, quintaChatGruppo,
-                     primaChatPrivata, secondaChatPrivata, terzaChatPrivata, quartaChatPrivata, quintaChatPrivata,
+    				 sestaChatGruppo, settimaChatGruppo, ottavaChatGruppo, nonaChatGruppo, decimaChatGruppo,
                      messaggioPrecedente, prossimoMessaggio;
     private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
     //private JComboBox<String> discussioni;
@@ -49,26 +49,27 @@ public class Chat extends JPanel {
         
         containerCenter = new SpecificContainer(Color.CYAN);
         containerCenter.setLayout(new GridLayout(10, 2));
-        listaComponenti.add(new Etichette("ChatDiGruppo1",Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(new Etichette("",Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(primaChatGruppo = new Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatPersonale1", Frame.COLORESECONDARIOTEMATICO));
-        listaComponenti.add(primaChatPrivata = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatDiGruppo2", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(secondaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatPersonale2", Frame.COLORESECONDARIOTEMATICO));
-        listaComponenti.add(secondaChatPrivata = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatDiGruppo3", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(terzaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatPersonale3", Frame.COLORESECONDARIOTEMATICO));
-        listaComponenti.add(terzaChatPrivata = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatDiGruppo4", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(quartaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatPersonale4", Frame.COLORESECONDARIOTEMATICO));
-        listaComponenti.add(quartaChatPrivata = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatDiGruppo5", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(quintaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
-        listaComponenti.add(new Etichette("ChatPersonale5", Frame.COLORESECONDARIOTEMATICO));
-        listaComponenti.add(quintaChatPrivata = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(sestaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(settimaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(ottavaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(nonaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+        listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
+        listaComponenti.add(decimaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
+
         
         for(int i = 0; i < listaComponenti.size(); i++) {
             containerCenter.add(listaComponenti.get(i));
@@ -175,45 +176,46 @@ public class Chat extends JPanel {
             this.quintaChatGruppo = quintaChatGruppo;
         }
 
-        public Pulsanti getPrimaChatPrivata() {
-            return primaChatPrivata;
+        public Pulsanti getSestaChatGruppo() {
+            return sestaChatGruppo;
         }
 
-        public void setPrimaChatPrivata(Pulsanti primaChatPrivata) {
-            this.primaChatPrivata = primaChatPrivata;
+        public void setSestaChatGruppo(Pulsanti sestaChatDiGruppo) {
+            this.sestaChatGruppo = sestaChatDiGruppo;
         }
 
-        public Pulsanti getSecondaChatPrivata() {
-            return secondaChatPrivata;
+        public Pulsanti getSettimaChatGruppo() {
+            return settimaChatGruppo;
         }
 
-        public void setSecondaChatPrivata(Pulsanti secondaChatPrivata) {
-            this.secondaChatPrivata = secondaChatPrivata;
+        public void setSettimaChatGruppo(Pulsanti settimaChatDiGruppo) {
+            this.settimaChatGruppo = settimaChatDiGruppo;
         }
 
-        public Pulsanti getTerzaChatPrivata() {
-            return terzaChatPrivata;
+        public Pulsanti getOttavaChatGruppo() {
+            return ottavaChatGruppo;
         }
 
-        public void setTerzaChatPrivata(Pulsanti terzaChatPrivata) {
-            this.terzaChatPrivata = terzaChatPrivata;
+        public void setOttavaChatGruppo(Pulsanti ottavaChatDiGruppo) {
+            this.ottavaChatGruppo = ottavaChatDiGruppo;
         }
 
-        public Pulsanti getQuartaChatPrivata() {
-            return quartaChatPrivata;
+        public Pulsanti getNonaChatGruppo() {
+            return nonaChatGruppo;
         }
 
-        public void setQuartaChatPrivata(Pulsanti quartaChatPrivata) {
-            this.quartaChatPrivata = quartaChatPrivata;
+        public void setNonaChatGruppo(Pulsanti nonaChatDiGruppo) {
+            this.nonaChatGruppo = nonaChatDiGruppo;
         }
 
-        public Pulsanti getQuintaChatPrivata() {
-            return quintaChatPrivata;
+        public Pulsanti getDecimaChatGruppo() {
+            return decimaChatGruppo;
         }
 
-        public void setQuintaChatPrivata(Pulsanti quintaChatPrivata) {
-            this.quintaChatPrivata = quintaChatPrivata;
+        public void setDecimaChatGruppo(Pulsanti decimaChatDiGruppo) {
+            this.decimaChatGruppo = decimaChatDiGruppo;
         }
+
         public int getIndiceMessaggioCorrente() {
 			return indiceMessaggioCorrente;
 		}

@@ -22,8 +22,8 @@ public class Controller {
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
-                           gestoreQuintaChatGruppo, gestorePrimaChatPrivata, gestoreSecondaChatPrivata, gestoreTerzaChatPrivata, gestoreQuartaChatPrivata, 
-                           gestoreQuintaChatPrivata, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
+                           gestoreQuintaChatGruppo, gestoreSestaChatGruppo, gestoreSettimaChatGruppo, gestoreOttavaChatGruppo, gestoreNonaChatGruppo, 
+                           gestoreDecimaChatGruppo, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
                            gestorePost1, gestorePost2, gestorePost3, gestoreSondaggio1, gestoreSondaggio2, gestoreSondaggio3,
                            gestoreChatFrameHome, gestoreCreaUnaChatDiGruppoHome, gestoreCreaChatDiGruppo, gestoreHomeChatDiGruppo, gestorePubblicaStory,
@@ -1078,7 +1078,10 @@ public class Controller {
         gestoreTerzaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Terza chat gruppo");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
         view.getTerzaChatGruppoButton().addActionListener(gestoreTerzaChatGruppo);
@@ -1086,7 +1089,10 @@ public class Controller {
         gestoreQuartaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Quarta chat gruppo");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
         view.getQuartaChatGruppoButton().addActionListener(gestoreQuartaChatGruppo);
@@ -1094,50 +1100,69 @@ public class Controller {
         gestoreQuintaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Quinta chat gruppo");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
         view.getQuintaChatGruppoButton().addActionListener(gestoreQuintaChatGruppo);
         
-        gestorePrimaChatPrivata = new ActionListener() {
+        gestoreSestaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Prima chat privata");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
-        view.getPrimaChatPrivataButton().addActionListener(gestorePrimaChatPrivata);
+        view.getSestaChatDiGruppoButton().addActionListener(gestoreSestaChatGruppo);
         
-        gestoreSecondaChatPrivata = new ActionListener() {
+        gestoreSettimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Seconda chat privata");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
-        view.getSecondaChatPrivataButton().addActionListener(gestoreSecondaChatPrivata);
+        view.getSettimaChatGruppoButton().addActionListener(gestoreSettimaChatGruppo);
         
-        gestoreTerzaChatPrivata = new ActionListener() {
+        gestoreOttavaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Terza chat privata");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
-        view.getTerzaChatPrivataButton().addActionListener(gestoreTerzaChatPrivata);
+        view.getOttavaChatGruppoButton().addActionListener(gestoreOttavaChatGruppo);
         
-        gestoreQuartaChatPrivata = new ActionListener() {
+        gestoreNonaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Quarta chat privata");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
-        view.getQuartaChatPrivataButton().addActionListener(gestoreQuartaChatPrivata);
+        view.getNonaChatGruppoButton().addActionListener(gestoreNonaChatGruppo);
         
-        gestoreQuintaChatPrivata = new ActionListener() {
+        gestoreDecimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Quinta chat privata");
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18)));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
+        		settaSchermataGruppo(g, messaggi);
+        		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
-        view.getQuintaChatPrivataButton().addActionListener(gestoreQuintaChatPrivata);
+        view.getDecimaChatGruppoButton().addActionListener(gestoreDecimaChatGruppo);
+
         
     }
     
