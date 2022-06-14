@@ -96,7 +96,13 @@ public class Controller {
                 if (login()) {
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	System.out.println(storySchermataHome.get(0) + storySchermataHome.get(1));
+                	if(storySchermataHome.size() != 0) {
+                		view.setPercorsiStorie(storySchermataHome);
+                		view.aggiornaStorieHome();
+                		refresh();
+                	} else {
+                		System.out.println("non ci sono storie");
+                	}
                 	if(postSchermataHome.size() == 0) {
                 		mostraSchermata("Home");
                 	} else {
@@ -197,13 +203,16 @@ public class Controller {
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//view.rimuoviStorieHome();
-        		//view.setPercorsiStorie("C:\\Users\\mamon\\Pictures\\malta 2018\\20180714_224630.jpg",
-        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145011.jpg",
-        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145014.jpg",
-        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_145041.jpg",
-        		//					   "C:\\Users\\mamon\\Pictures\\malta 2018\\20180715_151020.jpg");
-        		//view.aggiornaStorieHome();
+        		view.setIndiceStorie(view.getIndiceStorie() + 2);
+               	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            	if(storySchermataHome.size() != 0) {
+            		view.setPercorsiStorie(storySchermataHome);
+            		view.aggiornaStorieHome();
+            		refresh();
+            	} else {
+            		System.out.println("non ci sono storie");
+            	}
+        		
         		refresh();
         	
         	}

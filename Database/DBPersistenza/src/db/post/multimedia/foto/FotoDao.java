@@ -58,7 +58,7 @@ public class FotoDao extends PostDao {
 
 		try
 		{
-			String query="select idFoto from foto f, follow fo where f.profilo = fo.profiloSeguito and profiloPersonale=? and f.isStory = 1";
+			String query="select idFoto, percorso from foto f, follow fo where f.profilo = fo.profiloSeguito and profiloPersonale=? and f.isStory = 1";
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, profilo);
 			rs1=st1.executeQuery();
@@ -66,7 +66,10 @@ public class FotoDao extends PostDao {
 			while(rs1.next())
 			{
 				String idNuovo=rs1.getString(1);
+				String percorsoNuovo=rs1.getString(2);
+
 				result.add(idNuovo);
+				result.add(percorsoNuovo);
 			}
 		}catch (Exception e){e.printStackTrace();}
 

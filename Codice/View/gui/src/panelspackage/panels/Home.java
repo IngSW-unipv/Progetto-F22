@@ -29,6 +29,8 @@ public class Home extends JPanel {
 	private int contatorePost = 0, contatoreStory = 0;
 	private String percorsoPost, percorsoPrimaStoria, percorsoSecondaStoria, percorsoTerzaStoria, percorsoQuartaStoria, percorsoQuintaStoria;
 	private ArrayList<Pulsanti> listaPost = new ArrayList<Pulsanti>();
+	private ArrayList<Pulsanti> listaPulsantiStorie = new ArrayList<Pulsanti>();
+	private int indiceStorie = 0;
 	
 	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
 		int indiceBufferPosts = 0;
@@ -147,6 +149,26 @@ public class Home extends JPanel {
 		containerStory.remove(quintaStoria);
 	}
 	
+	
+	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
+		int i;
+
+		for (i = 0; i < storieDaVisualizzare.size()/2 && i < 3 ; i++) {
+			//System.out.println("stiamo aggiungendo : " + postDelProfilo.get((i*2)+1));
+		//Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
+			int indice =(i*2)+1 + indiceStorie;
+			
+		listaPulsantiStorie.get(i).setIcon(new ImageIcon(storieDaVisualizzare.get(indice)));
+		}
+		if (i<3) {
+			for (int j = i; j < 3; j++) {
+				Icon img2=new ImageIcon("immagini/images.png");
+				listaPulsantiStorie.get(j).setIcon(img2);
+			}
+		}
+	}
+	
+	
 	public void areaStories() {
 		SpecificContainer containerWest = new SpecificContainer();
 		containerStory = new SpecificContainer();
@@ -172,6 +194,12 @@ public class Home extends JPanel {
 		containerStory.add(terzaStoria);
 		containerStory.add(quartaStoria);
 		containerStory.add(quintaStoria);
+		
+		listaPulsantiStorie.add(primaStoria);
+		listaPulsantiStorie.add(secondaStoria);
+		listaPulsantiStorie.add(terzaStoria);
+		listaPulsantiStorie.add(quartaStoria);
+		listaPulsantiStorie.add(quintaStoria);
 			
 	}
 	
@@ -359,17 +387,14 @@ public class Home extends JPanel {
 	public void setPostPrincipale(Pulsanti postPrincipale) {
 		this.postPrincipale = postPrincipale;
 	}
-	
-	public void setPercorsiStorie(String percorsoPrimaStoria, String percorsoSecondaStoria, String percorsoTerzaStoria, String percorsoQuartaStoria, String percorsoQuintaStoria) {
-		this.percorsoPrimaStoria = percorsoPrimaStoria;
-		this.percorsoSecondaStoria = percorsoSecondaStoria;
-		this.percorsoTerzaStoria = percorsoTerzaStoria;
-		this.percorsoQuartaStoria = percorsoQuartaStoria;
-		this.percorsoQuintaStoria = percorsoQuintaStoria;
+
+
+	public int getIndiceStorie() {
+		return indiceStorie;
 	}
-	
-	
-	
-	
-	
+
+
+	public void setIndiceStorie(int indiceStorie) {
+		this.indiceStorie = indiceStorie;
+	}
 }

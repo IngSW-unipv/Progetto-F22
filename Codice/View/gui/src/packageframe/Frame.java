@@ -963,4 +963,26 @@ public class Frame extends JFrame {
 		 ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).setIdGruppo(idGruppo);	
 	}
 	
+	public void aggiornaStorieHome() {
+		((Home)mappaSchermate.get("Home")).aggiornaStorieHome();
+	}
+	
+	public void rimuoviStorieHome() {
+		((Home)mappaSchermate.get("Home")).rimuoviStorieHome();
+	}
+	
+	
+	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
+		((Home)mappaSchermate.get("Home")).setPercorsiStorie(storieDaVisualizzare);
+	}
+	
+	public int getIndiceStorie() {
+		return ((Home)mappaSchermate.get("Home")).getIndiceStorie();
+	}
+	
+	public void setIndiceStorie(int nuovoIndice) {
+		((Home)mappaSchermate.get("Home")).setIndiceStorie(nuovoIndice);
+	}
+	
+	
 }
