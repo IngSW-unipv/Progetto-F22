@@ -5,20 +5,13 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import Messaggio.Messaggio;
-import Messaggio.MessaggioDiGruppo;
-import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
-import post.multimedia.foto.Foto;
-import post.multimedia.video.Video;
 import post.sondaggio.Sondaggio;
-import post.sondaggio.SondaggioDoppiaVotazione;
-import post.sondaggio.SondaggioSceltaMultipla;
-import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
 import profilo.exception.GruppoGiaPieno;
@@ -83,23 +76,13 @@ public interface IProfilo {
 	boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1, String profilo2, String profilo3,
 			String profilo4, String profilo5, String profilo6, String amministratore)
 			throws AccountDoesNotExist;
-	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento);
 	boolean rimuoviCommento(String idCommento);
 	public Commento cercaCommento(String idCommento);
 	boolean modificaDescrizione(String n);
 	boolean aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) throws GruppoGiaPieno, ProfiloGiaInserito;
 	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
-	/**
-	 * Permette di aggiungere un voto ad un sondaggio
-	 * @param id del sondaggio a cui si vuole votare
-	 * @param opzione del sondaggio scelta
-	 * @param tipo di sondaggio a cui vogliamo votare
-	 * @return true se la votazione è avvenuta correttamente
-	 * @exception Eccezione se inserisco una opzione che non esiste
-	 * @exception Eccezione se cerco di v otare due volte allo stesso sondaggio
-	 */
-	boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost)
-			throws TastoNonEsistente, AzioneNonConsentita;
+	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t);
+
 
 }
 

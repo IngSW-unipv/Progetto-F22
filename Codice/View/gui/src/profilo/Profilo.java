@@ -759,12 +759,13 @@ public class Profilo implements IProfilo {
 	 * @param id del post sotto cui sarà scritto il commento
 	 * @param testo del commento
 	 */
+	@Override
 	public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t) {
 		Commento c;
 		String idCommento = Integer.toString((int)Math.round(Math.random() * 1000));
 	 		c = new Commento(idCommento, idProfilo, idPost, testoCommento);
 	 		if(dbfacade.cerca(c) != null) {
-	 			pubblicaCommento(idProfilo, idPost, testoCommento);
+	 			pubblicaCommento(idProfilo, idPost, testoCommento, t);
 	 		}
 		return dbfacade.carica(c);
 	}
@@ -1237,32 +1238,25 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 	return null;
 	}
 
+/**
+ * Modifica la foto di un gruppo
+ * @param id del gruppo 
+ * @param path dell'immagine da inserire
+ */
 @Override
 public boolean modificaFotoGruppo(Gruppo g, String s) {
-	// TODO Auto-generated method stub
-	return false;
+	return dbfacade.cambiaFotoGruppo(g, s);
 }
 
+/**
+ * Ritorna il path della foto di un gruppo
+ * @param id del gruppo 
+ */
 @Override
 public String vediFotoGruppo(Gruppo g) {
-	// TODO Auto-generated method stub
-	return null;
+	return dbfacade.vediFotoGruppo(g);
 }
 
-@Override
-public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost)
-		throws TastoNonEsistente, AzioneNonConsentita {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-	
 }
 
 	
