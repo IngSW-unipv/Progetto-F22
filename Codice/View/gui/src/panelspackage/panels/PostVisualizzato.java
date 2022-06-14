@@ -139,16 +139,6 @@ package panelspackage.panels;
     
         }
         
-        /*public void mostraBottoneSuperiore(boolean condition) {
-            if(condition) {
-                //iniziaSeguireButton.setVisible(false);
-                impostaImmagineProfiloButton.setVisible(true);
-            } else {
-                //impostaImmagineProfiloButton.setVisible(false);
-                iniziaSeguireButton.setVisible(true);
-            }
-        }*/
-        
         public boolean settaCommenti(ArrayList<String> commenti) {
             if(commenti.size() == 0) 
                 return false;
