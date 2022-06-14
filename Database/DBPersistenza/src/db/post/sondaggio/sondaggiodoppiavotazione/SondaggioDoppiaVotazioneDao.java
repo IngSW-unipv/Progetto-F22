@@ -521,5 +521,10 @@ public boolean modificaIsStory(PostDB m, boolean b) {
 	return false;
 }
 
+@Override
+public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
+	return null;
+}
+
 
 }

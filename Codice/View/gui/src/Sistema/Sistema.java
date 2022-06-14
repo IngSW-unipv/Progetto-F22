@@ -2,17 +2,8 @@ package Sistema;
 
 import db.facade.DbFacade;
 import post.commento.Commento;
-import post.enumeration.TipoPost;
-import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
-import post.sondaggio.SondaggioDoppiaVotazione;
-import post.sondaggio.SondaggioSceltaMultipla;
-import post.testo.Testo;
-
 import java.util.ArrayList;
-
-
-import Messaggio.Messaggio;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.ChatDiGruppo;
 import profilo.exception.*;

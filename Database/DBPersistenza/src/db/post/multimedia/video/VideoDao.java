@@ -490,4 +490,9 @@ public class VideoDao  extends PostDao{
 		return esito;
 	}
 
+	@Override
+	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
+		return null;
+	}
+
 }

@@ -69,7 +69,7 @@ public class PostUtility {
 		}
 		else if(t == TipoPost.VIDEO) {
 			VideoDB f = (VideoDB) p.inserisciCaratteristiche(p);
-			Video fdb = new Video(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi());
+			Video fdb = new Video(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.getDurataInSecondi(),f.isStory);
 			return fdb;
 		}
 		else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
@@ -200,7 +200,7 @@ public class PostUtility {
     		return pst;
     	}
     	else if(t == TipoPost.VIDEO) {
-    		pst = new Video(id,null,false, null, null, 0);
+    		pst = new Video(id,null,false, null, null, 0, false);
     		return pst;
     		}
     	else if(t == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {

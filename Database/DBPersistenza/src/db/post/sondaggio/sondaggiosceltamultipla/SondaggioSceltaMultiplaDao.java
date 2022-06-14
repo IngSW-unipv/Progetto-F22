@@ -640,4 +640,9 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		return false;
 	}
 
+	@Override
+	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
+		return null;
+	}
+
 }

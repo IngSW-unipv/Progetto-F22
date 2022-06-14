@@ -19,7 +19,7 @@ public class testfacade {
 		MessaggioPrivato mpv = new MessaggioPrivato("Dv03", null, null, null, null, "001");
 		MessaggioDiGruppo mdg = new MessaggioDiGruppo("Dv22", null, null, null, null, "G00");
 	//	Commento c = new Commento("C00", null, null, null, null, "F01", null, null, null, null);
-		Foto f = new Foto("F00", null, false, null, null, false);
+		Foto f = new Foto("F00", null, false, null, null, false, false);
      //  Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
         Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999");

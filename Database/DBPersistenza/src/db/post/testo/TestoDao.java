@@ -427,4 +427,9 @@ public class TestoDao extends PostDao {
 		return false;
 	}
 
+	@Override
+	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
+		return null;
+	}
+
 }

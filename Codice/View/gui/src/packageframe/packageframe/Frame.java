@@ -1,4 +1,5 @@
-package packageFrame;
+package packageframe.packageframe;
+
 import java.awt.Color;
 import java.awt.*;
 import java.util.ArrayList;
