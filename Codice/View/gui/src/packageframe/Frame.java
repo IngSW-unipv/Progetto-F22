@@ -984,5 +984,25 @@ public class Frame extends JFrame {
 		((Home)mappaSchermate.get("Home")).setIndiceStorie(nuovoIndice);
 	}
 	
+	public JButton getPrimaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getPrimaStoria();
+	}
+	
+	public JButton getSecondaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getSecondaStoria();
+	}
+	
+	public JButton getTerzaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getTerzaStoria();
+	}
+	
+	public JButton getQuartaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getQuartaStoria();
+	}
+	
+	public JButton getQuintaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getQuintaStoria();
+	}
+	
 	
 }

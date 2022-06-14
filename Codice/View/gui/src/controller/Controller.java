@@ -31,8 +31,8 @@ public class Controller {
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
-                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo
-    						;
+                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
+                           gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria;
     Frame view;
     Sistema model;
     
@@ -97,7 +97,6 @@ public class Controller {
                 if (login()) 
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)));
                 	checkPulsantiStorie();
                 	if(storySchermataHome.size() == 0) {
                   		System.out.println("non ci sono storie");
@@ -232,6 +231,86 @@ public class Controller {
         };
         view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);
         
+        gestorePrimaStoria = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+            	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
+        	}
+        };
+        view.getPrimaStoriaButton().addActionListener(gestorePrimaStoria);
+        
+        gestoreSecondaStoria = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+              	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
+        	}
+        };
+        view.getSecondaStoriaButton().addActionListener(gestoreSecondaStoria);
+        
+        gestoreTerzaStoria = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+              	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
+        	}
+        };
+        view.getTerzaStoriaButton().addActionListener(gestoreTerzaStoria);
+        
+        gestoreQuartaStoria = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+              	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(7 + view.getIndiceStorie())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
+        	}
+        };
+        view.getQuartaStoriaButton().addActionListener(gestoreQuartaStoria);
+        
+        gestoreQuintaStoria = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+              	Foto f = new Foto(null);
+            	try {
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(9 + view.getIndiceStorie())));
+				} catch (PostNonPresente| PostNonVisibile e1) {
+					e1.printStackTrace();
+				}
+            	visualizzaPostFoto(f);
+            	mostraSchermata("Postvisualizzato");
+            	refresh();
+        	}
+        };
+        view.getQuintaStoriaButton().addActionListener(gestoreQuintaStoria);
+        
         gestoreImpostazioni = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -354,6 +433,7 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	resetContatori();
                 mostraSchermata("Home");
+                refresh();
             }
         };
         view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
@@ -1552,19 +1632,21 @@ public class Controller {
 	
 	
 	public void checkPulsantiStorie() {
-		if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)) == 1) {
-			view.getButtonPrevStory().setEnabled(false);
-			refresh();
-		} else {
-			view.getButtonPrevStory().setEnabled(true);
-			refresh();
-		}
-		if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(7)) == (storySchermataHome.size() - 5)) {
-			view.getButtonNextStory().setEnabled(false);
-			refresh();
-		} else {
-			view.getButtonNextStory().setEnabled(true);
-			refresh();
+		if(storySchermataHome.size() != 0) {
+			if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)) == 1) {
+				view.getButtonPrevStory().setEnabled(false);
+				refresh();
+			} else {
+				view.getButtonPrevStory().setEnabled(true);
+				refresh();
+			}
+			if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(7)) == (storySchermataHome.size() - 5)) {
+				view.getButtonNextStory().setEnabled(false);
+				refresh();
+			} else {
+				view.getButtonNextStory().setEnabled(true);
+				refresh();
+			}
 		}
 	}
 	
