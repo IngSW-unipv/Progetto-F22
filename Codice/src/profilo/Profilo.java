@@ -463,22 +463,6 @@ public class Profilo implements IProfilo {
 	 * @param multimedia, cioè foto o video, che voglio caricare
 	 */
 	
-	/*@Override
-	public boolean pubblicaStoria(int time, Multimedia f){
-	
-		dbfacade.carica(f);
-		dbfacade.modificaIsStory(f, true);
-		dbfacade.modificaTempoCancellazione(f, time);
-		try {
-		    //Thread.sleep(time * 60 * 60 * 1000);	//in questo caso time indica il numero di ore
-			Thread.sleep(time * 1000);	//in questo caso time indica il numero di secondi
-		} catch (InterruptedException ie) {
-		    Thread.currentThread().interrupt();
-		}	
-		dbfacade.rimuovi(f);	
-		return true;
-	}*/
-	
 	@Override
 	public boolean pubblicaStoria(int time, Multimedia f){
 	
@@ -488,10 +472,8 @@ public class Profilo implements IProfilo {
 		Timer timerStoria = new Timer();
 		timerStoria.schedule(new TimerTask() {
 			public void run() {
-				dbfacade.rimuovi(f);
-				System.out.println("Storia eliminata");
-			}
-		}, (time*1000));
+				dbfacade.rimuovi(f);			}
+		}, (time * 60 * 60 * 1000));
 		return true;
 	}
 	

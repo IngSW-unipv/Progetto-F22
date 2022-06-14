@@ -163,7 +163,7 @@ class TestProfilo {
 	
 	@Test
 	public void testPubblicaFoto() {
-		assertTrue(profiloAttivo.pubblicaPost(new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso1", true)));
+		assertTrue(profiloAttivo.pubblicaPost(new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso1", true, false)));
 	}
 	@Test
 	public void testPubblicaTesto() {
@@ -196,7 +196,7 @@ class TestProfilo {
 	}
 	@Test
 	public void testPubblicaStoria() {
-		assertTrue(profiloAttivo.pubblicaStoria(24, new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso2", true)));
+		assertTrue(profiloAttivo.pubblicaStoria(24, new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso2", true, false)));
 	}
 	@Test 
 	public void testAggiungiVotoSondaggioDoppiaScelta() throws TastoNonEsistente, AzioneNonConsentita {
@@ -233,7 +233,7 @@ class TestProfilo {
 	}
 	@Test
 	public void testCambiaImmagineProfilo() {
-		Foto f = new Foto("F333", null, true, profiloAttivo.getIdProfilo(), "percorso4", true);
+		Foto f = new Foto("F333", null, true, profiloAttivo.getIdProfilo(), "percorso4", true, false);
 		assertTrue(profiloAttivo.cambiaImmagineProfilo(f.getIdPost()));
 	}
 	@Test
@@ -250,7 +250,7 @@ class TestProfilo {
 	public void testPubblicaCommento() {
 		Foto f = new Foto("F222");
 		Commento c = new Commento("C123", profiloAttivo.getIdProfilo(), f.getIdPost(), "bella foto");
-		assertTrue(profiloAttivo.pubblicaCommento(profiloAttivo.getIdProfilo(), c.getIdCommento(), c.getIdTesto()));
+		assertTrue(profiloAttivo.pubblicaCommento(profiloAttivo.getIdProfilo(), c.getIdCommento(), c.getIdTesto(), f.getTipo()));
 	}
 	@Test
 	public void testRimuoviCommento() {
@@ -286,7 +286,7 @@ class TestProfilo {
 	}
 	@Test
 	public void testModificammagineGruppo() {
-		Foto f = new Foto("F444", null, true, profiloAttivo.getIdProfilo(), "percorso5", true);
+		Foto f = new Foto("F444", null, true, profiloAttivo.getIdProfilo(), "percorso5", true, false);
 		Gruppo g = new Gruppo("G678");
 		assertTrue(profiloAttivo.modificaFotoGruppo(g, f.getIdPost()));
 	}
