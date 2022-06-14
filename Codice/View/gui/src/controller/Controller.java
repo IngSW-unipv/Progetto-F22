@@ -31,7 +31,8 @@ public class Controller {
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
-    						gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo;
+                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo
+    						;
     Frame view;
     Sistema model;
     
@@ -94,16 +95,15 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (login()) 
-                	
-                	
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+                	System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)));
+                	checkPulsantiStorie();
                 	if(storySchermataHome.size() == 0) {
                   		System.out.println("non ci sono storie");
                 	} else {
-                		view.setPercorsiStorie(storySchermataHome);
-                		view.aggiornaStorieHome();
-                		refresh();
+                		view.setPercorsiStorieLogin(storySchermataHome);
+                		//refresh();
                 	}
                 	if(postSchermataHome.size() == 0) {
                 		mostraSchermata("Home");
@@ -146,6 +146,8 @@ public class Controller {
         };
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
+    
+    
     public void actionListenersHome() {
 
     	gestorePulsanteFotoHome = new ActionListener() {
@@ -203,14 +205,16 @@ public class Controller {
         };
         view.getButtonPrevPost().addActionListener(gestorePostPrecedente); 
         
+    	
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		checkPulsantiStorie();
         		view.setIndiceStorie(view.getIndiceStorie() + 2);
-        		System.out.println(view.getIndiceStorie());
         		refresh();
-   
-        	
+        		view.aggiornaStorieHome(storySchermataHome);
+        		System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(9)));
+        		refresh();
         	}
         	
         };
@@ -219,6 +223,11 @@ public class Controller {
         gestoreStoryPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		checkPulsantiStorie();
+        		view.setIndiceStorie(view.getIndiceStorie() - 2);
+        		view.aggiornaStorieHome(storySchermataHome);
+        		System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)));
+        		refresh();
         	}
         };
         view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);
@@ -1540,4 +1549,23 @@ public class Controller {
 		//view.getDescrizioneGroupe().setText(g.getDescrizione());
 		//messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
 	}
+	
+	
+	public void checkPulsantiStorie() {
+		if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)) == 1) {
+			view.getButtonPrevStory().setEnabled(false);
+			refresh();
+		} else {
+			view.getButtonPrevStory().setEnabled(true);
+			refresh();
+		}
+		if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(7)) == (storySchermataHome.size() - 5)) {
+			view.getButtonNextStory().setEnabled(false);
+			refresh();
+		} else {
+			view.getButtonNextStory().setEnabled(true);
+			refresh();
+		}
+	}
+	
 }

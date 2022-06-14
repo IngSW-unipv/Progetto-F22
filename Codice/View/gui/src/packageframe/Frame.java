@@ -963,8 +963,8 @@ public class Frame extends JFrame {
 		 ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).setIdGruppo(idGruppo);	
 	}
 	
-	public void aggiornaStorieHome() {
-		((Home)mappaSchermate.get("Home")).aggiornaStorieHome();
+	public void aggiornaStorieHome(ArrayList<String> storieDaVisualizzare) {
+		((Home)mappaSchermate.get("Home")).aggiornaStorieHome(storieDaVisualizzare);
 	}
 	
 	public void rimuoviStorieHome() {
@@ -972,8 +972,8 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
-		((Home)mappaSchermate.get("Home")).setPercorsiStorie(storieDaVisualizzare);
+	public void setPercorsiStorieLogin(ArrayList<String> storieDaVisualizzare) {
+		((Home)mappaSchermate.get("Home")).setPercorsiStorieLogin(storieDaVisualizzare);
 	}
 	
 	public int getIndiceStorie() {

@@ -122,10 +122,6 @@ public class Home extends JPanel {
 		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
 	}
 	
-	public void aggiornaStorieHome() {
-		
-	}
-	
 	public void rimuoviStorieHome() {
 		containerStory.remove(primaStoria);
 		containerStory.remove(secondaStoria);
@@ -135,13 +131,12 @@ public class Home extends JPanel {
 	}
 	
 	
-	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
-		
-		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(1 + indiceStorie));
-		secondaStoria.impostaPercorsoPost(storieDaVisualizzare.get(3 + indiceStorie));
-		terzaStoria.impostaPercorsoPost(storieDaVisualizzare.get(5 + indiceStorie));
-		quartaStoria.impostaPercorsoPost(storieDaVisualizzare.get(7 + indiceStorie));
-		
+	public void setPercorsiStorieLogin(ArrayList<String> storieDaVisualizzare) {
+		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(1));
+		secondaStoria.impostaPercorsoPost(storieDaVisualizzare.get(3));
+		terzaStoria.impostaPercorsoPost(storieDaVisualizzare.get(5));
+		quartaStoria.impostaPercorsoPost(storieDaVisualizzare.get(7));
+		quintaStoria.impostaPercorsoPost(storieDaVisualizzare.get(9));
 		containerStory.add(primaStoria);
 		containerStory.add(secondaStoria);
 		containerStory.add(terzaStoria);
@@ -149,6 +144,17 @@ public class Home extends JPanel {
 		containerStory.add(quintaStoria);
 	}
 	
+	public void aggiornaStorieHome(ArrayList<String> storieDaVisualizzare) {
+		if(indiceStorie <= storieDaVisualizzare.size() && indiceStorie > 0) {
+			this.getPrimaStoria().impostaPercorsoPost(storieDaVisualizzare.get(1 + indiceStorie));
+			this.getSecondaStoria().impostaPercorsoPost(storieDaVisualizzare.get(3 + indiceStorie));
+			this.getTerzaStoria().impostaPercorsoPost(storieDaVisualizzare.get(5 + indiceStorie));
+			this.getQuartaStoria().impostaPercorsoPost(storieDaVisualizzare.get(7 + indiceStorie));
+			this.getQuintaStoria().impostaPercorsoPost(storieDaVisualizzare.get(9 + indiceStorie));
+		} else if(indiceStorie == 0 ){
+			this.getButtonPrevStory().setEnabled(false);
+		} else if (indiceStorie > storieDaVisualizzare.size());
+	}
 	
 	public void areaStories() {
 		SpecificContainer containerWest = new SpecificContainer();
@@ -361,4 +367,57 @@ public class Home extends JPanel {
 	public void setIndiceStorie(int indiceStorie) {
 		this.indiceStorie = indiceStorie;
 	}
+
+
+	public Pulsanti getPrimaStoria() {
+		return primaStoria;
+	}
+
+
+	public void setPrimaStoria(Pulsanti primaStoria) {
+		this.primaStoria = primaStoria;
+	}
+
+
+	public Pulsanti getSecondaStoria() {
+		return secondaStoria;
+	}
+
+
+	public void setSecondaStoria(Pulsanti secondaStoria) {
+		this.secondaStoria = secondaStoria;
+	}
+
+
+	public Pulsanti getTerzaStoria() {
+		return terzaStoria;
+	}
+
+
+	public void setTerzaStoria(Pulsanti terzaStoria) {
+		this.terzaStoria = terzaStoria;
+	}
+
+
+	public Pulsanti getQuartaStoria() {
+		return quartaStoria;
+	}
+
+
+	public void setQuartaStoria(Pulsanti quartaStoria) {
+		this.quartaStoria = quartaStoria;
+	}
+
+
+	public Pulsanti getQuintaStoria() {
+		return quintaStoria;
+	}
+
+
+	public void setQuintaStoria(Pulsanti quintaStoria) {
+		this.quintaStoria = quintaStoria;
+	}
+	
+	
+	
 }
