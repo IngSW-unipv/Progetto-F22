@@ -397,35 +397,7 @@ public class Profilo implements IProfilo {
 		return true;
 	}
 	
-	@Override
-	public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
-		Foto f = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
-		return f;
-	}
 
-	@Override
-	public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, int durataInSecondi) {
-		Video v = new Video(idPost,  descrizione, visibile, profilo, percorso, durataInSecondi);
-		return v;
-	}
-
-	@Override
-	public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String font, String titolo) {
-		Testo t = new Testo(idPost,  descrizione, visibile, profilo,font,titolo);
-		return t;
-	}	
-
-	@Override
-	public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, String profilo, String primaScelta,String secondaScelta) {
-		SondaggioDoppiaVotazione s = new SondaggioDoppiaVotazione(idPost,  descrizione, visibile, profilo, primaScelta, secondaScelta);
-		return s;
-	}
-
-	@Override
-	public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione,String descrizione, boolean visibile, String profilo, String primaScelta,String secondaScelta, String terzaScelta, String quartaScelta) {
-		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(idPost, descrizione, visibile, profilo, primaScelta, secondaScelta, terzaScelta, quartaScelta);
-		return s;
-	}
 
 	/**
 	 *Carica un post nel database
@@ -435,10 +407,11 @@ public class Profilo implements IProfilo {
 		boolean b = dbfacade.carica(p);
 		String s = dbfacade.cerca(p).getProfilo();
 		if(s != null) {
-				int n = dbfacade.vediNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null));
+				int n = dbfacade.vediNumPost(new Profilo(s));
 				n++;
-				dbfacade.modificaNumPost(new Profilo(s,null,null, 0, 0, 0, false, false, false, null, null), n);
-				return b;}
+				dbfacade.modificaNumPost(new Profilo(s), n);
+				return b;
+		}
 		return false;
 	}
 
@@ -478,6 +451,11 @@ public class Profilo implements IProfilo {
 		return postDeiProfiliSeguiti;
 	}
 	
+	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo, TipoPost tipo) {
+		ArrayList<String> storieDeiProfiliSeguiti = dbfacade.caricaStorieProfiliSeguiti(profilo, tipo);
+		return storieDeiProfiliSeguiti;
+	}
+	
 	/**
 	 * Ritorna la lista dei post visibili del tipo specificato nel parametro 
 	 */
@@ -497,6 +475,7 @@ public class Profilo implements IProfilo {
 	 * @param ore in cui voglio che il post sia nel database
 	 * @param multimedia, cioè foto o video, che voglio caricare
 	 */
+	/*
 	@Override
 	public boolean pubblicaStoria(int time, Multimedia f){
 	
@@ -511,6 +490,9 @@ public class Profilo implements IProfilo {
 		dbfacade.rimuovi(f);	
 		return true;
 	}
+	
+	*/
+	
 
 	/**
 	 * Restituisce il path all' interno del pc del post specificato
@@ -1056,16 +1038,29 @@ public class Profilo implements IProfilo {
 	 * @param path della foto
 	 * @param mi dice se la foto è in alta definizione 
 	 */
-	 public void pubblicaFoto(String descrizione, boolean visibile, String profilo, String percorso, boolean isHd) {
+	 public void pubblicaFoto(String descrizione, boolean visibile, String percorso, boolean isHd) {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
-		 p = new Foto(idPost, descrizione, visibile, profilo, percorso, isHd);
+		 p = new Foto(idPost, descrizione, visibile, getIdProfilo(), percorso, isHd, false);
 		 		
 		 if(dbfacade.cerca(new Foto(idPost)) != null) {
-		 pubblicaFoto(descrizione, visibile, profilo, percorso, isHd);
+			 pubblicaFoto(descrizione, visibile, percorso, isHd);
 		 }
 		this.pubblicaPost(p);
 	}
+	
+	 public void pubblicaStoria(String descrizione, boolean visibile, String percorso, boolean isHd) {
+		 Foto p;
+		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
+		 p = new Foto(idPost, descrizione, visibile, getIdProfilo(), percorso, isHd, true);
+		 System.out.println(p.isStory());
+		 		
+		 if(dbfacade.cerca(new Foto(idPost)) != null) {
+		 pubblicaFoto(descrizione, visibile , percorso, isHd);
+		 }
+		this.pubblicaPost(p);
+	}
+	
 	 
 	 /**
 		 * Carica nel database un sondaggio doppia votazione (Utile per il controller)
@@ -1270,6 +1265,61 @@ public boolean modificaFotoGruppo(Gruppo g, String s) {
 public String vediFotoGruppo(Gruppo g) {
 	// TODO Auto-generated method stub
 	return null;
+}
+
+@Override
+public boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public boolean aggiungiVotoSondaggio(String idSondaggio, int scelta, String tipoPost)
+		throws TastoNonEsistente, AzioneNonConsentita {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+@Override
+public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile,
+		String profilo, String percorso, boolean isHd) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+		boolean visibile, String profilo, String percorso, int durataInSecondi) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione,
+		String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione,
+		String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta,
+		String terzaScelta, String quartaScelta) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione,
+		boolean visibile, String profilo, String font, String titolo) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public boolean pubblicaStoria(int time, Multimedia f) {
+	// TODO Auto-generated method stub
+	return false;
 }	
 }
 

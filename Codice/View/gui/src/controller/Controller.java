@@ -95,6 +95,8 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
                 if (login()) {
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+                	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+                	System.out.println(storySchermataHome.get(0) + storySchermataHome.get(1));
                 	if(postSchermataHome.size() == 0) {
                 		mostraSchermata("Home");
                 	} else {
@@ -1348,7 +1350,7 @@ public class Controller {
         if(getPostAttuale() == 0) {
             String percorsoFilePost = view.ottieniPercorsoFile();
             if (percorsoFilePost != null) {
-            model.getProfiloAttivo().pubblicaFoto(commentoPost, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, false);
+            model.getProfiloAttivo().pubblicaFoto(commentoPost, true, percorsoFilePost, false);
             }
         }
         else if(getPostAttuale() == 1) {
@@ -1371,13 +1373,10 @@ public class Controller {
     
     public void pubblicaStory() {
    	 
-    	int idPostInt = (int)Math.round(Math.random() * 1000);
- 		String idPost = "F" + Integer.toString(idPostInt);
     	String commentoPost = view.ottieniCommento();
     	String percorsoFilePost = view.ottieniPercorsoFile();
-    	Foto f = new Foto(idPost, commentoPost, true, model.getProfiloAttivo().getIdProfilo(), percorsoFilePost, true);
     	
-    	model.getProfiloAttivo().pubblicaStoria(24, f);
+    	model.getProfiloAttivo().pubblicaStoria(commentoPost, true, percorsoFilePost, false);
     }
 
 

@@ -10,6 +10,7 @@ import db.commento.CommentoDB;
 import db.connessione.DBConnection;
 import db.post.PostDB;
 import db.post.PostDao;
+import db.post.multimedia.MultimediaDB;
 
 public class FotoDao extends PostDao {
 
@@ -44,7 +45,35 @@ public class FotoDao extends PostDao {
 		DBConnection.closeConnection(conn);
 		
 		return result;
-		}
+	}
+	
+	@Override
+	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
+		ArrayList<String> result = new ArrayList<>();
+
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+
+		ResultSet rs1;
+
+		try
+		{
+			String query="select idFoto from foto f, follow fo where f.profilo = fo.profiloSeguito and profiloPersonale=? and f.isStory = 1";
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, profilo);
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				String idNuovo=rs1.getString(1);
+				result.add(idNuovo);
+			}
+		}catch (Exception e){e.printStackTrace();}
+
+		DBConnection.closeConnection(conn);
+		
+		return result;
+	}
 	
 	@Override
 	public ArrayList<PostDB> selectAll() {
@@ -77,10 +106,12 @@ public class FotoDao extends PostDao {
 		conn=DBConnection.startConnection(conn,schema);
 		PreparedStatement st1;
 		boolean esito = true;
+		
+		System.out.println(((MultimediaDB) f).isStory);
 
 		try
 		{
-			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo) values (?,?,?,?,?,?,?,?)";
+			String query="insert into foto (idFoto,dataPubblicazione,oraPubblicazione,descrizione,numLike,numDislike,visibile,profilo,isStory) values (?,?,?,?,?,?,?,?,?)";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, f.getIdPost());
@@ -91,6 +122,7 @@ public class FotoDao extends PostDao {
 			st1.setInt(6, f.getNumDislike());
 			st1.setBoolean(7, true);
 		    st1.setString(8, f.getProfilo());
+		    st1.setBoolean(9, ((MultimediaDB) f).isStory());
 		 
 		    
 			st1.executeUpdate();
@@ -102,6 +134,7 @@ public class FotoDao extends PostDao {
 		}
 
 		DBConnection.closeConnection(conn);
+		
 		return esito;
 	}
 	

@@ -15,7 +15,7 @@ public abstract class MultimediaDB extends PostDB{
 	}
 	private int tempoCancellazione;
     private String percorso;
-    private boolean isStory;
+    public boolean isStory;
 	public int getTempoCancellazione() {
 		return tempoCancellazione;
 	}

@@ -236,12 +236,16 @@ public class DbFacade implements IDbFacade{
 	//Post
 	@Override
      public boolean carica(Post p) {
+		System.out.println("1" + p.toString());
+		
     	pstDao = Utility.convertiTipoPost(p.getTipo());
     	boolean b = pstDao.caricaPost(ConvertitoreFacade.getIstance().converti(p));
     	String [] s = ConvertitoreFacade.getIstance().ritornaChiaviString(p);
     	int  i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
     	boolean a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
     	pstDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s, i, a);
+    	
+    	System.out.println("2" + p.toString());
 
     	return b;
     		
@@ -252,6 +256,13 @@ public class DbFacade implements IDbFacade{
 		ArrayList<String> postDiUnProfilo = pstDao.caricaPostProfiliSeguiti(profilo);
 		return postDiUnProfilo;		
 	}
+	
+	public  ArrayList<String> caricaStorieProfiliSeguiti(String profilo, TipoPost tipo) {
+		pstDao = Utility.convertiTipoPost(tipo);
+		ArrayList<String> storieDiUnProfilo = pstDao.caricaStorieProfiliSeguiti(profilo);
+		return storieDiUnProfilo;		
+	}
+	
 	@Override
      public boolean rimuovi(Post p) {
     	 pstDao = Utility.convertiTipoPost(p.getTipo());

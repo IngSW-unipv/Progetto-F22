@@ -34,5 +34,6 @@ public interface IPostDao {
     public boolean modificaTempoCancellazione(PostDB m,int tempo);
     public boolean modificaIsStory(PostDB m,boolean b);
 	ArrayList<String> caricaPostProfiliSeguiti(String profilo);
+	ArrayList<String> caricaStorieProfiliSeguiti(String profilo);
     
 }

@@ -64,7 +64,7 @@ public class PostUtility {
 		
 		if(t == TipoPost.FOTO) {
 			FotoDB f = (FotoDB) p.inserisciCaratteristiche(p);
-			Foto fdb = new Foto(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.isHd());
+			Foto fdb = new Foto(f.getIdPost(), f.getDescrizione(), f.isVisibile(), f.getProfilo(), f.getPercorso(), f.isHd(), f.isStory());
 			return fdb;
 		}
 		else if(t == TipoPost.VIDEO) {
@@ -196,7 +196,7 @@ public class PostUtility {
     public Post restituisciTipo(String id, TipoPost t) {
     	Post pst;
     	if(t == TipoPost.FOTO) {
-    		pst = new Foto(id,null,false, null, null, false);
+    		pst = new Foto(id,null,false, null, null, false, true);
     		return pst;
     	}
     	else if(t == TipoPost.VIDEO) {

@@ -5,14 +5,16 @@ import post.Post;
 
 public abstract class Multimedia extends Post{
 
-	public Multimedia(String idPost, String descrizione, boolean visibile, String profilo, String percorso) {
+	
+	public Multimedia(String idPost, String descrizione, boolean visibile, String profilo, String percorso, boolean isStory) {
 		super(idPost,descrizione, visibile,
 				profilo);
 		
 		this.tempoCancellazione = 0;
 		this.percorso = percorso;
-		this.isStory = false;
+		this.isStory = isStory;
 	}
+	
 	private int tempoCancellazione;
     private String percorso;
     private boolean isStory;
