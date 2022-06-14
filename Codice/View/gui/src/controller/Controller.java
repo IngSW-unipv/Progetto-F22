@@ -93,15 +93,17 @@ public class Controller {
         gestoreLogin = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (login()) {
+                if (login()) 
+                	
+                	
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	if(storySchermataHome.size() != 0) {
+                	if(storySchermataHome.size() == 0) {
+                  		System.out.println("non ci sono storie");
+                	} else {
                 		view.setPercorsiStorie(storySchermataHome);
                 		view.aggiornaStorieHome();
                 		refresh();
-                	} else {
-                		System.out.println("non ci sono storie");
                 	}
                 	if(postSchermataHome.size() == 0) {
                 		mostraSchermata("Home");
@@ -109,7 +111,8 @@ public class Controller {
                 		view.setPercorsoPost(ottieniPost(0));
                 		view.aggiornaPostHome();
                     	mostraSchermata("Home");
-                	}
+                	
+                	
                 }
             }
         };
@@ -204,16 +207,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		view.setIndiceStorie(view.getIndiceStorie() + 2);
-               	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-            	if(storySchermataHome.size() != 0) {
-            		view.setPercorsiStorie(storySchermataHome);
-            		view.aggiornaStorieHome();
-            		refresh();
-            	} else {
-            		System.out.println("non ci sono storie");
-            	}
-        		
+        		System.out.println(view.getIndiceStorie());
         		refresh();
+   
         	
         	}
         	

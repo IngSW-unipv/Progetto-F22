@@ -20,8 +20,11 @@ public class Home extends JPanel {
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
 	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,
-					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton, primaStoria, secondaStoria,
-					 terzaStoria, quartaStoria, quintaStoria;
+					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton, primaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150), secondaStoria
+							 = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150),
+					 terzaStoria= new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150)
+					 , quartaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150), 
+					 quintaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150);;
 	
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
@@ -43,7 +46,13 @@ public class Home extends JPanel {
 	
 			
 	public void avvio() {
-		this.setOpaque(true);
+		listaPulsantiStorie.add(primaStoria);
+		listaPulsantiStorie.add(secondaStoria);
+		listaPulsantiStorie.add(terzaStoria);
+		listaPulsantiStorie.add(quartaStoria);
+		listaPulsantiStorie.add(quintaStoria);
+		
+		
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(NERO);
@@ -52,6 +61,7 @@ public class Home extends JPanel {
 	}
 
 	public void menuHome() {
+
 		postPrincipale = new Pulsanti("");
 		SpecificContainer areaRicerca = new SpecificContainer();
 		containerNorth.add(areaRicerca, BorderLayout.SOUTH);
@@ -107,38 +117,13 @@ public class Home extends JPanel {
 		containerBottoniPost.setLayout(new GridLayout(1, 2));
 		containerBottoniPost.add(buttonPrevPost = new Pulsanti("Post precedente", fontButton));
 		containerBottoniPost.add(buttonNextPost = new Pulsanti("Post successivo",fontButton));
-		
-		//SpecificContainer containerLikeDislikeComm = new SpecificContainer();
-		//containerLikeDislikeComm.setLayout(new GridLayout(2, 6));
-		/*containerLikeDislikeComm.add(numeroLike = new Etichette("N.like", Color.white));
-		containerLikeDislikeComm.add(numeroDislike = new Etichette("N.dislike", Color.white));
-		containerLikeDislikeComm.add(numeroCommenti = new Etichette("N.Commenti", Color.white));
-		containerLikeDislikeComm.add(aggiungiLike = new Pulsanti("+ Like", Frame.COLORESECONDARIOTEMATICO));
-		containerLikeDislikeComm.add(aggiungiDislike = new Pulsanti("+ Dislike", Frame.COLORESECONDARIOTEMATICO));
-		containerLikeDislikeComm.add(aggiungiCommento = new Pulsanti("+ Commento", Frame.COLORESECONDARIOTEMATICO));
-		*/
-		//containerCosePost.add(containerLikeDislikeComm, BorderLayout.NORTH);
-		//containerCosePost.add(scrollAreaDescrizione, BorderLayout.CENTER);
+
 		containerCosePost.add(containerBottoniPost, BorderLayout.SOUTH);
 		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
 	}
 	
 	public void aggiornaStorieHome() {
-		//Imposta i nuovi percorsi per le storie da visualizzare
-		primaStoria.impostaPercorsoPost(percorsoPrimaStoria);
-		secondaStoria.impostaPercorsoPost(percorsoSecondaStoria);
-		terzaStoria.impostaPercorsoPost(percorsoTerzaStoria);
-		quartaStoria.impostaPercorsoPost(percorsoQuartaStoria);
-		quintaStoria.impostaPercorsoPost(percorsoQuintaStoria);
-		containerStory.add(primaStoria);
-		containerStory.add(secondaStoria);
-		containerStory.add(terzaStoria);
-		containerStory.add(quartaStoria);
-		containerStory.add(quintaStoria);
-
-        this.invalidate();
-        this.validate();
-        this.repaint();
+		
 	}
 	
 	public void rimuoviStorieHome() {
@@ -151,21 +136,17 @@ public class Home extends JPanel {
 	
 	
 	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
-		int i;
-
-		for (i = 0; i < storieDaVisualizzare.size()/2 && i < 3 ; i++) {
-			//System.out.println("stiamo aggiungendo : " + postDelProfilo.get((i*2)+1));
-		//Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
-			int indice =(i*2)+1 + indiceStorie;
-			
-		listaPulsantiStorie.get(i).setIcon(new ImageIcon(storieDaVisualizzare.get(indice)));
-		}
-		if (i<3) {
-			for (int j = i; j < 3; j++) {
-				Icon img2=new ImageIcon("immagini/images.png");
-				listaPulsantiStorie.get(j).setIcon(img2);
-			}
-		}
+		
+		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(1 + indiceStorie));
+		secondaStoria.impostaPercorsoPost(storieDaVisualizzare.get(3 + indiceStorie));
+		terzaStoria.impostaPercorsoPost(storieDaVisualizzare.get(5 + indiceStorie));
+		quartaStoria.impostaPercorsoPost(storieDaVisualizzare.get(7 + indiceStorie));
+		
+		containerStory.add(primaStoria);
+		containerStory.add(secondaStoria);
+		containerStory.add(terzaStoria);
+		containerStory.add(quartaStoria);
+		containerStory.add(quintaStoria);
 	}
 	
 	
@@ -182,24 +163,7 @@ public class Home extends JPanel {
 		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
 		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
 		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
-		
-		primaStoria = new Pulsanti("", 150, 150);
-		secondaStoria = new Pulsanti("", 150, 150);
-		terzaStoria = new Pulsanti("", 150, 150);
-		quartaStoria = new Pulsanti("", 150, 150);
-		quintaStoria = new Pulsanti("", 150, 150);
-		
-		containerStory.add(primaStoria);
-		containerStory.add(secondaStoria);
-		containerStory.add(terzaStoria);
-		containerStory.add(quartaStoria);
-		containerStory.add(quintaStoria);
-		
-		listaPulsantiStorie.add(primaStoria);
-		listaPulsantiStorie.add(secondaStoria);
-		listaPulsantiStorie.add(terzaStoria);
-		listaPulsantiStorie.add(quartaStoria);
-		listaPulsantiStorie.add(quintaStoria);
+	
 			
 	}
 	

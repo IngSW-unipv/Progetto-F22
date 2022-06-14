@@ -54,6 +54,9 @@ public class Pulsanti extends JButton{
 		}
 		
 		public Pulsanti(String icona, int dim1, int dim2) {
+			Icon profileLabel = new ImageIcon(icona);
+			this.setIcon(profileLabel);
+			this.setVisible(true);
 			this.setPreferredSize(new Dimension(dim1, dim2));
 		}
 
