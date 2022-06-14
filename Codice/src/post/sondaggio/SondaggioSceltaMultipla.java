@@ -6,8 +6,9 @@ import post.enumeration.TipoPost;
 public class SondaggioSceltaMultipla extends Sondaggio{
 
 	public SondaggioSceltaMultipla(String idPost, String descrizione,
-			boolean visibile, String profilo,
-			String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
+		boolean visibile, String profilo,
+		String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta) {
+		
 		super(idPost, descrizione, visibile,	profilo, primaScelta, secondaScelta);
 		this.terzaScelta = terzaScelta;
 		this.quartaScelta = quartaScelta;
