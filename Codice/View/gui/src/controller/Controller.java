@@ -236,13 +236,14 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getContatoreStory())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
         	}
         };
         view.getPrimaStoriaButton().addActionListener(gestorePrimaStoria);
@@ -250,15 +251,16 @@ public class Controller {
         gestoreSecondaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-              	Foto f = new Foto(null);
+            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(2 + view.getContatoreStory())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
         	}
         };
         view.getSecondaStoriaButton().addActionListener(gestoreSecondaStoria);
@@ -266,15 +268,16 @@ public class Controller {
         gestoreTerzaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-              	Foto f = new Foto(null);
+            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(1 + view.getIndiceStorie())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getContatoreStory())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
         	}
         };
         view.getTerzaStoriaButton().addActionListener(gestoreTerzaStoria);
@@ -282,15 +285,16 @@ public class Controller {
         gestoreQuartaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-              	Foto f = new Foto(null);
+            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(7 + view.getIndiceStorie())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(6 + view.getContatoreStory())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
         	}
         };
         view.getQuartaStoriaButton().addActionListener(gestoreQuartaStoria);
@@ -298,15 +302,16 @@ public class Controller {
         gestoreQuintaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-              	Foto f = new Foto(null);
+            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(9 + view.getIndiceStorie())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(8 + view.getContatoreStory())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(f);
             	mostraSchermata("Postvisualizzato");
             	refresh();
+            
         	}
         };
         view.getQuintaStoriaButton().addActionListener(gestoreQuintaStoria);
