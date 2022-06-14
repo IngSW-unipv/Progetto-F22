@@ -30,8 +30,6 @@ import profilo.follow.Follow;
 
 public interface IProfilo {
  
-	public MessaggioDiGruppo creaMessaggioDiGruppo(String id, Date dataInvio, Time oraInvio, String testo,String profiloInviante,String idGruppo);
-	public MessaggioPrivato creaMessaggioPrivato(String id, String testo, String idProfiloInviante, String idProfiloRicevente);
 	public boolean scriviMessaggio(Messaggio m);
 	public boolean rimuoviMessaggio(Messaggio m);
 	public Messaggio cercaMessaggio(Messaggio m);
@@ -42,11 +40,6 @@ public interface IProfilo {
 	//Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	//A differenza del metodo leggiMessaggi, verranno restituite solo le informazioni riguardanti il testo del messaggio
 	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t);
-	public Foto creaFoto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, boolean isHd);
-	public Video creaVideo(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String percorso, int durataInSecondi);
-	public SondaggioDoppiaVotazione creaSondaggioSD(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta);
-	public SondaggioSceltaMultipla creaSondaggioDM(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta, String terzaScelta, String quartaScelta);
-	public Testo creaTesto(String idPost, Date dataPubblicazione, Time oraPubblicazione, String descrizione, boolean visibile, String profilo, String font, String titolo);
 	public boolean pubblicaPost(Post p);
 	public boolean rimuoviPost(Post p);
     public Post cercaPost(Post p)throws PostNonVisibile, PostNonPresente;
