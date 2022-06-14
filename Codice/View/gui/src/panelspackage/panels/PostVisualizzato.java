@@ -67,7 +67,7 @@ package panelspackage.panels;
             containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
 
             areaCommenti =  new AreaCommenti();
-            containerPost.add(areaCommenti, BorderLayout.SOUTH);
+            containerCenter.add(areaCommenti, BorderLayout.SOUTH);
 
             //COMMENTI
             postCommentiConUtenti.add("");
