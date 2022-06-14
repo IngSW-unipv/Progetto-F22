@@ -463,21 +463,37 @@ public class Profilo implements IProfilo {
 	 * @param multimedia, cioè foto o video, che voglio caricare
 	 */
 	
-	@Override
+	/*@Override
 	public boolean pubblicaStoria(int time, Multimedia f){
 	
 		dbfacade.carica(f);
 		dbfacade.modificaIsStory(f, true);
 		dbfacade.modificaTempoCancellazione(f, time);
 		try {
-		    Thread.sleep(time * 60 * 60 * 1000);
+		    //Thread.sleep(time * 60 * 60 * 1000);	//in questo caso time indica il numero di ore
+			Thread.sleep(time * 1000);	//in questo caso time indica il numero di secondi
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
 		}	
 		dbfacade.rimuovi(f);	
 		return true;
-	}
+	}*/
 	
+	@Override
+	public boolean pubblicaStoria(int time, Multimedia f){
+	
+		dbfacade.carica(f);
+		dbfacade.modificaIsStory(f, true);
+		dbfacade.modificaTempoCancellazione(f, time);
+		Timer timerStoria = new Timer();
+		timerStoria.schedule(new TimerTask() {
+			public void run() {
+				dbfacade.rimuovi(f);
+				System.out.println("Storia eliminata");
+			}
+		}, (time*1000));
+		return true;
+	}
 	
 	
 
@@ -1041,7 +1057,7 @@ public class Profilo implements IProfilo {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
 		 p = new Foto(idPost, descrizione, visibile, getIdProfilo(), percorso, isHd, true);
-		 this.pubblicaStoria(24, p);
+		 this.pubblicaStoria(60, p);
 	}
 	
 	 

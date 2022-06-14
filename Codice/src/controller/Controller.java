@@ -236,7 +236,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getContatoreStory())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getIndiceStorie())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -253,7 +253,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(2 + view.getContatoreStory())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(2 + view.getIndiceStorie())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -270,7 +270,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getContatoreStory())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getIndiceStorie())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -287,7 +287,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(6 + view.getContatoreStory())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(6 + view.getIndiceStorie())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -304,7 +304,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
             	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(8 + view.getContatoreStory())));
+            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(8 + view.getIndiceStorie())));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -920,6 +920,7 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
             	pubblicaStory();
+            	System.out.println("Storia aggiungta");
             }
         };
         view.getPubblicaStoryButton().addActionListener(gestorePubblicaStory);

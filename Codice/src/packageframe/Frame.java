@@ -198,16 +198,9 @@ public class Frame extends JFrame {
 	public int getContatorePost() {
 		return ((Home)mappaSchermate.get("Home")).getContatorePost();
 	}
-	public int getContatoreStory() {
-		return ((Home)mappaSchermate.get("Home")).getContatoreStory();
-	}
 	
 	public void setContatorePost(int valore) {
 		((Home)mappaSchermate.get("Home")).setContatorePost(valore);
-	}
-	public void setContatoreStory(int valore) {
-		((Home)mappaSchermate.get("Home")).setContatoreStory(valore); 
-		
 	}
 		
 	public JButton getButtonPrevPost() {

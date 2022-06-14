@@ -29,7 +29,7 @@ public class Home extends JPanel {
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
 	public static final  Color NERO = new Color(0,0,0);	
-	private int contatorePost = 0, contatoreStory = 0;
+	private int contatorePost = 0;
 	private String percorsoPost, percorsoPrimaStoria, percorsoSecondaStoria, percorsoTerzaStoria, percorsoQuartaStoria, percorsoQuintaStoria;
 	private ArrayList<Pulsanti> listaPost = new ArrayList<Pulsanti>();
 	private ArrayList<Pulsanti> listaPulsantiStorie = new ArrayList<Pulsanti>();
@@ -330,15 +330,6 @@ public class Home extends JPanel {
 		this.contatorePost = contatorePost;
 	}
 
-
-	public int getContatoreStory() {
-		return contatoreStory;
-	}
-
-
-	public void setContatoreStory(int contatoreStory) {
-		this.contatoreStory = contatoreStory;
-	}
 
 	public String getPercorsoPost() {
 		return percorsoPost;
