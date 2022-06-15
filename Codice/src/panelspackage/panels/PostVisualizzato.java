@@ -341,6 +341,13 @@ package panelspackage.panels;
 		
         
         public boolean settaCommenti(ArrayList<String> commenti) {
+        	if (this.indiceCommentoCorrente < 0) {
+        		indiceCommentoCorrente = 0;
+        	}
+        	if (this.indiceCommentoCorrente > commenti.size()/2 -4) {
+        		indiceCommentoCorrente = commenti.size()/2 - 4;
+        	}
+        	System.out.println("indiceCommento" + indiceCommentoCorrente);
             if(commenti.size() == 0) {
             	 for(int i = 0 ; i < 10; i = i+2) {
                      ((Pulsanti)ListaAreaTesto.get(i)).setText("");

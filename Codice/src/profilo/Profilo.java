@@ -420,6 +420,7 @@ public class Profilo implements IProfilo {
 	 */
 	@Override
 	public Post cercaPost(Post p) throws PostNonVisibile, PostNonPresente{
+		System.out.println(p.toString());
 		if (dbfacade.cerca(p) == null) {
 			throw new PostNonPresente(p.getIdPost());
 		}
