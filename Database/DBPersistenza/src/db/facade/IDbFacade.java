@@ -30,6 +30,7 @@ public interface IDbFacade {
 	public boolean gestisciPartecipanti(Gruppo g);
     public Gruppo cerca(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
+	boolean modificaDescrizione(String descrizione, Gruppo g);
 	boolean gestisciPartecipante1(String idProfilo, Gruppo g);
 	boolean gestisciPartecipante2(String idProfilo, Gruppo g);
 	boolean gestisciPartecipante3(String idProfilo, Gruppo g);
@@ -153,6 +154,7 @@ public interface IDbFacade {
 
 	//Ritorna true se l'account e' esistente
 	public boolean accountEsistente(Profilo p) throws AccountDoesNotExist ;
+	
 	
 
 

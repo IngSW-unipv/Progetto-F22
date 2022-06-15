@@ -125,17 +125,17 @@ public class DbFacade implements IDbFacade{
 		   return ConvertitoreFacade.getIstance().convertiInverso(gdb);
 		return null;
 	}
+	
+	
+	
 	@Override
 	public ArrayList<Gruppo> selectAllGruppo() {
 		return ConvertitoreFacade.getIstance().convertiListaGruppi(gDao.selectall());
 	}
 	
-	public boolean cambiaFotoGruppo(Gruppo g, String foto) {
-		return gDao.cambiaFotoGruppo(ConvertitoreFacade.getIstance().converti(g), foto);
-	}
-	
-	public String vediFotoGruppo(Gruppo g) {
-		return gDao.vediFotoGruppo(ConvertitoreFacade.getIstance().converti(g));
+	@Override
+	public boolean modificaDescrizione(String descrizione, Gruppo g) {
+		return gDao.cambiaDescrizioneGruppo(descrizione, ConvertitoreFacade.getIstance().converti(g));
 	}
 
 	public ArrayList<String> caricaGruppiProfilo(String profilo) {

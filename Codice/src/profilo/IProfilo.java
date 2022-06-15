@@ -81,6 +81,7 @@ public interface IProfilo {
 	boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno, ProfiloGiaInserito;
 	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
 	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t);
+	boolean modificaDescrizione(String idGruppo, String descrizione);
 
 
 }

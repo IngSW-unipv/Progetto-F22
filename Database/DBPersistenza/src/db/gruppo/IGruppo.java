@@ -18,6 +18,7 @@ boolean gestisciPartecipante1(String idProfilo, GruppoDB g);
 boolean gestisciPartecipante4(String idProfilo, GruppoDB g);
 boolean gestisciPartecipante5(String idProfilo, GruppoDB g);
 boolean gestisciPartecipante6(String idProfilo, GruppoDB g);
+boolean cambiaDescrizioneGruppo(String descrizione, GruppoDB g);
 
 
 }

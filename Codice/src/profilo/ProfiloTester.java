@@ -106,7 +106,7 @@ public class ProfiloTester {
 		}
     	*/
     	try {
-			p.aggiungiPartecipante("188", "dilo", "dilo");
+			p.aggiungiPartecipante("188", "dilo");
 		} catch (GruppoGiaPieno e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

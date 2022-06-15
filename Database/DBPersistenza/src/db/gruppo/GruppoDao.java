@@ -150,7 +150,30 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 	DBConnection.closeConnection(conn);
 	return null;
 }
+@Override
+public boolean cambiaDescrizioneGruppo(String descrizione, GruppoDB g) {
+	
+	conn=DBConnection.startConnection(conn,schema);
+	PreparedStatement st1;
+	boolean esito = true;
 
+	try
+	{
+		String query="update gruppo set Descrizione del gruppo=? where idGruppo=?";
+		st1 = conn.prepareStatement(query);
+		st1.setString(1, descrizione);
+		st1.setString(2, g.getIdGruppo());
+	
+		st1.executeUpdate();
+
+	}catch (Exception e){
+		e.printStackTrace();
+		esito=false;
+	}
+
+	DBConnection.closeConnection(conn);
+	return esito;
+}
 
 public ArrayList<String> caricaGruppiProfilo(String profilo) {
 	ArrayList<String> result = new ArrayList<>();

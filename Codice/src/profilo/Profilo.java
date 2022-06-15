@@ -1210,6 +1210,17 @@ public boolean rimuoviPartecipante(String idGruppo, String idProfilo){
 	return true;
 }
 /**
+ * permette di modificare la descrizione di un gruppo
+ * @param id del gruppo
+ * @param descrizione del gruppo
+ */
+@Override
+public boolean modificaDescrizione(String idGruppo, String descrizione) {
+	
+	return dbfacade.modificaDescrizione(descrizione, new Gruppo(idGruppo));
+}
+
+/**
  * Ritorna il conteggio di un determinato sondaggio
  * @param id del sondaggio 
  * @param tipo di sondaggio
@@ -1234,25 +1245,17 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 	return null;
 	}
 
-/**
- * Modifica la foto di un gruppo
- * @param id del gruppo 
- * @param path dell'immagine da inserire
- */
 @Override
 public boolean modificaFotoGruppo(Gruppo g, String s) {
-	return dbfacade.cambiaFotoGruppo(g, s);
+	// TODO Auto-generated method stub
+	return false;
 }
 
-/**
- * Ritorna il path della foto di un gruppo
- * @param id del gruppo 
- */
 @Override
 public String vediFotoGruppo(Gruppo g) {
-	return dbfacade.vediFotoGruppo(g);
+	// TODO Auto-generated method stub
+	return null;
 }
-
 }
 
 	
