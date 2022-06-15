@@ -199,17 +199,12 @@ public class Frame extends JFrame {
 	public int getContatorePost() {
 		return ((Home)mappaSchermate.get("Home")).getContatorePost();
 	}
-	public int getContatoreStory() {
-		return ((Home)mappaSchermate.get("Home")).getContatoreStory();
-	}
+
 	
 	public void setContatorePost(int valore) {
 		((Home)mappaSchermate.get("Home")).setContatorePost(valore);
 	}
-	public void setContatoreStory(int valore) {
-		((Home)mappaSchermate.get("Home")).setContatoreStory(valore); 
-		
-	}
+
 		
 	public JButton getButtonPrevPost() {
 		return ((Home)mappaSchermate.get("Home")).getButtonPrevPost();
@@ -565,49 +560,61 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public JButton getPrimaChatPrivataButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getPrimaChatPrivata();
-	}
-	
 	
 	public JButton getSecondaChatGruppoButton() {
 		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatGruppo();
 	}
 	
 	
-	public JButton getSecondaChatPrivataButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
-	}
-	
 	
 	public JButton getTerzaChatGruppoButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatGruppo();
+		return ((Chat)mappaSchermate.get("Chat")).getTerzaChatGruppo();
 	}
 	
-	
-	public JButton getTerzaChatPrivataButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
-	}
 	
 	
 	public JButton getQuartaChatGruppoButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatGruppo();
+		return ((Chat)mappaSchermate.get("Chat")).getQuartaChatGruppo();
 	}
 	
-	
-	public JButton getQuartaChatPrivataButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
-	}
+
 	
 	
 	public JButton getQuintaChatGruppoButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatGruppo();
+		return ((Chat)mappaSchermate.get("Chat")).getQuintaChatGruppo();
 	}
 	
 	
-	public JButton getQuintaChatPrivataButton() {
-		return ((Chat)mappaSchermate.get("Chat")).getSecondaChatPrivata();
+	public JButton getSestaChatGruppoButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getSestaChatGruppo();
 	}
+	
+	
+	
+	public JButton getSettimaChatGruppoButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getSettimaChatGruppo();
+	}
+	
+	
+	
+	public JButton getOttavaChatGruppoButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getOttavaChatGruppo();
+	}
+	
+	
+	
+	public JButton getNonaChatGruppoButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getNonaChatGruppo();
+	}
+	
+
+	
+	
+	public JButton getDecimaChatGruppoButton() {
+		return ((Chat)mappaSchermate.get("Chat")).getDecimaChatGruppo();
+	}
+	
+	
 	
 	
 	public void impostaFotoPostVisualizzato(String percorso) {

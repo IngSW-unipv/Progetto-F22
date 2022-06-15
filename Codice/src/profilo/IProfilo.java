@@ -73,8 +73,7 @@ public interface IProfilo {
 	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita;
 	public boolean rimuoviLike(Post p)throws AzioneNonConsentita;
 	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita;
-	boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1, String profilo2, String profilo3,
-			String profilo4, String profilo5, String profilo6, String amministratore)
+	boolean creaGruppo(String descrizione, String nomeGruppo)
 			throws AccountDoesNotExist;
 	boolean rimuoviCommento(String idCommento);
 	public Commento cercaCommento(String idCommento);

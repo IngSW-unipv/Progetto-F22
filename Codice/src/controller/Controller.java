@@ -448,6 +448,9 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
             	messaggi = model.getProfiloAttivo().cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+            	for(int i = 0; i < messaggi.size(); i++) {
+            		System.out.println(messaggi.get(i));
+            	}
             	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getNickname());
             	refresh();
             	mostraSchermata("AreaChatFrame");
@@ -1318,6 +1321,7 @@ public class Controller {
      	   @Override
      	   public void actionPerformed(ActionEvent e) {
      		  scriviMessaggioPrivato();
+     		  refresh();
      	   }
      	   
         };
@@ -1356,7 +1360,7 @@ public class Controller {
     			String descrizioneGruppo = view.getDescrizioneGruppo().getText();
     			try {
     				
-    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo, model.getProfiloAttivo().getIdProfilo(), null, null, null, null, null, model.getProfiloAttivo().getIdProfilo());
+    				model.getProfiloAttivo().creaGruppo( descrizioneGruppo, nomeGruppo);
     			} catch (AccountDoesNotExist e1) {
     				e1.printStackTrace();
     			}

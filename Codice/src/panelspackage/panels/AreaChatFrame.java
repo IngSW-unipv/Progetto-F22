@@ -3,6 +3,7 @@ package panelspackage.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -21,7 +22,7 @@ public class AreaChatFrame extends JPanel {
 	private ArrayList<String> messaggiChat = new ArrayList<String>();
 	private AreaDiTesto messaggi;
 	private InserimentoTesto scriviMessaggio;
-	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio;
+	private Pulsanti invia, home, nextMessaggio, prevMessaggio;
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 
 	
@@ -40,10 +41,8 @@ public class AreaChatFrame extends JPanel {
 	
     public void initComponents() {
     	
-      profilo = new Pulsanti("profiloricevente", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12));
       SpecificContainer containerNorth = new SpecificContainer();
       this.add(containerNorth, BorderLayout.NORTH);
-      containerNorth.add(profilo);
       
       scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
 	  scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
@@ -53,16 +52,17 @@ public class AreaChatFrame extends JPanel {
       this.add(containerSouth, BorderLayout.SOUTH);
       
      
-	 
+  	  containerSouth.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+	  containerSouth.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
       containerSouth.add(scriviMessaggio);
      
 		for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
-			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO);
+			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 20));
 			ListaEtichetteMessaggi.add(areaMessaggio);
 		}
-      
-		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+		
 		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
+		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		
 
 		//SpecificContainer containerCenter = new SpecificContainer(getBackground());
@@ -73,8 +73,7 @@ public class AreaChatFrame extends JPanel {
 
       this.add(containerSouth, BorderLayout.SOUTH);
 	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
-		
-
+      SpecificContainer containerButtons = new SpecificContainer();
 	  invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(invia,BorderLayout.EAST);
 
@@ -88,18 +87,40 @@ public class AreaChatFrame extends JPanel {
 		if(messaggi.size() == 0) {
 			return false;
 		} 
-
-		for(int i = 0 ; i < 20 || i < messaggi.size(); i = i + 2) {
+		
+		int i = 0;
+		boolean flag = true;
+		while(flag) {
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
+			
 			if (messaggi.get(indiceCorrente2).equals(inviante)) {
-			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
-			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
-				}
-			else {
+				
+				((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
+				((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
+			} else {
 				((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2 + 1));
 				((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText("");
-				}
 			}
+			
+			i = i+2;
+			
+			if (i == messaggi.size() || i == (20 - 2)) {
+				flag = false;
+			} 
+		}
+		
+		flag = true;
+		while(flag) { 
+			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
+			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText("");
+
+			if (i == (20 - 2)) {
+				flag = false;
+			}
+			
+			i = i + 2;
+		}
+		
 		return true;
 	}
 	
@@ -129,14 +150,6 @@ public class AreaChatFrame extends JPanel {
 
 	public void setInvia(Pulsanti invia) {
 		this.invia = invia;
-	}
-
-	public Pulsanti getProfilo() {
-		return profilo;
-	}
-
-	public void setProfilo(Pulsanti profilo) {
-		this.profilo = profilo;
 	}
 
 	public Pulsanti getHome() {

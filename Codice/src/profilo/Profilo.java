@@ -284,7 +284,8 @@ public class Profilo implements IProfilo {
 	 */
 	@Override
 	public boolean scriviMessaggio(Messaggio m){
-	    	return dbfacade.carica(m);	
+		System.out.println(m.toString());
+	    return dbfacade.carica(m);	
 	}
 
 	/**
@@ -346,13 +347,9 @@ public class Profilo implements IProfilo {
 		ArrayList<String> listaTestoEProfiloInviante = new ArrayList<String>();
 		
 		
-		
 		for(int i = 0; i < listaMessaggi.size(); i++) {
 			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getProfiloInviante());
 			listaTestoEProfiloInviante.add(listaMessaggi.get(i).getTesto());
-		}
-		for(int i = 0; i < listaMessaggi.size(); i++) {
-			System.out.println(listaMessaggi.get(i));
 		}
 		
 		return listaTestoEProfiloInviante;
@@ -803,16 +800,16 @@ public class Profilo implements IProfilo {
 	 * @param id dell'amministratore del gruppo
 	 * @param path della foto del gruppo
 	 */
-	public boolean creaGruppo(String descrizione, String nomeGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6, String amministratore) throws AccountDoesNotExist{
+	public boolean creaGruppo(String descrizione, String nomeGruppo) throws AccountDoesNotExist{
 		Gruppo g;
-		String idGruppo  = Integer.toString((int)Math.round(Math.random() * 1000));
+		//String idGruppo  = Integer.toString((int)Math.round(Math.random() * 1000));
 		
-		g = new Gruppo(idGruppo);
+		g = new Gruppo(nomeGruppo);
 		if(dbfacade.cerca(g) != null) {
-			creaGruppo(descrizione, nomeGruppo, profilo1,profilo2,profilo3,profilo4,profilo5,profilo6, amministratore);
+			creaGruppo(descrizione, nomeGruppo);
 		}
-		g = new Gruppo(idGruppo,descrizione,nomeGruppo,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,amministratore);
-	
+		g = new Gruppo(nomeGruppo,descrizione,nomeGruppo, getIdProfilo(), null, null, null, null, null , getIdProfilo());
+		
 		return dbfacade.carica(g);
 	}
 

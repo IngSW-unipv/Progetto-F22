@@ -141,7 +141,7 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 
    		try
    		{
-   			String query= "select * from messaggioprivato where(profiloinviante= ? and profiloRicevente =?) or (profiloinviante=? and profiloRicevente=?) order by dataInvio, oraInvio";
+   			String query= "select testo, profiloInviante, profiloRicevente from messaggioprivato where(profiloinviante= ? and profiloRicevente =?) or (profiloinviante=? and profiloRicevente=?) order by dataInvio, oraInvio";
 
    			st1 = conn.prepareStatement(query);
 			st1.setString(1, inviante);
@@ -153,7 +153,7 @@ public class MessaggioPrivatoDao extends MessaggioDao {
 
    			while(rs1.next())
 			{
-				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(rs1.getString(1), rs1.getDate(2),rs1.getTime(3),rs1.getString(4),rs1.getString(5), rs1.getString(6));
+				MessaggioPrivatoDB msg=new MessaggioPrivatoDB(null,null,null,rs1.getString(1),rs1.getString(2), rs1.getString(2));
 				result.add(msg);
 			}
 		}catch (Exception e){e.printStackTrace();}
