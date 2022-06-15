@@ -22,7 +22,7 @@ public class testfacade {
 		Foto f = new Foto("F00", null, false, null, null, false, false);
      //  Profilo p  = new Profilo("P00", null);
         DbFacade dbf = DbFacade.getIstance();
-        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999");
+        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002");
        SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SDV01", "wdtcqfu", true, "DV999", "cane", "gatto");        
         Profilo plof = new Profilo("DV999", "Davide99");
         

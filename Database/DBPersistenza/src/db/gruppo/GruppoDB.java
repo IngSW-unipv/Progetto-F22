@@ -2,12 +2,11 @@ package db.gruppo;
 
 public class GruppoDB {
 
-	public GruppoDB(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
+	public GruppoDB(String idGruppo, String descrizione, String profilo1, String profilo2,
 			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore) {
 		super();
 		this.idGruppo = idGruppo;
 		this.descrizione = descrizione;
-		this.nomeGruppo = nomeGruppo;
 		this.profilo1 = profilo1;
 		this.profilo2 = profilo2;
 		this.profilo3 = profilo3;
@@ -18,7 +17,6 @@ public class GruppoDB {
 	}
 	private String idGruppo;
 	private String descrizione;
-	private String nomeGruppo;
 	private String profilo1;
 	private String profilo2;
 	private String profilo3;
@@ -37,12 +35,6 @@ public class GruppoDB {
 	}
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-	public String getNomeGruppo() {
-		return nomeGruppo;
-	}
-	public void setNomeGruppo(String nomeGruppo) {
-		this.nomeGruppo = nomeGruppo;
 	}
 	public String getProfilo1() {
 		return profilo1;
@@ -88,8 +80,7 @@ public class GruppoDB {
 	}
 	@Override
 	public String toString() {
-		return "GruppoDB [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", nomeGruppo=" + nomeGruppo
-				+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
+		return "GruppoDB [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
 				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", Amministratore=" + Amministratore
 				+ ", fotoGruppo="  + "]";
 	}
