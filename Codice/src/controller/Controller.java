@@ -264,7 +264,7 @@ public class Controller {
             
         	}
         };
-        view.getSeconaStoriaButton().addActionListener(gestoreSecondaStoria);
+        view.getSecondaStoriaButton().addActionListener(gestoreSecondaStoria);
         
         gestoreTerzaStoria = new ActionListener() {
         	@Override
