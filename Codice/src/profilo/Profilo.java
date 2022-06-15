@@ -762,6 +762,7 @@ public class Profilo implements IProfilo {
 	 		if(dbfacade.cerca(c) != null) {
 	 			pubblicaCommento(idProfilo, idPost, testoCommento, t);
 	 		}
+	 		System.out.println(c.toString());
 		return dbfacade.carica(c);
 	}
 

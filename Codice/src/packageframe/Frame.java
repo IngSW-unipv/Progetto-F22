@@ -336,12 +336,12 @@ public class Frame extends JFrame {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getHomePostVisualizzato();
 	}
 	
-    public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
-        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, commenti);
+    public void settaSondaggioVisualizzato(String iDpost, String descrizionePost, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
+        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2, scelta3, scelta4, numeroLike, numeroDislike, numeroCommenti, conteggi, commenti);
     }
     
-    public void settaSondaggioVisualizzatoSceltaDoppia(String iDpost, String descrizionePost, String scelta1, String scelta2, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
-        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2,  numeroLike, numeroDislike, numeroCommenti, commenti);
+    public void settaSondaggioVisualizzatoSceltaDoppia(String iDpost, String descrizionePost, String scelta1, String scelta2, int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
+        ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).settaSondaggioVisualizzato(iDpost, descrizionePost, scelta1, scelta2,  numeroLike, numeroDislike, numeroCommenti,conteggi, commenti);
     }
     
     

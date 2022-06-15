@@ -711,8 +711,9 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
                 refresh();
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		mostraSchermata("Postvisualizzato");
@@ -736,9 +737,10 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
                 refresh();
                 
         		mostraSchermata("Postvisualizzato");
@@ -762,9 +764,10 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi,commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -774,7 +777,7 @@ public class Controller {
         gestoreSondaggioDoppiaScelta1 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
+        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(0));
         		try {
         			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(0), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
@@ -787,9 +790,10 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
+        		view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -812,9 +816,10 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0,  conteggi, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -837,9 +842,11 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
+
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
