@@ -84,7 +84,7 @@ public class Frame extends JFrame {
 		Home home = new Home(bufferStories, bufferPosts);
 		mappaSchermate.put("Home", home);
 
-		Impostazioni impostazioni = new Impostazioni("Stringa profilo prova");
+		Impostazioni impostazioni = new Impostazioni();
 		mappaSchermate.put("Impostazioni", impostazioni);
 
 		Profilo profilo = new Profilo(listaPost);
