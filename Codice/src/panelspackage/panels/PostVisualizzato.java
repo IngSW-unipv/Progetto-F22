@@ -337,15 +337,21 @@ package panelspackage.panels;
 		
         
         public boolean settaCommenti(ArrayList<String> commenti) {
-            if(commenti.size() == 0) 
-                return false;
-                         
+            if(commenti.size() == 0) {
+            	 for(int i = 0 ; i < 10; i = i+2) {
+                     ((Pulsanti)ListaAreaTesto.get(i)).setText("");
+                     ((Etichette)ListaAreaTesto.get(i + 1)).setText("");
+            	 	}
+            	 return true;
+                 }
+                   
             for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2; i = i + 2) {
 
                 int indiceCorrente2 = i + getIndiceCommentoCorrente();
                 ((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
                 ((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
             }
+          
             return true;
         }
         
