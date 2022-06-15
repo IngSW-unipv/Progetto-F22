@@ -28,9 +28,9 @@ public class ChatDiGruppoFrame extends JPanel {
 	private AreaDiTesto messaggi, testoDescrizione,testoDescrizioneNuova;
 	private InserimentoTesto scriviMessaggio, utenteDaEliminare,utenteDaAggiungere;
 	private SpecificContainer containerAmministratore;
-	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio, utenteDaEliminareButton, utenteDaAggiungereButton, modificaButton;
+	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio, 
+					 utenteDaEliminareButton, utenteDaAggiungereButton, modificaButton, partecipazioneButton, uscitaGruppoButton ;
 	
-
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 	private String idGruppo;
 
@@ -70,6 +70,14 @@ public class ChatDiGruppoFrame extends JPanel {
       grigliaGestioneMembri.add( modificaButton = new Pulsanti("modifica",Frame.COLOREPRIMARIOTEMATICO));
       containerAmministratore.add(grigliaGestioneMembri, BorderLayout.NORTH);
       containerNorth.add(containerAmministratore, BorderLayout.CENTER);
+      
+      SpecificContainer containerNorthCenter = new SpecificContainer();
+      containerNorthCenter.setLayout(new GridLayout(2, 1));
+      containerNorthCenter.add(partecipazioneButton = new Pulsanti("Partecipa", Frame.COLOREPRIMARIOTEMATICO));
+      containerNorthCenter.add(uscitaGruppoButton = new Pulsanti("Esci dal gruppo", Frame.COLOREPRIMARIOTEMATICO));
+      
+      containerNorth.add(containerNorthCenter, BorderLayout.SOUTH);
+
       containerNorth.add(new JFileChooser(), BorderLayout.SOUTH);
          
 		for(int i = getIndiceMessaggioCorrente();  i <  10; i++) {
@@ -252,6 +260,23 @@ public class ChatDiGruppoFrame extends JPanel {
 	public void setUtenteDaAggiungere(InserimentoTesto utenteDaAggiungere) {
 		this.utenteDaAggiungere = utenteDaAggiungere;
 	}
+	
+	public Pulsanti getPartecipazioneButton() {
+		return partecipazioneButton;
+	}
+
+	public void setPartecipazioneButton(Pulsanti partecipazioneButton) {
+		this.partecipazioneButton = partecipazioneButton;
+	}
+
+	public Pulsanti getUscitaGruppoButton() {
+		return uscitaGruppoButton;
+	}
+
+	public void setUscitaGruppoButton(Pulsanti uscitaGruppoButton) {
+		this.uscitaGruppoButton = uscitaGruppoButton;
+	}
+
 
 	public SpecificContainer getContainerAmministratore() {
 		return containerAmministratore;
