@@ -103,10 +103,34 @@ public class ChatDiGruppoFrame extends JPanel {
 			return false;
 		} 
 
-		for(int i = 0 ; i < 10 || i < messaggi.size(); i++) {
+		/*for(int i = 0 ; i < 10 || i < messaggi.size(); i++) {
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
 			((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2));
 		}
+		return true;*/		
+		int i = 0;
+		boolean flag = true;
+		while(flag) {
+			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
+			
+				((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2));
+
+			i++;
+			
+			if (i == messaggi.size() || i == (10 - 2)) {
+				flag = false;
+			} 
+		}
+		
+		flag = true;
+		while(flag) { 
+			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
+			if (i == (10 - 2)) {
+				flag = false;
+			}
+			
+			i++;
+		}	
 		return true;
 	}
 	

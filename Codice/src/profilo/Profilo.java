@@ -955,6 +955,7 @@ public class Profilo implements IProfilo {
 		if(dbfacade.cerca(new MessaggioDiGruppo(idMessaggio)) != null) {
 			scriviMessaggioGruppo(testo, idGruppo);
 		}
+		System.out.println(m.toString());
 		dbfacade.carica(m);
 	}
 	

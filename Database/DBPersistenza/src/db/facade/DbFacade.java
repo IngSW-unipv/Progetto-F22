@@ -175,7 +175,8 @@ public class DbFacade implements IDbFacade{
 		mDao = Utility.convertiTipoMessaggio(md.getTipo());
 		boolean b = mDao.scriviMessaggio(ConvertitoreFacade.getIstance().converti(md));
 		String s[] = ConvertitoreFacade.getIstance().ritorna(md);
-		mDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(md), s[0], s[1]);
+		mDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(md), s[1], s[0]);
+		System.out.println(s[0]);
 	    return b;
 		
 	}

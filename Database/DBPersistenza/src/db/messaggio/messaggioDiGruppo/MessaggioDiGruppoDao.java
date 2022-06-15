@@ -180,7 +180,7 @@ public class MessaggioDiGruppoDao extends MessaggioDao {
 
 		try
 		{
-			String query="SELECT idMsgGrp, testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
+			String query="SELECT profiloInviante, testo FROM messaggiodigruppo WHERE gruppo=? order by dataInvio,oraInvio";
 
 			st1 = conn.prepareStatement(query);
 			st1.setString(1, idGruppo);
