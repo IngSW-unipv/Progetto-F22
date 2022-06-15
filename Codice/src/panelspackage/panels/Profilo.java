@@ -225,6 +225,7 @@ public class  Profilo extends JPanel {
 					ListaTesti.get(i).setText("");
 				}
 			}
+			
 			if(postTestoDelProfilo.size() > 0)	 {
 				for ( i = 0; i < postTestoDelProfilo.size()/2 && i < 3  ; i++) {
 					ListaTesti.get(i).setText(postTestoDelProfilo.get(((i*2) + 1) + this.getContatoreTesto()));
