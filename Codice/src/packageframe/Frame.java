@@ -872,6 +872,10 @@ public class Frame extends JFrame {
 	public Pulsanti getUtenteDaAggiungereButton() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaAggiungereButton();	
 	}
+	
+	public Pulsanti getModificaButton() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getModificaButton();	
+	}
 
 	public Pulsanti setNextMessaggio(Pulsanti nextMessaggio) {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getPrevMessaggio();	
@@ -879,7 +883,7 @@ public class Frame extends JFrame {
 	
 	public InserimentoTesto getScriviMessaggioGruppo() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getScriviMessaggio();	
-		}
+	}
 
 	public Pulsanti getInviaGruppo() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getInvia();	
