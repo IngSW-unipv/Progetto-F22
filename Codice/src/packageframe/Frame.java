@@ -891,7 +891,12 @@ public class Frame extends JFrame {
 	public InserimentoTesto getUtenteDaAggiungere() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUtenteDaAggiungere();
 	}
-
+	public Pulsanti getPartecipazioneGruppoButton() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getPartecipazioneButton();
+	}
+	public Pulsanti getUscitaGruppoButton() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getUscitaGruppoButton();
+	}
 
 	public SpecificContainer getContainerAmministratore() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getContainerAmministratore();
