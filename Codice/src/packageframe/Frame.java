@@ -871,7 +871,9 @@ public class Frame extends JFrame {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getPrevMessaggio();
 
 	}
-
+	public Pulsanti getModificaButton() {
+		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getModificaButton();
+	}
 
 	public AreaDiTesto getTestoDescrizione() {
 		return ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).getTestoDescrizione();

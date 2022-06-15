@@ -1467,13 +1467,11 @@ public class Controller {
 	gestoreModificaDescrizioneChat = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
+			String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
 		}
 	};
-	
+	view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
     }
-    
-    
     	        
     public void refresh() {
         view.invalidate();

@@ -169,18 +169,5 @@ public class Sistema {
 	public void setProfiloConCuiSiStaChattando(Profilo profiloConCuiSiStaChattando) {
 		this.profiloConCuiSiStaChattando = profiloConCuiSiStaChattando;
 	}
-	
-	public void aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) {
-		try {
-			profiloAttivo.aggiungiPartecipante(idGruppo, idProfilo, nickName);
-		} catch (GruppoGiaPieno e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ProfiloGiaInserito e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 }
 

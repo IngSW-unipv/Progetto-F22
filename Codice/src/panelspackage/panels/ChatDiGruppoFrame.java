@@ -28,7 +28,9 @@ public class ChatDiGruppoFrame extends JPanel {
 	private AreaDiTesto messaggi, testoDescrizione,testoDescrizioneNuova;
 	private InserimentoTesto scriviMessaggio, utenteDaEliminare,utenteDaAggiungere;
 	private SpecificContainer containerAmministratore;
-	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio, utenteDaEliminareButton, utenteDaAggiungereButton;
+	private Pulsanti invia, profilo, home, nextMessaggio, prevMessaggio, utenteDaEliminareButton, utenteDaAggiungereButton, modificaButton;
+	
+
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 	private String idGruppo;
 
@@ -65,7 +67,7 @@ public class ChatDiGruppoFrame extends JPanel {
       grigliaGestioneMembri.add( utenteDaEliminare = new InserimentoTesto(Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12)));
       grigliaGestioneMembri.add( utenteDaEliminareButton = new Pulsanti("elimina",Frame.COLOREPRIMARIOTEMATICO));
       grigliaGestioneMembri.add(pannelloDescrizione);
-      grigliaGestioneMembri.add( utenteDaEliminareButton = new Pulsanti("modifica",Frame.COLOREPRIMARIOTEMATICO));
+      grigliaGestioneMembri.add( modificaButton = new Pulsanti("modifica",Frame.COLOREPRIMARIOTEMATICO));
       containerAmministratore.add(grigliaGestioneMembri, BorderLayout.NORTH);
       containerNorth.add(containerAmministratore, BorderLayout.CENTER);
       containerNorth.add(new JFileChooser(), BorderLayout.SOUTH);
@@ -273,6 +275,14 @@ public class ChatDiGruppoFrame extends JPanel {
 
 	public void setUtenteDaAggiungereButton(Pulsanti utenteDaAggiungereButton) {
 		this.utenteDaAggiungereButton = utenteDaAggiungereButton;
+	}
+	
+	public Pulsanti getModificaButton() {
+		return modificaButton;
+	}
+
+	public void setModificaButton(Pulsanti modificaButton) {
+		this.modificaButton = modificaButton;
 	}
 
 	public void setHome(Pulsanti home) {
