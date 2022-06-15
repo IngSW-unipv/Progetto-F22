@@ -31,7 +31,7 @@ public class Controller {
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
-                           gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo,
+                           gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo, gestorePartecipa, gestoreEsciGruppo,
                            gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo;
     Frame view;
@@ -1028,6 +1028,7 @@ public class Controller {
         		String nomeGruppo = view.getPulsanteRicercaGruppo().getText();
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(nomeGruppo));
         		settaSchermataGruppo(g, commentiConProfiliIinvianti);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1075,6 +1076,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		gruppoAttuale = g.getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
@@ -1087,6 +1089,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1099,6 +1102,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1110,6 +1114,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1121,6 +1126,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1132,6 +1138,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1143,6 +1150,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1154,6 +1162,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1165,6 +1174,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1176,6 +1186,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		setGruppo(g);
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1404,7 +1415,6 @@ public class Controller {
         };
         view.getHomeGruppo().addActionListener(gestoreHomeGruppoFrame);
     
-    
     	gestoreInviaMessaggioGruppo = new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
@@ -1455,19 +1465,11 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String utente = view.getUtenteDaAggiungere().getText();
-			try {
-				model.getProfiloAttivo().aggiungiPartecipante(gruppoAttuale, utente);
-			} catch (GruppoGiaPieno e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (ProfiloGiaInserito e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			aggiungiPartecipante(gruppoAttuale, utente);
 		}
 	};
 	view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
-	
+		
 	gestoreRimuoviUtente = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -1487,6 +1489,22 @@ public class Controller {
 			}
 	};
 	view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
+	
+	gestorePartecipa = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			aggiungiPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+		}
+	};
+	view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
+	
+	gestoreEsciGruppo = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			rimuoviPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+		}
+	};
+	view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
     }
     	        
     public void refresh() {
@@ -1740,5 +1758,45 @@ public class Controller {
 		view.aggiornaMessaggiGruppo(commenti);
 	}
 
-	
+	public void setGruppo(Gruppo g) {
+		if(model.getProfiloAttivo().getIdProfilo().equals(g.getAmministratore())) {
+			view.getUtenteDaAggiungereButton().setVisible(true);
+			view.getUtenteDaEliminareButton().setVisible(true);
+			view.getModificaButton().setVisible(true);
+			view.getUtenteDaAggiungere().setVisible(true);
+			view.getUtenteDaEliminare().setVisible(true);
+			view.getTestoDescrizioneNuova().setVisible(true);
+			view.getPartecipazioneGruppoButton().setVisible(false);
+			view.getUscitaGruppoButton ().setVisible(false);
+
+		}
+		else {
+			view.getUtenteDaAggiungereButton().setVisible(false);
+			view.getUtenteDaEliminareButton().setVisible(false);
+			view.getModificaButton().setVisible(false);
+			view.getUtenteDaAggiungere().setVisible(false);
+			view.getUtenteDaEliminare().setVisible(false);
+			view.getTestoDescrizioneNuova().setVisible(false);
+			view.getPartecipazioneGruppoButton().setVisible(true);
+			view. getUscitaGruppoButton ().setVisible(true);
+
+		}
+	}
+	public void aggiungiPartecipante(String idGruppo, String utente) {
+		try {
+			model.getProfiloAttivo().aggiungiPartecipante(idGruppo, utente);
+		} catch (GruppoGiaPieno e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ProfiloGiaInserito e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	public void rimuoviPartecipante(String idGruppo, String utente) {
+		model.getProfiloAttivo().rimuoviPartecipante(idGruppo, utente);
+	}
+
+
+
 }
