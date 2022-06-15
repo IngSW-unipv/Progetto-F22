@@ -1112,7 +1112,7 @@ public class Profilo implements IProfilo {
 	 * @param id del profilo da aggiungere
 	 */
 @Override
-public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String nickName) throws GruppoGiaPieno, ProfiloGiaInserito {
+public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno, ProfiloGiaInserito {
 		
 		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 		
@@ -1127,7 +1127,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String ni
 				g.setProfilo2(idProfilo);
 				if(g.getProfilo2().equals(g.getProfilo1())) {
 					dbfacade.gestisciPartecipante2(null, g);
-					throw new ProfiloGiaInserito(nickName);
+					throw new ProfiloGiaInserito(idProfilo);
 				}
 				return true;
 			}
@@ -1136,7 +1136,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String ni
 				g.setProfilo3(idProfilo);
 				if(g.getProfilo3().equals(g.getProfilo1()) || g.getProfilo3().equals(g.getProfilo2())) {
 					dbfacade.gestisciPartecipante3(null, g);
-					throw new ProfiloGiaInserito(nickName);
+					throw new ProfiloGiaInserito(idProfilo);
 				}
 				return true;
 			}
@@ -1145,7 +1145,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String ni
 				g.setProfilo4(idProfilo);
 				if(g.getProfilo4().equals(g.getProfilo1()) || g.getProfilo4().equals(g.getProfilo2()) || g.getProfilo4().equals(g.getProfilo3())) {
 					dbfacade.gestisciPartecipante4(null, g);
-					throw new ProfiloGiaInserito(nickName);
+					throw new ProfiloGiaInserito(idProfilo);
 				}
 				return true;
 			}
@@ -1154,7 +1154,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String ni
 				g.setProfilo5(idProfilo);
 				if(g.getProfilo5().equals(g.getProfilo1()) || g.getProfilo5().equals(g.getProfilo2()) || g.getProfilo5().equals(g.getProfilo3()) || g.getProfilo5().equals(g.getProfilo4())) {
 					dbfacade.gestisciPartecipante5(null, g);
-					throw new ProfiloGiaInserito(nickName);
+					throw new ProfiloGiaInserito(idProfilo);
 				}
 				return true;
 			}
@@ -1163,7 +1163,7 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo, String ni
 				g.setProfilo6(idProfilo);
 				if(g.getProfilo6().equals(g.getProfilo1()) || g.getProfilo6().equals(g.getProfilo2()) || g.getProfilo6().equals(g.getProfilo3()) || g.getProfilo6().equals(g.getProfilo4()) || g.getProfilo6().equals(g.getProfilo5())) {
 					dbfacade.gestisciPartecipante6(null, g);
-					throw new ProfiloGiaInserito(nickName);
+					throw new ProfiloGiaInserito(idProfilo);
 				}
 				return true;
 			}

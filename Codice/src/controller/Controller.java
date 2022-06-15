@@ -32,7 +32,7 @@ public class Controller {
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
                            gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
-                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
+                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo;
     Frame view;
     Sistema model;
@@ -1436,8 +1436,44 @@ public class Controller {
 	};
 	view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
 	
+	gestoreAggiungiUtente = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String utente = view.getUtenteDaAggiungere().getText();
+			try {
+				model.getProfiloAttivo().aggiungiPartecipante(gruppoAttuale, utente);
+			} catch (GruppoGiaPieno e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ProfiloGiaInserito e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	};
+	view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
+	
+	gestoreRimuoviUtente = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String utente = view.getUtenteDaEliminare().getText();
+			model.getProfiloAttivo().rimuoviPartecipante(gruppoAttuale, utente);
+			System.out.println(utente);
+			System.out.println(gruppoAttuale);
+		}
+	};
+	view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
+	
+	gestoreModificaDescrizioneChat = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	};
+	
     }
-
+    
+    
     	        
     public void refresh() {
         view.invalidate();
