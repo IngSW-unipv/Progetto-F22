@@ -59,6 +59,7 @@ public interface IDbFacade {
      public Post cerca(Post p);
      public ArrayList<Post> selectAllPost(TipoPost t);
      public String ottieniPercorso(Post m);
+     public boolean vediIsStory(Post m);
      
     //Ottiene gli id e il percorso dei post di un profilo 
 	public ArrayList<String> ottieniIdPost(TipoPost p, Profilo pr);

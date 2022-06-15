@@ -193,7 +193,7 @@ public class PostUtility {
 	 * @param Tipo dell'oggetto da costruire
 	 * @return istanza dell'oggetto costruito
 	 */
-    public Post restituisciTipo(String id, TipoPost t) {
+    public static Post restituisciTipo(String id, TipoPost t) {
     	Post pst;
     	if(t == TipoPost.FOTO) {
     		pst = new Foto(id,null,false, null, null, false, true);

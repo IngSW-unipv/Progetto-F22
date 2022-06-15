@@ -35,5 +35,5 @@ public interface IPostDao {
     public boolean modificaIsStory(PostDB m,boolean b);
 	ArrayList<String> caricaPostProfiliSeguiti(String profilo);
 	ArrayList<String> caricaStorieProfiliSeguiti(String profilo);
-    
+    public boolean vediIsStory(PostDB p); 
 }

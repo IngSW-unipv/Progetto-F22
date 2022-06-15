@@ -526,5 +526,10 @@ public ArrayList<String> caricaStorieProfiliSeguiti(String profilo) {
 	return null;
 }
 
+@Override
+public boolean vediIsStory(PostDB p) {
+	return false;
+}
+
 
 }

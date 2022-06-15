@@ -41,7 +41,7 @@ class TestProfilo {
 	public void testAggiungiLike() {
 		 Post p = new Foto("F666");
 		 try {
-			assertTrue(profiloAttivo.aggiungiLike(p));
+			assertTrue(profiloAttivo.aggiungiLike(p.getIdPost(), p.getTipo()));
 		} catch (AzioneNonConsentita e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,7 +51,7 @@ class TestProfilo {
 	public void testAggiungiDislike() {
 		 Post p = new Foto("F777");
 		 try {
-			assertTrue(profiloAttivo.aggiungiDislike(p));
+			assertTrue(profiloAttivo.aggiungiDislike(p.getIdPost(),p.getTipo()));
 		} catch (AzioneNonConsentita e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +61,7 @@ class TestProfilo {
 	public void testRimuoviLike() {
 		 Post p = new Foto("F888");
 		 try {
-			assertTrue(profiloAttivo.rimuoviLike(p));
+			assertTrue(profiloAttivo.rimuoviLike(p.getIdPost(),p.getTipo()));
 		} catch (AzioneNonConsentita e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ class TestProfilo {
 	public void testRimuoviDislike() {
 		 Post p = new Foto("F999");
 		 try {
-			assertTrue(profiloAttivo.rimuoviDislike(p));
+			assertTrue(profiloAttivo.rimuoviDislike(p.getIdPost(),p.getTipo()));
 		} catch (AzioneNonConsentita e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -68,10 +68,10 @@ public interface IProfilo {
 	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
     public Gruppo cercaGruppo(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
-	public boolean aggiungiLike(Post p)throws AzioneNonConsentita;
-	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita;
-	public boolean rimuoviLike(Post p)throws AzioneNonConsentita;
-	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita;
+	public boolean aggiungiLike(String idPost, TipoPost t)throws AzioneNonConsentita;
+	public boolean aggiungiDislike(String idPost, TipoPost t)throws AzioneNonConsentita;
+	public boolean rimuoviLike(String idPost, TipoPost t)throws AzioneNonConsentita;
+	public boolean rimuoviDislike(String idPost, TipoPost t)throws AzioneNonConsentita;
 	boolean creaGruppo(String descrizione, String nomeGruppo)
 			throws AccountDoesNotExist;
 	boolean rimuoviCommento(String idCommento);
