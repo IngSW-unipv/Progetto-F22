@@ -118,17 +118,10 @@ public class Home extends JPanel {
 	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
 		boolean flag = true;
 		int i = 0;
-		System.out.println(storieDaVisualizzare.size());
-		System.out.println(this.getIndiceStorie()); 
 		while(flag) {
 			int indice =(i*2) + 1 + this.getIndiceStorie();
-			System.out.println(indice); 
 			listaPulsantiStorie.get(i).setIcon(new ImageIcon(storieDaVisualizzare.get(indice)));
-			i++;
-			System.out.println(storieDaVisualizzare.get(indice));
-			System.out.println("size " + storieDaVisualizzare.size()/2);
-			System.out.println("indice i " + i);
-			
+			i++;			
 			if(i < storieDaVisualizzare.size()/2) {
 			} else {
 				System.out.println("else" +flag);
@@ -180,7 +173,7 @@ public class Home extends JPanel {
 
 			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pSondaggioDoppiaScelta =  new Pulsanti("Sondaggio due scelte", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio piï¿½ scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio più scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 			containerSud.add(creaUnaChatDiGruppo =  new Pulsanti("CreaChatDiGruppo", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 
