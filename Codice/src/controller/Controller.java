@@ -208,15 +208,13 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		if(view.getIndiceStorie() < storySchermataHome.size()/2 ) {
-        		view.setIndiceStorie(view.getIndiceStorie() + 2);
+        			view.setIndiceStorie(view.getIndiceStorie() + 2);
         		}
         	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
             	if(storySchermataHome.size() == 0) {
-          		System.out.println("non ci sono storie");
-        	} else {
-        		view.setPercorsiStorieLogin(storySchermataHome);
-        		//refresh();
-        		}
+            	} else {
+            		view.setPercorsiStorieLogin(storySchermataHome);
+            	}
         	}
         	
         };
@@ -226,14 +224,13 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		if(view.getIndiceStorie() > 0) {
-        		view.setIndiceStorie(view.getIndiceStorie() - 2);
+        			view.setIndiceStorie(view.getIndiceStorie() - 2);
         		}
         	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
             	if(storySchermataHome.size() == 0) {
-          		System.out.println("non ci sono storie");
-        	} else {
-        		view.setPercorsiStorieLogin(storySchermataHome);
-        		//refresh();
+            		System.out.println("non ci sono storie");
+            	} else {
+            		view.setPercorsiStorieLogin(storySchermataHome);
         		}
         	}
         };
@@ -767,7 +764,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(0), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(0), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
@@ -792,7 +789,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(2), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(2), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
@@ -817,7 +814,7 @@ public class Controller {
         		public void actionPerformed(ActionEvent e) {
         		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(4), null, false, null, null, null, null, null));
+        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(4), null, false, null, null, null, null, null));
 				} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
