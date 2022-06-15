@@ -106,7 +106,6 @@ public class Home extends JPanel {
 		containerPost = new SpecificContainer();
 		containerCenter.add(containerPost, BorderLayout.CENTER);
 		
-		//containerPost.add(new LabeledIcon(bufferPosts.get(indiceBufferPosts)), BorderLayout.CENTER);
 		
 		SpecificContainer containerCosePost = new SpecificContainer();
 		
@@ -151,9 +150,9 @@ public class Home extends JPanel {
 			this.getTerzaStoria().impostaPercorsoPost(storieDaVisualizzare.get(5 + indiceStorie));
 			this.getQuartaStoria().impostaPercorsoPost(storieDaVisualizzare.get(7 + indiceStorie));
 			this.getQuintaStoria().impostaPercorsoPost(storieDaVisualizzare.get(9 + indiceStorie));
-		} else if(indiceStorie == 0 ){
-			this.getButtonPrevStory().setEnabled(false);
-		} else if (indiceStorie > storieDaVisualizzare.size());
+		} else if(indiceStorie <= 0 ){
+			indiceStorie = 0;
+		} 
 	}
 	
 	public void areaStories() {

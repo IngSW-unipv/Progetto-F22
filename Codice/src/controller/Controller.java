@@ -98,7 +98,7 @@ public class Controller {
                 if (login()) 
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	checkPulsantiStorie();
+                	//checkPulsantiStorie();
                 	if(storySchermataHome.size() == 0) {
                   		System.out.println("non ci sono storie");
                 	} else {
@@ -209,7 +209,7 @@ public class Controller {
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		checkPulsantiStorie();
+        		//checkPulsantiStorie();
         		view.setIndiceStorie(view.getIndiceStorie() + 2);
         		refresh();
         		view.aggiornaStorieHome(storySchermataHome);
@@ -223,7 +223,7 @@ public class Controller {
         gestoreStoryPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		checkPulsantiStorie();
+        		//checkPulsantiStorie();
         		view.setIndiceStorie(view.getIndiceStorie() - 2);
         		view.aggiornaStorieHome(storySchermataHome);
         		System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)));
@@ -1731,7 +1731,7 @@ public class Controller {
 	}
 	
 	
-	public void checkPulsantiStorie() {
+	/*public void checkPulsantiStorie() {
 		if(storySchermataHome.size() != 0) {
 			if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)) == 1) {
 				view.getButtonPrevStory().setEnabled(false);
@@ -1748,6 +1748,6 @@ public class Controller {
 				refresh();
 			}
 		}
-	}
+	}*/
 	
 }

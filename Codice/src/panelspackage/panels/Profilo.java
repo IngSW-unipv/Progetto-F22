@@ -147,12 +147,12 @@ public class  Profilo extends JPanel {
 		SpecificContainer containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		containerGrigliaSouth.setLayout(new GridLayout(1,6));
 		
-		containerGrigliaSouth.add(prevTesto = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(nextTesto = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(prevFoto = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(nextFoto = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevTesto = new Pulsanti("Idea precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextTesto = new Pulsanti("Idea successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevFoto = new Pulsanti("Foto precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextFoto = new Pulsanti("Foto successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 
 		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
