@@ -27,6 +27,7 @@ public interface IProfilo {
 	public boolean rimuoviMessaggio(Messaggio m);
 	public Messaggio cercaMessaggio(Messaggio m);
 	public String ottieniTestoMessaggio(Messaggio m);
+	
     //Legge tutti i messaggi ricevuti ogni minuto da un profilo o un gruppo precisato(In base al tipo di messaggio).Dopo 5 minuti smette di farlo e si stoppa
 	public boolean leggiMessaggi(String profiloInviante,String profiloRicevente, TipoMessaggio t);
     
@@ -67,8 +68,6 @@ public interface IProfilo {
 	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6);
     public Gruppo cercaGruppo(Gruppo g);
 	public ArrayList<Gruppo> selectAllGruppo();
-	public boolean modificaFotoGruppo(Gruppo g, String s);
-	public String vediFotoGruppo(Gruppo g);
 	public boolean aggiungiLike(Post p)throws AzioneNonConsentita;
 	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita;
 	public boolean rimuoviLike(Post p)throws AzioneNonConsentita;

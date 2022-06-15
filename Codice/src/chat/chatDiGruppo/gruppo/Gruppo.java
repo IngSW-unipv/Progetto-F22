@@ -3,13 +3,12 @@ package chat.chatDiGruppo.gruppo;
 
 public class Gruppo {
 	
-public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String profilo1, String profilo2,
+public Gruppo(String idGruppo, String descrizione, String profilo1, String profilo2,
 			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore) {
 	
 		super();
 		this.idGruppo = idGruppo;
 		this.descrizione = descrizione;
-		this.nomeGruppo = nomeGruppo;
 		this.profilo1 = profilo1;
 		this.profilo2 = profilo2;
 		this.profilo3 = profilo3;
@@ -22,7 +21,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	public Gruppo(String idGruppo) {
 		this.idGruppo = idGruppo;
 		this.descrizione = null;
-		this.nomeGruppo = null;
 		this.profilo1 = null;
 		this.profilo2 = null;
 		this.profilo3 = null;
@@ -34,7 +32,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 
 	private String idGruppo;
 	private String descrizione;
-	private String nomeGruppo;
 	private String profilo1;
 	private String profilo2;
 	private String profilo3;
@@ -49,10 +46,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	
 	public String getDescrizione() {
 		return descrizione;
-	}
-	
-	public String getNomeGruppo() {
-		return nomeGruppo;
 	}
 	
 	public String getProfilo1() {
@@ -84,8 +77,7 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 	}
 	@Override
 	public String toString() {
-		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", nomeGruppo=" + nomeGruppo
-				+ ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
+		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
 				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", amministratore=" + amministratore
 				+ ", fotoGruppo=" + "]";
 	}
@@ -96,10 +88,6 @@ public Gruppo(String idGruppo, String descrizione, String nomeGruppo, String pro
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-
-	public void setNomeGruppo(String nomeGruppo) {
-		this.nomeGruppo = nomeGruppo;
 	}
 
 	public void setProfilo1(String profilo1) {

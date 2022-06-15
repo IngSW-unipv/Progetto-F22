@@ -32,7 +32,7 @@ public ArrayList<GruppoDB> selectall() {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9));
 
 			result.add(grp);
 		}
@@ -50,12 +50,11 @@ public boolean creaGruppo(GruppoDB g) {
 
 	try
 	{
-		String query="insert into gruppo (idGruppo,descrizione,nomeGruppo) values (?,?,?)";
+		String query="insert into gruppo (idGruppo,descrizione) values (?,?)";
 
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, g.getIdGruppo());
 		st1.setString(2, g.getDescrizione());
-		st1.setString(3, g.getNomeGruppo());
 
 		st1.executeUpdate();
 
@@ -140,7 +139,7 @@ public GruppoDB cercaGruppo(GruppoDB g) {
 
 		while(rs1.next())
 		{
-			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9),rs1.getString(10));
+			GruppoDB grp =new GruppoDB(rs1.getString(1), rs1.getString(2),rs1.getString(3),rs1.getString(4),rs1.getString(5), rs1.getString(6),rs1.getString(7),rs1.getString(8),rs1.getString(9));
 
 			DBConnection.closeConnection(conn);
 			return grp;
@@ -358,18 +357,5 @@ public boolean gestisciPartecipante6(String idProfilo, GruppoDB g) {
 	DBConnection.closeConnection(conn);
 	return esito;
 }
-
-@Override
-public boolean cambiaFotoGruppo(GruppoDB g, String s) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public String vediFotoGruppo(GruppoDB g) {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 
 }

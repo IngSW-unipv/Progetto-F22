@@ -809,7 +809,7 @@ public class Profilo implements IProfilo {
 		if(dbfacade.cerca(g) != null) {
 			creaGruppo(descrizione, nomeGruppo);
 		}
-		g = new Gruppo(nomeGruppo,descrizione,nomeGruppo, getIdProfilo(), null, null, null, null, null , getIdProfilo());
+		g = new Gruppo(nomeGruppo,descrizione, getIdProfilo(), null, null, null, null, null , getIdProfilo());
 		
 		return dbfacade.carica(g);
 	}
@@ -829,7 +829,7 @@ public class Profilo implements IProfilo {
 	 */
 	@Override
 	public boolean modificaPartecipantiGruppo(String idGruppo, String profilo1,String profilo2,String profilo3,String profilo4,String profilo5,String profilo6)  {
-		Gruppo g = new Gruppo(idGruppo,null,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
+		Gruppo g = new Gruppo(idGruppo,null,profilo1,profilo2,profilo3,profilo4,profilo5,profilo6,null);
 		return dbfacade.gestisciPartecipanti(g);
 	}
 
@@ -1038,7 +1038,7 @@ public class Profilo implements IProfilo {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
 		 p = new Foto(idPost, descrizione, visibile, getIdProfilo(), percorso, isHd, true);
-		 this.pubblicaStoria(60, p);
+		 this.pubblicaStoria(24, p);
 	}
 	
 	 
@@ -1245,18 +1245,6 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 		}
 	return null;
 	}
-
-@Override
-public boolean modificaFotoGruppo(Gruppo g, String s) {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-@Override
-public String vediFotoGruppo(Gruppo g) {
-	// TODO Auto-generated method stub
-	return null;
-}
 }
 
 	

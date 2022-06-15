@@ -269,7 +269,7 @@ class TestProfilo {
 	public void testCreaGruppo() {
 		
 		try {
-			assertTrue(profiloAttivo.creaGruppo(null, null, null, null, null, null, null, null, profiloAttivo.getIdProfilo()));
+			assertTrue(profiloAttivo.creaGruppo("Mi piace il mare", "I marinai"));
 		} catch (AccountDoesNotExist e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -284,18 +284,13 @@ class TestProfilo {
 	public void testCercaGruppo() {
 		assertNotNull(profiloAttivo.cercaGruppo(new Gruppo("G345")));
 	}
-	@Test
-	public void testModificammagineGruppo() {
-		Foto f = new Foto("F444", null, true, profiloAttivo.getIdProfilo(), "percorso5", true, false);
-		Gruppo g = new Gruppo("G678");
-		assertTrue(profiloAttivo.modificaFotoGruppo(g, f.getIdPost()));
-	}
+	
 	@Test
 	public void testAggiungiPartecipante() {
-		Gruppo g = new Gruppo("G123", null, null, null, null, null, null, null, null,profiloAttivo.getIdProfilo());
+		Gruppo g = new Gruppo("G123", null, null, null, null, null, null, null,profiloAttivo.getIdProfilo());
 		altroProfilo = new Profilo("alfredo");
 		try {
-			assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo(), altroProfilo.getNickname()));
+			assertTrue(profiloAttivo.aggiungiPartecipante(g.getIdGruppo(), altroProfilo.getIdProfilo()));
 		} catch (GruppoGiaPieno e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -306,7 +301,7 @@ class TestProfilo {
 	}
 	@Test
 	public void testRimuoviPartecipante() {
-		Gruppo g = new Gruppo("G345", null, null, "profilo1", "profilo2", "profilo3", "profilo4", "profilo5", "profilo6",profiloAttivo.getIdProfilo());
+		Gruppo g = new Gruppo("G345", null, "profilo1", "profilo2", "profilo3", "profilo4", "profilo5", "profilo6",profiloAttivo.getIdProfilo());
 		assertTrue(profiloAttivo.rimuoviPartecipante(g.getIdGruppo(), "profilo4"));
 	}
 	@AfterAll

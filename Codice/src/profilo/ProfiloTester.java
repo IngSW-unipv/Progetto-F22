@@ -31,7 +31,7 @@ public class ProfiloTester {
     	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null);
     	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null);
     	Testo t = new Testo("374");
-        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002", "DV999");
+        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002");
 
         Commento c = new Commento("C01", "001", "F01", "aadhd");
         Profilo plof = new Profilo("Dal",null);
