@@ -422,6 +422,7 @@ public class Profilo implements IProfilo {
 	 */
 	@Override
 	public Post cercaPost(Post p) throws PostNonVisibile, PostNonPresente{
+		System.out.println(p.toString());
 		if (dbfacade.cerca(p) == null) {
 			throw new PostNonPresente(p.getIdPost());
 		}
@@ -765,6 +766,7 @@ public class Profilo implements IProfilo {
 	 		if(dbfacade.cerca(c) != null) {
 	 			pubblicaCommento(idProfilo, idPost, testoCommento, t);
 	 		}
+	 		System.out.println(c.toString());
 		return dbfacade.carica(c);
 	}
 

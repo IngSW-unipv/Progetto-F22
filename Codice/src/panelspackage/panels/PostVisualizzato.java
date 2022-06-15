@@ -341,6 +341,13 @@ package panelspackage.panels;
 		
         
         public boolean settaCommenti(ArrayList<String> commenti) {
+        	if (this.indiceCommentoCorrente < 0) {
+        		indiceCommentoCorrente = 0;
+        	}
+        	if (this.indiceCommentoCorrente > commenti.size()/2 -4) {
+        		indiceCommentoCorrente = commenti.size()/2 - 4;
+        	}
+        	System.out.println("indiceCommento" + indiceCommentoCorrente);
             if(commenti.size() == 0) {
             	 for(int i = 0 ; i < 10; i = i+2) {
                      ((Pulsanti)ListaAreaTesto.get(i)).setText("");
@@ -373,17 +380,17 @@ package panelspackage.panels;
             this.getAreaCommentiTesto().setText(descrizionePost);
             impostaImmagineProfiloButton.setVisible(true);
         }
-        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti, int [] conteggi,ArrayList<String> commenti) {
             numeroMiPiace = numeroLike;
             numeroNonMiPiace = numeroDislike;
             numeroComm = numeroCommenti;
             settaCommenti(commenti);
             idPost = iDpost;
               
-            pulsantePrimaScelta.setText(scelta1);
-            pulsanteSecondaScelta.setText(scelta2);
-            pulsanteTerzaScelta.setText(scelta3);
-            pulsanteQuartaScelta.setText(scelta4);
+            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
+            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
+            etichettaTerzoRisultato.setText(String.valueOf(conteggi[2]));
+            etichettaQuartoRisultato.setText(String.valueOf(conteggi[3]));
             
             etichettaPrimoRisultato.setText("");
             etichettaSecondoRisultato.setText("");
@@ -398,8 +405,8 @@ package panelspackage.panels;
             impostaImmagineProfiloButton.setVisible(false);
         }
         
-        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
-            numeroMiPiace = numeroLike;
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
+        	numeroMiPiace = numeroLike;
             numeroNonMiPiace = numeroDislike;
             numeroComm = numeroCommenti;
             settaCommenti(commenti);
@@ -410,8 +417,8 @@ package panelspackage.panels;
             pulsanteTerzaScelta.setText("");
             pulsanteQuartaScelta.setText("");
             
-            etichettaPrimoRisultato.setText("");
-            etichettaSecondoRisultato.setText("");
+            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
+            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
             etichettaTerzoRisultato.setText("");
             etichettaQuartoRisultato.setText("");
             descrizionePost.setText(descrizioneSondaggio);
