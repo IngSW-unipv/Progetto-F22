@@ -131,15 +131,11 @@ public class Home extends JPanel {
 	
 	
 	public void setPercorsiStorieLogin(ArrayList<String> storieDaVisualizzare) {
-		boolean flag = true;
-		int i = 1;
-		while(flag) {
-		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(i));
-		i = i+2;
-		if(i > storieDaVisualizzare.size()) {
-			flag = false;
-			}
-		}
+		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(1));
+		secondaStoria.impostaPercorsoPost(storieDaVisualizzare.get(3));
+		terzaStoria.impostaPercorsoPost(storieDaVisualizzare.get(5));
+		quartaStoria.impostaPercorsoPost(storieDaVisualizzare.get(7));
+		quintaStoria.impostaPercorsoPost(storieDaVisualizzare.get(9));
 		containerStory.add(primaStoria);
 		containerStory.add(secondaStoria);
 		containerStory.add(terzaStoria);
