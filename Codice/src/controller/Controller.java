@@ -40,6 +40,7 @@ public class Controller {
     private String schermataAttuale = "Login";
     private String gruppoAttuale = "";
     private int postAttuale = -1,basePostAttuale = 0;
+    private String profiloVisualizzato;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
     private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
@@ -338,7 +339,7 @@ public class Controller {
         gestoreProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	
+            	profiloVisualizzato = model.getProfiloAttivo().getIdProfilo();
             	aggiornaSchermataProfiloAttivo();
                 refresh();
                 view.getPulsanteSegui().setVisible(false);
@@ -481,7 +482,7 @@ public class Controller {
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            if(model.getProfiloAttivo().getIdProfilo().equals(profiloVisualizzato)) {
 
                 Foto f = new Foto(null);
                 
@@ -493,9 +494,22 @@ public class Controller {
                 
                 visualizzaPostFoto(f);
                 mostraSchermata("Postvisualizzato");
-                refresh();
-            }
-        };
+                refresh();           
+        } else {
+        	Foto f = new Foto(null);
+        	try {
+				f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo()));
+			} catch (PostNonPresente| PostNonVisibile e1) {
+				 f.setPercorso("immagini/images.png"); 
+			}
+            
+            visualizzaPostFoto(f);
+            mostraSchermata("Postvisualizzato");
+            refresh();         
+        		}
+        	}
+        }
+            ;
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
         
         gestorePulsantePrimoTesto = new ActionListener() {
@@ -1001,6 +1015,7 @@ public class Controller {
                 percorsiPostTesto = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.TESTO);
                 percorsiPostSondaggioSceltaMultipla = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIOSCELTAMULTIPLA);
                 percorsiPostSondaggioDoppiaScelta = model.getProfiloCercato().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIODOPPIAVOTAZIONE);
+            	profiloVisualizzato = model.getProfiloCercato().getIdProfilo();
 
                 try {
                 	percorsoFotoProfilo = (String)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo())).getPercorso();
