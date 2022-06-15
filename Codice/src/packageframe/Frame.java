@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -201,6 +202,47 @@ public class Frame extends JFrame {
 	
 	public void aggiornaPostHome() {
 		((Home)mappaSchermate.get("Home")).aggiornaPostHome();
+	}
+	
+	public int getIndiceStorie() {
+		 ((Home)mappaSchermate.get("Home")).getIndiceStorie();	
+		return 0;
+	}
+
+	public void setPercorsiStorieLogin(ArrayList<String> storySchermataHome) {
+		 ((Home)mappaSchermate.get("Home")).setPercorsiStorieLogin(storySchermataHome);	
+	}
+
+	public void setIndiceStorie(int i) {
+		 ((Home)mappaSchermate.get("Home")).setIndiceStorie(i);	
+	}
+
+	public void aggiornaStorieHome(ArrayList<String> storySchermataHome) {
+		 ((Home)mappaSchermate.get("Home")).aggiornaStorieHome(storySchermataHome);
+		
+	}
+
+	public AbstractButton getPrimaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getPrimaStoria();
+	}
+
+
+	public AbstractButton getSeconaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getSecondaStoria();
+	}
+	
+	public AbstractButton getTerzaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getTerzaStoria();
+	}
+
+
+	public AbstractButton getQuartaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getQuartaStoria();
+	}
+
+
+	public AbstractButton getQuintaStoriaButton() {
+		return ((Home)mappaSchermate.get("Home")).getQuintaStoria();
 	}
 	
 	public void rimuoviPostHome() {
@@ -853,5 +895,10 @@ public class Frame extends JFrame {
 
 	public void setIdGruppo(String idGruppo) {
 		 ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).setIdGruppo(idGruppo);	
+	}
+
+
+	public AbstractButton getSestaChatDiGruppoButton() {
+		return null;
 	}
 }
