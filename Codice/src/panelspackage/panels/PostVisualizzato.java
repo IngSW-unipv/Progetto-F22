@@ -346,6 +346,7 @@ package panelspackage.panels;
                      ((Pulsanti)ListaAreaTesto.get(i)).setText("");
                      ((Etichette)ListaAreaTesto.get(i + 1)).setText("");
             	 	}
+            	 
             	 return true;
                  }
                    
