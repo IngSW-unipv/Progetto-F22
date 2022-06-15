@@ -20,30 +20,29 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
 public class Impostazioni extends JPanel {
+	
 	HashMap<String,JComponent> mappaPulsanti = new  HashMap<String,JComponent>();
 	private Pulsanti homeImpostazioni, salvaModifiche;
 	private AreaDiTesto areaDescrizione;
 	private SpecificContainer containerCenter;
+	private Etichette nomeProfilo;
 	
-	int i;
-	private static String colori[] = {"arancione", "verde"};
-	
-	public Impostazioni(String profilo) {
+	public Impostazioni() {
 		avvio();
-		this.initComponents(profilo);
+		this.initComponents();
 	}
 		
 	public void avvio() {
-		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);
 	}
-	public void initComponents(String profilo) {
+	
+	public void initComponents() {
 		SpecificContainer containerNorth = new SpecificContainer();
 		this.add(containerNorth, BorderLayout.NORTH);
 		
-		JLabel nomeProfilo = new JLabel(profilo);
+		nomeProfilo = new Etichette("");
 		nomeProfilo.setVisible(true);
 		
 		nomeProfilo.setForeground(Frame.COLOREPRIMARIOTEMATICO);
@@ -54,7 +53,6 @@ public class Impostazioni extends JPanel {
 		containerWest.setLayout(new GridLayout(8,1));
 		
 		mappaPulsanti.put("modificaprofilo", new Pulsanti("Modifica profilo", Frame.COLOREPRIMARIOTEMATICO));
-		mappaPulsanti.put("cambiaColori", new Box(getColori(), Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("logout", new  Pulsanti("Logout", Frame.COLOREPRIMARIOTEMATICO));
 		mappaPulsanti.put("eliminaaccount",new Pulsanti("Elimina account", Frame.COLOREPRIMARIOTEMATICO));
 			
@@ -75,19 +73,11 @@ public class Impostazioni extends JPanel {
 		containerSouth.add(homeImpostazioni = new Pulsanti("Torna alla home", Frame.COLORESECONDARIOTEMATICO),BorderLayout.CENTER);
 	}
 	
-	public String[] getColori() {
-		return colori;
-	}
-	
 	public SpecificContainer getContainerCenter() {
 		return this.containerCenter;
 	}
 	public Pulsanti getModificaProfilo() {
 		return (Pulsanti) mappaPulsanti.get("modificaprofilo");
-	}
-	
-	public Box getCambiaColore() {
-		return (Box) mappaPulsanti.get("cambiaColori");
 	}
 
 	public JButton getVisibilitaPost() {
@@ -118,5 +108,8 @@ public class Impostazioni extends JPanel {
 		this.areaDescrizione = areaDescrizione;
 	}
 
+	public Etichette getNomeProfilo() {
+		return nomeProfilo;
+	}
 }
 	
