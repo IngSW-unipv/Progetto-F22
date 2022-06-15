@@ -1418,6 +1418,7 @@ public class Controller {
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
         		view.aggiornaMessaggiGruppo(messaggi);        		
         		refresh();
+        		
 		}
 	};
 	view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
