@@ -30,9 +30,10 @@ public class Controller {
                            gestoreSalvaLeModifiche, gestoreNextFoto, gestorePrevFoto, gestoreNextTesto, gestorePrevTesto, gestoreNextSondaggio, gestorePrevSondaggio,
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
-                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
+                           gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
+                           gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
                            gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
-                           gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria;
+                           gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo;
     Frame view;
     Sistema model;
     
@@ -1061,6 +1062,7 @@ public class Controller {
         		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
         		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
         		settaSchermataGruppo(g, messaggi);
+        		gruppoAttuale = g.getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1405,6 +1407,34 @@ public class Controller {
 			}
 		};
 	view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
+	
+	gestoreNextMsgGruppo = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (messaggi.size() >= view.getIndiceMessaggioCorrenteGruppo()-2) {
+			view.incrementaIndiceMessaggioCorrenteGruppo();
+			}
+			if (view.getIndiceMessaggioCorrenteGruppo() < messaggi.size()) 	
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+        		view.aggiornaMessaggiGruppo(messaggi);        		
+        		refresh();
+		}
+	};
+	view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
+	
+	gestorePrevMsgGruppo = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if(view.getIndiceMessaggioCorrenteGruppo() > 0) {
+				view.decrementaIndiceMessaggioCorrenteGruppo();
+				messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+				view.aggiornaMessaggiGruppo(messaggi);        		
+				refresh();
+			}
+		}
+	};
+	view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
+	
     }
 
     	        
