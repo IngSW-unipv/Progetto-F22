@@ -26,11 +26,20 @@ package panelspackage.panels;
         private AreaCommenti areaCommenti;
         private AreaDiTesto aggiungiCommento, descrizionePost;
         private JButton homePostVisualizzato,nextCommento, prevCommento;
-        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteSecondaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteTerzaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),pulsanteQuartaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
-        private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), containerSondaggio =  new SpecificContainer(), containerPost = new SpecificContainer();
+        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
+        				 pulsanteSecondaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
+        				 pulsanteTerzaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
+        				 pulsanteQuartaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
+        private SpecificContainer containerNorth, containerCenter =  new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO), 
+        						  containerSondaggio =  new SpecificContainer(), 
+        		containerPost = new SpecificContainer();
         private String fotoPath =  "C:\\Users\\franc\\OneDrive\\Immagini\\imgbin-rias-.jpg", idPost = "405";
         private ArrayList<String> postCommentiConUtenti = new ArrayList<String>();
-        private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg"), etichettaPrimoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaSecondoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaTerzoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), etichettaQuartoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO);
+        private Etichette fotoVisualizzata = new Etichette("/Users/tommasomasaracchio/immaginiDatabase/waifu.jpeg"), 
+        				  etichettaPrimoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), 
+        				  etichettaSecondoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), 
+        				  etichettaTerzoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO), 
+        				  etichettaQuartoRisultato = new Etichette("o", Frame.COLOREPRIMARIOTEMATICO);
         int numeroMiPiace = 10, numeroNonMiPiace = 20, numeroComm = 3;
         
         public PostVisualizzato() {
@@ -54,11 +63,6 @@ package panelspackage.panels;
             impostaImmagineProfiloButton = new Pulsanti(messaggioBottoneSuperioreProfilo, Frame.COLOREPRIMARIOTEMATICO);
             containerNorth.add(impostaImmagineProfiloButton);
             
-            
-            /*iniziaSeguireButton = new Pulsanti(messaggioBottoneSuperioreFollow, Frame.COLOREPRIMARIOTEMATICO);
-            iniziaSeguireButton.setVisible(false);
-            containerNorth.add(iniziaSeguireButton);*/
-
             this.add(containerCenter, BorderLayout.CENTER);
             
             //POST
@@ -93,8 +97,8 @@ package panelspackage.panels;
             ListaAreaTesto.add(areaNomeProfilo);
             ListaAreaTesto.add(areaCommento);   
             }
-            ListaAreaTesto.add(nextCommento = new  JButton("->"));
-            ListaAreaTesto.add(prevCommento = new JButton("<-"));
+            ListaAreaTesto.add(prevCommento = new JButton("Commenti precedenti"));
+            ListaAreaTesto.add(nextCommento = new  JButton("Commenti successivi"));
             
             
             SpecificContainer containerEast = new SpecificContainer();
@@ -374,10 +378,10 @@ package panelspackage.panels;
             pulsanteTerzaScelta.setText(scelta3);
             pulsanteQuartaScelta.setText(scelta4);
             
-            etichettaPrimoRisultato.setText("fes");
-            etichettaSecondoRisultato.setText("fis");
-            etichettaTerzoRisultato.setText("p3");
-            etichettaQuartoRisultato.setText("fs");
+            etichettaPrimoRisultato.setText("");
+            etichettaSecondoRisultato.setText("");
+            etichettaTerzoRisultato.setText("");
+            etichettaQuartoRisultato.setText("");
             descrizionePost.setText(descrizioneSondaggio);
             this.getAreaCommentiTesto().setText("");
 
@@ -399,8 +403,8 @@ package panelspackage.panels;
             pulsanteTerzaScelta.setText("");
             pulsanteQuartaScelta.setText("");
             
-            etichettaPrimoRisultato.setText("fes");
-            etichettaSecondoRisultato.setText("fis");
+            etichettaPrimoRisultato.setText("");
+            etichettaSecondoRisultato.setText("");
             etichettaTerzoRisultato.setText("");
             etichettaQuartoRisultato.setText("");
             descrizionePost.setText(descrizioneSondaggio);

@@ -170,9 +170,7 @@ public class Controller {
     	gestorePostSuccessivo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	//System.out.println(view.getContatorePost());
-            	//System.out.println(postSchermataHome.size());
-            	if(view.getContatorePost() <= postSchermataHome.size() - 2) {	//DA RIVEDERE
+            	if(view.getContatorePost() <= postSchermataHome.size() - 2) {
 	                view.setContatorePost(view.getContatorePost() + 1);
 	            	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
 	            	view.rimuoviPostHome();
@@ -1742,28 +1740,7 @@ public class Controller {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.setIdGruppo(g.getIdGruppo());
 		view.aggiornaMessaggiGruppo(commenti);
-		//view.getDescrizioneGroupe().setText(g.getDescrizione());
-		//messaggiInviatiGruppoConInviante = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
 	}
-	
-	
-	/*public void checkPulsantiStorie() {
-		if(storySchermataHome.size() != 0) {
-			if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)) == 1) {
-				view.getButtonPrevStory().setEnabled(false);
-				refresh();
-			} else {
-				view.getButtonPrevStory().setEnabled(true);
-				refresh();
-			}
-			if(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(7)) == (storySchermataHome.size() - 5)) {
-				view.getButtonNextStory().setEnabled(false);
-				refresh();
-			} else {
-				view.getButtonNextStory().setEnabled(true);
-				refresh();
-			}
-		}
-	}*/
+
 	
 }
