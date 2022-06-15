@@ -1227,6 +1227,7 @@ public class Controller {
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   //model.getProfiloAttivo().aggiungiLike(view.getIdPostVisualizzato());
     	   }
        };
        view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
@@ -1234,6 +1235,7 @@ public class Controller {
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
+    		   //model.getProfiloAttivo().aggiungiDislike(view.getIdPostVisualizzato());
     	   }
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
@@ -1649,11 +1651,7 @@ public class Controller {
         percorsiPostSondaggioDoppiaScelta= model.getProfiloAttivo().caricaTuttiiPostDiUnProfilo(idProfilo, TipoPost.SONDAGGIODOPPIAVOTAZIONE);
 
         String fotoProfiloPercorso = null;
-        
-        for(int i =0; i < percorsiPostTesto.size() ; i++) {
-        	System.out.println("testi :"+ percorsiPostTesto.size());
-        }
-        
+ 
         try {
     	   fotoProfiloPercorso = ((Foto)model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()))).getPercorso();
         } catch (PostNonVisibile | PostNonPresente e1) {
