@@ -31,7 +31,7 @@ public class Controller {
                            gestorePulsantePrimaScelta, gestorePulsanteSecondaScelta, gestorePulsanteTerzaScelta, gestorePulsanteQuartaScelta, gestorePostPrecedente, gestorePostSuccessivo,
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
-                           gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente,
+                           gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo,
                            gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo;
     Frame view;
@@ -1020,6 +1020,17 @@ public class Controller {
         };
         view.getPulsanteRicercaProfilo().addActionListener(gestoreProfiloCercato);
         
+        gestoreCercaGruppo = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		String nomeGruppo = view.getPulsanteRicercaGruppo().getText();
+        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(nomeGruppo));
+        		settaSchermataGruppo(g, commentiConProfiliIinvianti);
+        		mostraSchermata("ChatDiGruppoFrame");
+        	}
+        };
+        view.getPulsanteRicercaGruppo().addActionListener(gestoreCercaGruppo);
+
     }
     
     
