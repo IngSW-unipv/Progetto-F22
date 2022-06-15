@@ -77,8 +77,6 @@ public class ChatDiGruppoFrame extends JPanel {
       containerNorthCenter.add(uscitaGruppoButton = new Pulsanti("Esci dal gruppo", Frame.COLOREPRIMARIOTEMATICO));
       
       containerNorth.add(containerNorthCenter, BorderLayout.SOUTH);
-
-      containerNorth.add(new JFileChooser(), BorderLayout.SOUTH);
          
 		for(int i = getIndiceMessaggioCorrente();  i <  10; i++) {
 			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO);
