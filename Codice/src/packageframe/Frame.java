@@ -689,9 +689,10 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public Pulsanti getPulsanteRicercaChat() {
+	public Pulsanti getPulsanteRicercaGruppo() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).gruppoCercato();
 	}
+
 	
 	
 	public Pulsanti getPulsanteSegui() {
