@@ -159,7 +159,7 @@ public boolean cambiaDescrizioneGruppo(String descrizione, GruppoDB g) {
 
 	try
 	{
-		String query="update gruppo set Descrizione del gruppo=? where idGruppo=?";
+		String query="update gruppo set descrizione=? where idGruppo=?";
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, descrizione);
 		st1.setString(2, g.getIdGruppo());

@@ -1468,7 +1468,8 @@ public class Controller {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
-		}
+				model.getProfiloAttivo().modificaDescrizione(gruppoAttuale, nuovaDescrizione);
+			}
 	};
 	view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
     }
