@@ -75,7 +75,7 @@ public class Home extends JPanel {
 		SpecificContainer menuHome = new SpecificContainer();
 		containerNorth.add(menuHome, BorderLayout.NORTH);
 		
-		containerNorth.add(new Etichette("Socialnetwork", Frame.COLOREPRIMARIOTEMATICO, fontTitle), BorderLayout.CENTER);	
+		containerNorth.add(new Etichette("MASA-Gram", Frame.COLOREPRIMARIOTEMATICO, fontTitle), BorderLayout.CENTER);	
 			
 		SpecificContainer menuHomeSinistro = new SpecificContainer();
 		containerNorth.add(menuHomeSinistro, BorderLayout.WEST);

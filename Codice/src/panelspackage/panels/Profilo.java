@@ -54,18 +54,20 @@ public class  Profilo extends JPanel {
 		pannelloFoto.setPreferredSize(new Dimension(80,80));
 		containerNorthNorth.add(pannelloFoto,BorderLayout.PAGE_START);
 
-		dati.add("N.Post");
+		dati.add("Nome utente: ");
 		dati.add(Integer.toString(0));
-		dati.add("N.Follower");
+		dati.add("Numero di post: ");
 		dati.add(Integer.toString(0));
-		dati.add("N.Seguiti");
+		dati.add("Numero di follower: ");
+		dati.add(Integer.toString(0));
+		dati.add("Numero di account seguiti: ");
 		dati.add(Integer.toString(0));
 		
 		for(int i = 0; i < this.dati.size(); i++) {
 			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
 			ListaEtichette.add(etichetta);
 			
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,3,2, ListaEtichette.size());
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,4,2, ListaEtichette.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);		
 		}
 		
@@ -89,17 +91,17 @@ public class  Profilo extends JPanel {
 		ListaTesti.clear();
 			AreaDiTesto primoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaTesti.add(primoTesto);
-			containerWest.add(pulsantePrimoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(pulsantePrimoTesto = new Pulsanti("Visualizza post", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerWest.add(new JScrollPane(ListaTesti.get(0)), BorderLayout.PAGE_START);
 		
 			AreaDiTesto secondoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaTesti.add(secondoTesto);
-			containerWest.add(pulsanteSecondoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(pulsanteSecondoTesto = new Pulsanti("Visualizza post", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerWest.add(new JScrollPane(ListaTesti.get(1)), BorderLayout.PAGE_START);
 		
 			AreaDiTesto terzoTesto = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaTesti.add(terzoTesto);
-			containerWest.add(pulsanteTerzoTesto = new Pulsanti("apri", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerWest.add(pulsanteTerzoTesto = new Pulsanti("Visualizza post", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerWest.add(new JScrollPane(ListaTesti.get(2)), BorderLayout.PAGE_START);
 		
 		SpecificContainer containerEast = new SpecificContainer();
@@ -110,36 +112,34 @@ public class  Profilo extends JPanel {
 		ListaSondaggi.clear();
 			AreaDiTesto testoPrimoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggiDoppiaScelta.add(testoPrimoSondaggioDoppia);
-			containerEast.add(pulsantePrimoSondaggioDoppia = new Pulsanti("Primo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsantePrimoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(0)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoSecondoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggiDoppiaScelta.add(testoSecondoSondaggioDoppia);
-			containerEast.add(pulsanteSecondoSondaggioDoppia = new Pulsanti("Secondo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteSecondoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(1)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoTerzoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggiDoppiaScelta.add(testoTerzoSondaggioDoppia);
-			containerEast.add(pulsanteTerzoSondaggioDoppia = new Pulsanti("Terzo sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteTerzoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(2)), BorderLayout.PAGE_START);
 
 			ListaSondaggi.clear();
 			AreaDiTesto testoPrimoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoPrimoSondaggio);
-			containerEast.add(pulsantePrimoSondaggio = new Pulsanti("Primo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsantePrimoSondaggio = new Pulsanti("Visualizza sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(0)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoSecondoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoSecondoSondaggio);
-			containerEast.add(pulsanteSecondoSondaggio = new Pulsanti("Secondo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteSecondoSondaggio = new Pulsanti("Visualizza sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(1)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoTerzoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
 			ListaSondaggi.add(testoTerzoSondaggio);
-			containerEast.add(pulsanteTerzoSondaggio = new Pulsanti("Terzo sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
+			containerEast.add(pulsanteTerzoSondaggio = new Pulsanti("Visualizza sondaggio scelta multipla", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
 			containerEast.add(new JScrollPane(ListaSondaggi.get(2)), BorderLayout.PAGE_START);
-		//ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
-		//ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
 		SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
 		this.add(containerSouth, BorderLayout.SOUTH);
@@ -189,10 +189,10 @@ public class  Profilo extends JPanel {
 
 	
 	public void setSchermataDati(int nFollower, int nSeguiti, int nPost, String nickName) {
-		((JLabel) ListaEtichette.get(1)).setText(String.valueOf(nFollower));
-		((JLabel) ListaEtichette.get(3)).setText(String.valueOf(nSeguiti));
-		((JLabel) ListaEtichette.get(5)).setText(String.valueOf(nPost));
-		etichettaNome.setText(nickName);
+		((JLabel) ListaEtichette.get(1)).setText(String.valueOf(nickName));
+		((JLabel) ListaEtichette.get(3)).setText(String.valueOf(nFollower));
+		((JLabel) ListaEtichette.get(5)).setText(String.valueOf(nSeguiti));
+		((JLabel) ListaEtichette.get(7)).setText(String.valueOf(nPost));
 	}
 
 	public Pulsanti getHomeProfilo() {
@@ -203,12 +203,10 @@ public class  Profilo extends JPanel {
 		int i;
 
 		for (i = 0; i < postDelProfilo.size()/2 && i < 3 ; i++) {
-			//System.out.println("stiamo aggiungendo : " + postDelProfilo.get((i*2)+1));
-		//Icon img=new ImageIcon(postDelProfilo.get((i*2)+1));
 			int indice =(i*2)+1 + getContatoreFoto();
-			
-		ListaPost.get(i).setIcon(new ImageIcon(postDelProfilo.get(indice)));
+			ListaPost.get(i).setIcon(new ImageIcon(postDelProfilo.get(indice)));
 		}
+		
 		if (i<3) {
 			for (int j = i; j < 3; j++) {
 				Icon img2=new ImageIcon("immagini/images.png");
@@ -220,30 +218,35 @@ public class  Profilo extends JPanel {
 	
 	
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
-		if(postTestoDelProfilo.size()/2 < 3)  {
-			for (int i = 0; i < postTestoDelProfilo.size(); i++) {
-				ListaTesti.get(i).setText("");
-			}
-		} else
-		for (int i = 0; i < postTestoDelProfilo.size()/2 && i < 3 ; i++) {
-			ListaTesti.get(i).setText(postTestoDelProfilo.get((i*2) + 1 +  this.getContatoreTesto()));
+		if(postTestoDelProfilo.size() < this.getContatoreTesto()) {
+			if(postTestoDelProfilo.size()/2 < 3)  {
+				for (int i = 0; i < postTestoDelProfilo.size(); i++) {
+					ListaTesti.get(i).setText("");
+				}
+			} else
+				for (int i = 0; i < postTestoDelProfilo.size()/2 && i < 3 ; i++) {
+					ListaTesti.get(i).setText(postTestoDelProfilo.get((i*2) + 1 +  this.getContatoreTesto()));
+				}
 		}
 	}
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
-
-		if(postSondaggioDelProfilo.size()/2 < 3)  {
-			int i;
-			for ( i = 0; i < postSondaggioDelProfilo.size()/2 ; i++) {
-				ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
+		if(postSondaggioDelProfilo.size() < this.getContatoreSondaggio()) {
+			if(postSondaggioDelProfilo.size()/2 < 3)  {
+				int i;
+				for ( i = 0; i < postSondaggioDelProfilo.size()/2 ; i++) {
+					ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
+				}
+				
+				for (int j = i; j < 3; j++) {
+				ListaSondaggi.get(j).setText("");
+				}
+			} else
+				for (int i = 0; i < 3 ; i++) {
+					ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
-			for (int j = i; j < 3; j++) {
-			ListaSondaggi.get(j).setText("");
-			}
-		} else
-		for (int i = 0; i < 3 ; i++) {
-			ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 		}
 	}
+	
 	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
 
 		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
