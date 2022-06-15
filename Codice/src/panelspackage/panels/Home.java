@@ -20,11 +20,10 @@ public class Home extends JPanel {
 	private int indiceBufferStories, indiceBufferPosts;
 	private Font fontTitle, fontText, fontButton;
 	private Pulsanti postPrincipale, creaUnaChatDiGruppo, buttonPrevPost,buttonNextPost,aggiungiLike,aggiungiDislike,aggiungiCommento,buttonPrevStory,buttonNextStory,
-					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton, primaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150), secondaStoria
-							 = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150),
-					 terzaStoria= new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150)
-					 , quartaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150), 
-					 quintaStoria = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/images.jpeg", 150, 150);;
+					 buttonImpostazioni,buttonProfilo,buttonChat,pPost,pSondaggioDoppiaScelta,pSondaggioSceltaMultipla,pIdea, searchButton, primaStoria,
+					 secondaStoria,
+					 terzaStoria,
+					  quartaStoria, quintaStoria ;
 	
 	private Etichette numeroLike, numeroDislike,  numeroCommenti, etichettaRicerca;
 	private InserimentoTesto testoRicerca;
@@ -35,23 +34,17 @@ public class Home extends JPanel {
 	private ArrayList<Pulsanti> listaPulsantiStorie = new ArrayList<Pulsanti>();
 	private int indiceStorie = 0;
 	
-	public Home(ArrayList<String> bufferStories, ArrayList<String>  bufferPosts) {
+	public Home() {
 		int indiceBufferPosts = 0;
 		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
 		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
 		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
 		avvio();		
-		this.initComponents(bufferPosts, bufferStories);
+		this.initComponents();
 	}
 	
 			
-	public void avvio() {
-		listaPulsantiStorie.add(primaStoria);
-		listaPulsantiStorie.add(secondaStoria);
-		listaPulsantiStorie.add(terzaStoria);
-		listaPulsantiStorie.add(quartaStoria);
-		listaPulsantiStorie.add(quintaStoria);
-		
+	public void avvio() {	
 		
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
@@ -102,7 +95,7 @@ public class Home extends JPanel {
 	}
 	
 	
-	public void areaPost(ArrayList<String>  bufferPosts) {
+	public void areaPost() {
 		containerPost = new SpecificContainer();
 		containerCenter.add(containerPost, BorderLayout.CENTER);
 		
@@ -121,39 +114,34 @@ public class Home extends JPanel {
 		containerPost.add(containerCosePost, BorderLayout.SOUTH);		
 	}
 	
-	public void rimuoviStorieHome() {
-		containerStory.remove(primaStoria);
-		containerStory.remove(secondaStoria);
-		containerStory.remove(terzaStoria);
-		containerStory.remove(quartaStoria);
-		containerStory.remove(quintaStoria);
-	}
 	
-	
-	public void setPercorsiStorieLogin(ArrayList<String> storieDaVisualizzare) {
-		primaStoria.impostaPercorsoPost(storieDaVisualizzare.get(1));
-		secondaStoria.impostaPercorsoPost(storieDaVisualizzare.get(3));
-		terzaStoria.impostaPercorsoPost(storieDaVisualizzare.get(5));
-		quartaStoria.impostaPercorsoPost(storieDaVisualizzare.get(7));
-		quintaStoria.impostaPercorsoPost(storieDaVisualizzare.get(9));
-		containerStory.add(primaStoria);
-		containerStory.add(secondaStoria);
-		containerStory.add(terzaStoria);
-		containerStory.add(quartaStoria);
-		containerStory.add(quintaStoria);
+	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
+		boolean flag = true;
+		int i = 0;
+		System.out.println(storieDaVisualizzare.size());
+		System.out.println(this.getIndiceStorie()); 
+		while(flag) {
+			int indice =(i*2) + 1 + this.getIndiceStorie();
+			System.out.println(indice); 
+			listaPulsantiStorie.get(i).setIcon(new ImageIcon(storieDaVisualizzare.get(indice)));
+			i++;
+			System.out.println(storieDaVisualizzare.get(indice));
+			System.out.println("size " + storieDaVisualizzare.size()/2);
+			System.out.println("indice i " + i);
+			
+			if(i < storieDaVisualizzare.size()/2) {
+			} else {
+				System.out.println("else" +flag);
+
+				flag = false;
+			}
+			if(i == 5) {
+				flag  =false;
+			} 
+		}
 	}
+		
 	
-	public void aggiornaStorieHome(ArrayList<String> storieDaVisualizzare) {
-		if(indiceStorie <= storieDaVisualizzare.size() && indiceStorie > 0) {
-			this.getPrimaStoria().impostaPercorsoPost(storieDaVisualizzare.get(1 + indiceStorie));
-			this.getSecondaStoria().impostaPercorsoPost(storieDaVisualizzare.get(3 + indiceStorie));
-			this.getTerzaStoria().impostaPercorsoPost(storieDaVisualizzare.get(5 + indiceStorie));
-			this.getQuartaStoria().impostaPercorsoPost(storieDaVisualizzare.get(7 + indiceStorie));
-			this.getQuintaStoria().impostaPercorsoPost(storieDaVisualizzare.get(9 + indiceStorie));
-		} else if(indiceStorie <= 0 ){
-			indiceStorie = 0;
-		} 
-	}
 	
 	public void areaStories() {
 		SpecificContainer containerWest = new SpecificContainer();
@@ -161,15 +149,26 @@ public class Home extends JPanel {
 		SpecificContainer containerButtonStory = new SpecificContainer();
 		
 		containerWest.add(containerStory = new SpecificContainer(), BorderLayout.CENTER);
-		containerStory.setLayout(new GridLayout(5,0));
+		containerStory.setLayout(new GridLayout(5,1));
 		containerCenter.add(containerWest, BorderLayout.WEST);
 	
 		containerButtonStory.setLayout(new GridLayout(1, 2));
 		containerButtonStory.add(buttonPrevStory = new Pulsanti("<-", Frame.COLORESECONDARIOTEMATICO));
 		containerButtonStory.add(buttonNextStory = new  Pulsanti("->", Frame.COLORESECONDARIOTEMATICO));
 		containerWest.add(containerButtonStory, BorderLayout.SOUTH);
-	
-			
+		
+		
+		listaPulsantiStorie.add(primaStoria = new Pulsanti("", 150, 150));
+		listaPulsantiStorie.add(secondaStoria = new Pulsanti("", 150, 150));
+		listaPulsantiStorie.add(terzaStoria = new Pulsanti("", 150, 150));
+		listaPulsantiStorie.add(quartaStoria = new Pulsanti("", 150, 150));
+		listaPulsantiStorie.add(quintaStoria = new Pulsanti("", 150, 150));
+
+		containerStory.add(primaStoria);
+		containerStory.add(secondaStoria);
+		containerStory.add(terzaStoria);
+		containerStory.add(quartaStoria);
+		containerStory.add(quintaStoria);
 	}
 	
 		public void sezionePubblicaPost() {
@@ -187,9 +186,9 @@ public class Home extends JPanel {
 
 		}
 		
-	public void initComponents(ArrayList<String>  bufferPosts, ArrayList<String>  bufferStories) {
+	public void initComponents() {
 		menuHome();
-		areaPost(bufferPosts);
+		areaPost();
 		areaStories();
 		sezionePubblicaPost();
 	}

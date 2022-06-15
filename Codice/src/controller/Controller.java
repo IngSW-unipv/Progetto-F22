@@ -111,8 +111,6 @@ public class Controller {
                 		view.setPercorsoPost(ottieniPost(0));
                 		view.aggiornaPostHome();
                     	mostraSchermata("Home");
-                	
-                	
                 }
             }
         };
@@ -209,12 +207,16 @@ public class Controller {
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//checkPulsantiStorie();
+        		if(view.getIndiceStorie() < storySchermataHome.size()/2 ) {
         		view.setIndiceStorie(view.getIndiceStorie() + 2);
-        		refresh();
-        		view.aggiornaStorieHome(storySchermataHome);
-        		System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(9)));
-        		refresh();
+        		}
+        	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            	if(storySchermataHome.size() == 0) {
+          		System.out.println("non ci sono storie");
+        	} else {
+        		view.setPercorsiStorieLogin(storySchermataHome);
+        		//refresh();
+        		}
         	}
         	
         };
@@ -223,11 +225,16 @@ public class Controller {
         gestoreStoryPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		//checkPulsantiStorie();
+        		if(view.getIndiceStorie() > 0) {
         		view.setIndiceStorie(view.getIndiceStorie() - 2);
-        		view.aggiornaStorieHome(storySchermataHome);
-        		System.out.println(view.getIndiceStorie() + storySchermataHome.indexOf(storySchermataHome.get(1)));
-        		refresh();
+        		}
+        	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
+            	if(storySchermataHome.size() == 0) {
+          		System.out.println("non ci sono storie");
+        	} else {
+        		view.setPercorsiStorieLogin(storySchermataHome);
+        		//refresh();
+        		}
         	}
         };
         view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);

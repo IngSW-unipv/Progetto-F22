@@ -81,7 +81,7 @@ public class Frame extends JFrame {
 		SignUp signup = new SignUp();
 		mappaSchermate.put("Signup", signup);
 
-		Home home = new Home(bufferStories, bufferPosts);
+		Home home = new Home();
 		mappaSchermate.put("Home", home);
 
 		Impostazioni impostazioni = new Impostazioni();
@@ -958,18 +958,9 @@ public class Frame extends JFrame {
 	public void setIdGruppo(String idGruppo) {
 		 ((ChatDiGruppoFrame)mappaSchermate.get("ChatDiGruppoFrame")).setIdGruppo(idGruppo);	
 	}
-	
-	public void aggiornaStorieHome(ArrayList<String> storieDaVisualizzare) {
-		((Home)mappaSchermate.get("Home")).aggiornaStorieHome(storieDaVisualizzare);
-	}
-	
-	public void rimuoviStorieHome() {
-		((Home)mappaSchermate.get("Home")).rimuoviStorieHome();
-	}
-	
-	
+
 	public void setPercorsiStorieLogin(ArrayList<String> storieDaVisualizzare) {
-		((Home)mappaSchermate.get("Home")).setPercorsiStorieLogin(storieDaVisualizzare);
+		((Home)mappaSchermate.get("Home")).setPercorsiStorie(storieDaVisualizzare);
 	}
 	
 	public int getIndiceStorie() {
