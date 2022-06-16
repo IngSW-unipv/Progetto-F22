@@ -12,6 +12,7 @@ import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
+import profilo.Profilo;
 import profilo.exception.*;
 
 public class Controller {
@@ -19,9 +20,10 @@ public class Controller {
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
                            gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
-                           gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreNascondi,
+                           gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
+                           gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestoreSestaChatGruppo, gestoreSettimaChatGruppo, gestoreOttavaChatGruppo, gestoreNonaChatGruppo, 
                            gestoreDecimaChatGruppo, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
@@ -32,7 +34,7 @@ public class Controller {
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
                            gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo, gestorePartecipa, gestoreEsciGruppo,
-                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, 
+                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo,
                            gestoreNextSondaggioDoppiaScelta, gestorePrevSondaggioDoppiaScelta;
  
@@ -165,6 +167,8 @@ public class Controller {
     public void actionListenersHome() {
     	/**
     	 * ActionListener che permette di poter visualizzare una foto in centro nella schermata della Home
+    	 * @throws PostNonPresente
+    	 * @throws PostNonVisibile
     	 */
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
@@ -182,7 +186,6 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getFotoPerController());
-            	view.getNascondi().setVisible(false);
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -263,6 +266,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter visualizzare la prima storia nella Home
+         * @throws PostNonPresente
+         * @theows PostNonVisibile
          */
         gestorePrimaStoria = new ActionListener() {
         	@Override
@@ -276,7 +281,6 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
-            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -285,6 +289,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter visualizzare la seconda storia nella Home
+         * @throws PostNonVisibile
+         * @throws PostNonPresente
          */
         gestoreSecondaStoria = new ActionListener() {
         	@Override
@@ -296,7 +302,6 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
-            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -305,6 +310,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter visualizzare la terza storia nella Home
+         * @throws PostNonVisibile
+         * @throws PostNonPresente
          */
         gestoreTerzaStoria = new ActionListener() {
         	@Override
@@ -318,7 +325,6 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
-            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -327,6 +333,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter visualizzare la quarta storia nella Home
+         * @throws PostNonVisibile
+         * @throws PostNonPresente
          */
         gestoreQuartaStoria = new ActionListener() {
         	@Override
@@ -338,7 +346,6 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
-            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -347,6 +354,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter visualizzare la quinta storia nella Home
+         * @throws PostNonVisibile
+         * @throws PostNonPresente
          */
         gestoreQuintaStoria = new ActionListener() {
         	@Override
@@ -358,7 +367,6 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
-            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -397,7 +405,6 @@ public class Controller {
                 refresh();
                 view.getPulsanteSegui().setVisible(false);
                 view.getApriChat().setVisible(false);
-                model.setProfiloCercato(model.getProfiloAttivo());
                 mostraSchermata("Profilo");
             }
         };
@@ -439,6 +446,7 @@ public class Controller {
     public void actionListenersImpostazioni() {
     	/**
     	 * ActionListener che permette di eseguire il logout e tornare alla schermata del login
+    	 * @throws AccountDoesNotExist
     	 */
     	gestoreLogOut = new ActionListener() {
 	        @Override
@@ -449,9 +457,6 @@ public class Controller {
 	            	e1.printStackTrace();
 	            }
 	            view.getContainerCenterFrame().setVisible(false);
-		        view.getInserimentoMail().setText("");
-		        view.getInserimentoPassword().setText("");
-
 	            mostraSchermata("Login");
 	        }
     	};
@@ -539,6 +544,8 @@ public class Controller {
 
         /**
          * ActionListener che permette di seguire il profilo cercato
+         * @throws AccountDoesNotExist
+         * @throws AzioneNonConsentita
          */
         gestorePulsanteSegui = new ActionListener() {
             @Override
@@ -556,6 +563,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di visualizzare la foto del profilo
+         * @throws PostNonPresente
+         * @throws PostNonVisibile
          */
         gestoreFotoProfilo = new ActionListener() {
             @Override
@@ -578,8 +587,6 @@ public class Controller {
 	            	}
 		            visualizzaPostFoto(model.getProfiloAttivo().getFotoProfiloPerController());
 		            mostraSchermata("Postvisualizzato");
-	            	view.getNascondi().setVisible(model.getProfiloCercato().getIdProfilo().equals(model.getProfiloAttivo().getIdProfilo()));
-		            
 		            refresh();         
 		        }
 	        }
@@ -948,6 +955,8 @@ public class Controller {
         
         /**
          * ActionListener che permette di poter cercare un profilo dalla barra di ricerca e di entrare nella sua pagina del profilo selezionato
+         * @throws PostNonVisibile
+         * @throws PostNonPresente
          */
         gestoreProfiloCercato = new ActionListener() {
             @Override
@@ -1214,17 +1223,6 @@ public class Controller {
      */
     public void actionListenersPostVisualizzato() {
     	/**
-    	 * ActionListener che permette rendere un post non piu visualizzabile da altri utenti
-    	 */
-    	gestoreNascondi = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	model.getProfiloAttivo().modificaVisibilita(view.getIdPostVisualizzato(), tipoPostAttuale ,false);
-            }
-        };
-        view.getNascondi().addActionListener(gestoreNascondi);
-
-    	/**
     	 * ActionListener che permette di tornare alla home della schermata di visualizzazione dei post
     	 */
         gestoreHomePostVisualizzato = new ActionListener() {
@@ -1263,6 +1261,7 @@ public class Controller {
        
        /**
         * ActionListener che permette di aggiungere un like a un post
+        * @throws AzioneNonConsentita
         */
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
@@ -1278,6 +1277,7 @@ public class Controller {
        
        /**
         * ActionListener che permette di aggiungere un dislike a un post
+        * @throws AzioneNonConsentita
         */
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
@@ -1318,6 +1318,8 @@ public class Controller {
        
        /**
         * ActionListener che permette di selezionare la prima scelta di un sondaggio
+        * @throws AzioneNonConsentita
+        * @throws TastoNonEsistente
         */
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
@@ -1335,6 +1337,8 @@ public class Controller {
        
        /**
         * ActionListener che permette di selezionare la seconda scelta di un sondaggio
+        * @throws AzioneNonConsentita
+        * @throws TastoNonEsistente
         */
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
@@ -1350,6 +1354,8 @@ public class Controller {
        
        /**
         * ActionListener che permette di selezionare la terza scelta di un sondaggio
+        * @throws AzioneNonConsentita
+        * @throws TastoNonEsistente
         */
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
@@ -1366,6 +1372,8 @@ public class Controller {
        
        /**
         * ActionListener che permette di selezionare la quarta scelta di un sondaggio
+        * @throws AzioneNonConsentita
+        * @throws TastoNonEsistente
         */
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
@@ -1447,6 +1455,7 @@ public class Controller {
     public void actionListenerCreaChatDiGruppo(){
     	/**
     	 * ActionListener che permette di creare un gruppo
+    	 * @throws AccountDoesNotExist
     	 */
     	gestoreCreaChatDiGruppo = new ActionListener() {
     		@Override
@@ -1614,7 +1623,7 @@ public class Controller {
      * @throws AccountGiaEsistente
      * @throws ChangeDefaultPassword
      * @throws AccountDoesNotExist
-     * @return true se il signUp ï¿½ riuscito
+     * @return true se il signUp è riuscito
      */
     public boolean signUp() {
         String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
@@ -1640,21 +1649,22 @@ public class Controller {
      * @throws PswOmailErrati
      * @throws ChangeDefaultPassword
      * @throws AccountDoesNotExist
-     * @return true se il login ï¿½ riuscito
+     * @return true se il login è riuscito
      */
     public boolean login() {        
-		try {
-		model.login(view.emailInserita(), view.passwordInserita());
-		} catch (ChangeDefaultPassword errore1) {
-		} catch (AccountDoesNotExist errore2) {
-		mostraFallimentoLogin("Questo account non esiste");
-		return false;
-		} catch (PswOmailErrati errore3) {
-		mostraFallimentoLogin("hai inserito le credenziali sbagliate");
-		return false;
-		}   
-		return true;
-		}
+        try {
+            model.login(view.emailInserita(), view.passwordInserita());
+        } catch (ChangeDefaultPassword errore1) {
+            //mostraFallimentoLogin(errore1.toString());
+        } catch (AccountDoesNotExist errore2) {
+            mostraFallimentoLogin(errore2.toString());
+            return false;
+        } catch (PswOmailErrati errore3) {
+            mostraFallimentoLogin(errore3.toString());
+            return false;
+        }   
+        return true;
+    }
     
     /**
      * metodo che nasconde la schermata attuale
@@ -1777,6 +1787,7 @@ public class Controller {
     }
     /**
      * metodo che permette di poter aggiungere i commenti al post di un profilo
+     * @throws PostNonVisibile
      */
     public void aggiungiCommento() {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
@@ -1809,6 +1820,8 @@ public class Controller {
     
     /**
      * metodo che permette di aggiornare la schermata del profilo attivo con i parametri passati
+     * @throws PostNonVisibile
+     * @throws PostNonPresente
      */
     public void aggiornaSchermataProfiloAttivo() {
     	String descrizione = model.getProfiloAttivo().getDescrizione();;
@@ -1866,6 +1879,7 @@ public class Controller {
     /**
      * permette di poter visualizzare un post con tutte le sue descrizioni
      * @param f
+     * @throws PostNonVisibile
      */
     public void visualizzaPostFoto(Foto f) {
     	  
@@ -1916,7 +1930,9 @@ public class Controller {
 	/**
 	 * permette di ottenere il percorso di un post
 	 * @param indicePost
-	 * @return
+	 * @throws PostNonPresente
+	 * @throws PostNonVisibile
+	 * @return percorsoPost
 	 */
 	public String ottieniPost(int indicePost) {
 		String percorsoPost = "";
@@ -1979,6 +1995,8 @@ public class Controller {
 	 * permette di aggiungere un partecipante a un gruppo
 	 * @param idGruppo
 	 * @param utente
+	 * @throws GruppoGiaPieno
+	 * @throws ProfiloGiaInserito
 	 */
 	public void aggiungiPartecipante(String idGruppo, String utente) {
 		try {
@@ -2001,7 +2019,7 @@ public class Controller {
 	/**
 	 * permette di poter visualizzare un testo e i commenti sotto di esso
 	 * @param indicePostTesto
-	 * @throws printStackTrace
+	 * @throws PostNonVisibile
 	 * @throws PostNonPresente
 	 */
 	public void visualizzaPostTesto(int indicePostTesto) {
@@ -2028,14 +2046,13 @@ public class Controller {
     							 commentiConProfiliIinvianti.size(), 
     							 commentiConProfiliIinvianti);
         mostraSchermata("Postvisualizzato");
-        view.getNascondi().setVisible(false);
         refresh();
 	}
 	
 	/**
 	 * permette di poter visualizzare una foto e i commenti sotto di esso
 	 * @param indicePostTesto
-	 * @throws printStackTrace
+	 * @throws PostNonVisibile
 	 * @throws PostNonPresente
 	 */
 	public void visualizzaPostFoto(int indicePostFoto) {
@@ -2065,14 +2082,13 @@ public class Controller {
     							 commentiConProfiliIinvianti.size(), 
     							 commentiConProfiliIinvianti);
         mostraSchermata("Postvisualizzato");
-    	view.getNascondi().setVisible(model.getProfiloCercato().getIdProfilo().equals(model.getProfiloAttivo().getIdProfilo()));
         refresh(); 
 	}
 	
 	/**
 	 * permette di poter visualizzare un sondaggio a scelta multipla e i commenti sotto di esso
 	 * @param indicePostTesto
-	 * @throws printStackTrace
+	 * @throws PostNonVisibile
 	 * @throws PostNonPresente
 	 */
 	public void visualizzaPostSondaggioSceltaMultipla(int indicePostSondaggio) {
@@ -2104,14 +2120,13 @@ public class Controller {
         
         view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         refresh();
-        view.getNascondi().setVisible(false);
 		mostraSchermata("Postvisualizzato");
 	}
 	
 	/**
 	 * permette di poter visualizzare un sondaggio a doppia scelta e i commenti sotto di esso
 	 * @param indicePostTesto
-	 * @throws printStackTrace
+	 * @throws PostNonVisibile
 	 * @throws PostNonPresente
 	 */
 	public void visualizzaPostSondaggioDoppiaScelta(int indicePostSondaggio) {
@@ -2138,7 +2153,6 @@ public class Controller {
 													0, 
 													conteggi,
 													commentiConProfiliIinvianti);
-        view.getNascondi().setVisible(false);
 		mostraSchermata("Postvisualizzato");
 		refresh();
 	}
