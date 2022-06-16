@@ -503,7 +503,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -535,7 +535,7 @@ public class Controller {
 				} 
             	try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -568,7 +568,7 @@ public class Controller {
 				}
             	try {
                 	tipoPostAttuale = TipoPost.TESTO;
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -605,7 +605,7 @@ public class Controller {
 				}
             	try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -640,7 +640,7 @@ public class Controller {
     				}
                 	try {
 
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
+    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
@@ -676,7 +676,7 @@ public class Controller {
     				}
                 	try {
 
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
+    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
@@ -706,7 +706,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -740,8 +740,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -777,7 +776,7 @@ public class Controller {
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -811,7 +810,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
         		try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -844,7 +843,7 @@ public class Controller {
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -877,7 +876,7 @@ public class Controller {
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1711,7 +1710,7 @@ public class Controller {
     }
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
-    	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost);
+    	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost, tipoPostAttuale);
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     
@@ -1763,7 +1762,7 @@ public class Controller {
     public void visualizzaPostFoto(Foto f) {
     	  
       		try {
-				commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+				commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost(), tipoPostAttuale);
 			} catch (PostNonVisibile e1) {
 				e1.printStackTrace();
 			}

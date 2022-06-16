@@ -367,9 +367,9 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public Etichette getEtichettaNome() {
+	/*public Etichette getEtichettaNome() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
-	}
+	}*/
 	
 	
 	public JButton getPulsanteFotoProfilo() {
