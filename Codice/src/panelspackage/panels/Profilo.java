@@ -201,6 +201,15 @@ public class  Profilo extends JPanel {
 
 	public void setPostProfilo(ArrayList<String> postDelProfilo) {
 		int i;
+		
+
+		if (contatoreFoto <= 0) {
+			contatoreFoto = 0;
+    	}
+
+    	if (contatoreFoto > postDelProfilo.size() - 6) {
+    		contatoreFoto = postDelProfilo.size() - 6;
+    	}
 
 		for (i = 0; i < postDelProfilo.size()/2 && i < 3 ; i++) {
 			int indice =(i*2)+1 + getContatoreFoto();
@@ -220,8 +229,12 @@ public class  Profilo extends JPanel {
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
 
 		int i;
-		if (this.contatoreTesto < 0) {
+		if (contatoreTesto <= 0) {
 			contatoreTesto = 0;
+    	}
+
+    	if (contatoreTesto > postTestoDelProfilo.size() - 6) {
+    		contatoreTesto = postTestoDelProfilo.size() - 6;
     	}
     	if (this.contatoreTesto > postTestoDelProfilo.size()/2 -2) {
     		contatoreTesto = postTestoDelProfilo.size()/2 - 2;
@@ -239,7 +252,13 @@ public class  Profilo extends JPanel {
 			}
 	}
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
-		if(postSondaggioDelProfilo.size() < this.getContatoreSondaggio()) {
+		if (contatoreSondaggio <= 0) {
+			contatoreSondaggio = 0;
+    	}
+
+    	if (contatoreSondaggio > postSondaggioDelProfilo.size() - 6) {
+    		contatoreSondaggio = postSondaggioDelProfilo.size() - 6;
+    	}
 			if(postSondaggioDelProfilo.size()/2 < 3)  {
 				int i;
 				for ( i = 0; i < postSondaggioDelProfilo.size()/2 ; i++) {
@@ -252,7 +271,6 @@ public class  Profilo extends JPanel {
 			} else
 				for (int i = 0; i < 3 ; i++) {
 					ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
-			}
 		}
 	}
 	
