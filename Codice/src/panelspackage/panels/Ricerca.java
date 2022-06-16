@@ -1,17 +1,12 @@
 package panelspackage.panels;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import packageframe.Frame;
 import panelspackage.panels.elements.Pulsanti;
-import panelspackage.panels.elements.AreaDiTesto;
-import panelspackage.panels.elements.Box;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
@@ -21,16 +16,13 @@ public class Ricerca extends JPanel {
 	private ArrayList<String> risultatiRicerca = new  ArrayList<String>();
 	private SpecificContainer containerCenter = new SpecificContainer();
 	private SpecificContainer containerWest = new SpecificContainer();
-
 	private JButton homeRicerca;
 	private Pulsanti profiloCercato, gruppoCercato;
 	private Etichette etichetta = new Etichette("Hai cercato " + stringCercata, Frame.COLOREPRIMARIOTEMATICO);
-	
 	int i;
 
 	
 	public Ricerca() {
-		
 		avvio();
 		initComponents();
 	}
@@ -75,7 +67,6 @@ public class Ricerca extends JPanel {
 	}
 	
 	public void impostaRisultatiRicerca(String ricerca) {
-
 			profiloCercato.setText(ricerca);
 			gruppoCercato.setText(ricerca);
 	}
