@@ -16,9 +16,10 @@ import profilo.Profilo;
 import profilo.exception.*;
 
 public class Controller {
+	
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
                            gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
-                           gestoreHomeChat, gestoreHomePannelloNotifiche, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
+                           gestoreHomeChat, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
@@ -36,7 +37,9 @@ public class Controller {
                            gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo,
                            gestoreNextSondaggioDoppiaScelta, gestorePrevSondaggioDoppiaScelta;
+ 
     Frame view;
+    
     Sistema model;
     
     private String schermataAttuale = "Login";
@@ -59,12 +62,18 @@ public class Controller {
     private ArrayList<String> listaGruppi = new ArrayList<String>();
     private TipoPost tipoPostAttuale;
     ArrayList<String> messaggi = new ArrayList<String>();
-    
+    /**
+     * dichiaro il costruttore del controller passandogli Frame e modello
+     * @param s
+     * @param f
+     */
 	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
     }
-    
+    /**
+     * metodo per l'inizializzazione dei componenti
+     */
     public void initComponents() {
         
         actionListenersLogin();
@@ -75,26 +84,18 @@ public class Controller {
         actionListenersCreazionePost();
         actionListenersRicerca();
         actionListenersChat();
-        actionListenersNotifiche();
         actionListenersPostVisualizzato();
         actionListenersAreaChatFrame();
         actionListenerCreaChatDiGruppo();
         actionListenerChatDiGruppoFrame();
     }
-
-    
-    public void actionListenersNotifiche() {
-        
-        gestoreHomePannelloNotifiche = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mostraSchermata("Home");
-            }
-        };
-        view.getHomePannelloNotificheButton().addActionListener(gestoreHomePannelloNotifiche);
-    }
-    
+    /**
+     * metodo che implementa gli ActionListener alla schermata Login
+     */
     public void actionListenersLogin() {
+    	/**
+    	 * ActionListener che permette di effettuare il login tramite pulsante login
+    	 */
         gestoreLogin = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -122,7 +123,9 @@ public class Controller {
             }
         };
         view.getLoginButton().addActionListener(gestoreLogin);
-            
+        /**
+         * actionListener che permette di andare dall schermata del login alla schermata del signup 
+         */
         gestoreSignUp = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -131,8 +134,13 @@ public class Controller {
         };
         view.getSignUpButton().addActionListener(gestoreSignUp);
     }
-    
+    /**
+     * metodo che permette di eseguire gli ActionListener alla schermata SingUp
+     */
     public void actionListenersSignUp() {
+    	/**
+    	 * ActionListener che permette di tornare alla schermata Home dalla schermata Singup
+    	 */
         gestoreRegistrati = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -142,7 +150,9 @@ public class Controller {
             }
         };
         view.getRegistratiButton().addActionListener(gestoreRegistrati);
-        
+        /**
+         * ActionListener che permette di tornare alla schermata Login dalla schermata Singup
+         */
         gestoreIndietroSignup = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,9 +162,13 @@ public class Controller {
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
     }
     
-    
+    /**
+     * metodo che implementa gli ActionListener nella schermata Home
+     */
     public void actionListenersHome() {
-
+    	/**
+    	 * ActionListener che permette di poter visualizzare una foto in centro nella schermata della Home
+    	 */
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -178,8 +192,9 @@ public class Controller {
         };
         view.getPostPrincipale().addActionListener(gestorePulsanteFotoHome);
         
-        
-        
+        /**
+         * ActionListener che permette di scorrere in avanti tra i vari post nella Home
+         */
     	gestorePostSuccessivo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -195,6 +210,9 @@ public class Controller {
         };
         view.getButtonNextPost().addActionListener(gestorePostSuccessivo);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra i vari post nella Home
+         */
         gestorePostPrecedente = new ActionListener() {
             @Override
              public void actionPerformed(ActionEvent e) {
@@ -210,7 +228,9 @@ public class Controller {
         };
         view.getButtonPrevPost().addActionListener(gestorePostPrecedente); 
         
-    	
+    	/**
+    	 * ActionListener che permette di poter scorrere in avanti tra le varie stories
+    	 */
         gestoreStorySuccessiva = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -226,6 +246,9 @@ public class Controller {
         };
         view.getButtonNextStory().addActionListener(gestoreStorySuccessiva);
         
+        /**
+    	 * ActionListener che permette di poter scorrere indietro tra le varie stories
+    	 */
         gestoreStoryPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -240,6 +263,9 @@ public class Controller {
         };
         view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);
         
+        /**
+         * ActionListener che permette di poter visualizzare la prima storia nella Home
+         */
         gestorePrimaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -258,6 +284,9 @@ public class Controller {
         };
         view.getPrimaStoriaButton().addActionListener(gestorePrimaStoria);
         
+        /**
+         * ActionListener che permette di poter visualizzare la seconda storia nella Home
+         */
         gestoreSecondaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -274,6 +303,9 @@ public class Controller {
         };
         view.getSecondaStoriaButton().addActionListener(gestoreSecondaStoria);
         
+        /**
+         * ActionListener che permette di poter visualizzare la terza storia nella Home
+         */
         gestoreTerzaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -292,6 +324,9 @@ public class Controller {
         };
         view.getTerzaStoriaButton().addActionListener(gestoreTerzaStoria);
         
+        /**
+         * ActionListener che permette di poter visualizzare la quarta storia nella Home
+         */
         gestoreQuartaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -308,6 +343,9 @@ public class Controller {
         };
         view.getQuartaStoriaButton().addActionListener(gestoreQuartaStoria);
         
+        /**
+         * ActionListener che permette di poter visualizzare la quinta storia nella Home
+         */
         gestoreQuintaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -324,6 +362,9 @@ public class Controller {
         };
         view.getQuintaStoriaButton().addActionListener(gestoreQuintaStoria);
         
+        /**
+         * ActionListener che permette di poter andare nella schermata delle impostazioni
+         */
         gestoreImpostazioni = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -331,7 +372,10 @@ public class Controller {
         	}
         };
         view.getImpostazioniButton().addActionListener(gestoreImpostazioni);
-                
+            
+        /**
+         * ActionListener che permette di creare una chat di gruppo dalla home
+         */
         gestoreCreaUnaChatDiGruppoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -339,7 +383,9 @@ public class Controller {
             }
         };
         view.getCreaUnaChatDiGruppo().addActionListener(gestoreCreaUnaChatDiGruppoHome);
-                
+        /**
+         * ActionListener che permette di visualizzare la propria pagina profilo        
+         */
         gestoreProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -353,7 +399,9 @@ public class Controller {
         };
         view.getProfiloButton().addActionListener(gestoreProfilo);
                 
-                
+        /**
+         * ActionListener che permette di visualizzare la schermata delle chat del profilo      
+         */        
         gestoreChat = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -364,7 +412,9 @@ public class Controller {
         };
         view.getChatButton().addActionListener(gestoreChat);
                 
-                
+        /**
+         * ActionListener che permette di poter cercare un profilo tramite barra di ricerca
+         */
         gestoreCerca = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -379,8 +429,13 @@ public class Controller {
         view.getCercaButton().addActionListener(gestoreCerca);
     }
     
-    
+    /**
+     * metodo che implementa i vari ActionListener della schermata impostazioni
+     */
     public void actionListenersImpostazioni() {
+    	/**
+    	 * ActionListener che permette di eseguire il logout e tornare alla schermata del login
+    	 */
     	gestoreLogOut = new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -395,6 +450,9 @@ public class Controller {
     	};
 	    view.getLogOutButton().addActionListener(gestoreLogOut);
 	    
+	    /**
+	     * ActionListener che permette di tornare alla schermata Home
+	     */
 	    gestoreHomeImpostazioni = new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -404,6 +462,9 @@ public class Controller {
 	    };
 	    view.getHomeImpostazioniButton().addActionListener(gestoreHomeImpostazioni);
 	    
+	    /**
+	     * ActionListener che permette di poter modificare la descrizione del profilo
+	     */
 	    gestoreModificaProfilo = new ActionListener() {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
@@ -413,14 +474,9 @@ public class Controller {
 	    };
 	    view.getModificaProfiloButton().addActionListener(gestoreModificaProfilo);
 	    
-	    gestoreEliminaAccount = new ActionListener() {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            view.getContainerCenterFrame().setVisible(false);
-	        }
-	    };
-	    view.getEliminaAccountButton().addActionListener(gestoreEliminaAccount);
-        
+        /**
+         * ActionListener che permette di poter salvare le modifiche alla descrizione del profilo se eseguita
+         */
 	    gestoreSalvaLeModifiche = new ActionListener() {
 	    	@Override
 	    	public void actionPerformed(ActionEvent e) {
@@ -429,6 +485,9 @@ public class Controller {
 	    };
 	    view.getSalvaModificheButton().addActionListener(gestoreSalvaLeModifiche);
 	    
+	    /**
+	     * ActionListener che permette di eliminare il proprio profilo
+	     */
 	    gestoreRimuoviAccount = new ActionListener() {
 	    	@Override
 	    	public void actionPerformed(ActionEvent e) {
@@ -439,7 +498,13 @@ public class Controller {
 	    view.getEliminaAccountButton().addActionListener(gestoreRimuoviAccount);
     }
     
+    /**
+     * metodo che implementa gli ActionListener del profilo
+     */
     public void actionListenersProfilo() {
+    	/**
+    	 * ActionListener che permette di tornare alla Home
+    	 */
         gestoreHomeProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -450,6 +515,9 @@ public class Controller {
         };
         view.getHomeProfiloButton().addActionListener(gestoreHomeProfilo);
         
+        /**
+         * ActionListener che permette di aprire una chat privata con il profilo cercato
+         */
         gestoreApriChat = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -462,6 +530,9 @@ public class Controller {
         };
         view.getApriChat().addActionListener(gestoreApriChat);
 
+        /**
+         * ActionListener che permette di seguire il profilo cercato
+         */
         gestorePulsanteSegui = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -476,6 +547,9 @@ public class Controller {
         };
         view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
         
+        /**
+         * ActionListener che permette di visualizzare la foto del profilo
+         */
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -503,436 +577,140 @@ public class Controller {
         };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
         
+        /**
+         * ActionListener che permette di visualizzare il primo testo visibile del profilo
+         */
         gestorePulsantePrimoTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              /*  try {
-                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(0 + view.getContatoreTesto()))));
-					
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				} catch (PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-            	try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	tipoPostAttuale = TipoPost.TESTO;
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-            	view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(),
-            							 null, 
-            							 model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
-            							 model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
-            							 model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
-            							 commentiConProfiliIinvianti.size(), 
-            							 commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();*/
             	visualizzaPostTesto(0 + view.getContatoreTesto());
             }
         };
         view.getPulsantePrimoTesto().addActionListener(gestorePulsantePrimoTesto);
         
+        /**
+         * ActionListener che permette di visualizzare il secondo testo visibile del profilo
+         */
         gestorePulsanteSecondoTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	/*settaPostVisualizzato(false);
-                try {
-                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(2+ view.getContatoreTesto()))));
-					
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				} catch (PostNonPresente e1) {
-				} 
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	tipoPostAttuale = TipoPost.TESTO;
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), 
-                						 null, 
-                						 model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
-                						 model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
-                						 model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
-                						 commentiConProfiliIinvianti.size(), 
-                						 commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();*/
             	visualizzaPostTesto(2+ view.getContatoreTesto());
             }
         };
         view.getPulsanteSecondoTesto().addActionListener(gestorePulsanteSecondoTesto);
         
+        /**
+         * ActionListener che permette di visualizzare il terzo testo visibile del profilo
+         */
         gestorePulsanteTerzoTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	/*settaPostVisualizzato(false);
-                try {
-                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(4 + view.getContatoreTesto()))));
-					
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				} catch (PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-            	try {
-                	tipoPostAttuale = TipoPost.TESTO;
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(),
-                					     null, 
-                					     model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
-                					     model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
-                					     model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
-                					     commentiConProfiliIinvianti.size(), 
-                					     commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();*/
             	visualizzaPostTesto(4 + view.getContatoreTesto());
             }
         };
-        view.getPulsanteTerzoTesto().addActionListener(gestorePulsanteTerzoTesto);
-        
-        
-        
-        
+        view.getPulsanteTerzoTesto().addActionListener(gestorePulsanteTerzoTesto);     
+        /**
+         * ActionListener che permette di visualizzare la prima foto visibile del profilo
+         */
         gestorePost1 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-                /*settaPostVisualizzato(false);
-                try {
-					try {
-						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + view.getContatoreFoto()))));
-					} catch (PostNonPresente e1) {
-						e1.printStackTrace();
-					}
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	tipoPostAttuale = TipoPost.FOTO;
-
-            	try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-            	view.getImpostaImmagineProfiloButton().setVisible(true);
-            	view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
-            							 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
-            							 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(), 
-            							 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
-            							 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
-            							 commentiConProfiliIinvianti.size(), 
-            							 commentiConProfiliIinvianti);
-                mostraSchermata("Postvisualizzato");
-                refresh();*/
-        		visualizzaPostFoto(0 + view.getContatoreFoto());
+                visualizzaPostFoto(0 + view.getContatoreFoto());
         	}
         };
         view.getPost1().addActionListener(gestorePost1);
         
+        /**
+         * ActionListener che permette di visualizzare la seconda foto visibile del profilo
+         */
         gestorePost2 = new ActionListener() {
         	@Override
-        		public void actionPerformed(ActionEvent e) {
-                    /*settaPostVisualizzato(false);                    
-                    try {
-    					try {
-    						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + view.getContatoreFoto()))));
-						} catch (PostNonPresente e1) {
-							e1.printStackTrace();
-						}
-    				} catch (PostNonVisibile e1) {
-    					e1.printStackTrace();
-    				}
-                	tipoPostAttuale = TipoPost.FOTO;
-
-                	try {
-
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
-    				} catch (PostNonVisibile e1) {
-    					e1.printStackTrace();
-    				}
-          
-                	view.getImpostaImmagineProfiloButton().setVisible(true);
-                    view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
-                    						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
-                    						 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(),
-                    						 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
-                    						 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
-                    						 commentiConProfiliIinvianti.size(), 
-                    						 commentiConProfiliIinvianti);
-                    mostraSchermata("Postvisualizzato");
-                    refresh();*/
-        		visualizzaPostFoto(2 + view.getContatoreFoto());
+        	public void actionPerformed(ActionEvent e) {
+               	visualizzaPostFoto(2 + view.getContatoreFoto());
         	}
         };
         view.getPost2().addActionListener(gestorePost2);
         
-        
+        /**
+         * ActionListener che permette di visualizzare la terza foto visibile del profilo
+         */
         gestorePost3 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-                    /*settaPostVisualizzato(false);
-                    try {
-    					try {
-    						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + view.getContatoreFoto()))));
-						} catch (PostNonPresente e1) {
-							e1.printStackTrace();
-						}
-    				} catch (PostNonVisibile e1) {
-    					e1.printStackTrace();
-    				}
-                	tipoPostAttuale = TipoPost.FOTO;
-
-                	try {
-
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
-    				} catch (PostNonVisibile e1) {
-    					e1.printStackTrace();
-    				}
-                	
-                	view.getImpostaImmagineProfiloButton().setVisible(true);
-                    view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(),
-                    						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(),
-                    						 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(),
-                    						 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
-                    						 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
-                    						 commentiConProfiliIinvianti.size(), 
-                    						 commentiConProfiliIinvianti);
-                    mostraSchermata("Postvisualizzato");
-                    refresh();*/
-        		visualizzaPostFoto(4 + view.getContatoreFoto());
+                    visualizzaPostFoto(4 + view.getContatoreFoto());
         	}
         };
         view.getPost3().addActionListener(gestorePost3);
         
-        
+        /**
+         * ActionListener che permette di visualizzare il primo sondaggio a scelta multipla visibile del profilo
+         */
         gestoreSondaggio1 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-        			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(0), null, false, null, null, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-
-        		try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(),
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
-        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
-        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
-        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
-        									    0, 
-        									    conteggi, 
-        									    commentiConProfiliIinvianti);
-                refresh();
-                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioSceltaMultipla(0);
         	}
         };
         view.getPulsantePrimoSondaggio().addActionListener(gestoreSondaggio1);
         
+        /**
+         * ActionListener che permette di visualizzare il secondo sondaggio a scelta multipla visibile del profilo
+         */
         gestoreSondaggio2 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-        			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(2), null, false, null, null, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-
-        		try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
-        									    0, 
-        									    conteggi, 
-        									    commentiConProfiliIinvianti);
-                refresh();
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioSceltaMultipla(2);
         	}
         };
         view.getPulsanteSecondoSondaggio().addActionListener(gestoreSondaggio2);
         
+        /**
+         * ActionListener che permette di visualizzare il terzo sondaggio a scelta multipla visibile del profilo
+         */
         gestoreSondaggio3 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-					model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(4), null, false, null, null, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-
-        		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(),
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
-        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
-        										0, 
-        										conteggi,
-        										commentiConProfiliIinvianti);
-                refresh();
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioSceltaMultipla(4);
         	}
         };
         view.getPulsanteTerzoSondaggio().addActionListener(gestoreSondaggio3);
         
+        /**
+         * ActionListener che permette di visualizzare il primo sondaggio a doppia scelta visibile del profilo
+         */
         gestoreSondaggioDoppiaScelta1 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(0), null, false, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-        		try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-        		view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(),
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(),
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(),
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(),
-        													0, 
-        													conteggi,
-        													commentiConProfiliIinvianti);
-                refresh();
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioDoppiaScelta(0);
         	}
         };
         view.getPulsantePrimoSondaggioDoppia().addActionListener(gestoreSondaggioDoppiaScelta1);
         
+        /**
+         * ActionListener che permette di visualizzare il secondo sondaggio a doppia scelta visibile del profilo
+         */
         gestoreSondaggioDoppiaScelta2 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(2), null, false, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-
-        		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(), 
-        													0, 
-        													conteggi, 
-        													commentiConProfiliIinvianti);
-                refresh();
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioDoppiaScelta(2);
         	}
         };
         view.getPulsanteSecondoSondaggioDoppia().addActionListener(gestoreSondaggioDoppiaScelta2);
         
+        /**
+         * ActionListener che permette di visualizzare il terzo sondaggio a doppia scelta visibile del profilo
+         */
         gestoreSondaggioDoppiaScelta3 = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		/*try {
-        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(4), null, false, null, null, null)));
-        		} catch (PostNonVisibile | PostNonPresente e1) {
-					e1.printStackTrace();
-				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
-
-        		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
-				} catch (PostNonVisibile e1) {
-					e1.printStackTrace();
-				}
-        		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
-
-            	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(),
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(),
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(), 
-        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(),
-        													0, 
-        													conteggi, 
-        													commentiConProfiliIinvianti);
-                refresh();
-        		mostraSchermata("Postvisualizzato");*/
         		visualizzaPostSondaggioDoppiaScelta(4);
         	}
         };
-        view.getPulsanteTerzoSondaggioDoppia().addActionListener(gestoreSondaggioDoppiaScelta3);
+        view.getPulsanteTerzoSondaggioDoppia().addActionListener(gestoreSondaggioDoppiaScelta3);      
         
-
-        
-
+        /**
+         * ActionListener che permette di scorrere in avanti tra le foto del profilo
+         */
         gestoreNextFoto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -942,6 +720,9 @@ public class Controller {
         };
         view.getNextFoto().addActionListener(gestoreNextFoto);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra le foto del profilo
+         */
         gestorePrevFoto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -951,6 +732,9 @@ public class Controller {
         };
         view.getPrevFoto().addActionListener(gestorePrevFoto);
         
+        /**
+         * ActionListener che permette di scorrere in avanti tra i testi del profilo
+         */
         gestoreNextTesto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -960,6 +744,9 @@ public class Controller {
         };
         view.getNextTesto().addActionListener(gestoreNextTesto);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra i testi del profilo
+         */
         gestorePrevTesto = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -969,6 +756,9 @@ public class Controller {
         };
         view.getPrevTesto().addActionListener(gestorePrevTesto);
         
+        /**
+         * ActionListener che permette di scorrere in avanti tra i sondaggi a scelta multipla del profilo
+         */
         gestoreNextSondaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -979,6 +769,9 @@ public class Controller {
         };
         view.getNextSondaggio().addActionListener(gestoreNextSondaggio);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra i sondaggi a scelta multipla del profilo
+         */
         gestorePrevSondaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -989,6 +782,9 @@ public class Controller {
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
         
+        /**
+         * ActionListener che permette di scorrere in avanti tra i sondaggi a doppia scelta del profilo
+         */
         gestoreNextSondaggioDoppiaScelta = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1001,6 +797,9 @@ public class Controller {
         };
         view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra i sondaggi a doppia scelta del profilo
+         */
         gestorePrevSondaggioDoppiaScelta = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1013,15 +812,19 @@ public class Controller {
         };
         view.getPrevSondaggioDoppiaScelta().addActionListener(gestorePrevSondaggioDoppiaScelta);
     }
-    
-   
 
+    /**
+     * metodo che implementa gli ActionListener per la schermata di creazione dei post
+     */
     public void actionListenersCreazionePost() {
+    	/**
+    	 * ActionListener che permette di poter creare una foto
+    	 */
         gestoreCreazionePostFoto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
             	setPostAttuale(0);
-            	view.getFileChooser().setVisible(true);
+            	view.getFileChooser().setVisible(true);   
             	view.getPrimaScelta().setVisible(false);
             	view.getSecondaScelta().setVisible(false);
             	view.getTerzaScelta().setVisible(false);
@@ -1031,7 +834,9 @@ public class Controller {
             }
         };
         view.getCreazionePostButton().addActionListener(gestoreCreazionePostFoto);
-   
+        /**
+         * ActionListener che permette di tornare alla Home dalla schermata CreazionePost
+         */
         gestoreHomeCreazionePost = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1039,7 +844,9 @@ public class Controller {
             }
         };
         view.getHomeCreazionePostButton().addActionListener(gestoreHomeCreazionePost);
-   
+        /**
+         * ActionListener che permette di pubblicare un post
+         */
         gestorePubblicaPost = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1048,6 +855,9 @@ public class Controller {
         };
         view.getPubblicaPostButton().addActionListener(gestorePubblicaPost);
         
+        /**
+         * ActionListener che permette di pubblicare una story
+         */
         gestorePubblicaStory = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1056,6 +866,9 @@ public class Controller {
         };
         view.getPubblicaStoryButton().addActionListener(gestorePubblicaStory);
         
+        /**
+         * ActionListener che permette di creare un testo
+         */
         gestorePubblicaSoloTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {   
@@ -1071,6 +884,9 @@ public class Controller {
         };
         view.getPIdeaButton().addActionListener(gestorePubblicaSoloTesto);
         
+        /**
+         * ActionListener che permette di creare un sondaggio a doppia votazione
+         */
         gestorePubblicaSondaggioDoppiaVotazione = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1086,6 +902,9 @@ public class Controller {
         };
         view.getPSondaggioDoppiaVotazioneButton().addActionListener(gestorePubblicaSondaggioDoppiaVotazione);
         
+        /**
+         * ActionListener che permette di creare un sondaggio a scelta multipla
+         */
         gestorePubblicaSondaggioSceltaMultipla = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1103,8 +922,13 @@ public class Controller {
 
     }
 
-    
+    /**
+     * metodo che implementa gli ActionListener per la ricerca
+     */
     public void actionListenersRicerca(){
+    	/**
+    	 * ActionListener che permette di tornare alla Home dalla schermata di ricerca
+    	 */
         gestoreHomeCerca = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1113,6 +937,9 @@ public class Controller {
         };
         view.getHomeRicercaButton().addActionListener(gestoreHomeCerca);
         
+        /**
+         * ActionListener che permette di poter cercare un profilo dalla barra di ricerca e di entrare nella sua pagina del profilo selezionato
+         */
         gestoreProfiloCercato = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1149,6 +976,9 @@ public class Controller {
         };
         view.getPulsanteRicercaProfilo().addActionListener(gestoreProfiloCercato);
         
+        /**
+         * ActionListener che permette di poter cercare un gruppo dalla barra di ricerca e di entrare chat del suddetto gruppo
+         */
         gestoreCercaGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1163,8 +993,14 @@ public class Controller {
 
     }
     
-    
+    /**
+     * metodo che implementa gli ActionListener della schermata delle varie Chat del profilo
+     */
     public void actionListenersChat() {
+    	
+    	/**
+    	 * ActionListener che permette di tornare nella Home dalla schermata della chat
+    	 */
         gestoreHomeChat = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1172,7 +1008,10 @@ public class Controller {
             }
         };
         view.getHomeChatButton().addActionListener(gestoreHomeChat);
-             
+        
+        /**
+         * ActionListener che permette di scorrere in avanti tra i vari messaggi delle chat
+         */
         gestoreProssimoMessaggio = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1185,6 +1024,9 @@ public class Controller {
         };
         view.getProssimoMessaggioButton().addActionListener(gestoreProssimoMessaggio);
         
+        /**
+         * ActionListener che permette di scorrere indietro tra i vari messaggi delle chat
+         */
         gestoreMessaggioPrecedente = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1197,6 +1039,9 @@ public class Controller {
         };
         view.getMessaggioPrecedenteButton().addActionListener(gestoreMessaggioPrecedente);
 
+        /**
+         * ActionListener che apre la prima chat di gruppo del profilo
+         */
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1210,6 +1055,9 @@ public class Controller {
         };
         view.getPrimaChatGruppoButton().addActionListener(gestorePrimaChatGruppo);
         
+        /**
+         * ActionListener che apre la seconda chat di gruppo del profilo
+         */
         gestoreSecondaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1223,7 +1071,9 @@ public class Controller {
         };
         view.getSecondaChatGruppoButton().addActionListener(gestoreSecondaChatGruppo);
         
-        
+        /**
+         * ActionListener che apre la terza chat di gruppo del profilo
+         */
         gestoreTerzaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1237,6 +1087,9 @@ public class Controller {
         };
         view.getTerzaChatGruppoButton().addActionListener(gestoreTerzaChatGruppo);
         
+        /**
+         * ActionListener che apre la quarta chat di gruppo del profilo
+         */
         gestoreQuartaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1250,6 +1103,9 @@ public class Controller {
         };
         view.getQuartaChatGruppoButton().addActionListener(gestoreQuartaChatGruppo);
         
+        /**
+         * ActionListener che apre la quinta chat di gruppo del profilo
+         */
         gestoreQuintaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1263,6 +1119,9 @@ public class Controller {
         };
         view.getQuintaChatGruppoButton().addActionListener(gestoreQuintaChatGruppo);
         
+        /**
+         * ActionListener che apre la sesta chat di gruppo del profilo
+         */
         gestoreSestaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1276,6 +1135,9 @@ public class Controller {
         };
         view.getSestaChatDiGruppoButton().addActionListener(gestoreSestaChatGruppo);
         
+        /**
+         * ActionListener che apre la settima chat di gruppo del profilo
+         */
         gestoreSettimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1289,6 +1151,9 @@ public class Controller {
         };
         view.getSettimaChatGruppoButton().addActionListener(gestoreSettimaChatGruppo);
         
+        /**
+         * ActionListener che apre la ottava chat di gruppo del profilo
+         */
         gestoreOttavaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1302,6 +1167,9 @@ public class Controller {
         };
         view.getOttavaChatGruppoButton().addActionListener(gestoreOttavaChatGruppo);
         
+        /**
+         * ActionListener che apre la nona chat di gruppo del profilo
+         */
         gestoreNonaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1315,6 +1183,9 @@ public class Controller {
         };
         view.getNonaChatGruppoButton().addActionListener(gestoreNonaChatGruppo);
         
+        /**
+         * ActionListener che apre la decima chat di gruppo del profilo
+         */
         gestoreDecimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -1327,11 +1198,15 @@ public class Controller {
         	}
         };
         view.getDecimaChatGruppoButton().addActionListener(gestoreDecimaChatGruppo);
-
-        
     }
     
+    /**
+     * metodo che implementa gli ActionListener della schermata di visualizzazione dei post
+     */
     public void actionListenersPostVisualizzato() {
+    	/**
+    	 * ActionListener che permette di tornare alla home della schermata di visualizzazione dei post
+    	 */
         gestoreHomePostVisualizzato = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1342,6 +1217,9 @@ public class Controller {
         };
         view.getHomePostVisualizzatoButton().addActionListener(gestoreHomePostVisualizzato);
     
+        /**
+         * ActionListener che permette di cambiare la foto del profilo
+         */
         gestoreImpostaFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1352,6 +1230,9 @@ public class Controller {
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
 
+        /**
+         * ActionListener che permette di aggiungere un commento a un post
+         */
         gestoreAggiungiCommento = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1360,6 +1241,9 @@ public class Controller {
         };
        view.getAggiungiCommentoButtonFrame().addActionListener(gestoreAggiungiCommento);
        
+       /**
+        * ActionListener che permette di aggiungere un like a un post
+        */
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1372,6 +1256,9 @@ public class Controller {
        };
        view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
        
+       /**
+        * ActionListener che permette di aggiungere un dislike a un post
+        */
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1384,6 +1271,9 @@ public class Controller {
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
        
+       /**
+        * ActionListener che permette di scorrere in avanti tra i commenti di un post
+        */
        gestoreNextCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) { 
@@ -1394,6 +1284,9 @@ public class Controller {
        };
        view.getNextCommento().addActionListener(gestoreNextCommento);
        
+       /**
+        * ActionListener che permette di scorrere indietro tra i commenti di un post
+        */
        gestorePrevCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1403,6 +1296,9 @@ public class Controller {
        };
        view.getPrevCommento().addActionListener(gestorePrevCommento);    
        
+       /**
+        * ActionListener che permette di selezionare la prima scelta di un sondaggio
+        */
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1417,6 +1313,9 @@ public class Controller {
        };
        view.getPulsantePrimaScelta().addActionListener(gestorePulsantePrimaScelta);
        
+       /**
+        * ActionListener che permette di selezionare la seconda scelta di un sondaggio
+        */
        gestorePulsanteSecondaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {		     	   
@@ -1429,6 +1328,9 @@ public class Controller {
        };
        view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
        
+       /**
+        * ActionListener che permette di selezionare la terza scelta di un sondaggio
+        */
        gestorePulsanteTerzaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1442,6 +1344,9 @@ public class Controller {
       };
        view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
        
+       /**
+        * ActionListener che permette di selezionare la quarta scelta di un sondaggio
+        */
        gestorePulsanteQuartaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
@@ -1453,12 +1358,17 @@ public class Controller {
 				}
     	   	}
        };
-       view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);
-       
+       view.getPulsanteQuartaScelta().addActionListener(gestorePulsanteQuartaScelta);  
     }
     
+    /**
+     * metodo che implementa gli ActionListener della schermata della chat privata
+     */
     public void actionListenersAreaChatFrame() {
     	
+    	/**
+    	 * ActionListener che permette di tornare alla home dalla schermata della chat
+    	 */
     	gestoreChatFrameHome = new ActionListener() {
       	   @Override
       	   public void actionPerformed(ActionEvent e) {
@@ -1468,7 +1378,9 @@ public class Controller {
          };
          view.getPulsanteHomeAreaChatFrame().addActionListener(gestoreChatFrameHome);
          
-         
+        /**
+         * ActionListener che permette di scrivere un messaggio
+         */
     	gestoreInvioMessaggio = new ActionListener() {
      	   @Override
      	   public void actionPerformed(ActionEvent e) {
@@ -1481,6 +1393,9 @@ public class Controller {
         };
         view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);
         
+        /**
+         * ActionListener che permette di scorrere in avanti tra i messaggi della chat
+         */
 	    gestoreNextMessaggioButton = new ActionListener() {
 	  	   @Override
 	  	   public void actionPerformed(ActionEvent e) {
@@ -1491,6 +1406,9 @@ public class Controller {
 	     };
          view.getNextMessaggioButton().addActionListener(gestoreNextMessaggioButton);   
          
+         /**
+          * ActionListener che permette di scorrere indietro tra i messaggi della chat
+          */
          gestorePrevMessaggioButton = new ActionListener() {
        	   @Override
        	   public void actionPerformed(ActionEvent e) {
@@ -1503,8 +1421,13 @@ public class Controller {
           view.getPrevMessaggioButton().addActionListener(gestorePrevMessaggioButton);   
      }
     
+    /**
+     * metodo che implementa gli ActionListener per la schermata di creazione di un gruppo
+     */
     public void actionListenerCreaChatDiGruppo(){
-    	
+    	/**
+    	 * ActionListener che permette di creare un gruppo
+    	 */
     	gestoreCreaChatDiGruppo = new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
@@ -1521,6 +1444,9 @@ public class Controller {
     	
     	view.getCreaGruppo().addActionListener(gestoreCreaChatDiGruppo);
     	
+    	/**
+    	 * ActionListener che permette di tornare nella Home dalla schermata di creazione di un gruppo
+    	 */
     	gestoreHomeChatDiGruppo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1530,7 +1456,14 @@ public class Controller {
         view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
     }
     
+    /**
+     * metodo che implementa gli ActionListener per la schermata di chat di gruppo
+     */
     public void  actionListenerChatDiGruppoFrame() {
+    	
+    	/**
+    	 * ActionListener che permette di tornare nella Home dalla schermata di chat di gruppo
+    	 */
     	gestoreHomeGruppoFrame = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -1539,6 +1472,10 @@ public class Controller {
         };
         view.getHomeGruppo().addActionListener(gestoreHomeGruppoFrame);
     
+        /**
+         * ActionListener che permette di scrivere un messaggio di gruppo
+
+         */
     	gestoreInviaMessaggioGruppo = new ActionListener() {
     		@Override
     		public void actionPerformed(ActionEvent e) {
@@ -1550,15 +1487,9 @@ public class Controller {
     	};
     	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
 	
-
-		gestoreHomeChatDiGruppo = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mostraSchermata("Home");
-				}
-			};
-		view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
-		
+    	/**
+         * ActionListener che permette di scorrere in avanti tra i messaggi della chat di gruppo
+         */
 		gestoreNextMsgGruppo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1574,6 +1505,9 @@ public class Controller {
 		};
 		view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
 		
+		/**
+         * ActionListener che permette di scorrere indietro tra i messaggi della chat di gruppo
+         */
 		gestorePrevMsgGruppo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1587,6 +1521,9 @@ public class Controller {
 		};
 		view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
 		
+		/**
+		 * ActionListener che permette di aggiungere un partecipante al gruppo
+		 */
 		gestoreAggiungiUtente = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1595,7 +1532,10 @@ public class Controller {
 			}
 		};
 		view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
-			
+		
+		/**
+		 * ActionListener che permette di rimuovere un partecipante dal gruppo
+		 */
 		gestoreRimuoviUtente = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1605,6 +1545,9 @@ public class Controller {
 		};
 		view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
 		
+		/**
+		 * ActionListener che permette di modificare la descrizione del gruppo
+		 */
 		gestoreModificaDescrizioneChat = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1614,6 +1557,9 @@ public class Controller {
 		};
 		view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
 		
+		/**
+		 * ActionListener che permette di entrare in un gruppo
+		 */
 		gestorePartecipa = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1622,7 +1568,9 @@ public class Controller {
 		};
 		view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
 		
-		
+		/**
+		 * ActionListener che permette di uscire da un gruppo
+		 */
 		gestoreEsciGruppo = new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -1631,13 +1579,23 @@ public class Controller {
 		};
 		view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
     }
-    	        
+    
+    /**
+     * metodo che permette di ricaricare la pagina
+     */
     public void refresh() {
         view.invalidate();
         view.validate();
         view.repaint();
     }
         
+    /**
+     * metodo che permette di fare il signUp
+     * @throws AccountGiaEsistente
+     * @throws ChangeDefaultPassword
+     * @throws AccountDoesNotExist
+     * @return true se il signUp è riuscito
+     */
     public boolean signUp() {
         String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
         String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
@@ -1657,6 +1615,13 @@ public class Controller {
         return true;
     }
     
+    /**
+     * metodo che permette di fare il login
+     * @throws PswOmailErrati
+     * @throws ChangeDefaultPassword
+     * @throws AccountDoesNotExist
+     * @return true se il login è riuscito
+     */
     public boolean login() {        
         try {
             model.login(view.emailInserita(), view.passwordInserita());
@@ -1672,16 +1637,23 @@ public class Controller {
         return true;
     }
     
+    /**
+     * metodo che nasconde la schermata attuale
+     * @param schermata
+     */
     public void nascondiSchermata(String schermata) {
         view.mappaSchermate.get(schermata).setVisible(false);
     }
-    
+    /**
+     * metodo che permette di cambiare schermata
+     * @param schermata
+     */
     public void mostraSchermata(String schermata) {
         nascondiSchermata(getSchermataAttuale());
         view.mostraSchermata(schermata);
         setSchermataAttuale(schermata);
     }
-
+    
     public String getSchermataAttuale() {
         return schermataAttuale;
     }
@@ -1689,12 +1661,17 @@ public class Controller {
     public void setSchermataAttuale(String schermataAttuale) {
         this.schermataAttuale = schermataAttuale;
     }
-    
+    /**
+     * metodo che segnala il fallimento del login
+     * @param codiceFallimento
+     */
     public void mostraFallimentoLogin(String codiceFallimento) {
         view.getEtichettaDiSegnalazioneLoginFallito().setText(codiceFallimento);
         view.getEtichettaDiSegnalazioneLoginFallito().setVisible(true);
     }
-    
+    /**
+     * metodo che permette di pubblicare un post a seconda del valore passato
+     */
     public void pubblicaPost() {
         String commentoPost = view.ottieniCommento();
     	System.out.println("post attuale =" + getPostAttuale());
@@ -1723,6 +1700,9 @@ public class Controller {
         }
     }
     
+    /**
+     * metodo che permette di pubblicare una story
+     */
     public void pubblicaStory() {
    	 
     	String commentoPost = view.ottieniCommento();
@@ -1731,7 +1711,10 @@ public class Controller {
     	model.getProfiloAttivo().pubblicaStoria(commentoPost, true, percorsoFilePost, false);
     }
 
-
+    /**
+     * metodo che permette di verificare se se il testo coincide con la ricerca
+     * @return true se il testo coincide con la ricerca
+     */
     public boolean verificaTestoRicerca() {
         if(view.getTestoRicerca().equals("") || view.getTestoRicerca().equals("Inserire un username da cercare")) {
             return false;
@@ -1739,10 +1722,21 @@ public class Controller {
         return true;
     }
 
-    public void oggettoDaCercare() {
-        
-    }
-    
+    /**
+     * metodo che aggiorna una schermata di un profilo a seconda del profilo cercato
+     * @param nickName
+     * @param descrizione
+     * @param numPost
+     * @param numFollower
+     * @param numSeguiti
+     * @param fotoProfiloPercorso
+     * @param idProfilo
+     * @param postFotoProfilo
+     * @param percorsiPostTesto
+     * @param percorsiPostSondaggio
+     * @param percorsiPostSondaggioDoppiaScelta
+     * @throws PostNonVisibile
+     */
     public void aggiornaSchermataProfilo(String nickName, String descrizione, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio, ArrayList<String>  percorsiPostSondaggioDoppiaScelta) throws PostNonVisibile {
     	view.setSchermataDati(numPost, numFollower, numSeguiti, nickName, descrizione);
         view.setFotoProfilo(fotoProfiloPercorso);
@@ -1752,11 +1746,9 @@ public class Controller {
         view.setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
         refresh();
     }
-    
-    public void settaPostVisualizzato(boolean condition) {
-       // view.mostraBottoneSuperiore(false);
-    }
-    
+    /**
+     * metodo che permette la ricerca di un profilo tramite barra di ricerca
+     */
     public void ricerca() {
         String risultatoRicerca = view.getTestoRicerca();
         view.getTestoRicercaInSchermataRicerca().setText(risultatoRicerca);
@@ -1764,7 +1756,9 @@ public class Controller {
         model.ricerca(view.getTestoRicerca());
         refresh();
     }
-    
+    /**
+     * metodo che permette di poter aggiungere i commenti al post di un profilo
+     */
     public void aggiungiCommento() {
     	String idProfilo = model.getProfiloAttivo().getIdProfilo();
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
@@ -1777,18 +1771,26 @@ public class Controller {
 		}
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
-    
+    /**
+     * metodo che permette di visualizzare i commenti di un post
+     * @param idPost
+     * @throws PostNonVisibile
+     */
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
     	commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(idPost, tipoPostAttuale);
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
-    
-    
+    /**
+     * metodo che permette di scrivere un messaggio privato a un altro profilo    
+     */
     public void scriviMessaggioPrivato() {
     	String testoDaInviare = view.getScriviMessaggio().getText();
     	model.getProfiloAttivo().scriviMessaggioPrivato(testoDaInviare, model.getProfiloConCuiSiStaChattando().getIdProfilo());
     }
     
+    /**
+     * metodo che permette di aggiornare la schermata del profilo attivo con i parametri passati
+     */
     public void aggiornaSchermataProfiloAttivo() {
     	String descrizione = model.getProfiloAttivo().getDescrizione();;
     	if(descrizione == null) {
@@ -1818,6 +1820,11 @@ public class Controller {
 		}
         refresh();
     }
+    
+    /**
+     * permette di riaggiornare da zero le pagine
+     * @throws AccountDoesNotExist
+     */
     public void resettaGui() {
        
         commentiConProfiliIinvianti.clear();
@@ -1836,6 +1843,11 @@ public class Controller {
 			e.printStackTrace();
 		}
     }
+    
+    /**
+     * permette di poter visualizzare un post con tutte le sue descrizioni
+     * @param f
+     */
     public void visualizzaPostFoto(Foto f) {
     	  
       		try {
@@ -1862,12 +1874,18 @@ public class Controller {
 		this.basePostAttuale = basePostAttuale;
 	}
 	
+	/**
+	 * permette di modificare la descrizione del profilo
+	 */
 	public void aggiungiDescrizione() {
     	String descrizione = view.getDescrizione().getText();
     	model.getProfiloAttivo().modificaDescrizione(descrizione);
     	model.getProfiloAttivo().setDescrizione(descrizione);
 	}
 	
+	/**
+	 * resetta i contatori per i post
+	 */
 	public void resetContatori() {
 		view.setContatoreFoto(0);
 		view.setContatoreSondaggio(0);
@@ -1876,6 +1894,11 @@ public class Controller {
 		view.setContatorePost(0);
 	}
 	
+	/**
+	 * permette di ottenere il percorso di un post
+	 * @param indicePost
+	 * @return
+	 */
 	public String ottieniPost(int indicePost) {
 		String percorsoPost = "";
 		
@@ -1887,18 +1910,28 @@ public class Controller {
 		
 		return percorsoPost;
 	}
-	
+	/**
+	 * permette di rimuovere il profilo attuale
+	 */
 	public void rimuoviProfilo() {
 		model.getProfiloAttivo().rimuoviQuestoProfilo();
 	}
 	
+	/**
+	 * permette di settare la schermata della chat di gruppo
+	 * @param g
+	 * @param commenti
+	 */
 	public void settaSchermataGruppo(Gruppo g, ArrayList<String> commenti) {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.setIdGruppo(g.getIdGruppo());
 		view.aggiornaMessaggiGruppo(commenti);
-		
 	}
 
+	/**
+	 * permette di settare la chat di gruppo a seconda che il profilo sia amministratore o meno
+	 * @param g
+	 */
 	public void setGruppo(Gruppo g) {
 		if(model.getProfiloAttivo().getIdProfilo().equals(g.getAmministratore())) {
 			view.getUtenteDaAggiungereButton().setVisible(true);
@@ -1923,6 +1956,11 @@ public class Controller {
 
 		}
 	}
+	/**
+	 * permette di aggiungere un partecipante a un gruppo
+	 * @param idGruppo
+	 * @param utente
+	 */
 	public void aggiungiPartecipante(String idGruppo, String utente) {
 		try {
 			model.getProfiloAttivo().aggiungiPartecipante(idGruppo, utente);
@@ -1932,10 +1970,21 @@ public class Controller {
 			e1.printStackTrace();
 		}
 	}
+	/**
+	 * permette di rimuovere un partecipante a un gruppo
+	 * @param idGruppo
+	 * @param utente
+	 */
 	public void rimuoviPartecipante(String idGruppo, String utente) {
 		model.getProfiloAttivo().rimuoviPartecipante(idGruppo, utente);
 	}
 	
+	/**
+	 * permette di poter visualizzare un testo e i commenti sotto di esso
+	 * @param indicePostTesto
+	 * @throws printStackTrace
+	 * @throws PostNonPresente
+	 */
 	public void visualizzaPostTesto(int indicePostTesto) {
 		tipoPostAttuale = TipoPost.TESTO;
         try {
@@ -1963,8 +2012,13 @@ public class Controller {
         refresh();
 	}
 	
+	/**
+	 * permette di poter visualizzare una foto e i commenti sotto di esso
+	 * @param indicePostTesto
+	 * @throws printStackTrace
+	 * @throws PostNonPresente
+	 */
 	public void visualizzaPostFoto(int indicePostFoto) {
-        settaPostVisualizzato(false);
         tipoPostAttuale = TipoPost.FOTO;
         try {
 			try {
@@ -1994,10 +2048,16 @@ public class Controller {
         refresh(); 
 	}
 	
+	/**
+	 * permette di poter visualizzare un sondaggio a scelta multipla e i commenti sotto di esso
+	 * @param indicePostTesto
+	 * @throws printStackTrace
+	 * @throws PostNonPresente
+	 */
 	public void visualizzaPostSondaggioSceltaMultipla(int indicePostSondaggio) {
 		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
 		try {
-			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(indicePostSondaggio + view.getContatoreSondaggio()), null, false, null, null, null, null, null)));
+			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(indicePostSondaggio), null, false, null, null, null, null, null)));
 		} catch (PostNonVisibile | PostNonPresente e1) {
 			e1.printStackTrace();
 		}
@@ -2007,8 +2067,7 @@ public class Controller {
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
-		
-		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioSceltaMultipla.get(0 + view.getContatoreSondaggio()), tipoPostAttuale);
+		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
     	view.getImpostaImmagineProfiloButton().setVisible(false);
 		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
 										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
@@ -2027,6 +2086,12 @@ public class Controller {
 		mostraSchermata("Postvisualizzato");
 	}
 	
+	/**
+	 * permette di poter visualizzare un sondaggio a doppia scelta e i commenti sotto di esso
+	 * @param indicePostTesto
+	 * @throws printStackTrace
+	 * @throws PostNonPresente
+	 */
 	public void visualizzaPostSondaggioDoppiaScelta(int indicePostSondaggio) {
 		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
 		try {
@@ -2054,7 +2119,4 @@ public class Controller {
 		mostraSchermata("Postvisualizzato");
 		refresh();
 	}
-
-
-
 }
