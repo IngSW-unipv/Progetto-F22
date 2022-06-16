@@ -360,7 +360,8 @@ package panelspackage.panels;
         public boolean settaCommenti(ArrayList<String> commenti) {
         	
         	if (this.indiceCommentoCorrente < 0) {
-        		indiceCommentoCorrente = 0;
+        		int zero = 0;
+        		indiceCommentoCorrente = zero;
         	}
         	if (this.indiceCommentoCorrente > commenti.size() - 10) {
         		int valoreMassimo =  commenti.size() - 10;
@@ -377,8 +378,11 @@ package panelspackage.panels;
                  }
                    
             for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2 ; i = i + 2) {
-
+            	if(indiceCommentoCorrente < 0) {
+            		indiceCommentoCorrente = 0;
+            	}
                 int indiceCorrente2 = i + indiceCommentoCorrente;
+                
                 ((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
                 ((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
             }
