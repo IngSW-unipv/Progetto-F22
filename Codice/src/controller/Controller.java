@@ -101,14 +101,19 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	tipoPostAttuale = TipoPost.FOTO;
                 if (login()) 
+    	            resetContatori();
+    	            resettaGui();
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	if(storySchermataHome.size() == 0) {
                   		System.out.println("non ci sono storie");
                 	} else {
+                    	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 		view.setPercorsiStorieLogin(storySchermataHome);
                 	}
                 	if(postSchermataHome.size() == 0) {
+                		view.setPercorsoPost("");
+                		view.aggiornaPostHome();
+
                 		mostraSchermata("Home");
                 	} else {
                 		view.setPercorsoPost(ottieniPost(0));
@@ -154,9 +159,16 @@ public class Controller {
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	try {
+            	try {if (postSchermataHome.size() > 0) {     		
             		model.getProfiloAttivo().setFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(0 + view.getContatorePost()))));
-				} catch (PostNonPresente| PostNonVisibile e1) {
+            		visualizzaPostFoto(model.getProfiloAttivo().getFotoPerController());
+                	mostraSchermata("Postvisualizzato");
+                	refresh();
+            	}
+            	else { model.getProfiloAttivo().setFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(0 + view.getContatorePost()))));
+            	mostraSchermata("Postvisualizzato");
+            	}
+            	} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getFotoPerController());
@@ -233,7 +245,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
             	try {
+            		if(storySchermataHome.size() >0) {
             		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getIndiceStorie()))));
+            		}
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1782,6 +1796,8 @@ public class Controller {
         percorsiPostTesto.clear();
         percorsiPostSondaggioSceltaMultipla.clear();
         listaGruppi.clear();
+        postSchermataHome.clear();
+        storySchermataHome.clear();
         
         try {
 			model.setProfiloAttivo(model.getProfiloAttivo().cercaProfilo(model.getProfiloAttivo()));
@@ -1825,6 +1841,8 @@ public class Controller {
 		view.setContatoreFoto(0);
 		view.setContatoreSondaggio(0);
 		view.setContatoreTesto(0);
+		view.setIndiceStorie(0);
+		view.setContatorePost(0);
 	}
 	
 	public String ottieniPost(int indicePost) {
