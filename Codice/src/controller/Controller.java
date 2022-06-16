@@ -20,7 +20,7 @@ public class Controller {
     private ActionListener gestoreLogin, gestoreSignUp, gestoreImpostazioni, gestoreRegistrati, gestoreProfilo,
                            gestoreChat, gestoreHomeImpostazioni, gestoreHomeProfilo,
                            gestoreHomeChat, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
-                           gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreVisibilitaPost, gestoreEliminaAccount,
+                           gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreNascondi,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
                            gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
                            gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
@@ -34,7 +34,7 @@ public class Controller {
                            gestorePulsantePrimoTesto,gestorePulsanteSecondoTesto,gestorePulsanteTerzoTesto, gestorePulsanteFotoHome, gestoreHomeGruppoFrame,
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
                            gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo, gestorePartecipa, gestoreEsciGruppo,
-                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
+                           gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, 
                            gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo,
                            gestoreNextSondaggioDoppiaScelta, gestorePrevSondaggioDoppiaScelta;
  
@@ -185,6 +185,7 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getFotoPerController());
+            	view.getNascondi().setVisible(false);
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -278,6 +279,7 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
+            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -297,6 +299,7 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
+            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -318,6 +321,7 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
+            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -337,6 +341,7 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
+            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -356,6 +361,7 @@ public class Controller {
 				}
             	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
+            	view.getNascondi().setVisible(false);
             	refresh();
             
         	}
@@ -394,6 +400,7 @@ public class Controller {
                 refresh();
                 view.getPulsanteSegui().setVisible(false);
                 view.getApriChat().setVisible(false);
+                model.setProfiloCercato(model.getProfiloAttivo());
                 mostraSchermata("Profilo");
             }
         };
@@ -445,6 +452,9 @@ public class Controller {
 	            	e1.printStackTrace();
 	            }
 	            view.getContainerCenterFrame().setVisible(false);
+		        view.getInserimentoMail().setText("");
+		        view.getInserimentoPassword().setText("");
+
 	            mostraSchermata("Login");
 	        }
     	};
@@ -571,6 +581,8 @@ public class Controller {
 	            	}
 		            visualizzaPostFoto(model.getProfiloAttivo().getFotoProfiloPerController());
 		            mostraSchermata("Postvisualizzato");
+	            	view.getNascondi().setVisible(model.getProfiloCercato().getIdProfilo().equals(model.getProfiloAttivo().getIdProfilo()));
+		            
 		            refresh();         
 		        }
 	        }
@@ -1205,6 +1217,17 @@ public class Controller {
      */
     public void actionListenersPostVisualizzato() {
     	/**
+    	 * ActionListener che permette rendere un post non piu visualizzabile da altri utenti
+    	 */
+    	gestoreNascondi = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	model.getProfiloAttivo().modificaVisibilita(view.getIdPostVisualizzato(), tipoPostAttuale ,false);
+            }
+        };
+        view.getNascondi().addActionListener(gestoreNascondi);
+
+    	/**
     	 * ActionListener che permette di tornare alla home della schermata di visualizzazione dei post
     	 */
         gestoreHomePostVisualizzato = new ActionListener() {
@@ -1594,7 +1617,7 @@ public class Controller {
      * @throws AccountGiaEsistente
      * @throws ChangeDefaultPassword
      * @throws AccountDoesNotExist
-     * @return true se il signUp è riuscito
+     * @return true se il signUp ï¿½ riuscito
      */
     public boolean signUp() {
         String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
@@ -1620,22 +1643,21 @@ public class Controller {
      * @throws PswOmailErrati
      * @throws ChangeDefaultPassword
      * @throws AccountDoesNotExist
-     * @return true se il login è riuscito
+     * @return true se il login ï¿½ riuscito
      */
     public boolean login() {        
-        try {
-            model.login(view.emailInserita(), view.passwordInserita());
-        } catch (ChangeDefaultPassword errore1) {
-            //mostraFallimentoLogin(errore1.toString());
-        } catch (AccountDoesNotExist errore2) {
-            mostraFallimentoLogin(errore2.toString());
-            return false;
-        } catch (PswOmailErrati errore3) {
-            mostraFallimentoLogin(errore3.toString());
-            return false;
-        }   
-        return true;
-    }
+		try {
+		model.login(view.emailInserita(), view.passwordInserita());
+		} catch (ChangeDefaultPassword errore1) {
+		} catch (AccountDoesNotExist errore2) {
+		mostraFallimentoLogin("Questo account non esiste");
+		return false;
+		} catch (PswOmailErrati errore3) {
+		mostraFallimentoLogin("hai inserito le credenziali sbagliate");
+		return false;
+		}   
+		return true;
+		}
     
     /**
      * metodo che nasconde la schermata attuale
@@ -2009,6 +2031,7 @@ public class Controller {
     							 commentiConProfiliIinvianti.size(), 
     							 commentiConProfiliIinvianti);
         mostraSchermata("Postvisualizzato");
+        view.getNascondi().setVisible(false);
         refresh();
 	}
 	
@@ -2045,6 +2068,7 @@ public class Controller {
     							 commentiConProfiliIinvianti.size(), 
     							 commentiConProfiliIinvianti);
         mostraSchermata("Postvisualizzato");
+    	view.getNascondi().setVisible(model.getProfiloCercato().getIdProfilo().equals(model.getProfiloAttivo().getIdProfilo()));
         refresh(); 
 	}
 	
@@ -2083,6 +2107,7 @@ public class Controller {
         
         view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         refresh();
+        view.getNascondi().setVisible(false);
 		mostraSchermata("Postvisualizzato");
 	}
 	
@@ -2116,6 +2141,7 @@ public class Controller {
 													0, 
 													conteggi,
 													commentiConProfiliIinvianti);
+        view.getNascondi().setVisible(false);
 		mostraSchermata("Postvisualizzato");
 		refresh();
 	}
