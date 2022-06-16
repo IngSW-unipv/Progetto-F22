@@ -106,18 +106,13 @@ public class ProfiloTester {
 		}
     	*/
    
-    	 //plof.pubblicaStoria("wgfre", false, null, false);
+    	// p1.pubblicaStoria("wgfre", false, null, false);
     	
    // System.out.println(p.pubblicaCommento("DV999", "SD01", "sono un canguro", TipoPost.SONDAGGIODOPPIAVOTAZIONE));
     	
-    	try {
-			SondaggioDoppiaVotazione s = (SondaggioDoppiaVotazione) p.cercaPost(sdv);
-			System.out.println(s.toString());
-		} catch (PostNonVisibile | PostNonPresente e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-  
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("DV999", TipoPost.FOTO);
+        for(String s : res)
+        	System.out.println(s.toString());
     }
 }
 

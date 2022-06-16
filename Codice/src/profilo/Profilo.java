@@ -4,8 +4,6 @@ package profilo;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
 import java.util.Timer;
 
 import Messaggio.Messaggio;
@@ -16,13 +14,11 @@ import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.ConvertitoreFacade;
 import convertitore.postUtility.PostUtility;
 import db.facade.DbFacade;
-import db.facade.Utility;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
 import post.multimedia.Multimedia;
 import post.multimedia.foto.Foto;
-import post.multimedia.video.Video;
 import post.sondaggio.Sondaggio;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
@@ -751,11 +747,6 @@ public class Profilo implements IProfilo {
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(pr,null));
-
-	//Se i post sono miei ritona anche quelli non visibili
-	if(pr.equals(this.getIdProfilo())) {
-		return res;
-	}
 	
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
@@ -777,7 +768,16 @@ public class Profilo implements IProfilo {
 
 	//La lista finale conterra' il percorso e l'id dei soli post visibili
 	for(Post posttt: search) {
-		if(dbfacade.vediIsStory(posttt) == false && dbfacade.vediVisibilita(posttt) == true) {
+		//Se i post sono miei ritona anche quelli non visibili
+		if(pr.equals(this.getIdProfilo()) && dbfacade.vediIsStory(posttt) == false) {
+			risultato.add(posttt.getIdPost());
+			if(f == TipoPost.FOTO || f == TipoPost.VIDEO)
+		        risultato.add(posttt.getPercorso());
+			else if(f == TipoPost.SONDAGGIODOPPIAVOTAZIONE || f == TipoPost.SONDAGGIOSCELTAMULTIPLA || f == TipoPost.TESTO)
+				risultato.add(posttt.getDescrizione());
+			
+		}
+		else if(dbfacade.vediIsStory(posttt) == false && dbfacade.vediVisibilita(posttt) == true) {
 			risultato.add(posttt.getIdPost());
 			if(f == TipoPost.FOTO || f == TipoPost.VIDEO)
 		        risultato.add(posttt.getPercorso());
