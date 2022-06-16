@@ -194,9 +194,8 @@ public ArrayList<String> caricaGruppiProfilo(String profilo) {
 		while(rs1.next())
 		{
 			String idNuovo=rs1.getString(1);
-			String nomeGruppo=rs1.getString(2);
 			result.add(idNuovo);
-	        result.add(nomeGruppo);
+	        result.add(idNuovo);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

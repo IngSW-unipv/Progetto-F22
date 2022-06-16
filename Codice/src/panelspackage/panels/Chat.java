@@ -96,10 +96,15 @@ public class Chat extends JPanel {
     
         
         public void settaSchermataChat(ArrayList<String> gruppi) {
-            for(int i=0; i < gruppi.size()/2 && i < 10; i++) {
+        	int i;
+            for(i=0; i < gruppi.size()/2 && i < 10; i++) {
             	int indicechat = (i*2) + 1 +  this.getIndiceMessaggioCorrente();
                 ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get(indicechat));               
-            }       
+            }
+            while(i<10) {
+                ((Etichette) listaComponenti.get(i*2)).setText("");              
+                i++;
+            }
         }
         
 
