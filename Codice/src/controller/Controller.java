@@ -58,6 +58,7 @@ public class Controller {
     private ArrayList<String> listaGruppi = new ArrayList<String>();
     private TipoPost tipoPostAttuale;
     ArrayList<String> messaggi = new ArrayList<String>();
+    
 	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
@@ -1141,11 +1142,11 @@ public class Controller {
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
-        		gruppoAttuale = g.getIdGruppo();
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1154,10 +1155,11 @@ public class Controller {
         gestoreSecondaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1167,10 +1169,11 @@ public class Controller {
         gestoreTerzaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1179,10 +1182,11 @@ public class Controller {
         gestoreQuartaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1191,10 +1195,11 @@ public class Controller {
         gestoreQuintaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1203,10 +1208,11 @@ public class Controller {
         gestoreSestaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1215,10 +1221,11 @@ public class Controller {
         gestoreSettimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1227,10 +1234,11 @@ public class Controller {
         gestoreOttavaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1239,10 +1247,11 @@ public class Controller {
         gestoreNonaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1251,10 +1260,11 @@ public class Controller {
         gestoreDecimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1283,17 +1293,6 @@ public class Controller {
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
-        
-        /*  
-        gestoreIniziaSeguire = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	System.out.println("Inizia a seguire");
-            }
-        };
-        view.getIniziaSeguireButton().addActionListener(gestoreIniziaSeguire);
-        
-         */
 
         gestoreAggiungiCommento = new ActionListener() {
             @Override
@@ -1306,7 +1305,11 @@ public class Controller {
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   //model.getProfiloAttivo().aggiungiLike(view.getIdPostVisualizzato());
+    		   try {
+    			   model.getProfiloAttivo().aggiungiLike(view.getIdPostVisualizzato(), tipoPostAttuale);
+    		   } catch(AzioneNonConsentita e1) {
+    			   e1.printStackTrace();
+    		   }
     	   }
        };
        view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
@@ -1314,7 +1317,11 @@ public class Controller {
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   //model.getProfiloAttivo().aggiungiDislike(view.getIdPostVisualizzato());
+    		   try {
+    			   model.getProfiloAttivo().aggiungiDislike(view.getIdPostVisualizzato(), tipoPostAttuale);
+    		   } catch(AzioneNonConsentita e1) {
+    			   e1.printStackTrace();
+    		   }
     	   }
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
@@ -1322,7 +1329,6 @@ public class Controller {
        gestoreNextCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) { 
- 
     		   view.incrementaIndiceCommento();
     		   view.settaCommenti(commentiConProfiliIinvianti);
     		   refresh();
@@ -1333,7 +1339,6 @@ public class Controller {
        gestorePrevCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   
     		   view.decrementaIndiceCommento();
     		   view.settaCommenti(commentiConProfiliIinvianti);    		
     	   }
@@ -1343,15 +1348,11 @@ public class Controller {
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		  
-    	   
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, tipoPostAttuale);
-   					} catch (TastoNonEsistente e1) {
-   				} catch (AzioneNonConsentita e1) {
-   					System.out.println("sondaggio andato male");
+   				} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-					}
+				}
    				
     	   }
     	   
@@ -1363,10 +1364,9 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {		     	   
     		   	try {
    					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, tipoPostAttuale);
-   					} catch (TastoNonEsistente e1) {
-   				} catch (AzioneNonConsentita e1) {
+   					} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-				}
+   					}
     	   }
        };
        view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
@@ -1377,10 +1377,9 @@ public class Controller {
     		   
     		   try {
   					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3, tipoPostAttuale);
-  					} catch (TastoNonEsistente e1) {
-  				} catch (AzioneNonConsentita e1) {
+  					} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-				}
+  					}
     	   }
       };
        view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
@@ -1391,8 +1390,7 @@ public class Controller {
     		   
     		   try {
 				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  tipoPostAttuale);
-    		   	} catch (TastoNonEsistente e1) {
-				} catch (AzioneNonConsentita e1) {
+    		   	} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 					e1.printStackTrace();
 				}
     	   	}
@@ -1423,21 +1421,19 @@ public class Controller {
         };
         view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);
         
-        gestoreNextMessaggioButton = new ActionListener() {
-      	   @Override
-      	   public void actionPerformed(ActionEvent e) {
-      				   	
-      		   view.incrementaIndiceMessaggio();
-      		   view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
-  			   	refresh();
-      		   	}
-         };
+	    gestoreNextMessaggioButton = new ActionListener() {
+	  	   @Override
+	  	   public void actionPerformed(ActionEvent e) {
+	  		   view.incrementaIndiceMessaggio();
+	  		   view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+			   refresh();
+	  	   }
+	     };
          view.getNextMessaggioButton().addActionListener(gestoreNextMessaggioButton);   
          
          gestorePrevMessaggioButton = new ActionListener() {
        	   @Override
        	   public void actionPerformed(ActionEvent e) {
-       			   	
             		 view.decrementaIndiceMessaggio();
             		 view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
             		 refresh();
@@ -1493,86 +1489,84 @@ public class Controller {
     	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
 	
 
-	gestoreHomeChatDiGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mostraSchermata("Home");
+		gestoreHomeChatDiGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostraSchermata("Home");
+				}
+			};
+		view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
+		
+		gestoreNextMsgGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (messaggi.size() >= view.getIndiceMessaggioCorrenteGruppo()-2) {
+				view.incrementaIndiceMessaggioCorrenteGruppo();
+				}
+				if (view.getIndiceMessaggioCorrenteGruppo() < messaggi.size()) 	
+	        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+	        		view.aggiornaMessaggiGruppo(messaggi);        		
+	        		refresh();
+	        		
 			}
 		};
-	view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
-	
-	gestoreNextMsgGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (messaggi.size() >= view.getIndiceMessaggioCorrenteGruppo()-2) {
-			view.incrementaIndiceMessaggioCorrenteGruppo();
-			}
-			if (view.getIndiceMessaggioCorrenteGruppo() < messaggi.size()) 	
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
-        		view.aggiornaMessaggiGruppo(messaggi);        		
-        		refresh();
-        		
-		}
-	};
-	view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
-	
-	gestorePrevMsgGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(view.getIndiceMessaggioCorrenteGruppo() > 0) {
-				view.decrementaIndiceMessaggioCorrenteGruppo();
-				messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
-				view.aggiornaMessaggiGruppo(messaggi);        		
-				refresh();
-			}
-		}
-	};
-	view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
-	
-	gestoreAggiungiUtente = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String utente = view.getUtenteDaAggiungere().getText();
-			aggiungiPartecipante(gruppoAttuale, utente);
-		}
-	};
-	view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
+		view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
 		
-	gestoreRimuoviUtente = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String utente = view.getUtenteDaEliminare().getText();
-			model.getProfiloAttivo().rimuoviPartecipante(gruppoAttuale, utente);
-			System.out.println(utente);
-			System.out.println(gruppoAttuale);
-		}
-	};
-	view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
-	
-	gestoreModificaDescrizioneChat = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
+		gestorePrevMsgGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(view.getIndiceMessaggioCorrenteGruppo() > 0) {
+					view.decrementaIndiceMessaggioCorrenteGruppo();
+					messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+					view.aggiornaMessaggiGruppo(messaggi);        		
+					refresh();
+				}
+			}
+		};
+		view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
+		
+		gestoreAggiungiUtente = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String utente = view.getUtenteDaAggiungere().getText();
+				aggiungiPartecipante(gruppoAttuale, utente);
+			}
+		};
+		view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
+			
+		gestoreRimuoviUtente = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String utente = view.getUtenteDaEliminare().getText();
+				model.getProfiloAttivo().rimuoviPartecipante(gruppoAttuale, utente);
+			}
+		};
+		view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
+		
+		gestoreModificaDescrizioneChat = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
 				model.getProfiloAttivo().modificaDescrizione(gruppoAttuale, nuovaDescrizione);
 			}
-	};
-	view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
-	
-	gestorePartecipa = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			aggiungiPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
-		}
-	};
-	view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
-	
-	gestoreEsciGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			rimuoviPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
-		}
-	};
-	view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
+		};
+		view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
+		
+		gestorePartecipa = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				aggiungiPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+			}
+		};
+		view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
+		
+		gestoreEsciGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rimuoviPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+			}
+		};
+		view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
     }
     	        
     public void refresh() {

@@ -60,6 +60,7 @@ public class Profilo implements IProfilo {
 	private Foto postFotoPerController = new Foto(null);	//Foto presenti nel profilo
 	private SondaggioSceltaMultipla postSondaggioSceltaMultiplaPerController = new SondaggioSceltaMultipla(null);
 	private SondaggioDoppiaVotazione postSondaggioDoppiaScelta = new SondaggioDoppiaVotazione(null);
+	private Gruppo gruppoPerController = new Gruppo(null);
 	
 	public Profilo(String idProfilo, String nickname) {
 		super();
@@ -103,6 +104,14 @@ public class Profilo implements IProfilo {
 	
 	
 	
+
+	public Gruppo getGruppoPerController() {
+		return gruppoPerController;
+	}
+
+	public void setGruppoPerController(Gruppo gruppoPerController) {
+		this.gruppoPerController = gruppoPerController;
+	}
 
 	public SondaggioDoppiaVotazione getPostSondaggioDoppiaScelta() {
 		return postSondaggioDoppiaScelta;
