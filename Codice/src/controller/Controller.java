@@ -104,7 +104,7 @@ public class Controller {
     	            resettaGui();
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	if(storySchermataHome.size() == 0) {
-                  		System.out.println("non ci sono storie");
+                  		System.out.println("");
                 	} else {
                     	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 		view.setPercorsiStorieLogin(storySchermataHome);
