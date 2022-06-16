@@ -91,7 +91,7 @@ package panelspackage.panels;
             
             for( int i = getIndiceCommentoCorrente();  i <  this.postCommentiConUtenti.size() - 1; i = i +2) {
 
-            Pulsanti areaNomeProfilo = new Pulsanti(postCommentiConUtenti.get(i), Frame.COLOREPRIMARIOTEMATICO);
+            Etichette areaNomeProfilo = new Etichette(postCommentiConUtenti.get(i), Frame.COLOREPRIMARIOTEMATICO);
             Etichette areaCommento = new Etichette(postCommentiConUtenti.get(i + 1),Frame.COLOREPRIMARIOTEMATICO);
             ListaAreaTesto.add(areaNomeProfilo);
             ListaAreaTesto.add(areaCommento);   
@@ -278,6 +278,11 @@ package panelspackage.panels;
         public int getIndiceCommentoCorrente() {
             return indiceCommentoCorrente;
         }
+        
+        public void setIndiceCommentoCorrente(int indice) {
+             indiceCommentoCorrente = indiceCommentoCorrente + indice;
+        }
+
 
 
         public void incrementaIndiceCommento() {
@@ -357,22 +362,26 @@ package panelspackage.panels;
         	if (this.indiceCommentoCorrente < 0) {
         		indiceCommentoCorrente = 0;
         	}
-        	if (this.indiceCommentoCorrente > commenti.size()/2 -2) {
-        		indiceCommentoCorrente = commenti.size()/2 - 2;
+        	System.out.println("size +" + commenti.size());
+        	if (this.indiceCommentoCorrente > commenti.size() - 10) {
+        		int somma =this.getIndiceCommentoCorrente() + commenti.size()  ;
+        		setIndiceCommentoCorrente(somma + 10);
         	}
-        	System.out.println("indiceCommento" + indiceCommentoCorrente);
+        	
+        	System.out.println("indiceCommento " + indiceCommentoCorrente);
             if(commenti.size() == 0) {
             	 for(int i = 0 ; i < 10; i = i+2) {
-                     ((Pulsanti)ListaAreaTesto.get(i)).setText("");
+                     ((Etichette)ListaAreaTesto.get(i)).setText("");
                      ((Etichette)ListaAreaTesto.get(i + 1)).setText("");
             	 	}
             	 return true;
                  }
                    
             for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2 ; i = i + 2) {
+            	System.out.println("indiceCommento ciclo for" + indiceCommentoCorrente);
 
-                int indiceCorrente2 = i + getIndiceCommentoCorrente();
-                ((Pulsanti)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
+                int indiceCorrente2 = i + indiceCommentoCorrente;
+                ((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
                 ((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
             }
             return true;
