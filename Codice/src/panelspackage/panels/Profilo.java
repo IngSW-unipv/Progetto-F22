@@ -189,6 +189,9 @@ public class  Profilo extends JPanel {
     	}
 
 		for (i = 0; i < postDelProfilo.size()/2 && i < 3 ; i++) {
+			if (contatoreFoto < 0) {
+				contatoreFoto = 0;
+	    	}
 			int indice =(i*2)+1 + getContatoreFoto();
 			ListaPost.get(i).setIcon(new ImageIcon(postDelProfilo.get(indice)));
 		}
