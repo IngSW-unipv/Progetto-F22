@@ -26,7 +26,7 @@ package panelspackage.panels;
         private AreaCommenti areaCommenti;
         private AreaDiTesto aggiungiCommento, descrizionePost;
         private JButton homePostVisualizzato,nextCommento, prevCommento;
-        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton,pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
+        private Pulsanti impostaImmagineProfiloButton, iniziaSeguireButton, nascondi, pulsantePrimaScelta = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
         				 pulsanteSecondaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
         				 pulsanteTerzaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO),
         				 pulsanteQuartaScelta  = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO);
@@ -61,7 +61,11 @@ package panelspackage.panels;
             this.add(containerNorth, BorderLayout.NORTH);
             
             impostaImmagineProfiloButton = new Pulsanti(messaggioBottoneSuperioreProfilo, Frame.COLOREPRIMARIOTEMATICO);
-            containerNorth.add(impostaImmagineProfiloButton);
+            containerNorth.add(impostaImmagineProfiloButton, BorderLayout.CENTER);
+            
+            nascondi = new Pulsanti("nascondi post", Frame.getColoreprimariotematico());
+            containerNorth.add(nascondi, BorderLayout.WEST);
+
             
             this.add(containerCenter, BorderLayout.CENTER);
             
@@ -154,9 +158,119 @@ package panelspackage.panels;
             containerSondaggio.add(containerScelte, BorderLayout.EAST);
     
         }
-
         
+        public boolean settaCommenti(ArrayList<String> commenti) {
+        	
+        	if (this.indiceCommentoCorrente < 0) {
+        		int zero = 0;
+        		indiceCommentoCorrente = zero;
+        	}
+        	if (this.indiceCommentoCorrente > commenti.size() - 10) {
+        		int valoreMassimo =  commenti.size() - 10;
+        		indiceCommentoCorrente = valoreMassimo;
+        	}
+        	
+        	
+            if(commenti.size() == 0) {
+            	 for(int i = 0 ; i < 10; i = i+2) {
+                     ((Etichette)ListaAreaTesto.get(i)).setText("");
+                     ((Etichette)ListaAreaTesto.get(i + 1)).setText("");
+            	 	}
+            	 return true;
+                 }
+                   
+            for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2 ; i = i + 2) {
+            	if(indiceCommentoCorrente < 0) {
+            		indiceCommentoCorrente = 0;
+            	}
+                int indiceCorrente2 = i + indiceCommentoCorrente;
+                
+                ((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
+                ((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
+            }
+            return true;
+        }
+        
+        public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
+            settaCommenti(commenti);
+            idPost = iDpost;
+            this.cambiaFoto(path);
+            fotoPath = path;
+            numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            containerSondaggio.setVisible(false);
+            containerPost.setVisible(true);
+            this.getAreaCommentiTesto().setText(descrizionePost);
+            this.getNumeroLike().setText("N.Like: " + numeroLike);
+            this.getNumeroDislike().setText("N.Dislike: " + numeroDislike);
+            this.getNumeroCommenti().setText("N.Commenti: " + numeroCommenti/2);
+            
+            impostaImmagineProfiloButton.setVisible(true);
+        }
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti, int [] conteggi,ArrayList<String> commenti) {
+            numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            settaCommenti(commenti);
+            idPost = iDpost;
+              
+            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
+            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
+            etichettaTerzoRisultato.setText(String.valueOf(conteggi[2]));
+            etichettaQuartoRisultato.setText(String.valueOf(conteggi[3]));
+            
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText(scelta3);
+            pulsanteQuartaScelta.setText(scelta4);
+            descrizionePost.setText(descrizioneSondaggio);
+            this.getAreaCommentiTesto().setText("");
 
+            containerPost.setVisible(false);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(false);
+            
+        }
+        
+        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
+        	numeroMiPiace = numeroLike;
+            numeroNonMiPiace = numeroDislike;
+            numeroComm = numeroCommenti;
+            settaCommenti(commenti);
+            idPost = iDpost;
+              
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText("");
+            pulsanteQuartaScelta.setText("");
+            
+            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
+            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
+            etichettaTerzoRisultato.setText("");
+            etichettaQuartoRisultato.setText("");
+            descrizionePost.setText(descrizioneSondaggio);
+            this.getAreaCommentiTesto().setText("");
+
+            containerPost.setVisible(false);
+            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
+            containerSondaggio.setVisible(true);
+            impostaImmagineProfiloButton.setVisible(false);
+        }
+        
+        public JLabel getNumeroLike() {
+        	return areaCommenti.getNumeroLike();
+        }
+        
+        public JLabel getNumeroDislike() {
+        	return areaCommenti.getNumeroDislike();
+        }
+        
+        public JLabel getNumeroCommenti() {
+        	return areaCommenti.getNumeroCommenti();
+        }
+        
         public ArrayList<JComponent> getListaAreaTesto() {
             return ListaAreaTesto;
         }
@@ -346,128 +460,17 @@ package panelspackage.panels;
 			this.pulsanteQuartaScelta = pulsanteQuartaScelta;
 		}
 
-
 		public String getTipoSondaggio() {
 			return tipoSondaggio;
 		}
 
-
 		public void setTipoSondaggio(String tipoSondaggio) {
 			this.tipoSondaggio = tipoSondaggio;
 		}
-		
-        
-        public boolean settaCommenti(ArrayList<String> commenti) {
-        	
-        	if (this.indiceCommentoCorrente < 0) {
-        		int zero = 0;
-        		indiceCommentoCorrente = zero;
-        	}
-        	if (this.indiceCommentoCorrente > commenti.size() - 10) {
-        		int valoreMassimo =  commenti.size() - 10;
-        		indiceCommentoCorrente = valoreMassimo;
-        	}
-        	
-        	
-            if(commenti.size() == 0) {
-            	 for(int i = 0 ; i < 10; i = i+2) {
-                     ((Etichette)ListaAreaTesto.get(i)).setText("");
-                     ((Etichette)ListaAreaTesto.get(i + 1)).setText("");
-            	 	}
-            	 return true;
-                 }
-                   
-            for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2 ; i = i + 2) {
-            	if(indiceCommentoCorrente < 0) {
-            		indiceCommentoCorrente = 0;
-            	}
-                int indiceCorrente2 = i + indiceCommentoCorrente;
-                
-                ((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
-                ((Etichette)ListaAreaTesto.get(i + 1)).setText(commenti.get(indiceCorrente2 + 1));
-            }
-            return true;
-        }
-        
-        public void settaPostVisualizzato(String iDpost, String path, String descrizionePost, int numeroLike, int numeroDislike, int numeroCommenti,ArrayList<String> commenti) {
-            settaCommenti(commenti);
-            idPost = iDpost;
-            this.cambiaFoto(path);
-            fotoPath = path;
-            numeroMiPiace = numeroLike;
-            numeroNonMiPiace = numeroDislike;
-            numeroComm = numeroCommenti;
-            containerSondaggio.setVisible(false);
-            containerPost.setVisible(true);
-            this.getAreaCommentiTesto().setText(descrizionePost);
-            this.getNumeroLike().setText("N.Like: " + numeroLike);
-            this.getNumeroDislike().setText("N.Dislike: " + numeroDislike);
-            this.getNumeroCommenti().setText("N.Commenti: " + numeroCommenti/2);
-            
-            impostaImmagineProfiloButton.setVisible(true);
-        }
-        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti, int [] conteggi,ArrayList<String> commenti) {
-            numeroMiPiace = numeroLike;
-            numeroNonMiPiace = numeroDislike;
-            numeroComm = numeroCommenti;
-            settaCommenti(commenti);
-            idPost = iDpost;
-              
-            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
-            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
-            etichettaTerzoRisultato.setText(String.valueOf(conteggi[2]));
-            etichettaQuartoRisultato.setText(String.valueOf(conteggi[3]));
-            
-            pulsantePrimaScelta.setText(scelta1);
-            pulsanteSecondaScelta.setText(scelta2);
-            pulsanteTerzaScelta.setText(scelta3);
-            pulsanteQuartaScelta.setText(scelta4);
-            descrizionePost.setText(descrizioneSondaggio);
-            this.getAreaCommentiTesto().setText("");
 
-            containerPost.setVisible(false);
-            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
-            containerSondaggio.setVisible(true);
-            impostaImmagineProfiloButton.setVisible(false);
-            
-        }
-        
-        public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
-        	numeroMiPiace = numeroLike;
-            numeroNonMiPiace = numeroDislike;
-            numeroComm = numeroCommenti;
-            settaCommenti(commenti);
-            idPost = iDpost;
-              
-            pulsantePrimaScelta.setText(scelta1);
-            pulsanteSecondaScelta.setText(scelta2);
-            pulsanteTerzaScelta.setText("");
-            pulsanteQuartaScelta.setText("");
-            
-            etichettaPrimoRisultato.setText(String.valueOf(conteggi[0]));
-            etichettaSecondoRisultato.setText(String.valueOf(conteggi[1]));
-            etichettaTerzoRisultato.setText("");
-            etichettaQuartoRisultato.setText("");
-            descrizionePost.setText(descrizioneSondaggio);
-            this.getAreaCommentiTesto().setText("");
 
-            containerPost.setVisible(false);
-            containerCenter.add(containerSondaggio, BorderLayout.CENTER);
-            containerSondaggio.setVisible(true);
-            impostaImmagineProfiloButton.setVisible(false);
-        }
-        
-        public JLabel getNumeroLike() {
-        	return areaCommenti.getNumeroLike();
-        }
-        
-        public JLabel getNumeroDislike() {
-        	return areaCommenti.getNumeroDislike();
-        }
-        
-        public JLabel getNumeroCommenti() {
-        	return areaCommenti.getNumeroCommenti();
-        }
-        
+		public Pulsanti getNascondi() {
+			return nascondi;
+		}
         
 }

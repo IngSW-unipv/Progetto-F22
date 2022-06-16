@@ -297,6 +297,14 @@ public class Frame extends JFrame {
 		return ((LogIn)mappaSchermate.get("Login")).getEtichettaErroreLogin();
 	}
 	
+	public JTextField getInserimentoMail() {
+		return ((LogIn)mappaSchermate.get("Login")).getInserimentoEmail();
+	}
+	
+	
+	public JTextField getInserimentoPassword() {
+		return ((LogIn)mappaSchermate.get("Login")).getInserimentoPwd();
+	}
 	
 	public SpecificContainer getContainerCenterFrame() {
 		return ((Impostazioni)mappaSchermate.get("Impostazioni")).getContainerCenter();
@@ -512,6 +520,9 @@ public class Frame extends JFrame {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getIdPost();
 	}
 
+	public Pulsanti getNascondi() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNascondi();
+	}
 
 	public void setPostProfilo(ArrayList<String> postDelProfilo) {
 		((Profilo)mappaSchermate.get("Profilo")).setPostProfilo(postDelProfilo);
