@@ -1730,6 +1730,7 @@ public class Controller {
     	view.settaCommenti(commentiConProfiliIinvianti);
     }
     
+    
     public void scriviMessaggioPrivato() {
     	String testoDaInviare = view.getScriviMessaggio().getText();
     	model.getProfiloAttivo().scriviMessaggioPrivato(testoDaInviare, model.getProfiloConCuiSiStaChattando().getIdProfilo());
