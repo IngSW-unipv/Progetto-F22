@@ -12,8 +12,10 @@ import profilo.Profilo;
 
 
 public class ChatPrivata extends Chat {
+	
 	private Profilo profiloInviante;
 	private Profilo profiloRicevente;
+	
 	public ChatPrivata(String nomeChat,Profilo profiloInviante, Profilo profiloRicevente) {
 		super(nomeChat);
 		this.profiloInviante = profiloInviante;
@@ -58,9 +60,6 @@ public class ChatPrivata extends Chat {
 	public String toString() {
 		return super.toString() + " profiloInviante=" + profiloInviante + ", profiloRicevente=" + profiloRicevente + "]";
 	}
-
-	
-
 }
 
 

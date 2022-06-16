@@ -36,6 +36,11 @@ public class ChatDiGruppo extends Chat{
 		super.setListaMessaggi(res);
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return super.toString() + " g=" + g + "]";
+	}
 
 	public Gruppo getG() {
 		return g;
@@ -43,11 +48,6 @@ public class ChatDiGruppo extends Chat{
 
 	public void setG(Gruppo g) {
 		this.g = g;
-	}
-
-	@Override
-	public String toString() {
-		return super.toString() + " g=" + g + "]";
 	}
 }
 		

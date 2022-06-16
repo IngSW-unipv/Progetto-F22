@@ -6,6 +6,8 @@ import java.sql.Time;
 import Messaggio.enumeration.TipoMessaggio;
 
 public class MessaggioDiGruppo extends Messaggio{
+	
+	private String idGruppo;
 
 	public MessaggioDiGruppo(String idMessaggio, Date dataInvio, Time oraInvio, String testo, String profiloInviante,String idGruppo) {
 		super(idMessaggio, dataInvio, oraInvio, testo,profiloInviante);
@@ -21,16 +23,7 @@ public class MessaggioDiGruppo extends Messaggio{
 		super(idMessaggio);
 		this.idGruppo = null;
 	}
-
-	private String idGruppo;
-
-	public String getIdGruppo() {
-		return idGruppo;
-	}
-
-	public void setIdGruppo(String idGruppo) {
-		this.idGruppo = idGruppo;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -47,7 +40,14 @@ public class MessaggioDiGruppo extends Messaggio{
 	public Messaggio inserisciCaratteristiche(Messaggio m) {
 		m = new MessaggioDiGruppo(m.getIdMessaggio(),m.getDataInvio(),m.getOraInvio(),m.getTesto(),m.getProfiloInviante(),this.getIdGruppo());
 		return m;
-		
+	}
+
+	public String getIdGruppo() {
+		return idGruppo;
+	}
+
+	public void setIdGruppo(String idGruppo) {
+		this.idGruppo = idGruppo;
 	}
 
 }

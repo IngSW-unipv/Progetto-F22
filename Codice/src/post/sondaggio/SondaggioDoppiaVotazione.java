@@ -7,18 +7,13 @@ import post.enumeration.TipoPost;
 public class SondaggioDoppiaVotazione extends Sondaggio{
 
  
-	public SondaggioDoppiaVotazione(String idPost, String descrizione, 
-			boolean visibile, String profilo, String primaScelta, String secondaScelta) {
+	public SondaggioDoppiaVotazione(String idPost, String descrizione, boolean visibile, String profilo, String primaScelta, String secondaScelta) {
 		super(idPost,descrizione, visibile, profilo, primaScelta, secondaScelta);
 	}
+	
 	public SondaggioDoppiaVotazione(String idPost) {
 		super(idPost);
 	}
-
-
-	
-
-
 
 	@Override
 	public TipoPost getTipo() {

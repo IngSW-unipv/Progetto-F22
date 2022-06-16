@@ -3,9 +3,18 @@ package chat.chatDiGruppo.gruppo;
 
 public class Gruppo {
 	
-public Gruppo(String idGruppo, String descrizione, String profilo1, String profilo2,
-			String profilo3, String profilo4, String profilo5, String profilo6, String amministratore) {
+	private String idGruppo;
+	private String descrizione;
+	private String profilo1;
+	private String profilo2;
+	private String profilo3;
+	private String profilo4;
+	private String profilo5;
+	private String profilo6;
+	private String amministratore;
 	
+	public Gruppo(String idGruppo, String descrizione, String profilo1, String profilo2, String profilo3, String profilo4, String profilo5, 
+			  String profilo6, String amministratore) {	
 		super();
 		this.idGruppo = idGruppo;
 		this.descrizione = descrizione;
@@ -28,20 +37,17 @@ public Gruppo(String idGruppo, String descrizione, String profilo1, String profi
 		this.profilo5 = null;
 		this.profilo6 = null;
 		this.amministratore = null;
-}
-
-	private String idGruppo;
-	private String descrizione;
-	private String profilo1;
-	private String profilo2;
-	private String profilo3;
-	private String profilo4;
-	private String profilo5;
-	private String profilo6;
-	private String amministratore;
+	}
+	
+	@Override
+	public String toString() {
+		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
+				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", amministratore=" + amministratore
+				+ ", fotoGruppo=" + "]";
+	}
 	
 	public String getIdGruppo() {
-	return idGruppo;
+		return idGruppo;
 	}
 	
 	public String getDescrizione() {
@@ -74,12 +80,6 @@ public Gruppo(String idGruppo, String descrizione, String profilo1, String profi
 	
 	public String getAmministratore() {
 		return amministratore;
-	}
-	@Override
-	public String toString() {
-		return "Gruppo [idGruppo=" + idGruppo + ", descrizione=" + descrizione + ", profilo1=" + profilo1 + ", profilo2=" + profilo2 + ", profilo3=" + profilo3 + ", profilo4="
-				+ profilo4 + ", profilo5=" + profilo5 + ", profilo6=" + profilo6 + ", amministratore=" + amministratore
-				+ ", fotoGruppo=" + "]";
 	}
 
 	public void setIdGruppo(String idGruppo) {

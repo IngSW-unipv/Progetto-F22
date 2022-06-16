@@ -8,6 +8,13 @@ import Messaggio.enumeration.TipoMessaggio;
 
 
 public abstract class Messaggio {
+	
+	private String idMessaggio;
+	private Date dataInvio;
+	private Time oraInvio;
+	private String testo;
+	private String profiloInviante;
+	
 	public Messaggio(String idMessaggio, Date dataInvio, Time oraInvio, String testo,String profiloInviante) {
 		super();
 		this.idMessaggio = idMessaggio;
@@ -16,6 +23,7 @@ public abstract class Messaggio {
 		this.testo = testo;
 		this.profiloInviante = profiloInviante;
 	}
+	
 	public Messaggio(String id) {
 		super();
 		this.idMessaggio = id;
@@ -34,36 +42,6 @@ public abstract class Messaggio {
 		this.profiloInviante = profiloInviante;
 	}
 
-	private String idMessaggio;
-	private Date dataInvio;
-	private Time oraInvio;
-	private String testo;
-	private String profiloInviante;
-	public String getIdMessaggio() {
-		return idMessaggio;
-	}
-	public void setIdMessaggio(String idMessaggio) {
-		this.idMessaggio = idMessaggio;
-	}
-	public Date getDataInvio() {
-		return dataInvio;
-	}
-	public void setDataInvio(Date dataInvio) {
-		this.dataInvio = dataInvio;
-	}
-	public Time getOraInvio() {
-		return oraInvio;
-	}
-	public void setOraInvio(Time oraInvio) {
-		this.oraInvio = oraInvio;
-	}
-	public String getTesto() {
-		return testo;
-	}
-	public void setTesto(String testo) {
-		this.testo = testo;
-	}
-
 	@Override
 	public String toString() {
 		return "Messaggio [idMessaggio=" + idMessaggio + ", dataInvio=" + dataInvio + ", oraInvio=" + oraInvio
@@ -80,10 +58,42 @@ public abstract class Messaggio {
 	 */
 	public abstract Messaggio inserisciCaratteristiche(Messaggio m);
 	
+	public String getIdMessaggio() {
+		return idMessaggio;
+	}
+	
+	public void setIdMessaggio(String idMessaggio) {
+		this.idMessaggio = idMessaggio;
+	}
+	
+	public Date getDataInvio() {
+		return dataInvio;
+	}
+	
+	public void setDataInvio(Date dataInvio) {
+		this.dataInvio = dataInvio;
+	}
+	
+	public Time getOraInvio() {
+		return oraInvio;
+	}
+	
+	public void setOraInvio(Time oraInvio) {
+		this.oraInvio = oraInvio;
+	}
+	
+	public String getTesto() {
+		return testo;
+	}
+	
+	public void setTesto(String testo) {
+		this.testo = testo;
+	}	
 	
 	public String getProfiloInviante() {
 		return profiloInviante;
 	}
+	
 	public void setProfiloInviante(String profiloInviante) {
 		this.profiloInviante = profiloInviante;
 	}
