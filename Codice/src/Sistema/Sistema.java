@@ -1,11 +1,14 @@
 package Sistema;
 
 import db.facade.DbFacade;
+import post.Post;
 import post.commento.Commento;
+import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
 import java.util.ArrayList;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.ChatDiGruppo;
+import convertitore.postUtility.PostUtility;
 import profilo.exception.*;
 import profilo.*;
 
@@ -107,11 +110,12 @@ public class Sistema {
 		 * @return ArrayList con i Commenti di un relativo post
 		 *@exception Eccezione se il post non è visibile
 		 */
-	public ArrayList<String> selectAllCommentiSottoPost(String idPost) throws PostNonVisibile {
+	public ArrayList<String> selectAllCommentiSottoPost(String idPost, TipoPost t) throws PostNonVisibile {
 		ArrayList<Commento> listaCommenti = new ArrayList<Commento>();
 		ArrayList<String> listaTestiCommentiConInviante = new ArrayList<String>();
 			
-		listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(new Foto(idPost));
+		Post p = PostUtility.restituisciTipo(idPost, t);
+		listaCommenti =  profiloAttivo.selectAllCommentiSottoPost(p);
 			
 		
 		for(int i=0; i<listaCommenti.size(); i++) {

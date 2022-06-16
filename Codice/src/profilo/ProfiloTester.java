@@ -28,7 +28,7 @@ public class ProfiloTester {
     	Profilo p1 = new Profilo("DV999", "Luca26");
     	Video v = new Video("V00", null, false, null, null, 0, false);
     	Foto f = new Foto("F15", null, false, null, null, false, false);
-    	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("S01", null, false, null, null, null);
+    	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SD343", null, false, null, null, null);
     	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null);
     	Testo t = new Testo("374");
         Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002");
@@ -108,9 +108,16 @@ public class ProfiloTester {
    
     	 //plof.pubblicaStoria("wgfre", false, null, false);
     	
-    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("Dal", TipoPost.FOTO);
-    	for(String s: res)
-    		System.out.println(s.toString());
+   // System.out.println(p.pubblicaCommento("DV999", "SD01", "sono un canguro", TipoPost.SONDAGGIODOPPIAVOTAZIONE));
+    	
+    	try {
+			SondaggioDoppiaVotazione s = (SondaggioDoppiaVotazione) p.cercaPost(sdv);
+			System.out.println(s.toString());
+		} catch (PostNonVisibile | PostNonPresente e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+  
     }
 }
 

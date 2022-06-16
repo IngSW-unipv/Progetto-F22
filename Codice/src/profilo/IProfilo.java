@@ -36,7 +36,7 @@ public interface IProfilo {
 	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t);
 	public boolean pubblicaPost(Post p);
 	public boolean rimuoviPost(Post p);
-    public Post cercaPost(Post p)throws PostNonVisibile, PostNonPresente;
+    public Post cercaPost(Post p) throws PostNonVisibile,PostNonPresente;
 	public ArrayList<Post> selectAllPost(TipoPost t);
     public boolean pubblicaStoria(int time, Multimedia f);
     public String ottieniPercorso(Post p)throws PostNonVisibile;

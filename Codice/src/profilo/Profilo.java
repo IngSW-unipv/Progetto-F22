@@ -421,11 +421,11 @@ public class Profilo implements IProfilo {
 	 *@exception eccezione se il post non esiste
 	 */
 	@Override
-	public Post cercaPost(Post p) throws PostNonVisibile, PostNonPresente{
+	public Post cercaPost(Post p)throws PostNonVisibile,PostNonPresente{
 		System.out.println(p.toString());
 		if (dbfacade.cerca(p) == null) {
 			throw new PostNonPresente(p.getIdPost());
-		}
+ 		}
 		return dbfacade.cerca(p);
 	}
 

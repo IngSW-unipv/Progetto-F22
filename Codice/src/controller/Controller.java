@@ -472,9 +472,6 @@ public class Controller {
 				} catch (AzioneNonConsentita e1) {
 					e1.printStackTrace();
 				}
-			/*	} catch (FollowYourself e1) {
-					e1.printStackTrace();
-				}*/
             }
         };
         view.getPulsanteSegui().addActionListener(gestorePulsanteSegui);
