@@ -45,7 +45,6 @@ public class Frame extends JFrame {
 		
 		 	avvio();
 	   }
-	
 
 	public void avvio() {
 		
@@ -55,7 +54,6 @@ public class Frame extends JFrame {
 		setVisible(true);
 		                
 	  }
-	
 	
 	public void settingParametriFrame() {
 		

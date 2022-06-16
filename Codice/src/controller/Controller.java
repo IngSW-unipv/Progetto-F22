@@ -12,7 +12,6 @@ import post.multimedia.foto.Foto;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
-import profilo.Profilo;
 import profilo.exception.*;
 
 public class Controller {
@@ -22,8 +21,7 @@ public class Controller {
                            gestoreHomeChat, gestoreCreazionePostFoto, gestoreHomeCreazionePost,
                            gestoreLogOut,gestorePubblicaPost, gestoreModificaProfilo, gestoreNascondi,
                            gestoreCerca, gestoreHomeCerca, gestoreFotoProfilo, gestoreIndietroSignup,gestoreHomePostVisualizzato,
-                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost,
-                           gestoreAggiornaChat, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
+                           gestoreAggiungiCommento, gestoreImpostaFotoProfilo,  gestoreAggiungiLikePost, gestoreAggiungiDislikePost, gestorePrimaChatGruppo, gestoreSecondaChatGruppo, gestoreTerzaChatGruppo, gestoreQuartaChatGruppo, 
                            gestoreQuintaChatGruppo, gestoreSestaChatGruppo, gestoreSettimaChatGruppo, gestoreOttavaChatGruppo, gestoreNonaChatGruppo, 
                            gestoreDecimaChatGruppo, gestoreNextCommento, gestorePrevCommento, gestorePubblicaSoloTesto,gestoreProfiloCercato,
                            gestorePulsanteSegui, gestoreApriChat,gestoreInvioMessaggio,gestoreNextMessaggioButton,gestorePrevMessaggioButton,gestorePubblicaSondaggioDoppiaVotazione, gestorePubblicaSondaggioSceltaMultipla,
@@ -48,7 +46,6 @@ public class Controller {
     private String profiloVisualizzato;
     private ArrayList<String> commentiConProfiliIinvianti = new ArrayList<String>();
     private ArrayList<String> messaggiInviati = new ArrayList<String>();
-    private ArrayList<String> messaggiInviatiGruppoConInviante = new ArrayList<String>();
 
     private ArrayList<String> postSchermataHome = new ArrayList<String>();
     private ArrayList<String> storySchermataHome = new ArrayList<String>();
