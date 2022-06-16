@@ -22,7 +22,7 @@ public class  Profilo extends JPanel {
 	ArrayList<AreaDiTesto> ListaSondaggiDoppiaScelta  = new ArrayList<AreaDiTesto>();	
 	ArrayList<String> dati = new ArrayList<String>();
 	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, 
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextSondaggioDoppiaScelta, prevSondaggioDoppiaScelta, nextTesto,prevTesto, 
 	nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, 
 	pulsanteSecondoTesto, pulsanteTerzoTesto,pulsantePrimoSondaggioDoppia, pulsanteSecondoSondaggioDoppia, pulsanteTerzoSondaggioDoppia;
 	private SpecificContainer containerNorth = new SpecificContainer(), 
@@ -150,42 +150,19 @@ public class  Profilo extends JPanel {
 		this.add(containerSouth, BorderLayout.SOUTH);
 
 		SpecificContainer containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
-		containerGrigliaSouth.setLayout(new GridLayout(1,6));
+		containerGrigliaSouth.setLayout(new GridLayout(1,8));
 		
 		containerGrigliaSouth.add(prevTesto = new Pulsanti("Idea precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextTesto = new Pulsanti("Idea successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerGrigliaSouth.add(prevFoto = new Pulsanti("Foto precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextFoto = new Pulsanti("Foto successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggio multiplo precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggio multiplo successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(nextSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(prevSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 
 		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
-	}
-
-	public ArrayList<JComponent> getListaAreaTesto() {
-		return ListaEtichette;
-	}
-
-	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
-		ListaEtichette = listaAreaTesto;
-	}
-	
-	public Pulsanti getPulsanteFotoProfilo() {
-		return this.immagineProf;
-	}
-
-	public void setHomeProfilo(Pulsanti homeProfilo) {
-		this.homeProfilo = homeProfilo;
-	}
-
-	public Pulsanti getImmagineProf() {
-		return immagineProf;
-	}
-
-	public void setImmagineProf(Pulsanti immagineProf) {
-		
-		this.immagineProf = immagineProf;
 	}
 
 	
@@ -291,6 +268,32 @@ public class  Profilo extends JPanel {
 			ListaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 		}
 	}
+	
+	public ArrayList<JComponent> getListaAreaTesto() {
+		return ListaEtichette;
+	}
+
+	public void setListaAreaTesto(ArrayList<JComponent> listaAreaTesto) {
+		ListaEtichette = listaAreaTesto;
+	}
+	
+	public Pulsanti getPulsanteFotoProfilo() {
+		return this.immagineProf;
+	}
+
+	public void setHomeProfilo(Pulsanti homeProfilo) {
+		this.homeProfilo = homeProfilo;
+	}
+
+	public Pulsanti getImmagineProf() {
+		return immagineProf;
+	}
+
+	public void setImmagineProf(Pulsanti immagineProf) {
+		
+		this.immagineProf = immagineProf;
+	}
+	
 	public void setFotoProfilo(String percorso) {
 		this.immagineProf.setIcon(new ImageIcon(percorso));
 	}
@@ -456,5 +459,28 @@ public class  Profilo extends JPanel {
 	public Pulsanti getPulsanteTerzoTesto() {
 		return pulsanteTerzoTesto;
 	}
+
+
+	public Pulsanti getNextSondaggioDoppiaScelta() {
+		return nextSondaggioDoppiaScelta;
+	}
+
+
+	public void setNextSondaggioDoppiaScelta(Pulsanti nextSondaggioDoppiaScelta) {
+		this.nextSondaggioDoppiaScelta = nextSondaggioDoppiaScelta;
+	}
+
+
+	public Pulsanti getPrevSondaggioDoppiaScelta() {
+		return prevSondaggioDoppiaScelta;
+	}
+
+
+	public void setPrevSondaggioDoppiaScelta(Pulsanti prevSondaggioDoppiaScelta) {
+		this.prevSondaggioDoppiaScelta = prevSondaggioDoppiaScelta;
+	}
+	
+	
+	
 	
 }

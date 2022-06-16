@@ -61,7 +61,7 @@ public class Frame extends JFrame {
 	
 	public void settingParametriFrame() {
 		
-		setTitle("Social Network");
+		setTitle("Masagram");
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    this.setSize(screenSize.width , screenSize.height );
 		setLayout(new BorderLayout());
@@ -120,11 +120,6 @@ public class Frame extends JFrame {
 		this.FrameMainContainer.add(mappaSchermate.get(Schermata), BorderLayout.CENTER);
 		mappaSchermate.get(Schermata).setVisible(true);
 	}
-	
-	/*public void mostraBottoneSuperiore(boolean condition) {
-		((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).mostraBottoneSuperiore(condition);
-	}*/
-
 	
 	public String getEmailPerReigstrarsi() {
 		return ((SignUp)mappaSchermate.get("Signup")).getEmailPerReigstrarsi();
@@ -367,10 +362,6 @@ public class Frame extends JFrame {
 	}
 	
 	
-	/*public Etichette getEtichettaNome() {
-		return ((Profilo)mappaSchermate.get("Profilo")).getEtichettaNome();
-	}*/
-	
 	
 	public JButton getPulsanteFotoProfilo() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPulsanteFotoProfilo();
@@ -484,6 +475,15 @@ public class Frame extends JFrame {
 	public JButton getPrevSondaggio() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPrevSondaggio();
 	}
+	
+	public JButton getNextSondaggioDoppiaScelta() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getNextSondaggioDoppiaScelta();
+	}
+	
+	public JButton getPrevSondaggioDoppiaScelta() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getPrevSondaggioDoppiaScelta();
+	}
+
 
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();

@@ -1,6 +1,7 @@
 package panelspackage.panels;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.HashMap;
 import javax.swing.JButton;
@@ -54,9 +55,9 @@ public class Impostazioni extends JPanel {
 		containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		this.add(containerCenter, BorderLayout.CENTER);
 
-		containerCenter.setLayout(new GridLayout(3,1));
-
-		containerCenter.add(areaDescrizione = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "inserisci la tua nuova descrizione profilo"));
+		//containerCenter.setLayout(new GridLayout(3,1));
+		containerCenter.add(new Etichette("Inserisci la nuova descrizione del tuo profilo", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 18)), BorderLayout.NORTH);
+		containerCenter.add(areaDescrizione = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "Nuova descrizione"), BorderLayout.CENTER);
 		containerCenter.setVisible(false);
 
 		SpecificContainer containerSouth = new SpecificContainer();

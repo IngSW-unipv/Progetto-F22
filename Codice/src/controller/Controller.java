@@ -34,7 +34,8 @@ public class Controller {
                            gestoreStorySuccessiva, gestoreStoryPrecedente, gestoreSondaggioDoppiaScelta1,gestoreSondaggioDoppiaScelta2, gestoreSondaggioDoppiaScelta3, 
                            gestoreRimuoviAccount, gestoreProssimoMessaggio, gestoreMessaggioPrecedente, gestoreCercaGruppo, gestorePartecipa, gestoreEsciGruppo,
                            gestoreRimuoviUtente, gestoreAggiungiUtente, gestoreModificaDescrizioneChat, gestoreInviaMessaggioGruppo, gestoreCambiaDescrizione, gestoreHomeGruppo,
-                           gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo;
+                           gestorePrimaStoria, gestoreSecondaStoria, gestoreTerzaStoria, gestoreQuartaStoria, gestoreQuintaStoria, gestoreNextMsgGruppo, gestorePrevMsgGruppo,
+                           gestoreNextSondaggioDoppiaScelta, gestorePrevSondaggioDoppiaScelta;
     Frame view;
     Sistema model;
     
@@ -98,6 +99,7 @@ public class Controller {
         gestoreLogin = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	tipoPostAttuale = TipoPost.FOTO;
                 if (login()) 
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
@@ -971,6 +973,22 @@ public class Controller {
         	}
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
+        
+        gestoreNextSondaggioDoppiaScelta = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Sondaggio doppia scelta successivo");
+        	}
+        };
+        view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
+        
+        gestorePrevSondaggioDoppiaScelta = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println("Sondaggio doppia scelta precedente");
+        	}
+        };
+        view.getPrevSondaggioDoppiaScelta().addActionListener(gestorePrevSondaggioDoppiaScelta);
     }
     
     public void actionListenersCreazionePost() {
@@ -1425,12 +1443,13 @@ public class Controller {
          };
          view.getPulsanteHomeAreaChatFrame().addActionListener(gestoreChatFrameHome);
          
-    	
+         
     	gestoreInvioMessaggio = new ActionListener() {
      	   @Override
      	   public void actionPerformed(ActionEvent e) {
      		  scriviMessaggioPrivato();
-     		  refresh();
+	  		  view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+			  refresh();
      	   }
      	   
         };
@@ -1735,9 +1754,10 @@ public class Controller {
     	String testoDaInviare = view.getScriviMessaggio().getText();
     	model.getProfiloAttivo().scriviMessaggioPrivato(testoDaInviare, model.getProfiloConCuiSiStaChattando().getIdProfilo());
     }
+    
     public void aggiornaSchermataProfiloAttivo() {
     	String descrizione = model.getProfiloAttivo().getDescrizione();;
-    	if(descrizione.equals("null")) {
+    	if(descrizione == null) {
     		descrizione = "-- Puoi cambiare la descrizione nelle impostazioni --";
     	}
     	String nickName = model.getProfiloAttivo().getNickname();
@@ -1868,10 +1888,8 @@ public class Controller {
 		try {
 			model.getProfiloAttivo().aggiungiPartecipante(idGruppo, utente);
 		} catch (GruppoGiaPieno e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (ProfiloGiaInserito e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -1880,6 +1898,7 @@ public class Controller {
 	}
 	
 	public void visualizzaPostTesto(int indicePostTesto) {
+		tipoPostAttuale = TipoPost.TESTO;
         try {
         	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(indicePostTesto))));
 			
@@ -1893,7 +1912,6 @@ public class Controller {
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
-    	tipoPostAttuale = TipoPost.TESTO;
     	view.getImpostaImmagineProfiloButton().setVisible(false);
     	view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(),
     							 null, 
@@ -1908,6 +1926,7 @@ public class Controller {
 	
 	public void visualizzaPostFoto(int indicePostFoto) {
         settaPostVisualizzato(false);
+        tipoPostAttuale = TipoPost.FOTO;
         try {
 			try {
 				model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(indicePostFoto))));
@@ -1917,7 +1936,6 @@ public class Controller {
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
-    	tipoPostAttuale = TipoPost.FOTO;
 
     	try {
 
@@ -1938,12 +1956,12 @@ public class Controller {
 	}
 	
 	public void visualizzaPostSondaggioSceltaMultipla(int indicePostSondaggio) {
+		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
 		try {
 			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(indicePostSondaggio), null, false, null, null, null, null, null)));
 		} catch (PostNonVisibile | PostNonPresente e1) {
 			e1.printStackTrace();
 		}
-		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
 
 		try {
 			commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
@@ -1970,12 +1988,12 @@ public class Controller {
 	}
 	
 	public void visualizzaPostSondaggioDoppiaScelta(int indicePostSondaggio) {
+		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
 		try {
 			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(indicePostSondaggio), null, false, null, null, null)));
 		} catch (PostNonVisibile | PostNonPresente e1) {
 			e1.printStackTrace();
 		}
-		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
 		try {
 			commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 		} catch (PostNonVisibile e1) {
