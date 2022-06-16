@@ -227,29 +227,6 @@ public class Profilo implements IProfilo {
 		return dbfacade.ottieniTestoMessaggio(m.getIdMessaggio(), m.getTipo());
 	}
 
-	/**
-	 * Funzione che mi permette di leggere tutti i messaggi inviati (con tutte le informazioni) da un certo utente, ogni minuto, per cinque minuti
-	 * @param id del profilo che invia
-	 * @param email del profilo che riceve
-	 * @param Tipo del messaggio da leggere
-	 */
-	@Override
-	public boolean leggiMessaggi(String profiloInviante,String profiloRicevente, TipoMessaggio t) {
-		
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-		int i = 0;
-		public void run() {
-				ArrayList<Messaggio> mess = dbfacade.selezionaMessaggi(profiloInviante,profiloRicevente, t);
-			    for(Messaggio lis : mess)	
-			    	System.out.println(lis.toString());
-			    	i++;
-		               if(i == 5) 
-		        	      timer.cancel();
-			    }
-			 }, 0,  1000 * 60 * 5);	
-		return true;
-	}
 	
 	/**
 	 * Funzione che permette di cercare nel database una chat indicata
@@ -268,31 +245,6 @@ public class Profilo implements IProfilo {
 		}
 		
 		return listaTestoEProfiloInviante;
-	}
-
-	/**
-	 * Funzione che mi permette di leggere tutti i messaggi (solamente il testo) inviati da un certo utente, ogni minuto, per cinque minuti
-	 * @param id del profilo che invia
-	 * @param email del profilo che riceve
-	 * @param Tipo del messaggio da leggere
-	 */
-	@Override
-	public boolean leggiSoloTesto(String profiloInviante,String profiloRicevente, TipoMessaggio t){
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-			int i = 0;
-		    public void run() {
-		      
-		       ArrayList<String> res = dbfacade.ottieniTestoListaMessaggi(profiloInviante,profiloRicevente, t);
-		    	for(String msg : res)
-		    		System.out.println(msg.toString());
-		       
-		    	i++;
-	               if(i == 5) 
-	        	      timer.cancel();
-		    }
-		 }, 0,  1000 * 60 * 5);	
-		return true;
 	}
 	
 	/**
@@ -432,7 +384,8 @@ public class Profilo implements IProfilo {
 	 * Modifica la visibilita di un post
 	 */
 	@Override
-	public boolean modificaVisibilita(Post p, boolean b) {
+	public boolean modificaVisibilita(String idPost, TipoPost t, boolean b) {
+		Post p = PostUtility.restituisciTipo(idPost, t);
 		return dbfacade.modificaVisibilita(p, b);
 	}
 
