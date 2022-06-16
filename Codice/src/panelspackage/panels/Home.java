@@ -124,11 +124,15 @@ public class Home extends JPanel {
 			indiceStorie = 0;
     	}
 		
-    	if (indiceStorie > storieDaVisualizzare.size() + 10) {
+    	if (indiceStorie > storieDaVisualizzare.size()-10) {
     		indiceStorie = storieDaVisualizzare.size() - 10;
+
     	}
-    	
+
 		while(flag) {
+			if (this.indiceStorie < 0) {
+				indiceStorie = 0;
+	    	}	
 			int indice =(i*2) + 1 + indiceStorie;
 			String percorso = storieDaVisualizzare.get(indice);
 			listaPulsantiStorie.get(i).setIcon(new ImageIcon(percorso));
