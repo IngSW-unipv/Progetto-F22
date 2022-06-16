@@ -83,7 +83,7 @@ public class Frame extends JFrame {
 		Impostazioni impostazioni = new Impostazioni();
 		mappaSchermate.put("Impostazioni", impostazioni);
 
-		Profilo profilo = new Profilo(listaPost);
+		Profilo profilo = new Profilo();
 		mappaSchermate.put("Profilo", profilo);
 
 		Chat chat = new Chat();

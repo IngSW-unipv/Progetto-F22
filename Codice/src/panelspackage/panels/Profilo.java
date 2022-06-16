@@ -3,10 +3,8 @@ package panelspackage.panels;
 import javax.swing.*;
 import packageframe.Frame;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import panelspackage.panels.elements.GrigliaDiElementi;
-import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
@@ -16,26 +14,24 @@ import panelspackage.panels.elements.SpecificContainer;
 public class  Profilo extends JPanel {
 
 	private String idProfilo;
-	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
-	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
-	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
-	ArrayList<AreaDiTesto> listaSondaggiDoppiaScelta  = new ArrayList<AreaDiTesto>();	
-	ArrayList<String> dati = new ArrayList<String>();
-	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
-	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextSondaggioDoppiaScelta, prevSondaggioDoppiaScelta, nextTesto,prevTesto, 
-	nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, 
-	pulsanteSecondoTesto, pulsanteTerzoTesto,pulsantePrimoSondaggioDoppia, pulsanteSecondoSondaggioDoppia, pulsanteTerzoSondaggioDoppia;
-	private SpecificContainer containerNorth = new SpecificContainer(), 
-							  containerCenter = new SpecificContainer(), 
-							  containerNorthNorth = new SpecificContainer();
+	private ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
+	private ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
+	private ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
+	private ArrayList<AreaDiTesto> listaSondaggiDoppiaScelta  = new ArrayList<AreaDiTesto>();	
+	private ArrayList<String> dati = new ArrayList<String>();
+	private ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
+	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextSondaggioDoppiaScelta, 
+					 prevSondaggioDoppiaScelta, nextTesto,prevTesto, nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio,
+					 pulsanteTerzoSondaggio, pulsantePrimoTesto, pulsanteSecondoTesto, pulsanteTerzoTesto,pulsantePrimoSondaggioDoppia, 
+					 pulsanteSecondoSondaggioDoppia, pulsanteTerzoSondaggioDoppia;
+	private SpecificContainer containerNorth, containerNorthNorth;
 	
 	private int contatoreFoto = 0, contatoreTesto = 0, contatoreSondaggio = 0, contatoreSondaggioDoppiaScelta = 0;
 	
-	public Profilo(ArrayList<String> immaginiPost) {
+	public Profilo() {
 		this.avvio();
-		this.initComponents(immaginiPost);
+		this.initComponents();
 	}
-	
 	
 	public void avvio() {
 		this.setVisible(true);
@@ -43,14 +39,17 @@ public class  Profilo extends JPanel {
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
 	}
 	
-	public void initComponents(ArrayList<String> immaginiPost) {
+	public void initComponents() {
+		
+		containerNorth = new SpecificContainer();
+		containerNorthNorth = new SpecificContainer();
 		
 		add(containerNorth, BorderLayout.NORTH);
 		containerNorth.add(containerNorthNorth, BorderLayout.NORTH);
 		containerNorthNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerNorthNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerNorthNorth.add(new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg");
+		immagineProf = new Pulsanti("");
 		JScrollPane pannelloFoto = new JScrollPane(immagineProf);
 		pannelloFoto.setPreferredSize(new Dimension(80,80));
 		containerNorthNorth.add(pannelloFoto,BorderLayout.PAGE_START);
@@ -288,38 +287,6 @@ public class  Profilo extends JPanel {
 					listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
 		}
 	}
-	
-	/*
-	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
-		if (this.contatoreSondaggioDoppiaScelta <= 0) {
-			contatoreSondaggioDoppiaScelta = 0;
-    	}
-    	if (contatoreSondaggioDoppiaScelta > postSondaggioDoppiaSceltaDelProfilo.size() - 6) {
-    		contatoreSondaggioDoppiaScelta = postSondaggioDoppiaSceltaDelProfilo.size() - 6;
-    	}
-		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
-			int i;
-			for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
-				if (contatoreSondaggioDoppiaScelta < 0) {
-					contatoreSondaggioDoppiaScelta = 0;
-		    	}
-				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
-			}
-			
-			for (int j = i; j < 3; j++) {
-				listaSondaggiDoppiaScelta.get(j).setText("");
-			}
-		} else {
-			if (contatoreSondaggioDoppiaScelta < 0) {
-				contatoreSondaggioDoppiaScelta = 0;
-	    	}
-			for (int i = 0; i < 3 ; i++) {
-
-				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
-			}
-		}
-	}
-	*/
 	
 	public ArrayList<JComponent> getListaAreaTesto() {
 		return ListaEtichette;

@@ -58,8 +58,8 @@ public class Ricerca extends JPanel {
 		add(containerWest, BorderLayout.WEST);
 		containerWest.setLayout(new GridLayout(10,1));
 		
-		containerWest.add(new Etichette("mail appartenente al profilo: ", Frame.COLOREPRIMARIOTEMATICO));
-		containerWest.add(new Etichette("id appartenente alla chat: "+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
+		containerWest.add(new Etichette("Mail appartenente al profilo: ", Frame.COLOREPRIMARIOTEMATICO));
+		containerWest.add(new Etichette("ID appartenente alla chat: "+ (i+1), Frame.COLOREPRIMARIOTEMATICO));
 
 		containerCenter.add(profiloCercato = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO));
 		containerCenter.add(gruppoCercato = new Pulsanti("", Frame.COLOREPRIMARIOTEMATICO));
@@ -94,7 +94,6 @@ public class Ricerca extends JPanel {
 	public Pulsanti getProfiloCercato() {
 		return (Pulsanti) profiloCercato;
 	}
-
 
 	public Pulsanti gruppoCercato() {
 		return gruppoCercato;
