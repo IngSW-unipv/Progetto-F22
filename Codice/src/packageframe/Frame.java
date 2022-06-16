@@ -40,20 +40,17 @@ public class Frame extends JFrame {
 	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
 	
 	
-	public Frame(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, 
-			     int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
+	public Frame() {
 		
-		 	avvio(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost,immagineProfilo, listaImmaginiPost);
+		 	avvio();
 	   }
 	
 
-	public void avvio(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, int numeroFollowers, 
-			          int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
+	public void avvio() {
 		
 		settingParametriFrame();
 		add(FrameMainContainer = new SpecificContainer(Color.BLACK) , BorderLayout.CENTER);
-		avvioSchermate(bufferStories, bufferPosts, nomeUtente, eMail, numeroFollowers, numeroSeguiti, numeroPost, immagineProfilo, 
-				       listaImmaginiPost);
+		avvioSchermate();
 		setVisible(true);
 		                
 	  }
@@ -71,8 +68,7 @@ public class Frame extends JFrame {
 	  
 	  }
 	
-	public void avvioSchermate(ArrayList<String> bufferStories, ArrayList<String> bufferPosts, String nomeUtente, String eMail, 
-			                   int numeroFollowers, int numeroSeguiti, int numeroPost, String immagineProfilo, String[] listaImmaginiPost ) {
+	public void avvioSchermate() {
 		
 		LogIn login = new LogIn();
 		mappaSchermate.put("Login",   login);

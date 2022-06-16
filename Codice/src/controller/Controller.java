@@ -63,7 +63,6 @@ public class Controller {
 	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
-        initComponents();
     }
     
     public void initComponents() {
@@ -1745,6 +1744,12 @@ public class Controller {
     	String commentoDaAggiungere = view.getCommentoDaAggiungere().getText();
     	String idPost = view.getIdPostVisualizzato();
     	model.getProfiloAttivo().pubblicaCommento(idProfilo, idPost, commentoDaAggiungere, tipoPostAttuale);
+		try {
+			commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(view.getIdPostVisualizzato(), tipoPostAttuale);
+		} catch (PostNonVisibile e) {
+			e.printStackTrace();
+		}
+    	view.settaCommenti(commentiConProfiliIinvianti);
     }
     
     public void mostraCommentiPost(String idPost) throws PostNonVisibile {
