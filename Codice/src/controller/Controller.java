@@ -977,15 +977,18 @@ public class Controller {
         gestoreNextSondaggioDoppiaScelta = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Sondaggio doppia scelta successivo");
+        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() + 2);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggioDoppiaScelta);
         	}
         };
         view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
         
+        
         gestorePrevSondaggioDoppiaScelta = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println("Sondaggio doppia scelta precedente");
+        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() - 2);
+        		view.setPostSondaggioProfilo(percorsiPostSondaggioDoppiaScelta);
         	}
         };
         view.getPrevSondaggioDoppiaScelta().addActionListener(gestorePrevSondaggioDoppiaScelta);
