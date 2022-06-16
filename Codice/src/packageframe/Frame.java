@@ -680,6 +680,18 @@ public class Frame extends JFrame {
 	public JButton getPulsanteQuartaScelta() {
 		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getPulsanteQuartaScelta();
 	}
+	
+	public JLabel getNumeroLike() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroLike();
+	}
+	
+	public JLabel getNumeroDislike() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroDislike();
+	}
+	
+	public JLabel getNumeroCommenti() {
+		return ((PostVisualizzato)mappaSchermate.get("Postvisualizzato")).getNumeroCommenti();
+	}
 
 	public JFileChooser getFileChooser() {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getFileChooser();
@@ -795,9 +807,6 @@ public class Frame extends JFrame {
 	public InserimentoTesto getQuartaScelta( ) {
 		return ((CreazionePost)mappaSchermate.get("CreazionePost")).getSceltaSondaggio4();
 	}
-	
-	
-
 	
 	
 	public JButton getNextTipoPost( ) {

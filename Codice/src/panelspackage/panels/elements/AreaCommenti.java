@@ -15,6 +15,7 @@ public class AreaCommenti extends Container {
 	
 	JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
 	JButton aggiungiLike, aggiungiDislike,aggiungiCommento;
+	JLabel numeroLike, numeroDislike, numeroCommenti;
 	
 	public AreaCommenti() {
 		this.setLayout(new BorderLayout());
@@ -23,11 +24,11 @@ public class AreaCommenti extends Container {
 		areaDescrizione.setEditable(false);
 		areaDescrizione.setLineWrap(true);
 		JScrollPane scrollAreaDescrizione = new JScrollPane(areaDescrizione, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JLabel numeroLike = new JLabel("N.like");
+		numeroLike = new JLabel("N.like");
 		numeroLike.setForeground(Color.white);
-		JLabel numeroDislike = new JLabel("N.dislike");
+		numeroDislike = new JLabel("N.dislike");
 		numeroDislike.setForeground(Color.white);
-		JLabel numeroCommenti = new JLabel("N.Commenti");
+		numeroCommenti = new JLabel("N.Commenti");
 		numeroCommenti.setForeground(Color.white);
 		
 		aggiungiLike = new JButton("Aggiungi Like");
@@ -64,6 +65,30 @@ public class AreaCommenti extends Container {
 
 	public JButton getAggiungiCommento() {
 		return aggiungiCommento;
+	}
+
+	public JLabel getNumeroLike() {
+		return numeroLike;
+	}
+
+	public void setNumeroLike(JLabel numeroLike) {
+		this.numeroLike = numeroLike;
+	}
+
+	public JLabel getNumeroDislike() {
+		return numeroDislike;
+	}
+
+	public void setNumeroDislike(JLabel numeroDislike) {
+		this.numeroDislike = numeroDislike;
+	}
+
+	public JLabel getNumeroCommenti() {
+		return numeroCommenti;
+	}
+
+	public void setNumeroCommenti(JLabel numeroCommenti) {
+		this.numeroCommenti = numeroCommenti;
 	}
 	
 }
