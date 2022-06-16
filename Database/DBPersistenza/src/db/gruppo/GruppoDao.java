@@ -184,7 +184,7 @@ public ArrayList<String> caricaGruppiProfilo(String profilo) {
 	
 	try {
 		
-		String query = "select distinct idGruppo, nomeGruppo from gruppo g, profilo p where p.idProfilo = g.profilo1 or p.idProfilo = g.profilo2 or p.idProfilo = g.profilo3 or p.idProfilo = g.profilo4 or p.idProfilo = g.profilo5 or p.idProfilo = g.profilo6 or p.idProfilo = g.amministratore and p.idProfilo =?";
+		String query = "select distinct idGruppo from gruppo g, profilo p where p.idProfilo = g.profilo1 or p.idProfilo = g.profilo2 or p.idProfilo = g.profilo3 or p.idProfilo = g.profilo4 or p.idProfilo = g.profilo5 or p.idProfilo = g.profilo6 or p.idProfilo = g.amministratore and p.idProfilo =?";
 		
 		st1 = conn.prepareStatement(query);
 		st1.setString(1, profilo);
@@ -194,9 +194,8 @@ public ArrayList<String> caricaGruppiProfilo(String profilo) {
 		while(rs1.next())
 		{
 			String idNuovo=rs1.getString(1);
-			String nomeGruppo=rs1.getString(2);
 			result.add(idNuovo);
-	        result.add(nomeGruppo);
+	        result.add(idNuovo);
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

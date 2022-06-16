@@ -9,6 +9,7 @@ import packageframe.Frame;
 import panelspackage.panels.PostVisualizzato;
 import post.enumeration.TipoPost;
 import post.multimedia.foto.Foto;
+import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.Profilo;
@@ -57,6 +58,7 @@ public class Controller {
     private ArrayList<String> listaGruppi = new ArrayList<String>();
     private TipoPost tipoPostAttuale;
     ArrayList<String> messaggi = new ArrayList<String>();
+    
 	public Controller(Sistema s, Frame f) {
         view = f;
         model = s;  
@@ -99,12 +101,10 @@ public class Controller {
                 if (login()) 
                 	postSchermataHome = model.getProfiloAttivo().caricaPostProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
                 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-                	//checkPulsantiStorie();
                 	if(storySchermataHome.size() == 0) {
                   		System.out.println("non ci sono storie");
                 	} else {
                 		view.setPercorsiStorieLogin(storySchermataHome);
-                		//refresh();
                 	}
                 	if(postSchermataHome.size() == 0) {
                 		mostraSchermata("Home");
@@ -140,7 +140,7 @@ public class Controller {
         gestoreIndietroSignup = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                    mostraSchermata("Login");
+            	mostraSchermata("Login");
             }
         };
          view.getIndietroButton().addActionListener(gestoreIndietroSignup);
@@ -152,13 +152,12 @@ public class Controller {
     	gestorePulsanteFotoHome = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(0 + view.getContatorePost())));
+            		model.getProfiloAttivo().setFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postSchermataHome.get(0 + view.getContatorePost()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getFotoPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -178,8 +177,6 @@ public class Controller {
 	            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
 	            	view.aggiornaPostHome();
 	            	refresh();
-            	} else {
-            		System.out.println("Non ci sono altri post, array finito");
             	}
             }
         };
@@ -195,8 +192,6 @@ public class Controller {
 	            	view.setPercorsoPost(ottieniPost(view.getContatorePost()));
 	            	view.aggiornaPostHome();
 	            	refresh();
-            	} else {
-            		System.out.println("Contatore uguale a 0, non ci sono post precedenti");
             	}
             }
         };
@@ -210,10 +205,9 @@ public class Controller {
         			view.setIndiceStorie(view.getIndiceStorie() + 2);
         		}
         	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-            	if(storySchermataHome.size() == 0) {
-            	} else {
-            		view.setPercorsiStorieLogin(storySchermataHome);
-            	}
+        	 	if(storySchermataHome.size() != 0) {
+        	 		view.setPercorsiStorieLogin(storySchermataHome);
+        	 	}
         	}
         	
         };
@@ -226,11 +220,9 @@ public class Controller {
         			view.setIndiceStorie(view.getIndiceStorie() - 2);
         		}
         	 	storySchermataHome = model.getProfiloAttivo().caricaStorieProfiliSeguiti(model.getProfiloAttivo().getIdProfilo(), TipoPost.FOTO);
-            	if(storySchermataHome.size() == 0) {
-            		System.out.println("non ci sono storie");
-            	} else {
-            		view.setPercorsiStorieLogin(storySchermataHome);
-        		}
+        	 	if(storySchermataHome.size() != 0) {
+        	 		view.setPercorsiStorieLogin(storySchermataHome);
+        	 	}
         	}
         };
         view.getButtonPrevStory().addActionListener(gestoreStoryPrecedente);
@@ -238,13 +230,12 @@ public class Controller {
         gestorePrimaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getIndiceStorie())));
+            		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(0 + view.getIndiceStorie()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -255,13 +246,12 @@ public class Controller {
         gestoreSecondaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(2 + view.getIndiceStorie())));
+            		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(2 + view.getIndiceStorie()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -272,13 +262,14 @@ public class Controller {
         gestoreTerzaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
+            	//Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getIndiceStorie())));
+            		//f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getIndiceStorie())));
+            		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(4 + view.getIndiceStorie()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -289,13 +280,12 @@ public class Controller {
         gestoreQuartaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(6 + view.getIndiceStorie())));
+            		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(6 + view.getIndiceStorie()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -306,13 +296,12 @@ public class Controller {
         gestoreQuintaStoria = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-            	Foto f = new Foto(null);
             	try {
-            		f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(8 + view.getIndiceStorie())));
+            		model.getProfiloAttivo().setStoriaPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(storySchermataHome.get(8 + view.getIndiceStorie()))));
 				} catch (PostNonPresente| PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	visualizzaPostFoto(f);
+            	visualizzaPostFoto(model.getProfiloAttivo().getStoriaPerController());
             	mostraSchermata("Postvisualizzato");
             	refresh();
             
@@ -426,14 +415,13 @@ public class Controller {
 	    view.getSalvaModificheButton().addActionListener(gestoreSalvaLeModifiche);
 	    
 	    gestoreRimuoviAccount = new ActionListener() {
-	    	    	@Override
-	    	    	public void actionPerformed(ActionEvent e) {
-	    			//view.getContainerCenterFrame().setVisible(false);
-	    	    		rimuoviProfilo();
-	    	    		mostraSchermata("Login");
-	    	    	}
-	    	    };
-	    	    view.getEliminaAccountButton().addActionListener(gestoreRimuoviAccount);
+	    	@Override
+	    	public void actionPerformed(ActionEvent e) {
+	    		rimuoviProfilo();
+	    		mostraSchermata("Login");
+	    	}
+	    };
+	    view.getEliminaAccountButton().addActionListener(gestoreRimuoviAccount);
     }
     
     public void actionListenersProfilo() {
@@ -452,9 +440,6 @@ public class Controller {
             public void actionPerformed(ActionEvent e) {
             	model.setProfiloConCuiSiStaChattando(model.getProfiloCercato());
             	messaggi = model.getProfiloAttivo().cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
-            	for(int i = 0; i < messaggi.size(); i++) {
-            		System.out.println(messaggi.get(i));
-            	}
             	view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getNickname());
             	refresh();
             	mostraSchermata("AreaChatFrame");
@@ -479,43 +464,38 @@ public class Controller {
         gestoreFotoProfilo = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            if(model.getProfiloAttivo().getIdProfilo().equals(profiloVisualizzato)) {
-
-                Foto f = new Foto(null);
-                
-                try {
-					f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo()));
-				} catch (PostNonPresente| PostNonVisibile e1) {
-					 f.setPercorso("immagini/images.png"); 
-				}
-                
-                visualizzaPostFoto(f);
-                mostraSchermata("Postvisualizzato");
-                refresh();           
-        } else {
-        	Foto f = new Foto(null);
-        	try {
-				f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo()));
-			} catch (PostNonPresente| PostNonVisibile e1) {
-				 f.setPercorso("immagini/images.png"); 
-			}
-            
-            visualizzaPostFoto(f);
-            mostraSchermata("Postvisualizzato");
-            refresh();         
-        		}
-        	}
-        }
-            ;
+	            if(model.getProfiloAttivo().getIdProfilo().equals(profiloVisualizzato)) {
+	                try {
+	                	model.getProfiloAttivo().setFotoProfiloPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloAttivo().getFotoProfilo())));
+					} catch (PostNonPresente| PostNonVisibile e1) {
+						model.getProfiloAttivo().getFotoProfiloPerController().setPercorso("immagini/images.png");
+					}
+	                
+	                visualizzaPostFoto(model.getProfiloAttivo().getFotoProfiloPerController());
+	                mostraSchermata("Postvisualizzato");
+	                refresh();           
+	            } else {
+	            	try {
+	            		model.getProfiloAttivo().setFotoProfiloPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(model.getProfiloCercato().getFotoProfilo())));
+	            	} catch (PostNonPresente| PostNonVisibile e1) { 
+						model.getProfiloAttivo().getFotoProfiloPerController().setPercorso("immagini/images.png");
+	            	}
+		            visualizzaPostFoto(model.getProfiloAttivo().getFotoProfiloPerController());
+		            mostraSchermata("Postvisualizzato");
+		            refresh();         
+		        }
+	        }
+        };
         view.getPulsanteFotoProfilo().addActionListener(gestoreFotoProfilo);
         
         gestorePulsantePrimoTesto = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Testo t = new Testo(null);
+                //Testo t = new Testo(null);
                 
                 try {
-					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(0 + view.getContatoreTesto())));
+					//t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(0 + view.getContatoreTesto())));
+                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(0 + view.getContatoreTesto()))));
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
@@ -523,13 +503,19 @@ public class Controller {
 					e1.printStackTrace();
 				}
             	try {
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	tipoPostAttuale = TipoPost.TESTO;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-            	view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+            	view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(),
+            							 null, 
+            							 model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
+            							 model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
+            							 model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
+            							 commentiConProfiliIinvianti.size(), 
+            							 commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();
             }
@@ -540,10 +526,8 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	settaPostVisualizzato(false);
-                Testo t = new Testo(null);
-                
                 try {
-					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(2+ view.getContatoreTesto())));
+                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(2+ view.getContatoreTesto()))));
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
@@ -551,13 +535,19 @@ public class Controller {
 				} 
             	try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	tipoPostAttuale = TipoPost.TESTO;
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(), 
+                						 null, 
+                						 model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
+                						 model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
+                						 model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
+                						 commentiConProfiliIinvianti.size(), 
+                						 commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();    
             }
@@ -568,10 +558,8 @@ public class Controller {
             @Override
             public void actionPerformed(ActionEvent e) {
             	settaPostVisualizzato(false);
-                Testo t = new Testo(null);
-                
                 try {
-					t = (Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(4 + view.getContatoreTesto())));
+                	model.getProfiloAttivo().setPostTestoPerController((Testo) model.getProfiloAttivo().cercaPost(new Testo(percorsiPostTesto.get(4 + view.getContatoreTesto()))));
 					
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
@@ -580,13 +568,19 @@ public class Controller {
 				}
             	try {
                 	tipoPostAttuale = TipoPost.TESTO;
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(t.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostTestoPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
 
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-                view.setPostVisualizzato(t.getIdPost(), null, t.getDescrizione(), t.getNumLike(), t.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                view.setPostVisualizzato(model.getProfiloAttivo().getPostTestoPerController().getIdPost(),
+                					     null, 
+                					     model.getProfiloAttivo().getPostTestoPerController().getDescrizione(), 
+                					     model.getProfiloAttivo().getPostTestoPerController().getNumLike(), 
+                					     model.getProfiloAttivo().getPostTestoPerController().getNumDislike(), 
+                					     commentiConProfiliIinvianti.size(), 
+                					     commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();
             }
@@ -600,11 +594,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
                 settaPostVisualizzato(false);
-                Foto f = new Foto(null);
-                
                 try {
 					try {
-						f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + view.getContatoreFoto())));
+						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(0 + view.getContatoreFoto()))));
 					} catch (PostNonPresente e1) {
 						e1.printStackTrace();
 					}
@@ -613,14 +605,20 @@ public class Controller {
 				}
             	try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
             	tipoPostAttuale = TipoPost.FOTO;
 
             	view.getImpostaImmagineProfiloButton().setVisible(true);
-            	view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+            	view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
+            							 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
+            							 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(), 
+            							 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
+            							 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
+            							 commentiConProfiliIinvianti.size(), 
+            							 commentiConProfiliIinvianti);
                 mostraSchermata("Postvisualizzato");
                 refresh();    
         	}
@@ -630,12 +628,10 @@ public class Controller {
         gestorePost2 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-                    settaPostVisualizzato(false);
-                    Foto f = new Foto(null);
-                    
+                    settaPostVisualizzato(false);                    
                     try {
     					try {
-							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + view.getContatoreFoto())));
+    						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(2 + view.getContatoreFoto()))));
 						} catch (PostNonPresente e1) {
 							e1.printStackTrace();
 						}
@@ -644,14 +640,20 @@ public class Controller {
     				}
                 	try {
 
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
           
                 	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
-                    view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                    view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
+                    						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
+                    						 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(),
+                    						 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
+                    						 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
+                    						 commentiConProfiliIinvianti.size(), 
+                    						 commentiConProfiliIinvianti);
                     mostraSchermata("Postvisualizzato");
                     refresh();
         	}
@@ -663,11 +665,9 @@ public class Controller {
         	@Override
         		public void actionPerformed(ActionEvent e) {
                     settaPostVisualizzato(false);
-                    Foto f = new Foto(null);
-                    
                     try {
     					try {
-							f = (Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + view.getContatoreFoto())));
+    						model.getProfiloAttivo().setPostFotoPerController((Foto) model.getProfiloAttivo().cercaPost(new Foto(postDelProfilo.get(4 + view.getContatoreFoto()))));
 						} catch (PostNonPresente e1) {
 							e1.printStackTrace();
 						}
@@ -676,14 +676,20 @@ public class Controller {
     				}
                 	try {
 
-    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(f.getIdPost());
+    					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost());
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
                 	
                 	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
-                    view.setPostVisualizzato(f.getIdPost(), f.getPercorso(), f.getDescrizione(), f.getNumLike(), f.getNumDislike(), commentiConProfiliIinvianti.size(), commentiConProfiliIinvianti);
+                    view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(),
+                    						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(),
+                    						 model.getProfiloAttivo().getPostFotoPerController().getDescrizione(),
+                    						 model.getProfiloAttivo().getPostFotoPerController().getNumLike(), 
+                    						 model.getProfiloAttivo().getPostFotoPerController().getNumDislike(), 
+                    						 commentiConProfiliIinvianti.size(), 
+                    						 commentiConProfiliIinvianti);
                     mostraSchermata("Postvisualizzato");
                     refresh();
         	}
@@ -694,27 +700,30 @@ public class Controller {
         gestoreSondaggio1 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(0), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+        			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(0), null, false, null, null, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
         		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
-        		System.out.println("siamo in sondaggio " + s.getIdPost());
-
-            	for (int i = 0; i < commentiConProfiliIinvianti.size(); i++) {
-            		System.out.println("siamo in post" + commentiConProfiliIinvianti.get(i));
-            	}
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(),
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
+        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
+        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
+        									    model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
+        									    0, 
+        									    conteggi, 
+        									    commentiConProfiliIinvianti);
                 refresh();
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
         		mostraSchermata("Postvisualizzato");
@@ -725,15 +734,14 @@ public class Controller {
         gestoreSondaggio2 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(2), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+        			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(2), null, false, null, null, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -741,7 +749,17 @@ public class Controller {
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
+        									    0, 
+        									    conteggi, 
+        									    commentiConProfiliIinvianti);
                 refresh();
                 
         		mostraSchermata("Postvisualizzato");
@@ -752,15 +770,14 @@ public class Controller {
         gestoreSondaggio3 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(4), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+					model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(4), null, false, null, null, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -768,7 +785,17 @@ public class Controller {
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
-        		view.settaSondaggioVisualizzato(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getTerzaScelta(), s.getQuartaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi,commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(),
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getPrimaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getSecondaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getTerzaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getQuartaScelta(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumLike(), 
+        										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getNumDislike(), 
+        										0, 
+        										conteggi,
+        										commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -778,15 +805,13 @@ public class Controller {
         gestoreSondaggioDoppiaScelta1 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(0));
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(0), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(0), null, false, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
-
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -794,7 +819,15 @@ public class Controller {
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
         		view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(),
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(),
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(),
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(),
+        													0, 
+        													conteggi,
+        													commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -804,15 +837,14 @@ public class Controller {
         gestoreSondaggioDoppiaScelta2 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(2), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(2), null, false, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -820,7 +852,15 @@ public class Controller {
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0,  conteggi, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(), 
+        													0, 
+        													conteggi, 
+        													commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -830,15 +870,14 @@ public class Controller {
         gestoreSondaggioDoppiaScelta3 = new ActionListener() {
         	@Override
         		public void actionPerformed(ActionEvent e) {
-        		SondaggioSceltaMultipla s = new SondaggioSceltaMultipla(schermataAttuale, schermataAttuale, false, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale, schermataAttuale);
         		try {
-        			s = (SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioDoppiaScelta.get(4), null, false, null, null, null, null, null));
-				} catch (PostNonVisibile | PostNonPresente e1) {
+        			model.getProfiloAttivo().setPostSondaggioDoppiaScelta((SondaggioDoppiaVotazione) model.getProfiloAttivo().cercaPost(new SondaggioDoppiaVotazione(percorsiPostSondaggioDoppiaScelta.get(4), null, false, null, null, null)));
+        		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
         		try {
 
-					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(s.getIdPost());
+					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost());
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -847,7 +886,15 @@ public class Controller {
 
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
-        		view.settaSondaggioVisualizzatoSceltaDoppia(s.getIdPost(), s.getDescrizione(), s.getPrimaScelta(), s.getSecondaScelta(), s.getNumLike(), s.getNumDislike(), 0, conteggi, commentiConProfiliIinvianti);
+        		view.settaSondaggioVisualizzatoSceltaDoppia(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(),
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getDescrizione(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getPrimaScelta(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getSecondaScelta(),
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumLike(), 
+        													model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getNumDislike(),
+        													0, 
+        													conteggi, 
+        													commentiConProfiliIinvianti);
                 refresh();
         		mostraSchermata("Postvisualizzato");
         	}
@@ -948,7 +995,6 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
             	pubblicaStory();
-            	System.out.println("Storia aggiungta");
             }
         };
         view.getPubblicaStoryButton().addActionListener(gestorePubblicaStory);
@@ -1073,9 +1119,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		if(view.getIndiceMessaggioCorrenteChat() < listaGruppi.size()-20) {
-        		view.incrementaIndiceMessaggioChat();
-        		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
-                view.settaSchermataChat(listaGruppi);
+        			view.incrementaIndiceMessaggioChat();
+        			listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+        			view.settaSchermataChat(listaGruppi);
         		}
         	}
         };
@@ -1085,9 +1131,9 @@ public class Controller {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		if(view.getIndiceMessaggioCorrenteChat() > 0) {
-        		view.decrementaIndiceMessaggioChat();
-        		listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
-                view.settaSchermataChat(listaGruppi);
+        			view.decrementaIndiceMessaggioChat();
+        			listaGruppi = model.getProfiloAttivo().caricaGruppiProfilo(model.getProfiloAttivo().getIdProfilo());
+        			view.settaSchermataChat(listaGruppi);
         		}
         	}
         };
@@ -1096,11 +1142,11 @@ public class Controller {
         gestorePrimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
-        		gruppoAttuale = g.getIdGruppo();
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(0))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1109,10 +1155,11 @@ public class Controller {
         gestoreSecondaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(2))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1122,10 +1169,11 @@ public class Controller {
         gestoreTerzaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(4))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1134,10 +1182,11 @@ public class Controller {
         gestoreQuartaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(6))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1146,10 +1195,11 @@ public class Controller {
         gestoreQuintaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(8))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1158,10 +1208,11 @@ public class Controller {
         gestoreSestaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(10))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1170,10 +1221,11 @@ public class Controller {
         gestoreSettimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(12))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1182,10 +1234,11 @@ public class Controller {
         gestoreOttavaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(14))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1194,10 +1247,11 @@ public class Controller {
         gestoreNonaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(16))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1206,10 +1260,11 @@ public class Controller {
         gestoreDecimaChatGruppo = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		Gruppo g = model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18)));
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(g.getIdGruppo());
-        		settaSchermataGruppo(g, messaggi);
-        		setGruppo(g);
+        		model.getProfiloAttivo().setGruppoPerController(model.getProfiloAttivo().cercaGruppo(new Gruppo(listaGruppi.get(18))));
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		settaSchermataGruppo(model.getProfiloAttivo().getGruppoPerController(), messaggi);
+        		setGruppo(model.getProfiloAttivo().getGruppoPerController());
+        		gruppoAttuale = model.getProfiloAttivo().getGruppoPerController().getIdGruppo();
         		mostraSchermata("ChatDiGruppoFrame");
         	}
         };
@@ -1238,17 +1293,6 @@ public class Controller {
             }
         };
         view.getImpostaImmagineProfiloButton().addActionListener(gestoreImpostaFotoProfilo);
-        
-        /*  
-        gestoreIniziaSeguire = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	System.out.println("Inizia a seguire");
-            }
-        };
-        view.getIniziaSeguireButton().addActionListener(gestoreIniziaSeguire);
-        
-         */
 
         gestoreAggiungiCommento = new ActionListener() {
             @Override
@@ -1261,7 +1305,11 @@ public class Controller {
        gestoreAggiungiLikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   //model.getProfiloAttivo().aggiungiLike(view.getIdPostVisualizzato());
+    		   try {
+    			   model.getProfiloAttivo().aggiungiLike(view.getIdPostVisualizzato(), tipoPostAttuale);
+    		   } catch(AzioneNonConsentita e1) {
+    			   e1.printStackTrace();
+    		   }
     	   }
        };
        view.getAggiungiLikeButtonFrame().addActionListener(gestoreAggiungiLikePost);
@@ -1269,7 +1317,11 @@ public class Controller {
        gestoreAggiungiDislikePost = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   //model.getProfiloAttivo().aggiungiDislike(view.getIdPostVisualizzato());
+    		   try {
+    			   model.getProfiloAttivo().aggiungiDislike(view.getIdPostVisualizzato(), tipoPostAttuale);
+    		   } catch(AzioneNonConsentita e1) {
+    			   e1.printStackTrace();
+    		   }
     	   }
        };
        view.getAggiungiDislikeButtonFrame().addActionListener(gestoreAggiungiDislikePost);
@@ -1277,7 +1329,6 @@ public class Controller {
        gestoreNextCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) { 
- 
     		   view.incrementaIndiceCommento();
     		   view.settaCommenti(commentiConProfiliIinvianti);
     		   refresh();
@@ -1288,7 +1339,6 @@ public class Controller {
        gestorePrevCommento = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		   
     		   view.decrementaIndiceCommento();
     		   view.settaCommenti(commentiConProfiliIinvianti);    		
     	   }
@@ -1298,15 +1348,11 @@ public class Controller {
        gestorePulsantePrimaScelta = new ActionListener() {
     	   @Override
     	   public void actionPerformed(ActionEvent e) {
-    		  
-    	   
     		   try {
    				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 1, tipoPostAttuale);
-   					} catch (TastoNonEsistente e1) {
-   				} catch (AzioneNonConsentita e1) {
-   					System.out.println("sondaggio andato male");
+   				} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-					}
+				}
    				
     	   }
     	   
@@ -1318,10 +1364,9 @@ public class Controller {
     	   public void actionPerformed(ActionEvent e) {		     	   
     		   	try {
    					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 2, tipoPostAttuale);
-   					} catch (TastoNonEsistente e1) {
-   				} catch (AzioneNonConsentita e1) {
+   					} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-				}
+   					}
     	   }
        };
        view.getPulsanteSecondaScelta().addActionListener(gestorePulsanteSecondaScelta);
@@ -1332,10 +1377,9 @@ public class Controller {
     		   
     		   try {
   					model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 3, tipoPostAttuale);
-  					} catch (TastoNonEsistente e1) {
-  				} catch (AzioneNonConsentita e1) {
+  					} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 						e1.printStackTrace();
-				}
+  					}
     	   }
       };
        view.getPulsanteTerzaScelta().addActionListener(gestorePulsanteTerzaScelta);
@@ -1346,8 +1390,7 @@ public class Controller {
     		   
     		   try {
 				model.getProfiloAttivo().aggiungiVotoSondaggio(view.getPostVisualizzato().getIdPost(), 4,  tipoPostAttuale);
-    		   	} catch (TastoNonEsistente e1) {
-				} catch (AzioneNonConsentita e1) {
+    		   	} catch (TastoNonEsistente | AzioneNonConsentita e1) {
 					e1.printStackTrace();
 				}
     	   	}
@@ -1378,21 +1421,19 @@ public class Controller {
         };
         view.getInviaMessaggio().addActionListener(gestoreInvioMessaggio);
         
-        gestoreNextMessaggioButton = new ActionListener() {
-      	   @Override
-      	   public void actionPerformed(ActionEvent e) {
-      				   	
-      		   view.incrementaIndiceMessaggio();
-      		   view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
-  			   	refresh();
-      		   	}
-         };
+	    gestoreNextMessaggioButton = new ActionListener() {
+	  	   @Override
+	  	   public void actionPerformed(ActionEvent e) {
+	  		   view.incrementaIndiceMessaggio();
+	  		   view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+			   refresh();
+	  	   }
+	     };
          view.getNextMessaggioButton().addActionListener(gestoreNextMessaggioButton);   
          
          gestorePrevMessaggioButton = new ActionListener() {
        	   @Override
        	   public void actionPerformed(ActionEvent e) {
-       			   	
             		 view.decrementaIndiceMessaggio();
             		 view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
             		 refresh();
@@ -1448,86 +1489,85 @@ public class Controller {
     	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
 	
 
-	gestoreHomeChatDiGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			mostraSchermata("Home");
+		gestoreHomeChatDiGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mostraSchermata("Home");
+				}
+			};
+		view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
+		
+		gestoreNextMsgGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (messaggi.size() >= view.getIndiceMessaggioCorrenteGruppo()-2) {
+				view.incrementaIndiceMessaggioCorrenteGruppo();
+				}
+				if (view.getIndiceMessaggioCorrenteGruppo() < messaggi.size()) 	
+	        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+	        		view.aggiornaMessaggiGruppo(messaggi);        		
+	        		refresh();
+	        		
 			}
 		};
-	view.getHomeCreazioneChatDiGruppo().addActionListener(gestoreHomeChatDiGruppo);
-	
-	gestoreNextMsgGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (messaggi.size() >= view.getIndiceMessaggioCorrenteGruppo()-2) {
-			view.incrementaIndiceMessaggioCorrenteGruppo();
-			}
-			if (view.getIndiceMessaggioCorrenteGruppo() < messaggi.size()) 	
-        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
-        		view.aggiornaMessaggiGruppo(messaggi);        		
-        		refresh();
-        		
-		}
-	};
-	view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
-	
-	gestorePrevMsgGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if(view.getIndiceMessaggioCorrenteGruppo() > 0) {
-				view.decrementaIndiceMessaggioCorrenteGruppo();
-				messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
-				view.aggiornaMessaggiGruppo(messaggi);        		
-				refresh();
-			}
-		}
-	};
-	view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
-	
-	gestoreAggiungiUtente = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String utente = view.getUtenteDaAggiungere().getText();
-			aggiungiPartecipante(gruppoAttuale, utente);
-		}
-	};
-	view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
+		view.getNextMessaggiGruppo().addActionListener(gestoreNextMsgGruppo);
 		
-	gestoreRimuoviUtente = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String utente = view.getUtenteDaEliminare().getText();
-			model.getProfiloAttivo().rimuoviPartecipante(gruppoAttuale, utente);
-			System.out.println(utente);
-			System.out.println(gruppoAttuale);
-		}
-	};
-	view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
-	
-	gestoreModificaDescrizioneChat = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
+		gestorePrevMsgGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(view.getIndiceMessaggioCorrenteGruppo() > 0) {
+					view.decrementaIndiceMessaggioCorrenteGruppo();
+					messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(gruppoAttuale);
+					view.aggiornaMessaggiGruppo(messaggi);        		
+					refresh();
+				}
+			}
+		};
+		view.getPrevMessaggioGruppo().addActionListener(gestorePrevMsgGruppo);
+		
+		gestoreAggiungiUtente = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String utente = view.getUtenteDaAggiungere().getText();
+				aggiungiPartecipante(gruppoAttuale, utente);
+			}
+		};
+		view.getUtenteDaAggiungereButton().addActionListener(gestoreAggiungiUtente);
+			
+		gestoreRimuoviUtente = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String utente = view.getUtenteDaEliminare().getText();
+				model.getProfiloAttivo().rimuoviPartecipante(gruppoAttuale, utente);
+			}
+		};
+		view.getUtenteDaEliminareButton().addActionListener(gestoreRimuoviUtente);
+		
+		gestoreModificaDescrizioneChat = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String nuovaDescrizione = view.getTestoDescrizioneNuova().getText();
 				model.getProfiloAttivo().modificaDescrizione(gruppoAttuale, nuovaDescrizione);
 			}
-	};
-	view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
-	
-	gestorePartecipa = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			aggiungiPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
-		}
-	};
-	view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
-	
-	gestoreEsciGruppo = new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			rimuoviPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
-		}
-	};
-	view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
+		};
+		view.getModificaButton().addActionListener(gestoreModificaDescrizioneChat);
+		
+		gestorePartecipa = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				aggiungiPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+			}
+		};
+		view.getPartecipazioneGruppoButton().addActionListener(gestorePartecipa);
+		
+		
+		gestoreEsciGruppo = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				rimuoviPartecipante(gruppoAttuale, model.getProfiloAttivo().getIdProfilo());
+			}
+		};
+		view.getUscitaGruppoButton().addActionListener(gestoreEsciGruppo);
     }
     	        
     public void refresh() {
@@ -1540,7 +1580,6 @@ public class Controller {
         String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
         String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
         String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
-        
         try {
             model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
         } catch (AccountGiaEsistente e1) {

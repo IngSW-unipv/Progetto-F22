@@ -53,6 +53,14 @@ public class Profilo implements IProfilo {
 	private boolean loggato;
 	private boolean accountesistente;
 	private boolean isPswCambiata;	
+	private Foto fotoPerController = new Foto(null);	//Post presente nella home
+	private Foto storiaPerController = new Foto(null);	//Storia presente nella home
+	private Foto fotoProfiloPerController = new Foto(null);	//Foto profilo
+	private Testo postTestoPerController = new Testo(null);	//Post di testo presenti nel profilo
+	private Foto postFotoPerController = new Foto(null);	//Foto presenti nel profilo
+	private SondaggioSceltaMultipla postSondaggioSceltaMultiplaPerController = new SondaggioSceltaMultipla(null);
+	private SondaggioDoppiaVotazione postSondaggioDoppiaScelta = new SondaggioDoppiaVotazione(null);
+	private Gruppo gruppoPerController = new Gruppo(null);
 	
 	public Profilo(String idProfilo, String nickname) {
 		super();
@@ -92,6 +100,74 @@ public class Profilo implements IProfilo {
 		this.loggato = loggato;
 		this.password = psw;
 		this.fotoProfilo = fotoProfilo;
+	}
+	
+	
+	
+
+	public Gruppo getGruppoPerController() {
+		return gruppoPerController;
+	}
+
+	public void setGruppoPerController(Gruppo gruppoPerController) {
+		this.gruppoPerController = gruppoPerController;
+	}
+
+	public SondaggioDoppiaVotazione getPostSondaggioDoppiaScelta() {
+		return postSondaggioDoppiaScelta;
+	}
+
+	public void setPostSondaggioDoppiaScelta(SondaggioDoppiaVotazione postSondaggioDoppiaScelta) {
+		this.postSondaggioDoppiaScelta = postSondaggioDoppiaScelta;
+	}
+
+	public SondaggioSceltaMultipla getPostSondaggioSceltaMultiplaPerController() {
+		return postSondaggioSceltaMultiplaPerController;
+	}
+
+	public void setPostSondaggioSceltaMultiplaPerController(
+			SondaggioSceltaMultipla postSondaggioSceltaMultiplaPerController) {
+		this.postSondaggioSceltaMultiplaPerController = postSondaggioSceltaMultiplaPerController;
+	}
+
+	public Foto getPostFotoPerController() {
+		return postFotoPerController;
+	}
+
+	public void setPostFotoPerController(Foto postFotoPerController) {
+		this.postFotoPerController = postFotoPerController;
+	}
+
+	public Testo getPostTestoPerController() {
+		return postTestoPerController;
+	}
+
+	public void setPostTestoPerController(Testo postTestoPerController) {
+		this.postTestoPerController = postTestoPerController;
+	}
+
+	public Foto getFotoProfiloPerController() {
+		return fotoProfiloPerController;
+	}
+
+	public void setFotoProfiloPerController(Foto fotoProfiloPerController) {
+		this.fotoProfiloPerController = fotoProfiloPerController;
+	}
+
+	public Foto getStoriaPerController() {
+		return storiaPerController;
+	}
+
+	public void setStoriaPerController(Foto storiaPerController) {
+		this.storiaPerController = storiaPerController;
+	}
+
+	public Foto getFotoPerController() {
+		return fotoPerController;
+	}
+
+	public void setFotoPerController(Foto fotoPerController) {
+		this.fotoPerController = fotoPerController;
 	}
 
 	public String getIdProfilo() {

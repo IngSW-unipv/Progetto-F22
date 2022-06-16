@@ -25,8 +25,9 @@ public class  Profilo extends JPanel {
 	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextTesto,prevTesto, 
 	nextTipoPost,prevTipoPost, pulsantePrimoSondaggio, pulsanteSecondoSondaggio, pulsanteTerzoSondaggio, pulsantePrimoTesto, 
 	pulsanteSecondoTesto, pulsanteTerzoTesto,pulsantePrimoSondaggioDoppia, pulsanteSecondoSondaggioDoppia, pulsanteTerzoSondaggioDoppia;
-	private Etichette etichettaNome;
-	private SpecificContainer containerNorth = new SpecificContainer(), containerCenter = new SpecificContainer(), containerNorthNorth = new SpecificContainer();
+	private SpecificContainer containerNorth = new SpecificContainer(), 
+							  containerCenter = new SpecificContainer(), 
+							  containerNorthNorth = new SpecificContainer();
 	
 	private int contatoreFoto = 0, contatoreTesto = 0, contatoreSondaggio = 0;
 	
@@ -48,7 +49,7 @@ public class  Profilo extends JPanel {
 		containerNorth.add(containerNorthNorth, BorderLayout.NORTH);
 		containerNorthNorth.add(segui = new Pulsanti("Segui", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerNorthNorth.add(apriChat = new Pulsanti("Apri Chat", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerNorthNorth.add(etichettaNome = new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
+		containerNorthNorth.add(new Etichette("Nome utente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
 		immagineProf = new Pulsanti("/Users/tommasomasaracchio/immaginiDatabase/kushina3.jpg");
 		JScrollPane pannelloFoto = new JScrollPane(immagineProf);
 		pannelloFoto.setPreferredSize(new Dimension(80,80));
@@ -62,12 +63,16 @@ public class  Profilo extends JPanel {
 		dati.add(Integer.toString(0));
 		dati.add("Numero di account seguiti: ");
 		dati.add(Integer.toString(0));
+		dati.add("");
+		dati.add("");
+		dati.add("Descrizione:");
+		dati.add("Per ora non è presente nessuna descrizione. Può essere inserita nelle impostazioni.");
 		
 		for(int i = 0; i < this.dati.size(); i++) {
 			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
 			ListaEtichette.add(etichetta);
 			
-		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,4,2, ListaEtichette.size());
+		GrigliaDiElementi Dati =  new GrigliaDiElementi(ListaEtichette,6,2, ListaEtichette.size());
 		containerNorth.add(Dati, BorderLayout.SOUTH);		
 		}
 		
@@ -181,10 +186,6 @@ public class  Profilo extends JPanel {
 	public void setImmagineProf(Pulsanti immagineProf) {
 		
 		this.immagineProf = immagineProf;
-	}
-	
-	public Etichette getEtichettaNome() {
-		return etichettaNome;
 	}
 
 	

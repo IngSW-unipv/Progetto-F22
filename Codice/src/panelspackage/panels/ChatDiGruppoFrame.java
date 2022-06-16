@@ -108,6 +108,10 @@ public class ChatDiGruppoFrame extends JPanel {
     
 	public boolean aggiornaMessaggiGruppo(ArrayList<String> messaggi) {
 		if(messaggi.size() == 0) {
+			for(int i = getIndiceMessaggioCorrente();  i <  10; i++) {
+				((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
+
+			}
 			return false;
 		} 
 

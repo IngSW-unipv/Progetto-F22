@@ -45,7 +45,7 @@ package panelspackage.panels;
         public PostVisualizzato() {
             avvio();
             initComponents();
-            }
+        }
 
         
         public void avvio() {
@@ -66,7 +66,6 @@ package panelspackage.panels;
             this.add(containerCenter, BorderLayout.CENTER);
             
             //POST
-            
             containerCenter.add(containerPost, BorderLayout.CENTER);
             containerPost.add(fotoVisualizzata, BorderLayout.CENTER);
 
@@ -102,17 +101,30 @@ package panelspackage.panels;
             
             
             SpecificContainer containerEast = new SpecificContainer();
+            SpecificContainer containerAggiuntivoEast = new SpecificContainer();
+            SpecificContainer secondoContainerAggiuntivoEast = new SpecificContainer();
+            secondoContainerAggiuntivoEast.setLayout(new GridLayout(1, 2));
             this.add(containerEast, BorderLayout.EAST);
             
             GrigliaDiElementi dati =  new GrigliaDiElementi(ListaAreaTesto,10,2, ListaAreaTesto.size());
             
-            
+            Etichette etichettaInserisciCommento = new Etichette("Inserisci un commento: ", Frame.COLOREPRIMARIOTEMATICO);
             aggiungiCommento = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, 10, 35);
             aggiungiCommento.setEditable(true);
             JScrollPane scrollCommento = new JScrollPane(aggiungiCommento);
-
+            
+            containerAggiuntivoEast.add(etichettaInserisciCommento, BorderLayout.NORTH);
+            containerAggiuntivoEast.add(scrollCommento, BorderLayout.CENTER);
+            
+            Etichette etichettaCommento = new Etichette("Commento: ", Frame.COLOREPRIMARIOTEMATICO);
+            Etichette etichettaProfilo = new Etichette("Profilo: ", Frame.COLOREPRIMARIOTEMATICO);
+            
+            secondoContainerAggiuntivoEast.add(etichettaProfilo);
+            secondoContainerAggiuntivoEast.add(etichettaCommento);
+            
+            containerEast.add(secondoContainerAggiuntivoEast, BorderLayout.NORTH);
             containerEast.add(dati, BorderLayout.CENTER);
-            containerEast.add(scrollCommento,  BorderLayout.SOUTH);
+            containerEast.add(containerAggiuntivoEast,  BorderLayout.SOUTH);
             
                 
             SpecificContainer containerSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
