@@ -400,6 +400,10 @@ package panelspackage.panels;
             containerSondaggio.setVisible(false);
             containerPost.setVisible(true);
             this.getAreaCommentiTesto().setText(descrizionePost);
+            this.getNumeroLike().setText("N.Like: " + numeroLike);
+            this.getNumeroDislike().setText("N.Dislike: " + numeroDislike);
+            this.getNumeroCommenti().setText("N.Commenti: " + numeroCommenti/2);
+            
             impostaImmagineProfiloButton.setVisible(true);
         }
         public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2, String scelta3, String scelta4, int numeroLike, int numeroDislike, int numeroCommenti, int [] conteggi,ArrayList<String> commenti) {
@@ -451,4 +455,18 @@ package panelspackage.panels;
             containerSondaggio.setVisible(true);
             impostaImmagineProfiloButton.setVisible(false);
         }
+        
+        public JLabel getNumeroLike() {
+        	return areaCommenti.getNumeroLike();
+        }
+        
+        public JLabel getNumeroDislike() {
+        	return areaCommenti.getNumeroDislike();
+        }
+        
+        public JLabel getNumeroCommenti() {
+        	return areaCommenti.getNumeroCommenti();
+        }
+        
+        
 }

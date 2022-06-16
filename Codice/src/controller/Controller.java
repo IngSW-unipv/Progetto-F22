@@ -1865,6 +1865,7 @@ public class Controller {
 		this.gruppoAttuale = g.getIdGruppo();
 		view.setIdGruppo(g.getIdGruppo());
 		view.aggiornaMessaggiGruppo(commenti);
+		
 	}
 
 	public void setGruppo(Gruppo g) {
