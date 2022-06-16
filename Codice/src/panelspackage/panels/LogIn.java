@@ -10,16 +10,10 @@ import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
 
-@SuppressWarnings("serial")
 public class LogIn extends JPanel {
-
-
 	private HashMap<String, JComponent> listaComponenti = new HashMap<String, JComponent>();
-	
 	private ArrayList<String> dati = new ArrayList<String>();
-	
 	private Pulsanti login, signup;
-	
 	private InserimentoTesto inserimentoEmail, inserimentoPassword;
 	private Etichette etichettaDiSegnalazioneLoginFallito;
 	
@@ -51,6 +45,7 @@ public class LogIn extends JPanel {
 		Container containerVuoto = new Container();
 		containerCenterAlto.add(containerVuoto);
 		Container containerVuoto1 = new Container();
+		
 		containerCenterAlto.add(containerVuoto1);
 		containerCenterAlto.add(new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
 		containerCenterAlto.add(inserimentoEmail = new InserimentoTesto(Frame.COLORESECONDARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
@@ -64,20 +59,9 @@ public class LogIn extends JPanel {
 		containerCenter.add(containerCenterAlto);
 		containerCenter.add(containerCenterBasso);
 		
-		//listaComponenti.put("labelEmail", new Etichette("EMAIL: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		//listaComponenti.put("email", new JScrollPane(inserimentoEmail = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "email", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
-		//listaComponenti.put("labelPwd", new Etichette("PASSWORD: ", SwingConstants.CENTER, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.BOLD, 25)));
-		//listaComponenti.put("password", new JScrollPane(inserimentoPassword = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 1, 20/*, new Font("Arial", Font.BOLD, 25)*/), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));	
-		//GrigliaDiElementi dati =  new GrigliaDiElementi(listaComponenti,2,2, listaComponenti.size());
-		//containerNorth.add(dati, BorderLayout.SOUTH);
-		
-		//SpecificContainer containerCenter = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-		//add(containerCenter, BorderLayout.CENTER);
-		//containerCenter.add(etichettaDiSegnalazioneLoginFallito = new Etichette("Login fallito, provare a reinserire i dati", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.NORTH);
-		//etichettaDiSegnalazioneLoginFallito.setVisible(false);
-		
 		SpecificContainer containerSouth = new SpecificContainer();
-		add(containerSouth, BorderLayout.SOUTH);
+		this.add(containerSouth, BorderLayout.SOUTH);
+		
 		containerSouth.setLayout(new GridLayout(2, 1));
 		containerSouth.add(login = new Pulsanti("LOGIN", Frame.COLOREPRIMARIOTEMATICO));
 		containerSouth.add(signup = new Pulsanti("SIGNUP", Frame.COLOREPRIMARIOTEMATICO));
@@ -91,8 +75,7 @@ public class LogIn extends JPanel {
 		this.listaComponenti = listaComponenti;
 	}
 	
-	@SuppressWarnings("rawtypes")
-	public HashMap getListaComponenti() {
+	public HashMap<String, JComponent> getListaComponenti() {
 		return this.listaComponenti;
 	}
 

@@ -1,19 +1,15 @@
 package panelspackage.panels;
 import javax.swing.*;
-import packageframe.Frame;
-import javax.swing.border.LineBorder;
 
+import packageframe.Frame;
 import java.awt.*;
 import java.util.ArrayList;
-
-import panelspackage.panels.elements.GrigliaDiElementi;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
-import panelspackage.panels.elements.AreaDiTesto;
 import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.SpecificContainer;
+
 public class SignUp extends JPanel {
-	
 	private JLabel titolo,testoEmail,testoPassword,testoRipetiPassword, testoUsername;
 	private InserimentoTesto email,password,ripetiPassword,username;
 	private Pulsanti registrati;
@@ -104,5 +100,71 @@ public class SignUp extends JPanel {
 	public void setIndietro(Pulsanti indietro) {
 		this.indietro = indietro;
 	}
+
+	public JLabel getTitolo() {
+		return titolo;
+	}
+
+	public void setTitolo(JLabel titolo) {
+		this.titolo = titolo;
+	}
+
+	public JLabel getTestoEmail() {
+		return testoEmail;
+	}
+
+	public void setTestoEmail(JLabel testoEmail) {
+		this.testoEmail = testoEmail;
+	}
+
+	public JLabel getTestoPassword() {
+		return testoPassword;
+	}
+
+	public void setTestoPassword(JLabel testoPassword) {
+		this.testoPassword = testoPassword;
+	}
+
+	public JLabel getTestoRipetiPassword() {
+		return testoRipetiPassword;
+	}
+
+	public void setTestoRipetiPassword(JLabel testoRipetiPassword) {
+		this.testoRipetiPassword = testoRipetiPassword;
+	}
+
+	public JLabel getTestoUsername() {
+		return testoUsername;
+	}
+
+	public void setTestoUsername(JLabel testoUsername) {
+		this.testoUsername = testoUsername;
+	}
+
+	public InserimentoTesto getPassword() {
+		return password;
+	}
+
+	public void setPassword(InserimentoTesto password) {
+		this.password = password;
+	}
+
+	public InserimentoTesto getRipetiPassword() {
+		return ripetiPassword;
+	}
+
+	public void setRipetiPassword(InserimentoTesto ripetiPassword) {
+		this.ripetiPassword = ripetiPassword;
+	}
+
+	public InserimentoTesto getUsername() {
+		return username;
+	}
+
+	public void setUsername(InserimentoTesto username) {
+		this.username = username;
+	}
+	
+	
 	
 }
