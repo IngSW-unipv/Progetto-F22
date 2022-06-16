@@ -1,0 +1,22 @@
+                  Glossario per alcuni termini inerenti al progetto
+
+
+idProfilo / profilo di tipo string = email del profilo in questione
+
+idGruppo / gruppo di tipo string = nome del gruppo in questione
+
+commento di tipo string = id della tabella commento nel database 
+
+messaggioPrivato di tipo string = id della tabella messaggio privato
+
+messaggioDiGruppo di tipo string = id della tabella messaggio di gruppo
+
+sondaggioDoppiaVotazione di tipo string = id del sondaggio doppia votazione
+
+sondaggioSceltaMultipla di tipo string = id del sondaggio scelta multipla
+
+foto di tipo string = id della tabella foto
+
+video di tipo string = id della tabella video
+
+testo di tipo string = id della tabella testo
