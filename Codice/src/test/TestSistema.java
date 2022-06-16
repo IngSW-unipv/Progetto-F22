@@ -15,12 +15,22 @@ class TestSistema {
 
 	static Sistema sistema = new Sistema();
 	
+	/**
+	 * inizializziamo il Profilo prima del test
+	 * @throws Exception
+	 */
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		Profilo p = new Profilo("lollo", "cortomuso");
 		DbFacade.getIstance().carica(p);
 	}
-
+	/** 
+	 * esegui il test del SingIn
+	 * @throws AccountGiaEsistente
+	 * @throws ChangeDefaultPassword
+	 * @throws AccountDoesNotExist
+	 * @throws Exception
+	 */
 	@Test
 	void testSignIn() throws AccountGiaEsistente, ChangeDefaultPassword, AccountDoesNotExist, Exception {
 		boolean esito;
@@ -31,7 +41,13 @@ class TestSistema {
 			e.printStackTrace();
 		}	
 	}
-	
+	/** 
+	 * esegui il test del SingIn
+	 * @throws PswOmailErrati
+	 * @throws ChangeDefaultPassword
+	 * @throws AccountDoesNotExist
+	 * @throws Exception
+	 */
 	@Test
 	void testLogIn() {
 		boolean esito;
@@ -46,7 +62,13 @@ class TestSistema {
 	 		e.printStackTrace();
 	 	} 
 	}
-
+	/**
+	 * controlli se il login fallisce
+	 * @throws PswOmailErrati
+	 * @throws ChangeDefaultPassword
+	 * @throws AccountDoesNotExist
+	 * @throws Exception
+	 */
 	@Test
 	void testLogInFallito() {
 		boolean esito;
@@ -62,29 +84,11 @@ class TestSistema {
 	 		
 	 	} 
 	}
-	
+	/**
+	 * testi l'eliminazione del profilo
+	 */
 	@Test
 	void testRimuoviProfilo() {
 		assertTrue(sistema.getProfiloAttivo().rimuoviQuestoProfilo());
 	}
-	/*
-	@AfterAll
-	static void tearDownAfterClass() throws Exception {
-		try {
-			try {
-				assertTrue(sistema.getProfiloAttivo().rimuoviQuestoProfilo());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		try {
-			sistema.getProfiloAttivo().cambiaPassword("cavallo", "lasabri");
-	 	} catch (ChangeDefaultPassword e) {
-		 	e.printStackTrace();
-	 	} catch (AccountDoesNotExist e) {
-		 	e.printStackTrace();
-	 	}
-	}*/
 }
