@@ -983,6 +983,7 @@ public class Controller {
         };
         view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
         
+        
         gestorePrevSondaggioDoppiaScelta = new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
