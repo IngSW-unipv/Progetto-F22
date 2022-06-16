@@ -603,14 +603,14 @@ public class Controller {
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
+            	tipoPostAttuale = TipoPost.FOTO;
+
             	try {
 
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-            	tipoPostAttuale = TipoPost.FOTO;
-
             	view.getImpostaImmagineProfiloButton().setVisible(true);
             	view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
             							 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
@@ -638,6 +638,8 @@ public class Controller {
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
+                	tipoPostAttuale = TipoPost.FOTO;
+
                 	try {
 
     					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
@@ -645,7 +647,6 @@ public class Controller {
     					e1.printStackTrace();
     				}
           
-                	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
                     view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), 
                     						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(), 
@@ -674,6 +675,8 @@ public class Controller {
     				} catch (PostNonVisibile e1) {
     					e1.printStackTrace();
     				}
+                	tipoPostAttuale = TipoPost.FOTO;
+
                 	try {
 
     					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostFotoPerController().getIdPost(), tipoPostAttuale);
@@ -681,7 +684,6 @@ public class Controller {
     					e1.printStackTrace();
     				}
                 	
-                	tipoPostAttuale = TipoPost.FOTO;
                 	view.getImpostaImmagineProfiloButton().setVisible(true);
                     view.setPostVisualizzato(model.getProfiloAttivo().getPostFotoPerController().getIdPost(),
                     						 model.getProfiloAttivo().getPostFotoPerController().getPercorso(),
@@ -705,12 +707,13 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+
         		try {
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
         		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
@@ -739,12 +742,13 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+
         		try {
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
@@ -774,13 +778,14 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+
         		try {
 
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIOSCELTAMULTIPLA");
@@ -809,12 +814,12 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
         		try {
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
         		view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
@@ -841,13 +846,14 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+
         		try {
 
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
             	view.getImpostaImmagineProfiloButton().setVisible(false);
                 view.setTipoSondaggio("SONDAGGIODOPPIAVOTAZIONE");
@@ -874,13 +880,14 @@ public class Controller {
         		} catch (PostNonVisibile | PostNonPresente e1) {
 					e1.printStackTrace();
 				}
+        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
+
         		try {
 
 					commentiConProfiliIinvianti = model.selectAllCommentiSottoPost(model.getProfiloAttivo().getPostSondaggioDoppiaScelta().getIdPost(), tipoPostAttuale);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
-        		tipoPostAttuale = TipoPost.SONDAGGIODOPPIAVOTAZIONE;
         		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
 
             	view.getImpostaImmagineProfiloButton().setVisible(false);
