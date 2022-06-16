@@ -56,8 +56,8 @@ public class AreaDiTesto extends JTextArea {
 	}
 
 	public AreaDiTesto(Border border, Font font) {
-	this.setBorder(border);
-	this.setFont(font);
+		this.setBorder(border);
+		this.setFont(font);
 	}
 	
 	public AreaDiTesto(Color colore, int base, int altezza, Font font) {

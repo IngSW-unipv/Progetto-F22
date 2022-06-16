@@ -15,17 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneLayout;
 import javax.swing.SwingConstants;
 public class PannelloNotifiche extends JPanel {
-	private Color ARANCIONE = new Color(255, 125, 0);
 	private Color NERO = new Color(0, 0, 0);
 	private Font fontTitolo;
-	int i;
-	//public Pulsanti[] listaPulsanti;
 	private HashMap<String, JButton> mappaPulsanti  = new HashMap<String, JButton>();
 	private JLabel titoloNotifiche;
 	private JButton eliminaNotifiche;
 	private JButton homeNotifiche;
 	
-	public PannelloNotifiche(/*ArrayList<String> contenuto, ArrayList<String> tipo*/ ) {
+	public PannelloNotifiche() {
 		
 		this.setOpaque(true);
 		this.setVisible(true);
@@ -55,12 +52,6 @@ public class PannelloNotifiche extends JPanel {
 		
 		mappaPulsanti.put("eliminaNotifiche", eliminaNotifiche);
 		mappaPulsanti.put("homeNotifiche", homeNotifiche);
-		/*containerCenter.setLayout(new GridLayout(contenuto.size(),1));
-		
-		for (i = 0; i < 5; i ++) {
-			listaPulsanti.add(new Pulsanti(contenuto.get(i), ARANCIONE));
-			containerCenter.add(listaPulsanti.get(i));
-		}*/
 		
 	}
 

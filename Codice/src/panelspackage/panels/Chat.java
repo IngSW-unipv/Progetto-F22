@@ -22,9 +22,7 @@ public class Chat extends JPanel {
     				 sestaChatGruppo, settimaChatGruppo, ottavaChatGruppo, nonaChatGruppo, decimaChatGruppo,
                      messaggioPrecedente, prossimoMessaggio;
     private ArrayList<JComponent> listaComponenti = new ArrayList<JComponent>();
-    //private JComboBox<String> discussioni;
     private SpecificContainer containerCenter, containerNorth,containerSouth, containerGrigliaSouth;
-    
     private int indiceMessaggioCorrente  = 0;
 
         public Chat() {
@@ -32,7 +30,7 @@ public class Chat extends JPanel {
             initComponents();
     }
         
-        public void avvio() {
+    public void avvio() {
         this.setOpaque(true);
         this.setVisible(true);
         this.setLayout(new BorderLayout());
@@ -44,9 +42,7 @@ public class Chat extends JPanel {
         containerNorth = new SpecificContainer();
         containerNorth.setLayout(new GridLayout(2, 1));
         this.add(containerNorth, BorderLayout.NORTH);
-        
-        
-        
+
         containerCenter = new SpecificContainer(Color.CYAN);
         containerCenter.setLayout(new GridLayout(10, 2));
         listaComponenti.add(new Etichette("",Frame.COLORESECONDARIOTEMATICO));
@@ -70,14 +66,12 @@ public class Chat extends JPanel {
         listaComponenti.add(new Etichette("", Frame.COLORESECONDARIOTEMATICO));
         listaComponenti.add(decimaChatGruppo = new  Pulsanti("Apri", Frame.COLOREPRIMARIOTEMATICO));
 
-        
         for(int i = 0; i < listaComponenti.size(); i++) {
             containerCenter.add(listaComponenti.get(i));
         }
         
         this.add(containerCenter, BorderLayout.CENTER); 
-        
-        
+                
         containerSouth = new SpecificContainer();
         this.add(containerSouth, BorderLayout.SOUTH);
         tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
@@ -90,167 +84,164 @@ public class Chat extends JPanel {
 		containerGrigliaSouth.setLayout(new GridLayout(1,2));
 		containerGrigliaSouth.add(messaggioPrecedente = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(prossimoMessaggio = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-
-     
     }
     
         
-        public void settaSchermataChat(ArrayList<String> gruppi) {
-        	int i;
-            for(i=0; i < gruppi.size(); i++) {
-            	
-        	System.out.println("lista gruppi" + gruppi.get(i));
-            }
-            for(i=0; i < gruppi.size()/2 && i < 10; i++) {
-            	int indicechat = (i*2) + 1 +  this.getIndiceMessaggioCorrente();
-                ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get(indicechat));               
-            }
-            while(i<10) {
-                ((Etichette) listaComponenti.get(i*2)).setText("");              
-                i++;
-            }
+    public void settaSchermataChat(ArrayList<String> gruppi) {
+    	int i;
+        for(i=0; i < gruppi.size(); i++) {
+        	
+    	System.out.println("lista gruppi" + gruppi.get(i));
         }
+        for(i=0; i < gruppi.size()/2 && i < 10; i++) {
+        	int indicechat = (i*2) + 1 +  this.getIndiceMessaggioCorrente();
+            ((Etichette) listaComponenti.get(i*2)).setText(gruppi.get(indicechat));               
+        }
+        while(i<10) {
+            ((Etichette) listaComponenti.get(i*2)).setText("");              
+            i++;
+        }
+    }
         
 
-        public Pulsanti getTornaHome() {
-            return tornaHome;
-        }
+    public Pulsanti getTornaHome() {
+        return tornaHome;
+    }
 
-        public void setTornaHome(Pulsanti home) {
-            this.tornaHome = home;
-        }
+    public void setTornaHome(Pulsanti home) {
+        this.tornaHome = home;
+    }
 
+    public SpecificContainer getContainerCenter() {
+        return containerCenter;
+    }
 
-        public SpecificContainer getContainerCenter() {
-            return containerCenter;
-        }
+    public void setContainerCenter(SpecificContainer containerCenter) {
+        this.containerCenter= containerCenter;
+    }
 
-        public void setContainerCenter(SpecificContainer containerCenter) {
-            this.containerCenter= containerCenter;
-        }
+    public SpecificContainer getContainerNorth() {
+        return containerNorth;
+    }
 
-        public SpecificContainer getContainerNorth() {
-            return containerNorth;
-        }
+    public void setContainerNorth(SpecificContainer containerNorth) {
+        this.containerNorth = containerNorth;
+    }
 
-        public void setContainerNorth(SpecificContainer containerNorth) {
-            this.containerNorth = containerNorth;
-        }
+    public SpecificContainer getContainerSouth() {
+        return containerSouth;
+    }
 
-        public SpecificContainer getContainerSouth() {
-            return containerSouth;
-        }
+    public void setContainerSouth(SpecificContainer containerSouth) {
+        this.containerSouth = containerSouth;
+    }
 
-        public void setContainerSouth(SpecificContainer containerSouth) {
-            this.containerSouth = containerSouth;
-        }
+    public Pulsanti getPrimaChatGruppo() {
+        return primaChatGruppo;
+    }
 
-        public Pulsanti getPrimaChatGruppo() {
-            return primaChatGruppo;
-        }
+    public void setPrimaChatGruppo(Pulsanti primaChatGruppo) {
+        this.primaChatGruppo = primaChatGruppo;
+    }
 
-        public void setPrimaChatGruppo(Pulsanti primaChatGruppo) {
-            this.primaChatGruppo = primaChatGruppo;
-        }
+    public Pulsanti getSecondaChatGruppo() {
+        return secondaChatGruppo;
+    }
 
-        public Pulsanti getSecondaChatGruppo() {
-            return secondaChatGruppo;
-        }
+    public void setSecondaChatGruppo(Pulsanti secondaChatGruppo) {
+        this.secondaChatGruppo = secondaChatGruppo;
+    }
 
-        public void setSecondaChatGruppo(Pulsanti secondaChatGruppo) {
-            this.secondaChatGruppo = secondaChatGruppo;
-        }
+    public Pulsanti getTerzaChatGruppo() {
+        return terzaChatGruppo;
+    }
 
-        public Pulsanti getTerzaChatGruppo() {
-            return terzaChatGruppo;
-        }
+    public void setTerzaChatGruppo(Pulsanti terzaChatGruppo) {
+        this.terzaChatGruppo = terzaChatGruppo;
+    }
 
-        public void setTerzaChatGruppo(Pulsanti terzaChatGruppo) {
-            this.terzaChatGruppo = terzaChatGruppo;
-        }
+    public Pulsanti getQuartaChatGruppo() {
+        return quartaChatGruppo;
+    }
 
-        public Pulsanti getQuartaChatGruppo() {
-            return quartaChatGruppo;
-        }
+    public void setQuartaChatGruppo(Pulsanti quartaChatGruppo) {
+        this.quartaChatGruppo = quartaChatGruppo;
+    }
 
-        public void setQuartaChatGruppo(Pulsanti quartaChatGruppo) {
-            this.quartaChatGruppo = quartaChatGruppo;
-        }
+    public Pulsanti getQuintaChatGruppo() {
+        return quintaChatGruppo;
+    }
 
-        public Pulsanti getQuintaChatGruppo() {
-            return quintaChatGruppo;
-        }
+    public void setQuintaChatGruppo(Pulsanti quintaChatGruppo) {
+        this.quintaChatGruppo = quintaChatGruppo;
+    }
 
-        public void setQuintaChatGruppo(Pulsanti quintaChatGruppo) {
-            this.quintaChatGruppo = quintaChatGruppo;
-        }
+    public Pulsanti getSestaChatGruppo() {
+        return sestaChatGruppo;
+    }
 
-        public Pulsanti getSestaChatGruppo() {
-            return sestaChatGruppo;
-        }
+    public void setSestaChatGruppo(Pulsanti sestaChatDiGruppo) {
+        this.sestaChatGruppo = sestaChatDiGruppo;
+    }
 
-        public void setSestaChatGruppo(Pulsanti sestaChatDiGruppo) {
-            this.sestaChatGruppo = sestaChatDiGruppo;
-        }
+    public Pulsanti getSettimaChatGruppo() {
+        return settimaChatGruppo;
+    }
 
-        public Pulsanti getSettimaChatGruppo() {
-            return settimaChatGruppo;
-        }
+    public void setSettimaChatGruppo(Pulsanti settimaChatDiGruppo) {
+        this.settimaChatGruppo = settimaChatDiGruppo;
+    }
 
-        public void setSettimaChatGruppo(Pulsanti settimaChatDiGruppo) {
-            this.settimaChatGruppo = settimaChatDiGruppo;
-        }
+    public Pulsanti getOttavaChatGruppo() {
+        return ottavaChatGruppo;
+    }
 
-        public Pulsanti getOttavaChatGruppo() {
-            return ottavaChatGruppo;
-        }
+    public void setOttavaChatGruppo(Pulsanti ottavaChatDiGruppo) {
+        this.ottavaChatGruppo = ottavaChatDiGruppo;
+    }
 
-        public void setOttavaChatGruppo(Pulsanti ottavaChatDiGruppo) {
-            this.ottavaChatGruppo = ottavaChatDiGruppo;
-        }
+    public Pulsanti getNonaChatGruppo() {
+        return nonaChatGruppo;
+    }
 
-        public Pulsanti getNonaChatGruppo() {
-            return nonaChatGruppo;
-        }
+    public void setNonaChatGruppo(Pulsanti nonaChatDiGruppo) {
+        this.nonaChatGruppo = nonaChatDiGruppo;
+    }
 
-        public void setNonaChatGruppo(Pulsanti nonaChatDiGruppo) {
-            this.nonaChatGruppo = nonaChatDiGruppo;
-        }
+    public Pulsanti getDecimaChatGruppo() {
+        return decimaChatGruppo;
+    }
 
-        public Pulsanti getDecimaChatGruppo() {
-            return decimaChatGruppo;
-        }
+    public void setDecimaChatGruppo(Pulsanti decimaChatDiGruppo) {
+        this.decimaChatGruppo = decimaChatDiGruppo;
+    }
 
-        public void setDecimaChatGruppo(Pulsanti decimaChatDiGruppo) {
-            this.decimaChatGruppo = decimaChatDiGruppo;
-        }
+    public int getIndiceMessaggioCorrente() {
+		return indiceMessaggioCorrente;
+	}
 
-        public int getIndiceMessaggioCorrente() {
-			return indiceMessaggioCorrente;
-		}
+	public void decrementaIndiceMessaggioCorrente() {
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
+	}
+	
+	public void incrementaIndiceMessaggioCorrente() {
+		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
 
-		public void decrementaIndiceMessaggioCorrente() {
-			this.indiceMessaggioCorrente = this.indiceMessaggioCorrente - 2;
-		}
-		
-		public void incrementaIndiceMessaggioCorrente() {
-			this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
+	}
 
-		}
+	public Pulsanti getMessaggioPrecedente() {
+		return messaggioPrecedente;
+	}
 
-		public Pulsanti getMessaggioPrecedente() {
-			return messaggioPrecedente;
-		}
+	public void setMessaggioPrecedente(Pulsanti messaggioPrecedente) {
+		this.messaggioPrecedente = messaggioPrecedente;
+	}
 
-		public void setMessaggioPrecedente(Pulsanti messaggioPrecedente) {
-			this.messaggioPrecedente = messaggioPrecedente;
-		}
+	public Pulsanti getProssimoMessaggio() {
+		return prossimoMessaggio;
+	}
 
-		public Pulsanti getProssimoMessaggio() {
-			return prossimoMessaggio;
-		}
-
-		public void setProssimoMessaggio(Pulsanti prossimoMessaggio) {
-			this.prossimoMessaggio = prossimoMessaggio;
-		}       
+	public void setProssimoMessaggio(Pulsanti prossimoMessaggio) {
+		this.prossimoMessaggio = prossimoMessaggio;
+	}       
 }   

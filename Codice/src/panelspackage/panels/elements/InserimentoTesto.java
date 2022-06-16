@@ -4,7 +4,6 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Font;
 
-@SuppressWarnings("serial")
 public class InserimentoTesto extends JTextField {
 	public InserimentoTesto(String testo, Color colore, Font font) {
 		this.setText(testo);

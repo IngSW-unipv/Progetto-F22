@@ -1,9 +1,7 @@
 package panelspackage.panels;
 
-
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -15,72 +13,60 @@ import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.Pulsanti;
 import panelspackage.panels.elements.SpecificContainer;
 
-
 public class AreaChatFrame extends JPanel {
-	
-	ArrayList<JComponent> ListaEtichetteMessaggi = new ArrayList<JComponent>();
+	private ArrayList<JComponent> ListaEtichetteMessaggi = new ArrayList<JComponent>();
 	private ArrayList<String> messaggiChat = new ArrayList<String>();
 	private AreaDiTesto messaggi;
 	private InserimentoTesto scriviMessaggio;
 	private Pulsanti invia, home, nextMessaggio, prevMessaggio;
 	private int indiceMessaggioCorrente = 0, numeroCommentiTotali;
 
-	
 	public AreaChatFrame() {
 		avvio();
 		initComponents();
 	}
 	
 	public void avvio() {
-		
 		this.setOpaque(true);
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);
 	}
 	
-    public void initComponents() {
-    	
-      SpecificContainer containerNorth = new SpecificContainer();
-      this.add(containerNorth, BorderLayout.NORTH);
-      
-      scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
-	  scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
-
-	  
-      SpecificContainer containerSouth = new SpecificContainer(getBackground());
-      this.add(containerSouth, BorderLayout.SOUTH);
-      
-     
-  	  containerSouth.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
-	  containerSouth.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
-      containerSouth.add(scriviMessaggio);
-     
-		for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
-			Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 20));
-			ListaEtichetteMessaggi.add(areaMessaggio);
-		}
+	public void initComponents() {
+		SpecificContainer containerNorth = new SpecificContainer();
+	    this.add(containerNorth, BorderLayout.NORTH);
+	      
+	    scriviMessaggio = new InserimentoTesto("Scrivi messaggio", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 12), 30);
+	    scriviMessaggio.setBackground(Frame.COLORESECONDARIOTEMATICO);
+	
+	    SpecificContainer containerSouth = new SpecificContainer(getBackground());
+	    this.add(containerSouth, BorderLayout.SOUTH);
+	      
+	    containerSouth.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+	    containerSouth.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
+	    containerSouth.add(scriviMessaggio);
+	     
+	    for(int i = getIndiceMessaggioCorrente();  i <  20; i++) {
+	    	Etichette areaMessaggio = new Etichette("", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 20));
+	    	ListaEtichetteMessaggi.add(areaMessaggio);
+	    }
 		
 		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
 		
-
-		//SpecificContainer containerCenter = new SpecificContainer(getBackground());
-	    //add(containerCenter, BorderLayout.CENTER);
-	    GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
+		GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,20,2, ListaEtichetteMessaggi.size());
 		add(grigliaMessaggi, BorderLayout.CENTER);
 		
 
-      this.add(containerSouth, BorderLayout.SOUTH);
-	  containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
-      SpecificContainer containerButtons = new SpecificContainer();
-	  invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-	  containerSouth.add(invia,BorderLayout.EAST);
+		this.add(containerSouth, BorderLayout.SOUTH);
+		containerSouth.add(scriviMessaggio,BorderLayout.CENTER );
+		invia = new Pulsanti("Invia", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14));
+		containerSouth.add(invia,BorderLayout.EAST);
 
-	  home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
-	  containerSouth.add(home,BorderLayout.SOUTH);
-
-    }
+		home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", 1, 14));
+		containerSouth.add(home,BorderLayout.SOUTH);
+	}
     
     
 	public boolean aggiornaMessaggi(ArrayList<String> messaggi, String inviante) {
@@ -94,7 +80,6 @@ public class AreaChatFrame extends JPanel {
 			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
 			
 			if (messaggi.get(indiceCorrente2).equals(inviante)) {
-				
 				((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
 				((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText(messaggi.get(indiceCorrente2 + 1));
 			} else {
@@ -108,19 +93,16 @@ public class AreaChatFrame extends JPanel {
 				flag = false;
 			} 
 		}
-		
 		flag = true;
 		while(flag) { 
 			((Etichette)ListaEtichetteMessaggi.get(i)).setText("");
 			((Etichette)ListaEtichetteMessaggi.get(i + 1)).setText("");
-
 			if (i == (20 - 2)) {
 				flag = false;
 			}
 			
 			i = i + 2;
 		}
-		
 		return true;
 	}
 	
@@ -174,7 +156,6 @@ public class AreaChatFrame extends JPanel {
 	
 	public void incrementaIndiceMessaggioCorrente() {
 		this.indiceMessaggioCorrente = this.indiceMessaggioCorrente + 2;
-
 	}
 
 	public int getNumeroCommentiTotali() {

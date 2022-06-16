@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 
 public class AreaCommenti extends Container {
 	
-	JTextArea areaDescrizione = new JTextArea("DESCRIZIONE POST\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.\n.");
+	JTextArea areaDescrizione = new JTextArea("");
 	JButton aggiungiLike, aggiungiDislike,aggiungiCommento;
 	JLabel numeroLike, numeroDislike, numeroCommenti;
 	
@@ -30,7 +30,6 @@ public class AreaCommenti extends Container {
 		numeroDislike.setForeground(Color.white);
 		numeroCommenti = new JLabel("N.Commenti");
 		numeroCommenti.setForeground(Color.white);
-		
 		aggiungiLike = new JButton("Aggiungi Like");
 		aggiungiDislike = new JButton("Aggiungi dislike");
 		aggiungiCommento = new JButton("Pubblica Commento");

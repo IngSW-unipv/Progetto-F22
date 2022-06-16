@@ -7,8 +7,6 @@ import java.util.HashMap;
 import javax.swing.JComponent;
 
 public class GrigliaDiElementi extends Container {
-	
-
 	int i;
 	
 	public GrigliaDiElementi(ArrayList<JComponent> listaComponenti, int row, int column, int numeroComponenti) {	
@@ -22,7 +20,6 @@ public class GrigliaDiElementi extends Container {
 	
 	public GrigliaDiElementi(HashMap<String, JComponent> listaComponenti, int row, int column, int numeroComponenti) {	
 		this.setLayout(new GridLayout(row, column));
-		
 		listaComponenti.forEach((key, value) -> this.add(value));
 	}
 }

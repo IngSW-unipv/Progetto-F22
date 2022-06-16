@@ -1,6 +1,5 @@
 package panelspackage.panels;
 
-
 import packageframe.Frame;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,8 +10,6 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.SpecificContainer;
 
-
-@SuppressWarnings("serial")
 public class CreazionePost extends JPanel {
 
 	private AreaDiTesto inserimentoCommentoPost;
@@ -32,7 +29,6 @@ public class CreazionePost extends JPanel {
 		this.setVisible(true);
 		this.setLayout(new BorderLayout());
 		this.setBackground(Frame.COLORESECONDARIOTEMATICO);	
-		//this.setBounds(0,0,base,altezza);
 	}
 	
 	public void initComponents() {
@@ -57,7 +53,6 @@ public class CreazionePost extends JPanel {
 		containerNorthInferiore.add(sceltaSondaggio3);
 		containerNorthInferiore.add(sceltaSondaggio4);
 
-		
 		fileChooser = new JFileChooser();
 		fileChooser.setAcceptAllFileFilterUsed(false);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Only text post (.txt)", "txt");
@@ -76,8 +71,8 @@ public class CreazionePost extends JPanel {
 		
 		SpecificContainer containerCommento = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
 		containerCenter.add(containerCommento);
-		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "pwd", 1, 20);
-		testoInserisciCommento = new Etichette("Inserire il commento al post:", SwingConstants.LEFT, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN, 20));
+		inserimentoCommentoPost = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "Inserire la descrizione", 1, 20);
+		testoInserisciCommento = new Etichette("Inserire il commento:", SwingConstants.LEFT, Frame.COLOREPRIMARIOTEMATICO, new Font("Arial", Font.PLAIN, 20));
 		containerCommento.add(testoInserisciCommento, BorderLayout.NORTH);
 		containerCommento.add(inserimentoCommentoPost, BorderLayout.CENTER);
 		

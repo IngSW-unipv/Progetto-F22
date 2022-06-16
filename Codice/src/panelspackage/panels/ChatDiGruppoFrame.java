@@ -1,6 +1,5 @@
 package panelspackage.panels;
 
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -8,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -48,17 +46,17 @@ public class ChatDiGruppoFrame extends JPanel {
 	
     public void initComponents() {
     	
-      SpecificContainer containerNorth = new SpecificContainer();
+    	SpecificContainer containerNorth = new SpecificContainer();
       this.add(containerNorth, BorderLayout.NORTH);
       
-      containerAmministratore  = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
-      Container grigliaGestioneMembri = new Container();
-      grigliaGestioneMembri.setBackground(Frame.COLOREPRIMARIOTEMATICO);
-      
-		testoDescrizioneNuova = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "testo di fissa dimensione", 10,10);
-		testoDescrizioneNuova.setEditable(true);
-		JScrollPane pannelloDescrizione = new JScrollPane(testoDescrizioneNuova);
-		pannelloDescrizione.setPreferredSize(new Dimension(10,10));
+	  containerAmministratore  = new SpecificContainer(Frame.COLOREPRIMARIOTEMATICO);
+	  Container grigliaGestioneMembri = new Container();
+	  grigliaGestioneMembri.setBackground(Frame.COLOREPRIMARIOTEMATICO);
+	  
+	  testoDescrizioneNuova = new AreaDiTesto(Frame.COLOREPRIMARIOTEMATICO, "testo di fissa dimensione", 10,10);
+	  testoDescrizioneNuova.setEditable(true);
+	  JScrollPane pannelloDescrizione = new JScrollPane(testoDescrizioneNuova);
+	  pannelloDescrizione.setPreferredSize(new Dimension(10,10));
 		
 		
       grigliaGestioneMembri.setLayout(new GridLayout(3,2));
@@ -83,12 +81,10 @@ public class ChatDiGruppoFrame extends JPanel {
 			ListaEtichetteMessaggi.add(areaMessaggio);
 		}
       
-		ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
-		ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
+	 ListaEtichetteMessaggi.add(nextMessaggio = new  Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO));
+	 ListaEtichetteMessaggi.add(prevMessaggio = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO));
 		
 	   GrigliaDiElementi grigliaMessaggi =  new GrigliaDiElementi(ListaEtichetteMessaggi,6,2, ListaEtichetteMessaggi.size());
-
-	   
 	   SpecificContainer containerSouth = new SpecificContainer();
 	   this.add(containerSouth, BorderLayout.SOUTH);
       
@@ -102,7 +98,7 @@ public class ChatDiGruppoFrame extends JPanel {
 
 	  home = new Pulsanti("Home", Frame.COLOREPRIMARIOTEMATICO, new Font("Times New Roman", 1, 14));
 	  containerSouth.add(home,BorderLayout.SOUTH);
-	  containerSouth.add(grigliaMessaggi, BorderLayout.NORTH);	
+	  containerSouth.add(grigliaMessaggi, BorderLayout.NORTH);
     }
     
     
@@ -114,12 +110,7 @@ public class ChatDiGruppoFrame extends JPanel {
 			}
 			return false;
 		} 
-
-		/*for(int i = 0 ; i < 10 || i < messaggi.size(); i++) {
-			int indiceCorrente2 = i + getIndiceMessaggioCorrente();
-			((Etichette)ListaEtichetteMessaggi.get(i)).setText(messaggi.get(indiceCorrente2));
-		}
-		return true;*/		
+		
 		int i = 0;
 		boolean flag = true;
 		while(flag) {

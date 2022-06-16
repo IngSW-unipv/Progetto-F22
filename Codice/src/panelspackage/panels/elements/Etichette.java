@@ -18,7 +18,6 @@ public class Etichette extends JLabel {
 	}
 	
 	public Etichette(String testo, Color colore) {
-		
 		this.setText(testo);
 		this.setForeground(colore);
 		this.setVisible(true);
@@ -26,7 +25,6 @@ public class Etichette extends JLabel {
 	}
 	
 	public Etichette(String testo, Color colore, Font font) {
-		
 		this.setText(testo);
 		this.setForeground(colore);
 		this.setVisible(true);
@@ -44,12 +42,10 @@ public class Etichette extends JLabel {
 		this.setHorizontalAlignment(swingContant);
 	}
 	public Etichette(String testo, Color colore1, Color colore2, Font font) {
-		
 		this.setText(testo);
 		this.setVisible(true);
 		this.setBackground(colore1);
 		this.setForeground(colore2);
 		this.setFont(font);
-
 	}
 }

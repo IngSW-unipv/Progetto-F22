@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Color;
 
-@SuppressWarnings("serial")
 public class SpecificContainer extends Container {
 	
 	public SpecificContainer(Color colorePrimario, Color coloreSecondario) {
