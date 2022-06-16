@@ -1997,7 +1997,7 @@ public class Controller {
 	public void visualizzaPostSondaggioSceltaMultipla(int indicePostSondaggio) {
 		tipoPostAttuale = TipoPost.SONDAGGIOSCELTAMULTIPLA;
 		try {
-			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(indicePostSondaggio), null, false, null, null, null, null, null)));
+			model.getProfiloAttivo().setPostSondaggioSceltaMultiplaPerController((SondaggioSceltaMultipla) model.getProfiloAttivo().cercaPost(new SondaggioSceltaMultipla(percorsiPostSondaggioSceltaMultipla.get(indicePostSondaggio + view.getContatoreSondaggio()), null, false, null, null, null, null, null)));
 		} catch (PostNonVisibile | PostNonPresente e1) {
 			e1.printStackTrace();
 		}
@@ -2007,7 +2007,8 @@ public class Controller {
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
-		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioDoppiaScelta.get(0), tipoPostAttuale);
+		
+		int [] conteggi = model.getProfiloAttivo().ottieniConteggiSondaggio(percorsiPostSondaggioSceltaMultipla.get(0 + view.getContatoreSondaggio()), tipoPostAttuale);
     	view.getImpostaImmagineProfiloButton().setVisible(false);
 		view.settaSondaggioVisualizzato(model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getIdPost(), 
 										model.getProfiloAttivo().getPostSondaggioSceltaMultiplaPerController().getDescrizione(), 

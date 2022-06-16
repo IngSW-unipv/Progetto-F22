@@ -418,10 +418,10 @@ package panelspackage.panels;
             etichettaTerzoRisultato.setText(String.valueOf(conteggi[2]));
             etichettaQuartoRisultato.setText(String.valueOf(conteggi[3]));
             
-            etichettaPrimoRisultato.setText("");
-            etichettaSecondoRisultato.setText("");
-            etichettaTerzoRisultato.setText("");
-            etichettaQuartoRisultato.setText("");
+            pulsantePrimaScelta.setText(scelta1);
+            pulsanteSecondaScelta.setText(scelta2);
+            pulsanteTerzaScelta.setText(scelta3);
+            pulsanteQuartaScelta.setText(scelta4);
             descrizionePost.setText(descrizioneSondaggio);
             this.getAreaCommentiTesto().setText("");
 
@@ -429,6 +429,7 @@ package panelspackage.panels;
             containerCenter.add(containerSondaggio, BorderLayout.CENTER);
             containerSondaggio.setVisible(true);
             impostaImmagineProfiloButton.setVisible(false);
+            
         }
         
         public void settaSondaggioVisualizzato(String iDpost, String descrizioneSondaggio, String scelta1, String scelta2,  int numeroLike, int numeroDislike, int numeroCommenti,int [] conteggi, ArrayList<String> commenti) {
