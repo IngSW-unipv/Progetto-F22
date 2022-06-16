@@ -1434,7 +1434,8 @@ public class Controller {
      	   @Override
      	   public void actionPerformed(ActionEvent e) {
      		  scriviMessaggioPrivato();
-	  		  view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getIdProfilo());
+	  		  messaggi = model.getProfiloAttivo().cercaMessaggiChatPrivata(model.getProfiloAttivo().getIdProfilo(), model.getProfiloConCuiSiStaChattando().getIdProfilo());
+	  		  view.aggiornaMessaggi(messaggi, model.getProfiloAttivo().getNickname());
 			  refresh();
      	   }
      	   
@@ -1504,6 +1505,8 @@ public class Controller {
     		public void actionPerformed(ActionEvent e) {
     			String messaggio = view.getScriviMessaggioGruppo().getText();
     			model.getProfiloAttivo().scriviMessaggioGruppo(messaggio,  gruppoAttuale );
+        		messaggi = model.getProfiloAttivo().caricaMessaggiChatGruppoConProfiloInviante(model.getProfiloAttivo().getGruppoPerController().getIdGruppo());
+        		view.aggiornaMessaggiGruppo(messaggi);
     		}
     	};
     	view.getInvia().addActionListener(gestoreInviaMessaggioGruppo);
