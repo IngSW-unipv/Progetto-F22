@@ -349,6 +349,12 @@ public class DbFacade implements IDbFacade{
         return pstDao.modificaIsStory(ConvertitoreFacade.getIstance().converti(m), b);
     }
 	
+	@Override
+	public boolean vediIsStory(Post m) {
+    	pstDao = Utility.convertiTipoPost(m.getTipo());
+        return pstDao.vediIsStory(ConvertitoreFacade.getIstance().converti(m));
+    	
+	}
     //Solo sondaggi
 	@Override
     public int vediCount1SDV(Post p) {

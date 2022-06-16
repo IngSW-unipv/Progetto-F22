@@ -540,4 +540,30 @@ public class FotoDao extends PostDao {
 		DBConnection.closeConnection(conn);
 		return esito;
 	}
+	@Override
+	public boolean vediIsStory(PostDB p) {
+		conn=DBConnection.startConnection(conn,schema);
+		PreparedStatement st1;
+		ResultSet rs1;
+
+		try
+		{
+			String query="SELECT isStory FROM foto WHERE idFoto=?";
+
+			st1 = conn.prepareStatement(query);
+			st1.setString(1, p.getIdPost());
+
+			rs1=st1.executeQuery();
+
+			while(rs1.next())
+			{
+				boolean b = rs1.getBoolean("isStory");
+				DBConnection.closeConnection(conn);
+				return b;
+			
+			}
+		}catch (Exception e){e.printStackTrace();}
+		System.out.println("Si è verificato un errore, ritorno false");
+		return false;
+	}
 }

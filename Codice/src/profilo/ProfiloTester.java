@@ -105,17 +105,12 @@ public class ProfiloTester {
 			e.printStackTrace();
 		}
     	*/
-    	try {
-			p.aggiungiPartecipante("188", "dilo");
-		} catch (GruppoGiaPieno e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ProfiloGiaInserito e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+   
+    	 //plof.pubblicaStoria("wgfre", false, null, false);
     	
-    	//p.rimuoviPartecipante("188", "frank");
+    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("Dal", TipoPost.FOTO);
+    	for(String s: res)
+    		System.out.println(s.toString());
     }
 }
 

@@ -432,4 +432,9 @@ public class TestoDao extends PostDao {
 		return null;
 	}
 
+	@Override
+	public boolean vediIsStory(PostDB p) {
+		return false;
+	}
+
 }

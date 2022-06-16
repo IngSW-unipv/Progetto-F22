@@ -645,4 +645,9 @@ public class SondaggioSceltaMultiplaDao extends PostDao{
 		return null;
 	}
 
+	@Override
+	public boolean vediIsStory(PostDB p) {
+		return false;
+	}
+
 }

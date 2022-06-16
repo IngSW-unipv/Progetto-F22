@@ -14,7 +14,9 @@ import Messaggio.MessaggioPrivato;
 import Messaggio.enumeration.TipoMessaggio;
 import chat.chatDiGruppo.gruppo.Gruppo;
 import convertitore.ConvertitoreFacade;
+import convertitore.postUtility.PostUtility;
 import db.facade.DbFacade;
+import db.facade.Utility;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
@@ -669,14 +671,15 @@ public class Profilo implements IProfilo {
 	 * @return Arraylist di stringhe in cui abbiamo idPost e percorso se il post è multimediale(foto,video)
 	 *  e abbiamo idPost e descrizione per gli altri tipi di post
 	 */
+	
 	public ArrayList<String> caricaTuttiiPostDiUnProfilo(String pr, TipoPost f) {
 	
 	ArrayList<String> res = dbfacade.ottieniIdPost(f, new Profilo(pr,null));
-	
+
 	//Se i post sono miei ritona anche quelli non visibili
-	if(pr.equals(this.getIdProfilo()))
+	if(pr.equals(this.getIdProfilo())) {
 		return res;
-	
+	}
 	
 	ArrayList<String> resId = new ArrayList<>();
 	ArrayList<Post> pst = new ArrayList<>();
@@ -698,7 +701,7 @@ public class Profilo implements IProfilo {
 
 	//La lista finale conterra' il percorso e l'id dei soli post visibili
 	for(Post posttt: search) {
-		if(dbfacade.vediVisibilita(posttt) == true) {
+		if(dbfacade.vediIsStory(posttt) == false && dbfacade.vediVisibilita(posttt) == true) {
 			risultato.add(posttt.getIdPost());
 			if(f == TipoPost.FOTO || f == TipoPost.VIDEO)
 		        risultato.add(posttt.getPercorso());
@@ -865,11 +868,12 @@ public class Profilo implements IProfilo {
 	 * @exception se provo a mettere like due volte
 	 */
 	@Override
-	public boolean aggiungiLike(Post p)throws AzioneNonConsentita{	
-		if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+	public boolean aggiungiLike(String idPost, TipoPost t)throws AzioneNonConsentita{	
+		if(dbfacade.presenteLikeMap(this.getIdProfilo(), idPost) == true) {
 	    throw new AzioneNonConsentita();
 		}else {
-				
+			
+		Post p = PostUtility.restituisciTipo(idPost, t);
 	    int i = dbfacade.vediNumLike(p);
         i++;
         dbfacade.modificaNumLike(p, i);
@@ -884,10 +888,12 @@ public class Profilo implements IProfilo {
 	 * @exception se provo a mettere like due volte
 	 */
 	@Override
-	public boolean aggiungiDislike(Post p)throws AzioneNonConsentita{
-		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+	public boolean aggiungiDislike(String idPost, TipoPost t)throws AzioneNonConsentita{
+		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), idPost) == true) {
 			throw new AzioneNonConsentita();
 		}else {		
+			
+			Post p = PostUtility.restituisciTipo(idPost, t);
 			int i = dbfacade.vediNumDislike(p);
 	        i++;
 	        dbfacade.modificaNumDislike(p, i);
@@ -901,9 +907,11 @@ public class Profilo implements IProfilo {
 	 * @exception se provo a togliere like quando non c'è
 	 */
 	@Override
-	public boolean rimuoviLike(Post p)throws AzioneNonConsentita{
+	public boolean rimuoviLike(String idPost, TipoPost t)throws AzioneNonConsentita{
 
-		if(dbfacade.presenteLikeMap(this.getIdProfilo(), p.getIdPost()) == true) {
+		if(dbfacade.presenteLikeMap(this.getIdProfilo(), idPost) == true) {
+			
+			Post p = PostUtility.restituisciTipo(idPost, t);
 			int i = dbfacade.vediNumLike(p);
 			i--;
 			dbfacade.modificaNumLike(p, i);
@@ -919,8 +927,9 @@ public class Profilo implements IProfilo {
 	 * @exception se provo a togliere dislike quando non c'è
 	 */
 	@Override
-	public boolean rimuoviDislike(Post p)throws AzioneNonConsentita{
-		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), p.getIdPost()) == true) {	
+	public boolean rimuoviDislike(String idPost, TipoPost t)throws AzioneNonConsentita{
+		if(dbfacade.presenteDislikeMap(this.getIdProfilo(), idPost) == true) {	
+			Post p = PostUtility.restituisciTipo(idPost, t);
 			int i = dbfacade.vediNumDislike(p);
 			i--;
 			dbfacade.modificaNumDislike(p, i);
@@ -1038,7 +1047,7 @@ public class Profilo implements IProfilo {
 	 public void pubblicaStoria(String descrizione, boolean visibile, String percorso, boolean isHd) {
 		 Foto p;
 		 String idPost = "F" + Integer.toString(((int)Math.round(Math.random() * 1000)));
-		 p = new Foto(idPost, descrizione, visibile, getIdProfilo(), percorso, isHd, true);
+		 p = new Foto(idPost, descrizione, visibile, this.getIdProfilo(), percorso, isHd, true);
 		 this.pubblicaStoria(24, p);
 	}
 	
