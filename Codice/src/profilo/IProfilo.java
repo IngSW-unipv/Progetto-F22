@@ -56,7 +56,6 @@ public interface IProfilo {
 	public String vediNickname(Profilo p);
 	public boolean modificaNickname(Profilo p, String n);
 	public String vediDescrizione(Profilo p);
-    public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,String idVideo,String idSDV,String idSSM, String idTesto); 
 	public ArrayList<String> ProfiloNickCommento(Profilo p);
 	public boolean profiloNonSeguito(String emailProfilo);
 	public boolean accountEsistente(String emailProfilo) throws AccountDoesNotExist;

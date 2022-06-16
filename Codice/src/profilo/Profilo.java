@@ -38,17 +38,9 @@ public class Profilo implements IProfilo {
 
 	private static DbFacade dbfacade;
 	
-	private String idProfilo;
-	private String nickname;
-	private String descrizione;
-	private int numFollower;
-	private int numSeguiti;
-	private int numPost;
-	private String password;
-	private String fotoProfilo;
-	private boolean loggato;
-	private boolean accountesistente;
-	private boolean isPswCambiata;	
+	private int numFollower,numSeguiti, numPost;
+	private String password,fotoProfilo, idProfilo,nickname,descrizione;;
+	private boolean loggato,accountesistente,isPswCambiata;	
 	private Foto fotoPerController = new Foto(null);	//Post presente nella home
 	private Foto storiaPerController = new Foto(null);	//Storia presente nella home
 	private Foto fotoProfiloPerController = new Foto(null);	//Foto profilo
@@ -97,153 +89,6 @@ public class Profilo implements IProfilo {
 		this.password = psw;
 		this.fotoProfilo = fotoProfilo;
 	}
-	
-	
-	
-
-	public Gruppo getGruppoPerController() {
-		return gruppoPerController;
-	}
-
-	public void setGruppoPerController(Gruppo gruppoPerController) {
-		this.gruppoPerController = gruppoPerController;
-	}
-
-	public SondaggioDoppiaVotazione getPostSondaggioDoppiaScelta() {
-		return postSondaggioDoppiaScelta;
-	}
-
-	public void setPostSondaggioDoppiaScelta(SondaggioDoppiaVotazione postSondaggioDoppiaScelta) {
-		this.postSondaggioDoppiaScelta = postSondaggioDoppiaScelta;
-	}
-
-	public SondaggioSceltaMultipla getPostSondaggioSceltaMultiplaPerController() {
-		return postSondaggioSceltaMultiplaPerController;
-	}
-
-	public void setPostSondaggioSceltaMultiplaPerController(
-			SondaggioSceltaMultipla postSondaggioSceltaMultiplaPerController) {
-		this.postSondaggioSceltaMultiplaPerController = postSondaggioSceltaMultiplaPerController;
-	}
-
-	public Foto getPostFotoPerController() {
-		return postFotoPerController;
-	}
-
-	public void setPostFotoPerController(Foto postFotoPerController) {
-		this.postFotoPerController = postFotoPerController;
-	}
-
-	public Testo getPostTestoPerController() {
-		return postTestoPerController;
-	}
-
-	public void setPostTestoPerController(Testo postTestoPerController) {
-		this.postTestoPerController = postTestoPerController;
-	}
-
-	public Foto getFotoProfiloPerController() {
-		return fotoProfiloPerController;
-	}
-
-	public void setFotoProfiloPerController(Foto fotoProfiloPerController) {
-		this.fotoProfiloPerController = fotoProfiloPerController;
-	}
-
-	public Foto getStoriaPerController() {
-		return storiaPerController;
-	}
-
-	public void setStoriaPerController(Foto storiaPerController) {
-		this.storiaPerController = storiaPerController;
-	}
-
-	public Foto getFotoPerController() {
-		return fotoPerController;
-	}
-
-	public void setFotoPerController(Foto fotoPerController) {
-		this.fotoPerController = fotoPerController;
-	}
-
-	public String getIdProfilo() {
-		return idProfilo;
-	}
-	public void setIdProfilo(String idProfilo) {
-		this.idProfilo = idProfilo;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getDescrizione() {
-		return descrizione;
-	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
-	}
-	public int getNumFollower() {
-		return numFollower;
-	}
-	public void setNumFollower(int numFollower) {
-	this.numFollower = numFollower;
-	}
-	public int getNumSeguiti() {
-		return numSeguiti;
-	}
-	public void setNumSeguiti(int numSeguiti) {
-		this.numSeguiti = numSeguiti;
-	}
-	public int getNumPost() {
-		return numPost;
-	}
-	public void setNumPost(int numPost) {
-		this.numPost = numPost;
-	}
-
-	public boolean isLoggato() {
-		return loggato;
-	}
-
-	public void setLoggato(boolean loggato) {
-		this.loggato = loggato;
-	}
-
-	public boolean isAccountesistente() {
-		return accountesistente;
-	}	
-
-	public void setAccountesistente(boolean accountesistente) {
-		this.accountesistente = accountesistente;
-	}
-
-	public boolean isPswCambiata() {
-		return isPswCambiata;
-	}
-
-	public void setPswCambiata(boolean isPswCambiata) {
-		this.isPswCambiata = isPswCambiata;
-	}	
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-	public String getFotoProfilo() {
-		return fotoProfilo;
-	}
-
-	public void setFotoProfilo(String fotoProfilo) {
-		this.fotoProfilo = fotoProfilo;
-	}
-
 
 	@Override
 	public String toString() {
@@ -306,10 +151,7 @@ public class Profilo implements IProfilo {
 	return true;	
 	}
       throw new AzioneNonConsentita();
-
-
 	}
-
 
 	/**
 	 * Permette di smettere di seguire una persona
@@ -334,7 +176,6 @@ public class Profilo implements IProfilo {
 		}
 		throw new AzioneNonConsentita();
 	}
-
 
 	/**
 	 * Ottengo la lista di tutti i miei follower
@@ -429,7 +270,6 @@ public class Profilo implements IProfilo {
 		return listaTestoEProfiloInviante;
 	}
 
-	
 	/**
 	 * Funzione che mi permette di leggere tutti i messaggi (solamente il testo) inviati da un certo utente, ogni minuto, per cinque minuti
 	 * @param id del profilo che invia
@@ -455,8 +295,6 @@ public class Profilo implements IProfilo {
 		return true;
 	}
 	
-
-
 	/**
 	 *Carica un post nel database
 	 */
@@ -494,7 +332,6 @@ public class Profilo implements IProfilo {
 	 */
 	@Override
 	public Post cercaPost(Post p)throws PostNonVisibile,PostNonPresente{
-		System.out.println(p.toString());
 		if (dbfacade.cerca(p) == null) {
 			throw new PostNonPresente(p.getIdPost());
  		}
@@ -509,7 +346,10 @@ public class Profilo implements IProfilo {
 		ArrayList<String> postDeiProfiliSeguiti = dbfacade.caricaPostProfiliSeguiti(profilo, tipo);
 		return postDeiProfiliSeguiti;
 	}
-	
+	/**
+	 * Ritorna la lista delle storie di tutti i profili che seguo
+	 * @return ArrayList di stringhe con gli id delle storie che seguo
+	 */
 	public ArrayList<String> caricaStorieProfiliSeguiti(String profilo, TipoPost tipo) {
 		ArrayList<String> storieDeiProfiliSeguiti = dbfacade.caricaStorieProfiliSeguiti(profilo, tipo);
 		return storieDeiProfiliSeguiti;
@@ -562,7 +402,6 @@ public class Profilo implements IProfilo {
 		throw new PostNonVisibile(p.getIdPost());
 	}
 
-	
 	/**
 	 * Restituisce la lista di tutti i commenti(con tutte le iformazioni) sotto un post
 	 */
@@ -570,7 +409,6 @@ public class Profilo implements IProfilo {
 	public ArrayList<Commento> selectAllCommentiSottoPost(Post p) {
 		return dbfacade.mostraCommentiPost(p);
 	}
-
 	
 	/**
 	 * Restituisce la lista di tutti i commenti(solo testo) sotto un post
@@ -734,8 +572,6 @@ public class Profilo implements IProfilo {
 		return dbfacade.selezionaTestoMessaggiProfilo(p, t);
 	}
 
-
-
 	/**
 	 * Restituisce tutti i post visibili di un profilo. Restituisce anche i non visibili se cerco i post del mio profilo
 	 * @param profilo di cui vogliamo vedere i post
@@ -786,7 +622,6 @@ public class Profilo implements IProfilo {
 		}
 	}
 		return risultato;
-    
 }
 
 	/**
@@ -821,14 +656,6 @@ public class Profilo implements IProfilo {
 		return dbfacade.modificaDescrizione(new Profilo(this.getIdProfilo()), n);
 	}
 
-	
-	@Override
-	public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,	String idVideo,String idSDV,String idSSM, String idTesto) {
- 
-		Commento c = new Commento(idCommento,oraCommento,dataCommento,testo,profilo,idFoto,idVideo,idSDV,idSSM,idTesto);
-		return c;
-	}
-
 	/**
 	 * Carica un commento nel database
 	 * @param id del profilo sotto cui sarà scritto il commento
@@ -843,10 +670,8 @@ public class Profilo implements IProfilo {
 	 		if(dbfacade.cerca(c) != null) {
 	 			pubblicaCommento(idProfilo, idPost, testoCommento, t);
 	 		}
-	 		System.out.println(c.toString());
 		return dbfacade.carica(c);
 	}
-
 
 	/**
 	 * Rimuove un commento dal database
@@ -928,8 +753,6 @@ public class Profilo implements IProfilo {
 	public ArrayList<String> caricaGruppiProfilo(String profilo) {
 		return dbfacade.caricaGruppiProfilo(profilo);
 	}
-
-
 
 	/**
 	 * Mostra tutte le informazioni di tutti i gruppi
@@ -1131,7 +954,6 @@ public class Profilo implements IProfilo {
 		 p = new Foto(idPost, descrizione, visibile, this.getIdProfilo(), percorso, isHd, true);
 		 this.pubblicaStoria(24, p);
 	}
-	
 	 
 	 /**
 		 * Carica nel database un sondaggio doppia votazione (Utile per il controller)
@@ -1203,8 +1025,8 @@ public class Profilo implements IProfilo {
 	 * @param id del gruppo 
 	 * @param id del profilo da aggiungere
 	 */
-@Override
-public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno, ProfiloGiaInserito {
+	@Override
+	public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws GruppoGiaPieno, ProfiloGiaInserito {
 		
 		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
 		
@@ -1263,54 +1085,53 @@ public boolean aggiungiPartecipante(String idGruppo, String idProfilo) throws Gr
 		throw new GruppoGiaPieno(idGruppo);
 		
 	}
+	
 /**
- * Permette di rimuovere un partecipante da un gruppo
- * @param id del gruppo 
- * @param id del profilo da aggiungere
- */
-@Override
-public boolean rimuoviPartecipante(String idGruppo, String idProfilo){
+* Permette di rimuovere un partecipante da un gruppo
+* @param id del gruppo 
+* @param id del profilo da aggiungere
+*/
+	@Override
+	public boolean rimuoviPartecipante(String idGruppo, String idProfilo){
 	
-	Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
-	
-	if(g != null) {
-		if(g.getProfilo1() == null || g.getProfilo1().equals(idProfilo)) {
-			dbfacade.gestisciPartecipante1(null, g);
-			
-		}
-		if(g.getProfilo2() == null || g.getProfilo2().equals(idProfilo)) {
+		Gruppo g = dbfacade.cerca(new Gruppo(idGruppo));
+		
+		if(g != null) {
+			if(g.getProfilo1() == null || g.getProfilo1().equals(idProfilo)) {
+				dbfacade.gestisciPartecipante1(null, g);
+			}
+			if(g.getProfilo2() == null || g.getProfilo2().equals(idProfilo)) {
 			dbfacade.gestisciPartecipante2(null, g);
 			
-		}
-		if(g.getProfilo3() == null || g.getProfilo3().equals(idProfilo)) {
-			dbfacade.gestisciPartecipante3(null, g);
+			}
+			if(g.getProfilo3() == null || g.getProfilo3().equals(idProfilo)) {
+				dbfacade.gestisciPartecipante3(null, g);
 			
-		}
-		if(g.getProfilo4() == null || g.getProfilo4().equals(idProfilo)) {
-			dbfacade.gestisciPartecipante4(null, g);
+			}
+			if(g.getProfilo4() == null || g.getProfilo4().equals(idProfilo)) {
+				dbfacade.gestisciPartecipante4(null, g);
 			
-		}
-		else if(g.getProfilo5() == null || g.getProfilo5().equals(idProfilo)) {
-			dbfacade.gestisciPartecipante5(null, g);
+			}
+			else if(g.getProfilo5() == null || g.getProfilo5().equals(idProfilo)) {
+				dbfacade.gestisciPartecipante5(null, g);
 			
+			}
+			if(g.getProfilo6() == null || g.getProfilo6().equals(idProfilo)) {
+				dbfacade.gestisciPartecipante6(null, g);
+			}
 		}
-		if(g.getProfilo6() == null || g.getProfilo6().equals(idProfilo)) {
-			dbfacade.gestisciPartecipante6(null, g);
-		}
-	}
 	
-	return true;
-}
+		return true;
+	}
 /**
  * permette di modificare la descrizione di un gruppo
  * @param id del gruppo
  * @param descrizione del gruppo
  */
-@Override
-public boolean modificaDescrizione(String idGruppo, String descrizione) {
-	
-	return dbfacade.modificaDescrizione(descrizione, new Gruppo(idGruppo));
-}
+	@Override
+	public boolean modificaDescrizione(String idGruppo, String descrizione) {
+		return dbfacade.modificaDescrizione(descrizione, new Gruppo(idGruppo));
+	}
 
 /**
  * Ritorna il conteggio di un determinato sondaggio
@@ -1318,21 +1139,21 @@ public boolean modificaDescrizione(String idGruppo, String descrizione) {
  * @param tipo di sondaggio
  * @return vettore di interi con i punteggi effettuati da ciascuna opzione
  */
-@Override
-public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
-	if(p == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
-		int [] i = new int [2];
-		i[0] = dbfacade.vediCount1SDV(new SondaggioDoppiaVotazione(idSondaggio));
-		i[1] = dbfacade.vediCount2SDV(new SondaggioDoppiaVotazione(idSondaggio));
-		return i;
-	}
-	else if(p == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
-		int [] i = new int [4];
-		i[0] = dbfacade.vediCount1SSM(new SondaggioSceltaMultipla(idSondaggio));
-		i[1] = dbfacade.vediCount2SSM(new SondaggioSceltaMultipla(idSondaggio));
-		i[2] = dbfacade.vediCount3SSM(new SondaggioSceltaMultipla(idSondaggio));
-		i[3] = dbfacade.vediCount4SSM(new SondaggioSceltaMultipla(idSondaggio));
-		return i;
+	@Override
+	public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
+		if(p == TipoPost.SONDAGGIODOPPIAVOTAZIONE) {
+			int [] i = new int [2];
+			i[0] = dbfacade.vediCount1SDV(new SondaggioDoppiaVotazione(idSondaggio));
+			i[1] = dbfacade.vediCount2SDV(new SondaggioDoppiaVotazione(idSondaggio));
+			return i;
+		}
+		else if(p == TipoPost.SONDAGGIOSCELTAMULTIPLA) {
+			int [] i = new int [4];
+			i[0] = dbfacade.vediCount1SSM(new SondaggioSceltaMultipla(idSondaggio));
+			i[1] = dbfacade.vediCount2SSM(new SondaggioSceltaMultipla(idSondaggio));
+			i[2] = dbfacade.vediCount3SSM(new SondaggioSceltaMultipla(idSondaggio));
+			i[3] = dbfacade.vediCount4SSM(new SondaggioSceltaMultipla(idSondaggio));
+			return i;
 		}
 	return null;
 	}
@@ -1342,56 +1163,200 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
  * @param id del post
  * @param tipo di post
  */
-@Override
-public int vediNumLike(String post, TipoPost t) {
-	Post p = PostUtility.restituisciTipo(post, t);
-	return dbfacade.vediNumLike(p);
-}
+	@Override
+	public int vediNumLike(String post, TipoPost t) {
+		Post p = PostUtility.restituisciTipo(post, t);
+		return dbfacade.vediNumLike(p);
+	}
 
 /**
  * Ritorna il numero di dislike di un post
  * @param id del post
  * @param tipo di post
  */
-@Override
-public int vediNumDislike(String post, TipoPost t) {
-	Post p = PostUtility.restituisciTipo(post, t);
-	return dbfacade.vediNumDislike(p);
-}
+	@Override
+	public int vediNumDislike(String post, TipoPost t) {
+		Post p = PostUtility.restituisciTipo(post, t);
+		return dbfacade.vediNumDislike(p);
+	}
 
 /**
  * Ritorna il numero di post di un profilo
  * @param id del profilo
  */
-@Override
-public int vediNumPost(String profilo) {
-	Profilo p = new Profilo(profilo);
-	return dbfacade.vediNumPost(p);
-}
+	@Override
+	public int vediNumPost(String profilo) {
+		Profilo p = new Profilo(profilo);
+		return dbfacade.vediNumPost(p);
+	}
 
 /**
  * Ritorna il numero di follower di un profilo
  * @param id del profilo
  */
 @Override
-public int vediNumFollower(String idProfilo) {
-	Profilo p = new Profilo(idProfilo);
-	return dbfacade.vediNumFollower(p);
+	public int vediNumFollower(String idProfilo) {
+		Profilo p = new Profilo(idProfilo);
+		return dbfacade.vediNumFollower(p);
 }
 
 /**
  * Ritorna il numero di profilo seguiti
  * @param id del profilo
  */
-@Override
-public int vediNumSeguiti(String idProfilo) {
-	Profilo p = new Profilo(idProfilo);
-	return dbfacade.vediNumSeguiti(p);
-}
-}
+	@Override
+	public int vediNumSeguiti(String idProfilo) {
+		Profilo p = new Profilo(idProfilo);
+		return dbfacade.vediNumSeguiti(p);
+	}
 
+
+	public Gruppo getGruppoPerController() {
+		return gruppoPerController;
+	}
+
+	public void setGruppoPerController(Gruppo gruppoPerController) {
+		this.gruppoPerController = gruppoPerController;
+	}	
+
+	public SondaggioDoppiaVotazione getPostSondaggioDoppiaScelta() {
+		return postSondaggioDoppiaScelta;
+	}
 	
-
-
-
-
+	public void setPostSondaggioDoppiaScelta(SondaggioDoppiaVotazione postSondaggioDoppiaScelta) {
+		this.postSondaggioDoppiaScelta = postSondaggioDoppiaScelta;
+	}
+	
+	public SondaggioSceltaMultipla getPostSondaggioSceltaMultiplaPerController() {
+		return postSondaggioSceltaMultiplaPerController;
+	}
+	
+	public void setPostSondaggioSceltaMultiplaPerController(
+			SondaggioSceltaMultipla postSondaggioSceltaMultiplaPerController) {
+		this.postSondaggioSceltaMultiplaPerController = postSondaggioSceltaMultiplaPerController;
+	}
+	
+	public Foto getPostFotoPerController() {
+		return postFotoPerController;
+	}
+	
+	public void setPostFotoPerController(Foto postFotoPerController) {
+		this.postFotoPerController = postFotoPerController;
+	}
+	
+	public Testo getPostTestoPerController() {
+		return postTestoPerController;
+	}
+	
+	public void setPostTestoPerController(Testo postTestoPerController) {
+		this.postTestoPerController = postTestoPerController;
+	}
+	
+	public Foto getFotoProfiloPerController() {
+		return fotoProfiloPerController;
+	}
+	
+	public void setFotoProfiloPerController(Foto fotoProfiloPerController) {
+		this.fotoProfiloPerController = fotoProfiloPerController;
+	}
+	
+	public Foto getStoriaPerController() {
+		return storiaPerController;
+	}
+	
+	public void setStoriaPerController(Foto storiaPerController) {
+		this.storiaPerController = storiaPerController;
+	}
+	
+	public Foto getFotoPerController() {
+		return fotoPerController;
+	}
+	
+	public void setFotoPerController(Foto fotoPerController) {
+		this.fotoPerController = fotoPerController;
+	}
+	
+	public String getIdProfilo() {
+		return idProfilo;
+	}
+	public void setIdProfilo(String idProfilo) {
+		this.idProfilo = idProfilo;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getDescrizione() {
+		return descrizione;
+	}
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+	public int getNumFollower() {
+		return numFollower;
+	}
+	public void setNumFollower(int numFollower) {
+	this.numFollower = numFollower;
+	}
+	public int getNumSeguiti() {
+		return numSeguiti;
+	}
+	public void setNumSeguiti(int numSeguiti) {
+		this.numSeguiti = numSeguiti;
+	}
+	public int getNumPost() {
+		return numPost;
+	}
+	public void setNumPost(int numPost) {
+		this.numPost = numPost;
+	}
+	
+	public boolean isLoggato() {
+		return loggato;
+	}
+	
+	public void setLoggato(boolean loggato) {
+		this.loggato = loggato;
+	}
+	
+	public boolean isAccountesistente() {
+		return accountesistente;
+	}	
+	
+	public void setAccountesistente(boolean accountesistente) {
+		this.accountesistente = accountesistente;
+	}
+	
+	public boolean isPswCambiata() {
+		return isPswCambiata;
+	}
+	
+	public void setPswCambiata(boolean isPswCambiata) {
+		this.isPswCambiata = isPswCambiata;
+	}	
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
+	public String getFotoProfilo() {
+		return fotoProfilo;
+	}
+	
+	public void setFotoProfilo(String fotoProfilo) {
+		this.fotoProfilo = fotoProfilo;
+	}
+}
+	
+		
+	
+	
+	
+	
