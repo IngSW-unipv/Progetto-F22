@@ -961,6 +961,7 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		view.setContatoreSondaggio(view.getContatoreSondaggio() + 2);
         		view.setPostSondaggioProfilo(percorsiPostSondaggioSceltaMultipla);
+        		view.setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
         	}
         };
         view.getNextSondaggio().addActionListener(gestoreNextSondaggio);
@@ -970,30 +971,12 @@ public class Controller {
         	public void actionPerformed(ActionEvent e) {
         		view.setContatoreSondaggio(view.getContatoreSondaggio() - 2);
         		view.setPostSondaggioProfilo(percorsiPostSondaggioSceltaMultipla);
+        		view.setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
         	}
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
-        
-        gestoreNextSondaggioDoppiaScelta = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() + 2);
-        		view.setPostSondaggioProfilo(percorsiPostSondaggioDoppiaScelta);
-        	}
-        };
-        view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
-        
-        
-        gestorePrevSondaggioDoppiaScelta = new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() - 2);
-        		view.setPostSondaggioProfilo(percorsiPostSondaggioDoppiaScelta);
-        	}
-        };
-        view.getPrevSondaggioDoppiaScelta().addActionListener(gestorePrevSondaggioDoppiaScelta);
     }
-    
+
     public void actionListenersCreazionePost() {
         gestoreCreazionePostFoto = new ActionListener() {
             @Override

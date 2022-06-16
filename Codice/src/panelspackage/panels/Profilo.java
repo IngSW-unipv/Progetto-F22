@@ -66,7 +66,7 @@ public class  Profilo extends JPanel {
 		dati.add("");
 		dati.add("");
 		dati.add("Descrizione:");
-		dati.add("Per ora non è presente nessuna descrizione. Può essere inserita nelle impostazioni.");
+		dati.add("Per ora non ï¿½ presente nessuna descrizione. Puï¿½ essere inserita nelle impostazioni.");
 		
 		for(int i = 0; i < this.dati.size(); i++) {
 			Etichette etichetta = new Etichette(this.dati.get(i), Frame.COLOREPRIMARIOTEMATICO);
@@ -150,16 +150,14 @@ public class  Profilo extends JPanel {
 		this.add(containerSouth, BorderLayout.SOUTH);
 
 		SpecificContainer containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
-		containerGrigliaSouth.setLayout(new GridLayout(1,8));
+		containerGrigliaSouth.setLayout(new GridLayout(1,6));
 		
 		containerGrigliaSouth.add(prevTesto = new Pulsanti("Idea precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextTesto = new Pulsanti("Idea successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerGrigliaSouth.add(prevFoto = new Pulsanti("Foto precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextFoto = new Pulsanti("Foto successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggio multiplo precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggio multiplo successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(prevSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(nextSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggi precedenti", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggi  successivi", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 
 		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
@@ -263,7 +261,7 @@ public class  Profilo extends JPanel {
 		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
 			int i;
 			for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
-				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
+				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
 			
 			for (int j = i; j < 3; j++) {
@@ -271,7 +269,7 @@ public class  Profilo extends JPanel {
 			}
 		} else
 			for (int i = 0; i < 3 ; i++) {
-				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
+				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
 	}
 	
