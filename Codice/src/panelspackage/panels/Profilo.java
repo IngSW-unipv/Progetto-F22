@@ -150,7 +150,7 @@ public class  Profilo extends JPanel {
 		this.add(containerSouth, BorderLayout.SOUTH);
 
 		SpecificContainer containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
-		containerGrigliaSouth.setLayout(new GridLayout(1,6));
+		containerGrigliaSouth.setLayout(new GridLayout(1,8));
 		
 		containerGrigliaSouth.add(prevTesto = new Pulsanti("Idea precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextTesto = new Pulsanti("Idea successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
@@ -158,6 +158,8 @@ public class  Profilo extends JPanel {
 		containerGrigliaSouth.add(nextFoto = new Pulsanti("Foto successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggi precedenti", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggi  successivi", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevSondaggioDoppiaScelta = new Pulsanti("Sondaggi precedenti", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
+		containerGrigliaSouth.add(nextSondaggioDoppiaScelta = new Pulsanti("Sondaggi  successivi", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 
 		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
@@ -260,18 +262,46 @@ public class  Profilo extends JPanel {
 		}
 	}
 	
+	
 	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
-		if (contatoreSondaggio <= 0) {
-			contatoreSondaggio = 0;
+		if (contatoreSondaggioDoppiaScelta <= 0) {
+			contatoreSondaggioDoppiaScelta = 0;
     	}
-    	if (contatoreSondaggio > postSondaggioDoppiaSceltaDelProfilo.size() - 6) {
-    		contatoreSondaggio = postSondaggioDoppiaSceltaDelProfilo.size() - 6;
+
+    	if (contatoreSondaggioDoppiaScelta > postSondaggioDoppiaSceltaDelProfilo.size() - 6) {
+    		contatoreSondaggioDoppiaScelta = postSondaggioDoppiaSceltaDelProfilo.size() - 6;
+    	}
+			if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
+				int i;
+				for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
+					if (contatoreSondaggio < 0) {
+						contatoreSondaggio = 0;
+			    	}
+					listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
+				}
+				
+				for (int j = i; j < 3; j++) {
+					listaSondaggiDoppiaScelta.get(j).setText("");
+				}
+			} else
+				for (int i = 0; i < 3 ; i++) {
+					listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
+		}
+	}
+	
+	/*
+	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
+		if (this.contatoreSondaggioDoppiaScelta <= 0) {
+			contatoreSondaggioDoppiaScelta = 0;
+    	}
+    	if (contatoreSondaggioDoppiaScelta > postSondaggioDoppiaSceltaDelProfilo.size() - 6) {
+    		contatoreSondaggioDoppiaScelta = postSondaggioDoppiaSceltaDelProfilo.size() - 6;
     	}
 		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
 			int i;
 			for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
-				if (contatoreSondaggio < 0) {
-					contatoreSondaggio = 0;
+				if (contatoreSondaggioDoppiaScelta < 0) {
+					contatoreSondaggioDoppiaScelta = 0;
 		    	}
 				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
@@ -279,11 +309,17 @@ public class  Profilo extends JPanel {
 			for (int j = i; j < 3; j++) {
 				listaSondaggiDoppiaScelta.get(j).setText("");
 			}
-		} else
+		} else {
+			if (contatoreSondaggioDoppiaScelta < 0) {
+				contatoreSondaggioDoppiaScelta = 0;
+	    	}
 			for (int i = 0; i < 3 ; i++) {
+
 				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
+		}
 	}
+	*/
 	
 	public ArrayList<JComponent> getListaAreaTesto() {
 		return ListaEtichette;
@@ -505,5 +541,4 @@ public class  Profilo extends JPanel {
 	public void setContatoreSondaggioDoppiaScelta(int contatoreSondaggioDoppiaScelta) {
 		this.contatoreSondaggioDoppiaScelta = contatoreSondaggioDoppiaScelta;
 	}
-	
 }

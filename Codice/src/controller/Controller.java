@@ -988,7 +988,33 @@ public class Controller {
         	}
         };
         view.getPrevSondaggio().addActionListener(gestorePrevSondaggio);
+        
+        gestoreNextSondaggioDoppiaScelta = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() + 2);
+        		System.out.println("contorller " + view.getContatoreSondaggioDoppiaScelta());
+        		view.setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
+
+        	}
+        };
+        view.getNextSondaggioDoppiaScelta().addActionListener(gestoreNextSondaggioDoppiaScelta);
+        
+        gestorePrevSondaggioDoppiaScelta = new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		if (view.getContatoreSondaggioDoppiaScelta() > 0) {
+        		view.setContatoreSondaggioDoppiaScelta(view.getContatoreSondaggioDoppiaScelta() - 2);
+        		}
+        		view.setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
+
+        	}
+        };
+        view.getPrevSondaggioDoppiaScelta().addActionListener(gestorePrevSondaggioDoppiaScelta);
     }
+    
+   
 
     public void actionListenersCreazionePost() {
         gestoreCreazionePostFoto = new ActionListener() {
