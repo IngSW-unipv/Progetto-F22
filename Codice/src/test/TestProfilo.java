@@ -2,10 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Messaggio.Messaggio;
@@ -42,7 +39,7 @@ class TestProfilo {
 		DbFacade.getIstance().carica(profiloAttivo);
 	}
 	/**
-	 * testi la possibilità di aggiungere like a un post
+	 * testi la possibilitï¿½ di aggiungere like a un post
 	 * @throws AzioneNonConsentita
 	 */
 	@Test
@@ -56,7 +53,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di aggiungere dislike a un post
+	 * testi la possibilitï¿½ di aggiungere dislike a un post
 	 * @throws AzioneNonConsentita 
 	 */
 	@Test
@@ -70,7 +67,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di rimuovere like a un post
+	 * testi la possibilitï¿½ di rimuovere like a un post
 	 * @throws AzioneNonConsentita
 	 */
 	@Test
@@ -84,7 +81,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di rimuovere dislike a un post
+	 * testi la possibilitï¿½ di rimuovere dislike a un post
 	 * @throws AzioneNonConsentita 
 	 */
 	@Test
@@ -98,7 +95,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di seguire un profilo
+	 * testi la possibilitï¿½ di seguire un profilo
 	 * @throws AccountDoesNotExist
 	 * @throws AzioneNonConsentita
 	 */
@@ -114,7 +111,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di smettere di seguire un profilo
+	 * testi la possibilitï¿½ di smettere di seguire un profilo
 	 * @throws AccountDoesNotExist
 	 * @throws AzioneNonConsentita
 	 */
@@ -139,7 +136,7 @@ class TestProfilo {
 	}
 	
 	/**
-	 * testi la possibilità di scrivere un messaggio di gruppo
+	 * testi la possibilitï¿½ di scrivere un messaggio di gruppo
 	 */
 	@Test
 	public void testScriviMessaggioDiGruppo() {
@@ -147,7 +144,7 @@ class TestProfilo {
 		assertTrue(profiloAttivo.scriviMessaggio(m));
 	}
 	/**
-	 * testi la possibilità di scrivere un messaggio privato
+	 * testi la possibilitï¿½ di scrivere un messaggio privato
 	 */
 	@Test
 	public void testScriviMessaggioPrivato() {
@@ -156,7 +153,7 @@ class TestProfilo {
 		assertTrue(profiloAttivo.scriviMessaggio(m));
 	}
 	/**
-	 * testi la possibilità di rimuovere un messaggio di gruppo
+	 * testi la possibilitï¿½ di rimuovere un messaggio di gruppo
 	 */
 	@Test
 	public void testRimuoviMessaggioDiGruppo() {
@@ -164,7 +161,7 @@ class TestProfilo {
 		assertTrue(profiloAttivo.rimuoviMessaggio(m));
 	}
 	/**
-	 * testi la possibilità di rimuovere un messaggio privato
+	 * testi la possibilitï¿½ di rimuovere un messaggio privato
 	 */
 	@Test
 	public void testRimuoviMessaggioPrivato() {
@@ -172,7 +169,7 @@ class TestProfilo {
 		assertTrue(profiloAttivo.rimuoviMessaggio(m));
 	}
 	/**
-	 * testi la possibilità di cercare un messaggio di gruppo
+	 * testi la possibilitï¿½ di cercare un messaggio di gruppo
 	 */
 	@Test
 	public void testCercaMessaggioDiGruppo() {
@@ -180,7 +177,7 @@ class TestProfilo {
 		assertNotNull(profiloAttivo.cercaMessaggio(m));
 	}
 	/**
-	 * testi la possibilità di cercare un messaggio privato
+	 * testi la possibilitï¿½ di cercare un messaggio privato
 	 */
 	@Test
 	public void testCercaMessaggioPrivato() {
@@ -189,28 +186,28 @@ class TestProfilo {
 	}
 	
 	/**
-	 * testi la possibilità di pubblicare una foto
+	 * testi la possibilitï¿½ di pubblicare una foto
 	 */
 	@Test
 	public void testPubblicaFoto() {
 		assertTrue(profiloAttivo.pubblicaPost(new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso1", true, false)));
 	}
 	/**
-	 * testi la possibilità di pubblicare un testo
+	 * testi la possibilitï¿½ di pubblicare un testo
 	 */
 	@Test
 	public void testPubblicaTesto() {
 		assertTrue(profiloAttivo.pubblicaPost(new Testo("T456", "ho fame", true, profiloAttivo.getIdProfilo(), null, null)));
 	}
 	/**
-	 * testi la possibilità di pubblicare un sondaggio con doppia votazione
+	 * testi la possibilitï¿½ di pubblicare un sondaggio con doppia votazione
 	 */
 	@Test
 	public void testPubblicaSondaggioDoppiaVotazione() {
 		assertTrue(profiloAttivo.pubblicaPost(new SondaggioDoppiaVotazione("SD123", null, true, profiloAttivo.getIdProfilo(), "prima scelta", "seconda scelta")));
 	}
 	/**
-	 * testi la possibilità di pubblicare un sondaggio con scelta multipla
+	 * testi la possibilitï¿½ di pubblicare un sondaggio con scelta multipla
 	 */
 	@Test
 	public void testPubblicaSondaggioSceltaMultipla() {
@@ -231,14 +228,14 @@ class TestProfilo {
 		assertTrue(profiloAttivo.rimuoviPost(new Testo("T456")));
 	}
 	/**
-	 * testi la possibilità di rimuovere un sondaggio con doppia scelta
+	 * testi la possibilitï¿½ di rimuovere un sondaggio con doppia scelta
 	 */
 	@Test
 	public void testRimuoviSondaggioDoppiaVotazione() {
 		assertTrue(profiloAttivo.rimuoviPost(new SondaggioDoppiaVotazione("SD123")));
 	}
 	/**
-	 * testi la possibilità di rimuovere un sondaggio con scelta multipla
+	 * testi la possibilitï¿½ di rimuovere un sondaggio con scelta multipla
 	 */
 	@Test
 	public void testRimuoviSondaggioSceltaMultipla() {
@@ -252,7 +249,7 @@ class TestProfilo {
 		assertTrue(profiloAttivo.pubblicaStoria(24, new Foto("F123", null, true, profiloAttivo.getIdProfilo(), "percorso2", true, false)));
 	}
 	/**
-	 * testi la possibilità di agguingere un voto a un sondaggio con doppia scelta
+	 * testi la possibilitï¿½ di agguingere un voto a un sondaggio con doppia scelta
 	 * @throws TastoNonEsistente
 	 * @throws AzioneNonConsentita
 	 */
@@ -268,7 +265,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di agguingere un voto a un sondaggio con scelta multipla
+	 * testi la possibilitï¿½ di agguingere un voto a un sondaggio con scelta multipla
 	 * @throws TastoNonEsistente
 	 * @throws AzioneNonConsentita
 	 */
@@ -296,7 +293,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di cambiare foto al profilo
+	 * testi la possibilitï¿½ di cambiare foto al profilo
 	 */
 	@Test
 	public void testCambiaImmagineProfilo() {
@@ -304,14 +301,14 @@ class TestProfilo {
 		assertTrue(profiloAttivo.cambiaImmagineProfilo(f.getIdPost()));
 	}
 	/**
-	 * testi la possibilità di cambiare nickname
+	 * testi la possibilitï¿½ di cambiare nickname
 	 */
 	@Test
 	public void testModificaNickname() {
 		assertTrue(profiloAttivo.modificaNickname(profiloAttivo, "nickModificato"));
 	}
 	/**
-	 * testi la possibilità di cambiare descrizione
+	 * testi la possibilitï¿½ di cambiare descrizione
 	 */
 	@Test
 	public void testModificaDescrizione() {
@@ -344,7 +341,7 @@ class TestProfilo {
 		assertNotNull(profiloAttivo.cercaCommento(c.getIdCommento()));
 	}
 	/**
-	 * testi la possibilità di creare un gruppo
+	 * testi la possibilitï¿½ di creare un gruppo
 	 */
 	@Test
 	public void testCreaGruppo() {
@@ -357,7 +354,7 @@ class TestProfilo {
 		}		
 	}
 	/**
-	 * testi la possibilità di rimuovere un gruppo
+	 * testi la possibilitï¿½ di rimuovere un gruppo
 	 */
 	@Test
 	public void testRimuoviGruppo() {
@@ -372,7 +369,7 @@ class TestProfilo {
 		assertNotNull(profiloAttivo.cercaGruppo(new Gruppo("G345")));
 	}
 	/**
-	 * testi la possibilità di aggiungere un partecipante a un gruppp
+	 * testi la possibilitï¿½ di aggiungere un partecipante a un gruppp
 	 */
 	@Test
 	public void testAggiungiPartecipante() {
@@ -389,7 +386,7 @@ class TestProfilo {
 		}
 	}
 	/**
-	 * testi la possibilità di rimuovere un partecipante a un gruppo
+	 * testi la possibilitï¿½ di rimuovere un partecipante a un gruppo
 	 */
 	@Test
 	public void testRimuoviPartecipante() {

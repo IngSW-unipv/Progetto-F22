@@ -31,7 +31,7 @@ public class testfacade {
        
       
         
-      /*  System.out.println(dbf.carica(mpv));
+       System.out.println(dbf.carica(mpv));
         System.out.println(dbf.carica(mdg));
        
         ArrayList<String> res = dbf.ottieniTestoListaMessaggi(mdg.getIdGruppo(),null, mdg.getTipo());
@@ -51,11 +51,11 @@ public class testfacade {
         System.out.println(dbf.carica(sdv));
         
         System.out.println(DbFacade.getIstance().carica(g));
-       ArrayList<String> res = DbFacade.getIstance().ottieniIdPost(TipoPost.TESTO,new Profilo("DV999", null));
-       for(String s : res)
-    	   System.out.println(s.toString());*/
+       ArrayList<String> ress = DbFacade.getIstance().ottieniIdPost(TipoPost.TESTO,new Profilo("DV999", null));
+       for(String s : ress)
+    	   System.out.println(s.toString());
        
-       boolean b = dbf.vediIsStory(f);
-       System.out.println(b);
+       boolean b1= dbf.vediIsStory(f);
+       System.out.println(b1);
 }
 }

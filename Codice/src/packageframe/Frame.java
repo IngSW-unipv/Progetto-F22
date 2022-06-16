@@ -26,6 +26,7 @@ import panelspackage.panels.elements.SpecificContainer;
 
 public class Frame extends JFrame {
 	
+
 	int i;
 	public static final  Color COLOREPRIMARIOTEMATICO = new Color(255, 175, 0);
 	public static final  Color COLORESECONDARIOTEMATICO = new Color(0,0,0);	

@@ -2,9 +2,6 @@ package post.commento;
 
 import java.time.LocalDateTime;
 
-import convertitore.ConvertitoreFacade;
-import db.commento.CommentoDB;
-import profilo.Profilo;
 
 public class TestDate {
 

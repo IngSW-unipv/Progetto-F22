@@ -1,7 +1,5 @@
 package Sistema;
 
-import post.multimedia.foto.Foto;
-import post.multimedia.video.Video;
 import profilo.Profilo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AccountGiaEsistente;
@@ -14,8 +12,6 @@ public class TestSistema {
 		Sistema s = new Sistema();
 
 		Profilo p = new Profilo("francesco.ardizzoni@gmail.com", "francy99");
-		Foto f = new Foto("F00", null, false, null, null, false, false);
-        Video v = new Video("V00", null, false, null, null, 0, false);
 		try {
 			System.out.println(s.signIn("DV999", "Davide99", "Marmellata"));
 		} catch (AccountGiaEsistente | ChangeDefaultPassword | AccountDoesNotExist e) {

@@ -4,7 +4,6 @@ import db.facade.DbFacade;
 import post.Post;
 import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.multimedia.foto.Foto;
 import java.util.ArrayList;
 import Messaggio.MessaggioPrivato;
 import chat.chatDiGruppo.ChatDiGruppo;

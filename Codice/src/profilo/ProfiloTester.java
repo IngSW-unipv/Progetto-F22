@@ -2,23 +2,15 @@ package profilo;
 
 import java.util.ArrayList;
 
-import Messaggio.MessaggioDiGruppo;
-import Messaggio.MessaggioPrivato;
-import chat.chatDiGruppo.gruppo.Gruppo;
-import post.Post;
-import post.commento.Commento;
 import post.enumeration.TipoPost;
-import post.multimedia.foto.Foto;
 import post.multimedia.video.Video;
 import post.sondaggio.SondaggioDoppiaVotazione;
 import post.sondaggio.SondaggioSceltaMultipla;
 import post.testo.Testo;
 import profilo.exception.AccountDoesNotExist;
 import profilo.exception.AzioneNonConsentita;
-import profilo.exception.GruppoGiaPieno;
 import profilo.exception.PostNonPresente;
 import profilo.exception.PostNonVisibile;
-import profilo.exception.ProfiloGiaInserito;
 import profilo.exception.TastoNonEsistente;
 
 public class ProfiloTester {
@@ -27,40 +19,13 @@ public class ProfiloTester {
     	Profilo p = new Profilo("frank");
     	Profilo p1 = new Profilo("DV999", "Luca26");
     	Video v = new Video("V00", null, false, null, null, 0, false);
-    	Foto f = new Foto("F15", null, false, null, null, false, false);
+ 
     	SondaggioDoppiaVotazione sdv = new SondaggioDoppiaVotazione("SD343", null, false, null, null, null);
     	SondaggioSceltaMultipla ssm = new SondaggioSceltaMultipla("S01", null, false, null, null, null, null, null);
     	Testo t = new Testo("374");
-        Gruppo g = new Gruppo("G03", "Gruppo di amici", "Calcio", "001", "002", "Davide99", "DV999", "001", "002");
-
-        Commento c = new Commento("C01", "001", "F01", "aadhd");
-        Profilo plof = new Profilo("Dal",null);
-    	// p.pubblicaCommento(c);
-    	MessaggioDiGruppo m = new MessaggioDiGruppo("MDG00", null, null, "ciaoooo", "F00", "G00");
-    	MessaggioPrivato m1 = new MessaggioPrivato("ABC", null, null, null, null, "001");
+     
     
-      /*
-    	try {
-			System.out.println(p1.cercaPost(f).toString());
-		} catch (PostNonVisibile | FotoProfiloNonAncoraImpostata e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	ArrayList<Post> res = p1.selectAllPost(TipoPost.FOTO);
-    	for(Post post : res)
-   		System.out.println(post.toString()); 
-    	try {
-			p1.aggiungiVotoSondaggio(ssm);
-		} catch (TastoNonEsistente e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        System.out.println(p1.modificaFotoGruppo(g, f.getIdPost()));
-    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo(p1, TipoPost.FOTO);
-    	for(String str : res)
-    		System.out.println(str.toString());
+     
     	
     	try {
 			Video v1 = (Video) p1.cercaPost(v);
@@ -104,14 +69,14 @@ public class ProfiloTester {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	*/
+    	
    
-    	// p1.pubblicaStoria("wgfre", false, null, false);
+    	 p1.pubblicaStoria("wgfre", false, null, false);
     	
-   // System.out.println(p.pubblicaCommento("DV999", "SD01", "sono un canguro", TipoPost.SONDAGGIODOPPIAVOTAZIONE));
+     System.out.println(p.pubblicaCommento("DV999", "SD01", "sono un canguro", TipoPost.SONDAGGIODOPPIAVOTAZIONE));
     	
-    	ArrayList<String> res = p1.caricaTuttiiPostDiUnProfilo("DV999", TipoPost.FOTO);
-        for(String s : res)
+    	ArrayList<String> ress = p1.caricaTuttiiPostDiUnProfilo("DV999", TipoPost.FOTO);
+        for(String s : ress)
         	System.out.println(s.toString());
     }
 }
