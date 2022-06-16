@@ -341,11 +341,12 @@ package panelspackage.panels;
 		
         
         public boolean settaCommenti(ArrayList<String> commenti) {
+        	
         	if (this.indiceCommentoCorrente < 0) {
         		indiceCommentoCorrente = 0;
         	}
-        	if (this.indiceCommentoCorrente > commenti.size()/2 -4) {
-        		indiceCommentoCorrente = commenti.size()/2 - 4;
+        	if (this.indiceCommentoCorrente > commenti.size()/2 -1) {
+        		indiceCommentoCorrente = commenti.size()/2 - 1;
         	}
         	System.out.println("indiceCommento" + indiceCommentoCorrente);
             if(commenti.size() == 0) {

@@ -5,6 +5,8 @@ import panelspackage.panels.elements.Etichette;
 import panelspackage.panels.elements.InserimentoTesto;
 import panelspackage.panels.elements.LabeledIcon;
 import panelspackage.panels.elements.SpecificContainer;
+import post.multimedia.foto.Foto;
+
 import java.awt.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -35,10 +37,9 @@ public class Home extends JPanel {
 	private int indiceStorie = 0;
 	
 	public Home() {
-		int indiceBufferPosts = 0;
-		fontText = new Font("Arial", Font.PLAIN, 20);	//Font per tutti i testi
-		fontTitle = new Font("Arial", Font.BOLD, 30);	//Font per il titolo
-		fontButton = new Font("Arial", Font.BOLD, 15);	//Font per i bottoni
+		fontText = new Font("Arial", Font.PLAIN, 20);	
+		fontTitle = new Font("Arial", Font.BOLD, 30);
+		fontButton = new Font("Arial", Font.BOLD, 15);	
 		avvio();		
 		this.initComponents();
 	}
@@ -115,23 +116,31 @@ public class Home extends JPanel {
 	}
 	
 	
+	
 	public void setPercorsiStorie(ArrayList<String> storieDaVisualizzare) {
 		boolean flag = true;
 		int i = 0;
+		if (this.indiceStorie <= 0) {
+			indiceStorie = 0;
+    	}
+		
+    	if (indiceStorie > storieDaVisualizzare.size() + 10) {
+    		indiceStorie = storieDaVisualizzare.size() - 10;
+    	}
+    	
 		while(flag) {
-			int indice =(i*2) + 1 + this.getIndiceStorie();
-			listaPulsantiStorie.get(i).setIcon(new ImageIcon(storieDaVisualizzare.get(indice)));
+			int indice =(i*2) + 1 + indiceStorie;
+			String percorso = storieDaVisualizzare.get(indice);
+			listaPulsantiStorie.get(i).setIcon(new ImageIcon(percorso));
 			i++;			
 			if(i < storieDaVisualizzare.size()/2) {
 			} else {
-				System.out.println("else" +flag);
-
 				flag = false;
 			}
 			if(i == 5) {
 				flag  =false;
 			} 
-		}
+		}		
 	}
 		
 	
@@ -173,7 +182,7 @@ public class Home extends JPanel {
 
 			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pSondaggioDoppiaScelta =  new Pulsanti("Sondaggio due scelte", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio più scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio piï¿½ scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 			containerSud.add(creaUnaChatDiGruppo =  new Pulsanti("CreaChatDiGruppo", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 
@@ -248,24 +257,31 @@ public class Home extends JPanel {
 	public void setButtonNextStory(Pulsanti buttonNextStory) {
 		this.buttonNextStory = buttonNextStory;
 	}
+	
 	public Pulsanti getpPost() {
 		return pPost;
 	}
+	
 	public void setpPost(Pulsanti pPost) {
 		this.pPost = pPost;
 	}
+	
 	public Pulsanti getpSondaggioDoppiaVotazione() {
 		return pSondaggioDoppiaScelta;
 	}
+	
 	public void setpSondaggioDoppiaVotazione(Pulsanti pSondaggioDoppiaScelta) {
 		this.pSondaggioDoppiaScelta = pSondaggioDoppiaScelta;
 	}
+	
 	public Pulsanti getpSondaggioSceltaMultipla() {
 		return pSondaggioSceltaMultipla;
 	}
+	
 	public void setpSondaggioSceltaMultipla(Pulsanti pSondaggioSceltaMultipla) {
 		this.pSondaggioSceltaMultipla = pSondaggioSceltaMultipla;
 	}
+	
 	public Pulsanti getpIdea() {
 		return pIdea;
 	}

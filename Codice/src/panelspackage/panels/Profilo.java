@@ -220,6 +220,12 @@ public class  Profilo extends JPanel {
 	public void setPostTestoProfilo(ArrayList<String> postTestoDelProfilo) {
 
 		int i;
+		if (this.contatoreTesto < 0) {
+			contatoreTesto = 0;
+    	}
+    	if (this.contatoreTesto > postTestoDelProfilo.size()/2 -2) {
+    		contatoreTesto = postTestoDelProfilo.size()/2 - 2;
+    	}
 			if(postTestoDelProfilo.size()/2 < 3)  {
 				for ( i = 0; i < 3 ; i++) {
 					ListaTesti.get(i).setText("");
