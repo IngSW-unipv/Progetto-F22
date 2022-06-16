@@ -377,8 +377,8 @@ public class Frame extends JFrame {
 	}
 	
 	
-	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti, String nickName) {
-		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti, nickName);
+	public void setSchermataDati(int nPost, int nFollower, int  nSeguiti, String nickName, String descrizione) {
+		((Profilo)mappaSchermate.get("Profilo")).setSchermataDati(nPost, nFollower, nSeguiti, nickName, descrizione);
 	}
 	
 	

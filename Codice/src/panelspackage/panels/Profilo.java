@@ -189,11 +189,12 @@ public class  Profilo extends JPanel {
 	}
 
 	
-	public void setSchermataDati(int nFollower, int nSeguiti, int nPost, String nickName) {
+	public void setSchermataDati(int nFollower, int nSeguiti, int nPost, String nickName, String descrizione) {
 		((JLabel) ListaEtichette.get(1)).setText(String.valueOf(nickName));
 		((JLabel) ListaEtichette.get(3)).setText(String.valueOf(nFollower));
 		((JLabel) ListaEtichette.get(5)).setText(String.valueOf(nSeguiti));
 		((JLabel) ListaEtichette.get(7)).setText(String.valueOf(nPost));
+		((JLabel) ListaEtichette.get(11)).setText(String.valueOf(descrizione));
 	}
 
 	public Pulsanti getHomeProfilo() {

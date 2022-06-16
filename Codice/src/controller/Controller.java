@@ -1073,6 +1073,7 @@ public class Controller {
         gestoreProfiloCercato = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String descrizione = model.getProfiloCercato().getDescrizione();
                 String nickName = model.getProfiloCercato().getNickname();
             	int numPost = model.getProfiloCercato().getNumPost();
                 int numFollower = model.getProfiloCercato().getNumFollower();
@@ -1094,7 +1095,7 @@ public class Controller {
 				}
                 
                 try {
-					aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo,  postDelProfilo, percorsiPostTesto, percorsiPostSondaggioSceltaMultipla, percorsiPostSondaggioDoppiaScelta);
+					aggiornaSchermataProfilo(nickName, descrizione, numPost, numFollower, numSeguiti, percorsoFotoProfilo, idProfilo,  postDelProfilo, percorsiPostTesto, percorsiPostSondaggioSceltaMultipla, percorsiPostSondaggioDoppiaScelta);
 				} catch (PostNonVisibile e1) {
 					e1.printStackTrace();
 				}
@@ -1695,8 +1696,8 @@ public class Controller {
         
     }
     
-    public void aggiornaSchermataProfilo(String nickName, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio, ArrayList<String>  percorsiPostSondaggioDoppiaScelta) throws PostNonVisibile {
-    	view.setSchermataDati(numPost, numFollower, numSeguiti, nickName);
+    public void aggiornaSchermataProfilo(String nickName, String descrizione, int numPost, int numFollower, int numSeguiti, String fotoProfiloPercorso, String idProfilo, ArrayList<String> postFotoProfilo, ArrayList<String> percorsiPostTesto, ArrayList<String> percorsiPostSondaggio, ArrayList<String>  percorsiPostSondaggioDoppiaScelta) throws PostNonVisibile {
+    	view.setSchermataDati(numPost, numFollower, numSeguiti, nickName, descrizione);
         view.setFotoProfilo(fotoProfiloPercorso);
         view.setPostProfilo(postFotoProfilo);
         view.setPostTestoProfilo(percorsiPostTesto);
@@ -1734,6 +1735,10 @@ public class Controller {
     	model.getProfiloAttivo().scriviMessaggioPrivato(testoDaInviare, model.getProfiloConCuiSiStaChattando().getIdProfilo());
     }
     public void aggiornaSchermataProfiloAttivo() {
+    	String descrizione = model.getProfiloAttivo().getDescrizione();;
+    	if(descrizione.equals("null")) {
+    		descrizione = "-- Puoi cambiare la descrizione nelle impostazioni --";
+    	}
     	String nickName = model.getProfiloAttivo().getNickname();
     	int numPost = model.getProfiloAttivo().getNumPost();
         int numFollower = model.getProfiloAttivo().getNumFollower();
@@ -1752,7 +1757,7 @@ public class Controller {
     	   fotoProfiloPercorso = "immagini/images.png";
         } 
         try {
-			aggiornaSchermataProfilo(nickName, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo, postDelProfilo,percorsiPostTesto, percorsiPostSondaggioSceltaMultipla, percorsiPostSondaggioDoppiaScelta);
+			aggiornaSchermataProfilo(nickName, descrizione, numPost, numFollower, numSeguiti, fotoProfiloPercorso, idProfilo, postDelProfilo,percorsiPostTesto, percorsiPostSondaggioSceltaMultipla, percorsiPostSondaggioDoppiaScelta);
 		} catch (PostNonVisibile e1) {
 			e1.printStackTrace();
 		}
