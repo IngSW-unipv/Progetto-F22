@@ -362,13 +362,12 @@ package panelspackage.panels;
         	if (this.indiceCommentoCorrente < 0) {
         		indiceCommentoCorrente = 0;
         	}
-        	System.out.println("size +" + commenti.size());
         	if (this.indiceCommentoCorrente > commenti.size() - 10) {
-        		int somma =this.getIndiceCommentoCorrente() + commenti.size()  ;
-        		setIndiceCommentoCorrente(somma + 10);
+        		int valoreMassimo =  commenti.size() - 10;
+        		indiceCommentoCorrente = valoreMassimo;
         	}
         	
-        	System.out.println("indiceCommento " + indiceCommentoCorrente);
+        	
             if(commenti.size() == 0) {
             	 for(int i = 0 ; i < 10; i = i+2) {
                      ((Etichette)ListaAreaTesto.get(i)).setText("");
@@ -378,7 +377,6 @@ package panelspackage.panels;
                  }
                    
             for(int i = 0 ; i < 10 && i < commenti.size() - this.getIndiceCommentoCorrente()/2 ; i = i + 2) {
-            	System.out.println("indiceCommento ciclo for" + indiceCommentoCorrente);
 
                 int indiceCorrente2 = i + indiceCommentoCorrente;
                 ((Etichette)ListaAreaTesto.get(i)).setText(commenti.get(indiceCorrente2));
