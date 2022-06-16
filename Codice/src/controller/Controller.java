@@ -1580,7 +1580,6 @@ public class Controller {
         String passEmailPerRegistrarsi = view.getEmailPerReigstrarsi();
         String nickNamePerRegistrarsi = view.getNickNamePerReigstrarsi();
         String passWordPerRegistrarsi = view.getPasswordPerReigstrarsi();
-        
         try {
             model.signIn(passEmailPerRegistrarsi,nickNamePerRegistrarsi, passWordPerRegistrarsi);
         } catch (AccountGiaEsistente e1) {
