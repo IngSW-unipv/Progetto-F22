@@ -422,11 +422,6 @@ public class Frame extends JFrame {
 		((Profilo)mappaSchermate.get("Profilo")).setPostTestoProfilo(postTestoDelProfilo);
 	}
 	
-
-	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> percorsiPostSondaggioDoppiaScelta) {
-		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioDoppiaSceltaProfilo(percorsiPostSondaggioDoppiaScelta);
-	}
-	
 	public int getContatoreFoto() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreFoto();
 	}
@@ -446,6 +441,10 @@ public class Frame extends JFrame {
 	
 	public void setContatoreSondaggio(int nuovoContatore) {
 		((Profilo)mappaSchermate.get("Profilo")).setContatoreSondaggio(nuovoContatore);
+	}
+	
+	public void setContatoreSondaggioDoppiaScelta(int nuovoContatore) {
+		((Profilo)mappaSchermate.get("Profilo")).setContatoreSondaggioDoppiaScelta(nuovoContatore);
 	}
 	
 	public void setContatoreTesto(int nuovoContatore) {
@@ -484,6 +483,9 @@ public class Frame extends JFrame {
 		return ((Profilo)mappaSchermate.get("Profilo")).getPrevSondaggioDoppiaScelta();
 	}
 
+	public int getContatoreSondaggioDoppiaScelta() {
+		return ((Profilo)mappaSchermate.get("Profilo")).getContatoreSondaggioDoppiaScelta();
+	}
 
 	public Etichette getTestoRicercaInSchermataRicerca() {
 		return ((Ricerca)mappaSchermate.get("Ricerca")).getTestoRicerca();
@@ -704,8 +706,13 @@ public class Frame extends JFrame {
 	public Pulsanti getApriChat() {
 		return ((Profilo)mappaSchermate.get("Profilo")).getApriChat();
 	}
+	
 	public void setPostSondaggioProfilo(ArrayList<String> postSondaggioDelProfilo) {
 		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioProfilo(postSondaggioDelProfilo);
+	}
+	
+	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
+		((Profilo)mappaSchermate.get("Profilo")).setPostSondaggioDoppiaSceltaProfilo(postSondaggioDoppiaSceltaDelProfilo);
 	}
 
 	

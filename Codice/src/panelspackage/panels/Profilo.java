@@ -19,7 +19,7 @@ public class  Profilo extends JPanel {
 	ArrayList<JComponent> ListaEtichette = new ArrayList<JComponent>();
 	ArrayList<Pulsanti> ListaPost = new ArrayList<Pulsanti>();
 	ArrayList<AreaDiTesto> ListaTesti = new ArrayList<AreaDiTesto>();
-	ArrayList<AreaDiTesto> ListaSondaggiDoppiaScelta  = new ArrayList<AreaDiTesto>();	
+	ArrayList<AreaDiTesto> listaSondaggiDoppiaScelta  = new ArrayList<AreaDiTesto>();	
 	ArrayList<String> dati = new ArrayList<String>();
 	ArrayList<AreaDiTesto> ListaSondaggi  = new ArrayList<AreaDiTesto>();
 	private Pulsanti homeProfilo, immagineProf, segui, apriChat,nextFoto,prevFoto, nextSondaggio, prevSondaggio, nextSondaggioDoppiaScelta, prevSondaggioDoppiaScelta, nextTesto,prevTesto, 
@@ -29,7 +29,7 @@ public class  Profilo extends JPanel {
 							  containerCenter = new SpecificContainer(), 
 							  containerNorthNorth = new SpecificContainer();
 	
-	private int contatoreFoto = 0, contatoreTesto = 0, contatoreSondaggio = 0;
+	private int contatoreFoto = 0, contatoreTesto = 0, contatoreSondaggio = 0, contatoreSondaggioDoppiaScelta = 0;
 	
 	public Profilo(ArrayList<String> immaginiPost) {
 		this.avvio();
@@ -116,19 +116,19 @@ public class  Profilo extends JPanel {
 		
 		ListaSondaggi.clear();
 			AreaDiTesto testoPrimoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaSondaggiDoppiaScelta.add(testoPrimoSondaggioDoppia);
+			listaSondaggiDoppiaScelta.add(testoPrimoSondaggioDoppia);
 			containerEast.add(pulsantePrimoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
-			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(0)), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(listaSondaggiDoppiaScelta.get(0)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoSecondoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaSondaggiDoppiaScelta.add(testoSecondoSondaggioDoppia);
+			listaSondaggiDoppiaScelta.add(testoSecondoSondaggioDoppia);
 			containerEast.add(pulsanteSecondoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
-			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(1)), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(listaSondaggiDoppiaScelta.get(1)), BorderLayout.PAGE_START);
 			
 			AreaDiTesto testoTerzoSondaggioDoppia = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
-			ListaSondaggiDoppiaScelta.add(testoTerzoSondaggioDoppia);
+			listaSondaggiDoppiaScelta.add(testoTerzoSondaggioDoppia);
 			containerEast.add(pulsanteTerzoSondaggioDoppia = new Pulsanti("Visualizza sondaggio doppia scelta", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.PAGE_START);
-			containerEast.add(new JScrollPane(ListaSondaggiDoppiaScelta.get(2)), BorderLayout.PAGE_START);
+			containerEast.add(new JScrollPane(listaSondaggiDoppiaScelta.get(2)), BorderLayout.PAGE_START);
 
 			ListaSondaggi.clear();
 			AreaDiTesto testoPrimoSondaggio = new AreaDiTesto(Frame.getColoreprimariotematico(), 10, 20);
@@ -158,8 +158,8 @@ public class  Profilo extends JPanel {
 		containerGrigliaSouth.add(nextFoto = new Pulsanti("Foto successiva", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
 		containerGrigliaSouth.add(prevSondaggio = new Pulsanti("Sondaggio multiplo precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(nextSondaggio = new Pulsanti("Sondaggio multiplo successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
-		containerGrigliaSouth.add(nextSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
-		containerGrigliaSouth.add(prevSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(prevSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio precedente", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerGrigliaSouth.add(nextSondaggioDoppiaScelta = new Pulsanti("Sondaggio doppio successivo", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 
 		containerSouth.add(containerGrigliaSouth, BorderLayout.NORTH);
 		containerSouth.add(homeProfilo = new Pulsanti("Torna alla Home", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.CENTER);
@@ -254,19 +254,25 @@ public class  Profilo extends JPanel {
 	}
 	
 	public void setPostSondaggioDoppiaSceltaProfilo(ArrayList<String> postSondaggioDoppiaSceltaDelProfilo) {
-
+		if (contatoreSondaggio <= 0) {
+			contatoreSondaggio = 0;
+    	}
+    	if (contatoreSondaggio > postSondaggioDoppiaSceltaDelProfilo.size() - 6) {
+    		contatoreSondaggio = postSondaggioDoppiaSceltaDelProfilo.size() - 6;
+    	}
 		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
 			int i;
 			for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
-				ListaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
+				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
 			}
+			
 			for (int j = i; j < 3; j++) {
-				ListaSondaggiDoppiaScelta.get(j).setText("");
+				listaSondaggiDoppiaScelta.get(j).setText("");
 			}
 		} else
-		for (int i = 0; i < 3 ; i++) {
-			ListaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
-		}
+			for (int i = 0; i < 3 ; i++) {
+				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggioDoppiaScelta()));
+			}
 	}
 	
 	public ArrayList<JComponent> getListaAreaTesto() {
@@ -479,8 +485,15 @@ public class  Profilo extends JPanel {
 	public void setPrevSondaggioDoppiaScelta(Pulsanti prevSondaggioDoppiaScelta) {
 		this.prevSondaggioDoppiaScelta = prevSondaggioDoppiaScelta;
 	}
-	
-	
-	
+
+
+	public int getContatoreSondaggioDoppiaScelta() {
+		return contatoreSondaggioDoppiaScelta;
+	}
+
+
+	public void setContatoreSondaggioDoppiaScelta(int contatoreSondaggioDoppiaScelta) {
+		this.contatoreSondaggioDoppiaScelta = contatoreSondaggioDoppiaScelta;
+	}
 	
 }
