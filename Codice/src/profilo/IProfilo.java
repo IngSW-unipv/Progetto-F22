@@ -81,7 +81,11 @@ public interface IProfilo {
 	boolean rimuoviPartecipante(String idGruppo, String idProfilo);
 	boolean pubblicaCommento(String idProfilo, String idPost, String testoCommento, TipoPost t);
 	boolean modificaDescrizione(String idGruppo, String descrizione);
-
+    public int vediNumLike(String post, TipoPost t);
+    public int vediNumDislike(String post, TipoPost t);
+    public int vediNumPost(String profilo);
+    public int vediNumFollower(String idProfilo);
+    public int vediNumSeguiti(String idProfilo);
 
 }
 

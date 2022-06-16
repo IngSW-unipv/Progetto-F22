@@ -821,6 +821,7 @@ public class Profilo implements IProfilo {
 		return dbfacade.modificaDescrizione(new Profilo(this.getIdProfilo()), n);
 	}
 
+	
 	@Override
 	public Commento creaCommento(String idCommento, Time oraCommento, Date dataCommento, String testo, String profilo, String idFoto,	String idVideo,String idSDV,String idSSM, String idTesto) {
  
@@ -1015,7 +1016,11 @@ public class Profilo implements IProfilo {
 		throw new AzioneNonConsentita();
 	}
 	
-	
+	/**
+	 * Crea un messaggio privato e lo carica nel database
+	 * @param testo del messaggio
+	 * @param id del profilo al quale vogliamo scrivere
+	 */
 	public void scriviMessaggioPrivato(String testo, String ricevente) {
 
  		int idMessage = (int)Math.round(Math.random() * 10000);
@@ -1029,7 +1034,7 @@ public class Profilo implements IProfilo {
 		
 
 	/**
-	 * Carica nel database un messaggio di gruppo (Utile per il controller)
+	 * Carica nel database un messaggio di gruppo 
 	 * @param testo del messaggio da scrivere
 	 * @param id del gruppo 
 	 */
@@ -1331,6 +1336,58 @@ public int[] ottieniConteggiSondaggio(String idSondaggio, TipoPost p) {
 		}
 	return null;
 	}
+
+/**
+ * Ritorna il numero di like di un post
+ * @param id del post
+ * @param tipo di post
+ */
+@Override
+public int vediNumLike(String post, TipoPost t) {
+	Post p = PostUtility.restituisciTipo(post, t);
+	return dbfacade.vediNumLike(p);
+}
+
+/**
+ * Ritorna il numero di dislike di un post
+ * @param id del post
+ * @param tipo di post
+ */
+@Override
+public int vediNumDislike(String post, TipoPost t) {
+	Post p = PostUtility.restituisciTipo(post, t);
+	return dbfacade.vediNumDislike(p);
+}
+
+/**
+ * Ritorna il numero di post di un profilo
+ * @param id del profilo
+ */
+@Override
+public int vediNumPost(String profilo) {
+	Profilo p = new Profilo(profilo);
+	return dbfacade.vediNumPost(p);
+}
+
+/**
+ * Ritorna il numero di follower di un profilo
+ * @param id del profilo
+ */
+@Override
+public int vediNumFollower(String idProfilo) {
+	Profilo p = new Profilo(idProfilo);
+	return dbfacade.vediNumFollower(p);
+}
+
+/**
+ * Ritorna il numero di profilo seguiti
+ * @param id del profilo
+ */
+@Override
+public int vediNumSeguiti(String idProfilo) {
+	Profilo p = new Profilo(idProfilo);
+	return dbfacade.vediNumSeguiti(p);
+}
 }
 
 	
