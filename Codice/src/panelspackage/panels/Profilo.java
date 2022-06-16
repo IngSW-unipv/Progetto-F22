@@ -227,6 +227,9 @@ public class  Profilo extends JPanel {
 			
 			if(postTestoDelProfilo.size() > 0)	 {
 				for ( i = 0; i < postTestoDelProfilo.size()/2 && i < 3  ; i++) {
+					if (contatoreTesto < 0) {
+						contatoreTesto = 0;
+			    	}
 					ListaTesti.get(i).setText(postTestoDelProfilo.get(((i*2) + 1) + this.getContatoreTesto()));
 				}
 			}
@@ -242,6 +245,9 @@ public class  Profilo extends JPanel {
 			if(postSondaggioDelProfilo.size()/2 < 3)  {
 				int i;
 				for ( i = 0; i < postSondaggioDelProfilo.size()/2 ; i++) {
+					if (contatoreSondaggio < 0) {
+						contatoreSondaggio = 0;
+			    	}
 					ListaSondaggi.get(i).setText(postSondaggioDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 				}
 				
@@ -264,6 +270,9 @@ public class  Profilo extends JPanel {
 		if(postSondaggioDoppiaSceltaDelProfilo.size()/2 < 3)  {
 			int i;
 			for ( i = 0; i < postSondaggioDoppiaSceltaDelProfilo.size()/2 ; i++) {
+				if (contatoreSondaggio < 0) {
+					contatoreSondaggio = 0;
+		    	}
 				listaSondaggiDoppiaScelta.get(i).setText(postSondaggioDoppiaSceltaDelProfilo.get(((i*2) + 1) + this.getContatoreSondaggio()));
 			}
 			
