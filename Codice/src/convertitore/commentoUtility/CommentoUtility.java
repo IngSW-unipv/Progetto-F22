@@ -25,6 +25,7 @@ public class CommentoUtility {
 		CommentoDB cdb = new CommentoDB(c.getIdCommento(), c.getOraCommento(), c.getDataCommento(),c.getTesto(), c.getProfilo(), c.getIdFoto(),c.getIdVideo(),c.getIdSDV(),c.getIdSSM(),c.getIdTesto());
 		return cdb;
 	}
+	
  
 	/**
 	 * Converte un CommentoDB in un commento
