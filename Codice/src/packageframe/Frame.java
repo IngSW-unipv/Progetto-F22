@@ -33,10 +33,6 @@ public class Frame extends JFrame {
     private ArrayList<String> risultatiRicerca = new ArrayList<String>();
 	private SpecificContainer FrameMainContainer;
 	
-	static  String listaCommenti[] = {"benissimo", "ok", "okok"};
-	static  String listaUtenti[] = {"Natasha", "Steve", "Clint"};
-	static String listaRisultatiRicerca[] = {"tony1","tony2","tony3","tony4","tony5","tony6","tony7","tony8","tony9","tony10",
-			                                 "tony11","tony12","tony13","tony14","tony15"};
 	ArrayList<String> listaPost = new ArrayList<String>();
 	public HashMap<String, JPanel> mappaSchermate = new HashMap<String, JPanel>();
 	
