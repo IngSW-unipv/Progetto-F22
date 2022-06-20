@@ -236,18 +236,14 @@ public class DbFacade implements IDbFacade{
      
 	//Post
 	@Override
-     public boolean carica(Post p) {
-		System.out.println("1" + p.toString());
-		
+     public boolean carica(Post p) {		
     	pstDao = Utility.convertiTipoPost(p.getTipo());
     	boolean b = pstDao.caricaPost(ConvertitoreFacade.getIstance().converti(p));
     	String [] s = ConvertitoreFacade.getIstance().ritornaChiaviString(p);
     	int  i = ConvertitoreFacade.getIstance().ritornaChiaviInt(p);
     	boolean a = ConvertitoreFacade.getIstance().ritornaChiaviBoolean(p);
     	pstDao.inserisciChiavi(ConvertitoreFacade.getIstance().converti(p), s, i, a);
-    	
-    	System.out.println("2" + p.toString());
-
+    
     	return b;
     		
     }

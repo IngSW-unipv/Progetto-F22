@@ -31,6 +31,8 @@ public class ChatPrivata extends Chat {
 	 */
 	public boolean setLista(Profilo Inviante, Profilo profiloRicevente, TipoMessaggio t) {
 		ArrayList<Messaggio> res = DbFacade.getIstance().selezionaMessaggi(profiloInviante.getIdProfilo(), profiloRicevente.getIdProfilo(), t);
+		if(res.isEmpty())
+			return false;
 		super.setListaMessaggi(res);
 		return true;
 	}

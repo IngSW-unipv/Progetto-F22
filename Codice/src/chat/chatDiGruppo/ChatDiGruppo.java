@@ -33,6 +33,8 @@ public class ChatDiGruppo extends Chat{
 	 */
 	public boolean setLista(Gruppo g, String s, TipoMessaggio t) {
 		ArrayList<Messaggio> res = DbFacade.getIstance().selezionaMessaggi(g.getIdGruppo(), s, t);
+		if(res.isEmpty())
+			return false;
 		super.setListaMessaggi(res);
 		return true;
 	}
