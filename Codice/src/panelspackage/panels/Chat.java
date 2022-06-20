@@ -75,15 +75,14 @@ public class Chat extends JPanel {
         containerSouth = new SpecificContainer();
         this.add(containerSouth, BorderLayout.SOUTH);
         tornaHome = new Pulsanti("Torna alla home", Frame.COLOREPRIMARIOTEMATICO);
-        containerSouth.setLayout(new GridLayout(2, 1));
-        containerSouth.add(tornaHome);
-        
+        containerSouth.setLayout(new GridLayout(2, 1));        
 
         containerGrigliaSouth = new SpecificContainer(Frame.COLORESECONDARIOTEMATICO);
         containerSouth.add(containerGrigliaSouth);
 		containerGrigliaSouth.setLayout(new GridLayout(1,2));
 		containerGrigliaSouth.add(messaggioPrecedente = new Pulsanti("<-", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.WEST);
 		containerGrigliaSouth.add(prossimoMessaggio = new Pulsanti("->", Frame.COLOREPRIMARIOTEMATICO), BorderLayout.EAST);
+		containerSouth.add(tornaHome);
     }
     
         

@@ -186,7 +186,7 @@ public class Home extends JPanel {
 
 			containerSud.add(pPost =  new Pulsanti("Pubblica un post", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pSondaggioDoppiaScelta =  new Pulsanti("Sondaggio due scelte", Frame.COLOREPRIMARIOTEMATICO,fontButton));
-			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio pi� scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
+			containerSud.add(pSondaggioSceltaMultipla =  new Pulsanti("Sondaggio piu' scelte", Frame.COLOREPRIMARIOTEMATICO, fontButton));
 			containerSud.add(pIdea =  new Pulsanti("Pubblica un'idea", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 			containerSud.add(creaUnaChatDiGruppo =  new Pulsanti("CreaChatDiGruppo", Frame.COLOREPRIMARIOTEMATICO,fontButton));
 
